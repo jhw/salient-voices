@@ -3,6 +3,6 @@ boto3
 botocore
 numpy
 # git+https://github.com/metrasynth/radiant-voices
-git+ssh://git@github.com/metrasynth/radiant-voices
+git+ssh://git@github.com/metrasynth/radiant-voices@master
 scipy
 sunvox-dll-python
