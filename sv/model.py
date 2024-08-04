@@ -1,4 +1,4 @@
-from core import load_class
+from sv.core import load_class
 
 class SVNoteTrig:
 

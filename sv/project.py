@@ -2,8 +2,8 @@ from rv.api import Project as RVProject
 from rv.pattern import Pattern as RVPattern
 from rv.note import Note as RVNote
 
-from core import load_class
-from sampler import SVSamplerPool
+from sv.core import load_class
+from sv.sampler import SVSamplerPool
 
 import random
 
