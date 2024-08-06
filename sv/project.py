@@ -2,13 +2,25 @@ from rv.api import Project as RVProject
 from rv.pattern import Pattern as RVPattern
 from rv.note import Note as RVNote
 
-from sv.core import load_class
-from sv.sampler import SVSamplerPool
+from sv.banks import SVBanks
+from sv.sampler import SVSamplePool
 
+import importlib
 import random
 
 Volume, Height = 256, 64
 
+def load_class(path):
+    try:
+        tokens = path.split(".")            
+        mod_path, class_name = ".".join(tokens[:-1]), tokens[-1]
+        module=importlib.import_module(mod_path)
+        return getattr(module, class_name)
+    except AttributeError as error:
+        raise RuntimeError(str(error))
+    except ModuleNotFoundError as error:
+        raise RuntimeError(str(error))
+    
 class SVColor(list):
 
     @classmethod
@@ -44,46 +56,85 @@ class SVOffset:
         self.value += value
         self.count += 1
         
+class SVModConfigItem(dict):
+
+    def __init__(self, item = {}):
+        dict.__init__(self, item)
+
+    @property
+    def links(self):
+        links = []
+        for link_dest in self["links"]:
+            link = [self["name"], link_dest]
+            links.append(link)
+        return links
+
+class SVModConfigItems(list):
+
+    def __init__(self, items = []):
+        list.__init__(self, [SVModConfigItem(item)
+                             for item in items])
+
+    def validate(self):
+        names = [item["name"] for item in self]
+        if len(names) != len(set(names)):
+            raise RuntimeError("modules names are not unique")
+        names.append("Output")
+        errors = []
+        for item in self:
+            for name in item["links"]:
+                if name == item["name"]:
+                    errors.append(f"{name} can't link to itself")
+                else:
+                    if name not in names:
+                        errors.append(f"unknown link destination {name}")
+        if errors != []:
+            raise RuntimeError(", ".join(errors))        
+                    
+    @property
+    def links(self):
+        links = []
+        for item in self:
+            links += item.links
+        return links
+    
 class SVProject:
 
     def populate_sample_pool(self, patches, pool):
         for patch in patches:
-            for track in patch.values():
+            for track in patch.tracks:
                 for trig in track:
                     if (hasattr(trig, "sample") and trig.sample):
                         pool.add(trig.sample)
     
     def init_module_classes(fn):
         def wrapped(self,
-                    proj,
+                    project,
                     patches,
                     modules,
-                    links,
                     banks):
             for mod in modules:
                 mod_class = load_class(mod["class"])
                 mod_kwargs = {}
                 if mod["class"].lower().endswith("sampler"):
-                    pool = SVSamplerPool()
+                    pool = SVSamplePool()
                     self.populate_sample_pool(patches = patches,
                                               pool = pool)
                     mod_kwargs = {"banks": banks,
                                   "pool": pool}
                 mod["instance"] = mod_class(**mod_kwargs)
             return fn(self,
-                      proj = proj,
+                      project = project,
                       patches = patches,
                       modules = modules,
-                      links = links,
                       banks = banks)
         return wrapped
 
     @init_module_classes
     def init_modules(self,                     
-                     proj,
+                     project,
                      patches,
                      modules,
-                     links,
                      banks):
         modules_ = {}
         for i, moditem in enumerate(modules):
@@ -92,11 +143,11 @@ class SVProject:
             if "defaults" in moditem:
                 for k, v in moditem["defaults"].items():
                     mod.set_raw(k, v)
-            proj.attach_module(mod)
+            project.attach_module(mod)
             modules_[name] = mod
-        output = sorted(proj.modules, key = lambda x: -x.index).pop()
-        for src, dest in links:
-            proj.connect(modules_[src],
+        output = sorted(project.modules, key = lambda x: -x.index).pop()
+        for src, dest in modules.links:
+            project.connect(modules_[src],
                          output if dest == "Output" else modules_[dest])
         return modules_
 
@@ -116,35 +167,14 @@ class SVProject:
                      offset,
                      color,
                      height = Height):
-        trigs = [{note.i:note
+        trigs = [{note.i: note
                   for note in track}
-                 for key, track in patch.items()]
+                 for track in patch.tracks]
         def notefn(self, j, i):
             return trigs[i][j].render(modules,
                                       controllers) if j in trigs[i] else RVNote()
         return RVPattern(lines = patch.n_ticks,
-                         tracks = len(patch),
-                         x = offset.value,
-                         y_size = height,
-                         bg_color = color).set_via_fn(notefn)
-
-    @attach_pattern
-    def init_pattern(self,
-                     patterns,
-                     modules,
-                     controllers,
-                     patch,
-                     offset,
-                     color,
-                     height = Height):
-        trigs = [{note.i:note
-                  for note in track}
-                 for key, track in patch.items()]
-        def notefn(self, j, i):
-            return trigs[i][j].render(modules,
-                                      controllers) if j in trigs[i] else RVNote()
-        return RVPattern(lines = patch.n_ticks,
-                         tracks = len(patch),
+                         tracks = len(patch.tracks),
                          x = offset.value,
                          y_size = height,
                          bg_color = color).set_via_fn(notefn)
@@ -159,7 +189,7 @@ class SVProject:
         def notefn(self, j, i):
             return RVNote()
         return RVPattern(lines = patch.n_ticks,
-                         tracks = len(patch),
+                         tracks = len(patch.tracks),
                          x = offset.value,
                          y_size = height,
                          bg_color = color).set_via_fn(notefn)
@@ -197,28 +227,38 @@ class SVProject:
                                 color = color)
         return patterns
 
+    def init_render_args(fn):
+        def wrapped(self, modules, banks, *args, **kwargs):
+            banks = SVBanks({bank.name: bank for bank in banks})            
+            modules = SVModConfigItems(modules)
+            modules.validate()
+            return fn(self,
+                      modules = modules,
+                      banks = banks,
+                      *args, **kwargs)
+        return wrapped
+    
+    @init_render_args
     def render(self,
                patches,
                modules,
-               links,
+               banks, 
                bpm,
                wash = False,
                breaks = False,
-               banks = None,
                volume = Volume):
-        proj = RVProject()
-        proj.initial_bpm = bpm
-        proj.global_volume = volume
-        rendered_modules = self.init_modules(proj = proj,
-                                             patches = patches,
-                                             modules = modules,
-                                             links = links,
-                                             banks = banks)
-        proj.patterns=self.init_patterns(modules = rendered_modules,
-                                         patches = patches,
-                                         wash = wash,
-                                         breaks = breaks)
-        return proj
+        project = RVProject()
+        project.initial_bpm = bpm
+        project.global_volume = volume
+        project_modules = self.init_modules(project = project,
+                                            patches = patches,
+                                            modules = modules,
+                                            banks = banks)
+        project.patterns = self.init_patterns(modules = project_modules,
+                                              patches = patches,
+                                              wash = wash,
+                                              breaks = breaks)
+        return project
 
 if __name__=="__main__":
     pass

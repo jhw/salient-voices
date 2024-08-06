@@ -1,16 +1,37 @@
-from sv.core import load_class
+# from rv.note import Note, NOTECMD
 
+"""
+^^^ leads to some weird circular import error
+"""
+
+class SVNoteOffTrig:
+
+    def __init__(self, mod, i):
+        self.mod = mod
+        self.i = i
+
+    @property
+    def key(self):
+        return self.mod
+    
+    def render(self,
+               *args):
+        from rv.note import Note, NOTECMD
+        return Note(note = NOTECMD.NOTE_OFF)
+        
 class SVNoteTrig:
 
     Volume = 128
     
     def __init__(self, mod, i,
                  sample = None,
+                 sample_mod = None,
                  note = None,
-                 vel = 1):
+                 vel = None):
         self.mod = mod
         self.i = i
         self.sample = sample
+        self.sample_mod = sample_mod
         self.note = note
         self.vel = vel        
 
@@ -22,15 +43,26 @@ class SVNoteTrig:
                modules,
                *args):
         if self.mod not in modules:
-            raise RuntimeError("mod %s not found" % self.mod)
+            raise RuntimeError("module %s not found" % self.mod)
+        if self.sample_mod and self.sample_mod not in modules:
+            raise RuntimeError("module %s not found" % self.sample_mod)
         mod = modules[self.mod]
-        mod_id = 1+mod.index # NB 1+
-        note = 1+(mod.lookup(self.sample) if self.sample else self.note)
-        vel = max(1, int(self.vel*self.Volume))
+        sample_mod = modules[self.sample_mod] if self.sample_mod else mod
+        if self.note:
+            note = self.note
+        elif self.sample:
+            note = 1 + sample_mod.lookup(self.sample)
+        else:
+            raise RuntimeError("either sample or note must be defined")
+        mod_id = 1 + mod.index # NB 1+
+        note_kwargs = {
+            "module": mod_id,
+            "note": note
+        }
+        if self.vel:
+            note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
         from rv.note import Note
-        return Note(module = mod_id,
-                    note = note,
-                    vel = vel)
+        return Note(**note_kwargs)
 
 class SVFXTrig:
 
@@ -58,71 +90,31 @@ class SVFXTrig:
                controllers):
         if (self.mod not in modules or
             self.mod not in controllers):
-            raise RuntimeError("mod %s not found" % self.mod)
+            raise RuntimeError("module %s not found" % self.mod)
         mod, controller = modules[self.mod], controllers[self.mod]
-        mod_id = 1+mod.index # NB 1+
+        mod_id = 1 + mod.index # NB 1+
         if self.ctrl not in controller:
-            raise RuntimeError("ctrl %s not found in mod %s" % (self.ctrl,
-                                                                self.mod))
+            raise RuntimeError("controller %s not found in module %s" % (self.ctrl,
+                                                                         self.mod))
         ctrl_id = self.CtrlMult*controller[self.ctrl]
         from rv.note import Note
         return Note(module = mod_id,
                     ctl = ctrl_id,
                     val = self.value)
 
-class SVTracks(dict):
+class SVPatch:
 
-    def __init__(self, n_ticks, item = {}):
-        dict.__init__(self)
+    def __init__(self, trigs, n_ticks):
+        self.trigs = trigs
         self.n_ticks = n_ticks
 
-class SVMachines(list):
-    
-    @classmethod
-    def randomise(self,
-                  machines,
-                  **kwargs):
-        return SVMachines([load_class(machine["class"]).randomise(machine = machine,
-                                                                  **kwargs)
-                           for machine in machines])
-    
-    def __init__(self, machines):
-        list.__init__(self, [load_class(machine["class"])(machine = machine)
-                             for machine in machines])
-        
-    def clone(self):
-        return SVMachines([machine.clone()
-                           for machine in self])
-    
-class SVPatch(dict):
-    
-    @classmethod
-    def randomise(self, machines, **kwargs):
-        return SVPatch(machines = SVMachines.randomise(machines = machines,
-                                                       **kwargs))
-        
-    def __init__(self,
-                 machines):
-        dict.__init__(self, {"machines": SVMachines(machines)})
-        
-    def clone(self):
-        return SVPatch(machines = self["machines"].clone())
-
-    def render(self,
-               n_ticks,
-               density,
-               temperature,
-               mutes = []):
-        tracks = SVTracks(n_ticks = n_ticks)
-        for machine in self["machines"]:
-            volume = 1 if machine["name"] not in mutes else 0
-            for trig in machine.render(n_ticks = n_ticks,
-                                       density = density,
-                                       temperature = temperature,
-                                       volume = volume):
-                tracks.setdefault(trig.key, [])
-                tracks[trig.key].append(trig)
-        return tracks
-        
+    @property
+    def tracks(self):
+        tracks = {}
+        for trig in self.trigs:
+            tracks.setdefault(trig.key, [])
+            tracks[trig.key].append(trig)
+        return list(tracks.values())
+            
 if __name__ == "__main__":
     pass
