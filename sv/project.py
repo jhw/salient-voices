@@ -2,9 +2,6 @@ from rv.api import Project as RVProject
 from rv.pattern import Pattern as RVPattern
 from rv.note import Note as RVNote
 
-from sv.banks import SVBanks
-from sv.sampler import SVSamplePool
-
 import importlib
 import random
 
@@ -97,6 +94,24 @@ class SVModConfigItems(list):
         for item in self:
             links += item.links
         return links
+
+class SVBanks(dict):
+
+    def __init__(self, item = []):
+        dict.__init__(self, item)
+
+    def get_wav_file(self, sample):
+        bank_name, file_path = sample.split("/")
+        return self[bank_name].zip_file.open(file_path, 'r')
+
+class SVPool(list):
+
+    def __init__(self, items = []):
+        list.__init__(self, items)
+
+    def add(self, sample):
+        if sample not in self:
+            self.append(sample)
     
 class SVProject:
 
@@ -117,7 +132,7 @@ class SVProject:
                 mod_class = load_class(mod["class"])
                 mod_kwargs = {}
                 if mod["class"].lower().endswith("sampler"):
-                    pool = SVSamplePool()
+                    pool = SVPool()
                     self.populate_sample_pool(patches = patches,
                                               pool = pool)
                     mod_kwargs = {"banks": banks,

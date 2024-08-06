@@ -10,15 +10,6 @@ warnings.simplefilter("ignore", wavfile.WavFileWarning)
 
 MaxSlots = 120
 
-class SVSamplePool(list):
-
-    def __init__(self, items = []):
-        list.__init__(self, items)
-
-    def add(self, sample):
-        if sample not in self:
-            self.append(sample)
-
 class SVBaseSampler(RVSampler):
 
     def __init__(self, *args, **kwargs):
