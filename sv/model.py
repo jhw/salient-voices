@@ -62,8 +62,6 @@ class SVNoteTrig:
             "note": note
         }
         if self.vel:
-            if not isinstance(self.vel, int):
-                raise RuntimeError("velocity of value {self.vel} found; velocity must be an int")
             note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
         from rv.note import Note
         return Note(**note_kwargs)

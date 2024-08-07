@@ -1,16 +1,17 @@
 ### short
 
-- remove velocity check
 - capture controller value too large
-- simple sampler to take initial pitch offset
 
 ### medium
+
+- simple sampler to take initial pitch offset
 
 - what's the scaling for filter Resonance default controller value
 - problem with rv.Note circular import error
 
 ### done
 
+- remove velocity check
 - move demos out of sv
 - local tests or demos
 - (string) hex value support 
