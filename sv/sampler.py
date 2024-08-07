@@ -44,24 +44,39 @@ class SVBaseSampler(rv.modules.sampler.Sampler):
 
     def lookup(self, sample):
         return self.pool.index(sample)
-    
-class SVSimpleSampler(SVBaseSampler):
 
-    def __init__(self, banks, pool, *args, **kwargs):
+"""
+SVSingleSlotSampler uses default sunvox sampler's chromatic implementation and thus should only accept a single sample for safety
+"""
+    
+class SVSingleSlotSampler(SVBaseSampler):
+
+    def __init__(self, banks, pool,
+                 *args, **kwargs):
         SVBaseSampler.__init__(self, *args, **kwargs)
+        if len(pool) > 1:
+            raise RuntimeError("SVSingleSlotSampler can only accept a single sample")
         self.pool = pool
         notes = list(rv.note.NOTE)
         for i, sample in enumerate(self.pool):
             self.note_samples[notes[i]] = i
             src = banks.get_wav_file(sample)
             self.load_sample(src, i)
-    
-class SVSlotSampler(SVBaseSampler):
 
-    def __init__(self, banks, pool, max_slots = MaxSlots, root_note = rv.note.NOTE.C5, *args, **kwargs):
+"""
+SVMultiSlotSampler accepts multiple samples and must then rebase the pitch on all of them so that input pitch is rendered
+SVMultiSlotSampler is thus non- chromatic due to the above, although slots between len(pool) and MaxSlots contain the default chromatic implementation
+"""
+            
+class SVMultiSlotSampler(SVBaseSampler):
+
+    def __init__(self, banks, pool,
+                 max_slots = MaxSlots,
+                 root_note = rv.note.NOTE.C5,
+                 *args, **kwargs):
         SVBaseSampler.__init__(self, *args, **kwargs)
         if len(pool) > max_slots:
-            raise RuntimeError("SVBankSampler max slots exceeded")
+            raise RuntimeError("SVMultiSlotSampler max slots exceeded")
         self.pool = pool
         notes = list(rv.note.NOTE)
         root = notes.index(root_note)

@@ -1,8 +1,6 @@
 ### short
 
-- single slot and multi slot sampler
 - single slot takes repitch arg
-- single slot raises exception if more than one sample
 - move init bank function into banks
 - extend it to take more than one sample ref
 - modify demo to use new bank loader
@@ -18,6 +16,8 @@
 
 ### done
 
+- single slot and multi slot sampler
+- single slot raises exception if more than one sample
 - remove "import RVXXX" nomenclature
 - try just importing rv everywhere
 - capture controller value too large
