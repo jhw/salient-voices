@@ -1,16 +1,16 @@
 ### short
 
-- capture controller value too large
+- try just importing rv everywhere
 
 ### medium
 
+- add echo to 303 demo
 - simple sampler to take initial pitch offset
-
 - what's the scaling for filter Resonance default controller value
-- problem with rv.Note circular import error
 
 ### done
 
+- capture controller value too large
 - remove velocity check
 - move demos out of sv
 - local tests or demos

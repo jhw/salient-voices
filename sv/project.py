@@ -1,4 +1,5 @@
 from rv.api import Project as RVProject
+from rv.errors import ControllerValueError
 from rv.pattern import Pattern as RVPattern
 from rv.note import Note as RVNote
 
@@ -171,7 +172,10 @@ class SVProject:
                         value = raw_value
                     else:
                         raise RuntimeError(f"fx value of {raw_value} found; must be int or hex string")
-                    mod.set_raw(key, value)
+                    try:
+                        mod.set_raw(key, value)
+                    except ControllerValueError as error:
+                        raise RuntimeError(str(error))
             project.attach_module(mod)
             modules_[name] = mod
         output = sorted(project.modules, key = lambda x: -x.index).pop()
