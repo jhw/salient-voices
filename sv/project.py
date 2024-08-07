@@ -102,6 +102,11 @@ class SVBanks(dict):
 
     def get_wav_file(self, sample):
         bank_name, file_path = sample.split("/")
+        if bank_name not in self:
+            raise RuntimeError(f"bank {bank_name} not found")
+        file_paths = self[bank_name].zipfile.namelist()
+        if file_path not in file_paths:
+            raise RuntimeError(f"path {file_path} not found in bank {bank_name}"
         return self[bank_name].zip_file.open(file_path, 'r')
 
 class SVPool(list):
