@@ -217,7 +217,7 @@ class SVProject:
                    color,
                    height = Height):
         def notefn(self, j, i):
-            return RVNote()
+            return rv.note.Note()
         return rv.pattern.Pattern(lines = patch.n_ticks,
                                   tracks = len(patch.tracks),
                                   x = offset.value,
