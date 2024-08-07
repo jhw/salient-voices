@@ -1,5 +1,3 @@
-from rv.modules.sampler import Sampler as RVSampler
-
 from scipy.io import wavfile
 
 import io
@@ -10,10 +8,10 @@ warnings.simplefilter("ignore", wavfile.WavFileWarning)
 
 MaxSlots = 120
 
-class SVBaseSampler(RVSampler):
+class SVBaseSampler(rv.modules.sampler.Sampler):
 
     def __init__(self, *args, **kwargs):
-        RVSampler.__init__(self, *args, **kwargs)
+        rv.modules.sampler.Sampler.__init__(self, *args, **kwargs)
         
     """
     - https://github.com/metrasynth/gallery/blob/master/wicked.mmckpy#L497-L526
@@ -35,8 +33,8 @@ class SVBaseSampler(RVSampler):
             size, channels = snd.shape
         sample.rate = freq
         sample.channels = {
-            1: RVSampler.Channels.mono,
-            2: RVSampler.Channels.stereo,
+            1: rv.modules.sampler.Sampler.Channels.mono,
+            2: rv.modules.sampler.Sampler.Channels.stereo,
         }[channels]
         sample.data = snd.data.tobytes()
         for key, value in kwargs.items():

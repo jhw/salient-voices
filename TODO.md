@@ -1,11 +1,10 @@
 ### short
 
-- remove "import RVXXX" nomenclature
+- remove RVXXX nomenclature from export.py
 
 ### medium
 
 - simple sampler to take initial pitch offset
-- add echo to 303 demo
 
 ### thoughts
 
@@ -13,6 +12,7 @@
 
 ### done
 
+- remove "import RVXXX" nomenclature
 - try just importing rv everywhere
 - capture controller value too large
 - remove velocity check

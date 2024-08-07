@@ -1,10 +1,7 @@
-from rv.api import Project as RVProject
-from rv.errors import ControllerValueError
-from rv.pattern import Pattern as RVPattern
-
 import importlib
 import random
 import rv
+import rv.api # why?
 
 Volume, Height = 256, 64
 
@@ -174,7 +171,7 @@ class SVProject:
                         raise RuntimeError(f"fx value of {raw_value} found; must be int or hex string")
                     try:
                         mod.set_raw(key, value)
-                    except ControllerValueError as error:
+                    except rv.errors.ControllerValueError as error:
                         raise RuntimeError(str(error))
             project.attach_module(mod)
             modules_[name] = mod
@@ -206,11 +203,11 @@ class SVProject:
         def notefn(self, j, i):
             return trigs[i][j].render(modules,
                                       controllers) if j in trigs[i] else rv.note.Note()
-        return RVPattern(lines = patch.n_ticks,
-                         tracks = len(patch.tracks),
-                         x = offset.value,
-                         y_size = height,
-                         bg_color = color).set_via_fn(notefn)
+        return rv.pattern.Pattern(lines = patch.n_ticks,
+                                  tracks = len(patch.tracks),
+                                  x = offset.value,
+                                  y_size = height,
+                                  bg_color = color).set_via_fn(notefn)
 
     @attach_pattern
     def init_blank(self,
@@ -221,11 +218,11 @@ class SVProject:
                    height = Height):
         def notefn(self, j, i):
             return RVNote()
-        return RVPattern(lines = patch.n_ticks,
-                         tracks = len(patch.tracks),
-                         x = offset.value,
-                         y_size = height,
-                         bg_color = color).set_via_fn(notefn)
+        return rv.pattern.Pattern(lines = patch.n_ticks,
+                                  tracks = len(patch.tracks),
+                                  x = offset.value,
+                                  y_size = height,
+                                  bg_color = color).set_via_fn(notefn)
     
     def init_controllers(self, modules):
         controllers = {}
@@ -280,7 +277,7 @@ class SVProject:
                wash = False,
                breaks = False,
                volume = Volume):
-        project = RVProject()
+        project = rv.api.Project()
         project.initial_bpm = bpm
         project.global_volume = volume
         project_modules = self.init_modules(project = project,
