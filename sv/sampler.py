@@ -1,9 +1,9 @@
 from rv.modules.sampler import Sampler as RVSampler
-from rv.note import NOTE as RVNOTE
 
 from scipy.io import wavfile
 
 import io
+import rv
 import warnings
 
 warnings.simplefilter("ignore", wavfile.WavFileWarning)
@@ -52,7 +52,7 @@ class SVSimpleSampler(SVBaseSampler):
     def __init__(self, banks, pool, *args, **kwargs):
         SVBaseSampler.__init__(self, *args, **kwargs)
         self.pool = pool
-        notes = list(RVNOTE)
+        notes = list(rv.note.NOTE)
         for i, sample in enumerate(self.pool):
             self.note_samples[notes[i]] = i
             src = banks.get_wav_file(sample)
@@ -60,12 +60,12 @@ class SVSimpleSampler(SVBaseSampler):
     
 class SVSlotSampler(SVBaseSampler):
 
-    def __init__(self, banks, pool, max_slots = MaxSlots, root_note = RVNOTE.C5, *args, **kwargs):
+    def __init__(self, banks, pool, max_slots = MaxSlots, root_note = rv.note.NOTE.C5, *args, **kwargs):
         SVBaseSampler.__init__(self, *args, **kwargs)
         if len(pool) > max_slots:
             raise RuntimeError("SVBankSampler max slots exceeded")
         self.pool = pool
-        notes = list(RVNOTE)
+        notes = list(rv.note.NOTE)
         root = notes.index(root_note)
         for i, sample in enumerate(self.pool):
             self.note_samples[notes[i]] = i

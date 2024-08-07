@@ -1,8 +1,4 @@
-# from rv.note import Note, NOTECMD
-
-"""
-^^^ leads to some weird circular import error
-"""
+import rv
 
 class SVNoteOffTrig:
 
@@ -16,8 +12,7 @@ class SVNoteOffTrig:
     
     def render(self,
                *args):
-        from rv.note import Note, NOTECMD
-        return Note(note = NOTECMD.NOTE_OFF)
+        return rv.note.Note(note = rv.note.NOTECMD.NOTE_OFF)
         
 class SVNoteTrig:
 
@@ -63,8 +58,7 @@ class SVNoteTrig:
         }
         if self.vel:
             note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
-        from rv.note import Note
-        return Note(**note_kwargs)
+        return rv.note.Note(**note_kwargs)
 
 class SVFXTrig:
 
@@ -108,10 +102,9 @@ class SVFXTrig:
             value = self.value
         else:
             raise RuntimeError(f"fx value of {self.value} found; must be int or hex string")
-        from rv.note import Note
-        return Note(module = mod_id,
-                    ctl = ctrl_id,
-                    val = value)
+        return rv.note.Note(module = mod_id,
+                            ctl = ctrl_id,
+                            val = value)
 
 class SVPatch:
 

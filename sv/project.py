@@ -1,10 +1,10 @@
 from rv.api import Project as RVProject
 from rv.errors import ControllerValueError
 from rv.pattern import Pattern as RVPattern
-from rv.note import Note as RVNote
 
 import importlib
 import random
+import rv
 
 Volume, Height = 256, 64
 
@@ -205,7 +205,7 @@ class SVProject:
                  for track in patch.tracks]
         def notefn(self, j, i):
             return trigs[i][j].render(modules,
-                                      controllers) if j in trigs[i] else RVNote()
+                                      controllers) if j in trigs[i] else rv.note.Note()
         return RVPattern(lines = patch.n_ticks,
                          tracks = len(patch.tracks),
                          x = offset.value,
