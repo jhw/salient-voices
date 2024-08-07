@@ -49,7 +49,7 @@ class SVNoteTrig:
         mod = modules[self.mod]
         sample_mod = modules[self.sample_mod] if self.sample_mod else mod
         if self.note:
-            if not isinstance(note, int):
+            if not isinstance(self.note, int):
                 raise RuntimeError(f"note with value {self.note} found; note must be an int")
             note = self.note
         elif self.sample:
