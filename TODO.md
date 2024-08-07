@@ -1,10 +1,10 @@
 ### short
 
 - (string) hex value support 
-  - fx controller values
   - module default values
 
 - simple sampler to take initial pitch offset
+- local tests or demos
 
 ### done
 

@@ -62,6 +62,8 @@ class SVNoteTrig:
             "note": note
         }
         if self.vel:
+            if not isinstance(self.vel, int):
+                raise RuntimeError("velocity of value {self.vel} found; velocity must be an int")
             note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
         from rv.note import Note
         return Note(**note_kwargs)
@@ -99,10 +101,19 @@ class SVFXTrig:
             raise RuntimeError("controller %s not found in module %s" % (self.ctrl,
                                                                          self.mod))
         ctrl_id = self.CtrlMult*controller[self.ctrl]
+        if isinstance(self.value, str):
+            try:
+                value = int(self.value, 16)
+            except ValueError:
+                raise RuntimeError(f"couldn't parse {self.value} as hex string")
+        elif isinstance(self.value, int):
+            value = self.value
+        else:
+            raise RuntimeError(f"fx value of {self.value} found; must be int or hex string")
         from rv.note import Note
         return Note(module = mod_id,
                     ctl = ctrl_id,
-                    val = self.value)
+                    val = value)
 
 class SVPatch:
 
