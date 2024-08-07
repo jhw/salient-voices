@@ -1,6 +1,5 @@
 from scipy.io import wavfile
 
-import io
 import rv
 import warnings
 

@@ -1,26 +1,14 @@
-from sv.banks import SVBank
+from sv.banks import single_shot_bank
 from sv.model import SVNoteTrig, SVNoteOffTrig, SVFXTrig, SVPatch
 from sv.project import SVProject
 
-import io
 import os
 import yaml
-import zipfile
 
 def load_yaml(attr):
     return yaml.safe_load(open(f"demos/303/{attr}.yaml").read())
 
 Modules = load_yaml("modules")
-
-def single_shot_bank(bank_name, file_path):
-    with open(file_path, 'rb') as wav_file:
-        wav_data = wav_file.read()
-    zip_buffer = io.BytesIO()
-    zip_file = zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False)
-    file_name = file_path.split("/")[-1]
-    zip_file.writestr(file_name, wav_data)
-    return SVBank(name = bank_name,
-                 zip_file = zip_file)
 
 def single_note(sample, note, adsr, filter_max, filter_resonance, i, length = 1):
     return [SVNoteTrig(mod = "MultiSynth",

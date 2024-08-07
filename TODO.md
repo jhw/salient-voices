@@ -1,14 +1,10 @@
 ### short
 
-- single slot takes repitch arg
-- move init bank function into banks
-- extend it to take more than one sample ref
-- modify demo to use new bank loader
-
 ### medium
 
-- remove RVXXX nomenclature from export.py
+- single slot takes repitch arg
 
+- remove RVXXX nomenclature from export.py
 
 ### thoughts
 
@@ -16,6 +12,8 @@
 
 ### done
 
+- modify demo to use new bank loader
+- move init bank function into banks
 - single slot and multi slot sampler
 - single slot raises exception if more than one sample
 - remove "import RVXXX" nomenclature
