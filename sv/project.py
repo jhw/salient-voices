@@ -106,7 +106,7 @@ class SVBanks(dict):
             raise RuntimeError(f"bank {bank_name} not found")
         file_paths = self[bank_name].zipfile.namelist()
         if file_path not in file_paths:
-            raise RuntimeError(f"path {file_path} not found in bank {bank_name}"
+            raise RuntimeError(f"path {file_path} not found in bank {bank_name}")
         return self[bank_name].zip_file.open(file_path, 'r')
 
 class SVPool(list):
@@ -161,8 +161,17 @@ class SVProject:
             mod, name = moditem["instance"], moditem["name"]
             setattr(mod, "name", name)
             if "defaults" in moditem:
-                for k, v in moditem["defaults"].items():
-                    mod.set_raw(k, v)
+                for key, raw_value in moditem["defaults"].items():
+                    if isinstance(raw_value, str):
+                        try:
+                            value = int(raw_value, 16)
+                        except ValueError:
+                            raise RuntimeError(f"couldn't parse {value} as hex string")
+                    elif isinstance(raw_value, int):
+                        value = raw_value
+                    else:
+                        raise RuntimeError(f"fx value of {raw_value} found; must be int or hex string")
+                    mod.set_raw(key, value)
             project.attach_module(mod)
             modules_[name] = mod
         output = sorted(project.modules, key = lambda x: -x.index).pop()
