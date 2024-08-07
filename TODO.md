@@ -1,10 +1,16 @@
 ### short
 
-- remove RVXXX nomenclature from export.py
+- single slot and multi slot sampler
+- single slot takes repitch arg
+- single slot raises exception if more than one sample
+- move init bank function into banks
+- extend it to take more than one sample ref
+- modify demo to use new bank loader
 
 ### medium
 
-- simple sampler to take initial pitch offset
+- remove RVXXX nomenclature from export.py
+
 
 ### thoughts
 
