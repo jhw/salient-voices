@@ -112,17 +112,19 @@ class SVPatch:
         self.trigs = trigs
         self.n_ticks = n_ticks
 
-    @property
-    def tracks(self):
-        tracks = {}
+    def tracks(self, mod_names):
+        tracks = {mod_name: {} for mod_name in mod_names}
         for trig in self.trigs:
-            tracks.setdefault(trig.mod, {})
             tracks[trig.mod].setdefault(trig.key, [])
             tracks[trig.mod][trig.key].append(trig)
+        # START TEMP CODE
+        tracks = {k:v for k, v in tracks.items()
+                  if v != {}}
+        # END TEMP CODE
         return tracks
 
-    def update_pool(self, pool):
-        for _, group in self.tracks.items():
+    def update_pool(self, mod_names, pool):
+        for _, group in self.tracks(mod_names).items():
             for _, track in group.items():
                 for trig in track:
                     if (hasattr(trig, "sample") and trig.sample):

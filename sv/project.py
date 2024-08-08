@@ -119,13 +119,15 @@ class SVProject:
                     patches,
                     modules,
                     banks):
+            mod_names = [mod["name"] for mod in modules]
             for mod in modules:
                 mod_class = load_class(mod["class"])
                 mod_kwargs = {}
                 if mod["class"].lower().endswith("sampler"):
                     pool = SVPool()
-                    for patch in patches:
-                        patch.update_pool(pool = pool)
+                    for patch in patches:                        
+                        patch.update_pool(pool = pool,
+                                          mod_names = mod_names)
                     mod_kwargs = {"banks": banks,
                                   "pool": pool}
                 mod["instance"] = mod_class(**mod_kwargs)
@@ -256,15 +258,15 @@ class SVProject:
                        wash,
                        breaks,
                        height = PatternHeight):
-
         x_count = 1 + int(wash) + int(breaks)
         x_offset, y_offset = SVOffset(), SVOffset()
+        mod_names = list(modules.keys())
         controllers = self.render_controllers(modules)
         patterns, color = [], None
         for i, patch in enumerate(patches):
             n_ticks = patch.n_ticks
             color = SVColor.randomise()            
-            for _, group in patch.tracks.items():
+            for _, group in patch.tracks(mod_names).items():
                 tracks = list(group.values())
                 self.render_patch(patterns = patterns,
                                   tracks = tracks,

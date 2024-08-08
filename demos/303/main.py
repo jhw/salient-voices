@@ -59,7 +59,9 @@ if __name__ == "__main__":
         project = SVProject().render_project(patches = patches,
                                              modules = Modules,
                                              banks = [bank],
-                                             bpm = 124)
+                                             bpm = 124,
+                                             wash = True,
+                                             breaks = True)
         if not os.path.exists("tmp"):
             os.mkdir("tmp")
         with open("tmp/demo-303.sunvox", 'wb') as f:
