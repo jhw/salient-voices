@@ -49,7 +49,7 @@ class SVOffset:
     def set_value(self, value):
         self.value = value
         
-    def increment(self, value):
+    def inc_value(self, value):
         self.value += value
         
 class SVModConfigItem(dict):
@@ -126,7 +126,7 @@ class SVProject:
                     if (hasattr(trig, "sample") and trig.sample):
                         pool.add(trig.sample)
     
-    def init_module_classes(fn):
+    def render_module_classes(fn):
         def wrapped(self,
                     project,
                     patches,
@@ -149,12 +149,12 @@ class SVProject:
                       banks = banks)
         return wrapped
 
-    @init_module_classes
-    def init_modules(self,                     
-                     project,
-                     patches,
-                     modules,
-                     banks):
+    @render_module_classes
+    def render_modules(self,                     
+                       project,
+                       patches,
+                       modules,
+                       banks):
         rendered_modules = {}
         for i, moditem in enumerate(modules):
             mod, name = moditem["instance"], moditem["name"]
@@ -186,19 +186,19 @@ class SVProject:
         def wrapped(*args, **kwargs):
             pattern = fn(*args, **kwargs)
             kwargs["patterns"].append(pattern)
-            kwargs["x_offset"].increment(kwargs["patch"].n_ticks)
+            kwargs["x_offset"].inc_value(kwargs["patch"].n_ticks)
         return wrapped
     
     @attach_pattern
-    def init_pattern(self,
-                     patterns,
-                     modules,
-                     controllers,
-                     patch,
-                     x_offset,
-                     y_offset,
-                     color,
-                     height = PatternHeight):
+    def render_pattern(self,
+                       patterns,
+                       modules,
+                       controllers,
+                       patch,
+                       x_offset,
+                       y_offset,
+                       color,
+                       height = PatternHeight):
         trigs = [{note.i: note
                   for note in track}
                  for track in patch.tracks]
@@ -213,7 +213,7 @@ class SVProject:
                                   bg_color = color).set_via_fn(notefn)
 
     @attach_pattern
-    def init_blank(self,
+    def render_blank(self,
                    patterns,
                    patch,
                    x_offset,
@@ -229,7 +229,7 @@ class SVProject:
                                   y_size = height,
                                   bg_color = color).set_via_fn(notefn)
     
-    def init_controllers(self, modules):
+    def render_controllers(self, modules):
         controllers = {}
         for mod in modules.values():
             controllers.setdefault(mod.name, {})
@@ -238,35 +238,35 @@ class SVProject:
                 controllers[mod.name][controller.name] = controller.number
         return controllers
 
-    def init_patterns(self,
+    def render_patterns(self,
                       modules,
                       patches,
                       height = PatternHeight,
                       wash = False,
                       breaks = False):
-        controllers = self.init_controllers(modules)
+        controllers = self.render_controllers(modules)
         x_offset, y_offset = SVOffset(), SVOffset()
         patterns, color = [], None
         for i, patch in enumerate(patches):
             y_offset.set_value(0) # NB reset
             color = SVColor.randomise() if 0 == i % 4 else color.mutate()
             for i in range(2 if wash else 1):
-                self.init_pattern(patterns = patterns,
-                                  modules = modules,
-                                  controllers = controllers,
+                self.render_pattern(patterns = patterns,
+                                    modules = modules,
+                                    controllers = controllers,
+                                    patch = patch,
+                                    x_offset = x_offset,
+                                    y_offset = y_offset,
+                                    color = color)
+            if breaks:
+                self.render_blank(patterns = patterns,
                                   patch = patch,
                                   x_offset = x_offset,
                                   y_offset = y_offset,
                                   color = color)
-            if breaks:
-                self.init_blank(patterns = patterns,
-                                patch = patch,
-                                x_offset = x_offset,
-                                y_offset = y_offset,
-                                color = color)
         return patterns
-
-    def init_render_args(fn):
+    
+    def init_project(fn):
         def wrapped(self, modules, banks, *args, **kwargs):
             banks = SVBanks({bank.name: bank for bank in banks})            
             modules = SVModConfigItems(modules)
@@ -277,26 +277,26 @@ class SVProject:
                       *args, **kwargs)
         return wrapped
     
-    @init_render_args
-    def render(self,
-               patches,
-               modules,
-               banks, 
-               bpm,
-               wash = False,
-               breaks = False,
-               volume = Volume):
+    @init_project
+    def render_project(self,
+                       patches,
+                       modules,
+                       banks, 
+                       bpm,
+                       wash = False,
+                       breaks = False,
+                       volume = Volume):
         project = rv.api.Project()
         project.initial_bpm = bpm
         project.global_volume = volume
-        project_modules = self.init_modules(project = project,
-                                            patches = patches,
-                                            modules = modules,
-                                            banks = banks)
-        project.patterns = self.init_patterns(modules = project_modules,
+        project_modules = self.render_modules(project = project,
                                               patches = patches,
-                                              wash = wash,
-                                              breaks = breaks)
+                                              modules = modules,
+                                              banks = banks)
+        project.patterns = self.render_patterns(modules = project_modules,
+                                                patches = patches,
+                                                wash = wash,
+                                                breaks = breaks)
         return project
 
 if __name__=="__main__":

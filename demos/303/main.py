@@ -53,10 +53,10 @@ if __name__ == "__main__":
                             length = 1)
         patch = SVPatch(trigs = trigs,
                         n_ticks = 8)
-        project = SVProject().render(patches = [patch],
-                                     modules = Modules,
-                                     banks = [bank],
-                                     bpm = 124)
+        project = SVProject().render_project(patches = [patch],
+                                             modules = Modules,
+                                             banks = [bank],
+                                             bpm = 124)
         if not os.path.exists("tmp"):
             os.mkdir("tmp")
         with open("tmp/demo-303.sunvox", 'wb') as f:
