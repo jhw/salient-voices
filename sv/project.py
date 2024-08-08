@@ -270,13 +270,13 @@ class SVProject:
                        wash,
                        breaks,
                        height = PatternHeight):
+        count = 1 + int(wash) + int(breaks)
         controllers = self.render_controllers(modules)
         x_offset, y_offset = SVOffset(), SVOffset()
         patterns, color = [], None
         for i, patch in enumerate(patches):
             n_ticks = patch.n_ticks
             color = SVColor.randomise() if 0 == i % 4 else color.mutate()
-            y_offset.set_value(0)
             for _, group in patch.track_groups.items():
                 tracks = list(group.values())
                 self.render_patch(patterns = patterns,
@@ -289,9 +289,10 @@ class SVProject:
                                   color = color,
                                   wash = wash,
                                   breaks = breaks)
-                count = 1 + int(wash) + int(breaks)
-                x_offset.inc_value(-count * n_ticks)
+                x_offset.inc_value(-1 * count * n_ticks)
                 y_offset.inc_value(height)
+        x_offset.inc_value(count * n_ticks)
+        y_offset.set_value(0)
         return patterns
     
     def init_project(fn):
