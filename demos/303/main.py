@@ -41,19 +41,22 @@ if __name__ == "__main__":
     try:
         bank = single_shot_bank(bank_name = "mikey303",
                                 file_path = "demos/303/303 VCO SQR.wav")
-        trigs = single_note(sample = "mikey303/303 VCO SQR.wav",
-                            note = 56,
-                            adsr = ["0010",
-                                    "0010",
-                                    "0800",
+        patches = []
+        for i in range(2):
+            trigs = single_note(sample = "mikey303/303 VCO SQR.wav",
+                                note = 56,
+                                adsr = ["0010",
+                                        "0010",
+                                        "0800",
                                     "0300"],
-                            filter_max = "5000",
-                            filter_resonance = "7000",
-                            i = 0,
-                            length = 1)
-        patch = SVPatch(trigs = trigs,
-                        n_ticks = 16)
-        project = SVProject().render_project(patches = [patch],
+                                filter_max = "5000",
+                                filter_resonance = "7000",
+                                i = 0,
+                                length = 1)
+            patch = SVPatch(trigs = trigs,
+                            n_ticks = 16)
+            patches.append(patch)
+        project = SVProject().render_project(patches = patches,
                                              modules = Modules,
                                              banks = [bank],
                                              bpm = 124)

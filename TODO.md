@@ -2,8 +2,6 @@
 
 - pass modules to track_groups so you get empty list of trigs if none are defined 
 - refactor patch track_groups so it just returns a single nested dict of modules to trigs 
-- should probably be renamed as filter trigs 
-- returns an ordered dict as modules is ordered
 - the values in there could be a new class called trig list 
 - then trig list could have a tracks property which groups by trig key 
 - module valuation to ensure unique module names 
@@ -14,7 +12,6 @@
 - ensure modules are sorted
 - reverse sort modules as by convention output is zero but one tends to define the other way
 - move bank stuff into sampler
-- add a second patch to demo for testing 
 - FX trig could have a vector classmethod
 - equally note trig could have a chord classmethod 
 - part of export stems should be moved to sv
@@ -67,6 +64,9 @@
 
 ### done
 
+- should probably be renamed as filter trigs 
+- returns an ordered dict as modules is ordered
+- add a second patch to demo for testing 
 - modify demo to use new bank loader
 - move init bank function into banks
 - single slot and multi slot sampler
