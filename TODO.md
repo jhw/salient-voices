@@ -1,16 +1,16 @@
 ### short
 
-### medium
+- better nomenclature for tracks vs trigs
+- abstract trigs as trig list
 
-- pass modules to track_groups so you get empty list of trigs if none are defined 
-- refactor patch track_groups so it just returns a single nested dict of modules to trigs 
-- the values in there could be a new class called trig list 
-- then trig list could have a tracks property which groups by trig key 
-- module valuation to ensure unique module names 
-- init a colour for each module 
+- initialise colours on per module basis
 - pass colours to module initialisation
 - pass colours to pattern initialisation
 - mutate colours after every 4th block 
+
+### medium
+
+- module valuation to ensure unique module names 
 - ensure modules are sorted
 - reverse sort modules as by convention output is zero but one tends to define the other way
 - move bank stuff into sampler
