@@ -1,7 +1,5 @@
 ### short
 
-- capture tidal demo
-
 - project test
 - script/banks test
 - utils/export test
@@ -10,34 +8,26 @@
 
 ### medium
 
-- FX trig could have a vector classmethod
-- equally note trig could have a chord classmethod 
-
+- fx trig vector classmethod
+- note trig chord classmethod
 - algo to increase colour brightness
-
-- part of export stems should be moved to sv
-- maybe the slicing and zipping bit 
-- you could have a zipslice function which took an in memory wav file and a series of keys, and dumped to an in memory zip file
-
-- need a utility which creates a bank from a zipfile
-- need a utility which slices a file and creates a bank from a zipfile
-- need a utility which creates a bank from a series of wav files 
-- feels like this stuff should live in sv/scripts/banks 
+- sliced wav to zipfile utility
+- import s3 banks code and test with moto
 
 - tidal syntax
 - freeze wash
 - jsonschema module validation
 - single slot sampler to take repitch arg
 
-
-
 ### thoughts
 
 - track labelling?
+  - no point now you have colours
 - what's the scaling for filter Resonance default controller value?
 
 ### done
 
+- capture tidal demo
 - move pool and bank into sampler
 - move bank loader into scripts
 - move export into utils
