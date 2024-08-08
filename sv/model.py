@@ -117,12 +117,6 @@ class SVPatch:
         for trig in self.trigs:
             tracks[trig.mod].setdefault(trig.key, [])
             tracks[trig.mod][trig.key].append(trig)
-        # START TEMP CODE
-        """
-        tracks = {k:v for k, v in tracks.items()
-                  if v != {}}
-        """
-        # END TEMP CODE
         return tracks
 
     def update_pool(self, mod_names, pool):
