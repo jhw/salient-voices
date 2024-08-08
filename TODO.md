@@ -1,8 +1,5 @@
 ### short
 
-- blank doesn't need len(tracks)
-- remove model temp code
-
 ### medium
 
 - pass modules to track_groups so you get empty list of trigs if none are defined 
@@ -41,6 +38,8 @@
 
 ### done
 
+- blank doesn't need len(tracks)
+- remove model temp code
 - should probably be renamed as filter trigs 
 - returns an ordered dict as modules is ordered
 - add a second patch to demo for testing 

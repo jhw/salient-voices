@@ -118,8 +118,10 @@ class SVPatch:
             tracks[trig.mod].setdefault(trig.key, [])
             tracks[trig.mod][trig.key].append(trig)
         # START TEMP CODE
+        """
         tracks = {k:v for k, v in tracks.items()
                   if v != {}}
+        """
         # END TEMP CODE
         return tracks
 

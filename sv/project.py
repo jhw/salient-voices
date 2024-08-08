@@ -197,7 +197,6 @@ class SVProject:
 
     def render_blank(self,
                      patterns,
-                     tracks,
                      n_ticks,
                      x_offset,
                      y_offset,
@@ -206,7 +205,7 @@ class SVProject:
         def notefn(self, j, i):
             return rv.note.Note()
         pattern = rv.pattern.Pattern(lines = n_ticks,
-                                     tracks = len(tracks),
+                                     tracks = 1,
                                      x = x_offset.value,
                                      y = y_offset.value,
                                      y_size = height,
@@ -234,18 +233,24 @@ class SVProject:
                      wash,
                      breaks):
         for i in range(2 if wash else 1):
-            self.render_pattern(patterns = patterns,
-                                tracks = tracks,
-                                n_ticks = n_ticks,
-                                modules = modules,
-                                controllers = controllers,
-                                x_offset = x_offset,
-                                y_offset = y_offset,
-                                color = color)
+            if tracks != []:
+                self.render_pattern(patterns = patterns,
+                                    tracks = tracks,
+                                    n_ticks = n_ticks,
+                                    modules = modules,
+                                    controllers = controllers,
+                                    x_offset = x_offset,
+                                    y_offset = y_offset,
+                                    color = color)
+            else:
+                self.render_blank(patterns = patterns,
+                                  n_ticks = n_ticks,
+                                  x_offset = x_offset,
+                                  y_offset = y_offset,
+                                  color = color)
             x_offset.inc_value(n_ticks)
         if breaks:
             self.render_blank(patterns = patterns,
-                              tracks = tracks,
                               n_ticks = n_ticks,
                               x_offset = x_offset,
                               y_offset = y_offset,
