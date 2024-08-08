@@ -1,4 +1,5 @@
 import importlib
+import math
 import random
 import rv
 import rv.api # why?
@@ -122,12 +123,20 @@ class SVProject:
                        patches,                       
                        modules,
                        colours, 
-                       banks):
-        rendered_modules = {}
+                       banks,
+                       x_offset = -128,
+                       y_offset = -128,
+                       x0 = 512,
+                       y0 = 512):
+        rendered_modules, n = {}, int(math.ceil(len(modules) ** 0.5))
         for i, mod_item in enumerate(modules):
             mod, mod_name = mod_item["instance"], mod_item["name"]
             setattr(mod, "name", mod_name)
             setattr(mod, "color", colours[mod_name])
+            x = x0 + int(x_offset * (n - (i % n) - 1))
+            y = y0 + int(y_offset * (n - math.floor(i / n) - 2))
+            setattr(mod, "x",  x)
+            setattr(mod, "y", y)
             if "defaults" in mod_item:
                 for key, raw_value in mod_item["defaults"].items():
                     if isinstance(raw_value, str):

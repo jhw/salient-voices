@@ -1,17 +1,22 @@
 ### short
 
-- simple (non- optimised) layout grid
+- move pool and bank into sampler
+- move bank loader into scripts
+- move export into utils
 
 ### medium
+
+- capture tidal demo
+
+- project unit test
+- bank script test
+- remove RV nomenclature from export.py
+- export test
 
 - FX trig could have a vector classmethod
 - equally note trig could have a chord classmethod 
 
 - algo to increase colour brightness
-
-- project unit test
-- move bank stuff into sampler
-- bank unit test
 
 - part of export stems should be moved to sv
 - maybe the slicing and zipping bit 
@@ -24,7 +29,6 @@
 
 - freeze wash
 - jsonschema module validation
-- remove RV nomenclature from export.py
 - single slot sampler to take repitch arg
 
 ### thoughts
@@ -34,6 +38,7 @@
 
 ### done
 
+- simple (non- optimised) layout grid
 - remove offsets
 - google colours
 - initialise colours on per module basis
