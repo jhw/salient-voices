@@ -1,15 +1,18 @@
 ### short
 
+- remove offsets
 - simple (non- optimised) layout grid
-- algo to increase colour brightness
-- project unit test
-- move bank stuff into sampler
-- bank unit test
 
 ### medium
 
 - FX trig could have a vector classmethod
 - equally note trig could have a chord classmethod 
+
+- algo to increase colour brightness
+
+- project unit test
+- move bank stuff into sampler
+- bank unit test
 
 - part of export stems should be moved to sv
 - maybe the slicing and zipping bit 
