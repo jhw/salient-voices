@@ -1,10 +1,5 @@
 ### short
 
-- initialise colours on per module basis
-- pass colours to module initialisation
-- pass colours to pattern initialisation
-- mutate colours after every 4th block 
-
 ### medium
 
 - module valuation to ensure unique module names 
@@ -35,6 +30,10 @@
 
 ### done
 
+- initialise colours on per module basis
+- pass colours to module initialisation
+- pass colours to pattern initialisation
+- mutate colours after every 4th block 
 - better nomenclature for tracks vs trigs
 - abstract trigs as trig list
 - blank doesn't need len(tracks)

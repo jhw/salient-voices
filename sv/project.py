@@ -118,6 +118,7 @@ class SVProject:
                     project,
                     patches,
                     modules,
+                    colours,
                     banks):
             mod_names = [mod["name"] for mod in modules]
             for mod in modules:
@@ -135,21 +136,24 @@ class SVProject:
                       project = project,
                       patches = patches,
                       modules = modules,
+                      colours = colours,
                       banks = banks)
         return wrapped
 
     @init_modules
     def render_modules(self,                     
                        project,
-                       patches,
+                       patches,                       
                        modules,
+                       colours, 
                        banks):
         rendered_modules = {}
-        for i, moditem in enumerate(modules):
-            mod, name = moditem["instance"], moditem["name"]
-            setattr(mod, "name", name)
-            if "defaults" in moditem:
-                for key, raw_value in moditem["defaults"].items():
+        for i, mod_item in enumerate(modules):
+            mod, mod_name = mod_item["instance"], mod_item["name"]
+            setattr(mod, "name", mod_name)
+            setattr(mod, "color", colours[mod_name])
+            if "defaults" in mod_item:
+                for key, raw_value in mod_item["defaults"].items():
                     if isinstance(raw_value, str):
                         try:
                             value = int(raw_value, 16)
@@ -164,7 +168,7 @@ class SVProject:
                     except rv.errors.ControllerValueError as error:
                         raise RuntimeError(str(error))
             project.attach_module(mod)
-            rendered_modules[name] = mod
+            rendered_modules[mod_name] = mod
         output = sorted(project.modules, key = lambda x: -x.index).pop()
         for src, dest in modules.links:
             project.connect(rendered_modules[src],
@@ -259,6 +263,7 @@ class SVProject:
     
     def render_patches(self,
                        modules,
+                       colours,
                        patches,
                        wash,
                        breaks,
@@ -267,12 +272,12 @@ class SVProject:
         x_offset, y_offset = SVOffset(), SVOffset()
         mod_names = list(modules.keys())
         controllers = self.render_controllers(modules)
-        patterns, color = [], None
+        patterns = []
         for i, patch in enumerate(patches):
             n_ticks = patch.n_ticks
-            color = SVColor.randomise()            
-            for group in patch.trig_groups(mod_names).values():
+            for mod_name, group in patch.trig_groups(mod_names).items():
                 tracks = list(group.values())
+                color = colours[mod_name]
                 self.render_patch(patterns = patterns,
                                   tracks = tracks,
                                   n_ticks = n_ticks,
@@ -312,11 +317,16 @@ class SVProject:
         project = rv.api.Project()
         project.initial_bpm = bpm
         project.global_volume = volume
+        mod_names = [mod["name"] for mod in modules]
+        colours = {mod_name: SVColor.randomise()
+                   for mod_name in mod_names}
         project_modules = self.render_modules(project = project,
                                               patches = patches,
                                               modules = modules,
+                                              colours = colours,
                                               banks = banks)
         project.patterns = self.render_patches(modules = project_modules,
+                                               colours = colours,
                                                patches = patches,
                                                wash = wash,
                                                breaks = breaks)
