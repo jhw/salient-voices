@@ -1,14 +1,19 @@
 ### short
 
-- track labelling
-- remove RV nomenclature from export.py
+- simplify colours to one per track
+- colour modules same as track
+- ensure that every module has a pattern line
+- simple (non- optimised) layout grid
 
 ### medium
 
+- jsonschema module validation
+- remove RV nomenclature from export.py
 - single slot sampler to take repitch arg
 
 ### thoughts
 
+- track labelling?
 - what's the scaling for filter Resonance default controller value?
 
 ### done
