@@ -113,13 +113,21 @@ class SVPatch:
         self.n_ticks = n_ticks
 
     @property
-    def track_groups(self):
+    def tracks(self):
         tracks = {}
         for trig in self.trigs:
             tracks.setdefault(trig.mod, {})
             tracks[trig.mod].setdefault(trig.key, [])
             tracks[trig.mod][trig.key].append(trig)
         return tracks
+
+    def update_pool(self, pool):
+        for _, group in self.tracks.items():
+            for _, track in group.items():
+                for trig in track:
+                    if (hasattr(trig, "sample") and trig.sample):
+                        pool.add(trig.sample)
+
     
 if __name__ == "__main__":
     pass

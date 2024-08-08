@@ -113,14 +113,6 @@ class SVPool(list):
     
 class SVProject:
 
-    def populate_sample_pool(self, patches, pool):
-        for patch in patches:
-            for _, group in patch.track_groups.items():
-                for _, track in group.items():
-                    for trig in track:
-                        if (hasattr(trig, "sample") and trig.sample):
-                            pool.add(trig.sample)
-    
     def init_modules(fn):
         def wrapped(self,
                     project,
@@ -132,8 +124,8 @@ class SVProject:
                 mod_kwargs = {}
                 if mod["class"].lower().endswith("sampler"):
                     pool = SVPool()
-                    self.populate_sample_pool(patches = patches,
-                                              pool = pool)
+                    for patch in patches:
+                        patch.update_pool(pool = pool)
                     mod_kwargs = {"banks": banks,
                                   "pool": pool}
                 mod["instance"] = mod_class(**mod_kwargs)
@@ -271,7 +263,7 @@ class SVProject:
         for i, patch in enumerate(patches):
             n_ticks = patch.n_ticks
             color = SVColor.randomise()            
-            for _, group in patch.track_groups.items():
+            for _, group in patch.tracks.items():
                 tracks = list(group.values())
                 self.render_patch(patterns = patterns,
                                   tracks = tracks,
