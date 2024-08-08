@@ -291,8 +291,8 @@ class SVProject:
                                   breaks = breaks)
                 x_offset.inc_value(-1 * count * n_ticks)
                 y_offset.inc_value(height)
-        x_offset.inc_value(count * n_ticks)
-        y_offset.set_value(0)
+            x_offset.inc_value(count * n_ticks)
+            y_offset.set_value(0)
         return patterns
     
     def init_project(fn):
