@@ -118,7 +118,7 @@ class SVPatch:
         for trig in self.trigs:
             tracks.setdefault(trig.key, [])
             tracks[trig.key].append(trig)
-        return list(tracks.values())
+        return tracks
             
 if __name__ == "__main__":
     pass

@@ -121,7 +121,7 @@ class SVProject:
 
     def populate_sample_pool(self, patches, pool):
         for patch in patches:
-            for track in patch.tracks:
+            for track in patch.tracks.values():
                 for trig in track:
                     if (hasattr(trig, "sample") and trig.sample):
                         pool.add(trig.sample)
@@ -186,27 +186,28 @@ class SVProject:
         def wrapped(*args, **kwargs):
             pattern = fn(*args, **kwargs)
             kwargs["patterns"].append(pattern)
-            kwargs["x_offset"].inc_value(kwargs["patch"].n_ticks)
+            kwargs["x_offset"].inc_value(kwargs["n_ticks"])
         return wrapped
     
     @attach_pattern
-    def render_pattern(self,
-                       patterns,
-                       modules,
-                       controllers,
-                       patch,
-                       x_offset,
-                       y_offset,
-                       color,
-                       height = PatternHeight):
+    def render_tracks(self,
+                      patterns,
+                      tracks,
+                      n_ticks,
+                      modules,
+                      controllers,
+                      x_offset,
+                      y_offset,
+                      color,
+                      height = PatternHeight):
         trigs = [{note.i: note
                   for note in track}
-                 for track in patch.tracks]
+                 for track in tracks]
         def notefn(self, j, i):
             return trigs[i][j].render(modules,
                                       controllers) if j in trigs[i] else rv.note.Note()
-        return rv.pattern.Pattern(lines = patch.n_ticks,
-                                  tracks = len(patch.tracks),
+        return rv.pattern.Pattern(lines = n_ticks,
+                                  tracks = len(tracks),
                                   x = x_offset.value,
                                   y = y_offset.value,
                                   y_size = height,
@@ -214,16 +215,17 @@ class SVProject:
 
     @attach_pattern
     def render_blank(self,
-                   patterns,
-                   patch,
-                   x_offset,
-                   y_offset,
-                   color,
-                   height = PatternHeight):
+                     patterns,
+                     tracks,
+                     n_ticks,
+                     x_offset,
+                     y_offset,
+                     color,
+                     height = PatternHeight):
         def notefn(self, j, i):
             return rv.note.Note()
-        return rv.pattern.Pattern(lines = patch.n_ticks,
-                                  tracks = len(patch.tracks),
+        return rv.pattern.Pattern(lines = n_ticks,
+                                  tracks = len(tracks),
                                   x = x_offset.value,
                                   y = y_offset.value,
                                   y_size = height,
@@ -238,29 +240,33 @@ class SVProject:
                 controllers[mod.name][controller.name] = controller.number
         return controllers
 
-    def render_patterns(self,
-                      modules,
-                      patches,
-                      height = PatternHeight,
-                      wash = False,
-                      breaks = False):
+    def render_patches(self,
+                        modules,
+                        patches,
+                        height = PatternHeight,
+                        wash = False,
+                        breaks = False):
         controllers = self.render_controllers(modules)
         x_offset, y_offset = SVOffset(), SVOffset()
         patterns, color = [], None
         for i, patch in enumerate(patches):
-            y_offset.set_value(0) # NB reset
+            tracks = list(patch.tracks.values())
+            n_ticks = patch.n_ticks
             color = SVColor.randomise() if 0 == i % 4 else color.mutate()
+            y_offset.set_value(0) # NB reset
             for i in range(2 if wash else 1):
-                self.render_pattern(patterns = patterns,
-                                    modules = modules,
-                                    controllers = controllers,
-                                    patch = patch,
-                                    x_offset = x_offset,
-                                    y_offset = y_offset,
-                                    color = color)
+                self.render_tracks(patterns = patterns,
+                                   tracks = tracks,
+                                   n_ticks = n_ticks,
+                                   modules = modules,
+                                   controllers = controllers,
+                                   x_offset = x_offset,
+                                   y_offset = y_offset,
+                                   color = color)
             if breaks:
                 self.render_blank(patterns = patterns,
-                                  patch = patch,
+                                  tracks = tracks,
+                                  n_ticks = n_ticks,
                                   x_offset = x_offset,
                                   y_offset = y_offset,
                                   color = color)
@@ -283,8 +289,8 @@ class SVProject:
                        modules,
                        banks, 
                        bpm,
-                       wash = False,
-                       breaks = False,
+                       wash = True, # TEMP
+                       breaks = True, # TEMP
                        volume = Volume):
         project = rv.api.Project()
         project.initial_bpm = bpm
@@ -293,10 +299,10 @@ class SVProject:
                                               patches = patches,
                                               modules = modules,
                                               banks = banks)
-        project.patterns = self.render_patterns(modules = project_modules,
-                                                patches = patches,
-                                                wash = wash,
-                                                breaks = breaks)
+        project.patterns = self.render_patches(modules = project_modules,
+                                               patches = patches,
+                                               wash = wash,
+                                               breaks = breaks)
         return project
 
 if __name__=="__main__":
