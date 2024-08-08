@@ -289,8 +289,8 @@ class SVProject:
                        modules,
                        banks, 
                        bpm,
-                       wash = True, # TEMP
-                       breaks = True, # TEMP
+                       wash = False,
+                       breaks = False,
                        volume = Volume):
         project = rv.api.Project()
         project.initial_bpm = bpm
