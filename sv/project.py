@@ -3,7 +3,7 @@ import random
 import rv
 import rv.api # why?
 
-Volume, PatternHeight = 256, 64
+Volume, PatternHeight = 256, 16
 
 def load_class(path):
     try:
@@ -35,12 +35,6 @@ class SVColor(list):
     def __init__(self, rgb = []):
         list.__init__(self, rgb)
 
-    def mutate(self,
-               contrast = 32):
-        values = range(-contrast, contrast)
-        return SVColor([min(255, max(0, rgb + random.choice(values)))
-                        for rgb in self])
-                    
 class SVOffset:
 
     def __init__(self, value = 0):
@@ -127,7 +121,7 @@ class SVProject:
                         if (hasattr(trig, "sample") and trig.sample):
                             pool.add(trig.sample)
     
-    def render_module_classes(fn):
+    def init_modules(fn):
         def wrapped(self,
                     project,
                     patches,
@@ -150,7 +144,7 @@ class SVProject:
                       banks = banks)
         return wrapped
 
-    @render_module_classes
+    @init_modules
     def render_modules(self,                     
                        project,
                        patches,
@@ -276,7 +270,7 @@ class SVProject:
         patterns, color = [], None
         for i, patch in enumerate(patches):
             n_ticks = patch.n_ticks
-            color = SVColor.randomise() if 0 == i % 4 else color.mutate()
+            color = SVColor.randomise()            
             for _, group in patch.track_groups.items():
                 tracks = list(group.values())
                 self.render_patch(patterns = patterns,
