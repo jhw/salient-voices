@@ -113,12 +113,13 @@ class SVPatch:
         self.n_ticks = n_ticks
 
     @property
-    def tracks(self):
+    def track_groups(self):
         tracks = {}
         for trig in self.trigs:
-            tracks.setdefault(trig.key, [])
-            tracks[trig.key].append(trig)
+            tracks.setdefault(trig.mod, {})
+            tracks[trig.mod].setdefault(trig.key, [])
+            tracks[trig.mod][trig.key].append(trig)
         return tracks
-            
+    
 if __name__ == "__main__":
     pass

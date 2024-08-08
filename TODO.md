@@ -1,14 +1,15 @@
 ### short
 
+- track labelling
+- remove RV nomenclature from export.py
+
 ### medium
 
-- single slot takes repitch arg
-
-- remove RVXXX nomenclature from export.py
+- single slot sampler to take repitch arg
 
 ### thoughts
 
-- what's the scaling for filter Resonance default controller value
+- what's the scaling for filter Resonance default controller value?
 
 ### done
 

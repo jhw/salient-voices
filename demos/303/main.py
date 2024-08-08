@@ -52,7 +52,7 @@ if __name__ == "__main__":
                             i = 0,
                             length = 1)
         patch = SVPatch(trigs = trigs,
-                        n_ticks = 8)
+                        n_ticks = 16)
         project = SVProject().render_project(patches = [patch],
                                              modules = Modules,
                                              banks = [bank],
