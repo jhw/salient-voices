@@ -22,17 +22,6 @@ def load_class(path):
     except ModuleNotFoundError as error:
         raise RuntimeError(str(error))
     
-class SVOffset:
-
-    def __init__(self, value = 0):
-        self.value = value
-
-    def set_value(self, value):
-        self.value = value
-        
-    def inc_value(self, value):
-        self.value += value
-        
 class SVModConfigItem(dict):
 
     def __init__(self, item = {}):
@@ -168,8 +157,8 @@ class SVProject:
                        n_ticks,
                        modules,
                        controllers,
-                       x_offset,
-                       y_offset,
+                       x,
+                       y,
                        color,
                        height = PatternHeight):
         trigs = [{note.i: note
@@ -180,8 +169,8 @@ class SVProject:
                                       controllers) if j in trigs[i] else rv.note.Note()
         pattern = rv.pattern.Pattern(lines = n_ticks,
                                      tracks = len(tracks),
-                                     x = x_offset.value,
-                                     y = y_offset.value,
+                                     x = x,
+                                     y = y,
                                      y_size = height,
                                      bg_color = color).set_via_fn(notefn)
         patterns.append(pattern)
@@ -189,16 +178,16 @@ class SVProject:
     def render_blank(self,
                      patterns,
                      n_ticks,
-                     x_offset,
-                     y_offset,
+                     x,
+                     y,
                      color,
                      height = PatternHeight):
         def notefn(self, j, i):
             return rv.note.Note()
         pattern = rv.pattern.Pattern(lines = n_ticks,
                                      tracks = 1,
-                                     x = x_offset.value,
-                                     y = y_offset.value,
+                                     x = x,
+                                     y = y,
                                      y_size = height,
                                      bg_color = color).set_via_fn(notefn)
         patterns.append(pattern)
@@ -218,8 +207,8 @@ class SVProject:
                      n_ticks,
                      modules,
                      controllers,
-                     x_offset,
-                     y_offset,
+                     x,
+                     y,
                      color,
                      wash,
                      breaks):
@@ -230,23 +219,23 @@ class SVProject:
                                     n_ticks = n_ticks,
                                     modules = modules,
                                     controllers = controllers,
-                                    x_offset = x_offset,
-                                    y_offset = y_offset,
+                                    x = x,
+                                    y = y,
                                     color = color)
             else:
                 self.render_blank(patterns = patterns,
                                   n_ticks = n_ticks,
-                                  x_offset = x_offset,
-                                  y_offset = y_offset,
+                                  x = x,
+                                  y = y,
                                   color = color)
-            x_offset.inc_value(n_ticks)
+            x += n_ticks
         if breaks:
             self.render_blank(patterns = patterns,
                               n_ticks = n_ticks,
-                              x_offset = x_offset,
-                              y_offset = y_offset,
+                              x = x,
+                              y = y,
                               color = color)
-            x_offset.inc_value(n_ticks)
+            x += n_ticks
     
     def render_patches(self,
                        modules,
@@ -256,10 +245,9 @@ class SVProject:
                        breaks,
                        height = PatternHeight):
         x_count = 1 + int(wash) + int(breaks)
-        x_offset, y_offset = SVOffset(), SVOffset()
         mod_names = list(modules.keys())
         controllers = self.render_controllers(modules)
-        patterns = []
+        patterns, x, y = [], 0, 0
         for i, patch in enumerate(patches):
             n_ticks = patch.n_ticks
             for mod_name, group in patch.trig_groups(mod_names).items():
@@ -270,15 +258,14 @@ class SVProject:
                                   n_ticks = n_ticks,
                                   modules = modules,
                                   controllers = controllers,
-                                  x_offset = x_offset,
-                                  y_offset = y_offset,
+                                  x = x,
+                                  y = y,
                                   color = color,
                                   wash = wash,
                                   breaks = breaks)
-                x_offset.inc_value(-1 * x_count * n_ticks)
-                y_offset.inc_value(height)
-            x_offset.inc_value(x_count * n_ticks)
-            y_offset.set_value(0)
+                y += height
+            x += x_count * n_ticks
+            y = 0
         return patterns
     
     def init_project(fn):

@@ -1,6 +1,5 @@
 ### short
 
-- remove offsets
 - simple (non- optimised) layout grid
 
 ### medium
@@ -35,6 +34,7 @@
 
 ### done
 
+- remove offsets
 - google colours
 - initialise colours on per module basis
 - pass colours to module initialisation
