@@ -1,17 +1,14 @@
 ### short
 
-- move pool and bank into sampler
-- move bank loader into scripts
-- move export into utils
-
-### medium
-
 - capture tidal demo
 
-- project unit test
-- bank script test
-- remove RV nomenclature from export.py
-- export test
+- project test
+- script/banks test
+- utils/export test
+
+- refactor export to remove RV nomenclature
+
+### medium
 
 - FX trig could have a vector classmethod
 - equally note trig could have a chord classmethod 
@@ -27,9 +24,12 @@
 - need a utility which creates a bank from a series of wav files 
 - feels like this stuff should live in sv/scripts/banks 
 
+- tidal syntax
 - freeze wash
 - jsonschema module validation
 - single slot sampler to take repitch arg
+
+
 
 ### thoughts
 
@@ -38,6 +38,9 @@
 
 ### done
 
+- move pool and bank into sampler
+- move bank loader into scripts
+- move export into utils
 - simple (non- optimised) layout grid
 - remove offsets
 - google colours

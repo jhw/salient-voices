@@ -1,6 +1,6 @@
-from sv.banks import single_shot_bank
 from sv.model import SVNoteTrig, SVNoteOffTrig, SVFXTrig, SVPatch
 from sv.project import SVProject
+from sv.scripts.banks import single_shot_bank
 
 import os
 import yaml

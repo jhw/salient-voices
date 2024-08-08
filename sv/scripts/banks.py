@@ -1,12 +1,8 @@
+from sv.sampler import SVBank
+
 import io
 import os
 import zipfile
-
-class SVBank:
-
-    def __init__(self, name, zip_file):
-        self.name = name
-        self.zip_file = zip_file
 
 def single_shot_bank(bank_name, file_path):
     with open(file_path, 'rb') as wav_file:
