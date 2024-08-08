@@ -190,16 +190,16 @@ class SVProject:
         return wrapped
     
     @attach_pattern
-    def render_tracks(self,
-                      patterns,
-                      tracks,
-                      n_ticks,
-                      modules,
-                      controllers,
-                      x_offset,
-                      y_offset,
-                      color,
-                      height = PatternHeight):
+    def render_pattern(self,
+                       patterns,
+                       tracks,
+                       n_ticks,
+                       modules,
+                       controllers,
+                       x_offset,
+                       y_offset,
+                       color,
+                       height = PatternHeight):
         trigs = [{note.i: note
                   for note in track}
                  for track in tracks]
@@ -240,12 +240,40 @@ class SVProject:
                 controllers[mod.name][controller.name] = controller.number
         return controllers
 
+    def render_patch(self,
+                     patterns,
+                     tracks,
+                     n_ticks,
+                     modules,
+                     controllers,
+                     x_offset,
+                     y_offset,
+                     color,
+                     wash,
+                     breaks):
+        y_offset.set_value(0)
+        for i in range(2 if wash else 1):
+            self.render_pattern(patterns = patterns,
+                                tracks = tracks,
+                                n_ticks = n_ticks,
+                                modules = modules,
+                                controllers = controllers,
+                                x_offset = x_offset,
+                                y_offset = y_offset,
+                                color = color)
+        if breaks:
+            self.render_blank(patterns = patterns,
+                              tracks = tracks,
+                              n_ticks = n_ticks,
+                              x_offset = x_offset,
+                              y_offset = y_offset,
+                              color = color)        
+    
     def render_patches(self,
-                        modules,
-                        patches,
-                        height = PatternHeight,
-                        wash = False,
-                        breaks = False):
+                       modules,
+                       patches,
+                       wash = False,
+                       breaks = False):
         controllers = self.render_controllers(modules)
         x_offset, y_offset = SVOffset(), SVOffset()
         patterns, color = [], None
@@ -253,23 +281,16 @@ class SVProject:
             tracks = list(patch.tracks.values())
             n_ticks = patch.n_ticks
             color = SVColor.randomise() if 0 == i % 4 else color.mutate()
-            y_offset.set_value(0) # NB reset
-            for i in range(2 if wash else 1):
-                self.render_tracks(patterns = patterns,
-                                   tracks = tracks,
-                                   n_ticks = n_ticks,
-                                   modules = modules,
-                                   controllers = controllers,
-                                   x_offset = x_offset,
-                                   y_offset = y_offset,
-                                   color = color)
-            if breaks:
-                self.render_blank(patterns = patterns,
-                                  tracks = tracks,
-                                  n_ticks = n_ticks,
-                                  x_offset = x_offset,
-                                  y_offset = y_offset,
-                                  color = color)
+            self.render_patch(patterns = patterns,
+                              tracks = tracks,
+                              n_ticks = n_ticks,
+                              modules = modules,
+                              controllers = controllers,
+                              x_offset = x_offset,
+                              y_offset = y_offset,
+                              color = color,
+                              wash = wash,
+                              breaks = breaks)
         return patterns
     
     def init_project(fn):
