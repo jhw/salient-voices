@@ -3,7 +3,7 @@ import random
 import rv
 import rv.api # why?
 
-Volume, Height = 256, 64
+Volume, PatternHeight = 256, 64
 
 def load_class(path):
     try:
@@ -43,13 +43,14 @@ class SVColor(list):
                     
 class SVOffset:
 
-    def __init__(self):
-        self.value = 0
-        self.count = 0
+    def __init__(self, value = 0):
+        self.value = value
 
+    def set_value(self, value):
+        self.value = value
+        
     def increment(self, value):
         self.value += value
-        self.count += 1
         
 class SVModConfigItem(dict):
 
@@ -154,7 +155,7 @@ class SVProject:
                      patches,
                      modules,
                      banks):
-        modules_ = {}
+        rendered_modules = {}
         for i, moditem in enumerate(modules):
             mod, name = moditem["instance"], moditem["name"]
             setattr(mod, "name", name)
@@ -174,18 +175,18 @@ class SVProject:
                     except rv.errors.ControllerValueError as error:
                         raise RuntimeError(str(error))
             project.attach_module(mod)
-            modules_[name] = mod
+            rendered_modules[name] = mod
         output = sorted(project.modules, key = lambda x: -x.index).pop()
         for src, dest in modules.links:
-            project.connect(modules_[src],
-                         output if dest == "Output" else modules_[dest])
-        return modules_
+            project.connect(rendered_modules[src],
+                         output if dest == "Output" else rendered_modules[dest])
+        return rendered_modules
 
     def attach_pattern(fn):
         def wrapped(*args, **kwargs):
-            rv_pattern = fn(*args, **kwargs)
-            kwargs["patterns"].append(rv_pattern)
-            kwargs["offset"].increment(kwargs["patch"].n_ticks)
+            pattern = fn(*args, **kwargs)
+            kwargs["patterns"].append(pattern)
+            kwargs["x_offset"].increment(kwargs["patch"].n_ticks)
         return wrapped
     
     @attach_pattern
@@ -194,9 +195,10 @@ class SVProject:
                      modules,
                      controllers,
                      patch,
-                     offset,
+                     x_offset,
+                     y_offset,
                      color,
-                     height = Height):
+                     height = PatternHeight):
         trigs = [{note.i: note
                   for note in track}
                  for track in patch.tracks]
@@ -205,7 +207,8 @@ class SVProject:
                                       controllers) if j in trigs[i] else rv.note.Note()
         return rv.pattern.Pattern(lines = patch.n_ticks,
                                   tracks = len(patch.tracks),
-                                  x = offset.value,
+                                  x = x_offset.value,
+                                  y = y_offset.value,
                                   y_size = height,
                                   bg_color = color).set_via_fn(notefn)
 
@@ -213,14 +216,16 @@ class SVProject:
     def init_blank(self,
                    patterns,
                    patch,
-                   offset,
+                   x_offset,
+                   y_offset,
                    color,
-                   height = Height):
+                   height = PatternHeight):
         def notefn(self, j, i):
             return rv.note.Note()
         return rv.pattern.Pattern(lines = patch.n_ticks,
                                   tracks = len(patch.tracks),
-                                  x = offset.value,
+                                  x = x_offset.value,
+                                  y = y_offset.value,
                                   y_size = height,
                                   bg_color = color).set_via_fn(notefn)
     
@@ -236,24 +241,28 @@ class SVProject:
     def init_patterns(self,
                       modules,
                       patches,
+                      height = PatternHeight,
                       wash = False,
                       breaks = False):
         controllers = self.init_controllers(modules)
-        offset = SVOffset()
+        x_offset, y_offset = SVOffset(), SVOffset()
         patterns, color = [], None
         for i, patch in enumerate(patches):
+            y_offset.set_value(0) # NB reset
             color = SVColor.randomise() if 0 == i % 4 else color.mutate()
             for i in range(2 if wash else 1):
                 self.init_pattern(patterns = patterns,
                                   modules = modules,
                                   controllers = controllers,
                                   patch = patch,
-                                  offset = offset,
+                                  x_offset = x_offset,
+                                  y_offset = y_offset,
                                   color = color)
             if breaks:
                 self.init_blank(patterns = patterns,
                                 patch = patch,
-                                offset = offset,
+                                x_offset = x_offset,
+                                y_offset = y_offset,
                                 color = color)
         return patterns
 
