@@ -271,7 +271,7 @@ class SVProject:
         for i, patch in enumerate(patches):
             n_ticks = patch.n_ticks
             color = SVColor.randomise()            
-            for _, group in patch.tracks(mod_names).items():
+            for group in patch.trig_groups(mod_names).values():
                 tracks = list(group.values())
                 self.render_patch(patterns = patterns,
                                   tracks = tracks,

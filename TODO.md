@@ -1,8 +1,5 @@
 ### short
 
-- better nomenclature for tracks vs trigs
-- abstract trigs as trig list
-
 - initialise colours on per module basis
 - pass colours to module initialisation
 - pass colours to pattern initialisation
@@ -38,6 +35,8 @@
 
 ### done
 
+- better nomenclature for tracks vs trigs
+- abstract trigs as trig list
 - blank doesn't need len(tracks)
 - remove model temp code
 - should probably be renamed as filter trigs 
