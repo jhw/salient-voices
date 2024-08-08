@@ -1,22 +1,24 @@
 ### short
 
+- simple (non- optimised) layout grid
+- algo to increase colour brightness
+- project unit test
+- move bank stuff into sampler
+- bank unit test
+
 ### medium
 
-- module valuation to ensure unique module names 
-- ensure modules are sorted
-- reverse sort modules as by convention output is zero but one tends to define the other way
-- move bank stuff into sampler
 - FX trig could have a vector classmethod
 - equally note trig could have a chord classmethod 
+
 - part of export stems should be moved to sv
 - maybe the slicing and zipping bit 
 - you could have a zipslice function which took an in memory wav file and a series of keys, and dumped to an in memory zip file
-- need unit tests as well as demos 
+
 - need a utility which creates a bank from a zipfile
 - need a utility which slices a file and creates a bank from a zipfile
 - need a utility which creates a bank from a series of wav files 
 - feels like this stuff should live in sv/scripts/banks 
-- simple (non- optimised) layout grid
 
 - freeze wash
 - jsonschema module validation
@@ -30,6 +32,7 @@
 
 ### done
 
+- google colours
 - initialise colours on per module basis
 - pass colours to module initialisation
 - pass colours to pattern initialisation
