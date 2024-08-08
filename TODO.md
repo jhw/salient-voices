@@ -2,6 +2,8 @@
 
 - investigate why you have to define mod_names two different ways before sending to path.group_trigs
 
+- unique colour choice
+
 - project test
 - script/banks test
 - utils/export test
