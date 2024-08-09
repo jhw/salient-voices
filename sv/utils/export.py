@@ -2,11 +2,9 @@
 - rv/tools/export.py
 """
 
-# from sunvox import Slot
-from sunvox.slot import Slot as RVSlot
-from sunvox.buffered import BufferedProcess as RVBufferedProcess
+from sunvox.slot import Slot
+from sunvox.buffered import BufferedProcess
 from sunvox.buffered import float32, int16
-
 from io import BytesIO
 import numpy as np
 from scipy.io import wavfile
@@ -15,11 +13,11 @@ def export_wav(project,
                data_type = int16, # int16, float32
                channels = 2, # 1, 2
                freq = 44100): # 44100, 48000
-    p = RVBufferedProcess(freq = freq,
+    p = BufferedProcess(freq = freq,
                           size = freq,
                           channels = channels,
                           data_type = data_type)
-    slot = RVSlot(project, process = p)
+    slot = Slot(project, process = p)
     length = slot.get_song_length_frames()
     output = np.zeros((length, 2), data_type)
     position = 0

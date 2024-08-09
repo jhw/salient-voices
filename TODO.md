@@ -1,6 +1,5 @@
 ### short
 
-- refactor export
 - test bank utils
 - s3 banks
 - wav to zipfile
@@ -29,6 +28,7 @@
 
 ### done
 
+- refactor export
 - test export
 - add banks default arg
 - add protection to model if mod not found
