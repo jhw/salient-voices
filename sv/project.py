@@ -124,23 +124,21 @@ class SVProject:
                        modules,
                        colours, 
                        banks,
-                       x_offset = -128,
-                       y_offset = -128,
-                       x0 = 512,
-                       y0 = 512):
+                       x_offset = 128,
+                       y_offset = 128,
+                       x0 = 0,
+                       y0 = 0):
         output = project.modules[0]
-        """
-        setattr(output, "x", 0)
-        setattr(output, "y", 0)
-        """
+        setattr(output, "x", x0)
+        setattr(output, "y", y0)
         n = int(math.ceil(len(modules) ** 0.5))
         rendered_modules = {}
-        for i, mod_item in enumerate(modules):
+        for i, mod_item in enumerate(reversed(modules)):
             mod, mod_name = mod_item["instance"], mod_item["name"]
             setattr(mod, "name", mod_name)
             setattr(mod, "color", colours[mod_name])
-            x = x0 + int(x_offset * (n - (i % n) - 1))
-            y = y0 + int(y_offset * (n - math.floor(i / n) - 2))
+            x = x0 + int(x_offset * ((i + 1) % n))
+            y = y0 + int(y_offset * math.floor((i + 1) / n))
             setattr(mod, "x",  x)
             setattr(mod, "y", y)
             if "defaults" in mod_item:
