@@ -24,7 +24,7 @@ Modules = yaml.safe_load("""
 class RenderTest(unittest.TestCase):
 
     def test_render(self):
-        trig = SVNoteTrig(mod = "AnalogGenerator",
+        trig = SVNoteTrig(mod = "AnalogGenerato",
                           note = 56,
                           i = 0)
         patch = SVPatch(trigs = [trig],
