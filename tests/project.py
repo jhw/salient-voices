@@ -24,16 +24,19 @@ Modules = yaml.safe_load("""
 class RenderTest(unittest.TestCase):
 
     def test_render(self):
-        trig = SVNoteTrig(mod = "AnalogGenerato",
-                          note = 56,
-                          i = 0)
-        patch = SVPatch(trigs = [trig],
-                        n_ticks = 16)
-        project = SVProject().render_project(patches = [patch],
-                                             modules = Modules,
-                                             banks = [],
-                                             bpm = 120)
-        self.assertTrue(isinstance(project, rv.project.Project))
-
+        try:
+            trig = SVNoteTrig(mod = "AnalogGenerator",
+                              note = 56,
+                              i = 0)
+            patch = SVPatch(trigs = [trig],
+                            n_ticks = 16)
+            project = SVProject().render_project(patches = [patch],
+                                                 modules = Modules,
+                                                 banks = [],
+                                                 bpm = 120)
+            self.assertTrue(isinstance(project, rv.project.Project))
+        except RuntimeError as error:
+            self.fail(str(error))
+            
 if __name__ == "__main__":
     pass
