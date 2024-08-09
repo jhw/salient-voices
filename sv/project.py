@@ -171,7 +171,7 @@ class SVProject:
                        controllers,
                        x,
                        y,
-                       color,
+                       colour,
                        height = PatternHeight):
         trigs = [{note.i: note
                   for note in track}
@@ -184,7 +184,7 @@ class SVProject:
                                      x = x,
                                      y = y,
                                      y_size = height,
-                                     bg_color = color).set_via_fn(notefn)
+                                     bg_color = colour).set_via_fn(notefn)
         patterns.append(pattern)
 
     def render_blank(self,
@@ -192,7 +192,7 @@ class SVProject:
                      n_ticks,
                      x,
                      y,
-                     color,
+                     colour,
                      height = PatternHeight):
         def notefn(self, j, i):
             return rv.note.Note()
@@ -201,7 +201,7 @@ class SVProject:
                                      x = x,
                                      y = y,
                                      y_size = height,
-                                     bg_color = color).set_via_fn(notefn)
+                                     bg_color = colour).set_via_fn(notefn)
         patterns.append(pattern)
     
     def render_controllers(self, modules):
@@ -221,7 +221,7 @@ class SVProject:
                      controllers,
                      x,
                      y,
-                     color,
+                     colour,
                      wash,
                      breaks):
         for i in range(2 if wash else 1):
@@ -233,20 +233,20 @@ class SVProject:
                                     controllers = controllers,
                                     x = x,
                                     y = y,
-                                    color = color)
+                                    colour = colour)
             else:
                 self.render_blank(patterns = patterns,
                                   n_ticks = n_ticks,
                                   x = x,
                                   y = y,
-                                  color = color)
+                                  colour = colour)
             x += n_ticks
         if breaks:
             self.render_blank(patterns = patterns,
                               n_ticks = n_ticks,
                               x = x,
                               y = y,
-                              color = color)
+                              colour = colour)
             x += n_ticks
     
     def render_patches(self,
@@ -264,7 +264,7 @@ class SVProject:
             n_ticks = patch.n_ticks
             for mod_name, group in patch.trig_groups(mod_names).items():
                 tracks = list(group.values())
-                color = colours[mod_name]
+                colour = colours[mod_name]
                 self.render_patch(patterns = patterns,
                                   tracks = tracks,
                                   n_ticks = n_ticks,
@@ -272,7 +272,7 @@ class SVProject:
                                   controllers = controllers,
                                   x = x,
                                   y = y,
-                                  color = color,
+                                  colour = colour,
                                   wash = wash,
                                   breaks = breaks)
                 y += height
