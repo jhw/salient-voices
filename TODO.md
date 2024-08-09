@@ -1,6 +1,5 @@
 ### short [01-s3-banks]
 
-- create bank fixture
 - dump bank fixture to s3
 - load banks from s3
 
@@ -33,6 +32,7 @@
 
 ### done
 
+- create bank fixture
 - test bank utils
 - refactor export
 - test export
