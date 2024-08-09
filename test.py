@@ -1,7 +1,8 @@
 import os, unittest
 
 def find_and_run_tests(root_dirs):
-    suite = unittest.TestSuite()    
+    suite = unittest.TestSuite()
+    print ()
     for root_dir in root_dirs:
         for root, _, files in os.walk(root_dir):
             for file in files:
@@ -15,6 +16,7 @@ def find_and_run_tests(root_dirs):
                             issubclass(obj, unittest.TestCase)):
                             print (str(obj)[1:-1].split(" ")[-1][1:-1])
                             suite.addTest(unittest.TestLoader().loadTestsFromTestCase(obj))
+    print ()
     unittest.TextTestRunner().run(suite)
 
 if __name__ == "__main__":

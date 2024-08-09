@@ -1,7 +1,7 @@
 ### short
 
-- test bank utils
 - s3 banks
+
 - wav to zipfile
 
 ### medium
@@ -28,6 +28,7 @@
 
 ### done
 
+- test bank utils
 - refactor export
 - test export
 - add banks default arg
