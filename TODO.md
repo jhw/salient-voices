@@ -1,16 +1,12 @@
 ### short
 
-- export test should use wavfile to validate output properties
-
 - slices -> wav to zipfile
 
 ### medium
 
-- rationalise two types of modules in project
-  - model.trig_groups shouldn't need to protect against bad keys
-
 - colour mutation
-- centre module grid in view
+
+- export test should use wavfile to validate output properties
 
 - fx trig vector classmethod
 - note trig chord classmethod
@@ -34,6 +30,7 @@
 
 ### done
 
+- centre module grid in view
 - fork sunvox-dll-python
 - load banks from s3
 - assert banks

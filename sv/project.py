@@ -105,8 +105,8 @@ class SVProject:
                        banks,
                        x_offset = 128,
                        y_offset = 128,
-                       x0 = 0,
-                       y0 = 0):
+                       x0 = 128,
+                       y0 = 256):
         output = project.modules[0]
         setattr(output, "x", x0)
         setattr(output, "y", y0)
