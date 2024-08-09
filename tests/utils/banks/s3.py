@@ -34,9 +34,17 @@ class S3BanksTest(unittest.TestCase):
                            Body = zip_buffer,
                            ContentType = "application/gzip")
     
-    def test_init_s3_banks(self):
+    def test_init_s3_banks(self, bucket_name = BucketName):
         try:
-            self.assertEqual(2, 2)
+            banks = init_s3_banks(s3 = self.s3,
+                                  bucket_name = bucket_name)
+            self.assertTrue(len(banks) == 1)
+            bank = banks[0]
+            self.assertTrue(isinstance(bank, SVBank))
+            self.assertEqual(bank.name, "mikey303")
+            wav_files = bank.zip_file.namelist()
+            self.assertTrue(len(wav_files) == 1)
+            self.assertTrue("303 VCO SQR.wav" in wav_files)
         except RuntimeError as error:
             self.fail(str(error))
 

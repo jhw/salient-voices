@@ -1,14 +1,11 @@
 ### short [01-s3-banks]
 
-- load banks from s3
-- assert banks
+- slices -> wav to zipfile
 
 ### medium
 
-- centre module grid in view
 - colour mutation
-
-- wav to zipfile
+- centre module grid in view
 
 - fx trig vector classmethod
 - note trig chord classmethod
@@ -32,6 +29,8 @@
 
 ### done
 
+- load banks from s3
+- assert banks
 - dump bank fixture to s3
 - create bank fixture
 - test bank utils
