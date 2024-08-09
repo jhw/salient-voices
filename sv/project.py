@@ -128,7 +128,13 @@ class SVProject:
                        y_offset = -128,
                        x0 = 512,
                        y0 = 512):
-        rendered_modules, n = {}, int(math.ceil(len(modules) ** 0.5))
+        output = project.modules[0]
+        """
+        setattr(output, "x", 0)
+        setattr(output, "y", 0)
+        """
+        n = int(math.ceil(len(modules) ** 0.5))
+        rendered_modules = {}
         for i, mod_item in enumerate(modules):
             mod, mod_name = mod_item["instance"], mod_item["name"]
             setattr(mod, "name", mod_name)
@@ -154,10 +160,9 @@ class SVProject:
                         raise RuntimeError(str(error))
             project.attach_module(mod)
             rendered_modules[mod_name] = mod
-        output = sorted(project.modules, key = lambda x: -x.index).pop()
         for src, dest in modules.links:
             project.connect(rendered_modules[src],
-                         output if dest == "Output" else rendered_modules[dest])
+                            output if dest == "Output" else rendered_modules[dest])
         return rendered_modules
 
     def render_pattern(self,
@@ -287,7 +292,17 @@ class SVProject:
                       banks = banks,
                       *args, **kwargs)
         return wrapped
-    
+
+    def init_colours(self, modules, colours = Colours):
+        mod_colours = {}
+        for mod in modules:
+            if colours == {}:
+                raise RuntimeError("colour choices exhausted")
+            colour = random.choice(colours)
+            colours.remove(colour)
+            mod_colours[mod["name"]] = colour
+        return mod_colours
+
     @init_project
     def render_project(self,
                        patches,
@@ -301,9 +316,7 @@ class SVProject:
         project = rv.api.Project()
         project.initial_bpm = bpm
         project.global_volume = volume
-        mod_names = [mod["name"] for mod in modules]
-        colours = {mod_name: random.choice(colours)
-                   for mod_name in mod_names}
+        colours = self.init_colours(modules)
         project_modules = self.render_modules(project = project,
                                               patches = patches,
                                               modules = modules,

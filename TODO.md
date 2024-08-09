@@ -1,36 +1,31 @@
 ### short
 
-- investigate why you have to define mod_names two different ways before sending to path.group_trigs
-
-- unique colour choice
-
-- project test
-- script/banks test
-- utils/export test
-
-- refactor export to remove RV nomenclature
+- unit tests
+- s3 banks
+- wav to zipfile
 
 ### medium
 
+- algo to increase colour brightness
+
 - fx trig vector classmethod
 - note trig chord classmethod
-- algo to increase colour brightness
-- sliced wav to zipfile utility
-- import s3 banks code and test with moto
 
-- tidal syntax
-- freeze wash
-- jsonschema module validation
 - single slot sampler to take repitch arg
+- jsonschema module validation
+- freeze wash
 
 ### thoughts
 
+- tidal syntax?
+  - not clear you need it, if it's really a performance thing
 - track labelling?
   - no point now you have colours
 - what's the scaling for filter Resonance default controller value?
 
 ### done
 
+- unique colour choice
 - capture tidal demo
 - move pool and bank into sampler
 - move bank loader into scripts
