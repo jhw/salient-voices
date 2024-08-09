@@ -1,16 +1,14 @@
 ### short
 
-- slices -> wav to zipfile
+- colour mutation
 
 ### medium
 
-- colour mutation
-
+- instrument namespacing
+- slices -> wav to zipfile
 - export test should use wavfile to validate output properties
-
 - fx trig vector classmethod
 - note trig chord classmethod
-
 - single slot sampler to take repitch arg
 - jsonschema module validation
 
