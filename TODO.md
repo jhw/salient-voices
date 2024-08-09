@@ -1,6 +1,11 @@
 ### short
 
-- unit tests
+- add banks default arg
+- add protection to model if mod not found
+
+- test export
+- test bank utils
+
 - s3 banks
 - wav to zipfile
 
