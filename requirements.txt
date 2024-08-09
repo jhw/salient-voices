@@ -1,3 +1,6 @@
+awscli
+boto3
+botocore
 numpy
 radiant-voices @ git+ssh://git@github.com/metrasynth/radiant-voices.git@master
 pyyaml
