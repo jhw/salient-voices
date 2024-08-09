@@ -1,13 +1,13 @@
 ### short
 
-- test export
+- refactor export
 - test bank utils
-
 - s3 banks
 - wav to zipfile
 
 ### medium
 
+- centre module grid in view
 - colour mutation
 
 - fx trig vector classmethod
@@ -29,7 +29,7 @@
 
 ### done
 
-
+- test export
 - add banks default arg
 - add protection to model if mod not found
 - unique colour choice

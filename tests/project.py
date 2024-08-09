@@ -38,4 +38,4 @@ class RenderTest(unittest.TestCase):
             self.fail(str(error))
             
 if __name__ == "__main__":
-    pass
+    unittest.main()
