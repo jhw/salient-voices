@@ -1,3 +1,5 @@
+from sv.sampler import SVPool, SVBanks
+
 import importlib
 import math
 import random
@@ -23,7 +25,7 @@ def load_class(path):
     except ModuleNotFoundError as error:
         raise RuntimeError(str(error))
     
-class SVModConfigItem(dict):
+class SVModule(dict):
 
     def __init__(self, item = {}):
         dict.__init__(self, item)
@@ -36,10 +38,10 @@ class SVModConfigItem(dict):
             links.append(link)
         return links
 
-class SVModConfigItems(list):
+class SVModules(list):
 
     def __init__(self, items = []):
-        list.__init__(self, [SVModConfigItem(item)
+        list.__init__(self, [SVModule(item)
                              for item in items])
 
     def validate(self):
@@ -65,29 +67,6 @@ class SVModConfigItems(list):
             links += item.links
         return links
 
-class SVBanks(dict):
-
-    def __init__(self, item = []):
-        dict.__init__(self, item)
-
-    def get_wav_file(self, sample):
-        bank_name, file_path = sample.split("/")
-        if bank_name not in self:
-            raise RuntimeError(f"bank {bank_name} not found")
-        file_paths = self[bank_name].zip_file.namelist()
-        if file_path not in file_paths:
-            raise RuntimeError(f"path {file_path} not found in bank {bank_name}")
-        return self[bank_name].zip_file.open(file_path, 'r')
-
-class SVPool(list):
-
-    def __init__(self, items = []):
-        list.__init__(self, items)
-
-    def add(self, sample):
-        if sample not in self:
-            self.append(sample)
-    
 class SVProject:
 
     def init_modules(fn):
@@ -283,7 +262,7 @@ class SVProject:
     def init_project(fn):
         def wrapped(self, modules, banks = [], *args, **kwargs):
             banks = SVBanks({bank.name: bank for bank in banks})            
-            modules = SVModConfigItems(modules)
+            modules = SVModules(modules)
             modules.validate()
             return fn(self,
                       modules = modules,
