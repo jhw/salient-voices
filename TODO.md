@@ -1,7 +1,5 @@
 ### short
 
-- colour mutation
-
 ### medium
 
 - instrument namespacing
@@ -18,6 +16,8 @@
 
 ### thoughts
 
+- colour mutation
+  - not worth it
 - algo to increase colour brightness?
   - not worth as tends to wash out colours
 - tidal syntax?
