@@ -1,20 +1,25 @@
-### short
+### short [01-s3-banks]
 
-- s3 banks
-
-- wav to zipfile
+- create bank fixture
+- dump bank fixture to s3
+- load banks from s3
 
 ### medium
 
 - centre module grid in view
 - colour mutation
 
+- wav to zipfile
+
 - fx trig vector classmethod
 - note trig chord classmethod
 
 - single slot sampler to take repitch arg
 - jsonschema module validation
-- freeze wash
+
+### long
+
+- moto upgrade
 
 ### thoughts
 

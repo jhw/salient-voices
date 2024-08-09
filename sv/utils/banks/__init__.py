@@ -1,7 +1,6 @@
 from sv.sampler import SVBank
 
 import io
-import os
 import zipfile
 
 def single_shot_bank(bank_name, file_path):
