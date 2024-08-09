@@ -281,7 +281,7 @@ class SVProject:
         return patterns
     
     def init_project(fn):
-        def wrapped(self, modules, banks, *args, **kwargs):
+        def wrapped(self, modules, banks = [], *args, **kwargs):
             banks = SVBanks({bank.name: bank for bank in banks})            
             modules = SVModConfigItems(modules)
             modules.validate()

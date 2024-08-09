@@ -1,8 +1,5 @@
 ### short
 
-- add banks default arg
-- add protection to model if mod not found
-
 - test export
 - test bank utils
 
@@ -11,7 +8,7 @@
 
 ### medium
 
-- algo to increase colour brightness
+- colour mutation
 
 - fx trig vector classmethod
 - note trig chord classmethod
@@ -22,6 +19,8 @@
 
 ### thoughts
 
+- algo to increase colour brightness?
+  - not worth as tends to wash out colours
 - tidal syntax?
   - not clear you need it, if it's really a performance thing
 - track labelling?
@@ -30,6 +29,9 @@
 
 ### done
 
+
+- add banks default arg
+- add protection to model if mod not found
 - unique colour choice
 - capture tidal demo
 - move pool and bank into sampler

@@ -32,7 +32,6 @@ class RenderTest(unittest.TestCase):
                             n_ticks = 16)
             project = SVProject().render_project(patches = [patch],
                                                  modules = Modules,
-                                                 banks = [],
                                                  bpm = 120)
             self.assertTrue(isinstance(project, rv.project.Project))
         except RuntimeError as error:
