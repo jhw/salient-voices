@@ -1,15 +1,15 @@
 ### short
 
-- add online check
 - change test sample to be a simple clap
 - change demo project to use samples 
-- consider replacing pools with bank refiltering
 - slice_wav_custom should be renamed as takes an audio_io
-- support for local zipped files
+- add online check
+- consider replacing pools with bank refiltering
 
 ### medium
 
 - band/instrument
+- support for local zipped files
 - ability to play sample without opening UI
 - export test should use wavfile to validate output properties
 - fx trig vector classmethod
