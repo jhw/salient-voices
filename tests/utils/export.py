@@ -2,6 +2,7 @@ from rv.readers.reader import read_sunvox_file
 from sv.utils.export import export_wav
 
 import io
+import os
 import unittest
 
 class ExportTest(unittest.TestCase):
@@ -15,6 +16,10 @@ class ExportTest(unittest.TestCase):
                 raise RuntimeError("project not loaded")
             buf = export_wav(project)
             self.assertTrue(isinstance(buf, io.BytesIO))
+            if not os.path.exists("tmp"):
+                os.mkdir("tmp")
+            with open("tmp/sample-project.wav", 'wb') as f:
+                f.write(buf.getvalue())
         except RuntimeError as error:
             self.fail(str(error))
             
