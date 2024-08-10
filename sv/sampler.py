@@ -3,6 +3,7 @@ from scipy.io import wavfile
 # import rv
 import rv.modules # why?
 import warnings
+import zipfile
 
 warnings.simplefilter("ignore", wavfile.WavFileWarning)
 
@@ -10,9 +11,13 @@ MaxSlots = 120
 
 class SVBank:
 
-    def __init__(self, name, zip_file):
+    def __init__(self, name, zip_buffer):
         self.name = name
-        self.zip_file = zip_file
+        self.zip_buffer = zip_buffer
+
+    @property
+    def zip_file(self): # assume zip_buffer.seek(0) has been called elsewhere
+        return zipfile.ZipFile(self.zip_buffer, 'r')
 
 class SVBanks(dict):
 

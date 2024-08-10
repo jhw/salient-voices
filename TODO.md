@@ -1,12 +1,11 @@
 ### short
 
-- convert banks zip_file to zip_buffer
-  - remove zipfile_to_bytesio utility
-- slicing needs to take start and end points
-- random_filename
+- s3 banks not creating zip_buffer in a zip- compatible manner
 
 ### medium
 
+- slicing needs to take start and end points
+- random_filename
 - band/instrument
 - ability to play sample without opening UI
 - export test should use wavfile to validate output properties
@@ -32,6 +31,8 @@
 
 ### done
 
+- convert banks zip_file to zip_buffer
+  - remove zipfile_to_bytesio utility
 - slices -> wav to zipfile
 - centre module grid in view
 - fork sunvox-dll-python

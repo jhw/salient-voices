@@ -16,6 +16,7 @@ def slice_wav(wav_io, zip_paths, fade = 3):
             chunk_audio.export(chunk_io, format = "wav")
             chunk_io.seek(0)
             zip_file.writestr(zip_path, chunk_io.read())
+    zip_buffer.seek(0) # ensure zipfile.ZipFile can be created from it
     return zip_buffer
 
 if __name__ == "__main__":

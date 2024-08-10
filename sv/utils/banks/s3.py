@@ -1,7 +1,6 @@
 from sv.sampler import SVBank
 
 import io
-import zipfile
 
 def _list_keys(s3, bucket_name, prefix):
     paginator = s3.get_paginator("list_objects_v2")
@@ -18,11 +17,14 @@ def _load_bank(s3,
                  bucket_name ,
                  s3_key):
     bank_name = s3_key.split("/")[-1].split(".")[0]
-    buf = io.BytesIO(s3.get_object(Bucket = bucket_name,
-                                   Key = s3_key)["Body"].read())
-    zf = zipfile.ZipFile(buf, "r")
+    zip_buffer = io.BytesIO(s3.get_object(Bucket = bucket_name,
+                                          Key = s3_key)["Body"].read())
+    # START TEMP CODE
+    import zipfile
+    print (zipfile.ZipFile(zip_buffer, 'r'))
+    # END TEMP CODE
     return SVBank(name = bank_name,
-                  zip_file = zf)
+                  zip_buffer = zip_buffer)
 
 def init_s3_banks(s3,
                   bucket_name,
