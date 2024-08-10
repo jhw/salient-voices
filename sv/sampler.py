@@ -1,5 +1,6 @@
 from scipy.io import wavfile
 
+import re
 # import rv
 import rv.modules # why?
 import warnings
@@ -24,6 +25,26 @@ class SVBanks(dict):
     def __init__(self, item = []):
         dict.__init__(self, item)
 
+    def spawn_pool(self, tag_mapping):
+        def filter_tags(file_name, tag_mapping):
+            tags = []
+            for tag, term in tag_mapping.items():
+                if re.search(term, file_name, re.I):
+                    tags.append(tag)
+            return tags        
+        pool, untagged = SVPool(), []
+        for bank in self.values():
+            for item in bank.zip_file.infolist():
+                wav_file = item.filename
+                tags = filter_tags(wav_file, tag_mapping)
+                sample = {"sample": f"{bank.name}/{wav_file}",
+                          "tags": tags}
+                if tags != []:
+                    pool.append(sample)
+                else:
+                    untagged.append(sample)
+        return pool, untagged
+        
     def get_wav_file(self, sample):
         bank_name, file_path = sample.split("/")
         if bank_name not in self:

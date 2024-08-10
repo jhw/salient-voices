@@ -1,13 +1,12 @@
 ### short
 
-- banks.spawn_pool
+- banks should really not be a list
 
 ### medium
 
 - containers/ensembles/bands, instruments
 
-- ability to play sample without opening UI
-- export test should use wavfile to validate output properties
+- project player
 - fx trig vector classmethod
 - single slot sampler to take repitch arg
 
@@ -17,7 +16,9 @@
 
 ### thoughts
 
-- colour mutation
+- export test should use wavfile to validate output properties?
+  - probably not worth it
+- colour mutation?
   - not worth it
 - algo to increase colour brightness?
   - not worth as tends to wash out colours
@@ -29,6 +30,7 @@
 
 ### done
 
+- banks.spawn_pool
 - bjorklund
 - add online check
 - slice_wav_custom should be renamed as takes an audio_io
