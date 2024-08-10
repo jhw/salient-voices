@@ -1,14 +1,12 @@
 ### short
 
-- project and model pool logic should be moved to pool
+- single slot sampler to take repitch arg
 
 ### medium
 
 - containers/ensembles/bands, instruments
-
-- project player
+- sv project player
 - fx trig vector classmethod
-- single slot sampler to take repitch arg
 
 ### long
 
@@ -16,6 +14,10 @@
 
 ### thoughts
 
+- remove iteration from single slot sampler? 
+  - just makes things less clear; don'r want to hardcode zero index
+- project and model pool logic should be moved to pool?
+ - seemingly makes things harder
 - export test should use wavfile to validate output properties?
   - probably not worth it
 - colour mutation?
