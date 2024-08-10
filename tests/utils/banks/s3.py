@@ -18,10 +18,9 @@ class S3BanksTest(unittest.TestCase):
                               CreateBucketConfiguration = {'LocationConstraint': 'EU'})
         bank = single_shot_bank(bank_name = "mikey303",
                                 file_path = "tests/utils/303 VCO SQR.wav")
-        zip_buffer = bank.zip_buffer
         self.s3.put_object(Bucket = bucket_name,
                            Key = "banks/mikey303.zip",
-                           Body = zip_buffer,
+                           Body = bank.zip_buffer.getvalue(),
                            ContentType = "application/gzip")
     
     def test_init_s3_banks(self, bucket_name = BucketName):
@@ -32,11 +31,9 @@ class S3BanksTest(unittest.TestCase):
             bank = banks[0]
             self.assertTrue(isinstance(bank, SVBank))
             self.assertEqual(bank.name, "mikey303")
-            """
             wav_files = bank.zip_file.namelist()
             self.assertTrue(len(wav_files) == 1)
             self.assertTrue("303 VCO SQR.wav" in wav_files)
-            """
         except RuntimeError as error:
             self.fail(str(error))
 

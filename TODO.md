@@ -1,11 +1,12 @@
 ### short
 
-- s3 banks not creating zip_buffer in a zip- compatible manner
+- slicing needs to take start and end points
+  - accept AudioSegment not wav
+
+- random_filename
 
 ### medium
 
-- slicing needs to take start and end points
-- random_filename
 - band/instrument
 - ability to play sample without opening UI
 - export test should use wavfile to validate output properties
@@ -31,6 +32,7 @@
 
 ### done
 
+- s3 banks not creating zip_buffer in a zip- compatible manner
 - convert banks zip_file to zip_buffer
   - remove zipfile_to_bytesio utility
 - slices -> wav to zipfile

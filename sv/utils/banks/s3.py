@@ -19,10 +19,6 @@ def _load_bank(s3,
     bank_name = s3_key.split("/")[-1].split(".")[0]
     zip_buffer = io.BytesIO(s3.get_object(Bucket = bucket_name,
                                           Key = s3_key)["Body"].read())
-    # START TEMP CODE
-    import zipfile
-    print (zipfile.ZipFile(zip_buffer, 'r'))
-    # END TEMP CODE
     return SVBank(name = bank_name,
                   zip_buffer = zip_buffer)
 
