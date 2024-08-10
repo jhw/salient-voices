@@ -58,7 +58,7 @@ def filter_packages(root):
     
 setuptools.setup(
     name="salient-voices",
-    version="0.1.16",
+    version="0.1.17",
     author="jhw",
     author_email="justin.worrall@gmail.com",
     description="A randomising- stem- generating wrapper library for radiant-voices",
