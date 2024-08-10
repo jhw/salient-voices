@@ -1,3 +1,4 @@
+from sv.utils import zipfile_to_bytesio
 from sv.utils.banks import single_shot_bank
 from sv.utils.banks.s3 import init_s3_banks
 from sv.sampler import SVBank
@@ -10,15 +11,6 @@ import zipfile
 
 BucketName = "hello-world"
 
-def convert_zipfile_to_bytesio(zip_file):
-    zip_buffer = io.BytesIO()
-    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_output:
-        for zip_info in zip_file.infolist():
-            file_content = zip_file.read(zip_info.filename)
-            zip_output.writestr(zip_info, file_content)
-    zip_buffer.seek(0)
-    return zip_buffer
-
 @mock_s3
 class S3BanksTest(unittest.TestCase):
     
@@ -28,7 +20,7 @@ class S3BanksTest(unittest.TestCase):
                               CreateBucketConfiguration = {'LocationConstraint': 'EU'})
         bank = single_shot_bank(bank_name = "mikey303",
                                 file_path = "tests/utils/303 VCO SQR.wav")
-        zip_buffer = convert_zipfile_to_bytesio(bank.zip_file)
+        zip_buffer = zipfile_to_bytesio(bank.zip_file)
         self.s3.put_object(Bucket = bucket_name,
                            Key = "banks/mikey303.zip",
                            Body = zip_buffer,
