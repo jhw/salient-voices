@@ -1,11 +1,10 @@
 ### short
 
 - consider replacing pools with bank refiltering
+- containers/ensembles/bands, instruments
 
 ### medium
 
-- band/instrument
-- support for local zipped files
 - ability to play sample without opening UI
 - export test should use wavfile to validate output properties
 - fx trig vector classmethod
