@@ -5,6 +5,11 @@ import zipfile
 
 def slice_wav_equal(wav_io, zip_paths, fade = 3):
     audio_io = AudioSegment.from_file(wav_io, format = "wav")
+    return slice_audio_segment_equal(audio_io = audio_io,
+                                     zip_paths = zip_paths,
+                                     fade = fade)
+
+def slice_audio_segment_equal(audio_io, zip_paths, fade = 3):
     chunk_size = int(len(audio_io) / len(zip_paths))
     zip_buffer = io.BytesIO()
     with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
@@ -19,7 +24,7 @@ def slice_wav_equal(wav_io, zip_paths, fade = 3):
     zip_buffer.seek(0) # ensure zipfile.ZipFile can be created from it
     return zip_buffer
 
-def slice_wav_custom(audio_io, zip_items, fade = 3):
+def slice_audio_segment_custom(audio_io, zip_items, fade = 3):
     zip_buffer = io.BytesIO()
     with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
         for zip_item in zip_items:

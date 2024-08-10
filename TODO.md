@@ -1,6 +1,5 @@
 ### short
 
-- slice_wav_custom should be renamed as takes an audio_io
 - add online check
 - consider replacing pools with bank refiltering
 
@@ -31,6 +30,7 @@
 
 ### done
 
+- slice_wav_custom should be renamed as takes an audio_io
 - change demo project to use samples 
 - random_filename
 - slicing needs to take start and end points

@@ -1,4 +1,4 @@
-from sv.utils.slicing import slice_wav_equal, slice_wav_custom
+from sv.utils.slicing import slice_wav_equal, slice_audio_segment_custom
 from pydub import AudioSegment
 
 import io
@@ -7,7 +7,7 @@ import zipfile
 
 class SlicingTest(unittest.TestCase):
 
-    def test_slice_equal(self):
+    def test_slice_wav_equal(self):
         try:
             wav_data = None
             with open("tests/utils/sample-project.wav", 'rb') as file:
@@ -26,7 +26,7 @@ class SlicingTest(unittest.TestCase):
         except RuntimeError as error:
             self.fail(str(error))
 
-    def test_slice_custom(self):
+    def test_slice_audio_segment_custom(self):
         try:
             wav_data = None
             with open("tests/utils/sample-project.wav", 'rb') as file:
@@ -42,8 +42,8 @@ class SlicingTest(unittest.TestCase):
                          {"zip_path": "slice-2.wav",
                           "start_time": int(n/2),
                           "end_time": n}]
-            zip_buffer = slice_wav_custom(audio_io = audio_io,
-                                          zip_items = zip_items)
+            zip_buffer = slice_audio_segment_custom(audio_io = audio_io,
+                                                    zip_items = zip_items)
             self.assertTrue(isinstance(zip_buffer, io.BytesIO))
             zip_file = zipfile.ZipFile(zip_buffer, 'r')
             zipped_paths = zip_file.namelist()
