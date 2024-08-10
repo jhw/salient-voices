@@ -8,7 +8,7 @@ class BanksTest(unittest.TestCase):
     def test_single_shot_bank(self):
         try:
             bank = single_shot_bank(bank_name = "mikey303",
-                                    file_path = "tests/utils/303 VCO SQR.wav")
+                                    file_path = "tests/303 VCO SQR.wav")
             self.assertTrue(isinstance(bank, SVBank))
             self.assertEqual(bank.name, "mikey303")
             wav_files = bank.zip_file.namelist()

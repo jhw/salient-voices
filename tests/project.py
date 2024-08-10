@@ -6,7 +6,7 @@ import rv
 import unittest
 import yaml
 
-AnalogGeneratorModules = yaml.safe_load("""
+GeneratorModules = yaml.safe_load("""
 - name: Generator
   class: rv.modules.analoggenerator.AnalogGenerator
   links:
@@ -22,7 +22,7 @@ AnalogGeneratorModules = yaml.safe_load("""
     - Output
 """)
 
-SingleSlotSamplerModules = yaml.safe_load("""
+SamplerModules = yaml.safe_load("""
 - name: Sampler
   class: sv.sampler.SVSingleSlotSampler
   links:
@@ -40,7 +40,7 @@ SingleSlotSamplerModules = yaml.safe_load("""
 
 class RenderTest(unittest.TestCase):
 
-    def test_analog_generator(self, modules = AnalogGeneratorModules):
+    def test_generator(self, modules = GeneratorModules):
         try:
             trig = SVNoteTrig(mod = "Generator",
                               note = 56,
@@ -54,10 +54,10 @@ class RenderTest(unittest.TestCase):
         except RuntimeError as error:
             self.fail(str(error))
 
-    def test_single_slot_sampler(self, modules = SingleSlotSamplerModules):
+    def test_sampler(self, modules = SamplerModules):
         try:
             bank = single_shot_bank(bank_name = "mikey303",
-                                    file_path = "tests/utils/303 VCO SQR.wav")
+                                    file_path = "tests/303 VCO SQR.wav")
             trig = SVNoteTrig(mod = "Sampler",
                               sample = "mikey303/303 VCO SQR.wav",
                               i = 0)

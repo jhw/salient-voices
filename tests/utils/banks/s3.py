@@ -17,7 +17,7 @@ class S3BanksTest(unittest.TestCase):
         self.s3.create_bucket(Bucket = bucket_name,
                               CreateBucketConfiguration = {'LocationConstraint': 'EU'})
         bank = single_shot_bank(bank_name = "mikey303",
-                                file_path = "tests/utils/303 VCO SQR.wav")
+                                file_path = "tests/303 VCO SQR.wav")
         self.s3.put_object(Bucket = bucket_name,
                            Key = "banks/mikey303.zip",
                            Body = bank.zip_buffer.getvalue(),
