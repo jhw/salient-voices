@@ -2,7 +2,8 @@ awscli
 boto3
 botocore
 numpy
-radiant-voices @ git+ssh://git@github.com/metrasynth/radiant-voices.git@master
+pydub
 pyyaml
+radiant-voices @ git+ssh://git@github.com/metrasynth/radiant-voices.git@master
 scipy
 sunvox-dll-python

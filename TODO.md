@@ -1,12 +1,16 @@
 ### short
 
+- band/instrument
+
 ### medium
 
-- instrument namespacing
-- slices -> wav to zipfile
+- ability to play sample without opening UI
+
 - export test should use wavfile to validate output properties
+
 - fx trig vector classmethod
 - note trig chord classmethod
+
 - single slot sampler to take repitch arg
 - jsonschema module validation
 
@@ -28,6 +32,7 @@
 
 ### done
 
+- slices -> wav to zipfile
 - centre module grid in view
 - fork sunvox-dll-python
 - load banks from s3
