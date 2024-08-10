@@ -1,9 +1,10 @@
 ### short
 
-- consider replacing pools with bank refiltering
-- containers/ensembles/bands, instruments
+- banks.spawn_pool
 
 ### medium
+
+- containers/ensembles/bands, instruments
 
 - ability to play sample without opening UI
 - export test should use wavfile to validate output properties
@@ -28,6 +29,7 @@
 
 ### done
 
+- bjorklund
 - add online check
 - slice_wav_custom should be renamed as takes an audio_io
 - change demo project to use samples 
