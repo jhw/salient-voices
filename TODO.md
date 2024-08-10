@@ -1,6 +1,6 @@
 ### short
 
-- single slot sampler to take repitch arg
+- sample should take offset info
 
 ### medium
 
@@ -32,6 +32,7 @@
 
 ### done
 
+- single slot sampler to take repitch arg
 - banks should really not be a list
 - banks.spawn_pool
 - bjorklund
