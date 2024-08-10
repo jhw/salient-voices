@@ -5,10 +5,7 @@ import unittest
 class NamingTest(unittest.TestCase):
 
     def test_random_name(self):
-        try:
-            print (random_name())
-        except RuntimeError as error:
-            self.fail(str(error))
+        print (random_name())
             
 if __name__ == "__main__":
     unittest.main()
