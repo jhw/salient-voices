@@ -1,7 +1,5 @@
 ### short
 
-- random_filename
-
 ### medium
 
 - band/instrument
@@ -29,6 +27,7 @@
 
 ### done
 
+- random_filename
 - slicing needs to take start and end points
   - accept AudioSegment not wav
 - s3 banks not creating zip_buffer in a zip- compatible manner
