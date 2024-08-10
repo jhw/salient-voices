@@ -16,9 +16,10 @@ class SlicingTest(unittest.TestCase):
                 raise RuntimeError("wav file not loaded")
             wav_buffer = io.BytesIO(wav_data)
             zip_paths = ["slice-1.wav", "slice-2.wav"]
-            zip_file = slice_wav(wav_io = wav_buffer,
-                                 zip_paths = zip_paths)
-            self.assertTrue(isinstance(zip_file, zipfile.ZipFile))
+            zip_buffer = slice_wav(wav_io = wav_buffer,
+                                   zip_paths = zip_paths)
+            self.assertTrue(isinstance(zip_buffer, io.BytesIO))
+            zip_file = zipfile.ZipFile(zip_buffer, 'r')
             zipped_paths = zip_file.namelist()
             for zip_path in zip_paths:
                 self.assertTrue(zip_path in zipped_paths)

@@ -11,7 +11,7 @@ def single_shot_bank(bank_name, file_path):
     file_name = file_path.split("/")[-1]
     zip_file.writestr(file_name, wav_data)
     return SVBank(name = bank_name,
-                 zip_file = zip_file)
+                  zip_file = zip_file)
 
         
 if __name__ == "__main__":

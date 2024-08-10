@@ -1,16 +1,16 @@
 ### short
 
-- band/instrument
+- convert banks zip_file to zip_buffer
+  - remove zipfile_to_bytesio utility
+
+- random_filename
 
 ### medium
 
+- band/instrument
 - ability to play sample without opening UI
-
 - export test should use wavfile to validate output properties
-
 - fx trig vector classmethod
-- note trig chord classmethod
-
 - single slot sampler to take repitch arg
 - jsonschema module validation
 
