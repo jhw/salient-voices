@@ -121,7 +121,7 @@ class SVPatch:
             groups[trig.mod][trig.key].append(trig)
         return groups
 
-    def update_pool(self, mod_names, pool):
+    def populate_pool(self, mod_names, pool):
         for group in self.trig_groups(mod_names).values():
             for trigs in group.values():
                 for trig in trigs:

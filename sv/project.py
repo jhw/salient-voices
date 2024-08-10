@@ -83,8 +83,8 @@ class SVProject:
                 if mod["class"].lower().endswith("sampler"):
                     pool = SVPool()
                     for patch in patches:                        
-                        patch.update_pool(pool = pool,
-                                          mod_names = mod_names)
+                        patch.populate_pool(pool = pool,
+                                            mod_names = mod_names)
                     mod_kwargs = {"banks": banks,
                                   "pool": pool}
                 mod["instance"] = mod_class(**mod_kwargs)
