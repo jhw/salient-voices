@@ -2,7 +2,7 @@
 
 - convert banks zip_file to zip_buffer
   - remove zipfile_to_bytesio utility
-
+- slicing needs to take start and end points
 - random_filename
 
 ### medium
