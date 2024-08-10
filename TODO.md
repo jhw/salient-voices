@@ -1,8 +1,5 @@
 ### short
 
-- slicing needs to take start and end points
-  - accept AudioSegment not wav
-
 - random_filename
 
 ### medium
@@ -32,6 +29,8 @@
 
 ### done
 
+- slicing needs to take start and end points
+  - accept AudioSegment not wav
 - s3 banks not creating zip_buffer in a zip- compatible manner
 - convert banks zip_file to zip_buffer
   - remove zipfile_to_bytesio utility
