@@ -1,6 +1,6 @@
 ### short
 
-- banks should really not be a list
+- project and model pool logic should be moved to pool
 
 ### medium
 
@@ -30,6 +30,7 @@
 
 ### done
 
+- banks should really not be a list
 - banks.spawn_pool
 - bjorklund
 - add online check

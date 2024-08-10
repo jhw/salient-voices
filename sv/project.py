@@ -261,7 +261,7 @@ class SVProject:
     
     def init_project(fn):
         def wrapped(self, modules, banks = [], *args, **kwargs):
-            banks = SVBanks({bank.name: bank for bank in banks})            
+            banks = SVBanks(banks)
             modules = SVModules(modules)
             modules.validate()
             return fn(self,

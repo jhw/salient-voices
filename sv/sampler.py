@@ -20,10 +20,10 @@ class SVBank:
     def zip_file(self): # assume zip_buffer.seek(0) has been called elsewhere
         return zipfile.ZipFile(self.zip_buffer, 'r')
 
-class SVBanks(dict):
+class SVBanks(list):
 
-    def __init__(self, item = []):
-        dict.__init__(self, item)
+    def __init__(self, items = []):
+        list.__init__(self, items)
 
     def spawn_pool(self, tag_mapping):
         def filter_tags(file_name, tag_mapping):
@@ -33,7 +33,7 @@ class SVBanks(dict):
                     tags.append(tag)
             return tags        
         pool, untagged = SVPool(), []
-        for bank in self.values():
+        for bank in self:
             for item in bank.zip_file.infolist():
                 wav_file = item.filename
                 tags = filter_tags(wav_file, tag_mapping)
@@ -46,13 +46,14 @@ class SVBanks(dict):
         return pool, untagged
         
     def get_wav_file(self, sample):
+        banks = {bank.name: bank for bank in self}
         bank_name, file_path = sample.split("/")
-        if bank_name not in self:
+        if bank_name not in banks:
             raise RuntimeError(f"bank {bank_name} not found")
-        file_paths = self[bank_name].zip_file.namelist()
+        file_paths = banks[bank_name].zip_file.namelist()
         if file_path not in file_paths:
             raise RuntimeError(f"path {file_path} not found in bank {bank_name}")
-        return self[bank_name].zip_file.open(file_path, 'r')
+        return banks[bank_name].zip_file.open(file_path, 'r')
         
 class SVPool(list):
 

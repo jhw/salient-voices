@@ -8,7 +8,7 @@ class BanksTest(unittest.TestCase):
     def test_spawn_pool(self):
         bank = single_shot_bank(bank_name = "mikey303",
                                 file_path = "tests/303 VCO SQR.wav")
-        banks = SVBanks({bank.name: bank})
+        banks = SVBanks([bank])
         tag_mapping = {"bass": "303"}
         pool, unmapped = banks.spawn_pool(tag_mapping)
         self.assertTrue(isinstance(pool, SVPool))
