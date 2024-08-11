@@ -87,7 +87,6 @@ class SVPool(list):
         return [sample["sample"]
                 for sample in self
                 if "tags" in sample and tag in sample["tags"]]
-
             
 class SVBaseSampler(rv.modules.sampler.Sampler):
 

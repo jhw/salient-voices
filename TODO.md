@@ -1,9 +1,12 @@
 ### short
 
-- generators
+- refactor pool tags implementation
+  - right now you are using it with both strings and dicts
+  - convert to single string format using hashtags eg "mikey303/303 VCO SQR.wav#bass#303"
 
 ### medium
 
+- generators
 - container test
 - sample should carry offset info (not single shot sampler)
 - sv project player

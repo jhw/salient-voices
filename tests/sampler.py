@@ -16,6 +16,8 @@ class BanksTest(unittest.TestCase):
         self.assertEqual(len(pool), 1)
         self.assertEqual(unmapped, [])
 
+class BankTest(unittest.TestCase):
+        
     def test_load_save_cycle(self):
         if os.path.exists("tmp/mikey303.zip"):
             os.system("rm tmp/mikey303.zip")
