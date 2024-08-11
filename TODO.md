@@ -1,7 +1,5 @@
 ### short [01-container-master]
 
-- number of lines in patch
-
 ### medium
 
 - sample should take offset info
@@ -32,6 +30,7 @@
 
 ### done
 
+- number of lines in patch
 - single slot sampler to take repitch arg
 - banks should really not be a list
 - banks.spawn_pool
