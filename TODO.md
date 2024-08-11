@@ -1,12 +1,16 @@
-### short
+### short [01-new-pool-model]
 
-- refactor pool tags implementation
-  - right now you are using it with both strings and dicts
-  - convert to single string format using hashtags eg "mikey303/303 VCO SQR.wav#bass#303"
+- rip out tags stuff from pool
+- new svsample class extending string
+- add svsample properties
+- replace instances of sample.split("/") with casting of class and use of properties
+- add back tag related code to pool (look in euclid cli)
+- add pool tests
 
 ### medium
 
-- generators
+- 303 generator demo
+
 - container test
 - sample should carry offset info (not single shot sampler)
 - sv project player
