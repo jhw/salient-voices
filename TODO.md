@@ -1,6 +1,5 @@
 ### short [01-new-pool-model]
 
-- add back tag related code to pool (look in euclid cli)
 - add pool tests
 - add test for spawn_pool
 
@@ -37,6 +36,7 @@
 
 ### done
 
+- add back tag related code to pool (look in euclid cli)
 - replace instances of sample.split("/") with casting of class and use of properties
 - refactor spawn_pool to use new sample format
 - new svsample class extending string

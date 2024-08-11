@@ -106,6 +106,19 @@ class SVPool(list):
         if sample not in self:
             self.append(sample)
 
+    @property
+    def tags(self):
+        tags = {}
+        for sample in self:
+            for tag in sample.tags:
+                tags.setdefault(tag, 0)
+                tags[tag] += 1
+        return tags
+        
+    def filter_by_tag(self, tag):
+        return [sample for sample in self
+                if tag in sample.tags]
+            
 class SVBaseSampler(rv.modules.sampler.Sampler):
 
     def __init__(self, *args, **kwargs):
