@@ -1,7 +1,5 @@
 ### short [01-new-pool-model]
 
-- new svsample class extending string
-- add svsample properties
 - refactor spawn_pool to use new sample format
 - replace instances of sample.split("/") with casting of class and use of properties
 - add back tag related code to pool (look in euclid cli)
@@ -41,6 +39,8 @@
 
 ### done
 
+- new svsample class extending string
+- add svsample properties
 - rip out tags stuff from pool
 - file utils
 - bank tag code

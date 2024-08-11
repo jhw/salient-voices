@@ -12,6 +12,27 @@ warnings.simplefilter("ignore", wavfile.WavFileWarning)
 
 MaxSlots = 120
 
+class SVSample(str):
+
+    def __init__(self, value = ""):
+        str.__init__(self, value)
+
+    @property
+    def tokens(self):
+        return re.split("\\:|\\#", self)
+
+    @property
+    def bank_name(self):
+        return self.tokens[0]
+
+    @property
+    def file_path(self):
+        return self.tokens[1]
+
+    @property
+    def tags(self):
+        return self.tokens[2:]
+        
 class SVBank:
 
     @classmethod
