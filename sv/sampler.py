@@ -77,8 +77,8 @@ class SVBanks(list):
             for item in bank.zip_file.infolist():
                 wav_file = item.filename
                 tags = filter_tags(wav_file, tag_mapping)
-                sample = {"sample": f"{bank.name}/{wav_file}",
-                          "tags": tags}
+                tag_string = "".join([f"#{tag}" for tag in tags])
+                sample = f"{bank.name}/{wav_file}{tag_string}",
                 if tags != []:
                     pool.append(sample)
                 else:
