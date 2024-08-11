@@ -1,8 +1,25 @@
 from sv.utils.banks import single_shot_bank
-from sv.sampler import SVBanks, SVBank, SVPool
+from sv.sampler import SVSample, SVBanks, SVBank, SVPool
 
 import os
 import unittest
+
+class SampleTest(unittest.TestCase):
+
+    def test_untagged(self):
+        sample = SVSample("mikey303/303 VCO SQR.wav")
+        self.assertEqual(sample.bank_name, "mikey303")
+        self.assertEqual(sample.file_path, "303 VCO SQR.wav")
+        self.assertEqual(sample.tags, [])
+    
+    def test_tagged(self):
+        sample = SVSample("mikey303/303 VCO SQR.wav#303#bass")
+        self.assertEqual(sample.bank_name, "mikey303")
+        self.assertEqual(sample.file_path, "303 VCO SQR.wav")
+        tags = sample.tags
+        self.assertEqual(len(tags), 2)
+        for tag in ["bass", "303"]:
+            self.assertTrue(tag in tags)        
 
 class BanksTest(unittest.TestCase):
 
@@ -27,6 +44,7 @@ class BankTest(unittest.TestCase):
         self.assertTrue(os.path.exists("tmp/mikey303.zip"))
         bank = SVBank.load_zipfile("tmp/mikey303.zip")
         self.assertTrue(isinstance(bank, SVBank))
+        
         
 if __name__ == "__main__":
     unittest.main()

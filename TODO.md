@@ -1,13 +1,18 @@
 ### short [01-new-pool-model]
 
-- add pool tests
-- add test for spawn_pool
+- test banks.spawn_pool
+- new PoolTest class
+- test pool.tags
+- test pool.filter_by_tags
 
 ### medium
 
-- 303 generator demo
+- add Tidal euclid patterns
+- add wol vca groove code
 
-- container test
+- 303 generator demo
+- refactor tests and demos to use new generator classes
+
 - sample should carry offset info (not single shot sampler)
 - sv project player
 - fx trig vector classmethod
