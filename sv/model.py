@@ -108,10 +108,13 @@ class SVFXTrig:
 
 class SVPatch:
 
-    def __init__(self, trigs, n_ticks):
+    def __init__(self, n_ticks, trigs = []):
         self.trigs = trigs
         self.n_ticks = n_ticks
 
+    def add_trigs(self, trigs):
+        self.trigs += trigs
+        
     def trig_groups(self, mod_names):
         groups = {mod_name: {} for mod_name in mod_names}
         for trig in self.trigs:

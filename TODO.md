@@ -1,10 +1,10 @@
-### short
+### short [01-container-master]
 
-- sample should take offset info
+- number of lines in patch
 
 ### medium
 
-- containers/ensembles/bands, instruments
+- sample should take offset info
 - sv project player
 - fx trig vector classmethod
 
