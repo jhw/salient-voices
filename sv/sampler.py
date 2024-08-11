@@ -15,11 +15,12 @@ MaxSlots = 120
 class SVSample(str):
 
     def __init__(self, value = ""):
-        str.__init__(self, value)
+        # str.__init__(self, value)
+        str.__init__(value)
 
     @property
     def tokens(self):
-        return re.split("\\:|\\#", self)
+        return re.split("\\/|\\#", self)
 
     @property
     def bank_name(self):
@@ -86,8 +87,9 @@ class SVBanks(list):
         return pool, untagged
         
     def get_wav_file(self, sample):
+        sample = SVSample(sample)
+        bank_name, file_path = sample.bank_name, sample.file_path
         banks = {bank.name: bank for bank in self}
-        bank_name, file_path = sample.split("/")
         if bank_name not in banks:
             raise RuntimeError(f"bank {bank_name} not found")
         file_paths = banks[bank_name].zip_file.namelist()
