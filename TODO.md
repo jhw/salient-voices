@@ -1,10 +1,12 @@
 ### short
 
+- SVBanks spawn_pool code doesn't take into account custom SVPool class in euclid cli
+
 - container test
 
 ### medium
 
-- sample should take offset info
+- sample should carry offset info (not single shot sampler)
 - sv project player
 - fx trig vector classmethod
 
