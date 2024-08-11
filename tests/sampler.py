@@ -1,5 +1,5 @@
 from sv.utils.banks import single_shot_bank
-from sv.sampler import SVSample, SVBanks, SVBank, SVPool
+from sv.sampler import SVSample, SVBank, SVBanks, SVPool
 
 import os
 import unittest
@@ -21,18 +21,6 @@ class SampleTest(unittest.TestCase):
         for tag in ["bass", "303"]:
             self.assertTrue(tag in tags)        
 
-class BanksTest(unittest.TestCase):
-
-    def test_spawn_pool(self):
-        bank = single_shot_bank(bank_name = "mikey303",
-                                file_path = "tests/303 VCO SQR.wav")
-        banks = SVBanks([bank])
-        tag_mapping = {"bass": "303"}
-        pool, unmapped = banks.spawn_pool(tag_mapping)
-        self.assertTrue(isinstance(pool, SVPool))
-        self.assertEqual(len(pool), 1)
-        self.assertEqual(unmapped, [])
-
 class BankTest(unittest.TestCase):
         
     def test_load_save_cycle(self):
@@ -44,7 +32,24 @@ class BankTest(unittest.TestCase):
         self.assertTrue(os.path.exists("tmp/mikey303.zip"))
         bank = SVBank.load_zipfile("tmp/mikey303.zip")
         self.assertTrue(isinstance(bank, SVBank))
-        
+            
+class BanksTest(unittest.TestCase):
+
+    def test_spawn_pool(self):
+        bank = single_shot_bank(bank_name = "mikey303",
+                                file_path = "tests/303 VCO SQR.wav")
+        banks = SVBanks([bank])
+        tag_mapping = {"bass": "303"}
+        pool, unmapped = banks.spawn_pool(tag_mapping)
+        print (pool)
+        self.assertTrue(isinstance(pool, SVPool))
+        self.assertEqual(len(pool), 1)
+        self.assertEqual(unmapped, [])
+
+class PoolTest(unittest.TestCase):
+
+    def test_hello(self):
+        self.assertEqual(2, 2)        
         
 if __name__ == "__main__":
     unittest.main()

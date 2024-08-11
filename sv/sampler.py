@@ -79,7 +79,7 @@ class SVBanks(list):
                 wav_file = item.filename
                 tags = filter_tags(wav_file, tag_mapping)
                 tag_string = "".join([f"#{tag}" for tag in tags])
-                sample = f"{bank.name}/{wav_file}{tag_string}",
+                sample = f"{bank.name}/{wav_file}{tag_string}"
                 if tags != []:
                     pool.append(sample)
                 else:

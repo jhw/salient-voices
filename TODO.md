@@ -1,7 +1,9 @@
 ### short [01-new-pool-model]
 
-- test banks.spawn_pool
-- new PoolTest class
+- samples should be inserted into pool as SVSample instances
+  - remove recasting in banks code
+- add check for type in banks spawn_pool test
+
 - test pool.tags
 - test pool.filter_by_tags
 
@@ -41,6 +43,7 @@
 
 ### done
 
+- new PoolTest class
 - add back tag related code to pool (look in euclid cli)
 - replace instances of sample.split("/") with casting of class and use of properties
 - refactor spawn_pool to use new sample format
