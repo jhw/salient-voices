@@ -1,11 +1,10 @@
 ### short
 
-- SVBanks spawn_pool code doesn't take into account custom SVPool class in euclid cli
-
-- container test
+- generators
 
 ### medium
 
+- container test
 - sample should carry offset info (not single shot sampler)
 - sv project player
 - fx trig vector classmethod
@@ -34,6 +33,9 @@
 
 ### done
 
+- file utils
+- bank tag code
+- SVBanks spawn_pool code doesn't take into account custom SVPool class in euclid cli
 - number of lines in patch
 - single slot sampler to take repitch arg
 - banks should really not be a list
