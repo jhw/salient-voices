@@ -1,8 +1,5 @@
 ### short [01-sampler-refactor]
 
-- remove single slot sampler
-- move existing constructor to base constructor, with repitch arg
-- add new slot and chromatic samplers, passing repitch arg to superclass
 - add root_notes property to base sampler
 - slot sampler to override root_notes with slot position
 - chromatic sampler to override root_notes with mid points
@@ -66,6 +63,9 @@
 
 ### done
 
+- move existing constructor to base constructor, with repitch arg
+- add new slot and chromatic samplers, passing repitch arg to superclass
+- remove single slot sampler
 - pass rand into generator
 - reverb
 - consider multiple seeds
