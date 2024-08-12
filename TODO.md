@@ -1,13 +1,15 @@
 ### short
 
-- refactor demos and tests to use generator classes [notes]
-- new nine09 generator
-- extend three03 generator
+- refactor nine09 demo to use three03 patterns
+- container test
+- refactor demos/303 to use generator
+- new demos/909
 
 ### medium
 
-- sample should carry offset info (not single shot sampler)
+- [303 extensions]
 
+- sample should carry offset info (not single shot sampler)
 - sv project player
 
 ### long
