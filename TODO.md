@@ -3,6 +3,13 @@
 - remove single slot offset
 - container test
 - refactor demos/303 to use generator pattern
+
+- extend demos/303
+  - random trig generation
+  - random note choice
+  - random filter level
+
+- add echo to demos
 - new demos/909
 
 ### features
@@ -27,8 +34,7 @@
 
 ### medium
 
-- sample should carry offset info (not single shot sampler)
-
+- 240bpm
 - sv project player
 
 ### long
