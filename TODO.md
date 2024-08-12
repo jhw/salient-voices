@@ -1,17 +1,14 @@
 ### 01-generator-model
 
+- randomise filter level
+- three03 should be initialised with sample
+- randomise volume
+- extend bpm/track size
+- add echo
+
 ### short
 
-- refactor demos/303 to use generator pattern
-
 - container test
-
-- extend demos/303
-  - random trig generation
-  - random note choice
-  - random filter level
-
-- add echo to demos
 - new demos/909
 
 ### features
@@ -65,6 +62,7 @@
 
 ### done
 
+- refactor demos/303 to use generator pattern
 - extend bassline function to include state
 - define simple stateless bassline function in demo
 - demo to execute bassline
