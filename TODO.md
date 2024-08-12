@@ -1,7 +1,5 @@
 ### short [01-new-pool-model]
 
-
-- test pool.tags
 - test pool.filter_by_tags
 
 ### medium
@@ -42,6 +40,7 @@
 
 ### done
 
+- test pool.tags
 - always recast sample as SVSample
 - samples should be inserted into pool as SVSample instances
   - remove recasting in banks code

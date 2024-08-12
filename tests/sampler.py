@@ -41,15 +41,20 @@ class BanksTest(unittest.TestCase):
         banks = SVBanks([bank])
         tag_mapping = {"bass": "303"}
         pool, unmapped = banks.spawn_pool(tag_mapping)
-        print (pool)
         self.assertTrue(isinstance(pool, SVPool))
         self.assertEqual(len(pool), 1)
         self.assertEqual(unmapped, [])
 
 class PoolTest(unittest.TestCase):
 
-    def test_hello(self):
-        self.assertEqual(2, 2)        
+    def test_tags(self):
+        pool = SVPool()
+        pool.add("mikey303/303 VCO SQR.wav#bass#303")
+        tags = pool.tags
+        self.assertEqual(len(tags), 2)
+        for tag in ["bass", "303"]:
+            self.assertTrue(tag in tags)
+            self.assertEqual(tags[tag], 1)
         
 if __name__ == "__main__":
     unittest.main()
