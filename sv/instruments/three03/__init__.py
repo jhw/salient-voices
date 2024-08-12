@@ -22,8 +22,8 @@ class Three03(InstrumentBase):
 
     def pluck(self,
               note, i,
-              attack_ms = "0010",
-              decay_ms = "0010",
+              attack_ms = "0008",
+              decay_ms = "0018",
               sustain_level = "0800",
               sustain_periods = 1,
               release_ms = "0300",

@@ -1,11 +1,18 @@
 ### short
 
+- sampler refactoring [notes]
+
+
+### medium
+
 - pico sequence [notes]
+
+- investigate root notes for chromatic sampler with two samples
+
 - pico play mode
-- transpose
+- grooves
 - disortion
 - extend bpm/track size
-- randomise volume/accent
 - container test
 - demos/909
 
@@ -13,7 +20,6 @@
 
 ##### 303, 909
 
-- VCA grooves
 - density- based fills
 
 ##### 303
@@ -21,16 +27,11 @@
 - filter decay
 - pitch bend
 - slide to note
+- transpose
 
 ##### 909
 
 - open/closed samples
-
-### medium
-
-- investigate chromatic distribution of two notes in a sampler
-
-- sv project player
 
 ### long
 
@@ -38,6 +39,8 @@
 
 ### thoughts
 
+- sv project player?
+  - not sure you need it
 - sort colours so they are far apart?
   - probably not worth it
 - rename echo as ghost?
