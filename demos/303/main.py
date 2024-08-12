@@ -10,11 +10,13 @@ def bassline(self, n,
     for i in range(n):
         if (random.random() < 0.5 and
             i > offset):
-            sustain_periods = random.choice([1, 2])
-            note = root_note + random.choice([-2, -2, 0, 0, 0, 5, 12])
-            offset = i + sustain_periods
+            length = random.choice([1, 1, 1 , 2])
+            note = root_note + random.choice([-2, 0, 0, 0, 5, 12])
+            freq_max = random.choice(["3000", "4000", "5000"])
+            offset = i + length
             yield self.pluck(note = note,
-                             sustain_periods = sustain_periods,
+                             sustain_periods = length,
+                             filter_freq_max = freq_max,
                              i = i)
                             
 if __name__ == "__main__":

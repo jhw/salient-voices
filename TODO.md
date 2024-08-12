@@ -1,6 +1,5 @@
 ### 01-generator-model
 
-- randomise filter level
 - three03 should be initialised with sample
 - randomise volume
 - extend bpm/track size
@@ -62,6 +61,7 @@
 
 ### done
 
+- randomise filter level
 - refactor demos/303 to use generator pattern
 - extend bassline function to include state
 - define simple stateless bassline function in demo
