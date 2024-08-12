@@ -1,7 +1,5 @@
 ### 01-generator-model
 
-- add instrument play function, attaching trigs
-- remove trig- attaching decorator
 - define simple stateless bassline function in demo
 - demo to execute bassline
 - extend bassline function to include state
@@ -71,6 +69,8 @@
 
 ### done
 
+- add instrument play function, attaching trigs
+- remove trig- attaching decorator
 - remove single slot offset
 - refactor nine09 demo to use three03 patterns
 - dev/three03_generator.py [notes]
