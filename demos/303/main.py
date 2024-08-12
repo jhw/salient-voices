@@ -16,9 +16,9 @@ def init_bassline(seed):
             if (i == 0 or
                 (rand.random() < 0.33333 and
                  i > offset)):
-                length = rand.choice([1, 1, 1 , 2])
+                length = rand.choice([1, 1, 1, 2])
                 note = root_note + rand.choice([-2, 0, 0, 0, 5])
-                freq = rand.choice(["2000", "3000", "4000", "5000"])
+                freq = rand.choice(["2000", "3000", "4000"])
                 offset = i + length
                 yield self.pluck(note = note,
                                  sustain_periods = length,

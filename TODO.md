@@ -1,5 +1,7 @@
 ### short
 
+- pass rand into generator
+
 - randomise volume/accent
 - extend bpm/track size
 - pico play mode
