@@ -1,10 +1,5 @@
 ### short [01-sampler-refactor]
 
-- add root_notes property to base sampler
-- slot sampler to override root_notes with slot position
-- chromatic sampler to override root_notes with mid points
-- add notes re chromatic mid point assumptions
-- lookup function to reference root_notes
 - refactor trig code to use note as offset in the presence of chromatic sampler only
 - refactor single_shot_bank to use chromatic sampler
 - rename single_shot_bank
@@ -63,6 +58,11 @@
 
 ### done
 
+- slot sampler to override root_notes with slot position
+- chromatic sampler to override root_notes with mid points
+- add notes re chromatic mid point assumptions
+- lookup function to reference root_notes
+- add root_notes property to base sampler
 - move existing constructor to base constructor, with repitch arg
 - add new slot and chromatic samplers, passing repitch arg to superclass
 - remove single slot sampler

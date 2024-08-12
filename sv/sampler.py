@@ -166,8 +166,12 @@ class SVBaseSampler(rv.modules.sampler.Sampler):
         self.samples[slot] = sample
         return sample
 
+    @property
+    def root_notes(self):
+        return {}
+            
     def lookup(self, sample):
-        return self.pool.index(sample)
+        return self.root_notes[sample]
 
 class SVSlotSampler(SVBaseSampler):
 
@@ -177,6 +181,11 @@ class SVSlotSampler(SVBaseSampler):
                                pool = pool,
                                repitch = True)
 
+    @property
+    def root_notes(self):
+        return {sample: i
+                for i, sample in enumerate(self.pool)}    
+        
 class SVChromaticSampler(SVBaseSampler):
 
     def __init__(self, banks, pool):
@@ -184,6 +193,16 @@ class SVChromaticSampler(SVBaseSampler):
                                banks = banks,
                                pool = pool,
                                repitch = False)
+
+    """
+    This is how is is *assumed* to work, but needs checking
+    """
+        
+    @property
+    def root_notes(self, max_slots = MaxSlots):
+        n = max_slots / len(self.pool)
+        return {sample: int(n * (i + 0.5))
+                for i, sample in enumerate(self.pool)}
         
 if __name__ == "__main__":
     pass
