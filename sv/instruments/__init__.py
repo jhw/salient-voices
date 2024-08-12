@@ -9,6 +9,7 @@ class InstrumentBase:
     def __init__(self, container, namespace):
         self.container = container
         self.namespace = namespace
+        self.defaults = {}
 
     def play(self, generator):
         for trigs in generator(self, n = self.container.n_ticks):
@@ -17,13 +18,20 @@ class InstrumentBase:
     @property
     def modules(self):
         modules = copy.deepcopy(self.Modules)
-        for module in modules:
-            module["name"] = f"{self.namespace}{module['name']}"
-            if "links" in module:
-                links = module["links"]
-                for i, link in enumerate(links):
-                    if link != "Output":
-                        links[i] = f"{self.namespace}{link}"
+        for mod in modules:
+            mod_name = mod["name"]
+            if mod_name in self.defaults:
+                defaults = self.defaults[mod_name]
+                """
+                mod.setdefault("defaults", {})
+                mod["defaults"].update(defaults)
+                """
+                print (mod_name, defaults, mod["defaults"])
+            if "links" in mod:
+                for i, link_name in enumerate(mod["links"]):
+                    if link_name != "Output":
+                        mod["links"][i] = f"{self.namespace}{link_name}"
+            mod["name"] = f"{self.namespace}{mod_name}"
         return modules
         
 if __name__ == "__main__":
