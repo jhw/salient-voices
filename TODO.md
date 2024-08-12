@@ -16,7 +16,7 @@
 
 ##### 303
 
-- filter level decay
+- filter decay
 - pitch bend
 - slice to note
 - accent
