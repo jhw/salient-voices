@@ -2,6 +2,7 @@
 
 - SVNoteTrig.note should be named offset if it's an offset
 - refactor/rename single_shot_bank to take multiple samples
+  - should become a file based loader
 
 ### medium
 
@@ -11,6 +12,7 @@
 - pico play mode
 - grooves
 - disortion
+- utils to concatenate banks
 - extend bpm/track size
 - container test
 - demos/909
