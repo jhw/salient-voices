@@ -1,3 +1,11 @@
+### 01-generator-model
+
+- add instrument play function, attaching trigs
+- remove trig- attaching decorator
+- define simple stateless bassline function in demo
+- demo to execute bassline
+- extend bassline function to include state
+
 ### short
 
 - refactor demos/303 to use generator pattern
