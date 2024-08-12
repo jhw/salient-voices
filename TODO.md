@@ -1,8 +1,9 @@
 ### short
 
-- pico sequence term and play mode
-
+- pico sequence [notes]
+- pico play mode
 - transpose
+- disortion
 - extend bpm/track size
 - randomise volume/accent
 - container test
@@ -20,7 +21,6 @@
 - filter decay
 - pitch bend
 - slide to note
-- distortion
 
 ##### 909
 
