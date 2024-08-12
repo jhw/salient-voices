@@ -1,15 +1,34 @@
 ### short
 
-- refactor nine09 demo to use three03 patterns
+- remove single slot offset
 - container test
-- refactor demos/303 to use generator
+- refactor demos/303 to use generator pattern
 - new demos/909
+
+### features
+
+##### 303, 909
+
+- pico play modes
+- VCA grooves
+- density- based fills
+- ghost echo
+
+##### 303
+
+- filter level decay
+- pitch bend
+- slice to note
+- accent
+
+##### 909
+
+- open/closed samples
 
 ### medium
 
-- [303 extensions]
-
 - sample should carry offset info (not single shot sampler)
+
 - sv project player
 
 ### long
@@ -38,6 +57,7 @@
 
 ### done
 
+- refactor nine09 demo to use three03 patterns
 - dev/three03_generator.py [notes]
 - old pop colours
 - add Tidal euclid patterns

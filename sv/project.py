@@ -10,7 +10,7 @@ Volume, PatternHeight = 256, 16
 
 def random_colour(offset = 64,
                   contrast = 128,
-                  n = 16):
+                  n = 32):
     for i in range(n):
         color = [int(offset + random.random() * (255 - offset))
                  for i in range(3)]
