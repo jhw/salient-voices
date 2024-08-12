@@ -1,6 +1,4 @@
-### short [01-new-pool-model]
-
-- add wol vca groove code
+### short
 
 ### medium
 
@@ -19,6 +17,8 @@
 
 ### thoughts
 
+- include groove?
+  - can't remember the how or why of the implemenation unfortunately
 - remove iteration from single slot sampler? 
   - just makes things less clear; don'r want to hardcode zero index
 - project and model pool logic should be moved to pool?
