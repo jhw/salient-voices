@@ -1,6 +1,5 @@
 ### 01-generator-model
 
-- three03 should be initialised with sample
 - randomise volume
 - extend bpm/track size
 - add echo
@@ -61,6 +60,7 @@
 
 ### done
 
+- three03 should be initialised with sample
 - randomise filter level
 - refactor demos/303 to use generator pattern
 - extend bassline function to include state

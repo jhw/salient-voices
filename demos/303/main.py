@@ -26,7 +26,8 @@ if __name__ == "__main__":
         container = Container(banks = [bank],
                               n_ticks = 32)
         three03 = Three03(container = container,
-                          namespace = "303")
+                          namespace = "303",
+                          sample = "mikey303/303 VCO SQR.wav")
         container.add_instrument(three03)
         three03.play(bassline)
         project = container.render_project()

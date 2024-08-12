@@ -5,7 +5,7 @@ class Three03(InstrumentBase):
 
     Modules = load_yaml(__file__, "modules.yaml")
     
-    def __init__(self, container, namespace, sample = "mikey303/303 VCO SQR.wav"):
+    def __init__(self, container, namespace, sample):
         super().__init__(container = container,
                          namespace = namespace)
         self.sample = sample
