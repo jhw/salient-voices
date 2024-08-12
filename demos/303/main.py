@@ -8,11 +8,11 @@ def bassline(self, n,
              root_note = 56):
     offset = -1 
     for i in range(n):
-        if (random.random() < 0.5 and
+        if (random.random() < 0.25 and
             i > offset):
             length = random.choice([1, 1, 1 , 2])
             note = root_note + random.choice([-2, 0, 0, 0, 5, 12])
-            freq_max = random.choice(["3000", "4000", "5000"])
+            freq_max = random.choice(["2000", "3000", "4000", "5000"])
             offset = i + length
             yield self.pluck(note = note,
                              sustain_periods = length,
@@ -24,7 +24,7 @@ if __name__ == "__main__":
         bank = single_shot_bank(bank_name = "mikey303",
                                 file_path = "demos/303/303 VCO SQR.wav")
         container = Container(banks = [bank],
-                              n_ticks = 32)
+                              n_ticks = 64)
         three03 = Three03(container = container,
                           namespace = "303",
                           sample = "mikey303/303 VCO SQR.wav")

@@ -24,5 +24,13 @@
     freq: 0
     resonance: "540" # no idea what the mapping format is here or why it differs from dynamic mapping
   links:
+    - Echo
+- name: Echo
+  class: rv.modules.echo.Echo
+  defaults:
+    wet: 64
+    feedback: 64
+    delay: 192
+  links:
     - Output
   

@@ -1,11 +1,13 @@
-### 01-generator-model
-
-- randomise volume
-- extend bpm/track size
-- add echo
-
 ### short
 
+- initialise bassline with seed
+- pass seed from command line
+- extend bpm/track size
+- randomise volume / add accent
+- rename echo as ghost
+- initialise 303 with ghost levels
+
+- consider multiple seeds
 - container test
 - new demos/909
 
@@ -16,14 +18,12 @@
 - pico play modes
 - VCA grooves
 - density- based fills
-- ghost echo
 
 ##### 303
 
 - filter decay
 - pitch bend
-- slice to note
-- accent
+- slide to note
 
 ##### 909
 
@@ -60,6 +60,7 @@
 
 ### done
 
+- add echo
 - three03 should be initialised with sample
 - randomise filter level
 - refactor demos/303 to use generator pattern
