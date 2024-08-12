@@ -1,7 +1,5 @@
 ### 01-generator-model
 
-- extend bassline function to include state
-
 ### short
 
 - refactor demos/303 to use generator pattern
@@ -67,6 +65,7 @@
 
 ### done
 
+- extend bassline function to include state
 - define simple stateless bassline function in demo
 - demo to execute bassline
 - add instrument play function, attaching trigs
