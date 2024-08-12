@@ -55,6 +55,14 @@ class PoolTest(unittest.TestCase):
         for tag in ["bass", "303"]:
             self.assertTrue(tag in tags)
             self.assertEqual(tags[tag], 1)
+
+    def test_filter_by_tag(self):
+        pool = SVPool()
+        pool.add("mikey303/303 VCO SQR.wav#bass#303")
+        samples = pool.filter_by_tag("bass")
+        self.assertTrue(len(samples), 1)
+        samples = pool.filter_by_tag("kick")
+        self.assertEqual(samples, [])
         
 if __name__ == "__main__":
     unittest.main()

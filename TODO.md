@@ -1,13 +1,11 @@
 ### short [01-new-pool-model]
 
-- test pool.filter_by_tags
+- add Tidal euclid patterns
+- add wol vca groove code
 
 ### medium
 
 - old pop colours
-
-- add Tidal euclid patterns
-- add wol vca groove code
 
 - 303 generator demo
 - refactor tests and demos to use new generator classes
@@ -40,6 +38,7 @@
 
 ### done
 
+- test pool.filter_by_tags
 - test pool.tags
 - always recast sample as SVSample
 - samples should be inserted into pool as SVSample instances
