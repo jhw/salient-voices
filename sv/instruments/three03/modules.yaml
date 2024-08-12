@@ -26,5 +26,10 @@
 - name: Echo
   class: rv.modules.echo.Echo
   links:
+    - Reverb
+- name: Reverb
+  class: rv.modules.reverb.Reverb
+  links:
     - Output
+
   

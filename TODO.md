@@ -1,9 +1,8 @@
 ### short
 
-- reverb
+- randomise volume/accent
 - extend bpm/track size
 - pico play mode
-- randomise volume/accent
 - container test
 - demos/909
 
@@ -52,6 +51,7 @@
 
 ### done
 
+- reverb
 - consider multiple seeds
 - initialise bassline with seed 
 - pass seed from command line

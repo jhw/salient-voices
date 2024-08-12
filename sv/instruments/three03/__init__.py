@@ -9,14 +9,16 @@ class Three03(InstrumentBase):
                  filter_resonance = "540",
                  echo_wet = 64,
                  echo_feedback = 64,
-                 echo_delay = 192):
+                 echo_delay = 192,
+                 reverb_wet = 8):
         super().__init__(container = container,
                          namespace = namespace)
         self.sample = sample
         self.defaults = {"Filter": {"resonance": filter_resonance},
                          "Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
-                                  "delay": echo_delay}}
+                                  "delay": echo_delay},
+                         "Reverb": {"wet": reverb_wet}}
 
     def pluck(self,
               note, i,
