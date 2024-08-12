@@ -87,8 +87,8 @@ class SVBanks(list):
         return pool, untagged
         
     def get_wav_file(self, sample):
-        sample = SVSample(sample)
-        bank_name, file_path = sample.bank_name, sample.file_path
+        bank_name = SVSample(sample).bank_name
+        file_path = SVSample(sample).file_path
         banks = {bank.name: bank for bank in self}
         if bank_name not in banks:
             raise RuntimeError(f"bank {bank_name} not found")
@@ -110,14 +110,14 @@ class SVPool(list):
     def tags(self):
         tags = {}
         for sample in self:
-            for tag in sample.tags:
+            for tag in SVSample(sample).tags:
                 tags.setdefault(tag, 0)
                 tags[tag] += 1
         return tags
         
     def filter_by_tag(self, tag):
         return [sample for sample in self
-                if tag in sample.tags]
+                if tag in SVSample(sample).tags]
             
 class SVBaseSampler(rv.modules.sampler.Sampler):
 

@@ -1,13 +1,12 @@
 ### short [01-new-pool-model]
 
-- samples should be inserted into pool as SVSample instances
-  - remove recasting in banks code
-- add check for type in banks spawn_pool test
 
 - test pool.tags
 - test pool.filter_by_tags
 
 ### medium
+
+- old pop colours
 
 - add Tidal euclid patterns
 - add wol vca groove code
@@ -43,6 +42,10 @@
 
 ### done
 
+- always recast sample as SVSample
+- samples should be inserted into pool as SVSample instances
+  - remove recasting in banks code
+- add check for type in banks spawn_pool test
 - new PoolTest class
 - add back tag related code to pool (look in euclid cli)
 - replace instances of sample.split("/") with casting of class and use of properties
