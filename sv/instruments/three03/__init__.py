@@ -6,7 +6,6 @@ class Three03(InstrumentBase):
     Modules = load_yaml(__file__, "modules.yaml")
     
     def __init__(self, container, namespace, sample,
-                 filter_freq = "5000",
                  filter_resonance = "540",
                  echo_wet = 64,
                  echo_feedback = 64,
@@ -14,8 +13,7 @@ class Three03(InstrumentBase):
         super().__init__(container = container,
                          namespace = namespace)
         self.sample = sample
-        self.defaults = {"Sound2Ctl": {"out_max": filter_freq},
-                         "Filter": {"resonance": filter_resonance},
+        self.defaults = {"Filter": {"resonance": filter_resonance},
                          "Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
                                   "delay": echo_delay}}
@@ -27,8 +25,7 @@ class Three03(InstrumentBase):
               sustain_level = "0800",
               sustain_periods = 1,
               release_ms = "0300",
-              filter_freq = "5000",
-              filter_resonance = "7000"):
+              filter_freq = "5000"):
         return [SVNoteTrig(mod = f"{self.namespace}MultiSynth",
                            sample_mod = f"{self.namespace}Sampler",
                            sample = self.sample,
@@ -48,9 +45,6 @@ class Three03(InstrumentBase):
                          i = i),
                 SVFXTrig(target = f"{self.namespace}Sound2Ctl/out_max",
                          value = filter_freq,
-                         i = i),
-                SVFXTrig(target = f"{self.namespace}Filter/resonance",
-                         value = filter_resonance,
                          i = i),
                 SVNoteOffTrig(mod = f"{self.namespace}MultiSynth",
                               i = i + sustain_periods)]

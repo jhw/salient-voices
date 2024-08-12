@@ -22,11 +22,8 @@ class InstrumentBase:
             mod_name = mod["name"]
             if mod_name in self.defaults:
                 defaults = self.defaults[mod_name]
-                """
                 mod.setdefault("defaults", {})
                 mod["defaults"].update(defaults)
-                """
-                print (mod_name, defaults, mod["defaults"])
             if "links" in mod:
                 for i, link_name in enumerate(mod["links"]):
                     if link_name != "Output":

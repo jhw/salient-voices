@@ -11,7 +11,6 @@
   class: rv.modules.sound2ctl.Sound2Ctl
   defaults:
     out_controller: 2
-    out_max: "5000"
   links:
     - Filter
 - name: Sampler
@@ -22,15 +21,10 @@
   class: rv.modules.filter.Filter
   defaults:
     freq: 0
-    resonance: "540" # no idea what the mapping format is here or why it differs from dynamic mapping
   links:
     - Echo
 - name: Echo
   class: rv.modules.echo.Echo
-  defaults:
-    wet: 64
-    feedback: 64
-    delay: 192
   links:
     - Output
   

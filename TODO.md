@@ -1,12 +1,9 @@
 ### short
 
-- specify module default parameters as instrument constructor params
-
-- initialise bassline with seed
+- initialise bassline with seed 
 - pass seed from command line
 - extend bpm/track size
 - randomise volume / add accent
-- rename echo as ghost
 
 - consider multiple seeds
 - container test
@@ -41,26 +38,24 @@
 
 ### thoughts
 
-- include groove?
-  - can't remember the how or why of the implemenation unfortunately
+- sort colours so they are far apart?
+  - probably not worth it
+- rename echo as ghost?
+  - not worth it; makes things less clear
 - remove iteration from single slot sampler? 
   - just makes things less clear; don'r want to hardcode zero index
-- project and model pool logic should be moved to pool?
- - seemingly makes things harder
 - export test should use wavfile to validate output properties?
   - probably not worth it
 - colour mutation?
   - not worth it
-- algo to increase colour brightness?
-  - not worth as tends to wash out colours
 - tidal syntax?
   - not clear you need it, if it's really a performance thing
 - track labelling?
   - no point now you have colours
-- what's the scaling for filter Resonance default controller value?
 
 ### done
 
+- specify module default parameters as instrument constructor params
 - add echo
 - three03 should be initialised with sample
 - randomise filter level
