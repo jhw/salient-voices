@@ -2,8 +2,6 @@
 
 ### medium
 
-- old pop colours
-
 - 303 generator demo
 - refactor tests and demos to use new generator classes
 
@@ -37,6 +35,7 @@
 
 ### done
 
+- old pop colours
 - add Tidal euclid patterns
 - test pool.filter_by_tags
 - test pool.tags

@@ -6,13 +6,17 @@ import random
 import rv
 import rv.api # why?
 
-"""
-https://stackoverflow.com/questions/32131668/from-where-can-i-get-list-of-all-color-patterns-used-by-google-charts
-"""
-
-Colours = [(51, 102, 204), (220, 57, 18), (255, 153, 0), (16, 150, 24), (153, 0, 153), (0, 153, 198), (221, 68, 119), (102, 170, 0), (184, 46, 46), (49, 99, 149), (153, 68, 153), (34, 170, 153), (170, 170, 17), (102, 51, 204), (230, 115, 0), (139, 7, 7), (101, 16, 103), (50, 146, 98), (85, 116, 166), (59, 62, 172), (183, 115, 34), (22, 214, 32), (185, 19, 131), (244, 53, 158), (156, 89, 53), (169, 196, 19), (42, 119, 141), (102, 141, 28), (190, 164, 19), (12, 89, 34), (116, 52, 17)]
-
 Volume, PatternHeight = 256, 16
+
+def random_colour(offset = 64,
+                  contrast = 128,
+                  n = 16):
+    for i in range(n):
+        color = [int(offset + random.random() * (255 - offset))
+                 for i in range(3)]
+        if (max(color) - min(color)) > contrast:
+            return color
+    raise RuntimeError("couldn't find suitable random colour")
 
 def load_class(path):
     try:
@@ -270,30 +274,20 @@ class SVProject:
                       *args, **kwargs)
         return wrapped
 
-    def init_colours(self, modules, colours = Colours):
-        mod_colours = {}
-        for mod in modules:
-            if colours == {}:
-                raise RuntimeError("colour choices exhausted")
-            colour = random.choice(colours)
-            colours.remove(colour)
-            mod_colours[mod["name"]] = colour
-        return mod_colours
-
     @init_project
     def render_project(self,
                        patches,
                        modules,
                        banks, 
                        bpm,
-                       colours = Colours,
                        wash = False,
                        breaks = False,
                        volume = Volume):
         project = rv.api.Project()
         project.initial_bpm = bpm
         project.global_volume = volume
-        colours = self.init_colours(modules)
+        colours = {mod["name"]: random_colour()
+                   for mod in modules}
         project_modules = self.render_modules(project = project,
                                               patches = patches,
                                               modules = modules,
