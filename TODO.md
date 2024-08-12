@@ -1,6 +1,5 @@
 ### short [01-new-pool-model]
 
-- add Tidal euclid patterns
 - add wol vca groove code
 
 ### medium
@@ -38,6 +37,7 @@
 
 ### done
 
+- add Tidal euclid patterns
 - test pool.filter_by_tags
 - test pool.tags
 - always recast sample as SVSample
