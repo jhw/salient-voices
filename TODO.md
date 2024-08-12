@@ -1,19 +1,16 @@
 ### short
 
-- initialise bassline with seed 
-- pass seed from command line
+- reverb
 - extend bpm/track size
-- randomise volume / add accent
-
-- consider multiple seeds
+- pico play mode
+- randomise volume/accent
 - container test
-- new demos/909
+- demos/909
 
 ### features
 
 ##### 303, 909
 
-- pico play modes
 - VCA grooves
 - density- based fills
 
@@ -55,6 +52,9 @@
 
 ### done
 
+- consider multiple seeds
+- initialise bassline with seed 
+- pass seed from command line
 - specify module default parameters as instrument constructor params
 - add echo
 - three03 should be initialised with sample
