@@ -27,7 +27,7 @@ class Three03(InstrumentBase):
               sustain_level = "0800",
               sustain_periods = 1,
               release_ms = "0300",
-              filter_freq = "5000"):
+              filter_freq = "4000"):
         return [SVNoteTrig(mod = f"{self.namespace}MultiSynth",
                            sample_mod = f"{self.namespace}Sampler",
                            sample = self.sample,

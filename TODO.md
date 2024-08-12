@@ -1,10 +1,10 @@
 ### short
 
-- pass rand into generator
+- pico sequence term and play mode
 
-- randomise volume/accent
+- transpose
 - extend bpm/track size
-- pico play mode
+- randomise volume/accent
 - container test
 - demos/909
 
@@ -20,6 +20,7 @@
 - filter decay
 - pitch bend
 - slide to note
+- distortion
 
 ##### 909
 
@@ -27,7 +28,8 @@
 
 ### medium
 
-- 240bpm
+- investigate chromatic distribution of two notes in a sampler
+
 - sv project player
 
 ### long
@@ -53,6 +55,7 @@
 
 ### done
 
+- pass rand into generator
 - reverb
 - consider multiple seeds
 - initialise bassline with seed 

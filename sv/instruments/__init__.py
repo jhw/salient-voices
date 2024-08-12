@@ -11,8 +11,10 @@ class InstrumentBase:
         self.namespace = namespace
         self.defaults = {}
 
-    def play(self, generator):
-        for trigs in generator(self, n = self.container.n_ticks):
+    def play(self, generator, rand):
+        for trigs in generator(self,
+                               rand = rand,
+                               n = self.container.n_ticks):
             self.container.add_trigs(trigs)
         
     @property
