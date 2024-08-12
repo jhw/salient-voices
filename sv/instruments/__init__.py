@@ -10,8 +10,8 @@ class InstrumentBase:
         self.container = container
         self.namespace = namespace
 
-    def play(self, generator, n):
-        for trigs in generator(self, n):
+    def play(self, generator):
+        for trigs in generator(self, n = self.container.n_ticks):
             self.container.add_trigs(trigs)
         
     @property

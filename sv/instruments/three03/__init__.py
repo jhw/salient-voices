@@ -10,15 +10,15 @@ class Three03(InstrumentBase):
                          namespace = namespace)
         self.sample = sample
 
-    def note(self,
-             note, i,
-             attack_ms = "0010",
-             decay_ms = "0010",
-             sustain_level = "0800",
-             sustain_periods = 1,
-             release_ms = "0300",
-             filter_freq_max = "5000",
-             filter_resonance = "7000"):
+    def pluck(self,
+              note, i,
+              attack_ms = "0010",
+              decay_ms = "0010",
+              sustain_level = "0800",
+              sustain_periods = 1,
+              release_ms = "0300",
+              filter_freq_max = "5000",
+              filter_resonance = "7000"):
         return [SVNoteTrig(mod = f"{self.namespace}MultiSynth",
                            sample_mod = f"{self.namespace}Sampler",
                            sample = self.sample,

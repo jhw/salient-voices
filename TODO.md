@@ -1,7 +1,5 @@
 ### 01-generator-model
 
-- define simple stateless bassline function in demo
-- demo to execute bassline
 - extend bassline function to include state
 
 ### short
@@ -69,6 +67,8 @@
 
 ### done
 
+- define simple stateless bassline function in demo
+- demo to execute bassline
 - add instrument play function, attaching trigs
 - remove trig- attaching decorator
 - remove single slot offset
