@@ -1,11 +1,12 @@
 ### short
 
+- specify module default parameters as instrument constructor params
+
 - initialise bassline with seed
 - pass seed from command line
 - extend bpm/track size
 - randomise volume / add accent
 - rename echo as ghost
-- initialise 303 with ghost levels
 
 - consider multiple seeds
 - container test
