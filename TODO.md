@@ -1,14 +1,22 @@
-### short
+### short [01-sampler-refactor]
 
-- sampler refactoring [notes]
-
+- remove single slot sampler
+- move existing constructor to base constructor, with repitch arg
+- add new slot and chromatic samplers, passing repitch arg to superclass
+- add root_notes property to base sampler
+- slot sampler to override root_notes with slot position
+- chromatic sampler to override root_notes with mid points
+- add notes re chromatic mid point assumptions
+- lookup function to reference root_notes
+- refactor trig code to use note as offset in the presence of chromatic sampler only
+- refactor single_shot_bank to use chromatic sampler
+- rename single_shot_bank
 
 ### medium
 
-- pico sequence [notes]
-
 - investigate root notes for chromatic sampler with two samples
 
+- pico sequence [notes]
 - pico play mode
 - grooves
 - disortion
