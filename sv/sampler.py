@@ -163,7 +163,6 @@ SVSingleSlotSampler uses default sunvox sampler's chromatic implementation and t
 class SVSingleSlotSampler(SVBaseSampler):
 
     def __init__(self, banks, pool,
-                 offset = 0,
                  *args, **kwargs):
         SVBaseSampler.__init__(self, *args, **kwargs)
         if len(pool) > 1:
@@ -174,8 +173,6 @@ class SVSingleSlotSampler(SVBaseSampler):
             self.note_samples[notes[i]] = i
             src = banks.get_wav_file(sample)
             self.load_sample(src, i)
-            sv_sample = self.samples[i]
-            sv_sample.relative_note += offset
 
 """
 SVMultiSlotSampler accepts multiple samples and must then rebase the pitch on all of them so that input pitch is rendered

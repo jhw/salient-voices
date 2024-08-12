@@ -1,8 +1,8 @@
 ### short
 
-- remove single slot offset
-- container test
 - refactor demos/303 to use generator pattern
+
+- container test
 
 - extend demos/303
   - random trig generation
@@ -63,6 +63,7 @@
 
 ### done
 
+- remove single slot offset
 - refactor nine09 demo to use three03 patterns
 - dev/three03_generator.py [notes]
 - old pop colours
