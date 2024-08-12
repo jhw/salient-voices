@@ -6,11 +6,11 @@ class Three03(InstrumentBase):
     Modules = load_yaml(__file__, "modules.yaml")
     
     def __init__(self, container, namespace, sample,
-                 filter_resonance = "540",
+                 filter_resonance = "585", # max 599; no idea re format
                  echo_wet = 64,
                  echo_feedback = 64,
                  echo_delay = 192,
-                 reverb_wet = 8):
+                 reverb_wet = 4):
         super().__init__(container = container,
                          namespace = namespace)
         self.sample = sample

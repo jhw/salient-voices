@@ -12,7 +12,7 @@ def bassline(self, n, rand,
              note_density = 0.33333,
              note_scale = [-2, 0, 0, 0, 5],
              note_lengths = [1, 1, 1, 2],
-             filter_frequencies = ["2000", "3000", "4000"]):
+             filter_frequencies = ["2000", "2800", "3000", "3800"]):
     note_offset = -1 
     for i in range(n):
         if (i == 0 or

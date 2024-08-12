@@ -21,6 +21,7 @@
   class: rv.modules.filter.Filter
   defaults:
     freq: 0
+    roll_off: 3 # no idea but seems to allow resonance to be higher without pinking distortion
   links:
     - Echo
 - name: Echo
