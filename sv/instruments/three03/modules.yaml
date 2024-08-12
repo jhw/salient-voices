@@ -14,7 +14,7 @@
   links:
     - Filter
 - name: Sampler
-  class: sv.sampler.SVSingleSlotSampler
+  class: sv.sampler.SVSlotSampler
   links:
     - Filter
 - name: Filter

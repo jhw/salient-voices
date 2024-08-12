@@ -1,3 +1,5 @@
+from sv.sampler import SVSlotSampler, SVChromaticSampler
+
 import rv
 
 class SVNoteOffTrig:
@@ -43,14 +45,14 @@ class SVNoteTrig:
             raise RuntimeError("module %s not found" % self.sample_mod)
         mod = modules[self.mod]
         sample_mod = modules[self.sample_mod] if self.sample_mod else mod
-        if self.note:
-            if not isinstance(self.note, int):
-                raise RuntimeError(f"note with value {self.note} found; note must be an int")
-            note = self.note
-        elif self.sample:
+        if isinstance(sample_mod, SVSlotSampler):
             note = 1 + sample_mod.lookup(self.sample)
+        elif isinstance(sample_mod, SVChromaticSampler):
+            root_note = 1 + sample_mod.lookup(self.sample)
+            offset = self.note
+            note = root_note + offset
         else:
-            raise RuntimeError("either sample or note must be defined")
+            note = self.note
         mod_id = 1 + mod.index # NB 1+
         note_kwargs = {
             "module": mod_id,

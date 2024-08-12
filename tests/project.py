@@ -24,7 +24,7 @@ GeneratorModules = yaml.safe_load("""
 
 SamplerModules = yaml.safe_load("""
 - name: Sampler
-  class: sv.sampler.SVSingleSlotSampler
+  class: sv.sampler.SVSlotSampler
   links:
   - Echo
 - name: Echo

@@ -1,8 +1,7 @@
 ### short [01-sampler-refactor]
 
-- refactor trig code to use note as offset in the presence of chromatic sampler only
-- refactor single_shot_bank to use chromatic sampler
-- rename single_shot_bank
+- SVNoteTrig.note should be named offset if it's an offset
+- refactor/rename single_shot_bank to take multiple samples
 
 ### medium
 
@@ -58,6 +57,10 @@
 
 ### done
 
+- check use of note in tests (should be offset where sampler concerned)
+- change demo to use offset
+- refactor SingleSampler refs
+- refactor trig code to use note as offset in the presence of chromatic sampler only
 - slot sampler to override root_notes with slot position
 - chromatic sampler to override root_notes with mid points
 - add notes re chromatic mid point assumptions

@@ -8,21 +8,21 @@ import re
 import sys
 
 def bassline(self, n, rand,
-             root_note = 56,
+             root_offset = -4,
              note_density = 0.33333,
              note_scale = [-2, 0, 0, 0, 5],
              note_lengths = [1, 1, 1, 2],
              filter_frequencies = ["2000", "2800", "3000", "3800"]):
-    note_offset = -1 
+    j = -1 
     for i in range(n):
         if (i == 0 or
             (rand.random() < note_density and
-             i > note_offset)):
-            note = root_note + rand.choice(note_scale)
+             i > j)):
+            note_offset = root_offset + rand.choice(note_scale)
             note_length = rand.choice(note_lengths)
-            note_offset = i + note_length
             filter_freq = rand.choice(filter_frequencies)
-            yield self.pluck(note = note,
+            j = i + note_length
+            yield self.pluck(note = note_offset,
                              sustain_periods = note_length,
                              filter_freq = filter_freq,
                              i = i)
