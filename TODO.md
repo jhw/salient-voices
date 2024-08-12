@@ -1,6 +1,5 @@
 ### short
 
-- dev/three03_generator.py [notes]
 - refactor demos and tests to use generator classes [notes]
 - new nine09 generator
 - extend three03 generator
@@ -37,6 +36,7 @@
 
 ### done
 
+- dev/three03_generator.py [notes]
 - old pop colours
 - add Tidal euclid patterns
 - test pool.filter_by_tags
