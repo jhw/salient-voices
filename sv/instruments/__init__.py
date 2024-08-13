@@ -6,6 +6,19 @@ import yaml
 def load_yaml(base_path, file_name):
     return yaml.safe_load(open("/".join(base_path.split("/")[:-1] + [file_name])).read())
 
+class SVNote:
+
+    def __init__(self, trigs = []):
+        self.trigs = trigs
+
+    def render(self, i):
+        trigs = []
+        for trig in self.trigs:
+            cloned_trig = trig.clone()
+            cloned_trig.i += i
+            trigs.append(cloned_trig)
+        return trigs
+        
 class InstrumentBase:
 
     def __init__(self, container, namespace):
