@@ -1,6 +1,5 @@
 ### short
 
-- add individual seeds
 - bank concatenation utility
 - container test
 
@@ -52,6 +51,7 @@
 
 ### done
 
+- add individual seeds
 - test distortion
 - test 240bpm
 - check raw 303 VCO SQR.wav sound vs C5 midpoint

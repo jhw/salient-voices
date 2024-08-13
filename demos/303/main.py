@@ -17,10 +17,10 @@ def bassline(self, n, rand,
     for i in range(n):
         if (0 == i % 2 and
             i > j and 
-            rand.random() < note_density):
-            note_offset = root_offset + rand.choice(note_scale)
-            note_length = rand.choice(note_lengths)
-            filter_freq = rand.choice(filter_frequencies)
+            rand["seq"].random() < note_density):
+            note_offset = root_offset + rand["note"].choice(note_scale)
+            note_length = rand["note"].choice(note_lengths)
+            filter_freq = rand["fx"].choice(filter_frequencies)
             j = i + note_length
             yield self.pluck(note = note_offset,
                              sustain_periods = note_length,
@@ -44,8 +44,11 @@ if __name__ == "__main__":
                           namespace = "303",
                           sample = "mikey303/303 VCO SQR.wav")
         container.add_instrument(three03)
+        rand = Random(seed)
+        seeds = {key: int(rand.random() * 1e8)
+                 for key in "seq|note|fx".split("|")}
         three03.play(generator = bassline,
-                     rand = Random(seed))
+                     seeds = seeds)
         project = container.render_project()
         if not os.path.exists("tmp"):
             os.mkdir("tmp")
