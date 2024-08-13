@@ -23,16 +23,30 @@ class SampleTest(unittest.TestCase):
 
 class BankTest(unittest.TestCase):
         
-    def test_load_save_cycle(self):
+    def test_load_save_zip(self):
         if os.path.exists("tmp/mikey303.zip"):
             os.system("rm tmp/mikey303.zip")
         bank = single_shot_bank(bank_name = "mikey303",
                                 file_path = "tests/303 VCO SQR.wav")
-        bank.dump_to_zip("tmp")
+        bank.dump_zip_file("tmp")
         self.assertTrue(os.path.exists("tmp/mikey303.zip"))
-        bank = SVBank.load_from_zip("tmp/mikey303.zip")
+        bank = SVBank.load_zip_file("tmp/mikey303.zip")
         self.assertTrue(isinstance(bank, SVBank))
-            
+
+    def test_load_files(self):
+        if not os.path.exists("tmp"):
+            os.mkdir("tmp")
+        os.system("rm tmp/*.wav")
+        os.system("cp \"tests/303 VCO SQR.wav\" tmp/")
+        bank = SVBank.load_files(bank_name = "mikey303",
+                                 dir_path = "tmp")
+        self.assertTrue(isinstance(bank, SVBank))
+        self.assertEqual(bank.name, "mikey303")
+        wav_files = bank.zip_file.namelist()
+        self.assertEqual(len(wav_files), 1)
+        self.assertTrue("303 VCO SQR.wav" in wav_files)
+        os.system("rm tmp/*.wav")
+        
 class BanksTest(unittest.TestCase):
 
     def test_spawn_pool(self):

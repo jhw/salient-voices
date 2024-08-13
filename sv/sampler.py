@@ -37,7 +37,24 @@ class SVSample(str):
 class SVBank:
 
     @classmethod
-    def load_from_zip(self, zip_path):
+    def load_files(self, bank_name, dir_path, ext = ".wav"):
+        zip_buffer = io.BytesIO()
+        zip_file = zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False)
+        for file_name in os.listdir(dir_path):
+            if file_name.endswith(ext):
+                file_path = f"{dir_path}/{file_name}"
+                wav_data = None
+                with open(file_path, 'rb') as wav_file:
+                    wav_data = wav_file.read()
+                if not wav_data:
+                    raise RuntimeError(f"couldn't load {file_path}")
+                zip_file.writestr(file_name, wav_data)
+        zip_buffer.seek(0)
+        return SVBank(name = bank_name,
+                      zip_buffer = zip_buffer)
+    
+    @classmethod
+    def load_zip_file(self, zip_path):
         bank_name = zip_path.split("/")[-1].split(".")[0]
         zip_buffer = io.BytesIO()
         with open(zip_path, 'rb') as f:
@@ -54,7 +71,7 @@ class SVBank:
     def zip_file(self): # assume zip_buffer.seek(0) has been called elsewhere
         return zipfile.ZipFile(self.zip_buffer, 'r')
 
-    def dump_to_zip(self, dir_path):
+    def dump_zip_file(self, dir_path):
         if not os.path.exists(dir_path):
             os.mkdir(dir_path)
         zip_path = f"{dir_path}/{self.name}.zip"
