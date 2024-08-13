@@ -1,8 +1,5 @@
 ### short
 
-- replace single shot in tests
-- remove single shot
-
 - rename load_files as load_wav_files
 - rename load|dump_zip as load|dump_zip_file
 
@@ -65,6 +62,8 @@
 
 ### done
 
+- replace single shot in tests
+- remove single shot
 - replace single shot in demos
 - refactor single shot bank as file loading bank utility
 - test slot sampler code with Euclid gist 

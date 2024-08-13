@@ -1,4 +1,3 @@
-from sv.utils.banks import single_shot_bank
 from sv.sampler import SVSample, SVBank, SVBanks, SVPool
 
 import os
@@ -26,8 +25,8 @@ class BankTest(unittest.TestCase):
     def test_load_save_zip(self):
         if os.path.exists("tmp/mikey303.zip"):
             os.system("rm tmp/mikey303.zip")
-        bank = single_shot_bank(bank_name = "mikey303",
-                                file_path = "tests/303 VCO SQR.wav")
+        bank = SVBank.load_files(bank_name = "mikey303",
+                                 dir_path = "tests")
         bank.dump_zip_file("tmp")
         self.assertTrue(os.path.exists("tmp/mikey303.zip"))
         bank = SVBank.load_zip_file("tmp/mikey303.zip")
@@ -50,8 +49,8 @@ class BankTest(unittest.TestCase):
 class BanksTest(unittest.TestCase):
 
     def test_spawn_pool(self):
-        bank = single_shot_bank(bank_name = "mikey303",
-                                file_path = "tests/303 VCO SQR.wav")
+        bank = SVBank.load_files(bank_name = "mikey303",
+                                 dir_path = "tests")
         banks = SVBanks([bank])
         tag_mapping = {"bass": "303"}
         pool, unmapped = banks.spawn_pool(tag_mapping)

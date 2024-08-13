@@ -1,4 +1,3 @@
-from sv.utils.banks import single_shot_bank
 from sv.utils.banks.s3 import init_s3_banks
 from sv.sampler import SVBank
 from moto import mock_s3
@@ -16,8 +15,8 @@ class S3BanksTest(unittest.TestCase):
         self.s3 = boto3.client("s3")
         self.s3.create_bucket(Bucket = bucket_name,
                               CreateBucketConfiguration = {'LocationConstraint': 'EU'})
-        bank = single_shot_bank(bank_name = "mikey303",
-                                file_path = "tests/303 VCO SQR.wav")
+        bank = SVBank.load_files(bank_name = "mikey303",
+                                 dir_path = "tests")
         self.s3.put_object(Bucket = bucket_name,
                            Key = "banks/mikey303.zip",
                            Body = bank.zip_buffer.getvalue(),

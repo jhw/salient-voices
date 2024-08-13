@@ -1,6 +1,6 @@
 from sv.model import SVNoteTrig, SVPatch
 from sv.project import SVProject
-from sv.utils.banks import single_shot_bank
+from sv.sampler import SVBank
 
 import rv
 import unittest
@@ -56,8 +56,8 @@ class RenderTest(unittest.TestCase):
 
     def test_sampler(self, modules = SamplerModules):
         try:
-            bank = single_shot_bank(bank_name = "mikey303",
-                                    file_path = "tests/303 VCO SQR.wav")
+            bank = SVBank.load_files(bank_name = "mikey303",
+                                     dir_path = "tests")
             trig = SVNoteTrig(mod = "Sampler",
                               sample = "mikey303/303 VCO SQR.wav",
                               i = 0)
