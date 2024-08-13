@@ -21,7 +21,6 @@ class Three03(InstrumentBase):
                          "Reverb": {"wet": reverb_wet}}
 
     def pluck(self,
-              i,
               note = 0,
               attack_ms = "0008",
               decay_ms = "0018",
@@ -32,25 +31,19 @@ class Three03(InstrumentBase):
         return [SVNoteTrig(mod = f"{self.namespace}MultiSynth",
                            sample_mod = f"{self.namespace}Sampler",
                            sample = self.sample,
-                           note = note,
-                           i = i),                 
+                           note = note),
                 SVFXTrig(target = f"{self.namespace}ADSR/attack_ms",
-                         value = attack_ms,
-                         i = i),
+                         value = attack_ms),
                 SVFXTrig(target = f"{self.namespace}ADSR/decay_ms",
-                         value = decay_ms,
-                         i = i),
+                         value = decay_ms),
                 SVFXTrig(target = f"{self.namespace}ADSR/sustain_level",
-                         value = sustain_level,
-                         i = i),
+                         value = sustain_level),
                 SVFXTrig(target = f"{self.namespace}ADSR/release_ms",
-                         value = release_ms,
-                         i = i),
+                         value = release_ms),
                 SVFXTrig(target = f"{self.namespace}Sound2Ctl/out_max",
-                         value = filter_freq,
-                         i = i),
+                         value = filter_freq),
                 SVNoteOffTrig(mod = f"{self.namespace}MultiSynth",
-                              i = i + sustain_periods)]
+                              i = sustain_periods)]
     
 if __name__ == "__main__":
     pass

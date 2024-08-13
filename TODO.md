@@ -1,6 +1,5 @@
 ### short [01-sv-note]
 
-- remove i arg being passed to instrument methods 
 - instruments methods to only set trig i if it's non zero, and then as an offset 
 - new sv note class at container or instrument level with trigs field
 - instrument to return sv note class
@@ -59,6 +58,7 @@
 
 ### done
 
+- remove i arg being passed to instrument methods 
 - add trig clone methods 
 - add default i = 0 arg to trigs 
 - container test
