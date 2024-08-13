@@ -1,7 +1,6 @@
 ### short
 
 - turn off export debugging
-- distribute colours
 - container test
 
 ### medium
@@ -50,6 +49,7 @@
 
 ### done
 
+- distribute colours
 - bank concatenation utility
 - add individual seeds
 - test distortion

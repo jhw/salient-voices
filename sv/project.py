@@ -18,6 +18,17 @@ def random_colour(offset = 64,
             return color
     raise RuntimeError("couldn't find suitable random colour")
 
+def order_colours(colours):
+    def rgb_distance(colour1, colour2):
+        return math.sqrt(sum((a - b) ** 2 for a, b in zip(colour1, colour2)))
+    ordered_colours = [colours.pop(0)]    
+    while colours:
+        last_colour = ordered_colours[-1]
+        furthest_colour = max(colours, key=lambda colour: rgb_distance(colour, last_colour))
+        colours.remove(furthest_colour)
+        ordered_colours.append(furthest_colour)    
+    return ordered_colours
+
 def load_class(path):
     try:
         tokens = path.split(".")            
@@ -274,6 +285,11 @@ class SVProject:
                       *args, **kwargs)
         return wrapped
 
+    def init_colours(self, modules):
+        colours = order_colours([random_colour() for mod in modules])        
+        return {mod["name"]: colour
+                for mod, colour in zip(modules, colours)}
+    
     @init_project
     def render_project(self,
                        patches,
@@ -286,8 +302,7 @@ class SVProject:
         project = rv.api.Project()
         project.initial_bpm = bpm
         project.global_volume = volume
-        colours = {mod["name"]: random_colour()
-                   for mod in modules}
+        colours = self.init_colours(modules)
         project_modules = self.render_modules(project = project,
                                               patches = patches,
                                               modules = modules,

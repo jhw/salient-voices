@@ -9,14 +9,13 @@ import sys
 
 def bassline(self, n, rand,
              root_offset = -5,
-             note_density = 0.75,
+             note_density = 0.5,
              note_scale = [-2, 0, 0, 0, 5],
              note_lengths = [2, 2, 2, 2, 3, 4],
              filter_frequencies = ["2800", "3000", "3800", "4000", "4500"]):
     j = -1 
     for i in range(n):
-        if (0 == i % 2 and
-            i > j and 
+        if (i > j and
             rand["seq"].random() < note_density):
             note_offset = root_offset + rand["note"].choice(note_scale)
             note_length = rand["note"].choice(note_lengths)
