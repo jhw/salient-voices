@@ -21,11 +21,11 @@ def bassline(self, n, rand,
             note_offset = root_offset + rand["note"].choice(note_scale)
             note_length = rand["note"].choice(note_lengths)
             filter_freq = rand["fx"].choice(filter_frequencies)
+            note = self.pluck(note = note_offset,
+                              sustain_periods = note_length,
+                              filter_freq = filter_freq)
+            yield note.render(i = i)
             j = i + note_length
-            yield self.pluck(note = note_offset,
-                             sustain_periods = note_length,
-                             filter_freq = filter_freq,
-                             i = i)
                             
 if __name__ == "__main__":
     try:

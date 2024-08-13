@@ -1,9 +1,8 @@
 ### short [01-sv-note]
 
-- generator to call render(i) on note
-
 - trigs should have a base class and a method to increment i
   - to be used by SVNote.render(i)
+
 
 ### medium
 
@@ -54,6 +53,9 @@
 
 ### done
 
+- move position of j increment in demo generator
+- change container demo to call render(i)
+- generator to call render(i) on note
 - instrument to return sv note class
 - add sv note render(i) skeleton 
 - instruments methods to only set trig i if it's non zero, and then as an offset 

@@ -23,7 +23,8 @@ class ContainerTest(unittest.TestCase):
             j = -1 
             for i in range(n):
                 if i > j:
-                    yield self.pluck(i = i)
+                    note = self.pluck()
+                    yield note.render(i = i)
                     j += 1
         three03.play(generator = bassline,
                      seeds = seeds)
