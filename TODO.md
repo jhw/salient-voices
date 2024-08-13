@@ -1,16 +1,16 @@
-### short [01-sampler-refactor]
+### short
 
-
-- check refactored samplers work with 303 demo, particularly offset code 
-- test adding saw wave to the mix
-- does the root note stuff hold up?
 - test slot sampler code with Euclid gist 
 
 ### medium
 
 - refactor single shot bank as file loading bank utility
-- SVNoteTrig.note should be named offset if it's an offset
+- test adding saw wave to the mix
 - investigate root notes for chromatic sampler with two samples
+
+- separate seeds
+
+- SVNoteTrig.note should be named offset if it's an offset
 
 - pico sequence [notes]
 - pico play mode
@@ -63,6 +63,7 @@
 
 ### done
 
+- check refactored samplers work with 303 demo, particularly offset code 
 - rename lookup as index of
 - check use of note in tests (should be offset where sampler concerned)
 - change demo to use offset
