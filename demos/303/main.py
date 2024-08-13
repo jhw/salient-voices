@@ -19,16 +19,13 @@ def random_note(self, rand,
                       sustain_periods = note_length,
                       filter_freq = filter_freq)
     
-def bassline(self, n, rand,
-             note_density = 0.5):
-    j = -1 
+def bassline(self, n, rand):
+    offset = -1 
     for i in range(n):
-        if (i > j and
-            0 == i % 2 and
-            rand["seq"].random() < note_density):
+        if i > offset:
             note = random_note(self, rand)
             yield note.render(i = i)
-            j = i + note.offset
+            offset = i + note.offset
                             
 if __name__ == "__main__":
     try:
