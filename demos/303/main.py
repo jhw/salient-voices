@@ -13,7 +13,7 @@ def bassline(self, n, rand,
              note_scale = [-2, 0, 0, 0],
              note_lengths = [1, 1, 1, 2],
              # filter_frequencies = ["2000", "2800", "3000", "3800"]):
-             filter_frequencies = ["2800", "3000", "3800", "4000"]):
+             filter_frequencies = ["8000"]):
     j = -1 
     for i in range(n):
         if (i == 0 or
@@ -43,7 +43,7 @@ if __name__ == "__main__":
                               n_ticks = 32)
         three03 = Three03(container = container,
                           namespace = "303",
-                          sample = "mikey303/303 VCO SAW.wav")
+                          sample = "mikey303/303 VCO SQR.wav")
         container.add_instrument(three03)
         three03.play(generator = bassline,
                      rand = Random(seed))

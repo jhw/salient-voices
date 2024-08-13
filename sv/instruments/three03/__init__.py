@@ -7,10 +7,10 @@ class Three03(InstrumentBase):
     
     def __init__(self, container, namespace, sample,
                  filter_resonance = "585", # max 599; no idea re format
-                 echo_wet = 64,
-                 echo_feedback = 64,
+                 echo_wet = 16,
+                 echo_feedback = 16,
                  echo_delay = 192,
-                 reverb_wet = 4):
+                 reverb_wet = 2):
         super().__init__(container = container,
                          namespace = namespace)
         self.sample = sample

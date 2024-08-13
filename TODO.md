@@ -1,9 +1,5 @@
 ### short
 
-- check raw 303 VCO SQR.wav sound vs C5 midpoint
-- force pool to have two samples and see if demo still works
-- ask chatgpt what it thinks about sampler sample distribution
-
 - add individual seeds
 - test distortion
 - test 240bpm
@@ -12,6 +8,8 @@
 - container test
 
 ### medium
+
+- chromatic sample distribution [notes]
 
 - pico sequence [notes]
 - pico play mode
@@ -61,6 +59,7 @@
 
 ### done
 
+- check raw 303 VCO SQR.wav sound vs C5 midpoint
 - add saw wave to 303 demo
 - check 303 demo still works
 - rename load_files as load_wav_files
