@@ -1,8 +1,6 @@
 ### short
 
 - add individual seeds
-- test distortion
-
 - bank concatenation utility
 - container test
 
@@ -37,27 +35,24 @@
 
 ### thoughts
 
+- distortion?
+  - dirties the notes unfortunately
 - SVNoteTrig.note should be named offset if it's an offset?
   - is fine
 - sv project player?
   - not sure you need it
 - sort colours so they are far apart?
   - probably not worth it
-- rename echo as ghost?
-  - not worth it; makes things less clear
-- remove iteration from single slot sampler? 
-  - just makes things less clear; don'r want to hardcode zero index
 - export test should use wavfile to validate output properties?
   - probably not worth it
 - colour mutation?
   - not worth it
 - tidal syntax?
   - not clear you need it, if it's really a performance thing
-- track labelling?
-  - no point now you have colours
 
 ### done
 
+- test distortion
 - test 240bpm
 - check raw 303 VCO SQR.wav sound vs C5 midpoint
 - add saw wave to 303 demo
