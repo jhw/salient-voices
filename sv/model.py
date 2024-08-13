@@ -4,7 +4,7 @@ import rv
 
 class SVNoteOffTrig:
 
-    def __init__(self, mod, i):
+    def __init__(self, mod, i = 0):
         self.mod = mod
         self.i = i
 
@@ -12,15 +12,15 @@ class SVNoteOffTrig:
     def key(self):
         return self.mod
     
-    def render(self,
-               *args):
+    def render(self, *args):
         return rv.note.Note(note = rv.note.NOTECMD.NOTE_OFF)
         
 class SVNoteTrig:
 
     Volume = 128
     
-    def __init__(self, mod, i,
+    def __init__(self, mod,
+                 i = 0,
                  sample = None,
                  sample_mod = None,
                  note = None,
@@ -36,9 +36,7 @@ class SVNoteTrig:
     def key(self):
         return self.mod
         
-    def render(self,
-               modules,
-               *args):
+    def render(self, modules, *args):
         if self.mod not in modules:
             raise RuntimeError("module %s not found" % self.mod)
         if self.sample_mod and self.sample_mod not in modules:
@@ -66,7 +64,7 @@ class SVFXTrig:
 
     CtrlMult = 256
 
-    def __init__(self, target, value, i):
+    def __init__(self, target, value, i = 0):
         self.target = target
         self.value = value
         self.i = i
@@ -85,7 +83,8 @@ class SVFXTrig:
         
     def render(self,
                modules,
-               controllers):
+               controllers,
+               *args):
         if (self.mod not in modules or
             self.mod not in controllers):
             raise RuntimeError("module %s not found" % self.mod)

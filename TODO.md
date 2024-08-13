@@ -1,4 +1,15 @@
-### short
+### short [01-sv-note]
+
+- add trig clone methods 
+- remove i arg being passed to instrument methods 
+- instruments methods to only set trig i if it's non zero, and then as an offset 
+- new sv note class at container or instrument level with trigs field
+- instrument to return sv note class
+- add sv note render(i) skeleton 
+- add update i method to trigs 
+- add base trig class
+- generator to call render(i) on note
+- remember to clone notes 
 
 ### medium
 
@@ -49,6 +60,7 @@
 
 ### done
 
+- add default i = 0 arg to trigs 
 - container test
 - distribute colours
 - bank concatenation utility
