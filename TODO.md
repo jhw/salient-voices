@@ -1,16 +1,9 @@
 ### short [01-sv-note]
 
-- trigs should have a base class and a method to increment i
-  - to be used by SVNote.render(i)
-
-
 ### medium
 
-- pico sequences [notes]
-
+- pico sequences / play mode [notes]
 - chromatic sample distribution [notes]
-
-- pico play mode
 - grooves
 - demos/909
 
@@ -53,6 +46,8 @@
 
 ### done
 
+- trigs should have a base class and a method to increment i
+  - to be used by SVNote.render(i)
 - move position of j increment in demo generator
 - change container demo to call render(i)
 - generator to call render(i) on note

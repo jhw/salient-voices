@@ -2,11 +2,19 @@ from sv.sampler import SVSlotSampler, SVChromaticSampler
 
 import rv
 
-class SVNoteOffTrig:
+class SVTrigBase:
+
+    def __init__(self, i):
+        self.i = i
+
+    def increment(self, i):
+        self.i += i
+
+class SVNoteOffTrig(SVTrigBase):
 
     def __init__(self, mod, i = 0):
+        super().__init__(i = i)
         self.mod = mod
-        self.i = i
 
     def clone(self):
         return SVNoteOffTrig(mod = self.mod,
@@ -19,7 +27,7 @@ class SVNoteOffTrig:
     def render(self, *args):
         return rv.note.Note(note = rv.note.NOTECMD.NOTE_OFF)
         
-class SVNoteTrig:
+class SVNoteTrig(SVTrigBase):
 
     Volume = 128
     
@@ -29,8 +37,8 @@ class SVNoteTrig:
                  sample_mod = None,
                  note = None,
                  vel = None):
+        super().__init__(i = i)
         self.mod = mod
-        self.i = i
         self.sample = sample
         self.sample_mod = sample_mod
         self.note = note
@@ -72,14 +80,14 @@ class SVNoteTrig:
             note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
         return rv.note.Note(**note_kwargs)
 
-class SVFXTrig:
+class SVFXTrig(SVTrigBase):
 
     CtrlMult = 256
 
     def __init__(self, target, value, i = 0):
+        super().__init__(i = i)
         self.target = target
         self.value = value
-        self.i = i
 
     def clone(self):
         return SVFXTrig(target = self.target,

@@ -15,7 +15,7 @@ class SVNote:
         trigs = []
         for trig in self.trigs:
             cloned_trig = trig.clone()
-            cloned_trig.i += i
+            cloned_trig.increment(i)
             trigs.append(cloned_trig)
         return trigs
         
