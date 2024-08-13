@@ -9,16 +9,15 @@ import sys
 
 def bassline(self, n, rand,
              root_offset = -5,
-             note_density = 0.33333,
-             note_scale = [-2, 0, 0, 0],
-             note_lengths = [1, 1, 1, 2],
-             # filter_frequencies = ["2000", "2800", "3000", "3800"]):
-             filter_frequencies = ["8000"]):
+             note_density = 0.75,
+             note_scale = [-2, 0, 0, 0, 5],
+             note_lengths = [2, 2, 2, 2, 3, 4],
+             filter_frequencies = ["2800", "3000", "3800", "4000", "4500"]):
     j = -1 
     for i in range(n):
-        if (i == 0 or
-            (rand.random() < note_density and
-             i > j)):
+        if (0 == i % 2 and
+            i > j and 
+            rand.random() < note_density):
             note_offset = root_offset + rand.choice(note_scale)
             note_length = rand.choice(note_lengths)
             filter_freq = rand.choice(filter_frequencies)
@@ -39,7 +38,7 @@ if __name__ == "__main__":
         bank = SVBank.load_wav_files(bank_name = "mikey303",
                                      dir_path = "demos/303")
         container = Container(banks = [bank],
-                              bpm = 120,
+                              bpm = 240,
                               n_ticks = 32)
         three03 = Three03(container = container,
                           namespace = "303",

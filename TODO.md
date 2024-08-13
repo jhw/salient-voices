@@ -2,7 +2,6 @@
 
 - add individual seeds
 - test distortion
-- test 240bpm
 
 - bank concatenation utility
 - container test
@@ -59,6 +58,7 @@
 
 ### done
 
+- test 240bpm
 - check raw 303 VCO SQR.wav sound vs C5 midpoint
 - add saw wave to 303 demo
 - check 303 demo still works
