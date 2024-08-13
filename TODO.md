@@ -1,12 +1,13 @@
-### short [01-sequence]
+### short
 
-- add seq_length parameter
-- pre- generate sequence and index into it
+- fix last period
+- render sequences
+- add breaks
 
 ### medium
 
-- pico sequences / play mode [notes]
 - chromatic sample distribution [notes]
+- play mode
 - grooves
 - demos/909
 
