@@ -8,6 +8,10 @@ class SVNoteOffTrig:
         self.mod = mod
         self.i = i
 
+    def clone(self):
+        return SVNoteOffTrig(mod = self.mod,
+                             i = self.i)
+
     @property
     def key(self):
         return self.mod
@@ -32,6 +36,14 @@ class SVNoteTrig:
         self.note = note
         self.vel = vel        
 
+    def clone(self):
+        return SVNoteTrig(mod = self.mod,
+                          i = self.i,
+                          sample = self.sample,
+                          sample_mod = self.sample_mod,
+                          note = self.note,
+                          vel = self.vel)
+    
     @property
     def key(self):
         return self.mod
@@ -69,6 +81,11 @@ class SVFXTrig:
         self.value = value
         self.i = i
 
+    def clone(self):
+        return SVFXTrig(target = self.target,
+                        value = self.value,
+                        i = self.i)
+    
     @property
     def mod(self):
         return self.target.split("/")[0]
