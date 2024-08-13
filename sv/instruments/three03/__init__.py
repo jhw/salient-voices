@@ -6,7 +6,7 @@ class Three03(InstrumentBase):
     Modules = load_yaml(__file__, "modules.yaml")
     
     def __init__(self, container, namespace, sample,
-                 filter_resonance = "585", # max 599; no idea re format
+                 filter_resonance = "575", # max 599; no idea re format
                  echo_wet = 16,
                  echo_feedback = 16,
                  echo_delay = 192,
@@ -21,7 +21,8 @@ class Three03(InstrumentBase):
                          "Reverb": {"wet": reverb_wet}}
 
     def pluck(self,
-              note, i,
+              i,
+              note = 0,
               attack_ms = "0008",
               decay_ms = "0018",
               sustain_level = "0800",

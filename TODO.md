@@ -1,12 +1,11 @@
 ### short
 
-- container test
-
 ### medium
+
+- pico sequences [notes]
 
 - chromatic sample distribution [notes]
 
-- pico sequences [notes]
 - pico play mode
 - grooves
 - demos/909
@@ -50,6 +49,7 @@
 
 ### done
 
+- container test
 - distribute colours
 - bank concatenation utility
 - add individual seeds

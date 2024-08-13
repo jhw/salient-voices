@@ -12,10 +12,11 @@ def bassline(self, n, rand,
              note_density = 0.5,
              note_scale = [-2, 0, 0, 0, 5],
              note_lengths = [2, 2, 2, 2, 3, 4],
-             filter_frequencies = ["2800", "3000", "3800", "4000", "4500"]):
+             filter_frequencies = ["2800", "3000", "3800", "4000", "4800", "5000"]):
     j = -1 
     for i in range(n):
         if (i > j and
+            0 == i % 2 and 
             rand["seq"].random() < note_density):
             note_offset = root_offset + rand["note"].choice(note_scale)
             note_length = rand["note"].choice(note_lengths)
