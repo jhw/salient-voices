@@ -28,9 +28,9 @@ class BankTest(unittest.TestCase):
             os.system("rm tmp/mikey303.zip")
         bank = single_shot_bank(bank_name = "mikey303",
                                 file_path = "tests/303 VCO SQR.wav")
-        bank.dump_zipfile("tmp")
+        bank.dump_to_zip("tmp")
         self.assertTrue(os.path.exists("tmp/mikey303.zip"))
-        bank = SVBank.load_zipfile("tmp/mikey303.zip")
+        bank = SVBank.load_from_zip("tmp/mikey303.zip")
         self.assertTrue(isinstance(bank, SVBank))
             
 class BanksTest(unittest.TestCase):
