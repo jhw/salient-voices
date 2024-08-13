@@ -36,8 +36,8 @@ if __name__ == "__main__":
         if not re.search("^\\d+$", seed):
             raise RuntimeError("seed must be an integer")
         seed = int(seed)
-        bank = SVBank.load_files(bank_name = "mikey303",
-                                 dir_path = "demos/303")
+        bank = SVBank.load_wav_files(bank_name = "mikey303",
+                                     dir_path = "demos/303")
         container = Container(banks = [bank],
                               bpm = 120,
                               n_ticks = 32)

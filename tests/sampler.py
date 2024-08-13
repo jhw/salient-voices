@@ -25,20 +25,20 @@ class BankTest(unittest.TestCase):
     def test_load_save_zip(self):
         if os.path.exists("tmp/mikey303.zip"):
             os.system("rm tmp/mikey303.zip")
-        bank = SVBank.load_files(bank_name = "mikey303",
-                                 dir_path = "tests")
+        bank = SVBank.load_wav_files(bank_name = "mikey303",
+                                     dir_path = "tests")
         bank.dump_zip_file("tmp")
         self.assertTrue(os.path.exists("tmp/mikey303.zip"))
         bank = SVBank.load_zip_file("tmp/mikey303.zip")
         self.assertTrue(isinstance(bank, SVBank))
 
-    def test_load_files(self):
+    def test_load_wav_files(self):
         if not os.path.exists("tmp"):
             os.mkdir("tmp")
         os.system("rm tmp/*.wav")
         os.system("cp \"tests/303 VCO SQR.wav\" tmp/")
-        bank = SVBank.load_files(bank_name = "mikey303",
-                                 dir_path = "tmp")
+        bank = SVBank.load_wav_files(bank_name = "mikey303",
+                                     dir_path = "tmp")
         self.assertTrue(isinstance(bank, SVBank))
         self.assertEqual(bank.name, "mikey303")
         wav_files = bank.zip_file.namelist()
@@ -49,8 +49,8 @@ class BankTest(unittest.TestCase):
 class BanksTest(unittest.TestCase):
 
     def test_spawn_pool(self):
-        bank = SVBank.load_files(bank_name = "mikey303",
-                                 dir_path = "tests")
+        bank = SVBank.load_wav_files(bank_name = "mikey303",
+                                     dir_path = "tests")
         banks = SVBanks([bank])
         tag_mapping = {"bass": "303"}
         pool, unmapped = banks.spawn_pool(tag_mapping)

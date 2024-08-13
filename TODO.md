@@ -1,8 +1,5 @@
 ### short
 
-- rename load_files as load_wav_files
-- rename load|dump_zip as load|dump_zip_file
-
 - add saw wave to 303 demo
 - check 303 demo still works
 
@@ -62,6 +59,8 @@
 
 ### done
 
+- rename load_files as load_wav_files
+- rename load|dump_zip as load|dump_zip_file
 - replace single shot in tests
 - remove single shot
 - replace single shot in demos

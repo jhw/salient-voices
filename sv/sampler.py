@@ -37,7 +37,7 @@ class SVSample(str):
 class SVBank:
 
     @classmethod
-    def load_files(self, bank_name, dir_path, ext = ".wav"):
+    def load_wav_files(self, bank_name, dir_path, ext = ".wav"):
         zip_buffer = io.BytesIO()
         zip_file = zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False)
         for file_name in os.listdir(dir_path):

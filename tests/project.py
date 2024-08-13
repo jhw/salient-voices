@@ -56,8 +56,8 @@ class RenderTest(unittest.TestCase):
 
     def test_sampler(self, modules = SamplerModules):
         try:
-            bank = SVBank.load_files(bank_name = "mikey303",
-                                     dir_path = "tests")
+            bank = SVBank.load_wav_files(bank_name = "mikey303",
+                                         dir_path = "tests")
             trig = SVNoteTrig(mod = "Sampler",
                               sample = "mikey303/303 VCO SQR.wav",
                               i = 0)
