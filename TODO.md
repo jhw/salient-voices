@@ -1,13 +1,12 @@
 ### short
 
-- turn off export debugging
 - container test
 
 ### medium
 
 - chromatic sample distribution [notes]
 
-- pico sequence [notes]
+- pico sequences [notes]
 - pico play mode
 - grooves
 - demos/909
@@ -34,6 +33,8 @@
 
 ### thoughts
 
+- turn off export debugging?
+  - not possible it seems
 - distortion?
   - dirties the notes unfortunately
 - SVNoteTrig.note should be named offset if it's an offset?
