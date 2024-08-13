@@ -31,8 +31,10 @@ class S3BanksTest(unittest.TestCase):
             self.assertTrue(isinstance(bank, SVBank))
             self.assertEqual(bank.name, "mikey303")
             wav_files = bank.zip_file.namelist()
-            self.assertTrue(len(wav_files) == 1)
-            self.assertTrue("303 VCO SQR.wav" in wav_files)
+            self.assertTrue(len(wav_files) == 2)
+            for wav_file in ["303 VCO SQR.wav",
+                             "303 VCO SAW.wav"]:                          
+                self.assertTrue(wav_file in wav_files)
         except RuntimeError as error:
             self.fail(str(error))
 

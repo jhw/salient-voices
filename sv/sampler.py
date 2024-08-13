@@ -37,11 +37,12 @@ class SVSample(str):
 class SVBank:
 
     @classmethod
-    def load_wav_files(self, bank_name, dir_path, ext = ".wav"):
+    def load_wav_files(self, bank_name, dir_path,
+                       filter_fn = lambda x: x.endswith(".wav")):
         zip_buffer = io.BytesIO()
         zip_file = zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False)
         for file_name in os.listdir(dir_path):
-            if file_name.endswith(ext):
+            if filter_fn(file_name):
                 file_path = f"{dir_path}/{file_name}"
                 wav_data = None
                 with open(file_path, 'rb') as wav_file:
@@ -68,8 +69,19 @@ class SVBank:
         self.zip_buffer = zip_buffer
 
     @property
-    def zip_file(self): # assume zip_buffer.seek(0) has been called elsewhere
+    def zip_file(self):
         return zipfile.ZipFile(self.zip_buffer, 'r')
+
+    def join(self, bank):
+        bank_zip_file = bank.zip_file
+        zip_buffer_temp = io.BytesIO(self.zip_buffer.getvalue())
+        with zipfile.ZipFile(zip_buffer_temp, 'a', zipfile.ZIP_DEFLATED) as zip_file:
+            for item in bank_zip_file.infolist():
+                wav_data = bank_zip_file.read(item.filename)
+                zip_file.writestr(item.filename, wav_data)
+        self.zip_buffer = zip_buffer_temp
+        self.zip_buffer.seek(0)
+        return self
 
     def dump_zip_file(self, dir_path):
         if not os.path.exists(dir_path):

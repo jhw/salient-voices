@@ -1,6 +1,6 @@
 ### short
 
-- bank concatenation utility
+- turn off export debugging
 - container test
 
 ### medium
@@ -51,6 +51,7 @@
 
 ### done
 
+- bank concatenation utility
 - add individual seeds
 - test distortion
 - test 240bpm
