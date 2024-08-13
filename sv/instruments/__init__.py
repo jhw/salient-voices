@@ -11,6 +11,10 @@ class SVNote:
     def __init__(self, trigs = []):
         self.trigs = trigs
 
+    @property
+    def offset(self):
+         return max([trig.i for trig in self.trigs])
+        
     def render(self, i):
         trigs = []
         for trig in self.trigs:

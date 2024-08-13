@@ -1,4 +1,7 @@
-### short [01-sv-note]
+### short [01-sequence]
+
+- add seq_length parameter
+- pre- generate sequence and index into it
 
 ### medium
 
@@ -46,6 +49,7 @@
 
 ### done
 
+- abstract note generation
 - trigs should have a base class and a method to increment i
   - to be used by SVNote.render(i)
 - move position of j increment in demo generator

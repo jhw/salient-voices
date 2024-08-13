@@ -7,25 +7,28 @@ import os
 import re
 import sys
 
+def random_note(self, rand,
+                root_offset = -5,
+                note_scale = [-2, 0, 0, 0, 5],
+                note_lengths = [2, 2, 2, 2, 3, 4],
+                filter_frequencies = ["2800", "3000", "3800", "4000", "4800", "5000"]):
+    note_offset = root_offset + rand["note"].choice(note_scale)
+    note_length = rand["note"].choice(note_lengths)
+    filter_freq = rand["fx"].choice(filter_frequencies)
+    return self.pluck(note = note_offset,
+                      sustain_periods = note_length,
+                      filter_freq = filter_freq)
+    
 def bassline(self, n, rand,
-             root_offset = -5,
-             note_density = 0.5,
-             note_scale = [-2, 0, 0, 0, 5],
-             note_lengths = [2, 2, 2, 2, 3, 4],
-             filter_frequencies = ["2800", "3000", "3800", "4000", "4800", "5000"]):
+             note_density = 0.5):
     j = -1 
     for i in range(n):
         if (i > j and
-            0 == i % 2 and 
+            0 == i % 2 and
             rand["seq"].random() < note_density):
-            note_offset = root_offset + rand["note"].choice(note_scale)
-            note_length = rand["note"].choice(note_lengths)
-            filter_freq = rand["fx"].choice(filter_frequencies)
-            note = self.pluck(note = note_offset,
-                              sustain_periods = note_length,
-                              filter_freq = filter_freq)
+            note = random_note(self, rand)
             yield note.render(i = i)
-            j = i + note_length
+            j = i + note.offset
                             
 if __name__ == "__main__":
     try:
