@@ -1,6 +1,7 @@
 ### short
 
 - turn off export debugging
+- distribute colours
 - container test
 
 ### medium
@@ -40,8 +41,6 @@
   - is fine
 - sv project player?
   - not sure you need it
-- sort colours so they are far apart?
-  - probably not worth it
 - export test should use wavfile to validate output properties?
   - probably not worth it
 - colour mutation?
