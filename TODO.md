@@ -1,17 +1,15 @@
 ### short
 
-- test slot sampler code with Euclid gist 
+- replace single shot in demos
+- replace single shot in tests
+- remove single shot
+
+- add saw wave to 303 demo
+- check 303 demo still works
 
 ### medium
 
-- refactor single shot bank as file loading bank utility
-- test adding saw wave to the mix
-- investigate root notes for chromatic sampler with two samples
-
 - separate seeds
-
-- SVNoteTrig.note should be named offset if it's an offset
-
 - pico sequence [notes]
 - pico play mode
 - grooves
@@ -44,6 +42,8 @@
 
 ### thoughts
 
+- SVNoteTrig.note should be named offset if it's an offset?
+  - is fine
 - sv project player?
   - not sure you need it
 - sort colours so they are far apart?
@@ -63,6 +63,8 @@
 
 ### done
 
+- refactor single shot bank as file loading bank utility
+- test slot sampler code with Euclid gist 
 - check refactored samplers work with 303 demo, particularly offset code 
 - rename lookup as index of
 - check use of note in tests (should be offset where sampler concerned)
