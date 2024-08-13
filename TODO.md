@@ -1,37 +1,38 @@
 ### short
 
-- check with chatgpt what happens if you have two samples
-  - where are the mid points?
-  - how is this consistent with slot sampler?
+- check raw 303 VCO SQR.wav sound vs C5 midpoint
+- force pool to have two samples and see if demo still works
+- ask chatgpt what it thinks about sampler sample distribution
+
+- add individual seeds
+- test distortion
+- test 240bpm
+
+- bank concatenation utility
+- container test
 
 ### medium
 
-- separate seeds
 - pico sequence [notes]
 - pico play mode
 - grooves
-- disortion
-- utils to concatenate banks
-- extend bpm/track size
-- container test
 - demos/909
 
 ### features
 
 ##### 303, 909
 
-- density- based fills
+- fills [notes]
 
 ##### 303
 
 - filter decay
 - pitch bend
 - slide to note
-- transpose
 
 ##### 909
 
-- open/closed samples
+- off- beat samples
 
 ### long
 
