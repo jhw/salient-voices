@@ -1,6 +1,6 @@
 ### short [01-sampler-refactor]
 
-- refactor single shot bank as file loading bank utility
+
 - check refactored samplers work with 303 demo, particularly offset code 
 - test adding saw wave to the mix
 - does the root note stuff hold up?
@@ -8,6 +8,7 @@
 
 ### medium
 
+- refactor single shot bank as file loading bank utility
 - SVNoteTrig.note should be named offset if it's an offset
 - investigate root notes for chromatic sampler with two samples
 
