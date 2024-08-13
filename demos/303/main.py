@@ -1,6 +1,6 @@
 from sv.container import Container
 from sv.instruments.three03 import Three03
-from sv.utils.banks import single_shot_bank
+from sv.utils.banks import SVBank
 from random import Random
 
 import os
@@ -36,8 +36,8 @@ if __name__ == "__main__":
         if not re.search("^\\d+$", seed):
             raise RuntimeError("seed must be an integer")
         seed = int(seed)
-        bank = single_shot_bank(bank_name = "mikey303",
-                                file_path = "demos/303/303 VCO SQR.wav")
+        bank = SVBank.load_files(bank_name = "mikey303",
+                                 dir_path = "demos/303")
         container = Container(banks = [bank],
                               bpm = 120,
                               n_ticks = 32)

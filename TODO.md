@@ -1,8 +1,10 @@
 ### short
 
-- replace single shot in demos
 - replace single shot in tests
 - remove single shot
+
+- rename load_files as load_wav_files
+- rename load|dump_zip as load|dump_zip_file
 
 - add saw wave to 303 demo
 - check 303 demo still works
@@ -63,6 +65,7 @@
 
 ### done
 
+- replace single shot in demos
 - refactor single shot bank as file loading bank utility
 - test slot sampler code with Euclid gist 
 - check refactored samplers work with 303 demo, particularly offset code 
