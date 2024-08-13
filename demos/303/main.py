@@ -1,6 +1,6 @@
 from sv.container import Container
 from sv.instruments.three03 import Three03
-from sv.utils.banks import SVBank
+from sv.sampler import SVBank
 from random import Random
 
 import os
@@ -8,9 +8,9 @@ import re
 import sys
 
 def bassline(self, n, rand,
-             root_offset = -4,
+             root_offset = -5,
              note_density = 0.33333,
-             note_scale = [-2, 0, 0, 0, 5],
+             note_scale = [-2, 0, 0, 0],
              note_lengths = [1, 1, 1, 2],
              # filter_frequencies = ["2000", "2800", "3000", "3800"]):
              filter_frequencies = ["2800", "3000", "3800", "4000"]):
@@ -43,7 +43,7 @@ if __name__ == "__main__":
                               n_ticks = 32)
         three03 = Three03(container = container,
                           namespace = "303",
-                          sample = "mikey303/303 VCO SQR.wav")
+                          sample = "mikey303/303 VCO SAW.wav")
         container.add_instrument(three03)
         three03.play(generator = bassline,
                      rand = Random(seed))

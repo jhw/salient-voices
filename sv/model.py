@@ -48,7 +48,7 @@ class SVNoteTrig:
         if isinstance(sample_mod, SVSlotSampler):
             note = 1 + sample_mod.index_of(self.sample)
         elif isinstance(sample_mod, SVChromaticSampler):
-            root_note = sample_mod.index_of(self.sample)
+            root_note = 1 + sample_mod.index_of(self.sample)
             offset = self.note
             note = root_note + offset
         else:

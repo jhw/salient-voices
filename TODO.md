@@ -1,7 +1,8 @@
 ### short
 
-- add saw wave to 303 demo
-- check 303 demo still works
+- check with chatgpt what happens if you have two samples
+  - where are the mid points?
+  - how is this consistent with slot sampler?
 
 ### medium
 
@@ -59,6 +60,8 @@
 
 ### done
 
+- add saw wave to 303 demo
+- check 303 demo still works
 - rename load_files as load_wav_files
 - rename load|dump_zip as load|dump_zip_file
 - replace single shot in tests
