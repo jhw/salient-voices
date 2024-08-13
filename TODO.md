@@ -1,11 +1,14 @@
 ### short [01-sampler-refactor]
 
-- SVNoteTrig.note should be named offset if it's an offset
-- refactor/rename single_shot_bank to take multiple samples
-  - should become a file based loader
+- refactor single shot bank as file loading bank utility
+- check refactored samplers work with 303 demo, particularly offset code 
+- test adding saw wave to the mix
+- does the root note stuff hold up?
+- test slot sampler code with Euclid gist 
 
 ### medium
 
+- SVNoteTrig.note should be named offset if it's an offset
 - investigate root notes for chromatic sampler with two samples
 
 - pico sequence [notes]
@@ -59,6 +62,7 @@
 
 ### done
 
+- rename lookup as index of
 - check use of note in tests (should be offset where sampler concerned)
 - change demo to use offset
 - refactor SingleSampler refs

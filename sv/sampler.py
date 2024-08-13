@@ -170,7 +170,7 @@ class SVBaseSampler(rv.modules.sampler.Sampler):
     def root_notes(self):
         return {}
             
-    def lookup(self, sample):
+    def index_of(self, sample):
         return self.root_notes[sample]
 
 class SVSlotSampler(SVBaseSampler):
