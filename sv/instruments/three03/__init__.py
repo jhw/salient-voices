@@ -1,4 +1,4 @@
-from sv.instruments import InstrumentBase, load_yaml
+from sv.instruments import InstrumentBase, SVNote, load_yaml
 from sv.model import SVNoteTrig, SVNoteOffTrig, SVFXTrig
 
 class Three03(InstrumentBase):
@@ -28,22 +28,23 @@ class Three03(InstrumentBase):
               sustain_periods = 1,
               release_ms = "0300",
               filter_freq = "4000"):
-        return [SVNoteTrig(mod = f"{self.namespace}MultiSynth",
-                           sample_mod = f"{self.namespace}Sampler",
-                           sample = self.sample,
-                           note = note),
-                SVFXTrig(target = f"{self.namespace}ADSR/attack_ms",
-                         value = attack_ms),
-                SVFXTrig(target = f"{self.namespace}ADSR/decay_ms",
-                         value = decay_ms),
-                SVFXTrig(target = f"{self.namespace}ADSR/sustain_level",
-                         value = sustain_level),
-                SVFXTrig(target = f"{self.namespace}ADSR/release_ms",
-                         value = release_ms),
-                SVFXTrig(target = f"{self.namespace}Sound2Ctl/out_max",
-                         value = filter_freq),
-                SVNoteOffTrig(mod = f"{self.namespace}MultiSynth",
-                              i = sustain_periods)]
+        trigs = [SVNoteTrig(mod = f"{self.namespace}MultiSynth",
+                            sample_mod = f"{self.namespace}Sampler",
+                            sample = self.sample,
+                            note = note),
+                 SVFXTrig(target = f"{self.namespace}ADSR/attack_ms",
+                          value = attack_ms),
+                 SVFXTrig(target = f"{self.namespace}ADSR/decay_ms",
+                          value = decay_ms),
+                 SVFXTrig(target = f"{self.namespace}ADSR/sustain_level",
+                          value = sustain_level),
+                 SVFXTrig(target = f"{self.namespace}ADSR/release_ms",
+                          value = release_ms),
+                 SVFXTrig(target = f"{self.namespace}Sound2Ctl/out_max",
+                          value = filter_freq),
+                 SVNoteOffTrig(mod = f"{self.namespace}MultiSynth",
+                               i = sustain_periods)]
+        return SVNote(trigs = trigs)
     
 if __name__ == "__main__":
     pass

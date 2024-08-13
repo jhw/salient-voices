@@ -1,11 +1,6 @@
 ### short [01-sv-note]
 
-- instrument to return sv note class
-- add sv note render(i) skeleton 
-- add update i method to trigs 
-- add base trig class
 - generator to call render(i) on note
-- remember to clone notes 
 
 - trigs should have a base class and a method to increment i
   - to be used by SVNote.render(i)
@@ -59,6 +54,8 @@
 
 ### done
 
+- instrument to return sv note class
+- add sv note render(i) skeleton 
 - instruments methods to only set trig i if it's non zero, and then as an offset 
 - remove i arg being passed to instrument methods 
 - add trig clone methods 
