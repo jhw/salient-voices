@@ -9,24 +9,46 @@ import sys
 
 def random_note(self, rand,
                 root_offset = -5,
-                note_scale = [-2, 0, 0, 3],
-                note_lengths = [2, 3, 4, 5],
-                filter_frequencies = ["2800", "3000", "3800", "4000", "4800", "5000"]):
+                note_scale = [-2, 0, 0, 0, 3, 12],
+                note_lengths = [2, 3, 4, 5, 6, 7],
+                filter_frequencies = ["3000", "4000", "5000", "6000"]):
     note_offset = root_offset + rand["note"].choice(note_scale)
     note_length = rand["note"].choice(note_lengths)
     filter_freq = rand["fx"].choice(filter_frequencies)
     return self.pluck(note = note_offset,
                       sustain_periods = note_length,
                       filter_freq = filter_freq)
-    
-def bassline(self, n, rand, note_density = 0.25):
-    offset = -1 
-    for i in range(n):
-        if (i > offset and
+
+def random_sequence(self,
+                    rand,
+                    seq_length,
+                    seq_quantise,
+                    note_density):
+    seq = [None for i in range(seq_length)]
+    j = -1
+    for i in range(seq_length):
+        if (i > j and
+            0 == i % seq_quantise and
             rand["seq"].random() < note_density):
-            note = random_note(self, rand)
+            seq[i] = random_note(self, rand)
+            j = i + seq[i].offset
+    return seq
+
+    
+def bassline(self, n, rand,
+             seq_length = 64,
+             seq_quantise = 4,
+             note_density = 0.5):
+    seq = random_sequence(self,
+                          rand,
+                          seq_length = seq_length,
+                          seq_quantise = seq_quantise,
+                          note_density = note_density)
+    for i in range(n):
+        j = i % seq_length
+        note = seq[j]
+        if note:
             yield note.render(i = i)
-            offset = i + note.offset
                             
 if __name__ == "__main__":
     try:
