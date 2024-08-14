@@ -1,14 +1,13 @@
 ### short
 
-- push all parameterisation down to bassline args level
-- seq trim and reverse
-- some sort of quantisation
-- separate seq length and play length
-- play modes
+- pre- generate sequence
 
 ### medium
 
 - chromatic sample distribution [notes]
+
+- quantisation
+- push all parameterisation down to bassline args level
 - bends and slides
 - grooves
 - demos/909
@@ -19,6 +18,8 @@
 
 ### thoughts
 
+- play modes?
+  - seems hard to implement and less value than slides
 - turn off export debugging?
   - not possible it seems
 - distortion?
