@@ -9,8 +9,8 @@ import sys
 
 def random_note(self, rand,
                 root_offset = -5,
-                note_scale = [-2, 0, 0, 0, 5],
-                note_lengths = [2, 2, 2, 2, 3, 4],
+                note_scale = [-2, 0, 3],
+                note_lengths = [2, 3, 4],
                 filter_frequencies = ["2800", "3000", "3800", "4000", "4800", "5000"]):
     note_offset = root_offset + rand["note"].choice(note_scale)
     note_length = rand["note"].choice(note_lengths)
@@ -18,14 +18,36 @@ def random_note(self, rand,
     return self.pluck(note = note_offset,
                       sustain_periods = note_length,
                       filter_freq = filter_freq)
+
+def random_sequence(self,
+                    rand,
+                    seq_length,
+                    note_density):
+    seq = [None for i in range(seq_length)]
+    j = -1
+    for i in range(seq_length):
+        if (i > j and
+            rand["seq"].random() < note_density):
+            seq[i] = random_note(self, rand)
+            j = i + seq[i].offset
+    return seq
     
-def bassline(self, n, rand):
-    offset = -1 
+def bassline(self, n, rand,
+             seq_length = 32,
+             note_density = 0.2):
+    seq = random_sequence(self,
+                          rand,
+                          seq_length = seq_length,
+                          note_density = note_density)
+    # START TEMP CODE
+    for i in range(3):
+        seq[seq_length - (i + 1)] = None
+    # END TEMP CODE
     for i in range(n):
-        if i > offset:
-            note = random_note(self, rand)
+        j = i % seq_length
+        note = seq[j]
+        if note:
             yield note.render(i = i)
-            offset = i + note.offset
                             
 if __name__ == "__main__":
     try:
@@ -39,7 +61,7 @@ if __name__ == "__main__":
                                      dir_path = "demos/303")
         container = Container(banks = [bank],
                               bpm = 240,
-                              n_ticks = 32)
+                              n_ticks = 128)
         three03 = Three03(container = container,
                           namespace = "303",
                           sample = "mikey303/303 VCO SQR.wav")

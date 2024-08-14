@@ -1,31 +1,17 @@
 ### short
 
-- fix last period
-- render sequences
-- add breaks
+- push all parameterisation down to bassline args level
+- seq trim and reverse
+- some sort of quantisation
+- separate seq length and play length
+- play modes
 
 ### medium
 
 - chromatic sample distribution [notes]
-- play mode
+- bends and slides
 - grooves
 - demos/909
-
-### features
-
-##### 303, 909
-
-- fills [notes]
-
-##### 303
-
-- filter decay
-- pitch bend
-- slide to note
-
-##### 909
-
-- off- beat samples
 
 ### long
 
@@ -50,6 +36,9 @@
 
 ### done
 
+- fix last period
+- render sequences
+- add breaks
 - abstract note generation
 - trigs should have a base class and a method to increment i
   - to be used by SVNote.render(i)
