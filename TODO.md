@@ -1,6 +1,8 @@
 ### short
 
-- remove sequence
+- replace note.offset with note.block_size
+- remove note_off
+  - does new note re- trigger env?
 
 ### medium
 
@@ -37,6 +39,7 @@
 
 ### done
 
+- remove sequence
 - remove quantitation
 - remove density
 - fix last period
