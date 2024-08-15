@@ -1,21 +1,15 @@
-### short [01-note-off-and-slide-to]
+### short 
 
-- effect has to be part of note trig
-- controller has to be set at zero
-- effect value is not rendering
-- don't slide if note is unchanged
-- abstract value parsing code in model
+- FX trigs (notes)
 
 ### medium
 
-- pitch bend down
+- slide to
+- pitch bends
 - filter decay
-
 - chromatic sample distribution [notes]
-
+- abstract value parsing code in model
 - quantisation
-- push all parameterisation down to bassline args level
-- bends and slides
 - grooves
 - demos/909
 

@@ -1,3 +1,17 @@
+### built- in FX 15/08/24
+
+- built in fx are always part of the note column
+- slide to must be adjacent to note
+- bend is under note
+- in many ways they are like mod trigs where you can have multiple in a vector underneath the original
+
+---
+
+- note needs to contain effect and value
+- note need not have a module or a note, it can just sit underneath an existing note
+- so its a question of the key structure here
+- because it has to be rendered in the same column, as they are bound to notes
+
 ### chromatic sample distributon 13/08/24
 
 - the chromatic sampler mid points are not working

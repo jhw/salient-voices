@@ -8,24 +8,22 @@ import re
 import sys
 
 def bassline(self, n, rand,
-             block_sizes = [2, 3, 4, 5, 6, 7, 8],
+             block_sizes = [2, 3, 4, 5, 6],
              root_offset = -5,
              note_scale = [-2, 0, 0, 0, 3, 12],
-             filter_frequencies = ["3000", "4000", "5000", "6000"],
-             off_density = 0.5):
-    j, sustain_term = 0, 1 # sustain term at 1 to avoid initial slide
+             filter_frequencies = ["2000", "3000", "4000", "5000", "6000"],
+             off_density = 1.0):
+    j = 0
     for i in range(n):
         if i >= j:
             block_size = rand["seq"].choice(block_sizes)
             note_offset = root_offset + rand["note"].choice(note_scale)
             filter_freq = rand["fx"].choice(filter_frequencies)
-            slide_to = sustain_term == None # defined before sustain_term is updated
             if rand["seq"].random() < off_density:
                 sustain_term = 1 + rand["note"].choice(range(block_size - 1))
             else:
                 sustain_term = None
             note = self.pluck(note = note_offset,
-                              slide_to = slide_to, 
                               sustain_term = sustain_term, 
                               filter_freq = filter_freq)
             yield note.render(i = i)
