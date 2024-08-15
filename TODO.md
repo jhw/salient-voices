@@ -1,7 +1,5 @@
 ### short
 
-- remove quantitation
-- remove density
 - remove sequence
 
 ### medium
@@ -39,6 +37,8 @@
 
 ### done
 
+- remove quantitation
+- remove density
 - fix last period
 - render sequences
 - add breaks

@@ -21,25 +21,20 @@ def random_note(self, rand,
 
 def random_sequence(self,
                     rand,
-                    seq_length,
-                    note_density):
+                    seq_length):
     seq = [None for i in range(seq_length)]
     j = -1
     for i in range(seq_length):
-        if (i > j and
-            rand["seq"].random() < note_density):
+        if i > j:
             seq[i] = random_note(self, rand)
             j = i + seq[i].offset
     return seq
 
-    
 def bassline(self, n, rand,
-             seq_length = 64,
-             note_density = 0.5):
+             seq_length = 64):
     seq = random_sequence(self,
                           rand,
-                          seq_length = seq_length,
-                          note_density = note_density)
+                          seq_length = seq_length)
     for i in range(n):
         j = i % seq_length
         note = seq[j]
