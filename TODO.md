@@ -1,6 +1,8 @@
 ### short
 
-- pre- generate sequence
+- remove quantitation
+- remove density
+- remove sequence
 
 ### medium
 
