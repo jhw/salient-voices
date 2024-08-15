@@ -13,7 +13,7 @@ def bassline(self, n, rand,
              note_scale = [-2, 0, 0, 0, 3, 12],
              filter_frequencies = ["3000", "4000", "5000", "6000"],
              off_density = 0.5):
-    j = 0 
+    j, sustain_term = 0, None
     for i in range(n):
         if i >= j:
             block_size = rand["seq"].choice(block_sizes)
@@ -22,6 +22,7 @@ def bassline(self, n, rand,
             if rand["seq"].random() < off_density:
                 sustain_term = 1 + rand["note"].choice(range(block_size - 1))
             note = self.pluck(note = note_offset,
+                              sustain_term = sustain_term, 
                               filter_freq = filter_freq)
             yield note.render(i = i)
             j = i + block_size

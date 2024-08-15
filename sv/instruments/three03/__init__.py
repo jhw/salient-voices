@@ -27,6 +27,7 @@ class Three03(InstrumentBase):
               attack_ms = "0008",
               decay_ms = "0018",
               sustain_level = "0800",
+              sustain_term = None,
               release_ms = "0300",
               filter_freq = "4000"):
         trigs = [SVNoteTrig(mod = f"{self.namespace}MultiSynth",

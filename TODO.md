@@ -1,8 +1,6 @@
 ### short [01-note-off-and-slide-to]
 
-- add instrument default sustain_term of None
 - if sustain_term, add sustain_term
-- pass sustain_term from bassline to instrument
 - add sustained boolean, default ?False?
 - update sustained_boolean according to whether (not) sustain_term defined
 - pass slide_to from instrument, using value of sustained
@@ -47,6 +45,8 @@
 
 ### done
 
+- pass sustain_term from bassline to instrument
+- add instrument default sustain_term of None
 - if off_density, create randomised sustain_term, inside block_size
 - add off_density parameter to bassline
 - SVFXTrig
