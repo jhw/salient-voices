@@ -1,5 +1,5 @@
 from sv.instruments import InstrumentBase, SVNote, load_yaml
-from sv.model import SVNoteTrig, SVModTrig
+from sv.model import SVNoteTrig, SVNoteOffTrig, SVModTrig, SVFXTrig
 
 class Three03(InstrumentBase):
 
@@ -49,7 +49,10 @@ class Three03(InstrumentBase):
             """
             Now what? There's no support for built in effects controllers!
             """
-            pass            
+            pass
+        if sustain_term:
+            trigs.append(SVNoteOffTrig(mod = f"{self.namespace}MultiSynth",
+                                       i = sustain_term))
         return SVNote(trigs = trigs)
     
 if __name__ == "__main__":

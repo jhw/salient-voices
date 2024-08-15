@@ -1,6 +1,5 @@
 ### short [01-note-off-and-slide-to]
 
-- add note off if sustain term
 - add slide to instead of adsr if slide to
 - check slide to effect number and value
 
@@ -44,6 +43,7 @@
 
 ### done
 
+- add note off if sustain term
 - pass slide_to from instrument, using value of sustained
 - update sustained_boolean according to whether (not) sustain_term defined
 - add sustained boolean, default ?False?
