@@ -1,6 +1,8 @@
 ### short [01-note-off-and-slide-to]
 
-- if sustain_term, add sustain_term
+- add note off if sustain term
+- add slide to instead of adsr if slide to
+- check slide to effect number and value
 
 - abstract value parsing code in model
 
