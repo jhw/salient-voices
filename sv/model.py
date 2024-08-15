@@ -80,7 +80,7 @@ class SVNoteTrig(SVTrigBase):
             note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
         return rv.note.Note(**note_kwargs)
 
-class SVFXTrig(SVTrigBase):
+class SVModTrig(SVTrigBase):
 
     CtrlMult = 256
 
@@ -90,9 +90,9 @@ class SVFXTrig(SVTrigBase):
         self.value = value
 
     def clone(self):
-        return SVFXTrig(target = self.target,
-                        value = self.value,
-                        i = self.i)
+        return SVModTrig(target = self.target,
+                         value = self.value,
+                         i = self.i)
     
     @property
     def mod(self):

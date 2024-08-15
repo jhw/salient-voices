@@ -1,5 +1,5 @@
 from sv.instruments import InstrumentBase, SVNote, load_yaml
-from sv.model import SVNoteTrig, SVFXTrig
+from sv.model import SVNoteTrig, SVModTrig
 
 class Three03(InstrumentBase):
 
@@ -22,6 +22,8 @@ class Three03(InstrumentBase):
 
     def pluck(self,
               note = 0,
+              slide_to = False,
+              slide_to_level = "0030",
               attack_ms = "0008",
               decay_ms = "0018",
               sustain_level = "0800",
@@ -31,16 +33,22 @@ class Three03(InstrumentBase):
                             sample_mod = f"{self.namespace}Sampler",
                             sample = self.sample,
                             note = note),
-                 SVFXTrig(target = f"{self.namespace}ADSR/attack_ms",
-                          value = attack_ms),
-                 SVFXTrig(target = f"{self.namespace}ADSR/decay_ms",
-                          value = decay_ms),
-                 SVFXTrig(target = f"{self.namespace}ADSR/sustain_level",
-                          value = sustain_level),
-                 SVFXTrig(target = f"{self.namespace}ADSR/release_ms",
-                          value = release_ms),
-                 SVFXTrig(target = f"{self.namespace}Sound2Ctl/out_max",
+                 SVModTrig(target = f"{self.namespace}Sound2Ctl/out_max",
                           value = filter_freq)]
+        if not slide_to:            
+            trigs += [SVModTrig(target = f"{self.namespace}ADSR/attack_ms",
+                               value = attack_ms),
+                      SVModTrig(target = f"{self.namespace}ADSR/decay_ms",
+                               value = decay_ms),
+                      SVModTrig(target = f"{self.namespace}ADSR/sustain_level",
+                               value = sustain_level),
+                      SVModTrig(target = f"{self.namespace}ADSR/release_ms",
+                                value = release_ms)]
+        else:
+            """
+            Now what? There's no support for built in effects controllers!
+            """
+            pass            
         return SVNote(trigs = trigs)
     
 if __name__ == "__main__":
