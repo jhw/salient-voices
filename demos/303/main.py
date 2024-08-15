@@ -21,6 +21,8 @@ def bassline(self, n, rand,
             filter_freq = rand["fx"].choice(filter_frequencies)
             if rand["seq"].random() < off_density:
                 sustain_term = 1 + rand["note"].choice(range(block_size - 1))
+            else:
+                sustain_term = None
             note = self.pluck(note = note_offset,
                               sustain_term = sustain_term, 
                               filter_freq = filter_freq)

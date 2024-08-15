@@ -1,9 +1,7 @@
 ### short [01-note-off-and-slide-to]
 
-- if sustain_term, add sustain_term
-- add sustained boolean, default ?False?
-- update sustained_boolean according to whether (not) sustain_term defined
 - pass slide_to from instrument, using value of sustained
+- if sustain_term, add sustain_term
 
 - abstract value parsing code in model
 
@@ -45,6 +43,8 @@
 
 ### done
 
+- update sustained_boolean according to whether (not) sustain_term defined
+- add sustained boolean, default ?False?
 - pass sustain_term from bassline to instrument
 - add instrument default sustain_term of None
 - if off_density, create randomised sustain_term, inside block_size
