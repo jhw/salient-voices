@@ -71,7 +71,7 @@ class SVNoteTrig(SVTrigBase):
             note = root_note + offset
         else:
             note = self.note
-        mod_id = 1 + mod.index # NB 1+
+        mod_id = 1 + mod.index
         note_kwargs = {
             "module": mod_id,
             "note": note
@@ -114,7 +114,7 @@ class SVModTrig(SVTrigBase):
             self.mod not in controllers):
             raise RuntimeError("module %s not found" % self.mod)
         mod, controller = modules[self.mod], controllers[self.mod]
-        mod_id = 1 + mod.index # NB 1+
+        mod_id = 1 + mod.index
         if self.ctrl not in controller:
             raise RuntimeError("controller %s not found in module %s" % (self.ctrl,
                                                                          self.mod))
@@ -132,6 +132,48 @@ class SVModTrig(SVTrigBase):
                             ctl = ctrl_id,
                             val = value)
 
+class SVFXTrig(SVTrigBase):
+
+    def __init__(self, target, value, i = 0):
+        super().__init__(i = i)
+        self.target = target
+        self.value = value
+
+    def clone(self):
+        return SVFXTrig(target = self.target,
+                        value = self.value,
+                        i = self.i)
+
+    @property
+    def mod(self):
+        return self.target.split("/")[0]
+
+    @property
+    def fx(self):
+        return int(self.target.split("/")[1])
+
+    @property
+    def key(self):
+        return self.target
+    
+    def render(self, modules, *args):
+        if self.mod not in modules:
+            raise RuntimeError("module %s not found" % self.mod)
+        mod = modules[self.mod]
+        mod_id = 1 + mod.index
+        if isinstance(self.value, str):
+            try:
+                value = int(self.value, 16)
+            except ValueError:
+                raise RuntimeError(f"couldn't parse {self.value} as hex string")
+        elif isinstance(self.value, int):
+            value = self.value
+        else:
+            raise RuntimeError(f"fx value of {self.value} found; must be int or hex string")
+        return rv.note.Note(module = mod_id,
+                            effect = self.fx,
+                            val = value)
+    
 class SVPatch:
 
     def __init__(self, n_ticks, trigs = []):

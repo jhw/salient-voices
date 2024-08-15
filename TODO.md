@@ -9,7 +9,7 @@
 - update sustained_boolean according to whether (not) sustain_term defined
 - pass slide_to from instrument, using value of sustained
 
-- trig support for built in fx controllers (where there is no controller)
+- abstract value parsing code in model
 
 ### medium
 
@@ -49,6 +49,7 @@
 
 ### done
 
+- SVFXTrig
 - add instrument slide_to boolean arg 
 - add instrument slide_level default arg
 - if slide_to then render slide, else render adsr
