@@ -1,8 +1,12 @@
 ### short
 
-- replace note.offset with note.block_size
-- remove note_off
-  - does new note re- trigger env?
+- copy simple examples
+
+- pitch bend down
+- filter decay
+- slide to note
+
+- add back note off
 
 ### medium
 
@@ -39,6 +43,9 @@
 
 ### done
 
+- replace note.offset with note.block_size
+- remove note_off
+  - does new note re- trigger env?
 - remove sequence
 - remove quantitation
 - remove density

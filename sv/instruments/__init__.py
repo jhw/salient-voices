@@ -8,13 +8,10 @@ def load_yaml(base_path, file_name):
 
 class SVNote:
 
-    def __init__(self, trigs = []):
+    def __init__(self, trigs, rows):
         self.trigs = trigs
-
-    @property
-    def offset(self):
-         return max([trig.i for trig in self.trigs])
-        
+        self.rows = rows
+                 
     def render(self, i):
         trigs = []
         for trig in self.trigs:

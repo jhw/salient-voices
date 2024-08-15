@@ -20,12 +20,12 @@ def random_note(self, rand,
                       filter_freq = filter_freq)
 
 def bassline(self, n, rand):
-    j = -1 
+    j = 0 
     for i in range(n):
-        if i > j:
+        if i >= j:
             note = random_note(self, rand)
             yield note.render(i = i)
-            j = i + note.offset
+            j = i + note.rows
                             
 if __name__ == "__main__":
     try:

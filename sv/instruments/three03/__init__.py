@@ -41,10 +41,13 @@ class Three03(InstrumentBase):
                  SVFXTrig(target = f"{self.namespace}ADSR/release_ms",
                           value = release_ms),
                  SVFXTrig(target = f"{self.namespace}Sound2Ctl/out_max",
-                          value = filter_freq),
-                 SVNoteOffTrig(mod = f"{self.namespace}MultiSynth",
-                               i = sustain_periods)]
-        return SVNote(trigs = trigs)
+                          value = filter_freq)]
+        """
+        trigs.append(SVNoteOffTrig(mod = f"{self.namespace}MultiSynth",
+                                   i = sustain_periods))
+        """
+        return SVNote(trigs = trigs,
+                      rows = 1 + sustain_periods)
     
 if __name__ == "__main__":
     pass
