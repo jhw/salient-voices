@@ -1,11 +1,21 @@
-### short
+### short [01-note-off-and-slide-to]
+
+- add off_density parameter to bassline
+- if off_density, create randomised sustain_term, inside block_size
+- add instrument default sustain_term of None
+- if sustain_term, add sustain_term
+- pass sustain_term from bassline to instrument
+- add sustained boolean, default ?False?
+- update sustained_boolean according to whether (not) sustain_term defined
+- add instrument slide_to boolean arg 
+- add instrument slide_level default arg
+- if slide_to then render slide, else render adsr
+- pass slide_to from instrument, using value of sustained
+
+### medium
 
 - pitch bend down
 - filter decay
-- slide to note
-- note off
-
-### medium
 
 - chromatic sample distribution [notes]
 
@@ -40,6 +50,7 @@
 
 ### done
 
+- move random note back into bassline
 - move rows to bassline generation
 - copy simple examples
 - replace note.offset with note.block_size

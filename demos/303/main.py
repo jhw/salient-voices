@@ -7,24 +7,19 @@ import os
 import re
 import sys
 
-def random_note(self, rand, block_size,
-                root_offset = -5,
-                note_scale = [-2, 0, 0, 0, 3, 12],
-                filter_frequencies = ["3000", "4000", "5000", "6000"]):
-    note_offset = root_offset + rand["note"].choice(note_scale)
-    filter_freq = rand["fx"].choice(filter_frequencies)
-    return self.pluck(note = note_offset,
-                      filter_freq = filter_freq)
-
 def bassline(self, n, rand,
-             block_sizes = [2, 3, 4, 5, 6, 7, 8]):
+             block_sizes = [2, 3, 4, 5, 6, 7, 8],
+             root_offset = -5,
+             note_scale = [-2, 0, 0, 0, 3, 12],
+             filter_frequencies = ["3000", "4000", "5000", "6000"]):
     j = 0 
     for i in range(n):
         if i >= j:
             block_size = rand["seq"].choice(block_sizes)
-            note = random_note(self,
-                               rand = rand,
-                               block_size = block_size)
+            note_offset = root_offset + rand["note"].choice(note_scale)
+            filter_freq = rand["fx"].choice(filter_frequencies)
+            note = self.pluck(note = note_offset,
+                              filter_freq = filter_freq)
             yield note.render(i = i)
             j = i + block_size
                             
