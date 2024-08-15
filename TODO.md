@@ -3,7 +3,7 @@
 - effect has to be part of note trig
 - controller has to be set at zero
 - effect value is not rendering
-
+- don't slide if note is unchanged
 - abstract value parsing code in model
 
 ### medium
