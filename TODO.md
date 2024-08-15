@@ -1,6 +1,5 @@
 ### short [01-note-off-and-slide-to]
 
-- add off_density parameter to bassline
 - if off_density, create randomised sustain_term, inside block_size
 - add instrument default sustain_term of None
 - if sustain_term, add sustain_term
@@ -49,6 +48,7 @@
 
 ### done
 
+- add off_density parameter to bassline
 - SVFXTrig
 - add instrument slide_to boolean arg 
 - add instrument slide_level default arg

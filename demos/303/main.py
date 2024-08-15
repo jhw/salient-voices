@@ -11,7 +11,8 @@ def bassline(self, n, rand,
              block_sizes = [2, 3, 4, 5, 6, 7, 8],
              root_offset = -5,
              note_scale = [-2, 0, 0, 0, 3, 12],
-             filter_frequencies = ["3000", "4000", "5000", "6000"]):
+             filter_frequencies = ["3000", "4000", "5000", "6000"],
+             off_density = 0.5):
     j = 0 
     for i in range(n):
         if i >= j:
