@@ -171,7 +171,7 @@ class SVFXTrig(SVTrigBase):
         else:
             raise RuntimeError(f"fx value of {self.value} found; must be int or hex string")
         return rv.note.Note(module = mod_id,
-                            effect = self.fx,
+                            pattern = self.fx,
                             val = value)
     
 class SVPatch:

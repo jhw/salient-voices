@@ -1,7 +1,8 @@
 ### short [01-note-off-and-slide-to]
 
-- add slide to instead of adsr if slide to
-- check slide to effect number and value
+- effect has to be part of note trig
+- controller has to be set at zero
+- effect value is not rendering
 
 - abstract value parsing code in model
 
@@ -43,6 +44,8 @@
 
 ### done
 
+- add slide to instead of adsr if slide to
+- check slide to effect number and value
 - add note off if sustain term
 - pass slide_to from instrument, using value of sustained
 - update sustained_boolean according to whether (not) sustain_term defined

@@ -23,7 +23,7 @@ class Three03(InstrumentBase):
     def pluck(self,
               note = 0,
               slide_to = False,
-              slide_to_level = "0030",
+              slide_to_level = "0008",
               attack_ms = "0008",
               decay_ms = "0018",
               sustain_level = "0800",
@@ -36,20 +36,18 @@ class Three03(InstrumentBase):
                             note = note),
                  SVModTrig(target = f"{self.namespace}Sound2Ctl/out_max",
                           value = filter_freq)]
-        if not slide_to:            
+        if slide_to:
+            trigs.append(SVFXTrig(target = f"{self.namespace}MultiSynth/3",
+                                  value = slide_to_level))
+        else:
             trigs += [SVModTrig(target = f"{self.namespace}ADSR/attack_ms",
-                               value = attack_ms),
+                                value = attack_ms),
                       SVModTrig(target = f"{self.namespace}ADSR/decay_ms",
-                               value = decay_ms),
+                                value = decay_ms),
                       SVModTrig(target = f"{self.namespace}ADSR/sustain_level",
-                               value = sustain_level),
+                                value = sustain_level),
                       SVModTrig(target = f"{self.namespace}ADSR/release_ms",
                                 value = release_ms)]
-        else:
-            """
-            Now what? There's no support for built in effects controllers!
-            """
-            pass
         if sustain_term:
             trigs.append(SVNoteOffTrig(mod = f"{self.namespace}MultiSynth",
                                        i = sustain_term))
