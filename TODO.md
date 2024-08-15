@@ -1,6 +1,5 @@
 ### short [01-note-off-and-slide-to]
 
-- pass slide_to from instrument, using value of sustained
 - if sustain_term, add sustain_term
 
 - abstract value parsing code in model
@@ -43,6 +42,7 @@
 
 ### done
 
+- pass slide_to from instrument, using value of sustained
 - update sustained_boolean according to whether (not) sustain_term defined
 - add sustained boolean, default ?False?
 - pass sustain_term from bassline to instrument
