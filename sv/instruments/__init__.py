@@ -8,9 +8,8 @@ def load_yaml(base_path, file_name):
 
 class SVNote:
 
-    def __init__(self, trigs, rows):
+    def __init__(self, trigs):
         self.trigs = trigs
-        self.rows = rows
                  
     def render(self, i):
         trigs = []

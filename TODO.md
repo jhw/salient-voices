@@ -1,12 +1,9 @@
 ### short
 
-- copy simple examples
-
 - pitch bend down
 - filter decay
 - slide to note
-
-- add back note off
+- note off
 
 ### medium
 
@@ -43,6 +40,8 @@
 
 ### done
 
+- move rows to bassline generation
+- copy simple examples
 - replace note.offset with note.block_size
 - remove note_off
   - does new note re- trigger env?

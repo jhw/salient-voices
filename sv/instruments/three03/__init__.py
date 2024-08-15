@@ -1,5 +1,5 @@
 from sv.instruments import InstrumentBase, SVNote, load_yaml
-from sv.model import SVNoteTrig, SVNoteOffTrig, SVFXTrig
+from sv.model import SVNoteTrig, SVFXTrig
 
 class Three03(InstrumentBase):
 
@@ -25,7 +25,6 @@ class Three03(InstrumentBase):
               attack_ms = "0008",
               decay_ms = "0018",
               sustain_level = "0800",
-              sustain_periods = 1,
               release_ms = "0300",
               filter_freq = "4000"):
         trigs = [SVNoteTrig(mod = f"{self.namespace}MultiSynth",
@@ -42,12 +41,7 @@ class Three03(InstrumentBase):
                           value = release_ms),
                  SVFXTrig(target = f"{self.namespace}Sound2Ctl/out_max",
                           value = filter_freq)]
-        """
-        trigs.append(SVNoteOffTrig(mod = f"{self.namespace}MultiSynth",
-                                   i = sustain_periods))
-        """
-        return SVNote(trigs = trigs,
-                      rows = 1 + sustain_periods)
+        return SVNote(trigs = trigs)
     
 if __name__ == "__main__":
     pass
