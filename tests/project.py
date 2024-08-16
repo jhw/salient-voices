@@ -42,7 +42,7 @@ class RenderTest(unittest.TestCase):
 
     def test_generator(self, modules = GeneratorModules):
         try:
-            trig = SVNoteTrig(mod = "Generator",
+            trig = SVNoteTrig(target = "Generator",
                               note = 56,
                               i = 0)
             patch = SVPatch(trigs = [trig],
@@ -58,7 +58,7 @@ class RenderTest(unittest.TestCase):
         try:
             bank = SVBank.load_wav_files(bank_name = "mikey303",
                                          dir_path = "tests")
-            trig = SVNoteTrig(mod = "Sampler",
+            trig = SVNoteTrig(target = "Sampler",
                               sample = "mikey303/303 VCO SQR.wav",
                               i = 0)
             patch = SVPatch(trigs = [trig],
