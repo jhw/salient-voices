@@ -1,14 +1,14 @@
-### short [01-fx-trigs]
+### short
 
-### medium
-
-- vitling
 - project render should be function not class
  
+### medium
+
+- chromatic sample distribution [notes]
+
 - sub/trill notes and slide to [notes]
 - ensure last note in pattern is off'ed
 - pitch bends and filter decay
-- chromatic sample distribution [notes]
 - quantisation
 - grooves
 - demos/909
@@ -38,6 +38,7 @@
 
 ### done
 
+- vitling
 - remove sustained
 - extend svnottefxtrig to take fx and value
 - check svnotetrig
