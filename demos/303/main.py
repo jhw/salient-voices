@@ -11,9 +11,10 @@ def bassline(self, n, rand,
              block_sizes = [2, 3, 4, 5, 6],
              root_offset = -5,
              note_scale = [-2, 0, 0, 0, 3, 12],
-             filter_frequencies = ["2000", "3000", "4000", "5000", "6000"],
+             # filter_frequencies = ["2000", "3000", "4000", "5000", "6000"],
+             filter_frequencies = ["2000", "2800", "3000", "3800", "4000"],
              off_density = 1.0):
-    j = 0
+    sustained, j = False, 0
     for i in range(n):
         if i >= j:
             block_size = rand["seq"].choice(block_sizes)
@@ -21,8 +22,10 @@ def bassline(self, n, rand,
             filter_freq = rand["fx"].choice(filter_frequencies)
             if rand["seq"].random() < off_density:
                 sustain_term = 1 + rand["note"].choice(range(block_size - 1))
+                sustained = False
             else:
                 sustain_term = None
+                sustained = True
             note = self.pluck(note = note_offset,
                               sustain_term = sustain_term, 
                               filter_freq = filter_freq)

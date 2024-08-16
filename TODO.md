@@ -1,15 +1,16 @@
 ### short 
 
-- import slide demo and see what controller value is being used
-
 - SVNoteFXTrig
 - SVFXTrig
+
+- import slide demo and see what controller value is being used
 
 - slide to 
 
 ### medium
 
-- slide to
+- ensure last note in pattern is off'ed
+
 - pitch bends
 - filter decay
 - chromatic sample distribution [notes]
