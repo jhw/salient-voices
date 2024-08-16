@@ -28,7 +28,7 @@ class Three03(InstrumentBase):
               sustain_term = None,
               release_ms = "0300",
               filter_freq = "4000"):
-        trigs = [SVNoteTrig(mod = f"{self.namespace}MultiSynth",
+        trigs = [SVNoteTrig(target = f"{self.namespace}MultiSynth",
                             sample_mod = f"{self.namespace}Sampler",
                             sample = self.sample,
                             note = note),
@@ -43,7 +43,7 @@ class Three03(InstrumentBase):
                   SVModTrig(target = f"{self.namespace}ADSR/release_ms",
                             value = release_ms)]
         if sustain_term:
-            trigs.append(SVNoteOffTrig(mod = f"{self.namespace}MultiSynth",
+            trigs.append(SVNoteOffTrig(target = f"{self.namespace}MultiSynth",
                                        i = sustain_term))
         return SVNote(trigs = trigs)
     

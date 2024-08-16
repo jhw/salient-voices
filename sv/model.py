@@ -20,48 +20,35 @@ class SVTrigBase:
 
     def increment(self, i):
         self.i += i
-
-class SVNoteOffTrig(SVTrigBase):
-
-    def __init__(self, mod, i = 0):
-        super().__init__(i = i)
-        self.mod = mod
-
-    def clone(self):
-        return SVNoteOffTrig(mod = self.mod,
-                             i = self.i)
-
-    @property
-    def key(self):
-        return self.mod
-    
-    def render(self, *args):
-        return rv.note.Note(note = rv.note.NOTECMD.NOTE_OFF)
         
 class SVNoteTrig(SVTrigBase):
 
     Volume = 128
     
-    def __init__(self, mod,
+    def __init__(self, target,
                  i = 0,
                  sample = None,
                  sample_mod = None,
                  note = None,
                  vel = None):
         super().__init__(i = i)
-        self.mod = mod
+        self.target = target
         self.sample = sample
         self.sample_mod = sample_mod
         self.note = note
         self.vel = vel        
 
     def clone(self):
-        return SVNoteTrig(mod = self.mod,
+        return SVNoteTrig(target = self.target,
                           i = self.i,
                           sample = self.sample,
                           sample_mod = self.sample_mod,
                           note = self.note,
                           vel = self.vel)
+
+    @property
+    def mod(self):
+        return self.target.split("/")[0]
     
     @property
     def key(self):
@@ -90,6 +77,27 @@ class SVNoteTrig(SVTrigBase):
         if self.vel:
             note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
         return rv.note.Note(**note_kwargs)
+
+class SVNoteOffTrig(SVTrigBase):
+
+    def __init__(self, target, i = 0):
+        super().__init__(i = i)
+        self.target = target    
+    
+    def clone(self):
+        return SVNoteOffTrig(target = self.target,
+                             i = self.i)
+
+    @property
+    def mod(self):
+        return self.target.split("/")[0]
+
+    @property
+    def key(self):
+        return self.mod
+    
+    def render(self, *args):
+        return rv.note.Note(note = rv.note.NOTECMD.NOTE_OFF)
     
 class SVModTrig(SVTrigBase):
 
