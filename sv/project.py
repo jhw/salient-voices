@@ -1,33 +1,12 @@
 from sv.sampler import SVPool, SVBanks
+from sv.colours import init_colours
 
 import importlib
 import math
-import random
 import rv
 import rv.api # why?
 
 Volume, PatternHeight = 256, 16
-
-def random_colour(offset = 64,
-                  contrast = 128,
-                  n = 32):
-    for i in range(n):
-        color = [int(offset + random.random() * (255 - offset))
-                 for i in range(3)]
-        if (max(color) - min(color)) > contrast:
-            return color
-    raise RuntimeError("couldn't find suitable random colour")
-
-def order_colours(colours):
-    def rgb_distance(colour1, colour2):
-        return math.sqrt(sum((a - b) ** 2 for a, b in zip(colour1, colour2)))
-    ordered_colours = [colours.pop(0)]    
-    while colours:
-        last_colour = ordered_colours[-1]
-        furthest_colour = max(colours, key=lambda colour: rgb_distance(colour, last_colour))
-        colours.remove(furthest_colour)
-        ordered_colours.append(furthest_colour)    
-    return ordered_colours
 
 def load_class(path):
     try:
@@ -82,34 +61,45 @@ class SVModules(list):
             links += item.links
         return links
 
-class SVProject:
+def init_project(fn):
+    def wrapped(self, modules, banks = [], *args, **kwargs):
+        banks = SVBanks(banks)
+        modules = SVModules(modules)
+        modules.validate()
+        return fn(self,
+                  modules = modules,
+                  banks = banks,
+                  *args, **kwargs)
+    return wrapped
 
-    def init_modules(fn):
-        def wrapped(self,
-                    project,
-                    patches,
-                    modules,
-                    colours,
-                    banks):
-            mod_names = [mod["name"] for mod in modules]
-            for mod in modules:
-                mod_class = load_class(mod["class"])
-                mod_kwargs = {}
-                if mod["class"].lower().endswith("sampler"):
-                    pool = SVPool()
-                    for patch in patches:                        
-                        patch.populate_pool(pool = pool,
-                                            mod_names = mod_names)
-                    mod_kwargs = {"banks": banks,
-                                  "pool": pool}
-                mod["instance"] = mod_class(**mod_kwargs)
-            return fn(self,
-                      project = project,
-                      patches = patches,
-                      modules = modules,
-                      colours = colours,
-                      banks = banks)
-        return wrapped
+def init_modules(fn):
+    def wrapped(self,
+                project,
+                patches,
+                modules,
+                colours,
+                banks):
+        mod_names = [mod["name"] for mod in modules]
+        for mod in modules:
+            mod_class = load_class(mod["class"])
+            mod_kwargs = {}
+            if mod["class"].lower().endswith("sampler"):
+                pool = SVPool()
+                for patch in patches:                        
+                    patch.populate_pool(pool = pool,
+                                        mod_names = mod_names)
+                mod_kwargs = {"banks": banks,
+                              "pool": pool}
+            mod["instance"] = mod_class(**mod_kwargs)
+        return fn(self,
+                  project = project,
+                  patches = patches,
+                  modules = modules,
+                  colours = colours,
+                  banks = banks)
+    return wrapped
+
+class SVProject:
 
     @init_modules
     def render_modules(self,                     
@@ -272,23 +262,7 @@ class SVProject:
                 y += height
             x += x_count * n_ticks
             y = 0
-        return patterns
-    
-    def init_project(fn):
-        def wrapped(self, modules, banks = [], *args, **kwargs):
-            banks = SVBanks(banks)
-            modules = SVModules(modules)
-            modules.validate()
-            return fn(self,
-                      modules = modules,
-                      banks = banks,
-                      *args, **kwargs)
-        return wrapped
-
-    def init_colours(self, modules):
-        colours = order_colours([random_colour() for mod in modules])        
-        return {mod["name"]: colour
-                for mod, colour in zip(modules, colours)}
+        return patterns      
     
     @init_project
     def render_project(self,
@@ -299,10 +273,10 @@ class SVProject:
                        wash = False,
                        breaks = False,
                        volume = Volume):
+        colours = init_colours(modules)
         project = rv.api.Project()
         project.initial_bpm = bpm
         project.global_volume = volume
-        colours = self.init_colours(modules)
         project_modules = self.render_modules(project = project,
                                               patches = patches,
                                               modules = modules,

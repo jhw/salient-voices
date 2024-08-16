@@ -1,11 +1,10 @@
 ### short
 
-- project render should be function not class
- 
+- colours test
+
 ### medium
 
 - chromatic sample distribution [notes]
-
 - sub/trill notes and slide to [notes]
 - ensure last note in pattern is off'ed
 - pitch bends and filter decay
@@ -38,6 +37,7 @@
 
 ### done
 
+- project render should be function not class
 - vitling
 - remove sustained
 - extend svnottefxtrig to take fx and value
