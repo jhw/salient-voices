@@ -1,3 +1,18 @@
+### slide to 16/08/24
+
+- instead of thinking how to how to join two notes with a slide, you might be better off thinking about adding slide stuff inside an existing note block
+- this would seem to simplify things a lot
+- you don't need the sustained variable at the baseline level
+- you don't need to do either/or for adsr or slide
+- you just have to define some extra notes inside the existing block, with slide to fx values
+- this makes it pretty easy to do trills and stuff 
+- but how can a (random?) trill be parameterised?
+
+--- 
+
+- pass a list of notes with offset, lenth fields
+- there should be shorthand for this
+
 ### built- in FX 15/08/24
 
 - built in fx are always part of the note column
