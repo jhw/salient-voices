@@ -1,7 +1,5 @@
 ### short
 
-- colours test
-
 ### medium
 
 - chromatic sample distribution [notes]
@@ -18,6 +16,8 @@
 
 ### thoughts
 
+- colours test?
+  - not worth it if used as part of project
 - play modes?
   - seems hard to implement and less value than slides
 - turn off export debugging?

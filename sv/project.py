@@ -99,6 +99,10 @@ def init_modules(fn):
                   banks = banks)
     return wrapped
 
+"""
+Project rendering doesn't necessarily have to be class based but there's so much rendering going on it's simplest to encapsulate it all in a class
+"""
+
 class SVProject:
 
     @init_modules
