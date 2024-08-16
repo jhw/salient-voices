@@ -1,6 +1,5 @@
 ### short [01-fx-trigs]
 
-- move target code into base class
 - extend svnottefxtrig to take fx and value
 - check svnotetrig
 
@@ -40,6 +39,7 @@
 
 ### done
 
+- move target code into base class
 - svnotetrig to take target not mod
 - add slide to instead of adsr if slide to
 - check slide to effect number and value

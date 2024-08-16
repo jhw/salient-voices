@@ -15,7 +15,8 @@ def parse_value(value):
 
 class SVTrigBase:
 
-    def __init__(self, i):
+    def __init__(self, target, i):
+        self.target = target
         self.i = i
 
     def increment(self, i):
@@ -31,8 +32,8 @@ class SVNoteTrig(SVTrigBase):
                  sample_mod = None,
                  note = None,
                  vel = None):
-        super().__init__(i = i)
-        self.target = target
+        super().__init__(target = target,
+                         i = i)
         self.sample = sample
         self.sample_mod = sample_mod
         self.note = note
@@ -81,8 +82,8 @@ class SVNoteTrig(SVTrigBase):
 class SVNoteOffTrig(SVTrigBase):
 
     def __init__(self, target, i = 0):
-        super().__init__(i = i)
-        self.target = target    
+        super().__init__(target = target,
+                         i = i)
     
     def clone(self):
         return SVNoteOffTrig(target = self.target,
@@ -104,8 +105,8 @@ class SVModTrig(SVTrigBase):
     CtrlMult = 256
 
     def __init__(self, target, value, i = 0):
-        super().__init__(i = i)
-        self.target = target
+        super().__init__(target = target,
+                         i = i)
         self.value = value
 
     def clone(self):
@@ -150,8 +151,8 @@ SVFXTrig is experimental and not currently being used
 class SVFXTrig(SVTrigBase):
 
     def __init__(self, target, value, i = 0):
-        super().__init__(i = i)
-        self.target = target
+        super().__init__(target = target,
+                         i = i)
         self.value = value
 
     def clone(self):
