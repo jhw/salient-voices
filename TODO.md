@@ -1,5 +1,7 @@
 ### short 
 
+- add and test vitling
+
 - SVNoteFXTrig
 - SVFXTrig
 
