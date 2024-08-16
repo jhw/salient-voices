@@ -1,6 +1,11 @@
 ### short 
 
-- FX trigs (notes)
+- import slide demo and see what controller value is being used
+
+- SVNoteFXTrig
+- SVFXTrig
+
+- slide to 
 
 ### medium
 
