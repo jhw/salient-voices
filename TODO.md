@@ -7,10 +7,10 @@
 ### medium
 
 - vitling
+- project render should be function not class
 - ensure last note in pattern is off'ed
 - pitch bends and filter decay
 - chromatic sample distribution [notes]
-- abstract value parsing code in model
 - quantisation
 - grooves
 - demos/909
