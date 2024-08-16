@@ -1,12 +1,13 @@
 ### short
 
+- sub- notes and slide to [notes]
+- echo s&h
+
 ### medium
 
+- sidechain
 - chromatic sample distribution [notes]
-- sub/trill notes and slide to [notes]
-- ensure last note in pattern is off'ed
 - pitch bends and filter decay
-- quantisation
 - grooves
 - demos/909
 
