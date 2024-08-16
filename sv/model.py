@@ -31,13 +31,15 @@ class SVNoteTrig(SVTrigBase):
                  sample = None,
                  sample_mod = None,
                  note = None,
-                 vel = None):
+                 vel = None,
+                 value = None):
         super().__init__(target = target,
                          i = i)
         self.sample = sample
         self.sample_mod = sample_mod
         self.note = note
-        self.vel = vel        
+        self.vel = vel
+        self.value = value
 
     def clone(self):
         return SVNoteTrig(target = self.target,
@@ -50,6 +52,14 @@ class SVNoteTrig(SVTrigBase):
     @property
     def mod(self):
         return self.target.split("/")[0]
+
+    @property
+    def has_fx(self):
+        return len(self.target.split("/")) > 1
+    
+    @property
+    def fx(self):
+        return int(self.target.split("/")[1])
     
     @property
     def key(self):
@@ -77,6 +87,9 @@ class SVNoteTrig(SVTrigBase):
         }
         if self.vel:
             note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
+        if self.has_fx and self.value:
+            note_kwargs["pattern"] = self.fx
+            note_kwargs["val"] = self.value
         return rv.note.Note(**note_kwargs)
 
 class SVNoteOffTrig(SVTrigBase):
@@ -99,6 +112,40 @@ class SVNoteOffTrig(SVTrigBase):
     
     def render(self, *args):
         return rv.note.Note(note = rv.note.NOTECMD.NOTE_OFF)
+
+class SVFXTrig(SVTrigBase):
+
+    def __init__(self, target, value, i = 0):
+        super().__init__(target = target,
+                         i = i)
+        self.value = value
+
+    def clone(self):
+        return SVFXTrig(target = self.target,
+                        value = self.value,
+                        i = self.i)
+
+    @property
+    def mod(self):
+        return self.target.split("/")[0]
+
+    @property
+    def fx(self):
+        return int(self.target.split("/")[1])
+
+    @property
+    def key(self):
+        return self.target
+    
+    def render(self, modules, *args):
+        if self.mod not in modules:
+            raise RuntimeError("module %s not found" % self.mod)
+        mod = modules[self.mod]
+        mod_id = 1 + mod.index
+        value = parse_value(self.value)
+        return rv.note.Note(module = mod_id,
+                            pattern = self.fx,
+                            val = value)
     
 class SVModTrig(SVTrigBase):
 
@@ -144,44 +191,6 @@ class SVModTrig(SVTrigBase):
                             ctl = ctrl_id,
                             val = value)
 
-"""
-SVFXTrig is experimental and not currently being used 
-"""
-    
-class SVFXTrig(SVTrigBase):
-
-    def __init__(self, target, value, i = 0):
-        super().__init__(target = target,
-                         i = i)
-        self.value = value
-
-    def clone(self):
-        return SVFXTrig(target = self.target,
-                        value = self.value,
-                        i = self.i)
-
-    @property
-    def mod(self):
-        return self.target.split("/")[0]
-
-    @property
-    def fx(self):
-        return int(self.target.split("/")[1])
-
-    @property
-    def key(self):
-        return self.target
-    
-    def render(self, modules, *args):
-        if self.mod not in modules:
-            raise RuntimeError("module %s not found" % self.mod)
-        mod = modules[self.mod]
-        mod_id = 1 + mod.index
-        value = parse_value(self.value)
-        return rv.note.Note(module = mod_id,
-                            pattern = self.fx,
-                            val = value)
-    
 class SVPatch:
 
     def __init__(self, n_ticks, trigs = []):

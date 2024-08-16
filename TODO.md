@@ -1,12 +1,11 @@
 ### short [01-fx-trigs]
 
-- extend svnottefxtrig to take fx and value
-- check svnotetrig
-
 ### medium
 
 - vitling
 - project render should be function not class
+ 
+- sub/trill notes and slide to [notes]
 - ensure last note in pattern is off'ed
 - pitch bends and filter decay
 - chromatic sample distribution [notes]
@@ -39,6 +38,9 @@
 
 ### done
 
+- remove sustained
+- extend svnottefxtrig to take fx and value
+- check svnotetrig
 - move target code into base class
 - svnotetrig to take target not mod
 - add slide to instead of adsr if slide to
