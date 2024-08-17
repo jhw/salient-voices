@@ -1,8 +1,5 @@
 ### short [01-ghost-echo]
 
-- add 303 modulate function taking mod, ctrl, value args
-- 303 modulate to return single fx trig
-- move 303 modulate into base class
 - new demo ghost_echo function
 - call ghost echo from demo main block
 
@@ -45,6 +42,9 @@
 
 ### done
 
+- add 303 modulate function taking mod, ctrl, value args
+- 303 modulate to return single fx trig
+- move 303 modulate into base class
 - rename pluck as note
 - rename SVNote as SVTrigBlock
 - project render should be function not class

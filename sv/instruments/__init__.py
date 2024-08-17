@@ -1,3 +1,4 @@
+from sv.model import SVModTrig
 from random import Random
 
 import copy
@@ -26,6 +27,11 @@ class InstrumentBase:
         self.namespace = namespace
         self.defaults = {}
 
+    def modulation(self, mod, ctrl, value):
+        trigs = [SVModTrig(target = f"{self.namespace}{self.mod}/{self.ctrl}",
+                           value = value)]
+        return SVTrigBlock(trigs = trigs)
+        
     def play(self, generator, seeds):
         rand = {key: Random(seed) for key, seed in seeds.items()}
         for trigs in generator(self,
