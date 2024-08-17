@@ -1,17 +1,12 @@
 ### short [01-ghost-echo]
 
-- include feedback in modulation
-- clipping
-
 ### medium
-
-- modulate resonance and roll off
 
 - chromatic sample distribution [notes]
 - sub- notes and slide to [notes]
-
 - pitch bends and filter decay
 - sidechain
+- clipping
 - grooves
 - 909 
 
@@ -42,6 +37,8 @@
 
 ### done
 
+- modulate resonance and roll off
+- include feedback in modulation
 - why does code fail if generator never returns anything
 - bassline note density
 - try using hex for default (echo) values

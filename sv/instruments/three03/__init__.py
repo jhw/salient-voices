@@ -46,6 +46,27 @@ class Three03(InstrumentBase):
             trigs.append(SVNoteOffTrig(target = f"{self.namespace}MultiSynth",
                                        i = sustain_term))
         return SVTrigBlock(trigs = trigs)
+
+    def modulation(self,
+                   echo_wet = None,
+                   echo_feedback = None,
+                   filter_resonance = None,
+                   filter_roll_off = None):
+        trigs = []
+        if echo_wet:
+            trigs.append(SVModTrig(target = f"{self.namespace}Echo/wet",
+                                   value = echo_wet))
+        if echo_feedback:
+            trigs.append(SVModTrig(target = f"{self.namespace}Echo/feedback",
+                                   value = echo_feedback))
+        if filter_resonance:
+            trigs.append(SVModTrig(target = f"{self.namespace}Filter/resonance",
+                                   value = filter_resonance))
+        if filter_roll_off:
+            trigs.append(SVModTrig(target = f"{self.namespace}Filter/roll_off",
+                                   value = filter_roll_off))
+        return SVTrigBlock(trigs = trigs)
+
     
 if __name__ == "__main__":
     pass

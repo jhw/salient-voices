@@ -31,14 +31,14 @@ def bassline(self, n, rand,
             j = i + block_size
 
 def ghost_echo(self, n, rand,
-               wet_levels = ["0000", "2000", "4000", "6000", "8000"],
+               sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
                quantise = 8):
     for i in range(n):
         if 0 == i % quantise:            
-            wet_level = rand["fx"].choice(wet_levels)
-            trig_block = self.modulation(mod = "Echo",
-                                         ctrl = "wet",
-                                         value = wet_level)
+            echo_wet_level = rand["fx"].choice(sample_hold_levels)
+            echo_feedback_level = rand["fx"].choice(sample_hold_levels)
+            trig_block = self.modulation(echo_wet = echo_wet_level,
+                                         echo_feedback = echo_feedback_level)
             yield trig_block.render(i = i)
                             
 if __name__ == "__main__":
