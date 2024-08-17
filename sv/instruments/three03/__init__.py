@@ -1,4 +1,4 @@
-from sv.instruments import InstrumentBase, SVNote, load_yaml
+from sv.instruments import InstrumentBase, SVTrigBlock, load_yaml
 from sv.model import SVNoteTrig, SVNoteOffTrig, SVModTrig
 
 class Three03(InstrumentBase):
@@ -45,7 +45,7 @@ class Three03(InstrumentBase):
         if sustain_term:
             trigs.append(SVNoteOffTrig(target = f"{self.namespace}MultiSynth",
                                        i = sustain_term))
-        return SVNote(trigs = trigs)
+        return SVTrigBlock(trigs = trigs)
     
 if __name__ == "__main__":
     pass
