@@ -1,6 +1,5 @@
 ### short [01-ghost-echo]
 
-- rename pluck as note
 - add 303 modulate function taking mod, ctrl, value args
 - 303 modulate to return single fx trig
 - move 303 modulate into base class
@@ -46,6 +45,7 @@
 
 ### done
 
+- rename pluck as note
 - rename SVNote as SVTrigBlock
 - project render should be function not class
 - vitling

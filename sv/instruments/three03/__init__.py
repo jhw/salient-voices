@@ -20,14 +20,14 @@ class Three03(InstrumentBase):
                                   "delay": echo_delay},
                          "Reverb": {"wet": reverb_wet}}
 
-    def pluck(self,
-              note = 0,
-              attack_ms = "0008",
-              decay_ms = "0018",
-              sustain_level = "0800",
-              sustain_term = None,
-              release_ms = "0300",
-              filter_freq = "4000"):
+    def note(self,
+             note = 0,
+             attack_ms = "0008",
+             decay_ms = "0018",
+             sustain_level = "0800",
+             sustain_term = None,
+             release_ms = "0300",
+             filter_freq = "4000"):
         trigs = [SVNoteTrig(target = f"{self.namespace}MultiSynth",
                             sample_mod = f"{self.namespace}Sampler",
                             sample = self.sample,
