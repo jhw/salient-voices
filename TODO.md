@@ -1,15 +1,24 @@
-### short
+### short [01-ghost-echo]
 
-- sub- notes and slide to [notes]
-- echo s&h
+- rename SVNote as SVTrigBlock
+- rename pluck as note
+- add 303 modulate function taking mod, ctrl, value args
+- 303 modulate to return single fx trig
+- move 303 modulate into base class
+- new demo ghost_echo function
+- call ghost echo from demo main block
 
 ### medium
 
-- sidechain
+- bassline note density
+
 - chromatic sample distribution [notes]
+- sub- notes and slide to [notes]
+
 - pitch bends and filter decay
+- sidechain
 - grooves
-- demos/909
+- 909 
 
 ### long
 
