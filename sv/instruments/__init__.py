@@ -28,7 +28,7 @@ class InstrumentBase:
         self.defaults = {}
 
     def modulation(self, mod, ctrl, value):
-        trigs = [SVModTrig(target = f"{self.namespace}{self.mod}/{self.ctrl}",
+        trigs = [SVModTrig(target = f"{self.namespace}{mod}/{ctrl}",
                            value = value)]
         return SVTrigBlock(trigs = trigs)
         

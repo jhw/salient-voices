@@ -1,7 +1,9 @@
 ### short [01-ghost-echo]
 
-- new demo ghost_echo function
-- call ghost echo from demo main block
+- try using hex for default (echo) values
+- include feedback in modulation
+- why does code fail if generator never returns anything
+- clipping
 
 ### medium
 
@@ -42,6 +44,8 @@
 
 ### done
 
+- new demo ghost_echo function
+- call ghost echo from demo main block
 - add 303 modulate function taking mod, ctrl, value args
 - 303 modulate to return single fx trig
 - move 303 modulate into base class

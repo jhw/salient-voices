@@ -21,12 +21,23 @@ def bassline(self, n, rand,
             note_offset = root_offset + rand["note"].choice(note_scale)
             sustain_term = 1 + rand["note"].choice(range(block_size - 1))
             filter_freq = rand["fx"].choice(filter_frequencies)
-            note = self.note(note = note_offset,
-                             sustain_term = sustain_term, 
-                             filter_freq = filter_freq)
+            trig_block = self.note(note = note_offset,
+                                   sustain_term = sustain_term, 
+                                   filter_freq = filter_freq)
             if (i + sustain_term) < n:
-                yield note.render(i = i)
+                yield trig_block.render(i = i)
             j = i + block_size
+
+def ghost_echo(self, n, rand,
+               wet_levels = ["0000", "2000", "4000", "6000", "8000"],
+               quantise = 8):
+    for i in range(n):
+        if 0 == i % quantise:            
+            wet_level = rand["fx"].choice(wet_levels)
+            trig_block = self.modulation(mod = "Echo",
+                                         ctrl = "wet",
+                                         value = wet_level)
+            yield trig_block.render(i = i)
                             
 if __name__ == "__main__":
     try:
@@ -49,6 +60,8 @@ if __name__ == "__main__":
         seeds = {key: int(rand.random() * 1e8)
                  for key in "seq|note|fx".split("|")}
         three03.play(generator = bassline,
+                     seeds = seeds)
+        three03.play(generator = ghost_echo,
                      seeds = seeds)
         project = container.render_project()
         if not os.path.exists("tmp"):
