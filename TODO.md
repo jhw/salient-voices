@@ -1,13 +1,11 @@
 ### short [01-ghost-echo]
 
-- try using hex for default (echo) values
 - include feedback in modulation
-- why does code fail if generator never returns anything
 - clipping
 
 ### medium
 
-- bassline note density
+- modulate resonance and roll off
 
 - chromatic sample distribution [notes]
 - sub- notes and slide to [notes]
@@ -44,6 +42,9 @@
 
 ### done
 
+- why does code fail if generator never returns anything
+- bassline note density
+- try using hex for default (echo) values
 - new demo ghost_echo function
 - call ghost echo from demo main block
 - add 303 modulate function taking mod, ctrl, value args

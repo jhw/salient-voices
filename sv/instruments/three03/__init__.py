@@ -6,11 +6,11 @@ class Three03(InstrumentBase):
     Modules = load_yaml(__file__, "modules.yaml")
     
     def __init__(self, container, namespace, sample,
-                 filter_resonance = "575", # max 599; no idea re format
-                 echo_wet = 16,
-                 echo_feedback = 16,
+                 filter_resonance = "575", # no idea re format; doesn't seem to correspond to either of the values in the UI; max seems to be around "599"
+                 echo_wet = 16, # seems to required integer format; no sure why won't take hex
+                 echo_feedback = 16, # seems to required integer format; no sure why won't take hex
                  echo_delay = 192,
-                 reverb_wet = 2):
+                 reverb_wet = 2): # setting as integer as easier when wanting tiny amounts only
         super().__init__(container = container,
                          namespace = namespace)
         self.sample = sample
