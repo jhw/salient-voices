@@ -2,7 +2,6 @@
 
 ### medium
 
-- city dreams shredder
 - grooves
 - chromatic sample distribution [notes]
 - cli demo w/ mutation

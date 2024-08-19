@@ -9,6 +9,7 @@ if __name__ == "__main__":
                 "links": {"in": mod.in_links,
                           "out": mod.out_links}})
     print ()
+    """
     for pattern in proj.patterns:
         if isinstance(pattern, Pattern):
             for lineno, line in enumerate(pattern.data):
@@ -16,5 +17,5 @@ if __name__ == "__main__":
                 for track_no, note in enumerate(line):
                     print (track_no, repr(note))
             print ()
-
+    """
     
