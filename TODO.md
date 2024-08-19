@@ -1,12 +1,10 @@
-### short [01-ghost-echo]
-
-- chromatic sample distribution [notes]
-- vitling 303
-- grooves
+### short
 
 ### medium
 
 - city dreams shredder
+- grooves
+- chromatic sample distribution [notes]
 - cli demo w/ mutation
 - sub- notes and slide to [notes]
 - pitch bends and filter decay
@@ -41,6 +39,7 @@
 
 ### done
 
+- vitling 303
 - modulate resonance and roll off
 - include feedback in modulation
 - why does code fail if generator never returns anything
