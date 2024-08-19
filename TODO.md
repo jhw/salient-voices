@@ -1,13 +1,17 @@
 ### short [01-ghost-echo]
 
+- chromatic sample distribution [notes]
+- vitling 303
+- grooves
+
 ### medium
 
-- chromatic sample distribution [notes]
+- city dreams shredder
+- cli demo w/ mutation
 - sub- notes and slide to [notes]
 - pitch bends and filter decay
 - sidechain
 - clipping
-- grooves
 - 909 
 
 ### long
