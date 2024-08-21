@@ -1,5 +1,8 @@
 ### short [01b-chromatic-sampler]
 
+- move base sampler constructor code into slot sampler
+- chromatic sampler must populate all slots, not just pool
+
 ### medium
 
 - city dreams shredder
