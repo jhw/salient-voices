@@ -1,10 +1,9 @@
-### short
+### short [01b-chromatic-sampler]
 
 ### medium
 
 - city dreams shredder
 - grooves
-- chromatic sample distribution [notes]
 - cli demo w/ mutation
 - sub- notes and slide to [notes]
 - pitch bends and filter decay
