@@ -1,15 +1,13 @@
-### short [01b-chromatic-sampler]
-
-- move base sampler constructor code into slot sampler
-- chromatic sampler must populate all slots, not just pool
+### short
 
 ### medium
+
+- sub- notes and slide to [notes]
+- pitch bends and filter decay
 
 - city dreams shredder
 - grooves
 - cli demo w/ mutation
-- sub- notes and slide to [notes]
-- pitch bends and filter decay
 - sidechain
 - clipping
 - 909 
@@ -41,6 +39,8 @@
 
 ### done
 
+- move base sampler constructor code into slot sampler
+- chromatic sampler must populate all slots, not just pool
 - vitling 303
 - modulate resonance and roll off
 - include feedback in modulation

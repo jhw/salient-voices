@@ -214,18 +214,29 @@ class SVSlotSampler(SVBaseSampler):
     def root_notes(self):
         return {sample: i
                 for i, sample in enumerate(self.pool)}    
-        
+
+"""
+Simply can't be bothered doing all the repitch work for Chromatic sampler
+The uses cases are either many- slot/unchromatic (SVSlotSampler) or single- slot/chromatic (SVChromaticSampler); there is no (eg) dual- slot/chromatic use case
+So simplest to raise exception if more than a single sample passed, and then rely on SVBaseSampler default chromatic behaviour which pitches the (chromatic) mid- point at C5 
+Althiough some kind of offset behaviour might be useful in the future
+"""
+    
 class SVChromaticSampler(SVBaseSampler):
 
     def __init__(self, banks, pool,
                  root_note = rv.note.NOTE.C5,
                  max_slots = MaxSlots):
+        if len(pool) != 1:
+            raise RuntimeError("SVChromaticSampler takes a single- sample pool only")
         SVBaseSampler.__init__(self,
                                banks = banks,
                                pool = pool)
-        notes = list(rv.note.NOTE)
-        root = notes.index(root_note)
 
+    """
+    This technically works for multiple notes but RuntimeError raise above should ensure there is only ever one
+    """
+        
     @property
     def root_notes(self, max_slots = MaxSlots):
         n = max_slots / len(self.pool)

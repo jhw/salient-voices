@@ -102,22 +102,24 @@ class SamplerTest(unittest.TestCase):
         bank = SVBank.load_wav_files(bank_name = "mikey303",
                                      dir_path = "tests")
         self.banks = SVBanks([bank])
-        tag_mapping = {"bass": "303"}
-        self.pool, _ = self.banks.spawn_pool(tag_mapping)
-            
+        
     def test_slot_sampler(self):
+        tag_mapping = {"bass": "303"}
+        pool, _ = self.banks.spawn_pool(tag_mapping)
         sampler = SVSlotSampler(banks = self.banks,
-                                pool = self.pool)
+                                pool = pool)
         root_notes = sampler.root_notes
-        for i, sample in enumerate(self.pool):
+        for i, sample in enumerate(pool):
             self.assertEqual(root_notes[sample], i)
 
     def test_chromatic_sampler(self, max_slots = MaxSlots):
+        tag_mapping = {"bass": "SQR"}
+        pool, _ = self.banks.spawn_pool(tag_mapping)
         sampler = SVChromaticSampler(banks = self.banks,
-                                     pool = self.pool)
-        block_size = int(max_slots / len(self.pool))
+                                     pool = pool)
+        block_size = int(max_slots / len(pool))
         root_notes = sampler.root_notes                
-        for i, sample in enumerate(self.pool):
+        for i, sample in enumerate(pool):
             root_note = int((i + 0.5) * block_size)
             self.assertEqual(root_notes[sample], root_note)
         
