@@ -1,16 +1,19 @@
 ### short
 
+- remove project breaks
+- remove slice stuff
+
+### ../gists/music/72d061156d7b7e9da23532453efb7d21 integration
+
+- banks.py
+- model.py
+- machines.py
+
 ### medium
 
-- sub- notes and slide to [notes]
-- pitch bends and filter decay
-
-- city dreams shredder
-- grooves
-- cli demo w/ mutation
-- sidechain
-- clipping
-- 909 
+- complete 303 slides
+- machine volume grooves
+- sample- level utils for trimming/reversing/repeating
 
 ### long
 
@@ -18,210 +21,5 @@
 
 ### thoughts
 
-- colours test?
-  - not worth it if used as part of project
-- play modes?
-  - seems hard to implement and less value than slides
-- turn off export debugging?
-  - not possible it seems
-- distortion?
-  - dirties the notes unfortunately
-- SVNoteTrig.note should be named offset if it's an offset?
-  - is fine
-- sv project player?
-  - not sure you need it
-- export test should use wavfile to validate output properties?
-  - probably not worth it
-- colour mutation?
-  - not worth it
-- tidal syntax?
-  - not clear you need it, if it's really a performance thing
-
 ### done
 
-- move base sampler constructor code into slot sampler
-- chromatic sampler must populate all slots, not just pool
-- vitling 303
-- modulate resonance and roll off
-- include feedback in modulation
-- why does code fail if generator never returns anything
-- bassline note density
-- try using hex for default (echo) values
-- new demo ghost_echo function
-- call ghost echo from demo main block
-- add 303 modulate function taking mod, ctrl, value args
-- 303 modulate to return single fx trig
-- move 303 modulate into base class
-- rename pluck as note
-- rename SVNote as SVTrigBlock
-- project render should be function not class
-- vitling
-- remove sustained
-- extend svnottefxtrig to take fx and value
-- check svnotetrig
-- move target code into base class
-- svnotetrig to take target not mod
-- add slide to instead of adsr if slide to
-- check slide to effect number and value
-- add note off if sustain term
-- pass slide_to from instrument, using value of sustained
-- update sustained_boolean according to whether (not) sustain_term defined
-- add sustained boolean, default ?False?
-- pass sustain_term from bassline to instrument
-- add instrument default sustain_term of None
-- if off_density, create randomised sustain_term, inside block_size
-- add off_density parameter to bassline
-- SVFXTrig
-- add instrument slide_to boolean arg 
-- add instrument slide_level default arg
-- if slide_to then render slide, else render adsr
-- move random note back into bassline
-- move rows to bassline generation
-- copy simple examples
-- replace note.offset with note.block_size
-- remove note_off
-  - does new note re- trigger env?
-- remove sequence
-- remove quantitation
-- remove density
-- fix last period
-- render sequences
-- add breaks
-- abstract note generation
-- trigs should have a base class and a method to increment i
-  - to be used by SVNote.render(i)
-- move position of j increment in demo generator
-- change container demo to call render(i)
-- generator to call render(i) on note
-- instrument to return sv note class
-- add sv note render(i) skeleton 
-- instruments methods to only set trig i if it's non zero, and then as an offset 
-- remove i arg being passed to instrument methods 
-- add trig clone methods 
-- add default i = 0 arg to trigs 
-- container test
-- distribute colours
-- bank concatenation utility
-- add individual seeds
-- test distortion
-- test 240bpm
-- check raw 303 VCO SQR.wav sound vs C5 midpoint
-- add saw wave to 303 demo
-- check 303 demo still works
-- rename load_files as load_wav_files
-- rename load|dump_zip as load|dump_zip_file
-- replace single shot in tests
-- remove single shot
-- replace single shot in demos
-- refactor single shot bank as file loading bank utility
-- test slot sampler code with Euclid gist 
-- check refactored samplers work with 303 demo, particularly offset code 
-- rename lookup as index of
-- check use of note in tests (should be offset where sampler concerned)
-- change demo to use offset
-- refactor SingleSampler refs
-- refactor trig code to use note as offset in the presence of chromatic sampler only
-- slot sampler to override root_notes with slot position
-- chromatic sampler to override root_notes with mid points
-- add notes re chromatic mid point assumptions
-- lookup function to reference root_notes
-- add root_notes property to base sampler
-- move existing constructor to base constructor, with repitch arg
-- add new slot and chromatic samplers, passing repitch arg to superclass
-- remove single slot sampler
-- pass rand into generator
-- reverb
-- consider multiple seeds
-- initialise bassline with seed 
-- pass seed from command line
-- specify module default parameters as instrument constructor params
-- add echo
-- three03 should be initialised with sample
-- randomise filter level
-- refactor demos/303 to use generator pattern
-- extend bassline function to include state
-- define simple stateless bassline function in demo
-- demo to execute bassline
-- add instrument play function, attaching trigs
-- remove trig- attaching decorator
-- remove single slot offset
-- refactor nine09 demo to use three03 patterns
-- dev/three03_generator.py [notes]
-- old pop colours
-- add Tidal euclid patterns
-- test pool.filter_by_tags
-- test pool.tags
-- always recast sample as SVSample
-- samples should be inserted into pool as SVSample instances
-  - remove recasting in banks code
-- add check for type in banks spawn_pool test
-- new PoolTest class
-- add back tag related code to pool (look in euclid cli)
-- replace instances of sample.split("/") with casting of class and use of properties
-- refactor spawn_pool to use new sample format
-- new svsample class extending string
-- add svsample properties
-- rip out tags stuff from pool
-- file utils
-- bank tag code
-- SVBanks spawn_pool code doesn't take into account custom SVPool class in euclid cli
-- number of lines in patch
-- single slot sampler to take repitch arg
-- banks should really not be a list
-- banks.spawn_pool
-- bjorklund
-- add online check
-- slice_wav_custom should be renamed as takes an audio_io
-- change demo project to use samples 
-- random_filename
-- slicing needs to take start and end points
-  - accept AudioSegment not wav
-- s3 banks not creating zip_buffer in a zip- compatible manner
-- convert banks zip_file to zip_buffer
-  - remove zipfile_to_bytesio utility
-- slices -> wav to zipfile
-- centre module grid in view
-- fork sunvox-dll-python
-- load banks from s3
-- assert banks
-- dump bank fixture to s3
-- create bank fixture
-- test bank utils
-- refactor export
-- test export
-- add banks default arg
-- add protection to model if mod not found
-- unique colour choice
-- capture tidal demo
-- move pool and bank into sampler
-- move bank loader into scripts
-- move export into utils
-- simple (non- optimised) layout grid
-- remove offsets
-- google colours
-- initialise colours on per module basis
-- pass colours to module initialisation
-- pass colours to pattern initialisation
-- mutate colours after every 4th block 
-- better nomenclature for tracks vs trigs
-- abstract trigs as trig list
-- blank doesn't need len(tracks)
-- remove model temp code
-- should probably be renamed as filter trigs 
-- returns an ordered dict as modules is ordered
-- add a second patch to demo for testing 
-- modify demo to use new bank loader
-- move init bank function into banks
-- single slot and multi slot sampler
-- single slot raises exception if more than one sample
-- remove "import RVXXX" nomenclature
-- try just importing rv everywhere
-- capture controller value too large
-- remove velocity check
-- move demos out of sv
-- local tests or demos
-- (string) hex value support 
-  - module default values
-- note value check for bad int
-- get_wav_file check for bad ref
-- move banks and sampler pool into project
