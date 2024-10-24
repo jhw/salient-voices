@@ -1,7 +1,6 @@
 ### short
 
 - remove project breaks
-- remove slice stuff
 
 ### ../gists/music/72d061156d7b7e9da23532453efb7d21 integration
 
@@ -22,4 +21,6 @@
 ### thoughts
 
 ### done
+
+- remove slice stuff
 
