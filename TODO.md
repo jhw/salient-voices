@@ -1,6 +1,9 @@
 ### short [02-909-instrument]
 
-- refactor machines to remove seeds and pass q instead
+- randomisation should sit outside machines
+- sample/hold modulator doesn't seem to index into rand (just uses rand.random())
+- should play be passed seeds or rand? 
+  - should rand really be redefined each iteration?
 - init_beats to generate beats function with machine
 
 - save container and check output 
@@ -29,6 +32,7 @@
 
 ### done
 
+- refactor machines to remove seeds and pass rand instead
 - nine09 to self initialise samplers based on generators passed
 - initialise nine09 instance
 - initialise machine
