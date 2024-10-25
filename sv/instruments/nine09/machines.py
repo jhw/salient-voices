@@ -12,9 +12,6 @@ def Q(seed):
     q.seed(seed)
     return q
 
-def class_name(self):
-    return str(self.__class__).split("'")[1]
-
 class EuclidSequencer:
     
     def __init__(self,
@@ -46,7 +43,6 @@ class EuclidSequencer:
                         for i in range(self.nsamples)]
         self.seeds = {k:random_seed()
                       for k in "sample|trig|pattern|volume".split("|")}
-
         
     def clone(self):
         return EuclidSequencer(name = self.name,
@@ -55,14 +51,6 @@ class EuclidSequencer:
                                samples = copy.deepcopy(self.samples),
                                seeds = copy.deepcopy(self.seeds))
 
-    def to_json(self):
-        return {"class": class_name(self),
-                "name": self.name,
-                "tag": self.tag,
-                "params": self.params,
-                "samples": self.samples,
-                "seeds": self.seeds}
-        
     def random_pattern(self, q):
         pulses, steps = q["pattern"].choice(self.patterns)[:2] # because some of Tidal euclid rhythms have 3 parameters
         return bjorklund(pulses = pulses,
@@ -136,12 +124,6 @@ class SampleHoldModulator:
                                    params = copy.deepcopy(self.params),
                                    seeds = copy.deepcopy(self.seeds))
 
-    def to_json(self):
-        return {"class": class_name(self),
-                "name": self.name,
-                "params": self.params,
-                "seeds": self.seeds}
-                    
     def render(self,
                n_ticks,
                min_value = '0000',

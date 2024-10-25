@@ -1,9 +1,14 @@
 ### short [02-909-instrument]
 
-- load banks
-- configure machines
-- pass machines to generators
-- generate beats
+- copy default bank
+- initialise bank in script
+- initialise pool 
+- initialise required seeds 
+- initialise and randomise one machine 
+- pass machine to generator function and generate trigs
+- save container and check output 
+- repeat for other machines and echo 
+- script to minimise bank fixture
 
 ### medium
 
@@ -21,5 +26,6 @@
 
 ### done
 
+- remove machines JSON code
 - remove slice stuff
 
