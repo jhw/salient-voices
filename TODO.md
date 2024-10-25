@@ -1,15 +1,15 @@
-### short [../gists/music/72d061156d7b7e9da23532453efb7d21 integration]
+### short [02-909-instrument]
 
-- banks.py
-- model.py
-- machines.py
+- load banks
+- configure machines
+- pass machines to generators
+- generate beats
 
 ### medium
 
-- complete 303 slides
-- machine volume grooves
-- sample- level utils for trimming/reversing/repeating
-
+- 303 slides
+- perkons grooves
+ 
 ### long
 
 - moto upgrade

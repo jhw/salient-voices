@@ -1,0 +1,58 @@
+- class: machines.EuclidSequencer
+  name: LoSampler
+  tag: lo
+  default: snare-clap
+  params:
+    density: 0.33333
+    modulation:
+      sample:
+        step: 4
+        threshold: 0.5
+      pattern:
+        step: 4
+        threshold: 0.5
+    nsamples: 4
+- class: machines.EuclidSequencer
+  name: MidSampler
+  tag: mid
+  default: kick-bass
+  params:
+    density: 0.66666
+    modulation:
+      sample:
+        step: 4
+        threshold: 0.5
+      pattern:
+        step: 4
+        threshold: 0.5
+    nsamples: 4
+- class: machines.EuclidSequencer
+  name: HiSampler
+  tag: hi
+  default: all-perc
+  params:
+    density: 0.9
+    modulation:
+      sample:
+        step: 4
+        threshold: 0.5
+      pattern:
+        step: 4
+        threshold: 0.5
+    nsamples: 4
+- class: machines.SampleHoldModulator
+  name: Echo/wet
+  params:
+    increment: 0.25
+    range:
+    - 0
+    - 1
+    step: 4
+- class: machines.SampleHoldModulator
+  name: Echo/feedback
+  params:
+    increment: 0.25
+    range:
+    - 0
+    - 1
+    step: 4
