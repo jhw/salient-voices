@@ -1,7 +1,5 @@
 ### short [02-909-instrument]
 
-- copy default bank
-- initialise bank in script
 - initialise pool 
 - initialise required seeds 
 - initialise and randomise one machine 
@@ -11,6 +9,10 @@
 - script to minimise bank fixture
 
 ### medium
+
+- replace print with logging
+- convert classmethods to staticmethods
+- machine config jsonschema validation
 
 - 303 slides
 - perkons grooves
@@ -26,6 +28,9 @@
 
 ### done
 
+- initialise container
+- initialise bank in script
+- copy default bank
 - remove machines JSON code
 - remove slice stuff
 
