@@ -1,10 +1,9 @@
 ### short [02-909-instrument]
 
-- randomisation should sit outside machines
-- sample/hold modulator doesn't seem to index into rand (just uses rand.random())
 - should play be passed seeds or rand? 
   - should rand really be redefined each iteration?
 - init_beats to generate beats function with machine
+- randomisation should sit outside machines
 
 - save container and check output 
 - add ghost
@@ -32,6 +31,7 @@
 
 ### done
 
+- sample/hold modulator doesn't seem to index into rand (just uses rand.random())
 - refactor machines to remove seeds and pass rand instead
 - nine09 to self initialise samplers based on generators passed
 - initialise nine09 instance

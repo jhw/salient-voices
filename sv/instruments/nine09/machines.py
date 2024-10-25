@@ -126,7 +126,7 @@ class SampleHoldModulator:
     def sample_hold(self, rand, i):
         if 0 == i % self.step:
             floor, ceil = self.range
-            v = floor + (ceil - floor) * rand.random()
+            v = floor + (ceil - floor) * rand["level"].random()
             return self.increment * int(0.5 + v / self.increment)
 
 if __name__=="__main__":
