@@ -5,8 +5,8 @@ from sv.project import load_class
 from random import Random
 
 import os
+import random
 import re
-import sys
 import yaml
 
 MachineConfig = yaml.safe_load(open("demos/909/machines.yaml").read())
@@ -17,20 +17,13 @@ clap: (clap)|(clp)|(cp)|(hc)
 hat: (oh)|( ch)|(open)|(closed)|(hh)|(hat)
 """)
 
-def beats(self, n, rand):
-    pass
-
-def ghost(self, n, rand):
-    pass
+def init_beats(machine):
+    def beats(self, n, rand):
+        pass
+    return beats
 
 if __name__ == "__main__":
     try:
-        if len(sys.argv) < 2:
-            raise RuntimeError("please enter seed")
-        seed = sys.argv[1]
-        if not re.search("^\\d+$", seed):
-            raise RuntimeError("seed must be an integer")
-        seed = int(seed)
         bank = SVBank.load_zip_file("demos/909/pico-default.zip")
         pool, _ = SVBanks([bank]).spawn_pool(tag_mapping = PoolMappingTerms)
         machine_conf = {machine_conf["tag"]:machine_conf
@@ -50,16 +43,11 @@ if __name__ == "__main__":
                         namespace = "909",
                         machine_config = [machine_conf])
         container.add_instrument(nine09)
-        rand = Random(seed)
-        seeds = {key: int(rand.random() * 1e8)
-                 for key in "sample|trig|pattern|volume".split("|")}
-        print(seeds)
-        """
+        rand = {key: Random(int(random.random() * 1e8))
+                 for key in "sample|trig|pattern|volume|level".split("|")}
+        beats = init_beats(machine)
         nine09.play(generator = beats,
                     seeds = seeds)
-        nine09.play(generator = ghost,
-                    seeds = seeds)
-        """
         """
         project = container.render_project()
         if not os.path.exists("tmp"):

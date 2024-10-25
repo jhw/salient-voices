@@ -1,18 +1,11 @@
 ### short [02-909-instrument]
 
-- should play be passed seeds or rand? 
-  - should rand really be redefined each iteration?
-- init_beats to generate beats function with machine
+- n_ticks, density, temperature args for beats rendering
 - randomisation should sit outside machines
-
-- save container and check output 
-- add ghost
-- add lo/mid/hi channels
-- script to minimise bank fixture
-- tests
 
 ### medium
 
+- script to minimise bank fixture size
 - replace print with logging
 - convert classmethods to staticmethods
 - machine config jsonschema validation
@@ -31,6 +24,8 @@
 
 ### done
 
+- should play be passed seeds or rand? 
+  - should rand really be redefined each iteration?
 - sample/hold modulator doesn't seem to index into rand (just uses rand.random())
 - refactor machines to remove seeds and pass rand instead
 - nine09 to self initialise samplers based on generators passed

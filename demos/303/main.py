@@ -4,8 +4,8 @@ from sv.sampler import SVBank
 from random import Random
 
 import os
+import random
 import re
-import sys
 
 def bassline(self, n, rand,
              block_sizes = [2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -43,12 +43,6 @@ def ghost_echo(self, n, rand,
                             
 if __name__ == "__main__":
     try:
-        if len(sys.argv) < 2:
-            raise RuntimeError("please enter seed")
-        seed = sys.argv[1]
-        if not re.search("^\\d+$", seed):
-            raise RuntimeError("seed must be an integer")
-        seed = int(seed)
         bank = SVBank.load_wav_files(bank_name = "mikey303",
                                      dir_path = "demos/303")
         container = Container(banks = [bank],
@@ -58,13 +52,12 @@ if __name__ == "__main__":
                           namespace = "303",
                           sample = "mikey303/303 VCO SQR.wav")
         container.add_instrument(three03)
-        rand = Random(seed)
-        seeds = {key: int(rand.random() * 1e8)
+        rand = {key: Random(int(random.random() * 1e8))
                  for key in "seq|note|fx".split("|")}
         three03.play(generator = bassline,
-                     seeds = seeds)
+                     rand = rand)
         three03.play(generator = ghost_echo,
-                     seeds = seeds)
+                     rand = rand)
         project = container.render_project()
         if not os.path.exists("tmp"):
             os.mkdir("tmp")
