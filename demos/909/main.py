@@ -23,29 +23,26 @@ def ghost(self, n, rand):
 if __name__ == "__main__":
     try:
         bank = SVBank.load_zip_file("demos/909/pico-default.zip")
-        container = Container(banks = [bank],
-                              bpm = 120,
-                              n_ticks = 16)
-        print (container)
+        pool, _ = SVBanks([bank]).spawn_pool(tag_mapping = PoolMappingTerms)
         machine_conf = {machine_conf["tag"]:machine_conf
                         for machine_conf in MachineConfig
                         if "tag" in machine_conf}["mid"]
-        pool, _ = SVBanks([bank]).spawn_pool(tag_mapping = PoolMappingTerms)
-        mapping = {machine_conf["tag"]:machine_conf["default"]}
         machine_class = load_class(machine_conf["class"])
         machine = machine_class(name = machine_conf["name"],
                                 tag = machine_conf["tag"],
                                 params = machine_conf["params"])
+        mapping = {machine_conf["tag"]:machine_conf["default"]}
         machine.randomise(pool = pool,
                           mapping = mapping)
-        print(machine)
-        """
+        container = Container(banks = [bank],
+                              bpm = 120,
+                              n_ticks = 16)
         nine09 = Nine09(container = container,
-                        namespace = "909")
+                        namespace = "909",
+                        machine_config = [machine_conf])
+        print(nine09.Modules)
+        """
         container.add_instrument(nine09)
-        rand = Random(seed)
-        seeds = {key: int(rand.random() * 1e8)
-                 for key in "seq|note|fx".split("|")}
         nine09.play(generator = beats,
                     seeds = seeds)
         nine09.play(generator = ghost,

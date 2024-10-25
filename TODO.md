@@ -1,10 +1,11 @@
 ### short [02-909-instrument]
 
-- initialise nine09 instance
-- nine09 to self initialise samplers based on generators passed
 - pass machine to generator function and generate trigs
 - save container and check output 
+- add ghost
+- add lo/mid/hi channels
 - script to minimise bank fixture
+- tests
 
 ### medium
 
@@ -26,6 +27,8 @@
 
 ### done
 
+- nine09 to self initialise samplers based on generators passed
+- initialise nine09 instance
 - initialise machine
 - randomise machine
 - initialise and randomise one machine 
