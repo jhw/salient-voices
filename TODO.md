@@ -1,10 +1,9 @@
 ### short [02-909-instrument]
 
-- initialise required seeds 
-- initialise and randomise one machine 
+- initialise nine09 instance
+- nine09 to self initialise samplers based on generators passed
 - pass machine to generator function and generate trigs
 - save container and check output 
-- repeat for other machines and echo 
 - script to minimise bank fixture
 
 ### medium
@@ -27,6 +26,10 @@
 
 ### done
 
+- initialise machine
+- randomise machine
+- initialise and randomise one machine 
+- initialise required seeds 
 - initialise pool 
 - initialise container
 - initialise bank in script

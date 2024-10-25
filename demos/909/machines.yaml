@@ -1,7 +1,7 @@
-- class: machines.EuclidSequencer
+- class: sv.instruments.nine09.machines.EuclidSequencer
   name: LoSampler
   tag: lo
-  default: snare-clap
+  default: clap
   params:
     density: 0.33333
     modulation:
@@ -12,10 +12,10 @@
         step: 4
         threshold: 0.5
     nsamples: 4
-- class: machines.EuclidSequencer
+- class: sv.instruments.nine09.machines.EuclidSequencer
   name: MidSampler
   tag: mid
-  default: kick-bass
+  default: kick
   params:
     density: 0.66666
     modulation:
@@ -26,10 +26,10 @@
         step: 4
         threshold: 0.5
     nsamples: 4
-- class: machines.EuclidSequencer
+- class: sv.instruments.nine09.machines.EuclidSequencer
   name: HiSampler
   tag: hi
-  default: all-perc
+  default: hat
   params:
     density: 0.9
     modulation:
@@ -40,7 +40,7 @@
         step: 4
         threshold: 0.5
     nsamples: 4
-- class: machines.SampleHoldModulator
+- class: sv.instruments.nine09.machines.SampleHoldModulator
   name: Echo/wet
   params:
     increment: 0.25
@@ -48,7 +48,7 @@
     - 0
     - 1
     step: 4
-- class: machines.SampleHoldModulator
+- class: sv.instruments.nine09.machines.SampleHoldModulator
   name: Echo/feedback
   params:
     increment: 0.25
