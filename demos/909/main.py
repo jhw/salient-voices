@@ -1,9 +1,16 @@
 from sv.container import Container
 from sv.instruments.nine09 import Nine09
-from sv.sampler import SVBank
+from sv.sampler import SVBank, SVBanks
 from random import Random
 
 import os
+import yaml
+
+Terms = yaml.safe_load("""
+kick: (kick)|(kik)|(kk)|(bd)
+clap: (clap)|(clp)|(cp)|(hc)
+hat: (oh)|( ch)|(open)|(closed)|(hh)|(hat)
+""")
 
 def beats(self, n, rand):
     pass
@@ -13,11 +20,14 @@ def ghost(self, n, rand):
 
 if __name__ == "__main__":
     try:
-        bank = SVBank.load_zip_file("demos/909/pico-default.zip")        
+        bank = SVBank.load_zip_file("demos/909/pico-default.zip")
+        print(bank)
         container = Container(banks = [bank],
                               bpm = 120,
                               n_ticks = 16)
-        print(container)
+        print(container) 
+        pool, _ = SVBanks([bank]).spawn_pool(tag_mapping = Terms)
+        print(pool)
         """
         nine09 = Nine09(container = container,
                         namespace = "909")

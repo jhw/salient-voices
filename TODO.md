@@ -1,6 +1,5 @@
 ### short [02-909-instrument]
 
-- initialise pool 
 - initialise required seeds 
 - initialise and randomise one machine 
 - pass machine to generator function and generate trigs
@@ -28,6 +27,7 @@
 
 ### done
 
+- initialise pool 
 - initialise container
 - initialise bank in script
 - copy default bank
