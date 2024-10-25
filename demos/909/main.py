@@ -2,8 +2,11 @@ from sv.container import Container
 from sv.instruments.nine09 import Nine09
 from sv.sampler import SVBank, SVBanks
 from sv.project import load_class
+from random import Random
 
 import os
+import re
+import sys
 import yaml
 
 MachineConfig = yaml.safe_load(open("demos/909/machines.yaml").read())
@@ -22,6 +25,12 @@ def ghost(self, n, rand):
 
 if __name__ == "__main__":
     try:
+        if len(sys.argv) < 2:
+            raise RuntimeError("please enter seed")
+        seed = sys.argv[1]
+        if not re.search("^\\d+$", seed):
+            raise RuntimeError("seed must be an integer")
+        seed = int(seed)
         bank = SVBank.load_zip_file("demos/909/pico-default.zip")
         pool, _ = SVBanks([bank]).spawn_pool(tag_mapping = PoolMappingTerms)
         machine_conf = {machine_conf["tag"]:machine_conf
@@ -40,13 +49,18 @@ if __name__ == "__main__":
         nine09 = Nine09(container = container,
                         namespace = "909",
                         machine_config = [machine_conf])
-        print(nine09.Modules)
-        """
         container.add_instrument(nine09)
+        rand = Random(seed)
+        seeds = {key: int(rand.random() * 1e8)
+                 for key in "sample|trig|pattern|volume".split("|")}
+        print(seeds)
+        """
         nine09.play(generator = beats,
                     seeds = seeds)
         nine09.play(generator = ghost,
                     seeds = seeds)
+        """
+        """
         project = container.render_project()
         if not os.path.exists("tmp"):
             os.mkdir("tmp")

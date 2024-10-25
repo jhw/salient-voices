@@ -1,6 +1,8 @@
 ### short [02-909-instrument]
 
-- pass machine to generator function and generate trigs
+- refactor machines to remove seeds and pass q instead
+- init_beats to generate beats function with machine
+
 - save container and check output 
 - add ghost
 - add lo/mid/hi channels
