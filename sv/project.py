@@ -1,4 +1,4 @@
-from sv.sampler import SVPool, SVBanks
+from sv.banks import SVPool, SVBanks
 from sv.colours import init_colours
 
 import importlib

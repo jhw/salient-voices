@@ -1,6 +1,6 @@
+from sv.banks import SVBank
 from sv.model import SVNoteTrig, SVPatch
 from sv.project import SVProject
-from sv.sampler import SVBank
 
 import rv
 import unittest

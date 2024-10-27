@@ -1,11 +1,13 @@
 ### short [02-909-instrument]
 
-- refactor s3 bank loading
-  - needs to include logging
+- s3 bank loading to log name of assets
+- refactor bank loading to include local caching
 
 ### medium
 
-- complete 909 example
+- complete 909 demo
+- simplify 303 demo
+
 - refactor demo naming
 - script to minimise bank fixture size
 - machine config jsonschema validation

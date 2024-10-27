@@ -1,5 +1,5 @@
-from sv.utils.banks.s3 import init_s3_banks
-from sv.sampler import SVBank
+from sv.banks import SVBank
+from sv.utils.banks.s3 import init_banks
 from moto import mock_s3
 
 import boto3
@@ -22,10 +22,10 @@ class S3BanksTest(unittest.TestCase):
                            Body = bank.zip_buffer.getvalue(),
                            ContentType = "application/gzip")
     
-    def test_init_s3_banks(self, bucket_name = BucketName):
+    def test_init_banks(self, bucket_name = BucketName):
         try:
-            banks = init_s3_banks(s3 = self.s3,
-                                  bucket_name = bucket_name)
+            banks = init_banks(s3 = self.s3,
+                               bucket_name = bucket_name)
             self.assertTrue(len(banks) == 1)
             bank = banks[0]
             self.assertTrue(isinstance(bank, SVBank))

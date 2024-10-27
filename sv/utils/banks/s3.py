@@ -1,4 +1,4 @@
-from sv.sampler import SVBank
+from sv.banks import SVBank
 
 import io
 
@@ -22,9 +22,9 @@ def _load_bank(s3,
     return SVBank(name = bank_name,
                   zip_buffer = zip_buffer)
 
-def init_s3_banks(s3,
-                  bucket_name,
-                  prefix = "banks"):
+def init_banks(s3,
+               bucket_name,
+               prefix = "banks"):
     s3_keys = _list_keys(s3, bucket_name, prefix)
     return [_load_bank(s3 = s3,
                        bucket_name = bucket_name,
