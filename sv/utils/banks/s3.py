@@ -1,6 +1,7 @@
 from sv.banks import SVBank
 
 import io
+import logging
 
 def _list_keys(s3, bucket_name, prefix):
     paginator = s3.get_paginator("list_objects_v2")
@@ -13,10 +14,11 @@ def _list_keys(s3, bucket_name, prefix):
                 keys.append(obj["Key"])
     return keys
 
-def _load_bank(s3,
+def _fetch_bank(s3,
                  bucket_name ,
                  s3_key):
     bank_name = s3_key.split("/")[-1].split(".")[0]
+    logging.info(f"fetching {bank_name}")
     zip_buffer = io.BytesIO(s3.get_object(Bucket = bucket_name,
                                           Key = s3_key)["Body"].read())
     return SVBank(name = bank_name,
@@ -26,9 +28,9 @@ def init_banks(s3,
                bucket_name,
                prefix = "banks"):
     s3_keys = _list_keys(s3, bucket_name, prefix)
-    return [_load_bank(s3 = s3,
-                       bucket_name = bucket_name,
-                       s3_key = s3_key)
+    return [_fetch_bank(s3 = s3,
+                        bucket_name = bucket_name,
+                        s3_key = s3_key)
             for s3_key in s3_keys]
 
 if __name__ == "__main__":

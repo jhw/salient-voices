@@ -1,6 +1,5 @@
 ### short [02-909-instrument]
 
-- s3 bank loading to log name of assets
 - refactor bank loading to include local caching
 
 ### medium
@@ -27,6 +26,7 @@
 
 ### done
 
+- s3 bank loading to log name of assets
 - replace print with logging
 - convert classmethods to staticmethods
 - remove vitling
