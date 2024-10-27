@@ -2,7 +2,6 @@
 
 - refactor s3 bank loading
   - needs to include logging
-- replace print with logging
 
 ### medium
 
@@ -26,6 +25,7 @@
 
 ### done
 
+- replace print with logging
 - convert classmethods to staticmethods
 - remove vitling
 - should play be passed seeds or rand? 

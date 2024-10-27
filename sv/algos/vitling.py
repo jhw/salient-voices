@@ -60,15 +60,5 @@ def closed_hat(rand, n = 16):
             ch_pattern[i] = rand.random() * 0.3
     return ch_pattern
 
-# Example usage:
 if __name__ == "__main__":
-    import random
-    rand = random.Random()
-    print("Fourfloor Kick Pattern:", fourfloor_kick(rand))
-    print("Electro Kick Pattern:", electro_kick(rand))
-    print("Backbeat Snare Pattern:", backbeat_snare(rand))
-    print("Skip Snare Pattern:", skip_snare(rand))
-    oh_pattern, ch_pattern = offbeats_hat(rand)
-    print("Offbeats Hat Pattern (Open Hat):", oh_pattern)
-    print("Offbeats Hat Pattern (Closed Hat):", ch_pattern)    
-    print("Closed Hat Pattern:", closed_hat(rand))
+    pass
