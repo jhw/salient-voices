@@ -1,14 +1,14 @@
 ### short [02-909-instrument]
 
+- refactor s3 bank loading
+  - needs to include logging
+- replace print with logging
+
 ### medium
 
 - complete 909 example
 - refactor demo naming
-- refactor s3 bank loading
-  - needs to include logging
 - script to minimise bank fixture size
-- replace print with logging
-- convert classmethods to staticmethods
 - machine config jsonschema validation
 
 ### long
@@ -26,6 +26,7 @@
 
 ### done
 
+- convert classmethods to staticmethods
 - remove vitling
 - should play be passed seeds or rand? 
   - should rand really be redefined each iteration?

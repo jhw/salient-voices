@@ -36,8 +36,8 @@ class SVSample(str):
         
 class SVBank:
 
-    @classmethod
-    def load_wav_files(self, bank_name, dir_path,
+    @staticmethod
+    def load_wav_files(bank_name, dir_path,
                        filter_fn = lambda x: x.endswith(".wav")):
         zip_buffer = io.BytesIO()
         zip_file = zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False)
@@ -54,8 +54,8 @@ class SVBank:
         return SVBank(name = bank_name,
                       zip_buffer = zip_buffer)
     
-    @classmethod
-    def load_zip_file(self, zip_path):
+    @staticmethod
+    def load_zip_file(zip_path):
         bank_name = zip_path.split("/")[-1].split(".")[0]
         zip_buffer = io.BytesIO()
         with open(zip_path, 'rb') as f:
