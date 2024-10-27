@@ -1,20 +1,23 @@
 ### short [02-909-instrument]
 
-- n_ticks, density, temperature args for beats rendering
-- randomisation should sit outside machines
+- remove chromatic sampler
+- remove vitling
 
 ### medium
 
+- complete 909 example
+- refactor demo naming
+- refactor s3 bank loading
+  - needs to include logging
 - script to minimise bank fixture size
 - replace print with logging
 - convert classmethods to staticmethods
 - machine config jsonschema validation
 
-- 303 slides
-- perkons grooves
- 
 ### long
 
+- 303 slides
+- perkons grooves
 - moto upgrade
 
 ### thoughts

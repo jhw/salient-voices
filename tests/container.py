@@ -4,6 +4,7 @@ from sv.container import Container
 from random import Random
 
 import os
+import random
 import unittest
 
 class ContainerTest(unittest.TestCase):
@@ -16,8 +17,7 @@ class ContainerTest(unittest.TestCase):
                           namespace = "303",
                           sample = "mikey303/303 VCO SQR.wav")
         container.add_instrument(three03)
-        rand = Random(seed)
-        seeds = {key: int(rand.random() * 1e8)
+        rand = {key: Random(int(random.random() * 1e8))
                  for key in "seq|note|fx".split("|")}
         def bassline(self, n, rand):
             j = -1 
@@ -27,7 +27,7 @@ class ContainerTest(unittest.TestCase):
                     yield note.render(i = i)
                     j += 1
         three03.play(generator = bassline,
-                     seeds = seeds)
+                     rand = rand)
         patches = container.patches
         self.assertTrue(patches != [])
         patch = patches[0]
