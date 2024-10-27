@@ -1,4 +1,4 @@
-import sv.algos.vitling.nine09 as nine09
+import sv.algos.vitling as nine09
 
 import random
 import unittest

@@ -1,8 +1,5 @@
 ### short [02-909-instrument]
 
-- remove chromatic sampler
-- remove vitling
-
 ### medium
 
 - complete 909 example
@@ -22,11 +19,14 @@
 
 ### thoughts
 
+- remove chromatic sampler?
+  - no because 303 depends on it
 - remove project breaks?
   - no; is complex as includes wash; and might still be useful
 
 ### done
 
+- remove vitling
 - should play be passed seeds or rand? 
   - should rand really be redefined each iteration?
 - sample/hold modulator doesn't seem to index into rand (just uses rand.random())
