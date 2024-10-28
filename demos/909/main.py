@@ -21,12 +21,15 @@ def random_pattern(rand, patterns = [pattern for pattern in TidalPatterns
     return bjorklund(pulses = pulses,
                      steps = steps)
 
-def beat(self, n, rand):
+def beat(self, n, rand,
+         sample_temperature = 0.5):
     pattern = random_pattern(rand)
     for i in range(n):
         if pattern[i % len(pattern)]:
             volume = wolgroove(rand = rand["vol"],
                                i = i)
+            if rand["samp"].random() < sample_temperature:
+                self.toggle_sample()
             trig_block = self.note(note = 0,
                                    volume = volume)
             yield trig_block.render(i = i)
@@ -56,7 +59,7 @@ if __name__ == "__main__":
                         samples = samples[:2]) # sample, alt sample
         container.add_instrument(nine09)
         seeds = {key: int(random.random() * 1e8)
-                 for key in "fx|vol|pat".split("|")}
+                 for key in "fx|vol|pat|samp".split("|")}
         nine09.play(generator = beat,
                     seeds = seeds)        
         nine09.play(generator = ghost_echo,

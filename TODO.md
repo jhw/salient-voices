@@ -1,11 +1,13 @@
 ### short [02-909-instrument]
 
-- sample toggling
+- test removing sustain by setting sustain level to zero, thereby using decay as release
 
 ### medium
 
 - density
+
 - add nine09, three03 subclassing
+
 - remove Container model
 - refactor bank loading to include local caching
 - script to minimise bank fixture size
@@ -32,6 +34,7 @@
 
 ### done
 
+- sample toggling
 - default echo wet, feedback values
 - euclid pattern
 - volume groove
