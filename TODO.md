@@ -1,8 +1,6 @@
 ### short [02-909-instrument]
 
-- pass volume
 - volume groove
-
 - euclid pattern
 
 ### medium
@@ -39,6 +37,7 @@
 
 ### done
 
+- pass volume
 - pass sample index from generator
 - 909 note to return trig
 - beat generator to return simple quantised beat

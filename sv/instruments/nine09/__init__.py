@@ -18,10 +18,12 @@ class Nine09(InstrumentBase):
     def sample(self):
         return self.samples[int(self.alt_sample)]
         
-    def note(self, note):
+    def note(self, note,
+             volume = 1):
         trigs = [SVNoteTrig(target = f"{self.namespace}Beat",
                             sample = self.sample,
-                            note = note)]
+                            note = note,
+                            vel = volume)]
         return SVTrigBlock(trigs = trigs)
 
     def modulation(self,
