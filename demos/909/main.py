@@ -1,3 +1,4 @@
+from sv.algos.euclid import bjorklund, TidalPatterns
 from sv.algos.groove import wolgroove
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
@@ -14,10 +15,15 @@ clap: (clap)|(clp)|(cp)|(hc)
 hat: (oh)|( ch)|(open)|(closed)|(hh)|(hat)
 """)
 
-def beat(self, n, rand,
-         quantise = 4):
+def random_pattern(rand, patterns = TidalPatterns):
+    pulses, steps = rand["pat"].choice(patterns)[:2] # because some of Tidal euclid rhythms have 3 parameters
+    return bjorklund(pulses = pulses,
+                     steps = steps)
+
+def beat(self, n, rand):
+    pattern = random_pattern(rand)
     for i in range(n):
-        if 0 == i % quantise:
+        if pattern[i % len(pattern)]:
             volume = wolgroove(rand = rand["vol"],
                                i = i)
             trig_block = self.note(note = 0,
@@ -49,7 +55,7 @@ if __name__ == "__main__":
                         samples = samples[:2]) # sample, alt sample
         container.add_instrument(nine09)
         seeds = {key: int(random.random() * 1e8)
-                 for key in "fx|vol".split("|")}
+                 for key in "fx|vol|pat".split("|")}
         nine09.play(generator = beat,
                     seeds = seeds)        
         nine09.play(generator = ghost_echo,

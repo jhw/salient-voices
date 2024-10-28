@@ -1,8 +1,8 @@
 ### short [02-909-instrument]
 
-- euclid pattern
-
 - default echo wet, feedback values
+
+- density
 
 ### medium
 
@@ -10,7 +10,6 @@
 
 - density
 - sample toggling
-- pattern toggling
 
 - remove Container model
 
@@ -19,6 +18,7 @@
 
 ### long
 
+- digitakt II dual euclidian
 - 303 slides
 - perkons grooves
 
@@ -26,6 +26,9 @@
 
 ### thoughts
 
+- pattern toggling?
+  - think it might be overkill
+  - replace with digitakt 2 dual euclidian
 - harmonise nomenclature as nine09, three03 etc?
   - not a lot of point
 - remove chromatic sampler?
@@ -35,6 +38,7 @@
 
 ### done
 
+- euclid pattern
 - volume groove
 - pass volume
 - pass sample index from generator
