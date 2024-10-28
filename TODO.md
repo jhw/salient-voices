@@ -1,14 +1,13 @@
 ### short [02-909-instrument]
 
-- TypeError: SVNoteTrig.__init__() got an unexpected keyword argument 'mod'
+- machine isn't yielding SVNoteTrig with correct signature
 
-- populate 909 trig code
+- what is the relationship between machine and instrument here?
 
 ### medium
 
 - refactor 303 for consistency with new machine api
 - refactor bank loading to include local caching
-- simplify 303 demo
 - refactor demo naming
 - script to minimise bank fixture size
 - machine config jsonschema validation

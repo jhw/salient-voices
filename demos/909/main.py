@@ -13,7 +13,7 @@ MachineConfig = yaml.safe_load(open("demos/909/machines.yaml").read())
 
 BeatGenerator = yaml.safe_load("""
 class: sv.instruments.nine09.machines.EuclidSequencer
-name: generator
+name: Beat
 params:
   density: 0.5
   modulation:

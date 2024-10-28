@@ -29,6 +29,13 @@ class Nine09(InstrumentBase):
             self.Modules.append(mod)
         self.Modules += FXModules
 
+    """
+    trigs = [SVNoteTrig(target = f"{self.namespace}MultiSynth",
+                        sample_mod = f"{self.namespace}Sampler",
+                        sample = self.sample,
+                        note = note),
+    """
+        
     def note(self):
         trigs = []
         return SVTrigBlock(trigs = trigs)
