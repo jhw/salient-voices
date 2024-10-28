@@ -6,15 +6,11 @@ class Nine09(InstrumentBase):
     Modules = load_yaml(__file__, "modules.yaml")
     
     def __init__(self, container, namespace, samples,
-                 echo_wet = 16, # seems to required integer format; no sure why won't take hex
-                 echo_feedback = 16, # seems to required integer format; no sure why won't take hex
                  echo_delay = 192):
         super().__init__(container = container,
                          namespace = namespace)
         self.samples = samples
-        self.defaults = {"Echo": {"wet": echo_wet,
-                                  "feedback": echo_feedback,
-                                  "delay": echo_delay}}
+        self.defaults = {"Echo": {"delay": echo_delay}}
 
     def note(self):
         trigs = []

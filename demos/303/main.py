@@ -8,12 +8,12 @@ import random
 import re
 
 def bassline(self, n, rand,
-             block_sizes = [2, 3, 4, 5, 6, 7, 8, 9, 10],
+             block_sizes = [2],
              root_offset = -5,
-             note_scale = [-2, -2, 0, 0, 0, 0, 3, 3, 12],
+             note_scale = [0, 0, 0, 12],
              quantise = 4,
-             note_density = 0.75,
-             filter_frequencies = ["2000", "2800", "3000", "3800", "4000", "4800", "5000"]):
+             note_density = 0.5,
+             filter_frequencies = ["2000", "3000", "4000"]):
     j = 0    
     for i in range(n):
         if (i >= j and
@@ -31,8 +31,8 @@ def bassline(self, n, rand,
             j = i + block_size
 
 def ghost_echo(self, n, rand,
-               sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
-               quantise = 8):
+               sample_hold_levels = ["0000", "2000", "4000"],
+               quantise = 4):
     for i in range(n):
         if 0 == i % quantise:            
             echo_wet_level = rand["fx"].choice(sample_hold_levels)
@@ -46,7 +46,7 @@ if __name__ == "__main__":
         bank = SVBank.load_wav_files(bank_name = "mikey303",
                                      dir_path = "demos/303")
         container = SVContainer(banks = [bank],
-                                bpm = 240,
+                                bpm = 120,
                                 n_ticks = 64)
         three03 = Three03(container = container,
                           namespace = "303",

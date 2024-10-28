@@ -1,7 +1,7 @@
 ### short [02-909-instrument]
 
-- generator functions
-- run demo and see if echo included
+- pass seeds to instrument not rand
+
 - 909 samples
 - basic 909 beat
 
@@ -13,7 +13,6 @@
 - sample switching
 - pattern switching
 
-- simplify 303 demo
 - refactor bank loading to include local caching
 - refactor demo naming
 - script to minimise bank fixture size
@@ -34,6 +33,10 @@
 
 ### done
 
+- simplify 303 demo
+- remove echo defaults
+- generator functions
+- run demo and see if echo included
 - remove machines.yaml and machines.py
 - copy 303 instrument to 909 and remove note stuff
 - remove env from demo
