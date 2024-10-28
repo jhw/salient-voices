@@ -29,9 +29,10 @@ class InstrumentBase:
     def play(self, generator, seeds):
         rand = {key: Random(value)
                  for key, value in seeds.items()}
-        for trigs in generator(self,
-                               rand = rand,
-                               n = self.container.n_ticks):
+        for i, trig_block in generator(self,
+                                  rand = rand,
+                                  n = self.container.n_ticks):
+            trigs = trig_block.render(i)
             self.container.add_trigs(trigs)
 
     @property

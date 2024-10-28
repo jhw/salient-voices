@@ -31,8 +31,8 @@ def beat(self, n, rand,
             if rand["samp"].random() < sample_temperature:
                 self.toggle_sample()
             trig_block = self.note(note = 0,
-                                   volume = volume)
-            yield trig_block.render(i = i)
+                                   volume = volume)            
+            yield i, trig_block
 
 def ghost_echo(self, n, rand,
                sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
@@ -43,7 +43,7 @@ def ghost_echo(self, n, rand,
             echo_feedback_level = rand["fx"].choice(sample_hold_levels)
             trig_block = self.modulation(echo_wet = echo_wet_level,
                                          echo_feedback = echo_feedback_level)
-            yield trig_block.render(i = i)
+            yield i, trig_block
                             
 if __name__ == "__main__":
     try:        

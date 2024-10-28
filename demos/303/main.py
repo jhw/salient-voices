@@ -24,7 +24,7 @@ def bassline(self, n, rand,
                                    sustain_term = sustain_term, 
                                    filter_freq = filter_freq)
             if (i + sustain_term) < n:
-                yield trig_block.render(i = i)
+                yield i, trig_block
             j = i + block_size
 
 def ghost_echo(self, n, rand,
@@ -36,7 +36,7 @@ def ghost_echo(self, n, rand,
             echo_feedback_level = rand["fx"].choice(sample_hold_levels)
             trig_block = self.modulation(echo_wet = echo_wet_level,
                                          echo_feedback = echo_feedback_level)
-            yield trig_block.render(i = i)
+            yield i, trig_block
                             
 if __name__ == "__main__":
     try:

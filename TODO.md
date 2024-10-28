@@ -1,12 +1,13 @@
 ### short [02-909-instrument]
 
-- density
+- explicit spawn patch call
 
 ### medium
 
+- density
+
 - add nine09, three03 subclassing
 
-- remove Container model
 - refactor bank loading to include local caching
 - script to minimise bank fixture size
 
@@ -20,6 +21,9 @@
 
 ### thoughts
 
+- remove Container model?
+  - no I think you really need it to encapsulate all the stuff going on
+  - and that serialisation, which might cause you to liberate the insides, is a secondary concern
 - pattern toggling?
   - think it might be overkill
   - replace with digitakt 2 dual euclidian
