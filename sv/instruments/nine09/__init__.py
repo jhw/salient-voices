@@ -18,11 +18,12 @@ class Nine09(InstrumentBase):
 
     Modules = []
     
-    def __init__(self, container, namespace, machine_config):
+    def __init__(self, container, namespace, channel_names):
+        super().__init__(container = container,
+                         namespace = namespace)
         self.defaults = {}
-        for machine_conf in machine_config:
-            mod_name = f"{machine_conf['tag'].capitalize()}Sampler"            
-            mod = {"name": mod_name,
+        for channel_name in channel_names:
+            mod = {"name": channel_name,
                    "class": "sv.sample.SVSlotSampler",
                    "links": ["Echo"]}
             self.Modules.append(mod)

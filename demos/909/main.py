@@ -34,32 +34,32 @@ hat: (oh)|( ch)|(open)|(closed)|(hh)|(hat)
 
 if __name__ == "__main__":
     try:
-        bank = SVBank.load_zip_file("demos/909/pico-default.zip")
-        pool, _ = SVBanks([bank]).spawn_pool(tag_mapping = PoolMappingTerms)
+        
         machine_conf = BeatGenerator
+        # initialise container
+        bank = SVBank.load_zip_file("demos/909/pico-default.zip")
+        container = SVContainer(banks = [bank],
+                                bpm = 120,
+                                n_ticks = 16)
+        nine09 = Nine09(container = container,
+                        namespace = "909",
+                        channel_names = [machine_conf["name"]])
+        container.add_instrument(nine09)
+        print(container)
+        # initialise machine
+        pool, _ = SVBanks([bank]).spawn_pool(tag_mapping = PoolMappingTerms)
         machine_class = load_class(machine_conf["class"])
         samples = pool.filter_by_tag("hat")
         random.shuffle(samples)
         machine = machine_class(name = machine_conf["name"],
                                 params = machine_conf["params"],
                                 samples = samples[:machine_conf["params"]["nsamples"]])
-        print (machine)
-        """
-        container = SVContainer(banks = [bank],
-                                bpm = 120,
-                                n_ticks = 16)
-        nine09 = Nine09(container = container,
-                        namespace = "909",
-                        machine_config = [machine_conf])
-        container.add_instrument(nine09)
-        """
-        """
+        print(machine)
+        # play machine
         rand = {key: Random(int(random.random() * 1e8))
                  for key in "sample|trig|pattern|volume|level".split("|")}
-        beats = init_beats(machine)
-        nine09.play(generator = beats,
+        nine09.play(generator = machine,
                     rand = rand)
-        """
         """
         project = container.render_project()
         if not os.path.exists("tmp"):
