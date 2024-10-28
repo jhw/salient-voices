@@ -8,11 +8,12 @@
 - density
 - 303 slides
 - refactor bank loading to include local caching
+- decompiler
+- perkons grooves
 
 ### long
 
 - digitakt II dual euclidian
-- perkons grooves
 
 - moto upgrade
 
