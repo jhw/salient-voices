@@ -13,6 +13,13 @@ clap: (clap)|(clp)|(cp)|(hc)
 hat: (oh)|( ch)|(open)|(closed)|(hh)|(hat)
 """)
 
+def beat(self, n, rand,
+         quantise = 4):
+    for i in range(n):
+        if 0 == i % quantise:
+             trig_block = self.note()
+             yield trig_block.render(i = i)
+
 def ghost_echo(self, n, rand,
                sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
                quantise = 4):
@@ -38,7 +45,9 @@ if __name__ == "__main__":
                         samples = samples[:4])
         container.add_instrument(nine09)
         seeds = {key: int(random.random() * 1e8)
-                 for key in "seq|note|fx".split("|")}
+                 for key in "fx".split("|")}
+        nine09.play(generator = beat,
+                    seeds = seeds)        
         nine09.play(generator = ghost_echo,
                     seeds = seeds)        
         project = container.render_project()

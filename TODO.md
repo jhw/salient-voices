@@ -1,8 +1,6 @@
 ### short [02-909-instrument]
 
-- beat generator skeleton
 - 909 note to return trig
-- beat generator to return simple quantised beat
 
 ### medium
 
@@ -32,6 +30,8 @@
 
 ### done
 
+- beat generator to return simple quantised beat
+- beat generator skeleton
 - note() to accept note value
 - sample index
 - 909 samples
