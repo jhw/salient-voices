@@ -7,11 +7,15 @@ class Three03(InstrumentBase):
     
     def __init__(self, container, namespace, sample,
                  filter_resonance = "575", # no idea re format; doesn't seem to correspond to either of the values in the UI; max seems to be around "599"
+                 echo_wet = 64, # '2000'
+                 echo_feedback = 64, # '2000'
                  reverb_wet = 2): # setting as integer as easier when wanting tiny amounts only
         super().__init__(container = container,
                          namespace = namespace)
         self.sample = sample
         self.defaults = {"Filter": {"resonance": filter_resonance},
+                         "Echo": {"wet": echo_wet,
+                                  "feedback": echo_feedback},
                          "Reverb": {"wet": reverb_wet}}
 
     def note(self,

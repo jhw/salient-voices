@@ -5,9 +5,14 @@ class Nine09(InstrumentBase):
 
     Modules = load_yaml(__file__, "modules.yaml")
     
-    def __init__(self, container, namespace, samples):
+    def __init__(self, container, namespace, samples,
+                 echo_wet = 64, # '2000'
+                 echo_feedback = 64): # '2000'
         super().__init__(container = container,
                          namespace = namespace)
+        self.defaults = {"Echo": {"wet": echo_wet,
+                                  "feedback": echo_feedback}}
+
         self.samples = samples
         self.alt_sample = False
 

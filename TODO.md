@@ -1,18 +1,12 @@
 ### short [02-909-instrument]
 
-- default echo wet, feedback values
-
-- density
+- sample toggling
 
 ### medium
 
-- add nine09, three03 subclassing
-
 - density
-- sample toggling
-
+- add nine09, three03 subclassing
 - remove Container model
-
 - refactor bank loading to include local caching
 - script to minimise bank fixture size
 
@@ -38,6 +32,7 @@
 
 ### done
 
+- default echo wet, feedback values
 - euclid pattern
 - volume groove
 - pass volume

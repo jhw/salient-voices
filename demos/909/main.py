@@ -15,7 +15,8 @@ clap: (clap)|(clp)|(cp)|(hc)
 hat: (oh)|( ch)|(open)|(closed)|(hh)|(hat)
 """)
 
-def random_pattern(rand, patterns = TidalPatterns):
+def random_pattern(rand, patterns = [pattern for pattern in TidalPatterns
+                                     if (pattern[0] / pattern[1]) < 0.5]):
     pulses, steps = rand["pat"].choice(patterns)[:2] # because some of Tidal euclid rhythms have 3 parameters
     return bjorklund(pulses = pulses,
                      steps = steps)
