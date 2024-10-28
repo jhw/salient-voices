@@ -1,16 +1,15 @@
 ### short [02-909-instrument]
 
-- fix 909 container error
+```
+TypeError: EuclidSequencer.__call__() got multiple values for argument 'rand'
+```
 
-- render 909 beat machine
-- render 909 echo
+- populate 909 trig code
 
 ### medium
 
 - refactor bank loading to include local caching
-
 - simplify 303 demo
-
 - refactor demo naming
 - script to minimise bank fixture size
 - machine config jsonschema validation
@@ -35,6 +34,7 @@
 
 ### done
 
+- fix 909 container error
 - migrate machines.py
 - migrate modules.yaml
 - refactor Container as SVContainer
