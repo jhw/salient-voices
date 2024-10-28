@@ -32,6 +32,15 @@ clap: (clap)|(clp)|(cp)|(hc)
 hat: (oh)|( ch)|(open)|(closed)|(hh)|(hat)
 """)
 
+Env = yaml.safe_load("""
+nticks: 16
+npatches: 16
+density: 0.75
+temperature: 0.5
+bpm: 120
+tpb: 4 # ticks per beat
+""")
+
 if __name__ == "__main__":
     try:
         
@@ -59,7 +68,8 @@ if __name__ == "__main__":
         rand = {key: Random(int(random.random() * 1e8))
                  for key in "sample|trig|pattern|volume|level".split("|")}
         nine09.play(generator = machine,
-                    rand = rand)
+                    rand = rand,
+                    env = Env)
         """
         project = container.render_project()
         if not os.path.exists("tmp"):

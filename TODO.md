@@ -1,13 +1,12 @@
 ### short [02-909-instrument]
 
-```
-TypeError: EuclidSequencer.__call__() got multiple values for argument 'rand'
-```
+- TypeError: SVNoteTrig.__init__() got an unexpected keyword argument 'mod'
 
 - populate 909 trig code
 
 ### medium
 
+- refactor 303 for consistency with new machine api
 - refactor bank loading to include local caching
 - simplify 303 demo
 - refactor demo naming
@@ -33,6 +32,12 @@ TypeError: EuclidSequencer.__call__() got multiple values for argument 'rand'
   - no; is complex as includes wash; and might still be useful
 
 ### done
+
+- define and pass env
+
+```
+TypeError: EuclidSequencer.__call__() got multiple values for argument 'rand'
+```
 
 - fix 909 container error
 - migrate machines.py
