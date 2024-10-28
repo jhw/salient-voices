@@ -1,12 +1,13 @@
 ### short [02-909-instrument]
 
-- machine isn't yielding SVNoteTrig with correct signature
-
-- what is the relationship between machine and instrument here?
+- revert play function
+- remove machines.yaml and machines.py
+- copy 303 instrument to 909 and remove note stuff
+- remove env from demo
+- copy 303 generator pattern to 909
 
 ### medium
 
-- refactor 303 for consistency with new machine api
 - refactor bank loading to include local caching
 - refactor demo naming
 - script to minimise bank fixture size
