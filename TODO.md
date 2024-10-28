@@ -1,7 +1,5 @@
 ### short [02-909-instrument]
 
-- move 303 defaults from yaml to instrument
-
 - pass volume
 - volume groove
 

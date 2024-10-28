@@ -7,15 +7,11 @@ class Three03(InstrumentBase):
     
     def __init__(self, container, namespace, sample,
                  filter_resonance = "575", # no idea re format; doesn't seem to correspond to either of the values in the UI; max seems to be around "599"
-                 echo_delay = 36,
-                 echo_delay_unit = 3, # tick
                  reverb_wet = 2): # setting as integer as easier when wanting tiny amounts only
         super().__init__(container = container,
                          namespace = namespace)
         self.sample = sample
         self.defaults = {"Filter": {"resonance": filter_resonance},
-                         "Echo": {"delay": echo_delay,
-                                  "delay_unit": echo_delay_unit},
                          "Reverb": {"wet": reverb_wet}}
 
     def note(self,

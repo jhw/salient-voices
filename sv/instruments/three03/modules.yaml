@@ -26,6 +26,9 @@
     - Echo
 - name: Echo
   class: rv.modules.echo.Echo
+  defaults:
+    delay: 36
+    delay_unit: 3 # tick
   links:
     - Reverb
 - name: Reverb
