@@ -1,6 +1,5 @@
 ### short [02-909-instrument]
 
-- revert play function
 - remove machines.yaml and machines.py
 - copy 303 instrument to 909 and remove note stuff
 - remove env from demo
@@ -33,6 +32,7 @@
 
 ### done
 
+- revert play function
 - define and pass env
 
 ```
