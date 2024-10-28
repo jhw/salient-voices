@@ -1,15 +1,23 @@
 ### short [02-909-instrument]
 
-- use modulo for sample indexation
-- set volume
+- pass sample index from generator
+- use modulo in sample indexation
+- pass volume
 - volume groove
+- euclid pattern
 
 ### medium
 
-- euclid pattern
-- pattern density
-- sample switching
-- pattern switching
+- density
+- sample toggling
+- pattern toggling
+
+- remove Container model
+
+- harmonise nomenclature as nine09, three03 etc
+- add nine09, three03 subclassing
+
+- undo 303 sustain model
 
 - refactor demo naming
 - refactor bank loading to include local caching
@@ -19,6 +27,7 @@
 
 - 303 slides
 - perkons grooves
+
 - moto upgrade
 
 ### thoughts
