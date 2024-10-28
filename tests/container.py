@@ -1,7 +1,6 @@
 from sv.instruments.three03 import Three03
 from sv.banks import SVBank
 from sv.container import SVContainer
-from random import Random
 
 import os
 import random
@@ -17,7 +16,7 @@ class ContainerTest(unittest.TestCase):
                           namespace = "303",
                           sample = "mikey303/303 VCO SQR.wav")
         container.add_instrument(three03)
-        rand = {key: Random(int(random.random() * 1e8))
+        seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx".split("|")}
         def bassline(self, n, rand):
             j = -1 
@@ -27,7 +26,7 @@ class ContainerTest(unittest.TestCase):
                     yield note.render(i = i)
                     j += 1
         three03.play(generator = bassline,
-                     rand = rand)
+                     seeds = seeds)
         patches = container.patches
         self.assertTrue(patches != [])
         patch = patches[0]

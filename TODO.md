@@ -5,6 +5,8 @@
 
 ### medium
 
+- default echo wet, feedback values
+
 - density
 - sample toggling
 - pattern toggling
