@@ -1,11 +1,16 @@
 ### short [02-909-instrument]
 
-- refactor bank loading to include local caching
+- refactor Container as SVContainer
+- migrate machines.py
+- migrate modules.yaml
+
 
 ### medium
 
 - complete 909 demo
 - simplify 303 demo
+
+- refactor bank loading to include local caching
 
 - refactor demo naming
 - script to minimise bank fixture size
@@ -26,6 +31,7 @@
 
 ### done
 
+- refactor SVPatch as SVTrigPatch
 - s3 bank loading to log name of assets
 - replace print with logging
 - convert classmethods to staticmethods

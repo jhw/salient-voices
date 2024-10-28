@@ -191,7 +191,7 @@ class SVModTrig(SVTrigBase):
                             ctl = ctrl_id,
                             val = value)
 
-class SVPatch:
+class SVTrigPatch:
 
     def __init__(self, n_ticks, trigs = []):
         self.trigs = trigs

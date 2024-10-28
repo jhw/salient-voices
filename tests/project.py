@@ -1,5 +1,5 @@
 from sv.banks import SVBank
-from sv.model import SVNoteTrig, SVPatch
+from sv.model import SVNoteTrig, SVTrigPatch
 from sv.project import SVProject
 
 import rv
@@ -45,8 +45,8 @@ class RenderTest(unittest.TestCase):
             trig = SVNoteTrig(target = "Generator",
                               note = 56,
                               i = 0)
-            patch = SVPatch(trigs = [trig],
-                            n_ticks = 16)
+            patch = SVTrigPatch(trigs = [trig],
+                                n_ticks = 16)
             project = SVProject().render_project(patches = [patch],
                                                  modules = modules,
                                                  bpm = 120)
@@ -61,8 +61,8 @@ class RenderTest(unittest.TestCase):
             trig = SVNoteTrig(target = "Sampler",
                               sample = "mikey303/303 VCO SQR.wav",
                               i = 0)
-            patch = SVPatch(trigs = [trig],
-                            n_ticks = 16)
+            patch = SVTrigPatch(trigs = [trig],
+                                n_ticks = 16)
             project = SVProject().render_project(patches = [patch],
                                                  modules = modules,
                                                  banks = [bank],

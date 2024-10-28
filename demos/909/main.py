@@ -1,6 +1,6 @@
+from sv.banks import SVBank, SVBanks
 from sv.container import Container
 from sv.instruments.nine09 import Nine09
-from sv.sampler import SVBank, SVBanks
 from sv.project import load_class
 from random import Random
 
@@ -43,11 +43,13 @@ if __name__ == "__main__":
                         namespace = "909",
                         machine_config = [machine_conf])
         container.add_instrument(nine09)
+        """
         rand = {key: Random(int(random.random() * 1e8))
                  for key in "sample|trig|pattern|volume|level".split("|")}
         beats = init_beats(machine)
         nine09.play(generator = beats,
-                    seeds = seeds)
+                    rand = rand)
+        """
         """
         project = container.render_project()
         if not os.path.exists("tmp"):

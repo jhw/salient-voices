@@ -1,6 +1,6 @@
+from sv.banks import SVBank
 from sv.container import Container
 from sv.instruments.three03 import Three03
-from sv.sampler import SVBank
 from random import Random
 
 import os

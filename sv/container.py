@@ -1,4 +1,4 @@
-from sv.model import SVPatch
+from sv.model import SVTrigPatch
 from sv.project import SVProject
 
 class Container:
@@ -19,7 +19,7 @@ class Container:
         self.spawn_patch()
 
     def spawn_patch(self):
-        self.patches.append(SVPatch(n_ticks = self.n_ticks))
+        self.patches.append(SVTrigPatch(n_ticks = self.n_ticks))
 
     def add_instrument(self, instrument):
         self.instruments.append(instrument)
