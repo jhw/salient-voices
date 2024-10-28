@@ -1,9 +1,7 @@
 ### short [02-909-instrument]
 
-- migrate machines.py
-- migrate modules.yaml
-
 - fix 909 container error
+
 - render 909 beat machine
 - render 909 echo
 
@@ -37,6 +35,8 @@
 
 ### done
 
+- migrate machines.py
+- migrate modules.yaml
 - refactor Container as SVContainer
 - refactor SVPatch as SVTrigPatch
 - s3 bank loading to log name of assets
