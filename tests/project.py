@@ -38,7 +38,7 @@ SamplerModules = yaml.safe_load("""
     - Output
 """)
 
-class RenderTest(unittest.TestCase):
+class ProjectTest(unittest.TestCase):
 
     def test_generator(self, modules = GeneratorModules):
         try:

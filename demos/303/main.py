@@ -1,5 +1,5 @@
 from sv.banks import SVBank
-from sv.container import Container
+from sv.container import SVContainer
 from sv.instruments.three03 import Three03
 from random import Random
 
@@ -45,9 +45,9 @@ if __name__ == "__main__":
     try:
         bank = SVBank.load_wav_files(bank_name = "mikey303",
                                      dir_path = "demos/303")
-        container = Container(banks = [bank],
-                              bpm = 240,
-                              n_ticks = 64)
+        container = SVContainer(banks = [bank],
+                                bpm = 240,
+                                n_ticks = 64)
         three03 = Three03(container = container,
                           namespace = "303",
                           sample = "mikey303/303 VCO SQR.wav")

@@ -1,6 +1,6 @@
 from sv.instruments.three03 import Three03
 from sv.banks import SVBank
-from sv.container import Container
+from sv.container import SVContainer
 from random import Random
 
 import os
@@ -12,7 +12,7 @@ class ContainerTest(unittest.TestCase):
     def test_play(self, seed = 12345):
         bank = SVBank.load_wav_files(bank_name = "mikey303",
                                      dir_path = "tests")
-        container = Container(banks = [bank])
+        container = SVContainer(banks = [bank])
         three03 = Three03(container = container,
                           namespace = "303",
                           sample = "mikey303/303 VCO SQR.wav")

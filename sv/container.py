@@ -1,7 +1,7 @@
 from sv.model import SVTrigPatch
 from sv.project import SVProject
 
-class Container:
+class SVContainer:
 
     def __init__(self,
                  banks = [],

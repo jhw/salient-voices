@@ -1,20 +1,26 @@
 ### short [02-909-instrument]
 
-- refactor Container as SVContainer
 - migrate machines.py
 - migrate modules.yaml
 
+- fix 909 container error
+- render 909 beat machine
+- render 909 echo
 
 ### medium
 
-- complete 909 demo
-- simplify 303 demo
-
 - refactor bank loading to include local caching
+
+- simplify 303 demo
 
 - refactor demo naming
 - script to minimise bank fixture size
 - machine config jsonschema validation
+
+### gists/music/72x 
+
+- move randomisation from model to cli
+- move model into sv
 
 ### long
 
@@ -31,6 +37,7 @@
 
 ### done
 
+- refactor Container as SVContainer
 - refactor SVPatch as SVTrigPatch
 - s3 bank loading to log name of assets
 - replace print with logging

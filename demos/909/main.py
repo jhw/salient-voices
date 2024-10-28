@@ -1,5 +1,5 @@
 from sv.banks import SVBank, SVBanks
-from sv.container import Container
+from sv.container import SVContainer
 from sv.instruments.nine09 import Nine09
 from sv.project import load_class
 from random import Random
@@ -36,9 +36,9 @@ if __name__ == "__main__":
         mapping = {machine_conf["tag"]:machine_conf["default"]}
         machine.randomise(pool = pool,
                           mapping = mapping)
-        container = Container(banks = [bank],
-                              bpm = 120,
-                              n_ticks = 16)
+        container = SVContainer(banks = [bank],
+                                bpm = 120,
+                                n_ticks = 16)
         nine09 = Nine09(container = container,
                         namespace = "909",
                         machine_config = [machine_conf])
