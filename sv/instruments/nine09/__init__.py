@@ -1,15 +1,17 @@
 from sv.instruments import InstrumentBase, SVTrigBlock, load_yaml
-from sv.model import SVNoteTrig, SVNoteOffTrig, SVModTrig
+from sv.model import SVNoteTrig, SVModTrig
 
 class Nine09(InstrumentBase):
 
     Modules = load_yaml(__file__, "modules.yaml")
     
     def __init__(self, container, namespace, samples,
+                 sample_index = 0,
                  echo_delay = 192):
         super().__init__(container = container,
                          namespace = namespace)
         self.samples = samples
+        self.sample_index = sample_index
         self.defaults = {"Echo": {"delay": echo_delay}}
 
     def note(self):

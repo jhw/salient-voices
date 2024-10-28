@@ -1,6 +1,8 @@
 ### short [02-909-instrument]
 
-- basic 909 beat
+- beat generator skeleton
+- 909 note to return trig
+- beat generator to return simple quantised beat
 
 ### medium
 
@@ -30,6 +32,7 @@
 
 ### done
 
+- sample index
 - 909 samples
 - pass seeds to instrument not rand
 - simplify 303 demo
