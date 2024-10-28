@@ -4,7 +4,6 @@ from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
 from sv.instruments.nine09 import Nine09
 
-import os
 import random
 import re
 import yaml
@@ -64,11 +63,7 @@ if __name__ == "__main__":
         nine09.play(generator = beat,
                     seeds = seeds)        
         nine09.play(generator = ghost_echo,
-                    seeds = seeds)        
-        project = container.render_project()
-        if not os.path.exists("tmp"):
-            os.mkdir("tmp")
-        with open("tmp/demo-909.sunvox", 'wb') as f:
-            project.write_to(f)
+                    seeds = seeds)
+        container.write_project("tmp/demo-909.sunvox")
     except RuntimeError as error:
         print ("ERROR: %s" % str(error))

@@ -1,6 +1,8 @@
 from sv.model import SVTrigPatch
 from sv.project import SVProject
 
+import os
+
 class SVContainer:
 
     def __init__(self,
@@ -40,6 +42,14 @@ class SVContainer:
                                            bpm = self.bpm,
                                            wash = self.wash,
                                            breaks = self.breaks)
-        
+
+    def write_project(self, filename):
+        path_to_filename = "/".join(filename.split("/")[:-1])
+        if not os.path.exists(path_to_filename):
+            os.makedirs(path_to_filename)
+        project = self.render_project()
+        with open(filename, 'wb') as f:            
+            project.write_to(f)
+              
 if __name__ == "__main__":
     pass

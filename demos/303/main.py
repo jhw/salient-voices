@@ -2,7 +2,6 @@ from sv.banks import SVBank
 from sv.container import SVContainer
 from sv.instruments.three03 import Three03
 
-import os
 import random
 import re
 
@@ -56,10 +55,6 @@ if __name__ == "__main__":
                      seeds = seeds)
         three03.play(generator = ghost_echo,
                      seeds = seeds)
-        project = container.render_project()
-        if not os.path.exists("tmp"):
-            os.mkdir("tmp")
-        with open("tmp/demo-303.sunvox", 'wb') as f:
-            project.write_to(f)
+        container.write_project("tmp/demo-303.sunvox")
     except RuntimeError as error:
         print ("ERROR: %s" % str(error))
