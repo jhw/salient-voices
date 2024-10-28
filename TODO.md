@@ -8,6 +8,7 @@
 ### medium
 
 - euclid pattern
+- pattern density
 - volume groove
 - sample switching
 - pattern switching
