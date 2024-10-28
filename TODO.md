@@ -1,19 +1,19 @@
 ### short [02-909-instrument]
 
-- 909 note to return trig
+- use modulo for sample indexation
+- set volume
+- volume groove
 
 ### medium
 
 - euclid pattern
 - pattern density
-- volume groove
 - sample switching
 - pattern switching
 
-- refactor bank loading to include local caching
 - refactor demo naming
+- refactor bank loading to include local caching
 - script to minimise bank fixture size
-- machine config jsonschema validation
 
 ### long
 
@@ -30,6 +30,7 @@
 
 ### done
 
+- 909 note to return trig
 - beat generator to return simple quantised beat
 - beat generator skeleton
 - note() to accept note value

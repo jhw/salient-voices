@@ -14,9 +14,15 @@ class Nine09(InstrumentBase):
         self.sample_index = sample_index
         self.defaults = {"Echo": {"delay": echo_delay}}
 
+    @property
+    def sample(self):
+        return self.samples[self.sample_index]
+        
     def note(self,
              note = 0):
-        trigs = []
+        trigs = [SVNoteTrig(target = f"{self.namespace}Beat",
+                            sample = self.sample,
+                            note = note)]
         return SVTrigBlock(trigs = trigs)
 
     def modulation(self,
