@@ -1,6 +1,5 @@
 ### short [02-909-instrument]
 
-- pass sample index from generator
 - use modulo in sample indexation
 - pass volume
 - volume groove
@@ -14,7 +13,6 @@
 
 - remove Container model
 
-- harmonise nomenclature as nine09, three03 etc
 - add nine09, three03 subclassing
 
 - undo 303 sustain model
@@ -32,6 +30,8 @@
 
 ### thoughts
 
+- harmonise nomenclature as nine09, three03 etc?
+  - not a lot of point
 - remove chromatic sampler?
   - no because 303 depends on it
 - remove project breaks?
@@ -39,6 +39,7 @@
 
 ### done
 
+- pass sample index from generator
 - 909 note to return trig
 - beat generator to return simple quantised beat
 - beat generator skeleton

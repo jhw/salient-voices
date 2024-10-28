@@ -17,7 +17,8 @@ def beat(self, n, rand,
          quantise = 4):
     for i in range(n):
         if 0 == i % quantise:
-             trig_block = self.note()
+             trig_block = self.note(note = 0,
+                                    sample_index = 0)
              yield trig_block.render(i = i)
 
 def ghost_echo(self, n, rand,

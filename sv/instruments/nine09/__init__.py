@@ -6,22 +6,17 @@ class Nine09(InstrumentBase):
     Modules = load_yaml(__file__, "modules.yaml")
     
     def __init__(self, container, namespace, samples,
-                 sample_index = 0,
                  echo_delay = 192):
         super().__init__(container = container,
                          namespace = namespace)
         self.samples = samples
-        self.sample_index = sample_index
         self.defaults = {"Echo": {"delay": echo_delay}}
 
-    @property
-    def sample(self):
-        return self.samples[self.sample_index]
-        
-    def note(self,
-             note = 0):
+    def note(self,             
+             note,
+             sample_index):
         trigs = [SVNoteTrig(target = f"{self.namespace}Beat",
-                            sample = self.sample,
+                            sample = self.samples[sample_index],
                             note = note)]
         return SVTrigBlock(trigs = trigs)
 
