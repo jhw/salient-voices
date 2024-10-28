@@ -1,6 +1,5 @@
 ### short [02-909-instrument]
 
-- 909 samples
 - basic 909 beat
 
 ### medium
@@ -31,6 +30,7 @@
 
 ### done
 
+- 909 samples
 - pass seeds to instrument not rand
 - simplify 303 demo
 - remove echo defaults

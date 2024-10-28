@@ -31,9 +31,11 @@ if __name__ == "__main__":
                                 bpm = 120,
                                 n_ticks = 16)
         pool, _ = SVBanks([bank]).spawn_pool(tag_mapping = PoolMappingTerms)
+        samples = pool.filter_by_tag("hat")
+        random.shuffle(samples)
         nine09 = Nine09(container = container,
                         namespace = "909",
-                        samples = [])
+                        samples = samples[:4])
         container.add_instrument(nine09)
         seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx".split("|")}
