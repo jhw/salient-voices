@@ -11,31 +11,40 @@ import yaml
 
 MachineConfig = yaml.safe_load(open("demos/909/machines.yaml").read())
 
+BeatGenerator = yaml.safe_load("""
+class: sv.instruments.nine09.machines.EuclidSequencer
+name: generator
+params:
+  density: 0.5
+  modulation:
+    sample:
+      step: 4
+      threshold: 0.5
+    pattern:
+      step: 4
+      threshold: 0.5
+  nsamples: 4
+""")
+
 PoolMappingTerms = yaml.safe_load("""
 kick: (kick)|(kik)|(kk)|(bd)
 clap: (clap)|(clp)|(cp)|(hc)
 hat: (oh)|( ch)|(open)|(closed)|(hh)|(hat)
 """)
 
-def init_beats(machine):
-    def beats(self, n, rand):
-        pass
-    return beats
-
 if __name__ == "__main__":
     try:
         bank = SVBank.load_zip_file("demos/909/pico-default.zip")
         pool, _ = SVBanks([bank]).spawn_pool(tag_mapping = PoolMappingTerms)
-        machine_conf = {machine_conf["tag"]:machine_conf
-                        for machine_conf in MachineConfig
-                        if "tag" in machine_conf}["mid"]
+        machine_conf = BeatGenerator
         machine_class = load_class(machine_conf["class"])
+        samples = pool.filter_by_tag("hat")
+        random.shuffle(samples)
         machine = machine_class(name = machine_conf["name"],
-                                tag = machine_conf["tag"],
-                                params = machine_conf["params"])
-        mapping = {machine_conf["tag"]:machine_conf["default"]}
-        machine.randomise(pool = pool,
-                          mapping = mapping)
+                                params = machine_conf["params"],
+                                samples = samples[:machine_conf["params"]["nsamples"]])
+        print (machine)
+        """
         container = SVContainer(banks = [bank],
                                 bpm = 120,
                                 n_ticks = 16)
@@ -43,6 +52,7 @@ if __name__ == "__main__":
                         namespace = "909",
                         machine_config = [machine_conf])
         container.add_instrument(nine09)
+        """
         """
         rand = {key: Random(int(random.random() * 1e8))
                  for key in "sample|trig|pattern|volume|level".split("|")}
