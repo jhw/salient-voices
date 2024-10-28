@@ -13,8 +13,6 @@
 
 - add nine09, three03 subclassing
 
-- undo 303 sustain model
-
 - refactor demo naming
 - refactor bank loading to include local caching
 - script to minimise bank fixture size

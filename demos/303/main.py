@@ -7,12 +7,12 @@ import random
 import re
 
 def bassline(self, n, rand,
-             block_sizes = [2],
+             block_sizes = [4, 8],
              root_offset = -5,
              note_scale = [0, 0, 0, 12],
              quantise = 4,
              note_density = 0.5,
-             filter_frequencies = ["2000", "3000", "4000"]):
+             filter_frequencies = ["2000", "3000", "4000", "5000"]):
     j = 0    
     for i in range(n):
         if (i >= j and
@@ -45,7 +45,7 @@ if __name__ == "__main__":
         bank = SVBank.load_wav_files(bank_name = "mikey303",
                                      dir_path = "demos/303")
         container = SVContainer(banks = [bank],
-                                bpm = 120,
+                                bpm = 480,
                                 n_ticks = 64)
         three03 = Three03(container = container,
                           namespace = "303",
