@@ -1,0 +1,52 @@
+- class: machines.EuclidSequencer
+  name: LoSampler
+  params:
+    density: 0.33333
+    modulation:
+      sample:
+        step: 4
+        threshold: 0.5
+      pattern:
+        step: 4
+        threshold: 0.5
+    nsamples: 4
+- class: machines.EuclidSequencer
+  name: MidSampler
+  params:
+    density: 0.66666
+    modulation:
+      sample:
+        step: 4
+        threshold: 0.5
+      pattern:
+        step: 4
+        threshold: 0.5
+    nsamples: 4
+- class: machines.EuclidSequencer
+  name: HiSampler
+  params:
+    density: 0.9
+    modulation:
+      sample:
+        step: 4
+        threshold: 0.5
+      pattern:
+        step: 4
+        threshold: 0.5
+    nsamples: 4
+- class: machines.SampleHoldModulator
+  name: Echo/wet
+  params:
+    increment: 0.25
+    range:
+    - 0
+    - 1
+    step: 4
+- class: machines.SampleHoldModulator
+  name: Echo/feedback
+  params:
+    increment: 0.25
+    range:
+    - 0
+    - 1
+    step: 4
