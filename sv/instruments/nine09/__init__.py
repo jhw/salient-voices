@@ -11,12 +11,18 @@ class Nine09(InstrumentBase):
                          namespace = namespace)
         self.samples = samples
         self.defaults = {"Echo": {"delay": echo_delay}}
+        self.alt_sample = False
 
-    def note(self,             
-             note,
-             sample_index):
+    def toggle_sample(self):
+        self.alt_sample = not self.alt_sample
+        
+    @property
+    def sample(self):
+        return self.samples[int(self.alt_sample)]
+        
+    def note(self, note):
         trigs = [SVNoteTrig(target = f"{self.namespace}Beat",
-                            sample = self.samples[sample_index],
+                            sample = self.sample,
                             note = note)]
         return SVTrigBlock(trigs = trigs)
 

@@ -1,8 +1,8 @@
 ### short [02-909-instrument]
 
-- use modulo in sample indexation
 - pass volume
 - volume groove
+
 - euclid pattern
 
 ### medium

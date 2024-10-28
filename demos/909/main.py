@@ -17,8 +17,7 @@ def beat(self, n, rand,
          quantise = 4):
     for i in range(n):
         if 0 == i % quantise:
-             trig_block = self.note(note = 0,
-                                    sample_index = 0)
+             trig_block = self.note(note = 0)
              yield trig_block.render(i = i)
 
 def ghost_echo(self, n, rand,
@@ -43,7 +42,7 @@ if __name__ == "__main__":
         random.shuffle(samples)
         nine09 = Nine09(container = container,
                         namespace = "909",
-                        samples = samples[:4])
+                        samples = samples[:2]) # sample, alt sample
         container.add_instrument(nine09)
         seeds = {key: int(random.random() * 1e8)
                  for key in "fx".split("|")}
