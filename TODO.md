@@ -1,21 +1,12 @@
 ### short [02-909-instrument]
 
-- remove machines.yaml and machines.py
-- copy 303 instrument to 909 and remove note stuff
-- remove env from demo
-- copy 303 generator pattern to 909
-
 ### medium
 
+- simplify 303 demo
 - refactor bank loading to include local caching
 - refactor demo naming
 - script to minimise bank fixture size
 - machine config jsonschema validation
-
-### gists/music/72x 
-
-- move randomisation from model to cli
-- move model into sv
 
 ### long
 
@@ -32,6 +23,10 @@
 
 ### done
 
+- remove machines.yaml and machines.py
+- copy 303 instrument to 909 and remove note stuff
+- remove env from demo
+- copy 303 generator pattern to 909
 - revert play function
 - define and pass env
 

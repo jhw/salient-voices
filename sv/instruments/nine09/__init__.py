@@ -1,47 +1,35 @@
-from sv.instruments import InstrumentBase, SVTrigBlock
-
-import yaml
-
-FXModules = yaml.safe_load("""
-- name: Echo
-  class: rv.modules.echo.Echo
-  defaults:
-    dry: 256
-    wet: 256
-    delay: 36
-    delay_unit: 3 # tick
-  links:
-    - Output
-""")
+from sv.instruments import InstrumentBase, SVTrigBlock, load_yaml
+from sv.model import SVNoteTrig, SVNoteOffTrig, SVModTrig
 
 class Nine09(InstrumentBase):
 
-    Modules = []
+    Modules = load_yaml(__file__, "modules.yaml")
     
-    def __init__(self, container, namespace, channel_names):
+    def __init__(self, container, namespace, samples,
+                 echo_wet = 16, # seems to required integer format; no sure why won't take hex
+                 echo_feedback = 16, # seems to required integer format; no sure why won't take hex
+                 echo_delay = 192):
         super().__init__(container = container,
                          namespace = namespace)
-        self.defaults = {}
-        for channel_name in channel_names:
-            mod = {"name": channel_name,
-                   "class": "sv.sample.SVSlotSampler",
-                   "links": ["Echo"]}
-            self.Modules.append(mod)
-        self.Modules += FXModules
+        self.samples = samples
+        self.defaults = {"Echo": {"wet": echo_wet,
+                                  "feedback": echo_feedback,
+                                  "delay": echo_delay}}
 
-    """
-    trigs = [SVNoteTrig(target = f"{self.namespace}MultiSynth",
-                        sample_mod = f"{self.namespace}Sampler",
-                        sample = self.sample,
-                        note = note),
-    """
-        
     def note(self):
         trigs = []
         return SVTrigBlock(trigs = trigs)
 
-    def modulation(self):
+    def modulation(self,
+                   echo_wet = None,
+                   echo_feedback = None):
         trigs = []
+        if echo_wet:
+            trigs.append(SVModTrig(target = f"{self.namespace}Echo/wet",
+                                   value = echo_wet))
+        if echo_feedback:
+            trigs.append(SVModTrig(target = f"{self.namespace}Echo/feedback",
+                                   value = echo_feedback))
         return SVTrigBlock(trigs = trigs)
     
 if __name__ == "__main__":

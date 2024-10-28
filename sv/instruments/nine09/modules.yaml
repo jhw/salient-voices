@@ -1,12 +1,4 @@
-- name: MidSampler
-  class: sv.sampler.SVSlotSampler
-  links:
-    - Echo
-- name: LoSampler
-  class: sv.sampler.SVSlotSampler
-  links:
-    - Echo
-- name: HiSampler
+- name: Sampler
   class: sv.sampler.SVSlotSampler
   links:
     - Echo
