@@ -1,6 +1,16 @@
 ### short [02-909-instrument]
 
+- generator functions
+- run demo and see if echo included
+- 909 samples
+- basic 909 beat
+
 ### medium
+
+- euclid pattern
+- volume groove
+- sample switching
+- pattern switching
 
 - simplify 303 demo
 - refactor bank loading to include local caching
