@@ -1,3 +1,5 @@
+from random import Random
+
 import copy
 import yaml
 
@@ -24,7 +26,9 @@ class InstrumentBase:
         self.namespace = namespace
         self.defaults = {}
 
-    def play(self, generator, rand):
+    def play(self, generator, seeds):
+        rand = {key: Random(value)
+                 for key, value in seeds.items()}
         for trigs in generator(self,
                                rand = rand,
                                n = self.container.n_ticks):

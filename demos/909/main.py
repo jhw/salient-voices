@@ -1,7 +1,6 @@
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
 from sv.instruments.nine09 import Nine09
-from random import Random
 
 import os
 import random
@@ -36,10 +35,10 @@ if __name__ == "__main__":
                         namespace = "909",
                         samples = [])
         container.add_instrument(nine09)
-        rand = {key: Random(int(random.random() * 1e8))
+        seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx".split("|")}
         nine09.play(generator = ghost_echo,
-                    rand = rand)        
+                    seeds = seeds)        
         project = container.render_project()
         if not os.path.exists("tmp"):
             os.mkdir("tmp")

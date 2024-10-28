@@ -1,7 +1,6 @@
 from sv.banks import SVBank
 from sv.container import SVContainer
 from sv.instruments.three03 import Three03
-from random import Random
 
 import os
 import random
@@ -52,12 +51,12 @@ if __name__ == "__main__":
                           namespace = "303",
                           sample = "mikey303/303 VCO SQR.wav")
         container.add_instrument(three03)
-        rand = {key: Random(int(random.random() * 1e8))
+        seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx".split("|")}
         three03.play(generator = bassline,
-                     rand = rand)
+                     seeds = seeds)
         three03.play(generator = ghost_echo,
-                     rand = rand)
+                     seeds = seeds)
         project = container.render_project()
         if not os.path.exists("tmp"):
             os.mkdir("tmp")

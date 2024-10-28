@@ -1,7 +1,5 @@
 ### short [02-909-instrument]
 
-- pass seeds to instrument not rand
-
 - 909 samples
 - basic 909 beat
 
@@ -33,6 +31,7 @@
 
 ### done
 
+- pass seeds to instrument not rand
 - simplify 303 demo
 - remove echo defaults
 - generator functions
