@@ -16,7 +16,6 @@ class SVContainer:
         self.breaks = breaks
         self.instruments = []
         self.patches = []
-        self.spawn_patch()
 
     def spawn_patch(self):
         self.patches.append(SVTrigPatch(n_ticks = self.n_ticks))

@@ -49,6 +49,7 @@ if __name__ == "__main__":
                           namespace = "303",
                           sample = "mikey303/303 VCO SAW.wav")
         container.add_instrument(three03)
+        container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx".split("|")}
         three03.play(generator = bassline,

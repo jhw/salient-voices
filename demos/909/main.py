@@ -58,6 +58,7 @@ if __name__ == "__main__":
                         namespace = "909",
                         samples = samples[:2]) # sample, alt sample
         container.add_instrument(nine09)
+        container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
                  for key in "fx|vol|pat|samp".split("|")}
         nine09.play(generator = beat,

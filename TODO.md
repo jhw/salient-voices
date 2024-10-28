@@ -4,23 +4,22 @@
 
 ### medium
 
-- density
-
 - add nine09, three03 subclassing
-
+- density
+- 303 slides
 - refactor bank loading to include local caching
-- script to minimise bank fixture size
 
 ### long
 
 - digitakt II dual euclidian
-- 303 slides
 - perkons grooves
 
 - moto upgrade
 
 ### thoughts
 
+- script to minimise bank fixture size?
+  - not worth it
 - remove Container model?
   - no I think you really need it to encapsulate all the stuff going on
   - and that serialisation, which might cause you to liberate the insides, is a secondary concern
