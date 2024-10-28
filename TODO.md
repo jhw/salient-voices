@@ -1,11 +1,12 @@
 ### short [02-909-instrument]
 
-- volume groove
 - euclid pattern
+
+- default echo wet, feedback values
 
 ### medium
 
-- default echo wet, feedback values
+- add nine09, three03 subclassing
 
 - density
 - sample toggling
@@ -13,9 +14,6 @@
 
 - remove Container model
 
-- add nine09, three03 subclassing
-
-- refactor demo naming
 - refactor bank loading to include local caching
 - script to minimise bank fixture size
 
@@ -37,6 +35,7 @@
 
 ### done
 
+- volume groove
 - pass volume
 - pass sample index from generator
 - 909 note to return trig

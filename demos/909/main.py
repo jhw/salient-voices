@@ -1,3 +1,4 @@
+from sv.algos.groove import wolgroove
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
 from sv.instruments.nine09 import Nine09
@@ -17,8 +18,11 @@ def beat(self, n, rand,
          quantise = 4):
     for i in range(n):
         if 0 == i % quantise:
-             trig_block = self.note(note = 0)
-             yield trig_block.render(i = i)
+            volume = wolgroove(rand = rand["vol"],
+                               i = i)
+            trig_block = self.note(note = 0,
+                                   volume = volume)
+            yield trig_block.render(i = i)
 
 def ghost_echo(self, n, rand,
                sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
@@ -45,7 +49,7 @@ if __name__ == "__main__":
                         samples = samples[:2]) # sample, alt sample
         container.add_instrument(nine09)
         seeds = {key: int(random.random() * 1e8)
-                 for key in "fx".split("|")}
+                 for key in "fx|vol".split("|")}
         nine09.play(generator = beat,
                     seeds = seeds)        
         nine09.play(generator = ghost_echo,
