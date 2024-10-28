@@ -1,10 +1,8 @@
 ### short [02-909-instrument]
 
-- test removing sustain by setting sustain level to zero, thereby using decay as release
+- density
 
 ### medium
-
-- density
 
 - add nine09, three03 subclassing
 
@@ -33,6 +31,8 @@
   - no; is complex as includes wash; and might still be useful
 
 ### done
+
+- test removing sustain by setting sustain level to zero, thereby using decay as release
 
 - sample toggling
 - default echo wet, feedback values
