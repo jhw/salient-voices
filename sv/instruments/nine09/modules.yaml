@@ -4,10 +4,5 @@
     - Echo
 - name: Echo
   class: rv.modules.echo.Echo
-  defaults:
-    dry: 256
-    wet: 256
-    delay: 36
-    delay_unit: 3 # tick
   links:
     - Output

@@ -6,11 +6,13 @@ class Nine09(InstrumentBase):
     Modules = load_yaml(__file__, "modules.yaml")
     
     def __init__(self, container, namespace, samples,
-                 echo_delay = 192):
+                 echo_delay = 36,
+                 echo_delay_unit = 3): # tick
         super().__init__(container = container,
                          namespace = namespace)
         self.samples = samples
-        self.defaults = {"Echo": {"delay": echo_delay}}
+        self.defaults = {"Echo": {"delay": echo_delay,
+                                  "delay_unit": echo_delay_unit}}
         self.alt_sample = False
 
     def toggle_sample(self):
