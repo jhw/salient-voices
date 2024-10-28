@@ -32,6 +32,7 @@
 
 ### done
 
+- note() to accept note value
 - sample index
 - 909 samples
 - pass seeds to instrument not rand

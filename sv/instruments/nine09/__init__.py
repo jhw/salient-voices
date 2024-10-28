@@ -14,7 +14,8 @@ class Nine09(InstrumentBase):
         self.sample_index = sample_index
         self.defaults = {"Echo": {"delay": echo_delay}}
 
-    def note(self):
+    def note(self,
+             note = 0):
         trigs = []
         return SVTrigBlock(trigs = trigs)
 

@@ -1,4 +1,4 @@
-- name: Sampler
+- name: Beat
   class: sv.sampler.SVSlotSampler
   links:
     - Echo
