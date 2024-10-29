@@ -50,7 +50,7 @@ def ghost_echo(self, n, rand,
 if __name__ == "__main__":
     try:
         bank = SVBank.load_wav_files(bank_name = "mikey303",
-                                     dir_path = "demos/303")
+                                     dir_path = "demos/303/mikey303")
         container = SVContainer(banks = [bank],
                                 bpm = 240,
                                 n_ticks = 32)

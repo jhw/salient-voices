@@ -1,14 +1,17 @@
 ### short
 
+### 303 
+
+- filter multiplier
+- equaliser
+- slide
+- slide- to
+
 ### medium
 
-- 303 filter multiplier
 - instrument/seeds/env serialisation
-- nine09, three03 subclasses
 - refactor banks to use local caching
 - perkons grooves
-- 303 slide
-- 303 slide- to
 - decompiler
 
 ### long
@@ -39,6 +42,7 @@
 
 ### done
 
+- nine09, three03 subclasses
 - 303 volume groove
 - convert 303 block to use while()
 - refactor beats to call all random stuff at start

@@ -51,7 +51,7 @@ def ghost_echo(self, n, rand, env,
                             
 if __name__ == "__main__":
     try:        
-        bank = SVBank.load_zip_file("demos/909/pico-default.zip")
+        bank = SVBank.load_zip_file("demos/909/samples/pico-default.zip")
         container = SVContainer(banks = [bank],
                                 bpm = 120,
                                 n_ticks = 16)
