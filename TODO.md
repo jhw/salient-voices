@@ -2,6 +2,9 @@
 
 - add env containing sample temperature
 - add density condition
+
+- remove wash and breaks
+
 - convert 303 block to use while()
 
 ### medium
@@ -10,6 +13,7 @@
 - nine09, three03 subclasses
 - refactor banks to use local caching
 - perkons grooves
+
 - 303 slide
 - 303 slide-to
 
