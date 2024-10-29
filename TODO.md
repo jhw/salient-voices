@@ -1,24 +1,25 @@
 ### short [02-909-instrument]
 
-- explicit spawn patch call
+- convet 303 block to use while()
+- nine09, three03 subclasses
+- refactor banks to use local caching
+- perkons grooves
+- 303 slide
+- 303 slide-to
 
 ### medium
 
-- add nine09, three03 subclassing
-- density
-- 303 slides
-- refactor bank loading to include local caching
 - decompiler
-- perkons grooves
+- digitakt II dual euclidian
 
 ### long
-
-- digitakt II dual euclidian
 
 - moto upgrade
 
 ### thoughts
 
+- density?
+  - think euclid selection may be better
 - script to minimise bank fixture size?
   - not worth it
 - remove Container model?
@@ -36,6 +37,7 @@
 
 ### done
 
+- explicit spawn patch call
 - test removing sustain by setting sustain level to zero, thereby using decay as release
 
 - sample toggling
