@@ -1,5 +1,7 @@
 ### short [02-909-instrument]
 
+- rename InstrumentBase as SVInstrumentBase
+
 - add env containing sample temperature
 - add density condition
 
@@ -43,6 +45,7 @@
 
 ### done
 
+- extend container classes
 - remove wash and breaks
 - add instrument randomise function
 - switch instrument to contain sample index not boolean
