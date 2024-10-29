@@ -1,7 +1,7 @@
 ### short [02-909-instrument]
 
+- test different filter modes
 - convert 303 block to use while()
-
 - instrument/seeds/env serialisation
 
 ### medium

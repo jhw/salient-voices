@@ -28,8 +28,8 @@ def bassline(self, n, rand,
             j = i + block_size
 
 def ghost_echo(self, n, rand,
-               sample_hold_levels = ["0000", "2000", "4000"],
-               quantise = 8,
+               sample_hold_levels = ["0000", "0800", "1000"],
+               quantise = 4,
                **kwargs):
     for i in range(n):
         if 0 == i % quantise:            
@@ -48,7 +48,7 @@ if __name__ == "__main__":
                                 n_ticks = 16)
         three03 = Three03(container = container,
                           namespace = "303",
-                          sample = "mikey303/303 VCO SAW.wav")
+                          sample = "mikey303/303 VCO SQR.wav")
         container.add_instrument(three03)
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
