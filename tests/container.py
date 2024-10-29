@@ -16,14 +16,15 @@ class ContainerTest(unittest.TestCase):
                           namespace = "303",
                           sample = "mikey303/303 VCO SQR.wav")
         container.add_instrument(three03)
+        container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx".split("|")}
         def bassline(self, n, rand):
             j = -1 
             for i in range(n):
                 if i > j:
-                    note = self.note()
-                    yield note.render(i = i)
+                    trig_block = self.note()
+                    yield i, trig_block
                     j += 1
         three03.play(generator = bassline,
                      seeds = seeds)

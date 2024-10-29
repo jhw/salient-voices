@@ -1,13 +1,19 @@
 ### short [02-909-instrument]
 
-- convet 303 block to use while()
+- add env containing sample temperature
+- add density condition
+- switch instrument to contain sample index not boolean
+- add instrument randomise function
+- convert 303 block to use while()
+
+### medium
+
+- instrument/seeds/env serialisation
 - nine09, three03 subclasses
 - refactor banks to use local caching
 - perkons grooves
 - 303 slide
 - 303 slide-to
-
-### medium
 
 - decompiler
 - digitakt II dual euclidian
@@ -37,6 +43,7 @@
 
 ### done
 
+- fix failing container test
 - explicit spawn patch call
 - test removing sustain by setting sustain level to zero, thereby using decay as release
 
