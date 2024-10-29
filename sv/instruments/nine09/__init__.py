@@ -19,6 +19,9 @@ class Nine09(InstrumentBase):
 
     def toggle_sample(self):
         self.sample_index = 1 - int(self.sample_index > 0)
+
+    def randomise_sample(self, rand):
+        self.sample_index = rand.choice(list(range(len(self.samples))))
         
     @property
     def sample(self):

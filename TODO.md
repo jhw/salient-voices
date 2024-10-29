@@ -2,7 +2,6 @@
 
 - add env containing sample temperature
 - add density condition
-- add instrument randomise function
 - convert 303 block to use while()
 
 ### medium
@@ -42,6 +41,7 @@
 
 ### done
 
+- add instrument randomise function
 - switch instrument to contain sample index not boolean
 - fix failing container test
 - explicit spawn patch call
