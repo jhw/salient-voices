@@ -19,7 +19,7 @@ class SVTrigBlock:
             trigs.append(cloned_trig)
         return trigs
         
-class InstrumentBase:
+class SVInstrumentBase:
 
     def __init__(self, container, namespace):
         self.container = container

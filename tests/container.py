@@ -31,7 +31,7 @@ class ContainerTest(unittest.TestCase):
         patches = container.patches
         self.assertTrue(patches != [])
         patch = patches[0]
-        self.assertTrue(patch.trigs != [])
+        self.assertTrue(patch.trig_patch.trigs != [])
         
 if __name__ == "__main__":
     unittest.main()

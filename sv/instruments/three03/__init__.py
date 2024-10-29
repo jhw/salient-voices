@@ -1,7 +1,7 @@
-from sv.instruments import InstrumentBase, SVTrigBlock, load_yaml
+from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
 from sv.model import SVNoteTrig, SVNoteOffTrig, SVModTrig
 
-class Three03(InstrumentBase):
+class Three03(SVInstrumentBase):
 
     Modules = load_yaml(__file__, "modules.yaml")
     
