@@ -1,7 +1,7 @@
 from sv.algos.groove import wolgroove
 from sv.banks import SVBank
 from sv.container import SVContainer
-from sv.instruments.three03 import Three03
+from sv.instruments.three03.mikey303 import Three03
 
 import random
 import re

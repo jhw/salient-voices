@@ -2,7 +2,7 @@ from sv.algos.euclid import bjorklund, TidalPatterns
 from sv.algos.groove import wolgroove
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
-from sv.instruments.nine09 import Nine09
+from sv.instruments.nine09.samples import Nine09
 
 import random
 import re
