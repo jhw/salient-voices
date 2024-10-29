@@ -8,14 +8,10 @@ class SVContainer:
     def __init__(self,
                  banks = [],
                  bpm = 120,
-                 n_ticks = 16,
-                 wash = False,
-                 breaks = False):
+                 n_ticks = 16):
         self.banks = banks
         self.bpm = bpm
         self.n_ticks = n_ticks
-        self.wash = wash
-        self.breaks = breaks
         self.instruments = []
         self.patches = []
 
@@ -39,9 +35,7 @@ class SVContainer:
          return SVProject().render_project(patches = self.patches,
                                            modules = self.modules,
                                            banks = self.banks,
-                                           bpm = self.bpm,
-                                           wash = self.wash,
-                                           breaks = self.breaks)
+                                           bpm = self.bpm)
 
     def write_project(self, filename):
         path_to_filename = "/".join(filename.split("/")[:-1])

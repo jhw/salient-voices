@@ -210,9 +210,8 @@ class SVProject:
                      x,
                      y,
                      colour,
-                     wash,
                      breaks):
-        for i in range(2 if wash else 1):
+        for i in range(1):
             if tracks != []:
                 self.render_pattern(patterns = patterns,
                                     tracks = tracks,
@@ -241,10 +240,9 @@ class SVProject:
                        modules,
                        colours,
                        patches,
-                       wash,
                        breaks,
                        height = PatternHeight):
-        x_count = 1 + int(wash) + int(breaks)
+        x_count = 1 + int(breaks)
         mod_names = list(modules.keys())
         controllers = self.render_controllers(modules)
         patterns, x, y = [], 0, 0
@@ -261,7 +259,6 @@ class SVProject:
                                   x = x,
                                   y = y,
                                   colour = colour,
-                                  wash = wash,
                                   breaks = breaks)
                 y += height
             x += x_count * n_ticks
@@ -274,7 +271,6 @@ class SVProject:
                        modules,
                        banks, 
                        bpm,
-                       wash = False,
                        breaks = False,
                        volume = Volume):
         colours = init_colours(modules)
@@ -289,7 +285,6 @@ class SVProject:
         project.patterns = self.render_patches(modules = project_modules,
                                                colours = colours,
                                                patches = patches,
-                                               wash = wash,
                                                breaks = breaks)
         return project
 
