@@ -19,7 +19,7 @@ class ContainerTest(unittest.TestCase):
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx".split("|")}
-        def bassline(self, n, rand):
+        def bassline(self, n, rand, **kwargs):
             j = -1 
             for i in range(n):
                 if i > j:

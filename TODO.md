@@ -1,7 +1,7 @@
-### short [02-909-instrument]
+### short
 
-- test different filter modes
 - convert 303 block to use while()
+- 303 volume groove
 - instrument/seeds/env serialisation
 
 ### medium
@@ -22,6 +22,7 @@
 
 ### thoughts
 
+- test different filter modes?
 - density?
   - think euclid selection may be better
 - script to minimise bank fixture size?
