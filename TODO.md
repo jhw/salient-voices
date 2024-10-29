@@ -1,12 +1,11 @@
 ### short [02-909-instrument]
 
-- add density condition
-
 - convert 303 block to use while()
+
+- instrument/seeds/env serialisation
 
 ### medium
 
-- instrument/seeds/env serialisation
 - nine09, three03 subclasses
 - refactor banks to use local caching
 - perkons grooves
@@ -42,6 +41,8 @@
 
 ### done
 
+- refactor beats to call all random stuff at start
+- add beat density
 - give env a blank default arg?
 - add env containing sample temperature
 - rename InstrumentBase as SVInstrumentBase

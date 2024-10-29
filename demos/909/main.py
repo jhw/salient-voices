@@ -16,6 +16,7 @@ hat: (oh)|( ch)|(open)|(closed)|(hh)|(hat)
 
 Env = yaml.safe_load("""
 sample_temperature: 0.5
+beat_density: 1.0
 """)
 
 def random_pattern(rand, patterns = [pattern for pattern in TidalPatterns
@@ -27,11 +28,12 @@ def random_pattern(rand, patterns = [pattern for pattern in TidalPatterns
 def beat(self, n, rand, env):
     pattern = random_pattern(rand)
     for i in range(n):
-        if pattern[i % len(pattern)]:
-            volume = wolgroove(rand = rand["vol"],
+        volume = wolgroove(rand = rand["vol"],
                                i = i)
-            if rand["samp"].random() < env["sample_temperature"]:
-                self.toggle_sample()
+        if rand["samp"].random() < env["sample_temperature"]:
+            self.toggle_sample()
+        if (pattern[i % len(pattern)] and
+            rand["beat"].random() < env["beat_density"]):
             trig_block = self.note(note = 0,
                                    volume = volume)            
             yield i, trig_block
@@ -62,7 +64,7 @@ if __name__ == "__main__":
         container.add_instrument(nine09)
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
-                 for key in "fx|vol|pat|samp".split("|")}
+                 for key in "fx|vol|pat|samp|beat".split("|")}
         nine09.play(generator = beat,
                     seeds = seeds,
                     env = Env)
