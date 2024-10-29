@@ -1,3 +1,4 @@
+from sv.algos.groove import wolgroove
 from sv.banks import SVBank
 from sv.container import SVContainer
 from sv.instruments.three03 import Three03
@@ -15,6 +16,8 @@ def bassline(self, n, rand,
              **kwargs):
     i = 0
     while True:
+        volume = wolgroove(rand = rand["vol"],
+                           i = i)
         if i >= (n - 2):
             break
         elif (rand["seq"].random() < note_density and
@@ -24,6 +27,7 @@ def bassline(self, n, rand,
             sustain_term = min(n - (i + 1), rand["note"].choice(block_sizes))
             filter_freq = rand["fx"].choice(filter_frequencies)
             trig_block = self.note(note = note_offset,
+                                   volume = volume,
                                    sustain_term = sustain_term, 
                                    filter_freq = filter_freq)
             yield i, trig_block
@@ -32,7 +36,7 @@ def bassline(self, n, rand,
             i += 1
             
 def ghost_echo(self, n, rand,
-               sample_hold_levels = ["0000", "0800", "1000"],
+               sample_hold_levels = ["0000", "0400", "0800"],
                quantise = 8,
                **kwargs):
     for i in range(n):
@@ -56,7 +60,7 @@ if __name__ == "__main__":
         container.add_instrument(three03)
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
-                 for key in "seq|note|fx".split("|")}
+                 for key in "seq|note|fx|vol".split("|")}
         three03.play(generator = bassline,
                      seeds = seeds)
         three03.play(generator = ghost_echo,

@@ -29,7 +29,7 @@ def beat(self, n, rand, env):
     pattern = random_pattern(rand)
     for i in range(n):
         volume = wolgroove(rand = rand["vol"],
-                               i = i)
+                           i = i)
         if rand["samp"].random() < env["sample_temperature"]:
             self.toggle_sample()
         if (pattern[i % len(pattern)] and

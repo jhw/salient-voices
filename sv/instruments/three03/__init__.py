@@ -20,6 +20,7 @@ class Three03(SVInstrumentBase):
 
     def note(self,
              note = 0,
+             volume = 1,
              attack_ms = "0008",
              decay_ms = "0018",
              sustain_level = "0800",
@@ -29,7 +30,8 @@ class Three03(SVInstrumentBase):
         trigs = [SVNoteTrig(target = f"{self.namespace}MultiSynth",
                             sample_mod = f"{self.namespace}Sampler",
                             sample = self.sample,
-                            note = note),
+                            note = note,
+                            vel = volume),
                  SVModTrig(target = f"{self.namespace}Sound2Ctl/out_max",
                           value = filter_freq)]
         trigs += [SVModTrig(target = f"{self.namespace}ADSR/attack_ms",
