@@ -1,5 +1,9 @@
 ### short
 
+- instrument/seeds/env serialisation
+- refactor banks to use local caching
+- perkons grooves
+
 ### 303 
 
 - filter multiplier
@@ -9,14 +13,10 @@
 
 ### medium
 
-- instrument/seeds/env serialisation
-- refactor banks to use local caching
-- perkons grooves
 - decompiler
+- digitakt II dual euclidian
 
 ### long
-
-- digitakt II dual euclidian
 
 - moto upgrade
 
