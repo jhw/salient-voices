@@ -209,40 +209,30 @@ class SVProject:
                      controllers,
                      x,
                      y,
-                     colour,
-                     breaks):
-        for i in range(1):
-            if tracks != []:
-                self.render_pattern(patterns = patterns,
-                                    tracks = tracks,
-                                    n_ticks = n_ticks,
-                                    modules = modules,
-                                    controllers = controllers,
-                                    x = x,
-                                    y = y,
-                                    colour = colour)
-            else:
-                self.render_blank(patterns = patterns,
-                                  n_ticks = n_ticks,
-                                  x = x,
-                                  y = y,
-                                  colour = colour)
-            x += n_ticks
-        if breaks:
+                     colour):
+        if tracks != []:
+            self.render_pattern(patterns = patterns,
+                                tracks = tracks,
+                                n_ticks = n_ticks,
+                                modules = modules,
+                                controllers = controllers,
+                                x = x,
+                                y = y,
+                                colour = colour)
+        else:
             self.render_blank(patterns = patterns,
                               n_ticks = n_ticks,
                               x = x,
                               y = y,
                               colour = colour)
-            x += n_ticks
+        x += n_ticks
     
     def render_patches(self,
                        modules,
                        colours,
                        patches,
-                       breaks,
                        height = PatternHeight):
-        x_count = 1 + int(breaks)
+        x_count = 1
         mod_names = list(modules.keys())
         controllers = self.render_controllers(modules)
         patterns, x, y = [], 0, 0
@@ -258,8 +248,7 @@ class SVProject:
                                   controllers = controllers,
                                   x = x,
                                   y = y,
-                                  colour = colour,
-                                  breaks = breaks)
+                                  colour = colour)
                 y += height
             x += x_count * n_ticks
             y = 0
@@ -271,7 +260,6 @@ class SVProject:
                        modules,
                        banks, 
                        bpm,
-                       breaks = False,
                        volume = Volume):
         colours = init_colours(modules)
         project = rv.api.Project()
@@ -284,8 +272,7 @@ class SVProject:
                                               banks = banks)
         project.patterns = self.render_patches(modules = project_modules,
                                                colours = colours,
-                                               patches = patches,
-                                               breaks = breaks)
+                                               patches = patches)
         return project
 
 if __name__=="__main__":

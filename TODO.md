@@ -3,8 +3,6 @@
 - add env containing sample temperature
 - add density condition
 
-- remove wash and breaks
-
 - convert 303 block to use while()
 
 ### medium
@@ -45,6 +43,7 @@
 
 ### done
 
+- remove wash and breaks
 - add instrument randomise function
 - switch instrument to contain sample index not boolean
 - fix failing container test
