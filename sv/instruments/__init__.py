@@ -26,12 +26,13 @@ class SVInstrumentBase:
         self.namespace = namespace
         self.defaults = {}
 
-    def play(self, generator, seeds):
+    def play(self, generator, seeds, env = {}):
         rand = {key: Random(value)
                  for key, value in seeds.items()}
         for i, trig_block in generator(self,
-                                  rand = rand,
-                                  n = self.container.n_ticks):
+                                       rand = rand,
+                                       n = self.container.n_ticks,
+                                       env = env):
             trigs = trig_block.render(i)
             self.container.add_trigs(trigs)
 

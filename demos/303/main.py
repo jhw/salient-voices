@@ -10,7 +10,8 @@ def bassline(self, n, rand,
              root_offset = -5,
              note_scale = [0, 0, 0, 0, 12],
              note_density = 0.5,
-             filter_frequencies = ["2000", "3000", "4000", "5000"]):
+             filter_frequencies = ["2000", "3000", "4000", "5000"],
+             **kwargs):
     j = 0    
     for i in range(n):
         if (i >= j and
@@ -28,7 +29,8 @@ def bassline(self, n, rand,
 
 def ghost_echo(self, n, rand,
                sample_hold_levels = ["0000", "2000", "4000"],
-               quantise = 8):
+               quantise = 8,
+               **kwargs):
     for i in range(n):
         if 0 == i % quantise:            
             echo_wet_level = rand["fx"].choice(sample_hold_levels)

@@ -1,6 +1,5 @@
 ### short [02-909-instrument]
 
-- add env containing sample temperature
 - add density condition
 
 - convert 303 block to use while()
@@ -43,6 +42,8 @@
 
 ### done
 
+- give env a blank default arg?
+- add env containing sample temperature
 - rename InstrumentBase as SVInstrumentBase
 - extend container classes
 - remove wash and breaks
