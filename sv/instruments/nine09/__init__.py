@@ -6,6 +6,7 @@ class Nine09(InstrumentBase):
     Modules = load_yaml(__file__, "modules.yaml")
     
     def __init__(self, container, namespace, samples,
+                 sample_index = 0,
                  echo_wet = 64, # '2000'
                  echo_feedback = 64): # '2000'
         super().__init__(container = container,
@@ -14,14 +15,14 @@ class Nine09(InstrumentBase):
                                   "feedback": echo_feedback}}
 
         self.samples = samples
-        self.alt_sample = False
+        self.sample_index = sample_index
 
     def toggle_sample(self):
-        self.alt_sample = not self.alt_sample
+        self.sample_index = 1 - int(self.sample_index > 0)
         
     @property
     def sample(self):
-        return self.samples[int(self.alt_sample)]
+        return self.samples[self.sample_index]
         
     def note(self, note,
              volume = 1):

@@ -2,7 +2,6 @@
 
 - add env containing sample temperature
 - add density condition
-- switch instrument to contain sample index not boolean
 - add instrument randomise function
 - convert 303 block to use while()
 
@@ -43,6 +42,7 @@
 
 ### done
 
+- switch instrument to contain sample index not boolean
 - fix failing container test
 - explicit spawn patch call
 - test removing sustain by setting sustain level to zero, thereby using decay as release
