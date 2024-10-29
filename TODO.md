@@ -1,6 +1,5 @@
 ### short
 
-- convert 303 block to use while()
 - 303 volume groove
 - instrument/seeds/env serialisation
 
@@ -42,6 +41,7 @@
 
 ### done
 
+- convert 303 block to use while()
 - refactor beats to call all random stuff at start
 - add beat density
 - give env a blank default arg?

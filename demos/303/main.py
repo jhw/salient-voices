@@ -6,30 +6,34 @@ import random
 import re
 
 def bassline(self, n, rand,
-             block_sizes = [2, 4],
+             block_sizes = [1, 2, 4],
              root_offset = -5,
              note_scale = [0, 0, 0, 0, 12],
-             note_density = 0.5,
-             filter_frequencies = ["2000", "3000", "4000", "5000"],
+             note_density = 0.66666,
+             quantise = 2,
+             filter_frequencies = ["1000", "1800", "2000", "4000"],
              **kwargs):
-    j = 0    
-    for i in range(n):
-        if (i >= j and
-            rand["seq"].random() < note_density):
+    i = 0
+    while True:
+        if i >= (n - 2):
+            break
+        elif (rand["seq"].random() < note_density and
+              0 == i % quantise):
             block_size = rand["seq"].choice(block_sizes)
             note_offset = root_offset + rand["note"].choice(note_scale)
-            sustain_term = 1 + rand["note"].choice(range(block_size - 1))
+            sustain_term = min(n - (i + 1), rand["note"].choice(block_sizes))
             filter_freq = rand["fx"].choice(filter_frequencies)
             trig_block = self.note(note = note_offset,
                                    sustain_term = sustain_term, 
                                    filter_freq = filter_freq)
-            if (i + sustain_term) < n:
-                yield i, trig_block
-            j = i + block_size
-
+            yield i, trig_block
+            i += 1 + sustain_term
+        else:
+            i += 1
+            
 def ghost_echo(self, n, rand,
                sample_hold_levels = ["0000", "0800", "1000"],
-               quantise = 4,
+               quantise = 8,
                **kwargs):
     for i in range(n):
         if 0 == i % quantise:            
@@ -44,8 +48,8 @@ if __name__ == "__main__":
         bank = SVBank.load_wav_files(bank_name = "mikey303",
                                      dir_path = "demos/303")
         container = SVContainer(banks = [bank],
-                                bpm = 120,
-                                n_ticks = 16)
+                                bpm = 240,
+                                n_ticks = 32)
         three03 = Three03(container = container,
                           namespace = "303",
                           sample = "mikey303/303 VCO SQR.wav")
