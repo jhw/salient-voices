@@ -65,6 +65,6 @@ if __name__ == "__main__":
                      seeds = seeds)
         three03.play(generator = ghost_echo,
                      seeds = seeds)
-        container.write_project("tmp/demo-303.sunvox")
+        container.write_project("tmp/demo-303-mikey303.sunvox")
     except RuntimeError as error:
         print ("ERROR: %s" % str(error))

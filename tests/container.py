@@ -1,4 +1,4 @@
-from sv.instruments.three03 import Three03
+from sv.instruments.three03.mikey303 import Three03
 from sv.banks import SVBank
 from sv.container import SVContainer
 

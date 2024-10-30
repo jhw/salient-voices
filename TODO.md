@@ -1,19 +1,17 @@
 ### short
 
-- instrument/seeds/env serialisation
-- refactor banks to use local caching
-- perkons grooves
-
-### 303 
-
-- filter multiplier
-- equaliser
-- slide
-- slide- to
-
 ### medium
 
+- remove serialisation classes
+- banks to use local caching
+- perkons grooves
 - decompiler
+
+- 303 filter multiplier
+- 303 equaliser
+- 303 slide
+- 303 slide- to
+
 - digitakt II dual euclidian
 
 ### long
@@ -22,9 +20,8 @@
 
 ### thoughts
 
-- test different filter modes?
-- density?
-  - think euclid selection may be better
+- refactor demos as tests?
+  - no because they are really demos
 - script to minimise bank fixture size?
   - not worth it
 - remove Container model?
@@ -33,15 +30,12 @@
 - pattern toggling?
   - think it might be overkill
   - replace with digitakt 2 dual euclidian
-- harmonise nomenclature as nine09, three03 etc?
-  - not a lot of point
 - remove chromatic sampler?
   - no because 303 depends on it
-- remove project breaks?
-  - no; is complex as includes wash; and might still be useful
 
 ### done
 
+- rename demo outputs
 - nine09, three03 subclasses
 - 303 volume groove
 - convert 303 block to use while()

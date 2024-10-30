@@ -71,6 +71,6 @@ if __name__ == "__main__":
         nine09.play(generator = ghost_echo,
                     seeds = seeds,
                     env = Env)
-        container.write_project("tmp/demo-909.sunvox")
+        container.write_project("tmp/demo-909-samples.sunvox")
     except RuntimeError as error:
         print ("ERROR: %s" % str(error))
