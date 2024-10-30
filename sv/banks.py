@@ -6,24 +6,6 @@ import re
 import zipfile
 
 class SVBank:
-
-    @staticmethod
-    def load_wav_files(bank_name, dir_path,
-                       filter_fn = lambda x: x.endswith(".wav")):
-        zip_buffer = io.BytesIO()
-        zip_file = zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False)
-        for file_name in os.listdir(dir_path):
-            if filter_fn(file_name):
-                file_path = f"{dir_path}/{file_name}"
-                wav_data = None
-                with open(file_path, 'rb') as wav_file:
-                    wav_data = wav_file.read()
-                if not wav_data:
-                    raise RuntimeError(f"couldn't load {file_path}")
-                zip_file.writestr(file_name, wav_data)
-        zip_buffer.seek(0)
-        return SVBank(name = bank_name,
-                      zip_buffer = zip_buffer)
     
     @staticmethod
     def load_zip_file(zip_path):
@@ -42,17 +24,6 @@ class SVBank:
     @property
     def zip_file(self):
         return zipfile.ZipFile(self.zip_buffer, 'r')
-
-    def join(self, bank):
-        bank_zip_file = bank.zip_file
-        zip_buffer_temp = io.BytesIO(self.zip_buffer.getvalue())
-        with zipfile.ZipFile(zip_buffer_temp, 'a', zipfile.ZIP_DEFLATED) as zip_file:
-            for item in bank_zip_file.infolist():
-                wav_data = bank_zip_file.read(item.filename)
-                zip_file.writestr(item.filename, wav_data)
-        self.zip_buffer = zip_buffer_temp
-        self.zip_buffer.seek(0)
-        return self
 
     def dump_zip_file(self, dir_path):
         if not os.path.exists(dir_path):

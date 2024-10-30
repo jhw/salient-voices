@@ -24,8 +24,7 @@ class SampleTest(unittest.TestCase):
 class SamplerTest(unittest.TestCase):
 
     def setUp(self):
-        bank = SVBank.load_wav_files(bank_name = "mikey303",
-                                     dir_path = "tests")
+        bank = SVBank.load_zip_file("tests/mikey303.zip")
         self.banks = SVBanks([bank])
         
     def test_slot_sampler(self):

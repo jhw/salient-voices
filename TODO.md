@@ -1,9 +1,8 @@
 ### short
 
-- remove SVBank support for file loading
+- rename zip_file, wav_file
 - move load_banks into SVBanks
 - investigate why tag matching returns that second variable
-- move load_banks into banks class
 
 ### medium
 
@@ -56,6 +55,7 @@
 
 ### done
 
+- remove SVBank support for file loading
 - move colours to utils
 - rename play() as render()
 - banks/utils diff_keys to do filesize checking

@@ -11,7 +11,8 @@ def refactor_src(pat, rep, root):
                     refactor(newtokens)
             elif filename.endswith("pyc"):
                 pass
-            else:
+            elif (filename.endswith(".py") or
+                  filename.endswith(".yaml")):
                 text = open(filename).read()
                 newtext = re.sub(pat, rep, text)
                 newfilename = re.sub(pat, rep, filename)

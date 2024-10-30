@@ -52,8 +52,7 @@ class ProjectTest(unittest.TestCase):
         self.assertTrue(isinstance(project, rv.project.Project))
 
     def test_sampler(self, modules = SamplerModules):
-        bank = SVBank.load_wav_files(bank_name = "mikey303",
-                                     dir_path = "tests")
+        bank = SVBank.load_zip_file("tests/mikey303.zip")
         trig = SVNoteTrig(target = "Sampler",
                           sample = "mikey303/303 VCO SQR.wav",
                           i = 0)

@@ -9,8 +9,7 @@ import unittest
 class ContainerTest(unittest.TestCase):
 
     def test_play(self, seed = 12345):
-        bank = SVBank.load_wav_files(bank_name = "mikey303",
-                                     dir_path = "tests")
+        bank = SVBank.load_zip_file("tests/mikey303.zip")
         container = SVContainer(banks = [bank])
         three03 = Three03(container = container,
                           namespace = "303",
