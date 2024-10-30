@@ -1,6 +1,5 @@
 ### short
 
-- move colours to utils
 - remove SVBank support for file loading
 - move load_banks into SVBanks
 - investigate why tag matching returns that second variable
@@ -57,6 +56,7 @@
 
 ### done
 
+- move colours to utils
 - rename play() as render()
 - banks/utils diff_keys to do filesize checking
 - remove RuntimeError catching in tests

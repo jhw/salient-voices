@@ -1,5 +1,5 @@
 from sv.banks import SVPool, SVBanks
-from sv.colours import init_colours
+from sv.utils.colours import init_colours
 
 import importlib
 import math
