@@ -2,7 +2,6 @@
 
 ### medium
 
-- remove serialisation classes
 - banks to use local caching
 - perkons grooves
 - decompiler
@@ -35,6 +34,7 @@
 
 ### done
 
+- remove serialisation classes
 - rename demo outputs
 - nine09, three03 subclasses
 - 303 volume groove
