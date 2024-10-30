@@ -49,7 +49,7 @@ def ghost_echo(self, n, rand,
                             
 if __name__ == "__main__":
     try:
-        bank = SVBank.load_zip_file("demos/303/mikey303/mikey303.zip")
+        bank = SVBank.load_zip("demos/303/mikey303/mikey303.zip")
         container = SVContainer(banks = [bank],
                                 bpm = 240,
                                 n_ticks = 32)

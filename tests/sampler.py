@@ -24,7 +24,7 @@ class SampleTest(unittest.TestCase):
 class SamplerTest(unittest.TestCase):
 
     def setUp(self):
-        bank = SVBank.load_zip_file("tests/mikey303.zip")
+        bank = SVBank.load_zip("tests/mikey303.zip")
         self.banks = SVBanks([bank])
         
     def test_slot_sampler(self):

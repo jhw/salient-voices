@@ -45,7 +45,7 @@ class SVBaseSampler(rv.modules.sampler.Sampler):
         notes = list(rv.note.NOTE)
         for i, sample in enumerate(self.pool):
             self.note_samples[notes[i]] = i
-            src = banks.get_wav_file(sample)
+            src = banks.get_wav(sample)
             self.load_sample(src, i)
         
     """

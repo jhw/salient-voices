@@ -1,6 +1,5 @@
 ### short
 
-- rename zip_file, wav_file
 - move load_banks into SVBanks
 - investigate why tag matching returns that second variable
 
@@ -55,6 +54,7 @@
 
 ### done
 
+- rename zip_file, wav_file
 - remove SVBank support for file loading
 - move colours to utils
 - rename play() as render()

@@ -8,7 +8,7 @@ import zipfile
 class SVBank:
     
     @staticmethod
-    def load_zip_file(zip_path):
+    def load_zip(zip_path):
         bank_name = zip_path.split("/")[-1].split(".")[0]
         zip_buffer = io.BytesIO()
         with open(zip_path, 'rb') as f:
@@ -25,7 +25,7 @@ class SVBank:
     def zip_file(self):
         return zipfile.ZipFile(self.zip_buffer, 'r')
 
-    def dump_zip_file(self, dir_path):
+    def dump_zip(self, dir_path):
         if not os.path.exists(dir_path):
             os.mkdir(dir_path)
         zip_path = f"{dir_path}/{self.name}.zip"
@@ -47,17 +47,17 @@ class SVBanks(list):
         pool, untagged = SVPool(), []
         for bank in self:
             for item in bank.zip_file.infolist():
-                wav_file = item.filename
-                tags = filter_tags(wav_file, tag_mapping)
+                wav_filename = item.filename
+                tags = filter_tags(wav_filename, tag_mapping)
                 tag_string = "".join([f"#{tag}" for tag in tags])
-                sample = f"{bank.name}/{wav_file}{tag_string}"
+                sample = f"{bank.name}/{wav_filename}{tag_string}"
                 if tags != []:
                     pool.append(sample)
                 else:
                     untagged.append(sample)
         return pool, untagged
         
-    def get_wav_file(self, sample):
+    def get_wav(self, sample):
         bank_name = SVSample(sample).bank_name
         file_path = SVSample(sample).file_path
         banks = {bank.name: bank for bank in self}

@@ -61,13 +61,13 @@ def sync_banks(s3,
                                               Key = key)["Body"].read())        
         bank = SVBank(name = bank_name,
                       zip_buffer = zip_buffer)
-        bank.dump_zip_file(cache_dir)
+        bank.dump_zip(cache_dir)
 
 def load_banks(cache_dir = "tmp/banks"):
     banks = SVBanks()
     for file_name in os.listdir(cache_dir):
         zip_path = f"{cache_dir}/{file_name}"
-        bank = SVBank.load_zip_file(zip_path)
+        bank = SVBank.load_zip(zip_path)
         banks.append(bank)
     return banks
         

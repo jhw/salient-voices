@@ -13,22 +13,22 @@ class BankTest(unittest.TestCase):
                              "303 VCO SAW.wav"]:                          
                 self.assertTrue(wav_file in wav_files)
         # load files
-        bank = SVBank.load_zip_file("tests/mikey303.zip")
+        bank = SVBank.load_zip("tests/mikey303.zip")
         self.assertTrue(isinstance(bank, SVBank))
         self.assertEqual(bank.name, "mikey303")
         assert_wav_files(bank)
         # save zip
-        bank.dump_zip_file("tmp")
+        bank.dump_zip("tmp")
         self.assertTrue(os.path.exists("tmp/mikey303.zip"))
         # reload zip
-        bank = SVBank.load_zip_file("tmp/mikey303.zip")
+        bank = SVBank.load_zip("tmp/mikey303.zip")
         self.assertTrue(isinstance(bank, SVBank))
         assert_wav_files(bank)
         
 class BanksTest(unittest.TestCase):
 
     def test_spawn_pool(self):
-        bank = SVBank.load_zip_file("tests/mikey303.zip")
+        bank = SVBank.load_zip("tests/mikey303.zip")
         banks = SVBanks([bank])
         tag_mapping = {"bass": "303"}
         pool, unmapped = banks.spawn_pool(tag_mapping)

@@ -16,7 +16,7 @@ class BankUtilsTest(unittest.TestCase):
         self.s3 = boto3.client("s3")
         self.s3.create_bucket(Bucket = bucket_name,
                               CreateBucketConfiguration = {'LocationConstraint': 'EU'})
-        bank = SVBank.load_zip_file("tests/mikey303.zip")
+        bank = SVBank.load_zip("tests/mikey303.zip")
         self.s3.put_object(Bucket = bucket_name,
                            Key = "banks/mikey303.zip",
                            Body = bank.zip_buffer.getvalue(),
