@@ -1,11 +1,10 @@
 ### short
 
-- banks/utils diff_keys to do filesize checking
+- test for md5 checking in utils/banks
 
 ### medium
 
 - 303 filter multiplier
-- 303 equaliser
 - 303 slide
 - 303 slide- to
 
@@ -23,6 +22,7 @@
 - trimming, repeating, reversing 
 - resample arranger
 - analog 303
+- live looper
 
 ### long
 
@@ -51,6 +51,7 @@
 
 ### done
 
+- banks/utils diff_keys to do filesize checking
 - remove RuntimeError catching in tests
 - refactor tests/utils/banks.py
 - sync|load_banks

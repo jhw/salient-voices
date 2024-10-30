@@ -37,14 +37,18 @@ class BankUtilsTest(unittest.TestCase):
                                 bucket_name = bucket_name)
         self.assertEqual(len(keys), 1)
         # diff keys
-        diffed_keys = diff_keys(keys)
+        diffed_keys = diff_keys(s3 = self.s3,
+                                bucket_name = bucket_name,
+                                keys = keys)
         self.assertEqual(len(diffed_keys), 1)
         # sync banks
         sync_banks(s3 = self.s3,
                    bucket_name = bucket_name,
                    keys = keys)
         # re- diff keys
-        diffed_keys = diff_keys(keys)
+        diffed_keys = diff_keys(s3 = self.s3,
+                                bucket_name = bucket_name,
+                                keys = keys)
         self.assertEqual(diffed_keys, [])
         # load banks
         banks = load_banks()
@@ -60,13 +64,6 @@ class BankUtilsTest(unittest.TestCase):
             self.assertTrue(wav_file in wav_files)
         
     def tearDown(self, bucket_name = BucketName):
-        # clean s3
-        resp = self.s3.list_objects(Bucket = bucket_name)
-        if "Contents" in resp:
-            for obj in resp["Contents"]:
-                self.s3.delete_object(Bucket = bucket_name,
-                                      Key = obj["Key"])
-        self.s3.delete_bucket(Bucket = bucket_name)
         # clean cache
         """
         try:
@@ -74,6 +71,13 @@ class BankUtilsTest(unittest.TestCase):
         except:
             pass
         """
+        # clean s3
+        resp = self.s3.list_objects(Bucket = bucket_name)
+        if "Contents" in resp:
+            for obj in resp["Contents"]:
+                self.s3.delete_object(Bucket = bucket_name,
+                                      Key = obj["Key"])
+        self.s3.delete_bucket(Bucket = bucket_name)
             
 if __name__ == "__main__":
     unittest.main()
