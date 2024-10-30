@@ -1,7 +1,5 @@
 ### short
 
-- remove RuntimeError catching in tests
-
 - banks/utils diff_keys to do filesize checking
 
 ### medium
@@ -53,6 +51,7 @@
 
 ### done
 
+- remove RuntimeError catching in tests
 - refactor tests/utils/banks.py
 - sync|load_banks
 - perkons grooves
