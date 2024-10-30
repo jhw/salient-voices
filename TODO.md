@@ -2,8 +2,6 @@
 
 ### medium
 
-- banks to use local caching
-
 - 303 filter multiplier
 - 303 equaliser
 - 303 slide
@@ -20,7 +18,6 @@
 - new sv 0.3 randomiser 
 - git based mutator
 - sunvox drum 909
-- decompiler
 - trimming, repeating, reversing 
 - resample arranger
 - analog 303
@@ -31,6 +28,9 @@
 
 ### thoughts
 
+- include local caching in banks?
+  - no it feels like this is really an app level thing
+  - feels like there are situations where you wouldn't in fact want or need it
 - refactor demos as tests?
   - no because they are really demos
 - script to minimise bank fixture size?
