@@ -1,6 +1,7 @@
 ### short
 
-- split init_banks into sync_banks, load_banks
+- sync_banks
+- load_banks
 
 ### medium
 
