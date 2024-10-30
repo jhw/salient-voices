@@ -65,12 +65,12 @@ if __name__ == "__main__":
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
                  for key in "fx|vol|pat|samp|beat".split("|")}
-        nine09.play(generator = beat,
-                    seeds = seeds,
-                    env = Env)
-        nine09.play(generator = ghost_echo,
-                    seeds = seeds,
-                    env = Env)
+        nine09.render(generator = beat,
+                      seeds = seeds,
+                      env = Env)
+        nine09.render(generator = ghost_echo,
+                      seeds = seeds,
+                      env = Env)
         container.write_project("tmp/demo-909-samples.sunvox")
     except RuntimeError as error:
         print ("ERROR: %s" % str(error))

@@ -1,5 +1,9 @@
 ### short
 
+- move colours to utils
+- remove SVBank support for file loading
+- move load_banks into SVBanks
+- investigate why tag matching returns that second variable
 - move load_banks into banks class
 
 ### medium
@@ -53,6 +57,7 @@
 
 ### done
 
+- rename play() as render()
 - banks/utils diff_keys to do filesize checking
 - remove RuntimeError catching in tests
 - refactor tests/utils/banks.py

@@ -26,8 +26,8 @@ class ContainerTest(unittest.TestCase):
                     trig_block = self.note()
                     yield i, trig_block
                     j += 1
-        three03.play(generator = bassline,
-                     seeds = seeds)
+        three03.render(generator = bassline,
+                       seeds = seeds)
         patches = container.patches
         self.assertTrue(patches != [])
         patch = patches[0]

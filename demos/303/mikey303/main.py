@@ -61,10 +61,10 @@ if __name__ == "__main__":
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx|vol".split("|")}
-        three03.play(generator = bassline,
-                     seeds = seeds)
-        three03.play(generator = ghost_echo,
-                     seeds = seeds)
+        three03.render(generator = bassline,
+                       seeds = seeds)
+        three03.render(generator = ghost_echo,
+                       seeds = seeds)
         container.write_project("tmp/demo-303-mikey303.sunvox")
     except RuntimeError as error:
         print ("ERROR: %s" % str(error))
