@@ -1,7 +1,8 @@
 ### short
 
-- sync_banks
-- load_banks
+- remove RuntimeError catching in tests
+
+- banks/utils diff_keys to do filesize checking
 
 ### medium
 
@@ -52,6 +53,8 @@
 
 ### done
 
+- refactor tests/utils/banks.py
+- sync|load_banks
 - perkons grooves
 - remove serialisation classes
 - rename demo outputs

@@ -5,7 +5,7 @@ import io
 import os
 import unittest
 
-class ExportTest(unittest.TestCase):
+class ExportUtilsTest(unittest.TestCase):
 
     def test_export(self):
         try:

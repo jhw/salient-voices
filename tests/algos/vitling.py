@@ -3,7 +3,7 @@ import sv.algos.vitling as nine09
 import random
 import unittest
 
-class VitlingTest(unittest.TestCase):
+class VitlingAlgoTest(unittest.TestCase):
 
     def test_nine09(self, n = 16):
         rand = random.Random()

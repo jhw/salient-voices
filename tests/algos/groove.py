@@ -5,7 +5,7 @@ from random import Random
 
 import unittest
 
-class GrooveTest(unittest.TestCase):
+class GrooveAlgoTest(unittest.TestCase):
 
     def test_wol_groove(self, steps = 16, pulses = 11):
         rand = Random(22682)

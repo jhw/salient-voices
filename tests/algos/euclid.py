@@ -2,7 +2,7 @@ from sv.algos.euclid import bjorklund
 
 import unittest
 
-class EuclidTest(unittest.TestCase):
+class EuclidAlgoTest(unittest.TestCase):
 
     def test_bjorklund(self, steps = 16, pulses = 11):
         beats = bjorklund(steps = steps,
