@@ -15,6 +15,16 @@
 
 - include pattern clones in vertical pattern slices
 
+### gists 
+
+- new sv 0.3 randomiser 
+- git based mutator
+- sunvox drum 909
+- decompiler
+- trimming, repeating, reversing 
+- resample arranger
+- analog 303
+
 ### long
 
 - moto upgrade
