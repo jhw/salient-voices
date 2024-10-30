@@ -1,5 +1,7 @@
 ### short
 
+- split init_banks into sync_banks, load_banks
+
 ### medium
 
 - 303 filter multiplier
@@ -28,6 +30,9 @@
 
 ### thoughts
 
+- base classes for 303, 909?
+  - no because not clear how defaults in a superclass should then be handled
+  - also smacks of over- optimisation
 - include local caching in banks?
   - no it feels like this is really an app level thing
   - feels like there are situations where you wouldn't in fact want or need it
