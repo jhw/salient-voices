@@ -1,12 +1,12 @@
 ### short
 
-- test for md5 checking in utils/banks
+- move load_banks into banks class
 
 ### medium
 
-- 303 filter multiplier
 - 303 slide
 - 303 slide- to
+- 303 filter multiplier
 
 - digitakt II dual euclidian
 
@@ -30,6 +30,8 @@
 
 ### thoughts
 
+- test for md5 checking in utils/banks?
+  - not clear it's worth it
 - base classes for 303, 909?
   - no because not clear how defaults in a superclass should then be handled
   - also smacks of over- optimisation
