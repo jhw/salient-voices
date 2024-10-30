@@ -3,7 +3,6 @@
 ### medium
 
 - banks to use local caching
-- decompiler
 
 - 303 filter multiplier
 - 303 equaliser
@@ -11,6 +10,10 @@
 - 303 slide- to
 
 - digitakt II dual euclidian
+
+### decompiler
+
+- include pattern clones in vertical pattern slices
 
 ### long
 
