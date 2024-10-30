@@ -1,7 +1,6 @@
 ### short
 
 - move load_banks into SVBanks
-- investigate why tag matching returns that second variable
 
 ### medium
 
