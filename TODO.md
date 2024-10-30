@@ -3,7 +3,6 @@
 ### medium
 
 - banks to use local caching
-- perkons grooves
 - decompiler
 
 - 303 filter multiplier
@@ -34,6 +33,7 @@
 
 ### done
 
+- perkons grooves
 - remove serialisation classes
 - rename demo outputs
 - nine09, three03 subclasses
