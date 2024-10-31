@@ -1,7 +1,8 @@
 ### short
 
-- rename filter_by_tag as filter
-- check tag filtering returns a new bank
+- sample tag stuff in banks spawn_pool should be moved into SVSample
+
+- bank.subset functionality
 
 ### medium
 
@@ -54,6 +55,8 @@
 
 ### done
 
+- rename filter_by_tag as filter
+- check tag filtering returns a new bank
 - move load_banks into SVBanks
 - rename zip_file, wav_file
 - remove SVBank support for file loading

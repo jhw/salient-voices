@@ -35,10 +35,11 @@ class SVBank:
 class SVBanks(list):
 
     @staticmethod
-    def load_zip(cache_dir = "tmp/banks"):
+    def load_zip(cache_dir = "tmp/banks",
+                 filter_fn = lambda x: x.endswith(".zip")):
         banks = SVBanks()
         for file_name in os.listdir(cache_dir):
-            if file_name.endswith(".zip"):
+            if filter_fn(file_name):
                 zip_path = f"{cache_dir}/{file_name}"
                 bank = SVBank.load_zip(zip_path)
                 banks.append(bank)
@@ -47,36 +48,35 @@ class SVBanks(list):
     def __init__(self, items = []):
         list.__init__(self, items)
 
+    def filter_tags(self, file_name, tag_mapping):
+        tags = []
+        for tag, term in tag_mapping.items():
+            if re.search(term, file_name, re.I):
+                tags.append(tag)
+        return tags        
+        
     def spawn_pool(self, tag_mapping):
-        def filter_tags(file_name, tag_mapping):
-            tags = []
-            for tag, term in tag_mapping.items():
-                if re.search(term, file_name, re.I):
-                    tags.append(tag)
-            return tags        
         pool, untagged = SVPool(), []
         for bank in self:
             for item in bank.zip_file.infolist():
-                wav_filename = item.filename
-                tags = filter_tags(wav_filename, tag_mapping)
+                tags = self.filter_tags(item.filename, tag_mapping)
                 tag_string = "".join([f"#{tag}" for tag in tags])
-                sample = f"{bank.name}/{wav_filename}{tag_string}"
+                sample_key = f"{bank.name}/{item.filename}{tag_string}"
                 if tags != []:
-                    pool.append(sample)
+                    pool.append(sample_key)
                 else:
-                    untagged.append(sample)
+                    untagged.append(sample_key)
         return pool, untagged
         
     def get_wav(self, sample):
-        bank_name = SVSample(sample).bank_name
-        file_path = SVSample(sample).file_path
         banks = {bank.name: bank for bank in self}
-        if bank_name not in banks:
+        sample = SVSample(sample)
+        if sample.bank_name not in banks:
             raise RuntimeError(f"bank {bank_name} not found")
-        file_paths = banks[bank_name].zip_file.namelist()
-        if file_path not in file_paths:
+        file_paths = banks[sample.bank_name].zip_file.namelist()
+        if sample.file_path not in file_paths:
             raise RuntimeError(f"path {file_path} not found in bank {bank_name}")
-        return banks[bank_name].zip_file.open(file_path, 'r')
+        return banks[sample.bank_name].zip_file.open(sample.file_path, 'r')
         
 class SVPool(list):
 
@@ -96,7 +96,7 @@ class SVPool(list):
                 tags[tag] += 1
         return tags
         
-    def filter_by_tag(self, tag):
+    def filter_tag(self, tag):
         return [sample for sample in self
                 if tag in SVSample(sample).tags]
             
