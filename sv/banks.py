@@ -25,6 +25,17 @@ class SVBank:
     def zip_file(self):
         return zipfile.ZipFile(self.zip_buffer, 'r')
 
+    def subset(self, name, file_list):
+        subset_buffer = io.BytesIO()
+        with zipfile.ZipFile(subset_buffer, 'w') as subset_zip:
+            for item in self.zip_file.infolist():
+                if item.filename in file_list:
+                    with self.zip_file.open(item, 'r') as source_file:
+                        subset_zip.writestr(item.filename, source_file.read())
+        subset_buffer.seek(0)
+        return SVBank(name = name,
+                      zip_buffer = subset_buffer)
+    
     def dump_zip(self, dir_path):
         if not os.path.exists(dir_path):
             os.mkdir(dir_path)

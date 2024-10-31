@@ -1,7 +1,5 @@
 ### short
 
-- bank.subset functionality
-
 ### medium
 
 - 303 slide
@@ -53,6 +51,7 @@
 
 ### done
 
+- bank.subset functionality
 - sample tag stuff in banks spawn_pool should be moved into SVSample
 - rename filter_by_tag as filter
 - check tag filtering returns a new bank
