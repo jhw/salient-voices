@@ -1,8 +1,9 @@
 from sv.algos.euclid import bjorklund, TidalPatterns
-from sv.algos.groove import wol_groove
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
 from sv.instruments.nine09.samples import Nine09
+
+import sv.algos.groove.perkons as perkons
 
 import random
 import re
@@ -28,8 +29,8 @@ def random_pattern(rand, patterns = [pattern for pattern in TidalPatterns
 def beat(self, n, rand, env):
     pattern = random_pattern(rand)
     for i in range(n):
-        volume = wol_groove(rand = rand["vol"],
-                            i = i)
+        volume = perkons.humanise(rand = rand["vol"],
+                                  i = i)
         if rand["samp"].random() < env["sample_temperature"]:
             self.toggle_sample()
         if (pattern[i % len(pattern)] and

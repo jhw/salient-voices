@@ -1,7 +1,8 @@
-from sv.algos.groove import wol_groove
 from sv.banks import SVBank
 from sv.container import SVContainer
 from sv.instruments.three03.mikey303 import Three03
+
+import sv.algos.groove.perkons as perkons
 
 import random
 import re
@@ -16,8 +17,8 @@ def bassline(self, n, rand,
              **kwargs):
     i = 0
     while True:
-        volume = wol_groove(rand = rand["vol"],
-                            i = i)
+        volume = perkons.humanise(rand = rand["vol"],
+                                  i = i)
         if i >= (n - 2):
             break
         elif (rand["seq"].random() < note_density and

@@ -99,17 +99,6 @@ class SVPool(list):
         if sample not in self:
             self.append(sample)
 
-    """
-    @property
-    def tags(self):
-        tags = {}
-        for sample in self:
-            for tag in SVSample(sample).tags:
-                tags.setdefault(tag, 0)
-                tags[tag] += 1
-        return tags
-    """
-        
     def match(self, tag):
         return [sample for sample in self
                 if tag in SVSample(sample).tags]
