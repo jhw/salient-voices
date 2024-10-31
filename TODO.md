@@ -1,9 +1,5 @@
 ### short
 
-- rename filter_tag as match
-- remove pool.tags
-- remove vitling, wolgroove
-
 ### medium
 
 - 303 slide
@@ -55,6 +51,9 @@
 
 ### done
 
+- remove vitling, wolgroove
+- rename filter_tag as match
+- remove pool.tags
 - bank.subset functionality
 - sample tag stuff in banks spawn_pool should be moved into SVSample
 - rename filter_by_tag as filter
