@@ -60,12 +60,13 @@ class SVBanks(list):
         for bank in self:
             for item in bank.zip_file.infolist():
                 tags = self.filter_tags(item.filename, tag_mapping)
-                tag_string = "".join([f"#{tag}" for tag in tags])
-                sample_key = f"{bank.name}/{item.filename}{tag_string}"
+                sample = SVSample.create(bank_name = bank.name,
+                                         file_name = item.filename,
+                                         tags = tags)
                 if tags != []:
-                    pool.append(sample_key)
+                    pool.append(sample)
                 else:
-                    untagged.append(sample_key)
+                    untagged.append(sample)
         return pool, untagged
         
     def get_wav(self, sample):

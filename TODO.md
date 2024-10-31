@@ -1,7 +1,5 @@
 ### short
 
-- sample tag stuff in banks spawn_pool should be moved into SVSample
-
 - bank.subset functionality
 
 ### medium
@@ -55,6 +53,7 @@
 
 ### done
 
+- sample tag stuff in banks spawn_pool should be moved into SVSample
 - rename filter_by_tag as filter
 - check tag filtering returns a new bank
 - move load_banks into SVBanks
