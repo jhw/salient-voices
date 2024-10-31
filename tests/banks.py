@@ -50,21 +50,12 @@ class BanksTest(unittest.TestCase):
 
 class PoolTest(unittest.TestCase):
 
-    def test_tags(self):
+    def test_match(self):
         pool = SVPool()
         pool.add("mikey303/303 VCO SQR.wav#bass#303")
-        tags = pool.tags
-        self.assertEqual(len(tags), 2)
-        for tag in ["bass", "303"]:
-            self.assertTrue(tag in tags)
-            self.assertEqual(tags[tag], 1)
-
-    def test_filter_tag(self):
-        pool = SVPool()
-        pool.add("mikey303/303 VCO SQR.wav#bass#303")
-        samples = pool.filter_tag("bass")
+        samples = pool.match("bass")
         self.assertTrue(len(samples), 1)
-        samples = pool.filter_tag("kick")
+        samples = pool.match("kick")
         self.assertEqual(samples, [])
         
 if __name__ == "__main__":

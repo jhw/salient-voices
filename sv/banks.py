@@ -59,7 +59,7 @@ class SVBanks(list):
     def __init__(self, items = []):
         list.__init__(self, items)
 
-    def filter_tags(self, file_name, tag_mapping):
+    def match_tags(self, file_name, tag_mapping):
         tags = []
         for tag, term in tag_mapping.items():
             if re.search(term, file_name, re.I):
@@ -70,7 +70,7 @@ class SVBanks(list):
         pool, untagged = SVPool(), []
         for bank in self:
             for item in bank.zip_file.infolist():
-                tags = self.filter_tags(item.filename, tag_mapping)
+                tags = self.match_tags(item.filename, tag_mapping)
                 sample = SVSample.create(bank_name = bank.name,
                                          file_name = item.filename,
                                          tags = tags)
@@ -99,6 +99,7 @@ class SVPool(list):
         if sample not in self:
             self.append(sample)
 
+    """
     @property
     def tags(self):
         tags = {}
@@ -107,8 +108,9 @@ class SVPool(list):
                 tags.setdefault(tag, 0)
                 tags[tag] += 1
         return tags
+    """
         
-    def filter_tag(self, tag):
+    def match(self, tag):
         return [sample for sample in self
                 if tag in SVSample(sample).tags]
             
