@@ -1,6 +1,8 @@
 ### short
 
 - move load_banks into SVBanks
+- rename filter_by_tag as filter
+- check tag filtering returns a new bank
 
 ### medium
 
