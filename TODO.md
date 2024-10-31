@@ -1,6 +1,5 @@
 ### short
 
-- move load_banks into SVBanks
 - rename filter_by_tag as filter
 - check tag filtering returns a new bank
 
@@ -55,6 +54,7 @@
 
 ### done
 
+- move load_banks into SVBanks
 - rename zip_file, wav_file
 - remove SVBank support for file loading
 - move colours to utils

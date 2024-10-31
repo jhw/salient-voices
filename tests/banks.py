@@ -4,7 +4,7 @@ import os
 import unittest
 
 class BankTest(unittest.TestCase):
-        
+
     def test_serialisation(self):
         def assert_wav_files(bank):
             wav_files = bank.zip_file.namelist()
@@ -27,6 +27,10 @@ class BankTest(unittest.TestCase):
         
 class BanksTest(unittest.TestCase):
 
+    def test_load(self):        
+        banks = SVBanks.load_zip("tests")        
+        self.assertTrue(len(banks) == 1)
+    
     def test_spawn_pool(self):
         bank = SVBank.load_zip("tests/mikey303.zip")
         banks = SVBanks([bank])

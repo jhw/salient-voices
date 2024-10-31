@@ -34,6 +34,16 @@ class SVBank:
     
 class SVBanks(list):
 
+    @staticmethod
+    def load_zip(cache_dir = "tmp/banks"):
+        banks = SVBanks()
+        for file_name in os.listdir(cache_dir):
+            if file_name.endswith(".zip"):
+                zip_path = f"{cache_dir}/{file_name}"
+                bank = SVBank.load_zip(zip_path)
+                banks.append(bank)
+        return banks
+    
     def __init__(self, items = []):
         list.__init__(self, items)
 

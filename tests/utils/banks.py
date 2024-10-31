@@ -1,5 +1,5 @@
 from sv.banks import SVBank
-from sv.utils.banks import list_remote_keys, diff_keys, sync_banks, load_banks
+from sv.utils.banks import list_remote_keys, diff_keys, sync_banks
 from moto import mock_s3
 
 import boto3
@@ -49,18 +49,6 @@ class BankUtilsTest(unittest.TestCase):
                                 bucket_name = bucket_name,
                                 keys = keys)
         self.assertEqual(diffed_keys, [])
-        # load banks
-        banks = load_banks()
-        self.assertTrue(len(banks) == 1)
-        # check bank properties
-        bank = banks[0]        
-        self.assertTrue(isinstance(bank, SVBank))
-        self.assertEqual(bank.name, "mikey303")        
-        wav_files = bank.zip_file.namelist()
-        self.assertTrue(len(wav_files) == 2)
-        for wav_file in ["303 VCO SQR.wav",
-                         "303 VCO SAW.wav"]:                          
-            self.assertTrue(wav_file in wav_files)
         
     def tearDown(self, bucket_name = BucketName):
         # clean cache
