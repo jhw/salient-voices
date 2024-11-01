@@ -1,4 +1,4 @@
-from sv.sampler import SVSample
+from sv.sampler import SVSampleRef as SVSample
 import io
 import os
 import re

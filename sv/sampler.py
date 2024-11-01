@@ -12,12 +12,12 @@ warnings.simplefilter("ignore", wavfile.WavFileWarning)
 
 MaxSlots = 120
 
-class SVSample(str):
+class SVSampleRef(str):
 
     @staticmethod
     def create(bank_name, file_name, tags):
         tag_string = "".join([f"#{tag}" for tag in sorted(tags)])
-        return SVSample(f"{bank_name}/{file_name}{tag_string}")
+        return SVSampleRef(f"{bank_name}/{file_name}{tag_string}")
     
     def __init__(self, value = ""):
         # str.__init__(self, value)

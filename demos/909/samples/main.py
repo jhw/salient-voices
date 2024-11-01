@@ -57,7 +57,7 @@ if __name__ == "__main__":
                                 bpm = 120,
                                 n_ticks = 16)
         pool, _ = SVBanks([bank]).spawn_pool(tag_mapping = PoolTerms)
-        samples = pool.match("hat")
+        samples = pool.match(lambda sample: "hat" in sample.tags)
         random.shuffle(samples)
         nine09 = Nine09(container = container,
                         namespace = "909",
