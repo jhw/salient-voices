@@ -1,5 +1,7 @@
 ### short
 
+- why are all patterns rendering the same
+
 ### medium
 
 - modifiers model
