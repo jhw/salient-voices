@@ -1,6 +1,6 @@
+from sv.banks import SVSampleRef as SVSample
 from sv.banks import SVBank, SVBanks
 from sv.sampler import SVSlotSampler, SVChromaticSampler, MaxSlots
-from sv.sampler import SVSampleRef as SVSample
 
 import os
 import unittest

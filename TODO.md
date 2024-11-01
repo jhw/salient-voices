@@ -1,10 +1,8 @@
 ### short
 
-- move sampleref into banks
+- modifiers model
 
 ### medium
-
-- modifiers model
 
 - 303 slide
 - 303 slide- to
@@ -18,8 +16,7 @@
 
 ### gists 
 
-- new sv 0.3 randomiser 
-- git based mutator
+- git based arranger
 - sunvox drum 909
 - trimming, repeating, reversing 
 - resample arranger
@@ -55,6 +52,8 @@
 
 ### done
 
+- new sv 0.3 randomiser 
+- move sampleref into banks
 - import SVSampleRef as SVSample
 - match to take matcher function
 - move subset to banks from bank
