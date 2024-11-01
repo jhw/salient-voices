@@ -25,22 +25,23 @@ class BankTest(unittest.TestCase):
         bank = SVBank.load_zip("tmp/mikey303.zip")
         self.assertTrue(isinstance(bank, SVBank))
         assert_wav_files(bank)
+        
+class BanksTest(unittest.TestCase):
+    
+    def test_load(self):        
+        banks = SVBanks.load_zip("tests")        
+        self.assertTrue(len(banks) == 1)
 
     def test_subset(self):
         bank = SVBank.load_zip("tests/mikey303.zip")
+        banks = SVBanks([bank])
         pool = SVPool([SVSample("mikey303/303 VCO SQR.wav")])
-        subset = bank.subset(name = "subset",
-                             pool = pool)
+        subset = banks.subset(name = "subset",
+                              pool = pool)
         wav_files = subset.zip_file.namelist()
         self.assertEqual(len(wav_files), 1)
         self.assertTrue("303 VCO SQR.wav" in wav_files)
         
-class BanksTest(unittest.TestCase):
-
-    def test_load(self):        
-        banks = SVBanks.load_zip("tests")        
-        self.assertTrue(len(banks) == 1)
-    
     def test_spawn_pool(self):
         bank = SVBank.load_zip("tests/mikey303.zip")
         banks = SVBanks([bank])

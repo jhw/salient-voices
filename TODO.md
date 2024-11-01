@@ -1,6 +1,5 @@
 ### short
 
-- move subset to banks from bank
 - match to take matcher function
 
 ### medium
@@ -56,6 +55,7 @@
 
 ### done
 
+- move subset to banks from bank
 - cast pool passed to subset
 - cast sample
 - don't cast sample and see what happens
