@@ -192,7 +192,7 @@ class SVModTrig(SVTrigBase):
                             val = value)
 
 class SVTrigPatch:
-
+    
     def __init__(self, n_ticks, trigs = []):
         self.trigs = trigs
         self.n_ticks = n_ticks

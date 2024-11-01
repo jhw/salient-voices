@@ -1,7 +1,5 @@
 ### short
 
-- why are all patterns rendering the same
-
 ### medium
 
 - modifiers model
@@ -53,6 +51,8 @@
   - no because 303 depends on it
 
 ### done
+
+- why are all patterns rendering the same
 
 ```
 ERROR: modules names are not unique

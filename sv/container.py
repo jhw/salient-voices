@@ -16,7 +16,8 @@ class SVContainer:
         self.patches = []
 
     def spawn_patch(self):
-        self.patches.append(SVTrigPatch(n_ticks = self.n_ticks))
+        self.patches.append(SVTrigPatch(n_ticks = self.n_ticks,
+                                        trigs = [])) # NB force reset
 
     def add_instrument(self, instrument):
         self.instruments.append(instrument)
@@ -32,10 +33,10 @@ class SVContainer:
         self.patches[-1].add_trigs(trigs)
 
     def render_project(self):
-         return SVProject().render_project(patches = self.patches,
-                                           modules = self.modules,
-                                           banks = self.banks,
-                                           bpm = self.bpm)
+        return SVProject().render_project(patches = self.patches,
+                                          modules = self.modules,
+                                          banks = self.banks,
+                                          bpm = self.bpm)
 
     def write_project(self, filename):
         path_to_filename = "/".join(filename.split("/")[:-1])
