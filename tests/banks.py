@@ -56,9 +56,9 @@ class PoolTest(unittest.TestCase):
     def test_match(self):
         pool = SVPool()
         pool.add("mikey303/303 VCO SQR.wav#bass#303")
-        samples = pool.match("bass")
+        samples = pool.match(lambda sample: "bass" in sample.tags)
         self.assertTrue(len(samples), 1)
-        samples = pool.match("kick")
+        samples = pool.match(lambda sample: "kick" in sample.tags)
         self.assertEqual(samples, [])
         
 if __name__ == "__main__":

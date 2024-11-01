@@ -1,6 +1,6 @@
 ### short
 
-- match to take matcher function
+- import SVSampleRef as SVSample
 
 ### medium
 
@@ -55,6 +55,7 @@
 
 ### done
 
+- match to take matcher function
 - move subset to banks from bank
 - cast pool passed to subset
 - cast sample

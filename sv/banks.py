@@ -101,8 +101,8 @@ class SVPool(list):
         if sample not in self:
             self.append(sample)
 
-    def match(self, tag):
-        return [sample for sample in self if tag in SVSample(sample).tags]
+    def match(self, matcher_fn):
+        return [sample for sample in self if matcher_fn(SVSample(sample))]
 
 if __name__ == "__main__":
     pass
