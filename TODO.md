@@ -1,5 +1,7 @@
 ### short
 
+- move sampleref into banks
+
 ### medium
 
 - modifiers model
