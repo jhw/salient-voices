@@ -45,7 +45,7 @@ class SVBanks(list):
     def __init__(self, items=[]):
         list.__init__(self, items)
 
-    def subset(self, name, pool):
+    def filter(self, name, pool):
         subset_buffer = io.BytesIO()
         with zipfile.ZipFile(subset_buffer, 'w') as subset_zip:
             for sample in pool:

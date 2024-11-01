@@ -32,13 +32,13 @@ class BanksTest(unittest.TestCase):
         banks = SVBanks.load_zip("tests")        
         self.assertTrue(len(banks) == 1)
 
-    def test_subset(self):
+    def test_filter(self):
         bank = SVBank.load_zip("tests/mikey303.zip")
         banks = SVBanks([bank])
         pool = SVPool([SVSample("mikey303/303 VCO SQR.wav")])
-        subset = banks.subset(name = "subset",
+        filtered = banks.filter(name = "filtered",
                               pool = pool)
-        wav_files = subset.zip_file.namelist()
+        wav_files = filtered.zip_file.namelist()
         self.assertEqual(len(wav_files), 1)
         self.assertTrue("303 VCO SQR.wav" in wav_files)
         
