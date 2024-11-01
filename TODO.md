@@ -1,9 +1,5 @@
 ### short
 
-```
-ERROR: modules names are not unique
-```
-
 ### medium
 
 - modifiers model
@@ -55,6 +51,10 @@ ERROR: modules names are not unique
   - no because 303 depends on it
 
 ### done
+
+```
+ERROR: modules names are not unique
+```
 
 - new sv 0.3 randomiser 
 - move sampleref into banks

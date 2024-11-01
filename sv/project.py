@@ -38,7 +38,7 @@ class SVModules(list):
         list.__init__(self, [SVModule(item)
                              for item in items])
 
-    def validate(self):
+    def validate(self):        
         names = [item["name"] for item in self]
         if len(names) != len(set(names)):
             raise RuntimeError("modules names are not unique")

@@ -119,9 +119,10 @@ if __name__ == "__main__":
         pool, _ = banks.spawn_pool(tag_mapping = PoolTerms)
         generators = {"beat": beat,
                       "echo": ghost_echo}
-        spawn_patch(container = container,
-                    pool = pool,
-                    generators = generators)
+        for i in range(2):
+            spawn_patch(container = container,
+                        pool = pool,
+                        generators = generators)
         container.write_project("tmp/unique-modules-test.sunvox")
     except RuntimeError as error:
         print ("ERROR: %s" % str(error))

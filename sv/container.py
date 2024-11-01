@@ -23,10 +23,10 @@ class SVContainer:
 
     @property
     def modules(self):
-        modules = []
-        for instrument in self.instruments:
-            modules += instrument.modules
-        return modules
+        modules = {}
+        for instrument in self.instruments:            
+            modules.update({mod["name"]:mod for mod in instrument.modules})
+        return list(modules.values())
 
     def add_trigs(self, trigs):
         self.patches[-1].add_trigs(trigs)
