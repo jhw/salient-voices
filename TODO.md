@@ -1,6 +1,13 @@
 ### short
 
+- cast pool passed to subset
+
+- move subset to banks from bank
+- match to take matcher function
+
 ### medium
+
+- modifiers model
 
 - 303 slide
 - 303 slide- to
@@ -51,6 +58,8 @@
 
 ### done
 
+- cast sample
+- don't cast sample and see what happens
 - remove vitling, wolgroove
 - rename filter_tag as match
 - remove pool.tags

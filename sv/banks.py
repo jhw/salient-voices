@@ -79,10 +79,15 @@ class SVBanks(list):
                 else:
                     untagged.append(sample)
         return pool, untagged
-        
+
+    def cast_sample(fn):
+        def wrapped(self, sample):
+            return fn(self, SVSample(sample))
+        return wrapped
+
+    @cast_sample
     def get_wav(self, sample):
         banks = {bank.name: bank for bank in self}
-        sample = SVSample(sample)
         if sample.bank_name not in banks:
             raise RuntimeError(f"bank {bank_name} not found")
         file_paths = banks[sample.bank_name].zip_file.namelist()
