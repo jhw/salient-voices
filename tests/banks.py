@@ -1,4 +1,5 @@
 from sv.banks import SVBank, SVBanks, SVPool
+from sv.sampler import SVSample
 
 import os
 import unittest
@@ -27,8 +28,9 @@ class BankTest(unittest.TestCase):
 
     def test_subset(self):
         bank = SVBank.load_zip("tests/mikey303.zip")
+        pool = SVPool([SVSample("mikey303/303 VCO SQR.wav")])
         subset = bank.subset(name = "subset",
-                             file_list = ["303 VCO SQR.wav"])
+                             pool = pool)
         wav_files = subset.zip_file.namelist()
         self.assertEqual(len(wav_files), 1)
         self.assertTrue("303 VCO SQR.wav" in wav_files)

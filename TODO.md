@@ -1,7 +1,5 @@
 ### short
 
-- cast pool passed to subset
-
 - move subset to banks from bank
 - match to take matcher function
 
@@ -58,6 +56,7 @@
 
 ### done
 
+- cast pool passed to subset
 - cast sample
 - don't cast sample and see what happens
 - remove vitling, wolgroove

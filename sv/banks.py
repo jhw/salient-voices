@@ -25,7 +25,8 @@ class SVBank:
     def zip_file(self):
         return zipfile.ZipFile(self.zip_buffer, 'r')
 
-    def subset(self, name, file_list):
+    def subset(self, name, pool):
+        file_list = [sample.file_path for sample in pool]
         subset_buffer = io.BytesIO()
         with zipfile.ZipFile(subset_buffer, 'w') as subset_zip:
             for item in self.zip_file.infolist():
