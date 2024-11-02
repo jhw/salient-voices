@@ -179,7 +179,7 @@ class SVModTrig(SVTrigBase):
         if self.ctrl not in controller:
             raise RuntimeError("controller %s not found in module %s" % (self.ctrl,
                                                                          self.mod))
-        ctrl_id = self.CtrlMult*controller[self.ctrl]
+        ctrl_id = self.CtrlMult * controller[self.ctrl]
         value = parse_value(self.value)
         return rv.note.Note(module = mod_id,
                             ctl = ctrl_id,
@@ -195,14 +195,13 @@ class SVTrigPatch:
         self.trigs += trigs
 
     def trig_groups(self, mod_names):
-        groups = {mod_name: {} for mod_name in mod_names}
+        groups = {}
         for trig in self.trigs:
-            if trig.mod not in groups:
-                raise RuntimeError(f"trig mod {trig.mod} not found in modules")
-            groups[trig.mod].setdefault(trig.key, [])
-            groups[trig.mod][trig.key].append(trig)
+            if trig.mod in mod_names:
+                groups.setdefault(trig.mod, {})
+                groups[trig.mod].setdefault(trig.key, [])
+                groups[trig.mod][trig.key].append(trig)
         return groups
-
         
 if __name__ == "__main__":
     pass
