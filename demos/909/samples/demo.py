@@ -1,10 +1,12 @@
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
 from sv.instruments.nine09.samples import Nine09
+from sv.utils.banks import sync_banks, list_remote_keys, diff_keys
 
 import sv.algos.euclid as euclid
 import sv.algos.groove.perkons as perkons
 
+import boto3
 import inspect
 import logging
 import random
@@ -21,21 +23,17 @@ logging.basicConfig(stream=sys.stdout,
                     level=logging.INFO,
                     format="%(levelname)s: %(message)s")
 
-def MF(mod, fn):
+def spawn_function(mod, fn, **kwargs):
     return getattr(eval(mod), fn)
 
-def MFA(mod, fn, args):
-    return MF(mod, fn)(**args)
-    
 def beat(self, n, rand, pattern, groove, sample_temperature, beat_density, **kwargs):
-    pattern_fn = MFA(**pattern)
-    groove_fn = MF(**groove)
+    pattern_fn = spawn_function(**pattern)(**pattern["args"])
+    groove_fn = spawn_function(**groove)
     for i in range(n):
-        volume = groove_fn(rand = rand["vol"],
-                           i = i)
+        volume = groove_fn(rand = rand["vol"], i = i)
         if rand["samp"].random() < sample_temperature:
             self.toggle_sample()        
-        if (pattern_fn(i) and
+        if (pattern_fn(i) and 
             rand["beat"].random() < beat_density):
             trig_block = self.note(note = 0,
                                    volume = volume)            
@@ -107,7 +105,7 @@ def spawn_patch(container, pool, generators):
                     seeds = seeds,
                     env = {"sample_temperature": temp,
                            "beat_density": density})
-        
+
 if __name__ == "__main__":
     try:
         bank = SVBank.load_zip("demos/909/samples/pico-default.zip")
