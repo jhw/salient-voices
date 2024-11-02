@@ -72,6 +72,23 @@ def init_project(fn):
                   *args, **kwargs)
     return wrapped
 
+def trig_groups(mod_names, trigs):
+    groups = {mod_name: {} for mod_name in mod_names}
+    for trig in trigs:
+        if trig.mod not in groups:
+            raise RuntimeError(f"trig mod {trig.mod} not found in modules")
+        groups[trig.mod].setdefault(trig.key, [])
+        groups[trig.mod][trig.key].append(trig)
+    return groups
+
+def populate_pool(mod_names, trigs, pool):
+    for group in trig_groups(mod_names = mod_names,
+                             trigs = trigs).values():
+        for trigs in group.values():
+            for trig in trigs:
+                if (hasattr(trig, "sample") and trig.sample):
+                    pool.add(trig.sample)
+
 def init_modules(fn):
     def wrapped(self,
                 project,
@@ -90,8 +107,9 @@ def init_modules(fn):
                     print(f"Patch {i} >>", [(trig.mod, trig.sample)
                                             for trig in patch.trigs
                                             if hasattr(trig, "sample")])
-                    patch.populate_pool(pool = pool,
-                                        mod_names = mod_names)
+                    populate_pool(pool = pool,
+                                  mod_names = mod_names,
+                                  trigs = patch.trigs)
                 print("Pool >>", pool)
                 mod_kwargs = {"banks": banks,
                               "pool": pool}
@@ -244,7 +262,8 @@ class SVProject:
         patterns, x, y = [], 0, 0
         for i, patch in enumerate(patches):
             n_ticks = patch.n_ticks
-            for mod_name, group in patch.trig_groups(mod_names).items():
+            for mod_name, group in trig_groups(mod_names = mod_names,
+                                               trigs = patch.trigs).items():
                 tracks = list(group.values())
                 colour = colours[mod_name]
                 self.render_patch(patterns = patterns,
