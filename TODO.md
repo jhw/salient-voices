@@ -1,7 +1,5 @@
 ### short
 
-- 303 >> ERROR: SVChromaticSampler takes a single- sample pool only
-
 - move trig_groups into project
 
 ### medium
@@ -56,6 +54,8 @@
   - no because 303 depends on it
 
 ### done
+
+- 303 >> ERROR: SVChromaticSampler takes a single- sample pool only
 
 - add back sample mod for mikey 303
 - investigate samplers being populated with every sample

@@ -87,7 +87,9 @@ def init_modules(fn):
                 pool = SVPool()
                 for patch in patches:
                     for trig in patch.trigs:
-                        if trig.mod == mod["name"]:
+                        if (trig.mod == mod["name"] or
+                            (hasattr(trig, "sample_mod") and
+                             trig.sample_mod == mod["name"])):
                             pool.add(trig.sample)
                 mod_kwargs = {"banks": banks,
                               "pool": pool}
