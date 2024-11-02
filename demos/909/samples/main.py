@@ -6,7 +6,6 @@ from sv.instruments.nine09.samples import Nine09
 import sv.algos.groove.perkons as perkons
 
 import random
-import re
 import yaml
 
 PoolTerms = yaml.safe_load("""

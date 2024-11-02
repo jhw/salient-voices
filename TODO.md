@@ -1,7 +1,5 @@
 ### short
 
-- auto- capitalises namespace
-- nine09/samples demo doesn't need re
 - update 909 demo from gist
 - investigate samplers being populated with every sample
 - sync_banks to wrap keys/diff/sync logic
@@ -58,6 +56,8 @@
 
 ### done
 
+- nine09/samples demo doesn't need re
+- auto- capitalises namespace
 - why are all patterns rendering the same
 
 ```

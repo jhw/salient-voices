@@ -5,7 +5,6 @@ from sv.instruments.three03.mikey303 import Three03
 import sv.algos.groove.perkons as perkons
 
 import random
-import re
 
 def bassline(self, n, rand,
              block_sizes = [1, 2, 4],

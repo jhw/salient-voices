@@ -23,7 +23,7 @@ class SVInstrumentBase:
 
     def __init__(self, container, namespace):
         self.container = container
-        self.namespace = namespace
+        self.namespace = namespace.lower().capitalize()
         self.defaults = {}
 
     def render(self, generator, seeds, env = {}):
