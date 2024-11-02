@@ -84,21 +84,15 @@ def init_modules(fn):
             mod_class = load_class(mod["class"])
             mod_kwargs = {}
             if mod["class"].lower().endswith("sampler"):
-                print("Mod >>", mod)
                 pool = SVPool()
-                for i, patch in enumerate(patches): # TEMP
-                    print(f"Patch {i} >>", [(trig.mod, trig.sample)
-                                            for trig in patch.trigs
-                                            if hasattr(trig, "sample")])
+                for patch in patches:
                     for group in patch.trig_groups(mod_names = mod_names).values():
                         for trigs in group.values():
                             for trig in trigs:
                                 if (hasattr(trig, "sample") and trig.sample):
                                     pool.add(trig.sample)
-                print("Pool >>", pool)
                 mod_kwargs = {"banks": banks,
                               "pool": pool}
-                print()
             mod["instance"] = mod_class(**mod_kwargs)
         return fn(self,
                   project = project,
