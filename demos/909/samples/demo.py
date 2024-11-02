@@ -117,7 +117,7 @@ if __name__ == "__main__":
         pool, _ = banks.spawn_pool(tag_mapping = PoolTerms)
         generators = {"beat": beat,
                       "echo": ghost_echo}
-        for i in range(4):
+        for i in range(2):
             spawn_patch(container = container,
                         pool = pool,
                         generators = generators)
