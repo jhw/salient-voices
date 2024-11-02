@@ -1,12 +1,11 @@
 ### short
 
-- something more pythonic for pattern indexing
 - use **env
 
 ### medium
 
 - sync_banks to wrap keys/diff/sync logic
-- refactor model.trig_groups (?)
+
 - modifiers model
 
 - 303 slide, slide- to
@@ -56,6 +55,7 @@
 
 ### done
 
+- something more pythonic for pattern indexing
 - pass all modules to trig_groups
 
 - 303 >> ERROR: SVChromaticSampler takes a single- sample pool only

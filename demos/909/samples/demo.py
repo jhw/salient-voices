@@ -28,14 +28,14 @@ def MFA(mod, fn, args):
     return MF(mod, fn)(**args)
     
 def beat(self, n, rand, env):
-    pattern = MFA(**env["pattern"])
+    pattern_fn = MFA(**env["pattern"])
     groove_fn = MF(**env["groove"])
     for i in range(n):
         volume = groove_fn(rand = rand["vol"],
                            i = i)
         if rand["samp"].random() < env["sample_temperature"]:
             self.toggle_sample()        
-        if (pattern[i % len(pattern)] and
+        if (pattern_fn(i) and
             rand["beat"].random() < env["beat_density"]):
             trig_block = self.note(note = 0,
                                    volume = volume)            
@@ -117,7 +117,7 @@ if __name__ == "__main__":
         pool, _ = banks.spawn_pool(tag_mapping = PoolTerms)
         generators = {"beat": beat,
                       "echo": ghost_echo}
-        for i in range(2):
+        for i in range(16):
             spawn_patch(container = container,
                         pool = pool,
                         generators = generators)

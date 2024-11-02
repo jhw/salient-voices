@@ -53,6 +53,13 @@ TidalPatterns = yaml.safe_load("""
 
 # https://raw.githubusercontent.com/brianhouse/bjorklund/master/__init__.py
 
+def wrap_generator(fn):
+    def wrapped(steps, pulses):
+        pattern = fn(steps, pulses)
+        return lambda i: pattern[i % len(pattern)]
+    return wrapped
+
+@wrap_generator
 def bjorklund(steps, pulses):
     steps = int(steps)
     pulses = int(pulses)
