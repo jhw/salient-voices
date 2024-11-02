@@ -32,7 +32,7 @@ class SVInstrumentBase:
         for i, trig_block in generator(self,
                                        rand = rand,
                                        n = self.container.n_ticks,
-                                       env = env):
+                                       **env):
             trigs = trig_block.render(i)
             self.container.add_trigs(trigs)
 

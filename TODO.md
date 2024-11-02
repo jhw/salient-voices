@@ -1,26 +1,19 @@
 ### short
 
-- use **env
+- sync_banks to wrap keys/diff/sync logic
 
 ### medium
 
-- sync_banks to wrap keys/diff/sync logic
-
 - modifiers model
-
 - 303 slide, slide- to
-- 303 filter multiplier
-
 - digitakt II dual euclidian
-
-### decompiler
-
-- include pattern clones in vertical pattern slices
+- decompiler
 
 ### gists 
 
-- git based arranger
+
 - sunvox drum 909
+- arranger (git?)
 - trimming, repeating, reversing 
 - resample arranger
 - breaks and wash
@@ -55,6 +48,7 @@
 
 ### done
 
+- use **env
 - something more pythonic for pattern indexing
 - pass all modules to trig_groups
 

@@ -27,23 +27,24 @@ def MF(mod, fn):
 def MFA(mod, fn, args):
     return MF(mod, fn)(**args)
     
-def beat(self, n, rand, env):
-    pattern_fn = MFA(**env["pattern"])
-    groove_fn = MF(**env["groove"])
+def beat(self, n, rand, pattern, groove, sample_temperature, beat_density, **kwargs):
+    pattern_fn = MFA(**pattern)
+    groove_fn = MF(**groove)
     for i in range(n):
         volume = groove_fn(rand = rand["vol"],
                            i = i)
-        if rand["samp"].random() < env["sample_temperature"]:
+        if rand["samp"].random() < sample_temperature:
             self.toggle_sample()        
         if (pattern_fn(i) and
-            rand["beat"].random() < env["beat_density"]):
+            rand["beat"].random() < beat_density):
             trig_block = self.note(note = 0,
                                    volume = volume)            
             yield i, trig_block
 
-def ghost_echo(self, n, rand, env,
+def ghost_echo(self, n, rand,
                sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
-               quantise = 4):
+               quantise = 4,
+               **kwargs):
     for i in range(n):
         if 0 == i % quantise:            
             echo_wet_level = rand["fx"].choice(sample_hold_levels)
