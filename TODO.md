@@ -1,11 +1,13 @@
 ### short
 
-- refactor model.trig_groups
-
-- sync_banks to wrap keys/diff/sync logic
+- pass all modules to trig_groups
+- something more pythonic for pattern indexing
+- use **env
 
 ### medium
 
+- sync_banks to wrap keys/diff/sync logic
+- refactor model.trig_groups (?)
 - modifiers model
 
 - 303 slide, slide- to
@@ -23,7 +25,7 @@
 - sunvox drum 909
 - trimming, repeating, reversing 
 - resample arranger
-- analog 303
+- breaks and wash
 - live looper
 
 ### long
