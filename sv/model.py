@@ -208,7 +208,6 @@ class SVTrigPatch:
                 groups[trig.mod].setdefault(trig.key, [])
                 groups[trig.mod][trig.key].append(trig)
         return groups
-
         
 if __name__ == "__main__":
     pass

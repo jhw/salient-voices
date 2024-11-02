@@ -1,10 +1,10 @@
 ### short
 
-- move trig_groups into project
-
-### medium
+- refactor model.trig_groups
 
 - sync_banks to wrap keys/diff/sync logic
+
+### medium
 
 - modifiers model
 
