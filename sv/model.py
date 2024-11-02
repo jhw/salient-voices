@@ -21,7 +21,7 @@ class SVTrigBase:
 
     def increment(self, i):
         self.i += i
-        
+
 class SVNoteTrig(SVTrigBase):
 
     Volume = 128
@@ -29,12 +29,14 @@ class SVNoteTrig(SVTrigBase):
     def __init__(self, target,
                  i = 0,
                  sample = None,
+                 sample_mod = None,
                  note = None,
                  vel = None,
                  value = None):
         super().__init__(target = target,
                          i = i)
         self.sample = sample
+        self.sample_mod = sample_mod
         self.note = note
         self.vel = vel
         self.value = value
@@ -43,6 +45,7 @@ class SVNoteTrig(SVTrigBase):
         return SVNoteTrig(target = self.target,
                           i = self.i,
                           sample = self.sample,
+                          sample_mod = self.sample_mod,
                           note = self.note,
                           vel = self.vel)
 
@@ -65,11 +68,14 @@ class SVNoteTrig(SVTrigBase):
     def render(self, modules, *args):
         if self.mod not in modules:
             raise RuntimeError("module %s not found" % self.mod)
+        if self.sample_mod and self.sample_mod not in modules:
+            raise RuntimeError("module %s not found" % self.sample_mod)
         mod = modules[self.mod]
-        if isinstance(mod, SVSlotSampler):
-            note = 1 + mod.index_of(self.sample)
-        elif isinstance(mod, SVChromaticSampler):
-            root_note = 1 + mod.index_of(self.sample)
+        sample_mod = modules[self.sample_mod] if self.sample_mod else mod
+        if isinstance(sample_mod, SVSlotSampler):
+            note = 1 + sample_mod.index_of(self.sample)
+        elif isinstance(sample_mod, SVChromaticSampler):
+            root_note = 1 + sample_mod.index_of(self.sample)
             offset = self.note
             note = root_note + offset
         else:
