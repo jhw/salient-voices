@@ -55,6 +55,7 @@
 
 ### done
 
+- rename main script as demo.py
 - nine09/samples demo doesn't need re
 - auto- capitalises namespace
 - why are all patterns rendering the same

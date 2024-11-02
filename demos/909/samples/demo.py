@@ -5,7 +5,6 @@ from sv.instruments.nine09.samples import Nine09
 import sv.algos.euclid as euclid
 import sv.algos.groove.perkons as perkons
 
-import boto3
 import inspect
 import logging
 import random
