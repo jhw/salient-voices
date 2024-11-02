@@ -1,16 +1,18 @@
 ### short
 
-- sync_banks to wrap keys/diff/sync logic
+- why is trig.sample_mod required?
 
 ### medium
 
+- adjust algos for ticks per beat
+  - does sunvox support per- pattern speeds?
+
 - modifiers model
 - 303 slide, slide- to
-- digitakt II dual euclidian
 - decompiler
+- digitakt II dual euclidian
 
 ### gists 
-
 
 - sunvox drum 909
 - arranger (git?)
@@ -48,6 +50,7 @@
 
 ### done
 
+- sync_banks to wrap keys/diff/sync logic
 - use **env
 - something more pythonic for pattern indexing
 - pass all modules to trig_groups

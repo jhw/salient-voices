@@ -44,12 +44,22 @@ def sync_banks(s3,
                cache_dir = "tmp/banks"):
     for key in keys:
         bank_name = key.split("/")[-1].split(".")[0]
-        logging.info(f"syncing {bank_name}")
+        logging.info(f"syncing bank {bank_name}")
         zip_buffer = io.BytesIO(s3.get_object(Bucket = bucket_name,
                                               Key = key)["Body"].read())        
         bank = SVBank(name = bank_name,
                       zip_buffer = zip_buffer)
         bank.dump_zip(cache_dir)
+
+def init_banks(s3, bucket_name):
+    remote_keys = list_remote_keys(s3 = s3,
+                                   bucket_name = bucket_name)
+    diffed_keys = diff_keys(s3 = s3,
+                            bucket_name = bucket_name,
+                            keys = remote_keys)
+    sync_banks(s3 = s3,
+               bucket_name = bucket_name,
+               keys = diffed_keys)
         
 if __name__ == "__main__":
     pass
