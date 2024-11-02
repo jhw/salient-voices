@@ -1,5 +1,11 @@
 ### short
 
+- auto- capitalises namespace
+- nine09/samples demo doesn't need re
+- update 909 demo from gist
+- investigate samplers being populated with every sample
+- sync_banks to wrap keys/diff/sync logic
+
 ### medium
 
 - modifiers model
