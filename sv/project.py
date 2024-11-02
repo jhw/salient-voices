@@ -86,7 +86,7 @@ def init_modules(fn):
             if mod["class"].lower().endswith("sampler"):
                 pool = SVPool()
                 for patch in patches:
-                    for group in patch.trig_groups(mod_names = mod_names).values():
+                    for group in patch.trig_groups(mod_names = [mod["name"]]).values():
                         for trigs in group.values():
                             for trig in trigs:
                                 if (hasattr(trig, "sample") and trig.sample):
