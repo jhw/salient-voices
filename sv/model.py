@@ -198,13 +198,12 @@ class SVTrigPatch:
         self.n_ticks = n_ticks
 
     def add_trigs(self, trigs):
-        self.trigs += trigs
-
+        self.trigs += trigs    
+        
     def trig_groups(self, mod_names):
-        groups = {}
+        groups = {mod_name: {} for mod_name in mod_names}
         for trig in self.trigs:
             if trig.mod in mod_names:
-                groups.setdefault(trig.mod, {})
                 groups[trig.mod].setdefault(trig.key, [])
                 groups[trig.mod][trig.key].append(trig)
         return groups

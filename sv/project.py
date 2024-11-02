@@ -241,7 +241,7 @@ class SVProject:
         patterns, x, y = [], 0, 0
         for i, patch in enumerate(patches):
             n_ticks = patch.n_ticks
-            for mod_name, group in patch.trig_groups(mod_names = mod_names).items():
+            for mod_name, group in patch.trig_groups(mod_names).items():
                 tracks = list(group.values())
                 colour = colours[mod_name]
                 self.render_patch(patterns = patterns,

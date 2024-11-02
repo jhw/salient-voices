@@ -1,6 +1,5 @@
 ### short
 
-- pass all modules to trig_groups
 - something more pythonic for pattern indexing
 - use **env
 
@@ -56,6 +55,8 @@
   - no because 303 depends on it
 
 ### done
+
+- pass all modules to trig_groups
 
 - 303 >> ERROR: SVChromaticSampler takes a single- sample pool only
 
