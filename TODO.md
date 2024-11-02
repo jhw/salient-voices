@@ -1,6 +1,8 @@
 ### short
 
-- add back sample mod for mikey 303
+- 303 >> ERROR: SVChromaticSampler takes a single- sample pool only
+
+- move trig_groups into project
 
 ### medium
 
@@ -55,6 +57,7 @@
 
 ### done
 
+- add back sample mod for mikey 303
 - investigate samplers being populated with every sample
 - rename main script as demo.py
 - nine09/samples demo doesn't need re
