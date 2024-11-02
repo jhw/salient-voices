@@ -193,6 +193,16 @@ class SVTrigPatch:
 
     def add_trigs(self, trigs):
         self.trigs += trigs
-            
+
+    def trig_groups(self, mod_names):
+        groups = {mod_name: {} for mod_name in mod_names}
+        for trig in self.trigs:
+            if trig.mod not in groups:
+                raise RuntimeError(f"trig mod {trig.mod} not found in modules")
+            groups[trig.mod].setdefault(trig.key, [])
+            groups[trig.mod][trig.key].append(trig)
+        return groups
+
+        
 if __name__ == "__main__":
     pass
