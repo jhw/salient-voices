@@ -1,15 +1,14 @@
 ### short
 
-- update 909 demo from gist
 - investigate samplers being populated with every sample
-- sync_banks to wrap keys/diff/sync logic
 
 ### medium
 
+- sync_banks to wrap keys/diff/sync logic
+
 - modifiers model
 
-- 303 slide
-- 303 slide- to
+- 303 slide, slide- to
 - 303 filter multiplier
 
 - digitakt II dual euclidian
