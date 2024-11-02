@@ -86,11 +86,9 @@ def init_modules(fn):
             if mod["class"].lower().endswith("sampler"):
                 pool = SVPool()
                 for patch in patches:
-                    for group in patch.trig_groups(mod_names = [mod["name"]]).values():
-                        for trigs in group.values():
-                            for trig in trigs:
-                                if (hasattr(trig, "sample") and trig.sample):
-                                    pool.add(trig.sample)
+                    for trig in patch.trigs:
+                        if trig.mod == mod["name"]:
+                            pool.add(trig.sample)
                 mod_kwargs = {"banks": banks,
                               "pool": pool}
             mod["instance"] = mod_class(**mod_kwargs)
@@ -229,7 +227,7 @@ class SVProject:
                               y = y,
                               colour = colour)
         x += n_ticks
-    
+
     def render_patches(self,
                        modules,
                        colours,

@@ -1,6 +1,6 @@
 ### short
 
-- investigate samplers being populated with every sample
+- add back sample mod for mikey 303
 
 ### medium
 
@@ -55,6 +55,7 @@
 
 ### done
 
+- investigate samplers being populated with every sample
 - rename main script as demo.py
 - nine09/samples demo doesn't need re
 - auto- capitalises namespace
