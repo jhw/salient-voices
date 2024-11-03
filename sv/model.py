@@ -2,7 +2,7 @@ from sv.sampler import SVSlotSampler, SVChromaticSampler
 
 import rv
 
-def parse_value(value):
+def ctrl_value(value):
     if isinstance(value, str):
         try:
             return int(value, 16)
@@ -142,7 +142,7 @@ class SVFXTrig(SVTrigBase):
             raise RuntimeError("module %s not found" % self.mod)
         mod = modules[self.mod]
         mod_id = 1 + mod.index
-        value = parse_value(self.value)
+        value = ctrl_value(self.value)
         return rv.note.Note(module = mod_id,
                             pattern = self.fx,
                             val = value)
@@ -186,7 +186,7 @@ class SVModTrig(SVTrigBase):
             raise RuntimeError("controller %s not found in module %s" % (self.ctrl,
                                                                          self.mod))
         ctrl_id = self.CtrlMult * controller[self.ctrl]
-        value = parse_value(self.value)
+        value = ctrl_value(self.value)
         return rv.note.Note(module = mod_id,
                             ctl = ctrl_id,
                             val = value)

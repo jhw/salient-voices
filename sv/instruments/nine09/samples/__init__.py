@@ -1,5 +1,5 @@
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
-from sv.model import SVNoteTrig, SVModTrig
+from sv.model import SVNoteTrig, SVModTrig, ctrl_value
 
 class Nine09(SVInstrumentBase):
 
@@ -27,21 +27,23 @@ class Nine09(SVInstrumentBase):
     def sample(self):
         return self.samples[self.sample_index]
         
-    def note(self, note,
-             volume = 1):
+    def note(self, note, volume,
+             level = 1.0):
         trigs = [SVNoteTrig(target = f"{self.namespace}Beat",
                             sample = self.sample,
                             note = note,
-                            vel = volume)]
+                            vel = volume * level)]
         return SVTrigBlock(trigs = trigs)
 
     def modulation(self,
+                   level = 1.0,
                    echo_wet = None,
                    echo_feedback = None):
         trigs = []
         if echo_wet:
+            wet_level = int(level * ctrl_value(echo_wet))
             trigs.append(SVModTrig(target = f"{self.namespace}Echo/wet",
-                                   value = echo_wet))
+                                   value = wet_level))
         if echo_feedback:
             trigs.append(SVModTrig(target = f"{self.namespace}Echo/feedback",
                                    value = echo_feedback))

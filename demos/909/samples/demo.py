@@ -26,7 +26,7 @@ logging.basicConfig(stream=sys.stdout,
 def spawn_function(mod, fn, **kwargs):
     return getattr(eval(mod), fn)
 
-def beat(self, n, rand, pattern, groove, sample_temperature, beat_density, **kwargs):
+def beat(self, n, rand, pattern, groove, sample_temperature, beat_density, dry_level, **kwargs):
     pattern_fn = spawn_function(**pattern)(**pattern["args"])
     groove_fn = spawn_function(**groove)
     for i in range(n):
@@ -36,19 +36,21 @@ def beat(self, n, rand, pattern, groove, sample_temperature, beat_density, **kwa
         if (pattern_fn(i) and 
             rand["beat"].random() < beat_density):
             trig_block = self.note(note = 0,
-                                   volume = volume)            
+                                   volume = volume,
+                                   level = dry_level)            
             yield i, trig_block
 
-def ghost_echo(self, n, rand,
+def ghost_echo(self, n, rand, wet_level,
                sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
                quantise = 4,
                **kwargs):
     for i in range(n):
         if 0 == i % quantise:            
-            echo_wet_level = rand["fx"].choice(sample_hold_levels)
-            echo_feedback_level = rand["fx"].choice(sample_hold_levels)
-            trig_block = self.modulation(echo_wet = echo_wet_level,
-                                         echo_feedback = echo_feedback_level)
+            sample_hold_wet = rand["fx"].choice(sample_hold_levels)
+            sample_hold_feedback = rand["fx"].choice(sample_hold_levels)
+            trig_block = self.modulation(level = wet_level,
+                                         echo_wet = sample_hold_wet,
+                                         echo_feedback = sample_hold_feedback)
             yield i, trig_block
 
 def random_pattern(fn):
@@ -103,7 +105,9 @@ def spawn_patch(container, pool, generators):
                     namespace = tag.lower().capitalize(),
                     generators = generators,
                     seeds = seeds,
-                    env = {"sample_temperature": temp,
+                    env = {"dry_level": 1.0,
+                           "wet_level": 1.0,
+                           "sample_temperature": temp,
                            "beat_density": density})
 
 if __name__ == "__main__":

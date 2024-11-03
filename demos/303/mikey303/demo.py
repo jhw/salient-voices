@@ -41,10 +41,10 @@ def ghost_echo(self, n, rand,
                **kwargs):
     for i in range(n):
         if 0 == i % quantise:            
-            echo_wet_level = rand["fx"].choice(sample_hold_levels)
-            echo_feedback_level = rand["fx"].choice(sample_hold_levels)
-            trig_block = self.modulation(echo_wet = echo_wet_level,
-                                         echo_feedback = echo_feedback_level)
+            wet_level = rand["fx"].choice(sample_hold_levels)
+            feedback_level = rand["fx"].choice(sample_hold_levels)
+            trig_block = self.modulation(echo_wet = wet_level,
+                                         echo_feedback = feedback_level)
             yield i, trig_block
                             
 if __name__ == "__main__":

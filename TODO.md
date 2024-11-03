@@ -1,11 +1,11 @@
 ### short
 
-- why is trig.sample_mod required?
+- ticks per beat
+  - does sunvox support different speeds?
+  - algo support
+  - s&h quantisation
 
 ### medium
-
-- adjust algos for ticks per beat
-  - does sunvox support per- pattern speeds?
 
 - modifiers model
 - 303 slide, slide- to
@@ -27,6 +27,7 @@
 
 ### thoughts
 
+- why is trig.sample_mod required?
 - test for md5 checking in utils/banks?
   - not clear it's worth it
 - base classes for 303, 909?
@@ -50,6 +51,7 @@
 
 ### done
 
+- dry, wet levels
 - sync_banks to wrap keys/diff/sync logic
 - use **env
 - something more pythonic for pattern indexing
