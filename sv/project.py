@@ -167,7 +167,7 @@ class SVProject:
         trigs = [{note.i: note
                   for note in track}
                  for track in tracks]
-        def notefn(self, j, i):
+        def note_fn(self, j, i):
             return trigs[i][j].render(modules,
                                       controllers) if j in trigs[i] else rv.note.Note()
         pattern = rv.pattern.Pattern(lines = n_ticks,
@@ -175,7 +175,7 @@ class SVProject:
                                      x = x,
                                      y = y,
                                      y_size = height,
-                                     bg_color = colour).set_via_fn(notefn)
+                                     bg_color = colour).set_via_fn(note_fn)
         patterns.append(pattern)
 
     def render_blank(self,
@@ -185,14 +185,14 @@ class SVProject:
                      y,
                      colour,
                      height = PatternHeight):
-        def notefn(self, j, i):
+        def note_fn(self, j, i):
             return rv.note.Note()
         pattern = rv.pattern.Pattern(lines = n_ticks,
                                      tracks = 1,
                                      x = x,
                                      y = y,
                                      y_size = height,
-                                     bg_color = colour).set_via_fn(notefn)
+                                     bg_color = colour).set_via_fn(note_fn)
         patterns.append(pattern)
     
     def render_controllers(self, modules):

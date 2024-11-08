@@ -81,8 +81,8 @@ class SVNoteTrig(SVNoteTrigBase):
             "module": mod_id,
             "note": note
         }
-        if self.vel:
-            note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
+        if self.vel != None:  # NB explicit check; if self.vel == 0 you still want this clause to execute
+            note_kwargs["vel"] = max(1, int(self.vel * self.Volume)) # RV will render a zero as a null which defaults to standard/max volume
         if self.has_fx and self.value:
             note_kwargs["pattern"] = self.fx
             note_kwargs["val"] = self.value
@@ -118,11 +118,12 @@ class SVSlotSampleTrig(SVNoteTrigBase):
             "module": mod_id,
             "note": note
         }
-        if self.vel:
-            note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
+        if self.vel != None: # NB explicit check; if self.vel == 0 you still want this clause to execute
+            note_kwargs["vel"] = max(1, int(self.vel * self.Volume))  # RV will render a zero as a null which defaults to standard/max volume
         if self.has_fx and self.value:
             note_kwargs["pattern"] = self.fx
             note_kwargs["val"] = self.value
+        print (note_kwargs)
         return rv.note.Note(**note_kwargs)
 
 class SVChromaticSampleTrig(SVNoteTrigBase):
@@ -166,8 +167,8 @@ class SVChromaticSampleTrig(SVNoteTrigBase):
             "module": mod_id,
             "note": note
         }
-        if self.vel:
-            note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
+        if self.vel != None:  # NB explicit check; if self.vel == 0 you still want this clause to execute
+            note_kwargs["vel"] = max(1, int(self.vel * self.Volume))  # RV will render a zero as a null which defaults to standard/max volume
         if self.has_fx and self.value:
             note_kwargs["pattern"] = self.fx
             note_kwargs["val"] = self.value

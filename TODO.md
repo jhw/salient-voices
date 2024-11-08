@@ -1,34 +1,38 @@
 ### short
 
-- trig.vel max(1) condition appears to be being bypassed during rendering
+- notefn volume helpers
 
-- check use of SVNoteTrig.value
 - model.py tests
 - cli/parse
+- check use of SVNoteTrig.value
 - copy gist as 909 demo
 
 ### medium
 
-### features
-
 - digitakt II dual euclidian
 
-- sample likeness clustering
+### sv
+
+- refactor randomise_row as randomise_track
+- refactor randomise as randomise_patches
 
 ### gists 
 
-- pico glitch sample munging
+- pico glitch samples
 
 - decompiler
-- 303 w/ slides
-- polly vocals
 - freezing
+- polly vocals
 - resampling
+- 303 w/ slides
 
+
+- sample likeness clustering
 - granular
 - sv drum
 - kicker
 - city dreams bass
+
 
 ### long
 
@@ -38,6 +42,8 @@
 
 ### done
 
+- when dry_level = 0, vel is not returned as part of SVSlotSampleNote note_kwargs, which means vel uses a default value of 0, which returns a null arg
+- trig.vel max(1) condition appears to be being bypassed during rendering
 - remove ability to pass note arg to Nine09.note()
 - separate SVSampleTrig class
 - flatten demos structure
