@@ -19,9 +19,9 @@ clap: (clap)|(clp)|(cp)|(hc)
 hat: (oh)|( ch)|(open)|(closed)|(hh)|(hat)
 """)
 
-logging.basicConfig(stream=sys.stdout,
-                    level=logging.INFO,
-                    format="%(levelname)s: %(message)s")
+logging.basicConfig(stream = sys.stdout,
+                    level = logging.INFO,
+                    format = "%(levelname)s: %(message)s")
 
 def spawn_function(mod, fn, **kwargs):
     return getattr(eval(mod), fn)

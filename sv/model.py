@@ -29,11 +29,11 @@ class SVNoteTrigBase(SVTrigBase):
     def __init__(self, target,
                  i = 0,
                  vel = None,
-                 value = None):
+                 fx_value = None):
         super().__init__(target = target,
                          i = i)
         self.vel = vel
-        self.value = value
+        self.fx_value = fx_value
 
     @property
     def mod(self):
@@ -73,11 +73,11 @@ class SVNoteTrig(SVNoteTrigBase):
                  i = 0,
                  note = None,
                  vel = None,
-                 value = None):
+                 fx_value = None):
         super().__init__(target = target,
                          i = i,
                          vel = vel,
-                         value = value)
+                         fx_value = fx_value)
         self.note = note
 
     def clone(self):
@@ -85,7 +85,7 @@ class SVNoteTrig(SVNoteTrigBase):
                           i = self.i,
                           note = self.note,
                           vel = self.vel,
-                          value = self.value)
+                          fx_value = self.fx_value)
         
     def render(self, modules, *args):
         if self.mod not in modules:
@@ -99,9 +99,9 @@ class SVNoteTrig(SVNoteTrigBase):
         }
         if self.has_vel:
             note_kwargs["vel"] = self.velocity
-        if self.has_fx and self.value:
+        if self.has_fx and self.fx_value:
             note_kwargs["pattern"] = self.fx
-            note_kwargs["val"] = self.value
+            note_kwargs["val"] = self.fx_value
         return rv.note.Note(**note_kwargs)
 
 class SVSlotSampleTrig(SVNoteTrigBase):
@@ -110,11 +110,11 @@ class SVSlotSampleTrig(SVNoteTrigBase):
                  i = 0,
                  sample = None,
                  vel = None,
-                 value = None):
+                 fx_value = None):
         super().__init__(target = target,
                          i = i,
                          vel = vel,
-                         value = value)
+                         fx_value = fx_value)
         self.sample = sample
 
     def clone(self):
@@ -122,7 +122,7 @@ class SVSlotSampleTrig(SVNoteTrigBase):
                                 i = self.i,
                                 sample = self.sample,
                                 vel = self.vel,
-                                value = self.value)
+                                fx_value = self.fx_value)
         
     def render(self, modules, *args):
         if self.mod not in modules:
@@ -136,9 +136,9 @@ class SVSlotSampleTrig(SVNoteTrigBase):
         }
         if self.has_vel:
             note_kwargs["vel"] = self.velocity
-        if self.has_fx and self.value:
+        if self.has_fx and self.fx_value:
             note_kwargs["pattern"] = self.fx
-            note_kwargs["val"] = self.value
+            note_kwargs["val"] = self.fx_value
         return rv.note.Note(**note_kwargs)
 
 class SVChromaticSampleTrig(SVNoteTrigBase):
@@ -149,11 +149,11 @@ class SVChromaticSampleTrig(SVNoteTrigBase):
                  sample_mod = None,
                  note = None,
                  vel = None,
-                 value = None):
+                 fx_value = None):
         super().__init__(target = target,
                          i = i,
                          vel = vel,
-                         value = value)
+                         fx_value = fx_value)
         self.sample = sample
         self.sample_mod = sample_mod
         self.note = note
@@ -165,7 +165,7 @@ class SVChromaticSampleTrig(SVNoteTrigBase):
                                      sample_mod = self.sample_mod,
                                      note = self.note,
                                      vel = self.vel,
-                                     value = self.value)
+                                     fx_value = self.fx_value)
         
     def render(self, modules, *args):
         if self.mod not in modules:
@@ -184,9 +184,9 @@ class SVChromaticSampleTrig(SVNoteTrigBase):
         }
         if self.has_vel:
             note_kwargs["vel"] = self.velocity
-        if self.has_fx and self.value:
+        if self.has_fx and self.fx_value:
             note_kwargs["pattern"] = self.fx
-            note_kwargs["val"] = self.value
+            note_kwargs["val"] = self.fx_value
         return rv.note.Note(**note_kwargs)
 
 class SVNoteOffTrig(SVTrigBase):
