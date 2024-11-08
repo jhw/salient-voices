@@ -27,7 +27,7 @@ class Nine09(SVInstrumentBase):
     def sample(self):
         return self.samples[self.sample_index]
         
-    def note(self, note, volume,
+    def note(self, volume,
              level = 1.0):
         trigs = [SVSlotSampleTrig(target = f"{self.namespace}Beat",
                                   sample = self.sample,

@@ -1,6 +1,5 @@
 ### short
 
-- remove ability to pass note arg to Nine09.note()
 - check use of SVNoteTrig.value
 - model.py tests
 - dry level of zero failing to mute instrument
@@ -38,6 +37,7 @@
 
 ### done
 
+- remove ability to pass note arg to Nine09.note()
 - separate SVSampleTrig class
 - flatten demos structure
 

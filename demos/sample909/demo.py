@@ -35,8 +35,7 @@ def beat(self, n, rand, pattern, groove, sample_temperature, beat_density, dry_l
             self.toggle_sample()        
         if (pattern_fn(i) and 
             rand["beat"].random() < beat_density):
-            trig_block = self.note(note = 0,
-                                   volume = volume,
+            trig_block = self.note(volume = volume,
                                    level = dry_level)            
             yield i, trig_block
 
