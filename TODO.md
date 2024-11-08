@@ -1,6 +1,5 @@
 ### short
 
-- flatten demos structure
 - cli/parse
 - why dry level 0 not muting instrument?
 - separate SVSampleTrig class
@@ -29,8 +28,6 @@
 - kicker
 - city dreams bass
 
-
-
 ### long
 
 - moto upgrade
@@ -38,4 +35,6 @@
 ### thoughts
 
 ### done
+
+- flatten demos structure
 

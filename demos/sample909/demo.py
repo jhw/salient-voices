@@ -112,7 +112,7 @@ def spawn_patch(container, pool, generators):
 
 if __name__ == "__main__":
     try:
-        bank = SVBank.load_zip("demos/909/samples/pico-default.zip")
+        bank = SVBank.load_zip("demos/sample909/pico-default.zip")
         banks = SVBanks([bank])
         container = SVContainer(banks = banks,
                                 bpm = 120,
@@ -124,6 +124,6 @@ if __name__ == "__main__":
             spawn_patch(container = container,
                         pool = pool,
                         generators = generators)
-        container.write_project("tmp/demo-909-samples.sunvox")
+        container.write_project("tmp/demo-sample909.sunvox")
     except RuntimeError as error:
         print ("ERROR: %s" % str(error))

@@ -49,7 +49,7 @@ def ghost_echo(self, n, rand,
                             
 if __name__ == "__main__":
     try:
-        bank = SVBank.load_zip("demos/303/mikey303/mikey303.zip")
+        bank = SVBank.load_zip("demos/mikey303/mikey303.zip")
         container = SVContainer(banks = [bank],
                                 bpm = 240,
                                 n_ticks = 32)
@@ -64,6 +64,6 @@ if __name__ == "__main__":
                        seeds = seeds)
         three03.render(generator = ghost_echo,
                        seeds = seeds)
-        container.write_project("tmp/demo-303-mikey303.sunvox")
+        container.write_project("tmp/demo-mikey303.sunvox")
     except RuntimeError as error:
         print ("ERROR: %s" % str(error))
