@@ -39,6 +39,22 @@ class SVNoteTrigBase(SVTrigBase):
     def mod(self):
         return self.target.split("/")[0]
 
+    """
+    - NB explicit None check; a vel of 0 should still register as a vel
+    """
+    
+    @property
+    def has_vel(self):
+        return self.vel != None
+
+    """
+    - NB a zero will be rendered by RV as a null which will be rendered by Sunvox as "volume missing; use default value"
+    """
+
+    @property
+    def velocity(self):        
+        return max(1, int(self.vel * self.Volume))
+    
     @property
     def has_fx(self):
         return len(self.target.split("/")) > 1
@@ -81,8 +97,8 @@ class SVNoteTrig(SVNoteTrigBase):
             "module": mod_id,
             "note": note
         }
-        if self.vel != None:  # NB explicit check; if self.vel == 0 you still want this clause to execute
-            note_kwargs["vel"] = max(1, int(self.vel * self.Volume)) # RV will render a zero as a null which defaults to standard/max volume
+        if self.has_vel:
+            note_kwargs["vel"] = self.velocity
         if self.has_fx and self.value:
             note_kwargs["pattern"] = self.fx
             note_kwargs["val"] = self.value
@@ -118,8 +134,8 @@ class SVSlotSampleTrig(SVNoteTrigBase):
             "module": mod_id,
             "note": note
         }
-        if self.vel != None: # NB explicit check; if self.vel == 0 you still want this clause to execute
-            note_kwargs["vel"] = max(1, int(self.vel * self.Volume))  # RV will render a zero as a null which defaults to standard/max volume
+        if self.has_vel:
+            note_kwargs["vel"] = self.velocity
         if self.has_fx and self.value:
             note_kwargs["pattern"] = self.fx
             note_kwargs["val"] = self.value
@@ -166,8 +182,8 @@ class SVChromaticSampleTrig(SVNoteTrigBase):
             "module": mod_id,
             "note": note
         }
-        if self.vel != None:  # NB explicit check; if self.vel == 0 you still want this clause to execute
-            note_kwargs["vel"] = max(1, int(self.vel * self.Volume))  # RV will render a zero as a null which defaults to standard/max volume
+        if self.has_vel:
+            note_kwargs["vel"] = self.velocity
         if self.has_fx and self.value:
             note_kwargs["pattern"] = self.fx
             note_kwargs["val"] = self.value

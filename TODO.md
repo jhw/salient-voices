@@ -1,10 +1,9 @@
 ### short
 
-- notefn volume helpers
+- check use of SVNoteTrig.value
 
 - model.py tests
 - cli/parse
-- check use of SVNoteTrig.value
 - copy gist as 909 demo
 
 ### medium
@@ -42,6 +41,7 @@
 
 ### done
 
+- notefn volume helpers
 - when dry_level = 0, vel is not returned as part of SVSlotSampleNote note_kwargs, which means vel uses a default value of 0, which returns a null arg
 - trig.vel max(1) condition appears to be being bypassed during rendering
 - remove ability to pass note arg to Nine09.note()
