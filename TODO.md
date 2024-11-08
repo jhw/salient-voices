@@ -1,8 +1,9 @@
 ### short
 
+- trig.vel max(1) condition appears to be being bypassed during rendering
+
 - check use of SVNoteTrig.value
 - model.py tests
-- dry level of zero failing to mute instrument
 - cli/parse
 - copy gist as 909 demo
 
