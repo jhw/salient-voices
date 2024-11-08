@@ -1,7 +1,5 @@
 ### short
 
-
-- model.py tests
 - cli/parse
 - copy gist as 909 demo
 
@@ -14,6 +12,11 @@
 - refactor randomise_row as randomise_track
 - refactor randomise as randomise_patches
 
+### thoughts
+
+- model.py tests?
+  - not sure it's worth it, given they are covered in other places
+
 ### gists 
 
 - pico glitch samples
@@ -24,13 +27,11 @@
 - resampling
 - 303 w/ slides
 
-
 - sample likeness clustering
 - granular
 - sv drum
 - kicker
 - city dreams bass
-
 
 ### long
 
