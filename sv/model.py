@@ -123,7 +123,6 @@ class SVSlotSampleTrig(SVNoteTrigBase):
         if self.has_fx and self.value:
             note_kwargs["pattern"] = self.fx
             note_kwargs["val"] = self.value
-        print (note_kwargs)
         return rv.note.Note(**note_kwargs)
 
 class SVChromaticSampleTrig(SVNoteTrigBase):
