@@ -1,7 +1,5 @@
 ### short
 
-- replace parse with local version
-
 ### medium
 
 - digitakt II dual euclidian
@@ -41,6 +39,7 @@
 
 ### done
 
+- replace parse with local version
 - rename randomiser methods as per below
 - update to use fixtures zip only
 - copy gist as 909 demo

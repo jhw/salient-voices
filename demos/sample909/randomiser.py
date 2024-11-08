@@ -1,11 +1,11 @@
 # from sv.banks import SVBanks
 from sv.banks import SVBank, SVBanks
 # from sv.utils.banks import init_banks
+from sv.utils.cli.parse import parse_line
 from sv.utils.export import export_wav
 from sv.utils.naming import random_name
 
 from model import Patches, Track
-from parse import *
 
 from datetime import datetime
 
