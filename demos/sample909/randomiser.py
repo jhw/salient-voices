@@ -127,12 +127,27 @@ class RandomiserCLI(cmd.Cmd):
 
     @init_output
     @render_patches()
-    def do_randomise(self, _):
+    def do_randomise_patches(self, _):
         self.patches = Patches.randomise(pool = self.pool,
                                          tracks = self.tracks,
                                          tag_mapping = self.tag_mapping,
                                          n = self.n_patches)
 
+    @assert_patches    
+    @parse_line([{"name": "key",
+                  "type": "enum",
+                  "options": [track["name"] for track in Tracks]}])
+    @init_output
+    @render_patches()
+    def do_randomise_track(self, key):
+        tracks = {track["name"]: track for track in self.tracks}
+        for patch in self.patches[1:]:
+            track = Track.randomise(track = tracks[key],
+                                    pool = self.pool,
+                                    tag_mapping = self.tag_mapping)
+            patch.replace_track(track)
+
+        
     @assert_patches
     @parse_line([{"name": "i",
                   "type": "int"}])
@@ -143,19 +158,6 @@ class RandomiserCLI(cmd.Cmd):
         self.patches = Patches([root.clone()
                                 for i in range(self.n_patches)])
 
-    @assert_patches    
-    @parse_line([{"name": "key",
-                  "type": "enum",
-                  "options": [track["name"] for track in Tracks]}])
-    @init_output
-    @render_patches()
-    def do_randomise_row(self, key):
-        tracks = {track["name"]: track for track in self.tracks}
-        for patch in self.patches[1:]:
-            track = Track.randomise(track = tracks[key],
-                                    pool = self.pool,
-                                    tag_mapping = self.tag_mapping)
-            patch.replace_track(track)
         
     @assert_patches
     @parse_line([{"name": "n",

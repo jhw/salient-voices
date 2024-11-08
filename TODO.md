@@ -1,6 +1,5 @@
 ### short
 
-- rename randomiser methods as per below
 - replace parse with local version
 
 ### medium
@@ -42,6 +41,7 @@
 
 ### done
 
+- rename randomiser methods as per below
 - update to use fixtures zip only
 - copy gist as 909 demo
 - cli/parse
