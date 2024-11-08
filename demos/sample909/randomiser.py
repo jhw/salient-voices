@@ -153,7 +153,7 @@ class RandomiserCLI(cmd.Cmd):
                   "type": "int"}])
     @init_output
     @render_patches()
-    def do_clone_col(self, i):
+    def do_clone_patch(self, i):
         root = self.patches[i % len(self.patches)]
         self.patches = Patches([root.clone()
                                 for i in range(self.n_patches)])
