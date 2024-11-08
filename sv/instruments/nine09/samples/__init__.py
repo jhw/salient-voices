@@ -1,5 +1,5 @@
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
-from sv.model import SVNoteTrig, SVModTrig, ctrl_value
+from sv.model import SVSlotSampleTrig, SVModTrig, ctrl_value
 
 class Nine09(SVInstrumentBase):
 
@@ -29,10 +29,9 @@ class Nine09(SVInstrumentBase):
         
     def note(self, note, volume,
              level = 1.0):
-        trigs = [SVNoteTrig(target = f"{self.namespace}Beat",
-                            sample = self.sample,
-                            note = note,
-                            vel = volume * level)]
+        trigs = [SVSlotSampleTrig(target = f"{self.namespace}Beat",
+                                  sample = self.sample,
+                                  vel = volume * level)]
         return SVTrigBlock(trigs = trigs)
 
     def modulation(self,

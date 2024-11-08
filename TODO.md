@@ -1,8 +1,10 @@
 ### short
 
+- remove ability to pass note arg to Nine09.note()
+- check use of SVNoteTrig.value
+- model.py tests
+- dry level of zero failing to mute instrument
 - cli/parse
-- why dry level 0 not muting instrument?
-- separate SVSampleTrig class
 - copy gist as 909 demo
 
 ### medium
@@ -36,5 +38,6 @@
 
 ### done
 
+- separate SVSampleTrig class
 - flatten demos structure
 

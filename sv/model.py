@@ -22,32 +22,18 @@ class SVTrigBase:
     def increment(self, i):
         self.i += i
 
-class SVNoteTrig(SVTrigBase):
+class SVNoteTrigBase(SVTrigBase):
 
     Volume = 128
-    
+        
     def __init__(self, target,
                  i = 0,
-                 sample = None,
-                 sample_mod = None,
-                 note = None,
                  vel = None,
                  value = None):
         super().__init__(target = target,
                          i = i)
-        self.sample = sample
-        self.sample_mod = sample_mod
-        self.note = note
         self.vel = vel
         self.value = value
-
-    def clone(self):
-        return SVNoteTrig(target = self.target,
-                          i = self.i,
-                          sample = self.sample,
-                          sample_mod = self.sample_mod,
-                          note = self.note,
-                          vel = self.vel)
 
     @property
     def mod(self):
@@ -65,6 +51,106 @@ class SVNoteTrig(SVTrigBase):
     def key(self):
         return self.mod
         
+class SVNoteTrig(SVNoteTrigBase):
+
+    def __init__(self, target,
+                 i = 0,
+                 note = None,
+                 vel = None,
+                 value = None):
+        super().__init__(target = target,
+                         i = i,
+                         vel = vel,
+                         value = value)
+        self.note = note
+
+    def clone(self):
+        return SVNoteTrig(target = self.target,
+                          i = self.i,
+                          note = self.note,
+                          vel = self.vel,
+                          value = self.value)
+        
+    def render(self, modules, *args):
+        if self.mod not in modules:
+            raise RuntimeError("module %s not found" % self.mod)
+        mod = modules[self.mod]
+        note = self.note
+        mod_id = 1 + mod.index
+        note_kwargs = {
+            "module": mod_id,
+            "note": note
+        }
+        if self.vel:
+            note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
+        if self.has_fx and self.value:
+            note_kwargs["pattern"] = self.fx
+            note_kwargs["val"] = self.value
+        return rv.note.Note(**note_kwargs)
+
+class SVSlotSampleTrig(SVNoteTrigBase):
+
+    def __init__(self, target,
+                 i = 0,
+                 sample = None,
+                 vel = None,
+                 value = None):
+        super().__init__(target = target,
+                         i = i,
+                         vel = vel,
+                         value = value)
+        self.sample = sample
+
+    def clone(self):
+        return SVSlotSampleTrig(target = self.target,
+                                i = self.i,
+                                sample = self.sample,
+                                vel = self.vel,
+                                value = self.value)
+        
+    def render(self, modules, *args):
+        if self.mod not in modules:
+            raise RuntimeError("module %s not found" % self.mod)
+        mod = modules[self.mod]
+        note = 1 + mod.index_of(self.sample)
+        mod_id = 1 + mod.index
+        note_kwargs = {
+            "module": mod_id,
+            "note": note
+        }
+        if self.vel:
+            note_kwargs["vel"] = max(1, int(self.vel * self.Volume))
+        if self.has_fx and self.value:
+            note_kwargs["pattern"] = self.fx
+            note_kwargs["val"] = self.value
+        return rv.note.Note(**note_kwargs)
+
+class SVChromaticSampleTrig(SVNoteTrigBase):
+
+    def __init__(self, target,
+                 i = 0,
+                 sample = None,
+                 sample_mod = None,
+                 note = None,
+                 vel = None,
+                 value = None):
+        super().__init__(target = target,
+                         i = i,
+                         vel = vel,
+                         value = value)
+        self.sample = sample
+        self.sample_mod = sample_mod
+        self.note = note
+
+    def clone(self):
+        return SVChromaticSampleTrig(target = self.target,
+                                     i = self.i,
+                                     sample = self.sample,
+                                     sample_mod = self.sample_mod,
+                                     note = self.note,
+                                     vel = self.vel,
+                                     value = self.value)
+        
     def render(self, modules, *args):
         if self.mod not in modules:
             raise RuntimeError("module %s not found" % self.mod)
@@ -72,14 +158,9 @@ class SVNoteTrig(SVTrigBase):
             raise RuntimeError("module %s not found" % self.sample_mod)
         mod = modules[self.mod]
         sample_mod = modules[self.sample_mod] if self.sample_mod else mod
-        if isinstance(sample_mod, SVSlotSampler):
-            note = 1 + sample_mod.index_of(self.sample)
-        elif isinstance(sample_mod, SVChromaticSampler):
-            root_note = 1 + sample_mod.index_of(self.sample)
-            offset = self.note
-            note = root_note + offset
-        else:
-            note = self.note
+        root_note = 1 + sample_mod.index_of(self.sample)
+        offset = self.note
+        note = root_note + offset
         mod_id = 1 + mod.index
         note_kwargs = {
             "module": mod_id,

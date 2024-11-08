@@ -1,5 +1,5 @@
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
-from sv.model import SVNoteTrig, SVNoteOffTrig, SVModTrig
+from sv.model import SVChromaticSampleTrig, SVNoteOffTrig, SVModTrig
 
 class Three03(SVInstrumentBase):
 
@@ -27,11 +27,11 @@ class Three03(SVInstrumentBase):
              sustain_term = None,
              release_ms = "0300",
              filter_freq = "4000"):
-        trigs = [SVNoteTrig(target = f"{self.namespace}MultiSynth",
-                            sample_mod = f"{self.namespace}Sampler",
-                            sample = self.sample,
-                            note = note,
-                            vel = volume),
+        trigs = [SVChromaticSampleTrig(target = f"{self.namespace}MultiSynth",
+                                       sample_mod = f"{self.namespace}Sampler",
+                                       sample = self.sample,
+                                       note = note,
+                                       vel = volume),
                  SVModTrig(target = f"{self.namespace}Sound2Ctl/out_max",
                           value = filter_freq)]
         trigs += [SVModTrig(target = f"{self.namespace}ADSR/attack_ms",
