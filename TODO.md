@@ -1,7 +1,9 @@
 ### short
 
-- cli/parse
 - copy gist as 909 demo
+- update to use fixtures zip only
+- replace parse with local version
+- rename randomiser methods
 
 ### medium
 
@@ -41,6 +43,7 @@
 
 ### done
 
+- cli/parse
 - check use of SVNoteTrig.value
 - notefn volume helpers
 - when dry_level = 0, vel is not returned as part of SVSlotSampleNote note_kwargs, which means vel uses a default value of 0, which returns a null arg
