@@ -1,9 +1,7 @@
 ### short
 
-- copy gist as 909 demo
-- update to use fixtures zip only
+- rename randomiser methods as per below
 - replace parse with local version
-- rename randomiser methods
 
 ### medium
 
@@ -11,6 +9,7 @@
 
 ### sv
 
+- remove generator passing note arg to instrument.note()
 - refactor randomise_row as randomise_track
 - refactor randomise as randomise_patches
 
@@ -43,6 +42,8 @@
 
 ### done
 
+- update to use fixtures zip only
+- copy gist as 909 demo
 - cli/parse
 - check use of SVNoteTrig.value
 - notefn volume helpers
