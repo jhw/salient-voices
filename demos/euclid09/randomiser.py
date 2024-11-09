@@ -1,11 +1,11 @@
 # from sv.banks import SVBanks
 from sv.banks import SVBank, SVBanks
 # from sv.utils.banks import init_banks
-from sv.utils.cli.parse import parse_line
 from sv.utils.export import export_wav
 from sv.utils.naming import random_name
 
 from model import Patches, Track
+from parse import parse_line
 
 from datetime import datetime
 
@@ -238,7 +238,7 @@ if __name__ == "__main__":
         init_banks(s3 = s3,
                    bucket_name = bucket_name)        
         """
-        bank = SVBank.load_zip("demos/sample909/pico-default.zip")
+        bank = SVBank.load_zip("/".join(__file__.split("/")[:-1] + ["pico-default.zip"]))
         banks = SVBanks([bank])
         pool, _ = banks.spawn_pool(tag_mapping = Terms)
         RandomiserCLI(banks = banks,
