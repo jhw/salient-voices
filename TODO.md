@@ -1,14 +1,12 @@
 ### short
 
+- re- simplify 909 demo?
+
 ### medium
 
 - digitakt II dual euclidian
 
 ### sv
-
-- remove generator passing note arg to instrument.note()
-- refactor randomise_row as randomise_track
-- refactor randomise as randomise_patches
 
 ### thoughts
 
