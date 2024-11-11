@@ -1,17 +1,16 @@
 ### short
 
-- re- simplify 909 demo?
+- per- phrase colours
+- model tests
+- init_banks needs to create tmp
+- pool tag_mapping arg should be renamed tag_patterns
+- update sample909 demo
 
 ### medium
 
 - digitakt II dual euclidian
 
-### sv
-
 ### thoughts
-
-- model.py tests?
-  - not sure it's worth it, given they are covered in other places
 
 ### gists 
 
@@ -19,11 +18,10 @@
 
 - decompiler
 - freezing
-- polly vocals
+- polly vocals + sv vocoder
 - resampling
-- 303 w/ slides
+- 303 slide
 
-- sample likeness clustering
 - granular
 - sv drum
 - kicker
