@@ -1,8 +1,8 @@
 ### short
 
-- per- phrase colours
-- update sample909 demo
+- init_colours should take a list of mod names
 - model tests
+- update sample909 demo
 
 ### medium
 
@@ -33,6 +33,7 @@
 
 ### done
 
+- per- phrase colours
 - pool tag_mapping arg should be renamed tag_patterns
 - init_banks needs to create tmp
 - replace parse with local version

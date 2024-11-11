@@ -234,16 +234,21 @@ class SVProject:
                        modules,
                        colours,
                        patches,
+                       phrase_size = 4,
                        height = PatternHeight):
         x_count = 1
         mod_names = list(modules.keys())
         controllers = self.render_controllers(modules)
         patterns, x, y = [], 0, 0
+        track_colours = dict(colours)
         for i, patch in enumerate(patches):
             n_ticks = patch.n_ticks
+            if 0 == i % phrase_size:
+                track_colours = init_colours([{"name": mod_name}
+                                              for mod_name in modules])
             for mod_name, group in patch.trig_groups(mod_names).items():
                 tracks = list(group.values())
-                colour = colours[mod_name]
+                colour = track_colours[mod_name]
                 self.render_patch(patterns = patterns,
                                   tracks = tracks,
                                   n_ticks = n_ticks,

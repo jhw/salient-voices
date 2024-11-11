@@ -240,7 +240,7 @@ if __name__ == "__main__":
         """
         bank = SVBank.load_zip("/".join(__file__.split("/")[:-1] + ["pico-default.zip"]))
         banks = SVBanks([bank])
-        pool, _ = banks.spawn_pool(tag_mapping = Terms)
+        pool, _ = banks.spawn_pool(tag_patterns = Terms)
         RandomiserCLI(banks = banks,
                       pool = pool).cmdloop()
     except RuntimeError as error:
