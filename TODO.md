@@ -2,7 +2,6 @@
 
 - per- phrase colours
 - model tests
-- init_banks needs to create tmp
 - pool tag_mapping arg should be renamed tag_patterns
 - update sample909 demo
 
@@ -35,6 +34,7 @@
 
 ### done
 
+- init_banks needs to create tmp
 - replace parse with local version
 - rename randomiser methods as per below
 - update to use fixtures zip only

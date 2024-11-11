@@ -24,6 +24,8 @@ def calculate_md5(file_path):
     return hash_md5.hexdigest()
 
 def diff_keys(s3, bucket_name, keys, cache_dir="tmp/banks"):
+    if not os.path.exists(cache_dir):
+            os.makedirs(cache_dir)
     diffed_keys = []
     for key in keys:
         bank_name = key.split("/")[-1].split(".")[0]
@@ -42,6 +44,8 @@ def sync_banks(s3,
                bucket_name,
                keys,
                cache_dir = "tmp/banks"):
+    if not os.path.exists(cache_dir):
+            os.makedirs(cache_dir)
     for key in keys:
         bank_name = key.split("/")[-1].split(".")[0]
         logging.info(f"syncing bank {bank_name}")
