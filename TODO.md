@@ -1,6 +1,5 @@
 ### short
 
-- init_colours should take a list of mod names
 - model tests
 - update sample909 demo
 
@@ -33,6 +32,7 @@
 
 ### done
 
+- init_colours should take a list of mod names
 - per- phrase colours
 - pool tag_mapping arg should be renamed tag_patterns
 - init_banks needs to create tmp

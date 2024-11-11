@@ -244,8 +244,7 @@ class SVProject:
         for i, patch in enumerate(patches):
             n_ticks = patch.n_ticks
             if 0 == i % phrase_size:
-                track_colours = init_colours([{"name": mod_name}
-                                              for mod_name in modules])
+                track_colours = init_colours(list(modules.keys()))
             for mod_name, group in patch.trig_groups(mod_names).items():
                 tracks = list(group.values())
                 colour = track_colours[mod_name]
@@ -269,7 +268,7 @@ class SVProject:
                        banks, 
                        bpm,
                        volume = Volume):
-        colours = init_colours(modules)
+        colours = init_colours([mod["name"] for mod in modules])
         project = rv.api.Project()
         project.initial_bpm = bpm
         project.global_volume = volume

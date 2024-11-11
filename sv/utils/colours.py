@@ -22,10 +22,10 @@ def order_colours(colours):
         ordered_colours.append(furthest_colour)    
     return ordered_colours
 
-def init_colours(modules):
-    colours = order_colours([random_colour() for mod in modules])        
-    return {mod["name"]: colour
-            for mod, colour in zip(modules, colours)}
+def init_colours(mod_names):
+    colours = order_colours([random_colour() for _ in mod_names])        
+    return {mod_name: colour
+            for mod_name, colour in zip(mod_names, colours)}
 
 if __name__ == "__main__":
     pass
