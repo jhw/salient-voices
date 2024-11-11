@@ -4,6 +4,7 @@ import sv.algos.groove.perkons as perkons
 from sv.container import SVContainer
 from sv.instruments.nine09.samples import Nine09
 
+# from euclid09.generators import *
 from generators import *
 
 import copy
@@ -138,15 +139,10 @@ class Tracks(list):
     def clone(self):
         return Tracks([track.clone() for track in self])
 
-    def shuffle(self, attr, **kwargs):
+    def randomise_attr(self, attr, **kwargs):
         track = random.choice(self)
         getattr(track, f"shuffle_{attr}")(**kwargs)
 
-    def replace(self, track):
-        names = [track.name for track in self]
-        i = names.index(track.name)
-        self[i] = track
-        
     def render(self, container, levels):                
         for track in self:
             track.render(container = container,
@@ -174,12 +170,9 @@ class Patch:
     def clone(self):
         return Patch(tracks = self.tracks.clone())    
 
-    def shuffle(self, attr, **kwargs):
-        self.tracks.shuffle(attr, **kwargs)
+    def randomise_attr(self, attr, **kwargs):
+        self.tracks.randomise_attr(attr, **kwargs)
 
-    def replace_track(self, track):
-        self.tracks.replace(track)
-        
     def render(self, container, levels):
         container.spawn_patch()
         self.tracks.render(container = container,
@@ -204,6 +197,9 @@ class Patches(list):
     def __init__(self, patches = []):
         list.__init__(self, patches)
 
+    def clone(self):
+        return Patches([patch.clone() for patch in self])
+        
     def render(self, banks, levels,
                bpm = 120,
                n_ticks = 16):

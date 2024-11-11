@@ -1,6 +1,5 @@
 ### short
 
-- model tests
 - update sample909 demo
 
 ### medium
@@ -8,6 +7,9 @@
 - digitakt II dual euclidian
 
 ### thoughts
+
+- model tests?
+  - still can't see the need
 
 ### gists 
 
