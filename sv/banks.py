@@ -83,18 +83,18 @@ class SVBanks(list):
         subset_buffer.seek(0)
         return SVBank(name=name, zip_buffer=subset_buffer)
         
-    def match_tags(self, file_name, tag_mapping):
+    def match_tags(self, file_name, tag_patterns):
         tags = []
-        for tag, term in tag_mapping.items():
+        for tag, term in tag_patterns.items():
             if re.search(term, file_name, re.I):
                 tags.append(tag)
         return tags        
 
-    def spawn_pool(self, tag_mapping):
+    def spawn_pool(self, tag_patterns):
         pool, untagged = SVPool(), []
         for bank in self:
             for item in bank.zip_file.infolist():
-                tags = self.match_tags(item.filename, tag_mapping)
+                tags = self.match_tags(item.filename, tag_patterns)
                 sample = SVSampleRef.create(bank_name=bank.name, file_name=item.filename, tags=tags)
                 if tags:
                     pool.append(sample)

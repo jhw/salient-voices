@@ -45,8 +45,8 @@ class BanksTest(unittest.TestCase):
     def test_spawn_pool(self):
         bank = SVBank.load_zip("tests/mikey303.zip")
         banks = SVBanks([bank])
-        tag_mapping = {"bass": "303"}
-        pool, unmapped = banks.spawn_pool(tag_mapping)
+        tag_patterns = {"bass": "303"}
+        pool, unmapped = banks.spawn_pool(tag_patterns)
         self.assertTrue(isinstance(pool, SVPool))
         self.assertEqual(len(pool), 2)
         self.assertEqual(unmapped, [])
