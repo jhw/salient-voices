@@ -52,8 +52,12 @@ if __name__ == "__main__":
     project = read_sunvox_file("dev/city-dreams.sunvox")
     mod_chains = filter_module_chains(project)
     for mod_chain in mod_chains:
-        print(mod_chain)
+        mod_indexes = [i for _, i in mod_chain]
+        if 25 in mod_indexes:
+            print(mod_chain)
+    print()
     groups = group_timeline(project)
     for x, group in groups.items():
-        print (x, group.mod_indexes)
+        if 25 in group.mod_indexes:
+            print (x, group.mod_indexes)
 
