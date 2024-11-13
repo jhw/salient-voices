@@ -59,6 +59,18 @@ class Tracks(list):
     def __init__(self, items = []):
         list.__init__(self, items)
 
+    def filter_by_chain(self, chain):
+        mod_indexes, tracks = chain.indexes, []
+        for _track in self:
+            track = []
+            for _note in _track:
+                if _note.mod and _note.mod in mod_indexes:
+                    track.append(_note)
+                else:
+                    track.append(Note())
+            tracks.append(track)
+        return Tracks(tracks)
+
     def to_pattern_data(self):
         return rotate_matrix(self, clockwise = False)
         
@@ -83,10 +95,9 @@ class PatternGroup(list):
     """
     
     def clone_patterns(self, chain):
-        mod_indexes = chain.indexes
         for i, pat in enumerate(group):
             tracks = Tracks.from_pattern_data(pat.data)
-            pat_data = tracks.to_pattern_data()
+            pat_data = tracks.filter_by_chain(chain).to_pattern_data()
             print(self.x, i, len(tracks), len(pat_data))
          
 class PatternGroups(list):
