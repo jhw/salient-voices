@@ -3,10 +3,12 @@ import rv.api
 from rv.pattern import Pattern, PatternClone
 from rv.readers.reader import read_sunvox_file
 
+from collections import OrderedDict
+
 class ModuleChain(list):
 
     @staticmethod
-    def init_from_project(project):
+    def parse_modules(project):
         modules = [{"name": mod.name,
                     "index": mod.index,
                     "links": {"in": mod.in_links,
@@ -55,22 +57,28 @@ class PatternGroup(list):
                         mod_indexes.add(note.mod.index)
         return sorted(list(mod_indexes))
 
-def group_timeline(project):
-    groups = {}
-    for i, _pattern in enumerate(project.patterns):
-        if isinstance(_pattern, PatternClone):
-            pattern = project.patterns[_pattern.source]
-        elif isinstance(_pattern, Pattern):
-            pattern = _pattern
-        x = _pattern.x
-        groups.setdefault(x, PatternGroup())
-        groups[x].append(pattern)
-    return groups
+class PatternGroups(OrderedDict):
 
+    @staticmethod
+    def parse_timeline(project):
+        groups = {}
+        for i, _pattern in enumerate(project.patterns):
+            if isinstance(_pattern, PatternClone):
+                pattern = project.patterns[_pattern.source]
+            elif isinstance(_pattern, Pattern):
+                pattern = _pattern
+            x = _pattern.x
+            groups.setdefault(x, PatternGroup())
+            groups[x].append(pattern)
+        return PatternGroups(groups)
+    
+    def __init__(self, item = {}):
+        OrderedDict.__init__(self, item)
+            
 if __name__ == "__main__":
     project = read_sunvox_file("dev/city-dreams.sunvox")
-    mod_chains = ModuleChain.init_from_project(project)
-    pat_groups = group_timeline(project)
+    mod_chains = ModuleChain.parse_modules(project)
+    pat_groups = PatternGroups.parse_timeline(project)
     filter_fn = lambda mod_chain, pat_group: mod_chain.indexes[0] in pat_group.mod_indexes
     for mod_chain in mod_chains:
         print(mod_chain)
