@@ -43,11 +43,11 @@ class ModuleChain(list):
         return "-".join([f"{name[:3].lower()}-{index:02X}"
                          for name, index in zip(self.names, self.indexes)])
 
-
 class PatternGroup(list):
 
-    def __init__(self, items = []):
+    def __init__(self, x, items = []):
         list.__init__(self, items)
+        self.x = x
 
     @property
     def mod_indexes(self):
@@ -59,23 +59,23 @@ class PatternGroup(list):
                         mod_indexes.add(note.mod.index)
         return sorted(list(mod_indexes))
 
-class PatternGroups(OrderedDict):
+class PatternGroups(list):
 
     @staticmethod
     def parse_timeline(project):
-        groups = {}
+        groups = OrderedDict()
         for i, _pattern in enumerate(project.patterns):
             if isinstance(_pattern, PatternClone):
                 pattern = project.patterns[_pattern.source]
             elif isinstance(_pattern, Pattern):
                 pattern = _pattern
             x = _pattern.x
-            groups.setdefault(x, PatternGroup())
+            groups.setdefault(x, PatternGroup(x))
             groups[x].append(pattern)
-        return PatternGroups(groups)
+        return PatternGroups(list(groups.values()))
     
-    def __init__(self, item = {}):
-        OrderedDict.__init__(self, item)
+    def __init__(self, items = {}):
+        list.__init__(self, items)
             
 if __name__ == "__main__":
     project = read_sunvox_file("dev/city-dreams.sunvox")
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     for mod_chain in mod_chains:
         if mod_chain [0][1] == 25:
             print(mod_chain)
-            for x, pat_group in pat_groups.items():
+            for pat_group in pat_groups:
                 if filter_fn(mod_chain, pat_group):
-                    print(x, pat_group.mod_indexes)
+                    print(pat_group.x, pat_group.mod_indexes)
             print()

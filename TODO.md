@@ -1,7 +1,5 @@
 ### short [01-decompiler]
 
-- convert pattern groups to a list
-
 - function to strip unwanted notes from pattern data
 
 ### medium
@@ -36,6 +34,7 @@
 
 ### done
 
+- convert pattern groups to a list
 - filter_mod_chains to validate out/0 and also remove it
 - move filter_mod_chains, parse_timeline into classes as static methods
 - update sample909 demo
