@@ -1,6 +1,10 @@
 ### short [01-decompiler]
 
-- clone modules, adding links
+- create project
+- attach modules to project
+- link modules
+
+- export controller properties to yaml
 
 ### medium
 
@@ -15,7 +19,6 @@
 
 - pico glitch samples
 
-- decompiler
 - freezing
 - polly vocals + sv vocoder
 - resampling

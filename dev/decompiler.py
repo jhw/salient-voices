@@ -30,12 +30,16 @@ class ModuleChain(list):
     def __init__(self, items = []):
         list.__init__(self, items)        
 
-    def filter_modules(self, project):
-        def clone_module(mod):
-            clone = mod.clone()
-            return clone
+    """
+    Note cloning a module -
+    - detaches it from project
+    - resets indexing
+    - removes connections
+    """
+        
+    def clone_modules(self, project):
         modules = {mod.index: mod for mod in project.modules}
-        return [clone_module(modules[item[1]]) for item in self]
+        return [modules[item[1]].clone() for item in self]
         
     @property
     def names(self):
@@ -72,13 +76,21 @@ class Tracks(list):
     def __init__(self, items = []):
         list.__init__(self, items)
 
-    def filter_by_chain(self, chain):
+    """
+    This is currently incomplete
+    Assuming you have cloned the modules, the mod index info will have changed
+    """
+        
+    def filter_by_chain(self, chain, modules):
         mod_indexes, tracks = chain.indexes, []
         for _track in self:
             track = []
             for _note in _track:
-                if _note.mod and _note.mod in mod_indexes:
-                    track.append(_note)
+                if _note.mod and _note.mod.index in mod_indexes:
+                    mod_index = mod_indexes.index(_note.mod.index)
+                    note = _note.clone()
+                    # note.mod = modules[mod_index] # modules must be attached to a project!
+                    track.append(note)
                 else:
                     track.append(Note())
             tracks.append(track)
@@ -103,14 +115,10 @@ class PatternGroup(list):
                         mod_indexes.add(note.mod.index)
         return sorted(list(mod_indexes))
 
-    """
-    - remember RV manages notes in rows (lines) first, then cols (notes-in-track) nested inside that
-    """
-    
-    def clone_patterns(self, chain):
+    def clone_patterns(self, chain, modules):
         for i, pat in enumerate(group):
             tracks = Tracks.from_pattern_data(pat.data)
-            pat_data = tracks.filter_by_chain(chain).to_pattern_data()
+            pat_data = tracks.filter_by_chain(chain, modules).to_pattern_data()
             print(self.x, i, len(tracks), len(pat_data))
          
 class PatternGroups(list):
@@ -142,10 +150,10 @@ if __name__ == "__main__":
     groups = PatternGroups.parse_timeline(project)
     for chain in chains:
         if chain [0][1] == 25:
-            modules = chain.filter_modules(project)
+            modules = chain.clone_modules(project)
             print(modules)
             print()
             chain_groups = groups.filter_by_chain(chain)
             for group in chain_groups:
-                group.clone_patterns(chain)
+                group.clone_patterns(chain, modules)
                         
