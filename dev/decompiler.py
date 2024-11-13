@@ -49,15 +49,6 @@ class PatternGroup(list):
     def __init__(self, x, items = []):
         list.__init__(self, items)
         self.x = x
-
-    def clean_tracks(self, mod_chain):
-        mod_indexes = mod_chain.indexes
-        for pattern in self:
-            for track in pattern.data:
-                for i, note in enumerate(track):
-                    if note.mod and note.mod.index not in mod_indexes:
-                        print (note)
-                        track[i] = Note()
         
     @property
     def mod_indexes(self):
@@ -93,6 +84,9 @@ if __name__ == "__main__":
     pat_groups = PatternGroups.parse_timeline(project)
     filter_fn = lambda mod_chain, pat_group: mod_chain.indexes[0] in pat_group.mod_indexes
     for mod_chain in mod_chains:
-        mod_indexes = mod_chain.indexes
         if mod_chain [0][1] == 25:
-            print (mod_chain)
+            mod_indexes = mod_chain.indexes
+            for pat_group in pat_groups:
+                if filter_fn(mod_chain, pat_group):                    
+                    for i, pattern in enumerate(pat_group):
+                        print(pat_group.x, i, len(pattern.data))

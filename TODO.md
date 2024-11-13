@@ -1,6 +1,7 @@
 ### short [01-decompiler]
 
-- function to strip unwanted notes from pattern data
+- strip unwanted notes
+- create new projects
 
 ### medium
 
