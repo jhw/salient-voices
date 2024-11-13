@@ -44,6 +44,24 @@ class ModuleChain(list):
         return "-".join([f"{name[:3].lower()}-{index:02X}"
                          for name, index in zip(self.names, self.indexes)])
 
+def rotate_matrix(matrix, clockwise = True):
+    if clockwise:
+        return [list(row) for row in zip(*matrix[::-1])]
+    else:
+        return [list(row) for row in zip(*matrix)][::-1]
+
+class Tracks(list):
+
+    @staticmethod
+    def from_pattern_data(pattern_data):
+        return Tracks(rotate_matrix(pattern_data))
+    
+    def __init__(self, items = []):
+        list.__init__(self, items)
+
+    def to_pattern_data(self):
+        return rotate_matrix(self, clockwise = False)
+        
 class PatternGroup(list):
 
     def __init__(self, x, items = []):
@@ -67,7 +85,9 @@ class PatternGroup(list):
     def clone_patterns(self, chain):
         mod_indexes = chain.indexes
         for i, pat in enumerate(group):
-             print(self.x, i, len(pat.data))
+            tracks = Tracks.from_pattern_data(pat.data)
+            pat_data = tracks.to_pattern_data()
+            print(self.x, i, len(tracks), len(pat_data))
          
 class PatternGroups(list):
 
