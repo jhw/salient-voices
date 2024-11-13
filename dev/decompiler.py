@@ -28,18 +28,25 @@ class ModuleChain(list):
         return dfs(0)
     
     def __init__(self, items = []):
-        list.__init__(self, items)
+        list.__init__(self, items)        
 
+    def filter_modules(self, project):
+        def clone_module(mod):
+            clone = mod.clone()
+            return clone
+        modules = {mod.index: mod for mod in project.modules}
+        return [clone_module(modules[item[1]]) for item in self]
+        
     @property
     def names(self):
-        return [mod[0] for mod in self
-                if mod[0] != "OUT"]
+        return [item[0] for item in self
+                if item[0] != "OUT"]
 
     @property
     def indexes(self):
-        return [mod[1] for mod in self
-                if mod[1] != 0]
-
+        return [item[1] for item in self
+                if item[1] != 0]
+    
     def __str__(self):
         return "-".join([f"{name[:3].lower()}-{index:02X}"
                          for name, index in zip(self.names, self.indexes)])
@@ -135,6 +142,9 @@ if __name__ == "__main__":
     groups = PatternGroups.parse_timeline(project)
     for chain in chains:
         if chain [0][1] == 25:
+            modules = chain.filter_modules(project)
+            print(modules)
+            print()
             chain_groups = groups.filter_by_chain(chain)
             for group in chain_groups:
                 group.clone_patterns(chain)
