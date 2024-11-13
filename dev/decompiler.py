@@ -60,6 +60,15 @@ class PatternGroup(list):
                         mod_indexes.add(note.mod.index)
         return sorted(list(mod_indexes))
 
+    """
+    - remember RV manages notes in rows (lines) first, then cols (notes-in-track) nested inside that
+    """
+    
+    def clone_patterns(self, chain):
+        mod_indexes = chain.indexes
+        for i, pat in enumerate(group):
+             print(self.x, i, len(pat.data))
+         
 class PatternGroups(list):
 
     @staticmethod
@@ -77,16 +86,19 @@ class PatternGroups(list):
     
     def __init__(self, items = {}):
         list.__init__(self, items)
-            
+
+    def filter_by_chain(self, chain,
+                        filter_fn = lambda chain, group: chain.indexes[0] in group.mod_indexes):
+        return PatternGroups([group for group in self
+                              if filter_fn(chain, group)])
+        
 if __name__ == "__main__":
     project = read_sunvox_file("dev/city-dreams.sunvox")
-    mod_chains = ModuleChain.parse_modules(project)
-    pat_groups = PatternGroups.parse_timeline(project)
-    filter_fn = lambda mod_chain, pat_group: mod_chain.indexes[0] in pat_group.mod_indexes
-    for mod_chain in mod_chains:
-        if mod_chain [0][1] == 25:
-            mod_indexes = mod_chain.indexes
-            for pat_group in pat_groups:
-                if filter_fn(mod_chain, pat_group):                    
-                    for i, pattern in enumerate(pat_group):
-                        print(pat_group.x, i, len(pattern.data))
+    chains = ModuleChain.parse_modules(project)
+    groups = PatternGroups.parse_timeline(project)
+    for chain in chains:
+        if chain [0][1] == 25:
+            chain_groups = groups.filter_by_chain(chain)
+            for group in chain_groups:
+                group.clone_patterns(chain)
+                        
