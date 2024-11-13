@@ -1,5 +1,6 @@
 import rv.api
 
+from rv.note import Note
 from rv.pattern import Pattern, PatternClone
 from rv.readers.reader import read_sunvox_file
 
@@ -83,9 +84,14 @@ if __name__ == "__main__":
     pat_groups = PatternGroups.parse_timeline(project)
     filter_fn = lambda mod_chain, pat_group: mod_chain.indexes[0] in pat_group.mod_indexes
     for mod_chain in mod_chains:
+        mod_indexes = mod_chain.indexes
         if mod_chain [0][1] == 25:
-            print(mod_chain)
             for pat_group in pat_groups:
                 if filter_fn(mod_chain, pat_group):
-                    print(pat_group.x, pat_group.mod_indexes)
-            print()
+                    for pattern in pat_group:
+                        for track in pattern.data:
+                            for i, note in enumerate(track):
+                                if note.mod and note.mod.index not in mod_indexes:
+                                    print (note)
+                                    track[i] = Note()
+                    break
