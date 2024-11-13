@@ -1,7 +1,7 @@
 ### short [01-decompiler]
 
-- strip unwanted notes
-- create new projects
+- clone modules, adding links
+- clone pattern, rejecting unwanted notes
 
 ### medium
 
