@@ -1,9 +1,8 @@
 ### short [01-decompiler]
 
-- PatternGroups class to store x
-- filter_mod_chains to validate out/0 and also remove it
+- convert pattern groups to a list
+
 - function to strip unwanted notes from pattern data
-- check how old decompiler creates new projects >> detach modules?
 
 ### medium
 
@@ -37,6 +36,7 @@
 
 ### done
 
+- filter_mod_chains to validate out/0 and also remove it
 - move filter_mod_chains, parse_timeline into classes as static methods
 - update sample909 demo
 - init_colours should take a list of mod names

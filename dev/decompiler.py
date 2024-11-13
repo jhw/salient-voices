@@ -31,14 +31,16 @@ class ModuleChain(list):
 
     @property
     def names(self):
-        return [mod[0] for mod in self]
+        return [mod[0] for mod in self
+                if mod[0] != "OUT"]
 
     @property
     def indexes(self):
-        return [mod[1] for mod in self]
+        return [mod[1] for mod in self
+                if mod[1] != 0]
 
     def __str__(self):
-        return "-".join([f"{name[:3].lower()}-{index}"
+        return "-".join([f"{name[:3].lower()}-{index:02X}"
                          for name, index in zip(self.names, self.indexes)])
 
 
@@ -81,8 +83,9 @@ if __name__ == "__main__":
     pat_groups = PatternGroups.parse_timeline(project)
     filter_fn = lambda mod_chain, pat_group: mod_chain.indexes[0] in pat_group.mod_indexes
     for mod_chain in mod_chains:
-        print(mod_chain)
-        for x, pat_group in pat_groups.items():
-            if filter_fn(mod_chain, pat_group):
-                print(x, pat_group.mod_indexes)
-        print()
+        if mod_chain [0][1] == 25:
+            print(mod_chain)
+            for x, pat_group in pat_groups.items():
+                if filter_fn(mod_chain, pat_group):
+                    print(x, pat_group.mod_indexes)
+            print()
