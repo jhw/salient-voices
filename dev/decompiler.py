@@ -50,6 +50,12 @@ def rotate_matrix(matrix, clockwise = True):
     else:
         return [list(row) for row in zip(*matrix)][::-1]
 
+"""
+RV thinks in terms of lines(rows) primarily and then tracks within those lines
+But it's more natural to think in terms of cols here, with each col as a track
+Hence rotate pattern data and then rotate it back
+"""
+    
 class Tracks(list):
 
     @staticmethod
