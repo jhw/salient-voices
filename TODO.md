@@ -2,13 +2,15 @@
 
 - NOTE OFF is not being included/rendered
 
+- Mechanical Heart `-1` error
+- Ether Winds `None` error
+
 ### medium
 
-- fails on Mechanical Heart
 - what's the white block in the timeline render?
-- replace sys.args stuff with argsparse
 - layout management
 - yaml export
+- replace sys.args stuff with argsparse
 
 ### thoughts
 
