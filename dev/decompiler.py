@@ -172,14 +172,18 @@ def DefaultChainFilter(chain, group):
 def create_patch(project_name, project, chain, groups,
                  filter_fn = DefaultChainFilter):
     patch = Project()
-    patch.initial_bpm = project.initial_bpm
-    patch.global_volume = project.global_volume
-    modules = chain.clone_modules(project)
-    for mod in modules:
+    for attr in ["initial_bpm",
+                 "global_volume"]:
+        setattr(patch, attr, getattr(project, attr))
+    chain_modules = chain.clone_modules(project) # excludes Output, indexing
+    for mod in reversed(chain_modules):
         patch.attach_module(mod)
+    patch_modules = patch.modules # includes Output, indexing
+    for i in range(len(chain_modules)):
+        patch.connect(patch_modules[i+1], patch_modules[i])
     chain_groups = groups.filter_by_chain(chain, filter_fn)
     for group in chain_groups:
-        group.clone_patterns(chain, modules)
+        group.clone_patterns(chain, chain_modules)
         
 if __name__ == "__main__":
     try:

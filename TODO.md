@@ -1,6 +1,5 @@
 ### short [01-decompiler]
 
-- link modules
 - set pattern data
 - save project
 
@@ -37,6 +36,7 @@
 
 ### done
 
+- link modules
 - use real project name and create slug for output
 - set note module indexes
 - problem with Base module
