@@ -7,6 +7,15 @@ from rv.readers.reader import read_sunvox_file
 
 from collections import OrderedDict
 
+import logging
+import os
+import re
+import sys
+
+logging.basicConfig(stream=sys.stdout,
+                    level=logging.INFO,
+                    format="%(levelname)s: %(message)s")
+
 class ModuleChain(list):
 
     @staticmethod
@@ -153,8 +162,15 @@ class PatternGroups(list):
         return PatternGroups([group for group in self
                               if filter_fn(chain, group)])
 
-def create_patch(project, chain, groups,
-                 filter_fn = lambda chain, group: chain.indexes[0] in group.mod_indexes):
+"""
+The VCO is typically at the start of the chain; is this module present in a pattern group's list of modules?
+"""
+    
+def DefaultChainFilter(chain, group):
+    return chain.indexes[0] in group.mod_indexes
+    
+def create_patch(project_name, project, chain, groups,
+                 filter_fn = DefaultChainFilter):
     patch = Project()
     patch.initial_bpm = project.initial_bpm
     patch.global_volume = project.global_volume
@@ -164,17 +180,28 @@ def create_patch(project, chain, groups,
     chain_groups = groups.filter_by_chain(chain, filter_fn)
     for group in chain_groups:
         group.clone_patterns(chain, modules)
-    
+        
 if __name__ == "__main__":
-    project = read_sunvox_file("dev/decompiler/city-dreams.sunvox")
-    bpm, volume = project.initial_bpm, project.global_volume
-    chains = ModuleChain.parse_modules(project)
-    groups = PatternGroups.parse_timeline(project)
-    for chain in chains:
-        if chain [0][1] != 25:
-            continue
-        create_patch(project = project,
-                     chain = chain,
-                     groups = groups)
+    try:
+        if len(sys.argv) < 2:
+            raise RuntimeError("please enter path to sunvox file")
+        filename = sys.argv[1]
+        if not os.path.exists(filename):
+            raise RuntimeError("file does not exist")
+        if not filename.endswith(".sunvox"):
+            raise RuntimeError("file must be a .sunvox file")
+        project_name = "-".join([tok.lower() for tok in re.split("\\W", filename.split("/")[-1].split(".")[0]) if tok != ''])
+        project = read_sunvox_file(filename)
+        chains = ModuleChain.parse_modules(project)
+        groups = PatternGroups.parse_timeline(project)
+        for chain in chains:
+            if chain [0][1] != 25:
+                continue
+            create_patch(project_name = project_name,
+                         project = project,
+                         chain = chain,
+                         groups = groups)
+    except RuntimeError as error:
+        logging.error(str(error))
 
                         
