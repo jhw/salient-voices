@@ -156,7 +156,7 @@ def create_patch(project, chain, groups):
         group.clone_patterns(chain, modules)
     
 if __name__ == "__main__":
-    project = read_sunvox_file("dev/city-dreams.sunvox")
+    project = read_sunvox_file("dev/decompiler/city-dreams.sunvox")
     bpm, volume = project.initial_bpm, project.global_volume
     chains = ModuleChain.parse_modules(project)
     groups = PatternGroups.parse_timeline(project)
