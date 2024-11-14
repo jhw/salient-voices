@@ -60,17 +60,22 @@ class ModuleChain(list):
         return "-".join([f"{name[:3].lower()}-{index:02X}"
                          for name, index in zip(self.names, self.indexes)])
 
+"""
+RV thinks in terms of lines, and then tracks belonging to a line
+But this is fucked up as it means the track data is atomised
+Better to rotate so you can work in terms of tracks (cols) and then rotate back on output
+"""
+    
 def rotate_matrix(matrix, clockwise = True):
     if clockwise:
         return [list(row) for row in zip(*matrix[::-1])]
     else:
         return [list(row) for row in zip(*matrix)][::-1]
 
-"""
-RV thinks in terms of lines(rows) primarily and then tracks within those lines
-But it's more natural to think in terms of cols here, with each col as a track
-Hence rotate pattern data and then rotate it back
-"""
+class Track(list):
+
+    def __init__(self, notes = []):
+        list.__init__(self, notes)
     
 class Tracks(list):
 
@@ -84,7 +89,7 @@ class Tracks(list):
     def filter_by_chain(self, chain, modules):
         mod_indexes, tracks = chain.indexes, []
         for _track in self:
-            track = []
+            track = Track()
             for _note in _track:
                 if _note.mod and _note.mod.index in mod_indexes:
                     mod_index = mod_indexes.index(_note.mod.index)

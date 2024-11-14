@@ -6,7 +6,7 @@
 
 ### medium
 
-- filter out empty tracks with a Track class
+- filter out empty tracks
 - layout management
 - export controller properties to yaml
 
