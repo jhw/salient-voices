@@ -2,6 +2,7 @@ import rv.api
 
 from rv.note import Note
 from rv.pattern import Pattern, PatternClone
+from rv.project import Project
 from rv.readers.reader import read_sunvox_file
 
 from collections import OrderedDict
@@ -116,7 +117,7 @@ class PatternGroup(list):
         return sorted(list(mod_indexes))
 
     def clone_patterns(self, chain, modules):
-        for i, pat in enumerate(group):
+        for i, pat in enumerate(self):
             tracks = Tracks.from_pattern_data(pat.data)
             pat_data = tracks.filter_by_chain(chain, modules).to_pattern_data()
             print(self.x, i, len(tracks), len(pat_data))
@@ -143,17 +144,29 @@ class PatternGroups(list):
                         filter_fn = lambda chain, group: chain.indexes[0] in group.mod_indexes):
         return PatternGroups([group for group in self
                               if filter_fn(chain, group)])
-        
+
+def create_patch(project, chain, groups):
+    patch = Project()
+    patch.initial_bpm = project.initial_bpm
+    patch.global_volume = project.global_volume
+    chain_modules = chain.clone_modules(project)
+    print(chain_modules)
+    print()
+    chain_groups = groups.filter_by_chain(chain)
+    for group in chain_groups:
+        group.clone_patterns(chain = chain,
+                             modules = chain_modules)
+    
 if __name__ == "__main__":
     project = read_sunvox_file("dev/city-dreams.sunvox")
+    bpm, volume = project.initial_bpm, project.global_volume
     chains = ModuleChain.parse_modules(project)
     groups = PatternGroups.parse_timeline(project)
     for chain in chains:
-        if chain [0][1] == 25:
-            modules = chain.clone_modules(project)
-            print(modules)
-            print()
-            chain_groups = groups.filter_by_chain(chain)
-            for group in chain_groups:
-                group.clone_patterns(chain, modules)
+        if chain [0][1] != 25:
+            continue
+        create_patch(project = project,
+                     chain = chain,
+                     groups = groups)
+
                         

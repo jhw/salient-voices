@@ -1,14 +1,13 @@
 ### short [01-decompiler]
 
-- create project
 - attach modules to project
+- set note module indexes
 - link modules
-
-- export controller properties to yaml
+- save project
 
 ### medium
 
-- digitakt II dual euclidian
+- export controller properties to yaml
 
 ### thoughts
 
@@ -37,6 +36,7 @@
 
 ### done
 
+- create project
 - clone pattern, rejecting unwanted notes
 - convert pattern groups to a list
 - filter_mod_chains to validate out/0 and also remove it
