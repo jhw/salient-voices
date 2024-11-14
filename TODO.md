@@ -1,15 +1,13 @@
 ### short [01-decompiler]
 
-- filter out empty tracks
-- flatten tracks
-
 - set pattern data
+
 - save project
 
 ### medium
 
-- filter out empty tracks
-- layout management
+- layouts
+- colours?
 - export controller properties to yaml
 
 ### thoughts
@@ -39,6 +37,8 @@
 
 ### done
 
+- filter out empty tracks
+- flatten tracks
 - link modules
 - use real project name and create slug for output
 - set note module indexes

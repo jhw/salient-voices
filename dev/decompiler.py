@@ -128,6 +128,13 @@ class Tracks(list):
                 tracks.append(track)
         return Tracks(tracks)
 
+    @property
+    def lengths(self):
+        lengths = set()
+        for track in self:
+            lengths.add(len(track))
+        return lengths
+    
     def to_pattern_data(self):
         return rotate_matrix(self, clockwise = False)
         
@@ -147,12 +154,17 @@ class PatternGroup(list):
                         mod_indexes.add(note.mod.index)
         return sorted(list(mod_indexes))
 
-    def flatten_tracks(self, chain, modules):
-        for i, pat in enumerate(self):
+    def master_tracks(self, chain, modules):
+        master = Tracks()
+        for pat in self:
             tracks = Tracks.from_pattern_data(pat.data)
-            pat_data = tracks.filter_by_chain(chain, modules).to_pattern_data()
-            print(self.x, i, len(tracks), len(pat_data))
-        print()
+            filtered_tracks = tracks.filter_by_chain(chain, modules)
+            if filtered_tracks != []:
+                track_lengths = filtered_tracks.lengths
+                if len(track_lengths) != 1:
+                    raise RuntimeError(f"chain {chain} has multiple track lengths {track_lengths}")
+                master += filtered_tracks
+        return master
          
 class PatternGroups(list):
 
@@ -197,7 +209,8 @@ def create_patch(project_name, project, chain, groups,
         patch.connect(patch_modules[i+1], patch_modules[i])
     chain_groups = groups.filter_by_chain(chain, filter_fn)
     for group in chain_groups:
-        group.flatten_tracks(chain, chain_modules)
+        master = group.master_tracks(chain, chain_modules)
+        print(group.x, len(master), len(master.to_pattern_data()))
         
 if __name__ == "__main__":
     try:
@@ -213,8 +226,11 @@ if __name__ == "__main__":
         chains = ModuleChain.parse_modules(project)
         groups = PatternGroups.parse_timeline(project)
         for chain in chains:
+            # START TEMP CODE
             if chain [0][1] != 25:
                 continue
+            # END TEMP CODE
+            print(f"--- {chain} ---")
             create_patch(project_name = project_name,
                          project = project,
                          chain = chain,
