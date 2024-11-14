@@ -1,6 +1,5 @@
 ### short [01-decompiler]
 
-- set note module indexes
 - link modules
 - save project
 
@@ -37,6 +36,7 @@
 
 ### done
 
+- set note module indexes
 - problem with Base module
 - attach modules to project
 - create project

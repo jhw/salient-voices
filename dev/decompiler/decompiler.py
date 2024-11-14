@@ -86,6 +86,11 @@ class Tracks(list):
     def __init__(self, items = []):
         list.__init__(self, items)
 
+    """
+    Note that module indexes start at 1 not 0 (because Output is 0)
+    Nice thing about this routine is that mod.index is never directly references so you don't need a +1 hack anywhere :)
+    """
+        
     def filter_by_chain(self, chain, modules):
         mod_indexes, tracks = chain.indexes, []
         for _track in self:
@@ -94,7 +99,7 @@ class Tracks(list):
                 if _note.mod and _note.mod.index in mod_indexes:
                     mod_index = mod_indexes.index(_note.mod.index)
                     note = _note.clone()
-                    # note.mod = modules[mod_index] # modules must be attached to a project!
+                    note.mod = modules[mod_index]
                     track.append(note)
                 else:
                     track.append(Note())
@@ -144,19 +149,19 @@ class PatternGroups(list):
     def __init__(self, items = {}):
         list.__init__(self, items)
 
-    def filter_by_chain(self, chain,
-                        filter_fn = lambda chain, group: chain.indexes[0] in group.mod_indexes):
+    def filter_by_chain(self, chain, filter_fn):
         return PatternGroups([group for group in self
                               if filter_fn(chain, group)])
 
-def create_patch(project, chain, groups):
+def create_patch(project, chain, groups,
+                 filter_fn = lambda chain, group: chain.indexes[0] in group.mod_indexes):
     patch = Project()
     patch.initial_bpm = project.initial_bpm
     patch.global_volume = project.global_volume
     modules = chain.clone_modules(project)
     for mod in modules:
         patch.attach_module(mod)
-    chain_groups = groups.filter_by_chain(chain)
+    chain_groups = groups.filter_by_chain(chain, filter_fn)
     for group in chain_groups:
         group.clone_patterns(chain, modules)
     
