@@ -1,12 +1,13 @@
 ### short [01-decompiler]
 
-- attach modules to project
 - set note module indexes
 - link modules
 - save project
 
 ### medium
 
+- filter out empty tracks with a Track class
+- layout management
 - export controller properties to yaml
 
 ### thoughts
@@ -36,6 +37,8 @@
 
 ### done
 
+- problem with Base module
+- attach modules to project
 - create project
 - clone pattern, rejecting unwanted notes
 - convert pattern groups to a list

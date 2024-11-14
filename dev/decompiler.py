@@ -37,20 +37,24 @@ class ModuleChain(list):
     - resets indexing
     - removes connections
     """
-        
+
+    def is_output(self, item):
+        return item[0] == "OUT"
+    
     def clone_modules(self, project):
         modules = {mod.index: mod for mod in project.modules}
-        return [modules[item[1]].clone() for item in self]
+        return [modules[item[1]].clone() for item in self
+                if not self.is_output(item)]
         
     @property
     def names(self):
         return [item[0] for item in self
-                if item[0] != "OUT"]
+                if not self.is_output(item)]
 
     @property
     def indexes(self):
         return [item[1] for item in self
-                if item[1] != 0]
+                if not self.is_output(item)]
     
     def __str__(self):
         return "-".join([f"{name[:3].lower()}-{index:02X}"
@@ -77,11 +81,6 @@ class Tracks(list):
     def __init__(self, items = []):
         list.__init__(self, items)
 
-    """
-    This is currently incomplete
-    Assuming you have cloned the modules, the mod index info will have changed
-    """
-        
     def filter_by_chain(self, chain, modules):
         mod_indexes, tracks = chain.indexes, []
         for _track in self:
@@ -120,7 +119,7 @@ class PatternGroup(list):
         for i, pat in enumerate(self):
             tracks = Tracks.from_pattern_data(pat.data)
             pat_data = tracks.filter_by_chain(chain, modules).to_pattern_data()
-            print(self.x, i, len(tracks), len(pat_data))
+            # print(self.x, i, len(tracks), len(pat_data))
          
 class PatternGroups(list):
 
@@ -149,13 +148,12 @@ def create_patch(project, chain, groups):
     patch = Project()
     patch.initial_bpm = project.initial_bpm
     patch.global_volume = project.global_volume
-    chain_modules = chain.clone_modules(project)
-    print(chain_modules)
-    print()
+    modules = chain.clone_modules(project)
+    for mod in modules:
+        patch.attach_module(mod)
     chain_groups = groups.filter_by_chain(chain)
     for group in chain_groups:
-        group.clone_patterns(chain = chain,
-                             modules = chain_modules)
+        group.clone_patterns(chain, modules)
     
 if __name__ == "__main__":
     project = read_sunvox_file("dev/city-dreams.sunvox")
