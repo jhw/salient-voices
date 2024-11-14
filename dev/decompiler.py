@@ -195,7 +195,7 @@ The VCO is typically at the start of the chain; is this module present in a patt
 def DefaultChainFilter(chain, group):
     return chain.indexes[0] in group.mod_indexes
     
-def create_patch(project_name, project, chain, groups,
+def create_patch(project, chain, groups,
                  filter_fn = DefaultChainFilter):
     patch = Project()
     for attr in ["initial_bpm",
@@ -208,9 +208,18 @@ def create_patch(project_name, project, chain, groups,
     for i in range(len(chain_modules)):
         patch.connect(patch_modules[i+1], patch_modules[i])
     chain_groups = groups.filter_by_chain(chain, filter_fn)
+    patch.patterns, x, y = [], 0, 0
     for group in chain_groups:
         master = group.master_tracks(chain, chain_modules)
-        print(group.x, len(master), len(master.to_pattern_data()))
+        pat_data = master.to_pattern_data()
+        pattern = Pattern(lines = len(pat_data),
+                          tracks = len(master),
+                          x = x,
+                          y = y)
+        pattern.set_via_fn(lambda self, i, j: pat_data[i][j])
+        patch.patterns.append(pattern)
+        x += len(pat_data)
+    return patch
         
 if __name__ == "__main__":
     try:
@@ -227,14 +236,21 @@ if __name__ == "__main__":
         groups = PatternGroups.parse_timeline(project)
         for chain in chains:
             # START TEMP CODE
-            if chain [0][1] != 25:
+            """
+            if chain[0][1] != 25:
                 continue
+            """
             # END TEMP CODE
-            print(f"--- {chain} ---")
-            create_patch(project_name = project_name,
-                         project = project,
-                         chain = chain,
-                         groups = groups)
+            logging.info(chain)
+            patch = create_patch(project = project,
+                                 chain = chain,
+                                 groups = groups)
+            file_name = f"tmp/decompiler/{project_name}/{chain}.sunvox"
+            dir_name = "/".join(file_name.split("/")[:-1])
+            if not os.path.exists(dir_name):
+                os.makedirs(dir_name)
+            with open(file_name, 'wb') as f:            
+                patch.write_to(f)
     except RuntimeError as error:
         logging.error(str(error))
 

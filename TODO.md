@@ -1,14 +1,14 @@
 ### short [01-decompiler]
 
-- set pattern data
-- save project
-- replace sys.args stuff with argsparse
+- NOTE OFF is not being included/rendered
 
 ### medium
 
-- layouts
-- colours?
-- export controller properties to yaml
+- fails on Mechanical Heart
+- what's the white block in the timeline render?
+- replace sys.args stuff with argsparse
+- layout management
+- yaml export
 
 ### thoughts
 
@@ -37,6 +37,8 @@
 
 ### done
 
+- save project
+- create pattern with data
 - filter out empty tracks
 - flatten tracks
 - link modules
