@@ -1,8 +1,8 @@
 ### short [01-decompiler]
 
 - set pattern data
-
 - save project
+- replace sys.args stuff with argsparse
 
 ### medium
 
