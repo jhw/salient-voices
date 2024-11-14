@@ -1,6 +1,6 @@
 import rv.api
 
-from rv.note import Note
+from rv.note import Note, NOTECMD
 from rv.pattern import Pattern, PatternClone
 from rv.project import Project
 from rv.readers.reader import read_sunvox_file
@@ -85,6 +85,18 @@ class Track(list):
 
     def __init__(self, notes = []):
         list.__init__(self, notes)
+
+    def has_content(self):
+        for note in self:
+            if not (note == None or
+                    (note.note == NOTECMD.EMPTY and
+                     note.vel == 0 and
+                     note.module == 0 and
+                     note.ctl == 0 and
+                     note.val == 0 and
+                     note.pattern == None)):
+                return True
+        return False
     
 class Tracks(list):
 
@@ -112,7 +124,8 @@ class Tracks(list):
                     track.append(note)
                 else:
                     track.append(Note())
-            tracks.append(track)
+            if track.has_content():
+                tracks.append(track)
         return Tracks(tracks)
 
     def to_pattern_data(self):
@@ -134,11 +147,12 @@ class PatternGroup(list):
                         mod_indexes.add(note.mod.index)
         return sorted(list(mod_indexes))
 
-    def clone_patterns(self, chain, modules):
+    def flatten_tracks(self, chain, modules):
         for i, pat in enumerate(self):
             tracks = Tracks.from_pattern_data(pat.data)
             pat_data = tracks.filter_by_chain(chain, modules).to_pattern_data()
-            # print(self.x, i, len(tracks), len(pat_data))
+            print(self.x, i, len(tracks), len(pat_data))
+        print()
          
 class PatternGroups(list):
 
@@ -183,7 +197,7 @@ def create_patch(project_name, project, chain, groups,
         patch.connect(patch_modules[i+1], patch_modules[i])
     chain_groups = groups.filter_by_chain(chain, filter_fn)
     for group in chain_groups:
-        group.clone_patterns(chain, chain_modules)
+        group.flatten_tracks(chain, chain_modules)
         
 if __name__ == "__main__":
     try:

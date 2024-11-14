@@ -1,5 +1,8 @@
 ### short [01-decompiler]
 
+- filter out empty tracks
+- flatten tracks
+
 - set pattern data
 - save project
 
