@@ -70,7 +70,7 @@ class ModuleChain(list):
     """
 
     def is_output(self, item):
-        return item[0] == "OUT"
+        return item[1] == 0
     
     def clone_modules(self, project):
         modules = {mod.index: mod for mod in project.modules}

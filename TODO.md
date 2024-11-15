@@ -1,12 +1,6 @@
 ### short [01-decompiler]
 
 ```
- File "/Users/jhw/work/salient_voices/env/lib/python3.10/site-packages/rv/project.py", line 80, in attach_module
-    raise RuntimeError("Cannot attach base Module instance.")
-RuntimeError: Cannot attach base Module instance.
-```
-
-```
   File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 76, in <dictcomp>
     modules = {mod.index: mod for mod in project.modules}
 AttributeError: 'NoneType' object has no attribute 'index'
@@ -48,6 +42,12 @@ AttributeError: 'NoneType' object has no attribute 'index'
 ### thoughts
 
 ### done
+
+```
+ File "/Users/jhw/work/salient_voices/env/lib/python3.10/site-packages/rv/project.py", line 80, in attach_module
+    raise RuntimeError("Cannot attach base Module instance.")
+RuntimeError: Cannot attach base Module instance.
+```
 
 ```
   File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 24, in <listcomp>
