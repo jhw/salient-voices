@@ -1,10 +1,12 @@
 ### short [01-decompiler]
 
-- max chains
-- patterns with no notes in caravan, space trip
-- timeline patterns seem to be switched
+- controller yaml export
+- layout management
 
 ### medium
+
+- patterns with no notes in caravan, space trip
+- timeline patterns seem to be switched
 
 ```
   File "/Users/jhw/work/salient_voices/env/lib/python3.10/site-packages/rv/modules/sampler.py", line 142, in chunks
@@ -12,12 +14,10 @@
 struct.error: ushort format requires 0 <= number <= (32767 *2 +1)
 ```
 
-- layout management
-- controller yaml export
-- replace sys.args stuff with argsparse
-
 ### thoughts
 
+- replace sys.args stuff with argsparse?
+  - not worth it
 - model tests?
   - still can't see the need
 
@@ -43,6 +43,7 @@ struct.error: ushort format requires 0 <= number <= (32767 *2 +1)
 
 ### done
 
+- max chains
 - remove dots and spaces from short names
 
 ```

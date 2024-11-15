@@ -252,8 +252,10 @@ def create_patch(project, chain, groups,
             existing.add(pat_repr)
     return patch
 
-def decompile_project(project_name, project):
+def decompile_project(project_name, project, max_chains = 100):
     chains = ModuleChain.parse_modules(project)
+    if len(chains) > max_chains:
+        raise RuntimeError(f"skipping as {len(chains)} chains found")
     groups = PatternGroups.parse_timeline(project)
     for chain in chains:
         patch = create_patch(project = project,
@@ -261,7 +263,7 @@ def decompile_project(project_name, project):
                              groups = groups)
         if patch.patterns != []:
             logging.info(chain)
-            file_name = f"tmp/decompiler/{project_name}/{chain}.sunvox"
+            file_name = f"tmp/decompiler/{project_name}/sunvox/{chain}.sunvox"
             dir_name = "/".join(file_name.split("/")[:-1])
             if not os.path.exists(dir_name):
                 os.makedirs(dir_name)
@@ -289,6 +291,8 @@ if __name__ == "__main__":
             try:
                 project = read_sunvox_file(abs_filename)
                 decompile_project(project_name, project)
+            except RuntimeError as error:
+                logging.warning(str(error))
             except Exception as e:
                 logging.warning(f"{traceback.format_exc()}")
     except RuntimeError as error:
