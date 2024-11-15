@@ -73,7 +73,7 @@ class ModuleChain(list):
         return item[1] == 0
     
     def clone_modules(self, project):
-        modules = {mod.index: mod for mod in project.modules}
+        modules = {mod.index: mod for mod in project.modules if mod}
         return [modules[item[1]].clone() for item in self
                 if not self.is_output(item)]
         
@@ -198,6 +198,8 @@ class PatternGroups(list):
     def parse_timeline(project):
         groups = OrderedDict()
         for i, _pattern in enumerate(project.patterns):
+            if _pattern == None:
+                continue
             if isinstance(_pattern, PatternClone):
                 pattern = project.patterns[_pattern.source]
             elif isinstance(_pattern, Pattern):

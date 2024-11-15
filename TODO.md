@@ -1,16 +1,10 @@
 ### short [01-decompiler]
 
-```
-  File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 76, in <dictcomp>
-    modules = {mod.index: mod for mod in project.modules}
-AttributeError: 'NoneType' object has no attribute 'index'
-```
+- remove dots and spaces from short names
+- patterns with no notes in caravan, space trip
+- timeline patterns seem to be switched
 
 ### medium
-
-- patterns with no notes in caravan, space trip
-
-- timeline patterns seem to be switched
 
 - layout management
 - controller yaml export
@@ -42,6 +36,12 @@ AttributeError: 'NoneType' object has no attribute 'index'
 ### thoughts
 
 ### done
+
+```
+  File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 76, in <dictcomp>
+    modules = {mod.index: mod for mod in project.modules}
+AttributeError: 'NoneType' object has no attribute 'index'
+```
 
 ```
  File "/Users/jhw/work/salient_voices/env/lib/python3.10/site-packages/rv/project.py", line 80, in attach_module
