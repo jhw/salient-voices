@@ -1,12 +1,6 @@
 ### short [01-decompiler]
 
 ```
-  File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 31, in dfs
-    current_module = module_dict[current_index]
-KeyError: -1
-```
-
-```
   File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 24, in <listcomp>
     modules = [{"name": mod.name,
 AttributeError: 'NoneType' object has no attribute 'name'
@@ -51,6 +45,12 @@ RuntimeError: Cannot attach base Module instance.
 ### thoughts
 
 ### done
+
+```
+  File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 31, in dfs
+    current_module = module_dict[current_index]
+KeyError: -1
+```
 
 - pass a directory not a filename 
 - capture exceptions gracefully
