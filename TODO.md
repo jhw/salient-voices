@@ -1,12 +1,6 @@
 ### short [01-decompiler]
 
 ```
-  File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 24, in <listcomp>
-    modules = [{"name": mod.name,
-AttributeError: 'NoneType' object has no attribute 'name'
-```
-
-```
  File "/Users/jhw/work/salient_voices/env/lib/python3.10/site-packages/rv/project.py", line 80, in attach_module
     raise RuntimeError("Cannot attach base Module instance.")
 RuntimeError: Cannot attach base Module instance.
@@ -14,9 +8,9 @@ RuntimeError: Cannot attach base Module instance.
 
 ### medium
 
+- patterns with no notes in caravan, space trip
+
 - timeline patterns seem to be switched
-- blank sampler in mechanical heart
-- mechanical heart lead seems to be missing
 
 - layout management
 - controller yaml export
@@ -48,6 +42,12 @@ RuntimeError: Cannot attach base Module instance.
 ### thoughts
 
 ### done
+
+```
+  File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 24, in <listcomp>
+    modules = [{"name": mod.name,
+AttributeError: 'NoneType' object has no attribute 'name'
+```
 
 ```
   File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 31, in dfs
