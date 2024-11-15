@@ -11,6 +11,7 @@ import logging
 import os
 import re
 import sys
+import traceback
 
 logging.basicConfig(stream=sys.stdout,
                     level=logging.INFO,
@@ -227,7 +228,23 @@ def create_patch(project, chain, groups,
             x += len(pat_data)
             existing.add(pat_repr)
     return patch
-        
+
+def decompile_project(project_name, project):
+    chains = ModuleChain.parse_modules(project)
+    groups = PatternGroups.parse_timeline(project)
+    for chain in chains:
+        patch = create_patch(project = project,
+                             chain = chain,
+                             groups = groups)
+        if patch.patterns != []:
+            logging.info(chain)
+            file_name = f"tmp/decompiler/{project_name}/{chain}.sunvox"
+            dir_name = "/".join(file_name.split("/")[:-1])
+            if not os.path.exists(dir_name):
+                os.makedirs(dir_name)
+            with open(file_name, 'wb') as f:            
+                patch.write_to(f)
+
 if __name__ == "__main__":
     try:
         if len(sys.argv) < 2:
@@ -238,21 +255,12 @@ if __name__ == "__main__":
         if not filename.endswith(".sunvox"):
             raise RuntimeError("file must be a .sunvox file")
         project_name = "-".join([tok.lower() for tok in re.split("\\W", filename.split("/")[-1].split(".")[0]) if tok != ''])
+        logging.info(f"--- {project_name} ---")
         project = read_sunvox_file(filename)
-        chains = ModuleChain.parse_modules(project)
-        groups = PatternGroups.parse_timeline(project)
-        for chain in chains:
-            patch = create_patch(project = project,
-                                 chain = chain,
-                                 groups = groups)
-            if patch.patterns != []:
-                logging.info(chain)
-                file_name = f"tmp/decompiler/{project_name}/{chain}.sunvox"
-                dir_name = "/".join(file_name.split("/")[:-1])
-                if not os.path.exists(dir_name):
-                    os.makedirs(dir_name)
-                with open(file_name, 'wb') as f:            
-                    patch.write_to(f)
+        try:
+            decompile_project(project_name, project)
+        except Exception as e:
+            logging.warning(f"{traceback.format_exc()}")
     except RuntimeError as error:
         logging.error(str(error))
 

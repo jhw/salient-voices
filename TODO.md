@@ -1,6 +1,6 @@
 ### short [01-decompiler]
 
-- pass a directory not a filename and capture exceptions gracefully
+- pass a directory not a filename 
 - fix known exceptions
 
 ### medium
@@ -37,6 +37,7 @@
 
 ### done
 
+- capture exceptions gracefully
 - only render unique patterns
 - don't render blanks eg Elochka gen-0D-ech-02-fla-0F
 - add notes without modules and note off
