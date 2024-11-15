@@ -1,6 +1,5 @@
 ### short [01-decompiler]
 
-- don't render blanks eg Elochka gen-0D-ech-02-fla-0F
 - only render unique patterns
 - pass a directory not a filename and capture exceptions gracefully
 - fix known exceptions
@@ -38,6 +37,7 @@
 
 ### done
 
+- don't render blanks eg Elochka gen-0D-ech-02-fla-0F
 - add notes without modules and note off
 - save project
 - create pattern with data

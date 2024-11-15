@@ -239,22 +239,17 @@ if __name__ == "__main__":
         chains = ModuleChain.parse_modules(project)
         groups = PatternGroups.parse_timeline(project)
         for chain in chains:
-            # START TEMP CODE
-            """
-            if chain[0][1] != 25:
-                continue
-            """
-            # END TEMP CODE
-            logging.info(chain)
             patch = create_patch(project = project,
                                  chain = chain,
                                  groups = groups)
-            file_name = f"tmp/decompiler/{project_name}/{chain}.sunvox"
-            dir_name = "/".join(file_name.split("/")[:-1])
-            if not os.path.exists(dir_name):
-                os.makedirs(dir_name)
-            with open(file_name, 'wb') as f:            
-                patch.write_to(f)
+            if patch.patterns != []:
+                logging.info(chain)
+                file_name = f"tmp/decompiler/{project_name}/{chain}.sunvox"
+                dir_name = "/".join(file_name.split("/")[:-1])
+                if not os.path.exists(dir_name):
+                    os.makedirs(dir_name)
+                with open(file_name, 'wb') as f:            
+                    patch.write_to(f)
     except RuntimeError as error:
         logging.error(str(error))
 
