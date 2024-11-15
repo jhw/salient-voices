@@ -94,7 +94,8 @@ class Track(list):
                      note.module == 0 and
                      note.ctl == 0 and
                      note.val == 0 and
-                     note.pattern == None)):
+                     note.pattern == None) or
+                    note.note == NOTECMD.NOTE_OFF):                    
                 return True
         return False
     
@@ -121,6 +122,9 @@ class Tracks(list):
                     mod_index = mod_indexes.index(_note.mod.index)
                     note = _note.clone()
                     note.mod = modules[mod_index]
+                    track.append(note)
+                elif _note.note in [NOTECMD.NOTE_OFF]:
+                    note = _note.clone()
                     track.append(note)
                 else:
                     track.append(Note())

@@ -1,13 +1,12 @@
 ### short [01-decompiler]
 
-- add temp timeline break
-- add notes without modules and note off
+- don't render blanks eg Elochka gen-0D-ech-02-fla-0F
+- only render unique patterns
 - pass a directory not a filename and capture exceptions gracefully
-- fix know exceptions
+- fix known exceptions
 
 ### medium
 
-- fix multiple patterns
 - layout management
 - yaml export
 - replace sys.args stuff with argsparse
@@ -39,6 +38,7 @@
 
 ### done
 
+- add notes without modules and note off
 - save project
 - create pattern with data
 - filter out empty tracks
