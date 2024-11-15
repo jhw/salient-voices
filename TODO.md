@@ -6,6 +6,12 @@
 RuntimeError: Cannot attach base Module instance.
 ```
 
+```
+  File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 76, in <dictcomp>
+    modules = {mod.index: mod for mod in project.modules}
+AttributeError: 'NoneType' object has no attribute 'index'
+```
+
 ### medium
 
 - patterns with no notes in caravan, space trip
