@@ -251,19 +251,23 @@ def parse_project_name(filename):
 if __name__ == "__main__":
     try:
         if len(sys.argv) < 2:
-            raise RuntimeError("please enter path to sunvox file")
-        filename = sys.argv[1]
-        if not os.path.exists(filename):
-            raise RuntimeError("file does not exist")
-        if not filename.endswith(".sunvox"):
-            raise RuntimeError("file must be a .sunvox file")
-        project_name = parse_project_name(filename)
-        logging.info(f"--- {project_name} ---")
-        project = read_sunvox_file(filename)
-        try:
-            decompile_project(project_name, project)
-        except Exception as e:
-            logging.warning(f"{traceback.format_exc()}")
+            raise RuntimeError("please enter directory")
+        dirname = sys.argv[1]
+        if not os.path.exists(dirname):
+            raise RuntimeError("directory does not exist")
+        if not os.path.isdir(dirname):
+            raise RuntimeError("path is not a directory")
+        for filename in sorted(os.listdir(dirname)):
+            if not filename.endswith(".sunvox"):
+                continue
+            project_name = parse_project_name(filename)
+            logging.info(f"--- {project_name} ---")
+            abs_filename = f"{dirname}/{filename}"
+            try:
+                project = read_sunvox_file(abs_filename)
+                decompile_project(project_name, project)
+            except Exception as e:
+                logging.warning(f"{traceback.format_exc()}")
     except RuntimeError as error:
         logging.error(str(error))
 

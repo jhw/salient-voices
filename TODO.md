@@ -1,7 +1,22 @@
 ### short [01-decompiler]
 
-- pass a directory not a filename 
-- fix known exceptions
+```
+  File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 31, in dfs
+    current_module = module_dict[current_index]
+KeyError: -1
+```
+
+```
+  File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 24, in <listcomp>
+    modules = [{"name": mod.name,
+AttributeError: 'NoneType' object has no attribute 'name'
+```
+
+```
+ File "/Users/jhw/work/salient_voices/env/lib/python3.10/site-packages/rv/project.py", line 80, in attach_module
+    raise RuntimeError("Cannot attach base Module instance.")
+RuntimeError: Cannot attach base Module instance.
+```
 
 ### medium
 
@@ -37,6 +52,7 @@
 
 ### done
 
+- pass a directory not a filename 
 - capture exceptions gracefully
 - only render unique patterns
 - don't render blanks eg Elochka gen-0D-ech-02-fla-0F
