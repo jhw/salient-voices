@@ -15,8 +15,11 @@ RuntimeError: Cannot attach base Module instance.
 ### medium
 
 - timeline patterns seem to be switched
+- blank sampler in mechanical heart
+- mechanical heart lead seems to be missing
+
 - layout management
-- yaml export
+- controller yaml export
 - replace sys.args stuff with argsparse
 
 ### thoughts
