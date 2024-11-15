@@ -7,6 +7,7 @@ from rv.readers.reader import read_sunvox_file
 
 from collections import OrderedDict
 
+import json
 import logging
 import os
 import re
@@ -252,6 +253,33 @@ def create_patch(project, chain, groups,
             existing.add(pat_repr)
     return patch
 
+def dump_sunvox(project_name, chain, patch):
+    file_name = f"tmp/decompiler/{project_name}/sunvox/{chain}.sunvox"
+    dir_name = "/".join(file_name.split("/")[:-1])
+    if not os.path.exists(dir_name):
+        os.makedirs(dir_name)
+    with open(file_name, 'wb') as f:            
+        patch.write_to(f)
+
+def dump_modules(project_name, chain, patch):
+    mod_struct = [{"name": mod.name,
+                   "class": str(mod.__class__).split("'")[1],
+                   "controller_values": mod.controller_values}
+                  for mod in patch.modules if mod.index != 0]
+    file_name = f"tmp/decompiler/{project_name}/modules/{chain}.json"
+    dir_name = "/".join(file_name.split("/")[:-1])
+    if not os.path.exists(dir_name):        
+        os.makedirs(dir_name)
+    class EnumEncoder(json.JSONEncoder):
+        def default(self, obj):
+            if isinstance(obj, Enum):
+                return obj.value
+            return super().default(obj)
+    with open(file_name, 'w') as f:
+        f.write(json.dumps(mod_struct,
+                           cls = EnumEncoder,
+                           indent = 2))
+                
 def decompile_project(project_name, project, max_chains = 100):
     chains = ModuleChain.parse_modules(project)
     if len(chains) > max_chains:
@@ -261,14 +289,11 @@ def decompile_project(project_name, project, max_chains = 100):
         patch = create_patch(project = project,
                              chain = chain,
                              groups = groups)
-        if patch.patterns != []:
+        if (patch.modules != [] and
+            patch.patterns != []):
             logging.info(chain)
-            file_name = f"tmp/decompiler/{project_name}/sunvox/{chain}.sunvox"
-            dir_name = "/".join(file_name.split("/")[:-1])
-            if not os.path.exists(dir_name):
-                os.makedirs(dir_name)
-            with open(file_name, 'wb') as f:            
-                patch.write_to(f)
+            dump_sunvox(project_name, chain, patch)
+            dump_modules(project_name, chain, patch)
 
 def parse_project_name(filename):
     return "-".join([tok.lower() for tok in re.split("\\W", filename.split("/")[-1].split(".")[0]) if tok != ''])

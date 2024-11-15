@@ -1,8 +1,5 @@
 ### short [01-decompiler]
 
-- controller yaml export
-- layout management
-
 ### medium
 
 - patterns with no notes in caravan, space trip
@@ -41,8 +38,12 @@ struct.error: ushort format requires 0 <= number <= (32767 *2 +1)
 
 ### thoughts
 
+- layout management for decompiler?
+  - belies the bare bones nature
+
 ### done
 
+- controller yaml export
 - max chains
 - remove dots and spaces from short names
 
