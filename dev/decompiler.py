@@ -245,6 +245,9 @@ def decompile_project(project_name, project):
             with open(file_name, 'wb') as f:            
                 patch.write_to(f)
 
+def parse_project_name(filename):
+    return "-".join([tok.lower() for tok in re.split("\\W", filename.split("/")[-1].split(".")[0]) if tok != ''])
+                
 if __name__ == "__main__":
     try:
         if len(sys.argv) < 2:
@@ -254,7 +257,7 @@ if __name__ == "__main__":
             raise RuntimeError("file does not exist")
         if not filename.endswith(".sunvox"):
             raise RuntimeError("file must be a .sunvox file")
-        project_name = "-".join([tok.lower() for tok in re.split("\\W", filename.split("/")[-1].split(".")[0]) if tok != ''])
+        project_name = parse_project_name(filename)
         logging.info(f"--- {project_name} ---")
         project = read_sunvox_file(filename)
         try:
