@@ -1,6 +1,15 @@
-### short [01-decompiler]
+### short
 
 ### medium
+
+### thoughts
+
+- replace sys.args stuff with argsparse?
+  - not worth it
+- model tests?
+  - still can't see the need
+
+### decompiler
 
 - patterns with no notes in caravan, space trip
 - timeline patterns seem to be switched
@@ -10,13 +19,6 @@
     data += pack("<HH", x, y)
 struct.error: ushort format requires 0 <= number <= (32767 *2 +1)
 ```
-
-### thoughts
-
-- replace sys.args stuff with argsparse?
-  - not worth it
-- model tests?
-  - still can't see the need
 
 ### gists 
 
