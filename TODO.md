@@ -1,11 +1,11 @@
 ### short [01-decompiler]
 
-- only render unique patterns
 - pass a directory not a filename and capture exceptions gracefully
 - fix known exceptions
 
 ### medium
 
+- timeline patterns seem to be switched
 - layout management
 - yaml export
 - replace sys.args stuff with argsparse
@@ -37,6 +37,7 @@
 
 ### done
 
+- only render unique patterns
 - don't render blanks eg Elochka gen-0D-ech-02-fla-0F
 - add notes without modules and note off
 - save project

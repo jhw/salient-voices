@@ -98,7 +98,7 @@ class Track(list):
                     note.note == NOTECMD.NOTE_OFF):                    
                 return True
         return False
-    
+
 class Tracks(list):
 
     @staticmethod
@@ -212,17 +212,20 @@ def create_patch(project, chain, groups,
     for i in range(len(chain_modules)):
         patch.connect(patch_modules[i+1], patch_modules[i])
     chain_groups = groups.filter_by_chain(chain, filter_fn)
-    patch.patterns, x, y = [], 0, 0
+    patch.patterns, existing, x = [], set(), 0
     for group in chain_groups:
         master = group.master_tracks(chain, chain_modules)
         pat_data = master.to_pattern_data()
         pattern = Pattern(lines = len(pat_data),
                           tracks = len(master),
                           x = x,
-                          y = y)
+                          y = 0)
         pattern.set_via_fn(lambda self, i, j: pat_data[i][j])
-        patch.patterns.append(pattern)
-        x += len(pat_data)
+        pat_repr = pattern.tabular_repr()
+        if pat_repr not in existing:
+            patch.patterns.append(pattern)
+            x += len(pat_data)
+            existing.add(pat_repr)
     return patch
         
 if __name__ == "__main__":
