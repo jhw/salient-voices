@@ -79,7 +79,7 @@ class ModuleChain(list):
         
     @property
     def names(self):
-        return [item[0] for item in self
+        return [re.sub("\\W", "", item[0]) for item in self
                 if not self.is_output(item)]
 
     @property

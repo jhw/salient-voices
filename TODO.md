@@ -1,10 +1,16 @@
 ### short [01-decompiler]
 
-- remove dots and spaces from short names
+- max chains
 - patterns with no notes in caravan, space trip
 - timeline patterns seem to be switched
 
 ### medium
+
+```
+  File "/Users/jhw/work/salient_voices/env/lib/python3.10/site-packages/rv/modules/sampler.py", line 142, in chunks
+    data += pack("<HH", x, y)
+struct.error: ushort format requires 0 <= number <= (32767 *2 +1)
+```
 
 - layout management
 - controller yaml export
@@ -36,6 +42,8 @@
 ### thoughts
 
 ### done
+
+- remove dots and spaces from short names
 
 ```
   File "/Users/jhw/work/salient_voices/dev/decompiler.py", line 76, in <dictcomp>
