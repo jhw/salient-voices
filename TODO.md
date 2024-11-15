@@ -1,13 +1,13 @@
 ### short [01-decompiler]
 
-- NOTE OFF is not being included/rendered
-
-- Mechanical Heart `-1` error
-- Ether Winds `None` error
+- add temp timeline break
+- add notes without modules and note off
+- pass a directory not a filename and capture exceptions gracefully
+- fix know exceptions
 
 ### medium
 
-- what's the white block in the timeline render?
+- fix multiple patterns
 - layout management
 - yaml export
 - replace sys.args stuff with argsparse
