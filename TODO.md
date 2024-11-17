@@ -3,7 +3,7 @@
 - instruments should have default volume 1
 - container render should have default seeds arg
 - nine09 needs ability to set sample index directly
-- when container writes project, don't assume the existence of an instrument
+  - increment/decrement
 
 ### medium
 
@@ -52,6 +52,8 @@ struct.error: ushort format requires 0 <= number <= (32767 *2 +1)
   - belies the bare bones nature
 
 ### done
+
+- when container writes project, don't assume the existence of an instrument
 
 - controller yaml export
 - max chains

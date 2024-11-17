@@ -40,7 +40,8 @@ class SVContainer:
 
     def write_project(self, filename):
         path_to_filename = "/".join(filename.split("/")[:-1])
-        if not os.path.exists(path_to_filename):
+        if (path_to_filename != ""  and
+            not os.path.exists(path_to_filename)):
             os.makedirs(path_to_filename)
         project = self.render_project()
         with open(filename, 'wb') as f:            
