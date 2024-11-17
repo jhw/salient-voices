@@ -1,6 +1,6 @@
 ### short
 
-- decompiler module layout management
+- resize modules
 
 ### medium
 
@@ -36,6 +36,7 @@
 
 ### done
 
+- decompiler module layout management
 - replace root note with relative note
 - fix sample pitching
 - nine09 needs ability to set sample index directly
