@@ -27,6 +27,7 @@ SamplerModules = yaml.safe_load("""
   class: sv.sampler.SVSlotSampler
   links:
   - Echo
+  root: 62 # C5
 - name: Echo
   class: rv.modules.echo.Echo
   defaults:

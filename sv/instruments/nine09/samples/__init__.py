@@ -1,16 +1,21 @@
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
 from sv.model import SVSlotSampleTrig, SVModTrig, ctrl_value
 
+import rv
+import rv.api
+
 class Nine09(SVInstrumentBase):
 
     Modules = load_yaml(__file__, "modules.yaml")
     
     def __init__(self, container, namespace, samples,
+                 root = rv.note.NOTE.C5,
                  sample_index = 0,
                  echo_wet = 64, # '2000'
                  echo_feedback = 64): # '2000'
         super().__init__(container = container,
-                         namespace = namespace)
+                         namespace = namespace,
+                         root = root)
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback}}
 

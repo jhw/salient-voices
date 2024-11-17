@@ -21,9 +21,10 @@ class SVTrigBlock:
         
 class SVInstrumentBase:
 
-    def __init__(self, container, namespace):
+    def __init__(self, container, namespace, root = None):
         self.container = container
         self.namespace = namespace.lower().capitalize()
+        self.root = root
         self.defaults = {}
 
     def render(self, generator,
@@ -52,6 +53,8 @@ class SVInstrumentBase:
                     if link_name != "Output":
                         mod["links"][i] = f"{self.namespace}{link_name}"
             mod["name"] = f"{self.namespace}{mod_name}"
+            if self.root:
+                mod["root"] = self.root
         return modules
         
 if __name__ == "__main__":

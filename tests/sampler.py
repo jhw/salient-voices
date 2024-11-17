@@ -3,6 +3,8 @@ from sv.banks import SVBank, SVBanks
 from sv.sampler import SVSlotSampler, SVChromaticSampler, MaxSlots
 
 import os
+import rv
+import rv.api
 import unittest
 
 class SampleTest(unittest.TestCase):
@@ -32,7 +34,8 @@ class SamplerTest(unittest.TestCase):
         tag_mapping = {"bass": "303"}
         pool, _ = self.banks.spawn_pool(tag_mapping)
         sampler = SVSlotSampler(banks = self.banks,
-                                pool = pool)
+                                pool = pool,
+                                root_note = rv.note.NOTE.C5)
         root_notes = sampler.root_notes
         for i, sample in enumerate(pool):
             self.assertEqual(root_notes[sample], i)

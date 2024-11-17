@@ -92,7 +92,8 @@ def init_modules(fn):
                              trig.sample_mod == mod["name"])):
                             pool.add(trig.sample)
                 mod_kwargs = {"banks": banks,
-                              "pool": pool}
+                              "pool": pool,
+                              "root_note": mod["root"]}
             mod["instance"] = mod_class(**mod_kwargs)
         return fn(self,
                   project = project,

@@ -3,6 +3,8 @@ from sv.container import SVContainer
 from sv.instruments.nine09.samples import Nine09
 
 import logging
+import rv
+import rv.api
 import sys
 
 logging.basicConfig(stream=sys.stdout,
@@ -24,11 +26,13 @@ if __name__ == "__main__":
         samples = pool.match(lambda x: True)
         container = SVContainer(banks = banks,
                                 bpm = 120,
-                                n_ticks = 32)
+                                n_ticks = 64)
         container.spawn_patch()
         nine09 = Nine09(container = container,
                         namespace = "voice",
-                        samples = samples)
+                        samples = samples,
+                        root = rv.note.NOTE.C4,
+                        echo_wet = 0)
         container.add_instrument(nine09)
         nine09.render(generator = Speak)
         container.write_project("tmp/polly-voice-sampler-demo.sunvox")

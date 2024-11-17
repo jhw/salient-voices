@@ -58,8 +58,7 @@ class SVBaseSampler(rv.modules.sampler.Sampler):
 
 class SVSlotSampler(SVBaseSampler):
 
-    def __init__(self, banks, pool,
-                 root_note = rv.note.NOTE.C5,
+    def __init__(self, banks, pool, root_note,
                  max_slots = MaxSlots):
         SVBaseSampler.__init__(self,
                                banks = banks,

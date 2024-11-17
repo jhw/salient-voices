@@ -1,3 +1,14 @@
+### decompiler notes 17/11/24
+
+- seem to be patterns with no notes in caravan, space trip
+- timeline patterns seem to be switched
+
+```
+  File "/Users/jhw/work/salient_voices/env/lib/python3.10/site-packages/rv/modules/sampler.py", line 142, in chunks
+    data += pack("<HH", x, y)
+struct.error: ushort format requires 0 <= number <= (32767 *2 +1)
+```
+
 ### slide to 16/08/24
 
 - instead of thinking how to how to join two notes with a slide, you might be better off thinking about adding slide stuff inside an existing note block

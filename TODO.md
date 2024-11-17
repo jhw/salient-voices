@@ -1,10 +1,8 @@
 ### short
 
-- fix sample pitchinh
+- decompiler module layout management
 
 ### medium
-
-- decompiler module layout management
 
 ### thoughts
 
@@ -12,17 +10,6 @@
   - not worth it
 - model tests?
   - still can't see the need
-
-### decompiler
-
-- patterns with no notes in caravan, space trip
-- timeline patterns seem to be switched
-
-```
-  File "/Users/jhw/work/salient_voices/env/lib/python3.10/site-packages/rv/modules/sampler.py", line 142, in chunks
-    data += pack("<HH", x, y)
-struct.error: ushort format requires 0 <= number <= (32767 *2 +1)
-```
 
 ### gists 
 
@@ -49,6 +36,7 @@ struct.error: ushort format requires 0 <= number <= (32767 *2 +1)
 
 ### done
 
+- fix sample pitching
 - nine09 needs ability to set sample index directly
   - increment/decrement
 - container render should have default seeds arg
