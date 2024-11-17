@@ -1,7 +1,6 @@
 ### short [01-poly-chromatic-demo]
 
-- copy slot demo to chromatic demo
-- move 909 definition inline
+- rename nine09 as three09
 - remove echo
 - use single sample
 - convert to chromatic sampler
@@ -44,6 +43,8 @@
 
 ### done
 
+- copy slot demo to chromatic demo
+- move 909 definition inline
 - resize modules
 - decompiler module layout management
 - replace root note with relative note
