@@ -1,13 +1,12 @@
 ### short
 
-- resize modules
-
 ### medium
 
 ### thoughts
 
 - replace sys.args stuff with argsparse?
   - not worth it
+
 - model tests?
   - still can't see the need
 
@@ -36,6 +35,7 @@
 
 ### done
 
+- resize modules
 - decompiler module layout management
 - replace root note with relative note
 - fix sample pitching

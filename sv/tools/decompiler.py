@@ -230,7 +230,8 @@ def create_patch(project, chain, groups,
                  x_offset = 128,
                  y_offset = 128,
                  x0 = 128,
-                 y0 = 256):
+                 y0 = 256,
+                 scale = 256):
     patch = Project()
     for attr in ["initial_bpm",
                  "global_volume"]:
@@ -243,8 +244,8 @@ def create_patch(project, chain, groups,
     for i, mod in enumerate(patch_modules):
         x = x0 + int(x_offset * ((i + 1) % grid_sz))
         y = y0 + int(y_offset * math.floor((i + 1) / grid_sz))
-        setattr(mod, "x",  x)
-        setattr(mod, "y", y)
+        for k, v in [("x", x), ("y", y), ("scale", scale)]:
+            setattr(mod, k,  v)        
     for i in range(len(chain_modules)):
         patch.connect(patch_modules[i+1], patch_modules[i])
     chain_groups = groups.filter_by_chain(chain, filter_fn)
