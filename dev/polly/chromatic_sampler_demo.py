@@ -1,8 +1,8 @@
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
-
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
 from sv.model import SVChromaticSampleTrig, SVModTrig, ctrl_value
+from sv.sampler import SVBaseSampler, MaxSlots
 
 import logging
 import rv
@@ -16,11 +16,28 @@ logging.basicConfig(stream=sys.stdout,
 
 Modules = yaml.safe_load("""
 - name: Beat
-  class: sv.sampler.SVChromaticSampler
+  class: dev.polly.chromatic_sampler_demo.SVChromaticSampler
   links:
     - Output
 """)
 
+class SVChromaticSampler(SVBaseSampler):
+
+    def __init__(self, banks, pool,
+                 root_note = rv.note.NOTE.C5,
+                 max_slots = MaxSlots):
+        SVBaseSampler.__init__(self,
+                               banks = banks,
+                               pool = pool)
+
+    @property
+    def root_notes(self, max_slots = MaxSlots):
+        n = max_slots / len(self.pool)
+        roots = {sample: int(n * (i + 0.5))
+                 for i, sample in enumerate(self.pool)}
+        logging.info(roots)
+        return roots
+        
 class VolcaSample(SVInstrumentBase):
 
     Modules = Modules
@@ -34,8 +51,8 @@ class VolcaSample(SVInstrumentBase):
         self.samples = samples
         self.sample_index = sample_index
 
-    def increment_sample(self):
-        self.sample_index = (self.sample_index + 1) % len(self.samples)
+    def toggle_sample(self):
+        self.sample_index = 1 - int(self.sample_index > 0)
         
     @property
     def sample(self):
@@ -55,7 +72,7 @@ def Speak(self, n, **kwargs):
         if 0 == i % 4:
             trig_block = self.note()
             yield i, trig_block
-            # self.increment_sample()
+            # self.toggle_sample()
 
 if __name__ == "__main__":
     try:

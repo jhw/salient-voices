@@ -1,7 +1,6 @@
 ### short [01-poly-chromatic-demo]
 
-- add local chromatic sampler
-- test two samples
+- chromatic sampler needs to refactor roots and/or sample distribution
 
 ### sv
 
@@ -42,6 +41,8 @@
 
 ### done
 
+- test two samples
+- add local chromatic sampler
 - use single sample
 - rename nine09 as three09
 - remove echo
