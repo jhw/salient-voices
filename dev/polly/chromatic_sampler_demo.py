@@ -21,7 +21,7 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class Nine09(SVInstrumentBase):
+class VolcaSample(SVInstrumentBase):
 
     Modules = Modules
     
@@ -67,12 +67,12 @@ if __name__ == "__main__":
                                 bpm = 120,
                                 n_ticks = 64)
         container.spawn_patch()
-        nine09 = Nine09(container = container,
-                        namespace = "voice",
-                        samples = samples,
-                        relative_note = -12)
-        container.add_instrument(nine09)
-        nine09.render(generator = Speak)
+        volca_sample = VolcaSample(container = container,
+                                   namespace = "voice",
+                                   samples = samples,
+                                   relative_note = -12)
+        container.add_instrument(volca_sample)
+        volca_sample.render(generator = Speak)
         container.write_project("tmp/polly-chromatic-sampler-demo.sunvox")
     except RuntimeError as error:
         print ("ERROR: %s" % str(error))

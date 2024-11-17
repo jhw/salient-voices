@@ -1,8 +1,5 @@
 ### short [01-poly-chromatic-demo]
 
-- rename nine09 as three09
-- remove echo
-- use single sample
 - convert to chromatic sampler
 - test keyboard range
 - add extra sample
@@ -43,6 +40,9 @@
 
 ### done
 
+- use single sample
+- rename nine09 as three09
+- remove echo
 - copy slot demo to chromatic demo
 - move 909 definition inline
 - resize modules
