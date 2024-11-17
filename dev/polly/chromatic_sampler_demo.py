@@ -2,7 +2,7 @@ from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
 
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
-from sv.model import SVSlotSampleTrig, SVModTrig, ctrl_value
+from sv.model import SVChromaticSampleTrig, SVModTrig, ctrl_value
 
 import logging
 import rv
@@ -16,7 +16,7 @@ logging.basicConfig(stream=sys.stdout,
 
 Modules = yaml.safe_load("""
 - name: Beat
-  class: sv.sampler.SVSlotSampler
+  class: sv.sampler.SVChromaticSampler
   links:
     - Output
 """)
@@ -26,11 +26,10 @@ class VolcaSample(SVInstrumentBase):
     Modules = Modules
     
     def __init__(self, container, namespace, samples,
-                 sample_index = 0,
-                 relative_note = 0):
+                 sample_index = 0):
         super().__init__(container = container,
                          namespace = namespace,
-                         root = rv.note.NOTE.C5 + relative_note)
+                         root = rv.note.NOTE.C5)        
         self.defaults = {}
         self.samples = samples
         self.sample_index = sample_index
@@ -45,9 +44,10 @@ class VolcaSample(SVInstrumentBase):
     def note(self,
              volume = 1.0,
              level = 1.0):
-        trigs = [SVSlotSampleTrig(target = f"{self.namespace}Beat",
-                                  sample = self.sample,
-                                  vel = volume * level)]
+        trigs = [SVChromaticSampleTrig(note = -16,
+                                       target = f"{self.namespace}Beat",
+                                       sample = self.sample,
+                                       vel = volume * level)]
         return SVTrigBlock(trigs = trigs)
 
 def Speak(self, n, **kwargs):
@@ -69,8 +69,7 @@ if __name__ == "__main__":
         container.spawn_patch()
         volca_sample = VolcaSample(container = container,
                                    namespace = "voice",
-                                   samples = samples,
-                                   relative_note = -12)
+                                   samples = samples)
         container.add_instrument(volca_sample)
         volca_sample.render(generator = Speak)
         container.write_project("tmp/polly-chromatic-sampler-demo.sunvox")

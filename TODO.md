@@ -1,9 +1,11 @@
 ### short [01-poly-chromatic-demo]
 
-- convert to chromatic sampler
-- test keyboard range
-- add extra sample
-- re- test keyboard range
+- add local chromatic sampler
+- test two samples
+
+### sv
+
+- InstrumentBase needs a SamplerBase subclass to handle root?
 
 ### medium
 
