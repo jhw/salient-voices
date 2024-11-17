@@ -1,6 +1,5 @@
 ### short
 
-- container render should have default seeds arg
 - nine09 needs ability to set sample index directly
   - increment/decrement
 
@@ -52,6 +51,7 @@ struct.error: ushort format requires 0 <= number <= (32767 *2 +1)
 
 ### done
 
+- container render should have default seeds arg
 - instruments should have default volume 1
 - when container writes project, don't assume the existence of an instrument
 
