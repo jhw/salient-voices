@@ -1,5 +1,3 @@
-from sv.sampler import SVSlotSampler, SVChromaticSampler
-
 import rv
 
 def ctrl_value(value):

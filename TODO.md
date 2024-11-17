@@ -1,7 +1,5 @@
 ### short
 
-- replace root note with relative note
-
 - decompiler module layout management
 
 ### medium
@@ -38,6 +36,7 @@
 
 ### done
 
+- replace root note with relative note
 - fix sample pitching
 - nine09 needs ability to set sample index directly
   - increment/decrement

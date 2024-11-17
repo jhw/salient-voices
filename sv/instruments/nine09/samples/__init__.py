@@ -9,13 +9,13 @@ class Nine09(SVInstrumentBase):
     Modules = load_yaml(__file__, "modules.yaml")
     
     def __init__(self, container, namespace, samples,
-                 root = rv.note.NOTE.C5,
                  sample_index = 0,
+                 relative_note = 0,
                  echo_wet = 64, # '2000'
                  echo_feedback = 64): # '2000'
         super().__init__(container = container,
                          namespace = namespace,
-                         root = root)
+                         root = rv.note.NOTE.C5 + relative_note)
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback}}
 

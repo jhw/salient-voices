@@ -3,8 +3,6 @@ from sv.container import SVContainer
 from sv.instruments.nine09.samples import Nine09
 
 import logging
-import rv
-import rv.api
 import sys
 
 logging.basicConfig(stream=sys.stdout,
@@ -31,7 +29,7 @@ if __name__ == "__main__":
         nine09 = Nine09(container = container,
                         namespace = "voice",
                         samples = samples,
-                        root = rv.note.NOTE.C4,
+                        relative_note = -12,
                         echo_wet = 0)
         container.add_instrument(nine09)
         nine09.render(generator = Speak)
