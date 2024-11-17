@@ -1,4 +1,13 @@
-### short
+### short [01-poly-chromatic-demo]
+
+- copy slot demo to chromatic demo
+- move 909 definition inline
+- remove echo
+- use single sample
+- convert to chromatic sampler
+- test keyboard range
+- add extra sample
+- re- test keyboard range
 
 ### medium
 

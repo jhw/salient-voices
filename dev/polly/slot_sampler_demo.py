@@ -33,6 +33,6 @@ if __name__ == "__main__":
                         echo_wet = 0)
         container.add_instrument(nine09)
         nine09.render(generator = Speak)
-        container.write_project("tmp/polly-voice-sampler-demo.sunvox")
+        container.write_project("tmp/polly-slot-sampler-demo.sunvox")
     except RuntimeError as error:
         print ("ERROR: %s" % str(error))
