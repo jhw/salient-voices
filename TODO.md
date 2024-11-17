@@ -1,5 +1,7 @@
 ### short
 
+- replace root note with relative note
+
 - decompiler module layout management
 
 ### medium
