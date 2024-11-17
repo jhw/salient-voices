@@ -20,6 +20,12 @@ class Nine09(SVInstrumentBase):
     def toggle_sample(self):
         self.sample_index = 1 - int(self.sample_index > 0)
 
+    def increment_sample(self):
+        self.sample_index = (self.sample_index + 1) % len(self.samples)
+
+    def decrement_sample(self):
+        self.sample_index = (self.sample_index - 1) % len(self.samples)
+        
     def randomise_sample(self, rand):
         self.sample_index = rand.choice(list(range(len(self.samples))))
         
