@@ -1,6 +1,14 @@
 ### short
 
+- instruments should have default volume 1
+- container render should have default seeds arg
+- nine09 needs ability to set sample index directly
+- when container writes project, don't assume the existence of an instrument
+
 ### medium
+
+- why is pitch messed up?
+- decompiler module layout management
 
 ### thoughts
 
