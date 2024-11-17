@@ -14,7 +14,7 @@ def Speak(self, n, rand, **kwargs):
     for i in range(n):
         if 0 == i % 4:
             self.randomise_sample(rand["sample"])
-            trig_block = self.note(volume = 1)
+            trig_block = self.note()
             yield i, trig_block
 
 if __name__ == "__main__":

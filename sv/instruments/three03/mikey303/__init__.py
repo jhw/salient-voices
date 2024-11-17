@@ -20,7 +20,7 @@ class Three03(SVInstrumentBase):
 
     def note(self,
              note = 0,
-             volume = 1,
+             volume = 1.0,
              attack_ms = "0008",
              decay_ms = "0018",
              sustain_level = "0800",
