@@ -1,6 +1,9 @@
 ### short
 
-- refactor sample ref as object
+- euclid cli failing to serialise/deserialise samples
+
+- try and remove cast_sample
+
 - add sample ref qs functionality
 
 ### medium
@@ -8,7 +11,9 @@
 - rename nine09 as detroit
 - sample trig to include note as part of sample reference
 - refactor sampler note arg as relative note
+
 - add back container test
+- add sv sample tests
 
 ### thoughts
 
@@ -39,6 +44,7 @@
 
 ### done
 
+- refactor sample ref as object
 - move sample ref to sampler
 - add note to sample re mods attachment point
 - add notes re sampler structure

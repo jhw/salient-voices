@@ -35,7 +35,7 @@ class BanksTest(unittest.TestCase):
     def test_filter(self):
         bank = SVBank.load_zip("tests/mikey303.zip")
         banks = SVBanks([bank])
-        pool = SVPool([SVSample("mikey303/303 VCO SQR.wav")])
+        pool = SVPool([SVSample.parse("mikey303/303 VCO SQR.wav")])
         filtered = banks.filter(name = "filtered",
                               pool = pool)
         wav_files = filtered.zip_file.namelist()

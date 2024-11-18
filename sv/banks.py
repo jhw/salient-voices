@@ -5,6 +5,9 @@ import os
 import re
 import zipfile
 
+def cast_sample(sample):
+    return SVSample.parse(sample) if isinstance(sample, str) else sample
+
 class SVBank:
     
     @staticmethod
@@ -71,21 +74,17 @@ class SVBanks(list):
         for bank in self:
             for item in bank.zip_file.infolist():
                 tags = self.match_tags(item.filename, tag_patterns)
-                sample = SVSample.create(bank_name=bank.name,
-                                         file_name=item.filename, tags=tags)
+                sample = SVSample(bank_name = bank.name,
+                                  file_path = item.filename,
+                                  tags = tags)
                 if tags:
                     pool.append(sample)
                 else:
                     untagged.append(sample)
         return pool, untagged
 
-    def cast_sample(fn):
-        def wrapped(self, sample):
-            return fn(self, SVSample(sample))
-        return wrapped
-
-    @cast_sample
     def get_wav(self, sample):
+        sample = cast_sample(sample)
         banks = {bank.name: bank for bank in self}
         if sample.bank_name not in banks:
             raise RuntimeError(f"bank {sample.bank_name} not found")
@@ -104,7 +103,7 @@ class SVPool(list):
             self.append(sample)
 
     def match(self, matcher_fn):
-        return [sample for sample in self if matcher_fn(SVSample(sample))]
+        return [sample for sample in self if matcher_fn(cast_sample(sample))]
 
 if __name__ == "__main__":
     pass

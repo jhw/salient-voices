@@ -10,13 +10,13 @@ import unittest
 class SampleTest(unittest.TestCase):
 
     def test_untagged(self):
-        sample = SVSample("mikey303/303 VCO SQR.wav")
+        sample = SVSample.parse("mikey303/303 VCO SQR.wav")
         self.assertEqual(sample.bank_name, "mikey303")
         self.assertEqual(sample.file_path, "303 VCO SQR.wav")
         self.assertEqual(sample.tags, [])
     
     def test_tagged(self):
-        sample = SVSample("mikey303/303 VCO SQR.wav#303#bass")
+        sample = SVSample.parse("mikey303/303 VCO SQR.wav#303#bass")
         self.assertEqual(sample.bank_name, "mikey303")
         self.assertEqual(sample.file_path, "303 VCO SQR.wav")
         tags = sample.tags

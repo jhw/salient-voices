@@ -9,32 +9,23 @@ warnings.simplefilter("ignore", wavfile.WavFileWarning)
 
 MaxSlots = 120
 
-class SVSampleRef(str):
+class SVSampleRef:
 
     @staticmethod
-    def create(bank_name, file_name, tags):
-        tag_string = "".join([f"#{tag}" for tag in sorted(tags)])
-        return SVSampleRef(f"{bank_name}/{file_name}{tag_string}")
+    def parse(sample_str):
+        tokens = re.split("\\/|\\#", sample_str)
+        return SVSampleRef(bank_name = tokens[0],
+                           file_path = tokens[1],
+                           tags = tokens[2:])
     
-    def __init__(self, value = ""):
-        # str.__init__(self, value)
-        str.__init__(value)
+    def __init__(self, bank_name, file_path, tags = []):
+        self.bank_name = bank_name
+        self.file_path = file_path
+        self.tags = tags
 
-    @property
-    def tokens(self):
-        return re.split("\\/|\\#", self)
-
-    @property
-    def bank_name(self):
-        return self.tokens[0]
-
-    @property
-    def file_path(self):
-        return self.tokens[1]
-
-    @property
-    def tags(self):
-        return self.tokens[2:]
+    def __str__(self):
+        tag_string = "".join([f"#{tag}" for tag in sorted(self.tags)])
+        return f"{self.bank_name}/{self.file_path}{tag_string}"
 
 class SVBaseSampler(rv.modules.sampler.Sampler):
 
@@ -101,10 +92,7 @@ class SVSlotSampler(SVBaseSampler):
             self.note_samples[notes[i]] = i
             src = banks.get_wav(sample)
             self.load_sample(src, i)
-            """
-            - remap pitch
-            - this is where you get to modify the sample based on sample ref attributes
-            """
+            # remap pitch
             sample = self.samples[i]
             sample.relative_note += (root-i)
 
