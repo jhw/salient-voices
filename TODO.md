@@ -1,7 +1,5 @@
 ### short [01-poly-chromatic-demo]
 
-- re- test demos
-- move chromatic sample trig into 303 demo
 - move chromatic sampler into 303 demos as single shot sampler
 - rationalise base and slot samplers, moving note_samples stuff into slot sampler
 - add notes re sampler structure
@@ -42,6 +40,8 @@
 
 ### done
 
+- move chromatic sample trig into 303 demo
+- re- test demos
 - test two samples
 - add local chromatic sampler
 - use single sample
