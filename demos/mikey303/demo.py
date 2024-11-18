@@ -1,6 +1,7 @@
 from sv.banks import SVBank
 from sv.container import SVContainer
-from sv.instruments.three03.mikey303 import Three03
+# from sv.instruments.three03.mikey303 import Three03
+from demos.mikey303.instrument import Three03
 
 import sv.algos.groove.perkons as perkons
 

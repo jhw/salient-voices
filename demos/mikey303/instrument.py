@@ -1,5 +1,7 @@
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
-from sv.model import SVChromaticSampleTrig, SVNoteOffTrig, SVModTrig
+# from sv.model import SVChromaticSampleTrig, SVNoteOffTrig, SVModTrig
+from sv.model import SVNoteOffTrig, SVModTrig
+from demos.mikey303.model import SVChromaticSampleTrig
 
 import rv
 import rv.api
