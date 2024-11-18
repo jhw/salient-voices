@@ -30,7 +30,7 @@ class BanksTest(unittest.TestCase):
     
     def test_load(self):        
         banks = SVBanks.load_zip("tests")        
-        self.assertTrue(len(banks) == 1)
+        self.assertTrue(len(banks) == 2)
 
     def test_filter(self):
         bank = SVBank.load_zip("tests/mikey303.zip")
