@@ -1,6 +1,5 @@
 ### short [01-poly-chromatic-demo]
 
-- add notes re sampler structure
 - check sampler uses str(sample) as slot key identifier
 - ask chatgpt to refactor sv sample to include querystring with note, default value 0 
 - sample trig (and others?) to include note as part of sample reference
@@ -40,6 +39,7 @@
 
 ### done
 
+- add notes re sampler structure
 - rationalise base and slot samplers, moving note_samples stuff into slot sampler
 - move chromatic sampler into 303 demos as single shot sampler
 - move chromatic sample trig into 303 demo
