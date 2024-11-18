@@ -97,6 +97,7 @@ class SVSlotSampler(SVBaseSampler):
                                pool = pool)
         notes = list(rv.note.NOTE)
         root = notes.index(root_note)
+        self.sample_strings = [str(sample) for sample in self.pool]
         for i, sample in enumerate(self.pool):
             # insert sample into slot
             self.note_samples[notes[i]] = i
@@ -107,8 +108,7 @@ class SVSlotSampler(SVBaseSampler):
             sample.relative_note += (root-i)
 
     def index_of(self, sample):
-        sample_strings = [str(sample) for sample in self.pool]
-        return sample_strings.index(str(sample))
+        return self.sample_strings.index(str(sample))
 
 if __name__ == "__main__":
     pass

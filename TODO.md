@@ -1,9 +1,9 @@
 ### short
 
+- randomise_tags followed by randomis_patches fails
+
 - how to avoid euclid model casting to SVSample
-  - and why don't other classes have to do this?
-  
-- simplify SVSample
+  - and why don't other classes have to do this?  
 
 - check three03 still works
 
