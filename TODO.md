@@ -1,10 +1,12 @@
 ### short
 
-- sv sample ref should not extend string
+- add note to sample re mods attachment point
+- refactor sample ref as object
+- move sample ref to sampler
+- add sample ref qs functionality
 
 ### medium
 
-- refactor sv sample to include qs with note, default value 0 
 - sample trig to include note as part of sample reference
 - refactor sampler note arg as relative note
 - add back container test
