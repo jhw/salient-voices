@@ -1,12 +1,12 @@
-### short [01-poly-chromatic-demo]
+### short
 
-- check sampler uses str(sample) as slot key identifier
-- ask chatgpt to refactor sv sample to include querystring with note, default value 0 
-- sample trig (and others?) to include note as part of sample reference
+- sv sample ref should not extend string
 
 ### medium
 
-- refactor sampler note as relative note
+- refactor sv sample to include qs with note, default value 0 
+- sample trig to include note as part of sample reference
+- refactor sampler note arg as relative note
 - add back container test
 
 ### thoughts
@@ -16,7 +16,7 @@
 
 ### gists 
 
-- pico glitch samples
+- retrig and reverse
 
 - freezing
 - polly vocals + sv vocoder
@@ -26,7 +26,6 @@
 - granular
 - sv drum
 - kicker
-- city dreams bass
 
 ### long
 
