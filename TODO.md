@@ -1,7 +1,5 @@
 ### short
 
-- try and remove cast_sample
-
 - consider SVSample as dict to avoid euclid09 demo leading to 
 
 ### medium
@@ -46,6 +44,7 @@
 
 ### done
 
+- try and remove cast_sample
 - euclid cli failing to serialise/deserialise samples
 - refactor sample ref as object
 - move sample ref to sampler
