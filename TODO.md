@@ -1,17 +1,18 @@
 ### short [01-poly-chromatic-demo]
 
-- chromatic sampler needs to refactor roots and/or sample distribution
-
-### sv
-
-- InstrumentBase needs a SamplerBase subclass to handle root?
+- re- test demos
+- move chromatic sample trig into 303 demo
+- move chromatic sampler into 303 demos as single shot sampler
+- rationalise base and slot samplers, moving note_samples stuff into slot sampler
+- add notes re sampler structure
+- check sampler uses str(sample) as slot key identifier
+- ask chatgpt to refactor sv sample to include querystring with note, default value 0 
+- sample trig (and others?) to include note as part of sample reference
+- refactor sampler note as relative note
 
 ### medium
 
 ### thoughts
-
-- replace sys.args stuff with argsparse?
-  - not worth it
 
 - model tests?
   - still can't see the need
