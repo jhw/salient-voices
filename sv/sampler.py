@@ -9,7 +9,7 @@ warnings.simplefilter("ignore", wavfile.WavFileWarning)
 
 MaxSlots = 120
 
-class SVSampleRef:
+class SVSampleRef(dict):
 
     @staticmethod
     def parse(sample_str):
@@ -19,10 +19,27 @@ class SVSampleRef:
                            tags = tokens[2:])
     
     def __init__(self, bank_name, file_path, tags = []):
-        self.bank_name = bank_name
-        self.file_path = file_path
-        self.tags = tags
+        dict.__init__(self)
+        self["bank_name"] = bank_name
+        self["file_path"] = file_path
+        self["tags"] = tags
 
+    @property
+    def bank_name(self):
+        return self["bank_name"]
+
+    @property
+    def file_path(self):
+        return self["file_path"]
+
+    @property
+    def tags(self):
+        return self["tags"]
+
+    """
+    - required by Sampler for sample index lookup
+    """
+    
     def __str__(self):
         tag_string = "".join([f"#{tag}" for tag in sorted(self.tags)])
         return f"{self.bank_name}/{self.file_path}{tag_string}"
@@ -63,13 +80,6 @@ class SVBaseSampler(rv.modules.sampler.Sampler):
         self.samples[i] = sample
         return sample
 
-    @property
-    def root_notes(self):
-        return {}
-            
-    def index_of(self, sample):
-        return self.root_notes[sample]
-
 class SVSlotSampler(SVBaseSampler):
 
     """
@@ -96,11 +106,10 @@ class SVSlotSampler(SVBaseSampler):
             sample = self.samples[i]
             sample.relative_note += (root-i)
 
-    @property
-    def root_notes(self):
-        return {sample: i
-                for i, sample in enumerate(self.pool)}    
-        
+    def index_of(self, sample):
+        sample_strings = [str(sample) for sample in self.pool]
+        return sample_strings.index(str(sample))
+
 if __name__ == "__main__":
     pass
             

@@ -1,10 +1,13 @@
 ### short
 
-- consider SVSample as dict to avoid euclid09 demo leading to 
-
-### medium
+- how to avoid euclid model casting to SVSample
+  - and why don't other classes have to do this?
+  
+- simplify SVSample
 
 - check three03 still works
+
+### medium
 
 - add sample ref qs functionality
 - sample trig to include note as part of sample reference
@@ -12,6 +15,7 @@
 
 - add back container test
 - add sv sample tests
+- add back sampler test
 
 - rename nine09 as detroit
 
@@ -44,6 +48,7 @@
 
 ### done
 
+- consider SVSample as dict to avoid euclid09 demo leading to 
 - try and remove cast_sample
 - euclid cli failing to serialise/deserialise samples
 - refactor sample ref as object

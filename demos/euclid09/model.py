@@ -49,7 +49,7 @@ class Track:
                      density = track["density"])
     @staticmethod
     def from_json(track):
-        track["samples"] = [SVSample.parse(sample) for sample in track["samples"]]
+        track["samples"] = [SVSample(**sample) for sample in track["samples"]]
         return Track(**track)
     
     def __init__(self, name, samples, pattern, groove, seeds, temperature, density):
@@ -115,8 +115,7 @@ class Track:
         
     def to_json(self):
         return {"name": self.name,
-                # "samples": self.samples,
-                "samples": [str(sample) for sample in self.samples],
+                "samples": self.samples,
                 "pattern": self.pattern,
                 "groove": self.groove,
                 "seeds": self.seeds,
