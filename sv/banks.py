@@ -1,34 +1,9 @@
+from sv.sampler import SVSampleRef as SVSample
+
 import io
 import os
 import re
 import zipfile
-
-class SVSampleRef(str):
-
-    @staticmethod
-    def create(bank_name, file_name, tags):
-        tag_string = "".join([f"#{tag}" for tag in sorted(tags)])
-        return SVSampleRef(f"{bank_name}/{file_name}{tag_string}")
-    
-    def __init__(self, value = ""):
-        # str.__init__(self, value)
-        str.__init__(value)
-
-    @property
-    def tokens(self):
-        return re.split("\\/|\\#", self)
-
-    @property
-    def bank_name(self):
-        return self.tokens[0]
-
-    @property
-    def file_path(self):
-        return self.tokens[1]
-
-    @property
-    def tags(self):
-        return self.tokens[2:]
 
 class SVBank:
     
@@ -79,7 +54,8 @@ class SVBanks(list):
                 if matching_bank:
                     if sample.file_path in matching_bank.zip_file.namelist():
                         with matching_bank.zip_file.open(sample.file_path, 'r') as source_file:
-                            subset_zip.writestr(sample.file_path, source_file.read())
+                            subset_zip.writestr(sample.file_path,
+                                                source_file.read())
         subset_buffer.seek(0)
         return SVBank(name=name, zip_buffer=subset_buffer)
         
@@ -95,7 +71,8 @@ class SVBanks(list):
         for bank in self:
             for item in bank.zip_file.infolist():
                 tags = self.match_tags(item.filename, tag_patterns)
-                sample = SVSampleRef.create(bank_name=bank.name, file_name=item.filename, tags=tags)
+                sample = SVSample.create(bank_name=bank.name,
+                                         file_name=item.filename, tags=tags)
                 if tags:
                     pool.append(sample)
                 else:
@@ -104,7 +81,7 @@ class SVBanks(list):
 
     def cast_sample(fn):
         def wrapped(self, sample):
-            return fn(self, SVSampleRef(sample))
+            return fn(self, SVSample(sample))
         return wrapped
 
     @cast_sample
@@ -116,8 +93,7 @@ class SVBanks(list):
         if sample.file_path not in file_paths:
             raise RuntimeError(f"path {sample.file_path} not found in bank {sample.bank_name}")
         return banks[sample.bank_name].zip_file.open(sample.file_path, 'r')
-
-        
+    
 class SVPool(list):
 
     def __init__(self, items=[]):
@@ -128,7 +104,7 @@ class SVPool(list):
             self.append(sample)
 
     def match(self, matcher_fn):
-        return [sample for sample in self if matcher_fn(SVSampleRef(sample))]
+        return [sample for sample in self if matcher_fn(SVSample(sample))]
 
 if __name__ == "__main__":
     pass

@@ -1,7 +1,6 @@
 ### short
 
 - refactor sample ref as object
-- move sample ref to sampler
 - add sample ref qs functionality
 
 ### medium
@@ -40,6 +39,7 @@
 
 ### done
 
+- move sample ref to sampler
 - add note to sample re mods attachment point
 - add notes re sampler structure
 - rationalise base and slot samplers, moving note_samples stuff into slot sampler

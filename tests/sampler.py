@@ -1,5 +1,5 @@
-from sv.banks import SVSampleRef as SVSample
 from sv.banks import SVBank, SVBanks
+from sv.sampler import SVSampleRef as SVSample
 from sv.sampler import SVSlotSampler, MaxSlots
 
 import os

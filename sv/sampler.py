@@ -1,5 +1,6 @@
 from scipy.io import wavfile
 
+import re
 # import rv
 import rv.modules # why?
 import warnings
@@ -7,7 +8,34 @@ import warnings
 warnings.simplefilter("ignore", wavfile.WavFileWarning)
 
 MaxSlots = 120
-                    
+
+class SVSampleRef(str):
+
+    @staticmethod
+    def create(bank_name, file_name, tags):
+        tag_string = "".join([f"#{tag}" for tag in sorted(tags)])
+        return SVSampleRef(f"{bank_name}/{file_name}{tag_string}")
+    
+    def __init__(self, value = ""):
+        # str.__init__(self, value)
+        str.__init__(value)
+
+    @property
+    def tokens(self):
+        return re.split("\\/|\\#", self)
+
+    @property
+    def bank_name(self):
+        return self.tokens[0]
+
+    @property
+    def file_path(self):
+        return self.tokens[1]
+
+    @property
+    def tags(self):
+        return self.tokens[2:]
+
 class SVBaseSampler(rv.modules.sampler.Sampler):
 
     def __init__(self, banks, pool,

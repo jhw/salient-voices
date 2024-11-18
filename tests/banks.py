@@ -1,5 +1,5 @@
-from sv.banks import SVSampleRef as SVSample
 from sv.banks import SVBank, SVBanks, SVPool
+from sv.sampler import SVSampleRef as SVSample
 
 import os
 import unittest
