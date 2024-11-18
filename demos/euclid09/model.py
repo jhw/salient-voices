@@ -3,6 +3,7 @@ import sv.algos.groove.perkons as perkons
 
 from sv.container import SVContainer
 from sv.instruments.nine09.samples import Nine09
+from sv.sampler import SVSampleRef as SVSample
 
 # from euclid09.generators import *
 from generators import *
@@ -48,6 +49,7 @@ class Track:
                      density = track["density"])
     @staticmethod
     def from_json(track):
+        track["samples"] = [SVSample.parse(sample) for sample in track["samples"]]
         return Track(**track)
     
     def __init__(self, name, samples, pattern, groove, seeds, temperature, density):
@@ -113,7 +115,8 @@ class Track:
         
     def to_json(self):
         return {"name": self.name,
-                "samples": self.samples,
+                # "samples": self.samples,
+                "samples": [str(sample) for sample in self.samples],
                 "pattern": self.pattern,
                 "groove": self.groove,
                 "seeds": self.seeds,

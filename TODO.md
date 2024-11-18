@@ -1,19 +1,21 @@
 ### short
 
-- euclid cli failing to serialise/deserialise samples
-
 - try and remove cast_sample
 
-- add sample ref qs functionality
+- consider SVSample as dict to avoid euclid09 demo leading to 
 
 ### medium
 
-- rename nine09 as detroit
+- check three03 still works
+
+- add sample ref qs functionality
 - sample trig to include note as part of sample reference
 - refactor sampler note arg as relative note
 
 - add back container test
 - add sv sample tests
+
+- rename nine09 as detroit
 
 ### thoughts
 
@@ -44,6 +46,7 @@
 
 ### done
 
+- euclid cli failing to serialise/deserialise samples
 - refactor sample ref as object
 - move sample ref to sampler
 - add note to sample re mods attachment point
