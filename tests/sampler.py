@@ -1,6 +1,6 @@
 from sv.banks import SVSampleRef as SVSample
 from sv.banks import SVBank, SVBanks
-from sv.sampler import SVSlotSampler, SVChromaticSampler, MaxSlots
+from sv.sampler import SVSlotSampler, MaxSlots
 
 import os
 import rv
@@ -39,17 +39,6 @@ class SamplerTest(unittest.TestCase):
         root_notes = sampler.root_notes
         for i, sample in enumerate(pool):
             self.assertEqual(root_notes[sample], i)
-
-    def test_chromatic_sampler(self, max_slots = MaxSlots):
-        tag_mapping = {"bass": "SQR"}
-        pool, _ = self.banks.spawn_pool(tag_mapping)
-        sampler = SVChromaticSampler(banks = self.banks,
-                                     pool = pool)
-        block_size = int(max_slots / len(pool))
-        root_notes = sampler.root_notes                
-        for i, sample in enumerate(pool):
-            root_note = int((i + 0.5) * block_size)
-            self.assertEqual(root_notes[sample], root_note)
         
 if __name__ == "__main__":
     unittest.main()
