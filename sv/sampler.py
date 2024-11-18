@@ -73,7 +73,10 @@ class SVSlotSampler(SVBaseSampler):
             self.note_samples[notes[i]] = i
             src = banks.get_wav(sample)
             self.load_sample(src, i)
-            # remap pitch
+            """
+            - remap pitch
+            - this is where you get to modify the sample based on sample ref attributes
+            """
             sample = self.samples[i]
             sample.relative_note += (root-i)
 

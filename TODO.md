@@ -1,12 +1,12 @@
 ### short
 
-- add note to sample re mods attachment point
 - refactor sample ref as object
 - move sample ref to sampler
 - add sample ref qs functionality
 
 ### medium
 
+- rename nine09 as detroit
 - sample trig to include note as part of sample reference
 - refactor sampler note arg as relative note
 - add back container test
@@ -40,6 +40,7 @@
 
 ### done
 
+- add note to sample re mods attachment point
 - add notes re sampler structure
 - rationalise base and slot samplers, moving note_samples stuff into slot sampler
 - move chromatic sampler into 303 demos as single shot sampler
