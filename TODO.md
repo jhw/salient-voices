@@ -1,7 +1,7 @@
 ### short
 
-- single sample trig class which has both mod and sampler_mod
-  - set sampler_mod equal to mod if former is blank
+- sample trig needs to be a single class and may not need to extend from base
+  - as doesn't seem to need target
 
 ### medium
 
