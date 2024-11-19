@@ -37,7 +37,17 @@ class SVModule(dict):
     def is_sampler(self):
         # return self["class"].lower().endswith("sampler")
         return does_class_extend(self["class"], rv.modules.sampler.Sampler)
-        
+
+    def init_sample_pool(self, patches):
+        pool = SVPool()
+        for patch in patches:
+            for trig in patch.trigs:
+                if (trig.mod == self["name"] or
+                    (hasattr(trig, "sampler_mod") and
+                     trig.sampler_mod == self["name"])):
+                    pool.add(trig.sample)
+        return pool
+    
     @property
     def links(self):
         links = []
@@ -97,13 +107,7 @@ def init_modules(fn):
             mod_class = load_class(mod["class"])
             mod_kwargs = {}
             if mod.is_sampler:
-                pool = SVPool()
-                for patch in patches:
-                    for trig in patch.trigs:
-                        if (trig.mod == mod["name"] or
-                            (hasattr(trig, "sampler_mod") and
-                             trig.sampler_mod == mod["name"])):
-                            pool.add(trig.sample)
+                pool = mod.init_sample_pool(patches)
                 mod_kwargs = {"banks": banks,
                               "pool": pool,
                               "root_note": mod["root"]}
