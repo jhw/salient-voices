@@ -121,7 +121,7 @@ class SVSampleTrig(SVNoteTrigBase):
                                 sample = self.sample,
                                 vel = self.vel,
                                 fx_value = self.fx_value)
-        
+
     def render(self, modules, *args):
         if self.mod not in modules:
             raise RuntimeError("module %s not found" % self.mod)

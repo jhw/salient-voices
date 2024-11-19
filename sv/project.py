@@ -1,4 +1,5 @@
 from sv.banks import SVPool, SVBanks
+from sv.model import SVSampleTrig, SVMultiSynthSampleTrig
 from sv.utils.colours import init_colours
 
 import importlib
@@ -35,16 +36,16 @@ class SVModule(dict):
 
     @property
     def is_sampler(self):
-        # return self["class"].lower().endswith("sampler")
         return does_class_extend(self["class"], rv.modules.sampler.Sampler)
 
     def init_sample_pool(self, patches):
         pool = SVPool()
         for patch in patches:
             for trig in patch.trigs:
-                if (trig.mod == self["name"] or
-                    (hasattr(trig, "sampler_mod") and
-                     trig.sampler_mod == self["name"])):
+                if ((isinstance(trig, SVMultiSynthSampleTrig) and
+                     trig.sampler_mod == self["name"]) or
+                    (isinstance(trig, SVSampleTrig) and
+                     trig.mod == self["name"])):
                     pool.add(trig.sample)
         return pool
     

@@ -1,7 +1,5 @@
 ### short
 
-- add sampler_mod property to SampleTrig and use in sampler population
-
 - do you need trig cloning?
 
 - rename nine09 as Detroit
