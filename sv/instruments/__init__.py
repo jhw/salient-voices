@@ -14,9 +14,8 @@ class SVTrigBlock:
     def render(self, i):
         trigs = []
         for trig in self.trigs:
-            cloned_trig = trig.clone()
-            cloned_trig.increment(i)
-            trigs.append(cloned_trig)
+            trig.increment(i)
+            trigs.append(trig)
         return trigs
         
 class SVInstrumentBase:

@@ -1,15 +1,15 @@
 ### short
 
-- do you need trig cloning?
+- single sample trig class which has both mod and sampler_mod
+  - set sampler_mod equal to mod if former is blank
+
+### medium
 
 - rename nine09 as Detroit
 - replace container test with Detroit instrument test
 
-### medium
-
-
 - add back 303 as Berlin instrument 
-- Berlin instrument 
+- Berlin instrument test
 
 - simplify demos in favour of tests
   - tests should dump sunvox files
@@ -19,11 +19,7 @@
 
 - rename note as relative_note
 
-
 ### thoughts
-
-- model tests?
-  - still can't see the need
 
 ### gists 
 
@@ -50,6 +46,7 @@
 
 ### done
 
+- remove trig cloning
 - move MultiSynthSampleTrig into core model
 - add notes to MultiSynthSampleTrig
 - change is_sampler to see if class extends rv sampler

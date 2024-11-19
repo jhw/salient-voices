@@ -78,13 +78,6 @@ class SVNoteTrig(SVNoteTrigBase):
                          fx_value = fx_value)
         self.note = note
 
-    def clone(self):
-        return SVNoteTrig(target = self.target,
-                          i = self.i,
-                          note = self.note,
-                          vel = self.vel,
-                          fx_value = self.fx_value)
-        
     def render(self, modules, *args):
         if self.mod not in modules:
             raise RuntimeError("module %s not found" % self.mod)
@@ -114,13 +107,6 @@ class SVSampleTrig(SVNoteTrigBase):
                          vel = vel,
                          fx_value = fx_value)
         self.sample = sample
-
-    def clone(self):
-        return SVSampleTrig(target = self.target,
-                                i = self.i,
-                                sample = self.sample,
-                                vel = self.vel,
-                                fx_value = self.fx_value)
 
     def render(self, modules, *args):
         if self.mod not in modules:
@@ -158,14 +144,6 @@ class SVMultiSynthSampleTrig(SVSampleTrig):
                          sample = sample)
         self.sampler_mod = sampler_mod
 
-    def clone(self):
-        return SVMultiSynthSampleTrig(target = self.target,
-                                      i = self.i,
-                                      sample = self.sample,
-                                      sampler_mod = self.sampler_mod,
-                                      vel = self.vel,
-                                      fx_value = self.fx_value)
-        
     def render(self, modules, *args):
         for mod in [self.mod,
                     self.sampler_mod]:
@@ -192,10 +170,6 @@ class SVNoteOffTrig(SVTrigBase):
         super().__init__(target = target,
                          i = i)
     
-    def clone(self):
-        return SVNoteOffTrig(target = self.target,
-                             i = self.i)
-
     @property
     def mod(self):
         return self.target.split("/")[0]
@@ -213,11 +187,6 @@ class SVFXTrig(SVTrigBase):
         super().__init__(target = target,
                          i = i)
         self.value = value
-
-    def clone(self):
-        return SVFXTrig(target = self.target,
-                        value = self.value,
-                        i = self.i)
 
     @property
     def mod(self):
@@ -250,11 +219,6 @@ class SVModTrig(SVTrigBase):
                          i = i)
         self.value = value
 
-    def clone(self):
-        return SVModTrig(target = self.target,
-                         value = self.value,
-                         i = self.i)
-    
     @property
     def mod(self):
         return self.target.split("/")[0]
