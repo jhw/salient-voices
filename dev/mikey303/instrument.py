@@ -1,52 +1,8 @@
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
-from sv.model import SVNoteOffTrig, SVModTrig, SVSampleTrig
+from sv.model import SVNoteOffTrig, SVModTrig, SVMultiSynthSampleTrig
 
 import rv
 import rv.api
-
-class SVMultiSynthSampleTrig(SVSampleTrig):
-
-    def __init__(self, target,
-                 i = 0,
-                 sample = None,
-                 sampler_mod = None,
-                 vel = None,
-                 fx_value = None):
-        super().__init__(target = target,
-                         i = i,
-                         vel = vel,
-                         fx_value = fx_value,
-                         sample = sample)
-        self.sampler_mod = sampler_mod
-
-    def clone(self):
-        return SVMultiSynthSampleTrig(target = self.target,
-                                      i = self.i,
-                                      sample = self.sample,
-                                      sampler_mod = self.sampler_mod,
-                                      vel = self.vel,
-                                      fx_value = self.fx_value)
-        
-    def render(self, modules, *args):
-        for mod in [self.mod,
-                    self.sampler_mod]:
-            if mod not in modules:
-                raise RuntimeError("module %s not found" % mod)
-        mod = modules[self.mod]
-        sampler_mod = modules[self.sampler_mod]
-        note = 1 + sampler_mod.index_of(self.sample)
-        mod_id = 1 + mod.index
-        note_kwargs = {
-            "module": mod_id,
-            "note": note
-        }
-        if self.has_vel:
-            note_kwargs["vel"] = self.velocity
-        if self.has_fx and self.fx_value:
-            note_kwargs["pattern"] = self.fx
-            note_kwargs["val"] = self.fx_value
-        return rv.note.Note(**note_kwargs)
-
 
 class Three03(SVInstrumentBase):
 

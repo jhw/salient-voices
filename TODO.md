@@ -1,7 +1,6 @@
 ### short
 
-- simplify project render chromatic check
-- add notes re IndirectSampleTrig structure
+- add sampler_mod property to SampleTrig and use in sampler population
 
 - do you need trig cloning?
 
@@ -35,7 +34,7 @@
 - freezing
 - polly vocals/ vocoder
 - 303 slide
-- pico plat modes
+- pico play modes
 - resampling
 
 - granular
@@ -53,6 +52,8 @@
 
 ### done
 
+- move MultiSynthSampleTrig into core model
+- add notes to MultiSynthSampleTrig
 - change is_sampler to see if class extends rv sampler
 - add SVModule.is_sampler property
 - rename sample_mod as sampler_mod
