@@ -1,12 +1,13 @@
 ### short
 
-- test polly slot, chromatic demos
+- test polly slot demo
+- test polly chromatic demo
 
 ### medium
 
-- rename nine09 as detroit
 - investigate chromatic sample trig vs slot sample trig
 - add back 303 as an instrument
+- rename instruments as cities
 
 ### euclid
 
