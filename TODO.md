@@ -1,7 +1,5 @@
 ### short
 
-- blank querystring if empty
-
 - add back container test
 - add back sampler test
 
@@ -46,6 +44,7 @@
 
 ### done
 
+- blank querystring if empty
 - fix negative note handling
 - refactor sv sample so note is an argument and querystring is a property
 - refactor 303 note handling to clone sample and add note
