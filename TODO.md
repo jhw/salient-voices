@@ -21,6 +21,8 @@
 
 ### thoughts
 
+- should MultiSynthSampleTrig be merged into SampleTrig?
+
 ### gists 
 
 - reverse/retrig
