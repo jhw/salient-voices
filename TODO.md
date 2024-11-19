@@ -1,6 +1,5 @@
 ### short
 
-- add querystring and note support to sample ref
 - sampler to adjust relative note based on sample note 
 - add sample ref clone 
 - 909 note function to lookup base sample 
@@ -49,6 +48,7 @@
 
 ### done
 
+- add querystring and note support to sample ref
 - fix randomise tags problem
 - fix 303 sampler problem 
 

@@ -1,4 +1,6 @@
+
 from scipy.io import wavfile
+from urllib.parse import urlparse, parse_qs
 
 import re
 # import rv
@@ -13,16 +15,38 @@ class SVSampleRef(dict):
 
     @staticmethod
     def parse(sample_str):
-        tokens = re.split("\\/|\\#", sample_str)
-        return SVSampleRef(bank_name = tokens[0],
-                           file_path = tokens[1],
-                           tags = tokens[2:])
-    
-    def __init__(self, bank_name, file_path, tags = []):
+        # Split tags first
+        tag_split = sample_str.split("#")
+        sample_and_qs = tag_split[0]
+        tags = tag_split[1:] if len(tag_split) > 1 else []
+
+        # Parse bank_name, file_path, and query string
+        path_and_query = sample_and_qs.split("?")
+        path = path_and_query[0]
+        query_string = path_and_query[1] if len(path_and_query) > 1 else ""
+
+        # Extract bank_name and file_path
+        tokens = path.split("/", 1)
+        bank_name = tokens[0]
+        file_path = tokens[1] if len(tokens) > 1 else ""
+
+        # Parse query string into a dictionary
+        query_dict = parse_qs(query_string)
+        note = int(query_dict.get("note", [0])[0])  # Default note to 0 if not provided
+
+        return SVSampleRef(
+            bank_name=bank_name,
+            file_path=file_path,
+            querystring={"note": note},
+            tags=tags
+        )
+
+    def __init__(self, bank_name, file_path, querystring=None, tags=None):
         dict.__init__(self)
         self["bank_name"] = bank_name
         self["file_path"] = file_path
-        self["tags"] = tags
+        self["querystring"] = querystring or {"note": 0}
+        self["tags"] = tags or []
 
     @property
     def bank_name(self):
@@ -33,16 +57,23 @@ class SVSampleRef(dict):
         return self["file_path"]
 
     @property
+    def querystring(self):
+        return self["querystring"]
+
+    @property
+    def note(self):
+        return self.querystring.get("note", 0)
+
+    @property
     def tags(self):
         return self["tags"]
 
-    """
-    - required by Sampler for sample index lookup
-    """
-    
     def __str__(self):
+        query_parts = [f"{key}={value}"
+                       for key, value in self.querystring.items()]
+        query_string = "?" + "&".join(query_parts) if query_parts else ""
         tag_string = "".join([f"#{tag}" for tag in sorted(self.tags)])
-        return f"{self.bank_name}/{self.file_path}{tag_string}"
+        return f"{self.bank_name}/{self.file_path}{query_string}{tag_string}"
 
 class SVBaseSampler(rv.modules.sampler.Sampler):
 
