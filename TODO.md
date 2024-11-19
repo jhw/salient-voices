@@ -1,13 +1,15 @@
 ### short
 
-- add back container test
-- add back sampler test
+- refactor 303 note handling to clone sample and add note
 
 ### medium
 
-- test polly slot, chromatic demos
+- add back container test
+- add back sampler test
 
 - rename nine09 as detroit
+
+- test polly slot, chromatic demos
 
 ### euclid
 
