@@ -1,16 +1,16 @@
 ### short
 
-### medium
+- retire demos/euclid09
 
-- rename nine09 as Detroit
-- replace container test with Detroit instrument test
+### medium
 
 - add back 303 as Berlin instrument 
 - Berlin instrument test
 
-- simplify demos in favour of tests
-  - tests should dump sunvox files
-  
+- extend detroit test
+  - echo s&h
+  - euclid and perkons
+
 - check for %s
 - check/test rv instruments
 
@@ -45,6 +45,9 @@
 
 ### done
 
+- detroit test to dump output
+- replace container test with Detroit instrument test
+- rename nine09 as Detroit
 - remove trig cloning
 - move MultiSynthSampleTrig into core model
 - add notes to MultiSynthSampleTrig
