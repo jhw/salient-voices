@@ -1,7 +1,5 @@
 ### short
 
-- fix randomise tags problem
-
 ### medium
 
 - add querystring and note support to sample ref
@@ -51,6 +49,7 @@
 
 ### done
 
+- fix randomise tags problem
 - fix 303 sampler problem 
 
 - consider SVSample as dict to avoid euclid09 demo leading to 
