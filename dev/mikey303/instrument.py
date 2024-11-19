@@ -28,12 +28,12 @@ class SVMultiSynthSampleTrig(SVSampleTrig):
                                       fx_value = self.fx_value)
         
     def render(self, modules, *args):
-        if self.mod not in modules:
-            raise RuntimeError("module %s not found" % self.mod)
-        if self.sampler_mod and self.sampler_mod not in modules:
-            raise RuntimeError("module %s not found" % self.sampler_mod)
+        for mod in [self.mod,
+                    self.sampler_mod]:
+            if mod not in modules:
+                raise RuntimeError("module %s not found" % mod)
         mod = modules[self.mod]
-        sampler_mod = modules[self.sampler_mod] if self.sampler_mod else mod
+        sampler_mod = modules[self.sampler_mod]
         note = 1 + sampler_mod.index_of(self.sample)
         mod_id = 1 + mod.index
         note_kwargs = {

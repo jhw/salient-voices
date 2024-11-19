@@ -1,6 +1,5 @@
 ### short
 
-- rename sample_mod as sampler_mod
 - add SVModule.is_sampler property
 - simplify project render chromatic check
 
@@ -13,11 +12,15 @@
 
 ### medium
 
+
 - add back 303 as Berlin instrument 
 - Berlin instrument 
 
 - simplify demos in favour of tests
   - tests should dump sunvox files
+  
+- check for %s
+- check/test rv instruments
 
 - rename note as relative_note
 
@@ -52,6 +55,7 @@
 
 ### done
 
+- rename sample_mod as sampler_mod
 - rename SlotSampleTrig as simply SampleTrig
 - indirect sample trig to extend sample trig 
 - rename chromatic sample trig as indirect sample trig 
