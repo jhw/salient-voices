@@ -1,7 +1,5 @@
 ### short
 
-- add note to cloned sample
-
 - check 303 demo
 - replace local 303 sampler with slot sampler 
 
@@ -16,6 +14,7 @@
 
 ### euclid
 
+- model serialisation adjustments for sv sample ref as dict
 - handle case where there are no tag values
 
 ### thoughts
@@ -47,6 +46,7 @@
 
 ### done
 
+- add note to cloned sample
 - clone base sample at 909 level
 - add sample ref clone 
 - sampler to adjust relative note based on sample note 
