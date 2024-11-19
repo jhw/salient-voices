@@ -1,10 +1,52 @@
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
-# from sv.model import SVChromaticSampleTrig, SVNoteOffTrig, SVModTrig
-from sv.model import SVNoteOffTrig, SVModTrig
-from dev.mikey303.model import SVChromaticSampleTrig
+from sv.model import SVNoteOffTrig, SVModTrig, SVNoteTrigBase
 
 import rv
 import rv.api
+
+class SVIndirectSampleTrig(SVNoteTrigBase):
+
+    def __init__(self, target,
+                 i = 0,
+                 sample = None,
+                 sample_mod = None,
+                 vel = None,
+                 fx_value = None):
+        super().__init__(target = target,
+                         i = i,
+                         vel = vel,
+                         fx_value = fx_value)
+        self.sample = sample
+        self.sample_mod = sample_mod
+
+    def clone(self):
+        return SVIndirectSampleTrig(target = self.target,
+                                     i = self.i,
+                                     sample = self.sample,
+                                     sample_mod = self.sample_mod,
+                                     vel = self.vel,
+                                     fx_value = self.fx_value)
+        
+    def render(self, modules, *args):
+        if self.mod not in modules:
+            raise RuntimeError("module %s not found" % self.mod)
+        if self.sample_mod and self.sample_mod not in modules:
+            raise RuntimeError("module %s not found" % self.sample_mod)
+        mod = modules[self.mod]
+        sample_mod = modules[self.sample_mod] if self.sample_mod else mod
+        note = 1 + sample_mod.index_of(self.sample)
+        mod_id = 1 + mod.index
+        note_kwargs = {
+            "module": mod_id,
+            "note": note
+        }
+        if self.has_vel:
+            note_kwargs["vel"] = self.velocity
+        if self.has_fx and self.fx_value:
+            note_kwargs["pattern"] = self.fx
+            note_kwargs["val"] = self.fx_value
+        return rv.note.Note(**note_kwargs)
+
 
 class Three03(SVInstrumentBase):
 
@@ -36,10 +78,10 @@ class Three03(SVInstrumentBase):
              filter_freq = "4000"):
         cloned_sample = self.sample.clone()
         cloned_sample["note"] = note
-        trigs = [SVChromaticSampleTrig(target = f"{self.namespace}MultiSynth",
-                                       sample_mod = f"{self.namespace}Sampler",
-                                       sample = cloned_sample,
-                                       vel = volume),
+        trigs = [SVIndirectSampleTrig(target = f"{self.namespace}MultiSynth",
+                                      sample_mod = f"{self.namespace}Sampler",
+                                      sample = cloned_sample,
+                                      vel = volume),
                  SVModTrig(target = f"{self.namespace}Sound2Ctl/out_max",
                           value = filter_freq)]
         trigs += [SVModTrig(target = f"{self.namespace}ADSR/attack_ms",

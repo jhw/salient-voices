@@ -1,7 +1,5 @@
 ### short
 
-- move chromatic sample trig into instrument
-- rename chromatic sample trig as indirect sample trig 
 - indirect sample trig to extend sample trig 
 - rename nine09 as Detroit
 - replace container test with Detroit instrument test
@@ -42,6 +40,8 @@
 
 ### done
 
+- rename chromatic sample trig as indirect sample trig 
+- move chromatic sample trig into instrument
 - test polly slot demo
 - test polly chromatic demo
 - add back sampler test
