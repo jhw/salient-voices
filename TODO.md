@@ -10,7 +10,6 @@
 - replace 303 chromatic sampler with slot sampler 
 
 - add back container test
-- add sv sample tests
 - add back sampler test
 
 - rename nine09 as detroit
@@ -48,6 +47,7 @@
 
 ### done
 
+- sample tests
 - add querystring and note support to sample ref
 - fix randomise tags problem
 - fix 303 sampler problem 
