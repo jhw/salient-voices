@@ -1,16 +1,16 @@
 ### short
 
+- move chromatic sample trig into instrument
+- rename chromatic sample trig as indirect sample trig 
+- indirect sample trig to extend sample trig 
+- rename nine09 as Detroit
+- replace container test with Detroit instrument test
+
 ### medium
 
 - rename note as relative_note
-- investigate chromatic sample trig vs slot sample trig
-- add back 303 as an instrument
-- rename instruments as cities
-
-### euclid
-
-- model serialisation adjustments for sv sample ref as dict
-- handle case where there are no tag values
+- add back 303 as Berlin instrument 
+- Berlin instrument tray
 
 ### thoughts
 
