@@ -1,6 +1,5 @@
 ### short
 
-- add SVModule.is_sampler property
 - simplify project render chromatic check
 
 - add notes re IndirectSampleTrig structure
@@ -55,6 +54,7 @@
 
 ### done
 
+- add SVModule.is_sampler property
 - rename sample_mod as sampler_mod
 - rename SlotSampleTrig as simply SampleTrig
 - indirect sample trig to extend sample trig 

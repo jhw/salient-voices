@@ -25,6 +25,10 @@ class SVModule(dict):
         dict.__init__(self, item)
 
     @property
+    def is_sampler(self):
+        return self["class"].lower().endswith("sampler")
+        
+    @property
     def links(self):
         links = []
         for link_dest in self["links"]:
@@ -83,7 +87,7 @@ def init_modules(fn):
         for mod in modules:
             mod_class = load_class(mod["class"])
             mod_kwargs = {}
-            if mod["class"].lower().endswith("sampler"):
+            if mod.is_sampler:
                 pool = SVPool()
                 for patch in patches:
                     for trig in patch.trigs:
