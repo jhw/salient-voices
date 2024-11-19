@@ -1,8 +1,5 @@
 ### short
 
-- sample trig needs to be a single class and may not need to extend from base
-  - as doesn't seem to need target
-
 ### medium
 
 - rename nine09 as Detroit
