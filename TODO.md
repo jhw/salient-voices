@@ -1,14 +1,12 @@
 ### short
 
+- why do instruments tests require this seed parameter?
+
 ### medium
 
-- add back 303 as Berlin instrument 
-- Berlin instrument test
-
-- extend detroit test
-  - echo s&h
-  - euclid
-  - perkons
+- detroit test echo s&h
+- detroit test euclid
+- detroit test perkons
 
 - check for %s
 - check/test rv instruments
@@ -44,6 +42,9 @@
 
 ### done
 
+- should berlin instrument embed mikey303 samples? (probably)
+- add back 303 as berlin instrument 
+- berlin instrument test
 - retire demos/euclid09
 - detroit test to dump output
 - replace container test with Detroit instrument test
