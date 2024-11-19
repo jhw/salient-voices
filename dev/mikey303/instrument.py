@@ -1,10 +1,10 @@
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
-from sv.model import SVNoteOffTrig, SVModTrig, SVNoteTrigBase
+from sv.model import SVNoteOffTrig, SVModTrig, SVSlotSampleTrig
 
 import rv
 import rv.api
 
-class SVIndirectSampleTrig(SVNoteTrigBase):
+class SVIndirectSampleTrig(SVSlotSampleTrig):
 
     def __init__(self, target,
                  i = 0,
@@ -15,8 +15,8 @@ class SVIndirectSampleTrig(SVNoteTrigBase):
         super().__init__(target = target,
                          i = i,
                          vel = vel,
-                         fx_value = fx_value)
-        self.sample = sample
+                         fx_value = fx_value,
+                         sample = sample)
         self.sample_mod = sample_mod
 
     def clone(self):

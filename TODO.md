@@ -1,14 +1,20 @@
 ### short
 
-- indirect sample trig to extend sample trig 
+- rename SlotSampleTrig as simply SampleTrig
+- do you need trig cloning?
+
+- add notes re IndirectSampleTrig structure
+
 - rename nine09 as Detroit
 - replace container test with Detroit instrument test
 
 ### medium
 
-- rename note as relative_note
 - add back 303 as Berlin instrument 
-- Berlin instrument tray
+- Berlin instrument 
+
+- rename note as relative_note
+
 
 ### thoughts
 
@@ -40,6 +46,7 @@
 
 ### done
 
+- indirect sample trig to extend sample trig 
 - rename chromatic sample trig as indirect sample trig 
 - move chromatic sample trig into instrument
 - test polly slot demo
