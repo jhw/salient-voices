@@ -14,8 +14,7 @@
   links:
     - Filter
 - name: Sampler
-  # class: sv.sampler.SVChromaticSampler
-  class: dev.mikey303.sampler.SVSingleSlotDefaultSampler
+  class: sv.sampler.SVSlotSampler
   links:
     - Filter
 - name: Filter

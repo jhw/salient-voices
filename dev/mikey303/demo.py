@@ -10,7 +10,8 @@ import random
 
 def bassline(self, n, rand,
              block_sizes = [1, 2, 4],
-             root_offset = -5,
+             # root_offset = -5,
+             root_offset = 0,
              note_scale = [0, 0, 0, 0, 12],
              note_density = 0.66666,
              quantise = 2,

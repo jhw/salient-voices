@@ -1,11 +1,9 @@
 ### short
 
-- replace local 303 sampler with slot sampler 
-
-### medium
-
 - add back container test
 - add back sampler test
+
+### medium
 
 - test polly slot, chromatic demos
 
@@ -15,6 +13,10 @@
 
 - model serialisation adjustments for sv sample ref as dict
 - handle case where there are no tag values
+
+### mikey303
+
+- fix negative note handling
 
 ### thoughts
 
