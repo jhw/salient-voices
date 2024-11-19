@@ -1,8 +1,8 @@
 ### short
 
 - simplify project render chromatic check
-
 - add notes re IndirectSampleTrig structure
+- change is_sampler to see if class extends rv sampler
 
 - do you need trig cloning?
 
