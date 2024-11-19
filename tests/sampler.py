@@ -48,6 +48,7 @@ class SVSampleRefTest(unittest.TestCase):
         self.assertEqual(sample.bank_name, "mikey303")
         self.assertEqual(sample.file_path, "303 VCO SQR.wav")
         self.assertEqual(sample.tags, [])
+        # Invalid note should fall back to default 0
         self.assertEqual(sample.querystring, {"note": 0})
         self.assertEqual(sample.note, 0)
 
@@ -76,6 +77,15 @@ class SVSampleRefTest(unittest.TestCase):
         sample_str = "mikey303/303 VCO SQR.wav#303#bass"
         sample = SVSample.parse(sample_str)
         self.assertEqual(str(sample), sample_str)
+
+    def test_note_property(self):
+        sample = SVSample("mikey303", "303 VCO SQR.wav", note=32, tags=["bass"])
+        self.assertEqual(sample.note, 32)
+        self.assertEqual(sample.querystring, {"note": 32})
+        sample.note = 64
+        self.assertEqual(sample.note, 64)
+        self.assertEqual(sample.querystring, {"note": 64})
+        self.assertEqual(str(sample), "mikey303/303 VCO SQR.wav?note=64#bass")
 
 if __name__ == "__main__":
     unittest.main()

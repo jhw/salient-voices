@@ -1,24 +1,20 @@
 ### short
 
-- refactor sv sample so note is an argument and querystring is a property
-
-### medium
+- blank querystring if empty
 
 - add back container test
 - add back sampler test
 
-- rename nine09 as detroit
+### medium
 
+- investigate chromatic sample trig vs slot sample trig
+- rename nine09 as detroit
 - test polly slot, chromatic demos
 
 ### euclid
 
 - model serialisation adjustments for sv sample ref as dict
 - handle case where there are no tag values
-
-### mikey303
-
-- fix negative note handling
 
 ### thoughts
 
@@ -27,12 +23,13 @@
 
 ### gists 
 
-- retrig and reverse
+- reverse/retrig
 
 - freezing
-- polly vocals + sv vocoder
-- resampling
+- polly vocals/ vocoder
 - 303 slide
+- pico plat modes
+- resampling
 
 - granular
 - sv drum
@@ -49,6 +46,8 @@
 
 ### done
 
+- fix negative note handling
+- refactor sv sample so note is an argument and querystring is a property
 - refactor 303 note handling to clone sample and add note
 - check 303 demo
 - add note to cloned sample

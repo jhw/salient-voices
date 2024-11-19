@@ -10,12 +10,11 @@ import random
 
 def bassline(self, n, rand,
              block_sizes = [1, 2, 4],
-             # root_offset = -5,
-             root_offset = 0,
-             note_scale = [0, 12],
+             root_offset = -5,
+             note_scale = [-2, 0, 0, 0, 5],
              note_density = 0.66666,
              quantise = 2,
-             filter_frequencies = ["1000", "1800", "2000", "4000"],
+             filter_frequencies = ["1000", "1800", "2000"],
              **kwargs):
     i = 0
     while True:
@@ -55,7 +54,7 @@ if __name__ == "__main__":
         bank = SVBank.load_zip("dev/mikey303/mikey303.zip")
         container = SVContainer(banks = [bank],
                                 bpm = 240,
-                                n_ticks = 32)
+                                n_ticks = 128)
         three03 = Three03(container = container,
                           namespace = "303",
                           sample = SVSample.parse("mikey303/303 VCO SQR.wav"))

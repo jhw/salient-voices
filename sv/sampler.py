@@ -43,23 +43,23 @@ class SVSampleRef(dict):
         return SVSampleRef(
             bank_name=bank_name,
             file_path=file_path,
-            querystring={"note": note},
+            note=note,
             tags=tags
         )
 
-    def __init__(self, bank_name, file_path, querystring=None, tags=None):
+    def __init__(self, bank_name, file_path, note=0, tags=None):
         dict.__init__(self)
         self["bank_name"] = bank_name
         self["file_path"] = file_path
-        self["querystring"] = querystring or {"note": 0}
+        self["note"] = note
         self["tags"] = tags or []
 
     def clone(self):
         return SVSampleRef(bank_name = self.bank_name,
                            file_path = self.file_path,
-                           querystring = dict(self.querystring),
+                           note = self.note,
                            tags = list(self.tags))
-
+        
     @property
     def bank_name(self):
         return self["bank_name"]
@@ -69,12 +69,16 @@ class SVSampleRef(dict):
         return self["file_path"]
 
     @property
-    def querystring(self):
-        return self["querystring"]
+    def note(self):
+        return self["note"]
+
+    @note.setter
+    def note(self, value):
+        self["note"] = value
 
     @property
-    def note(self):
-        return self.querystring.get("note", 0)
+    def querystring(self):
+        return {"note": self["note"]}
 
     @property
     def tags(self):
