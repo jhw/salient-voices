@@ -1,12 +1,12 @@
 ### short
 
-### medium
-
 - add querystring and note support to sample ref
 - sampler to adjust relative note based on sample note 
 - add sample ref clone 
 - 909 note function to lookup base sample 
 - clone base sample and add note 
+
+### medium
 
 - replace 303 chromatic sampler with slot sampler 
 
