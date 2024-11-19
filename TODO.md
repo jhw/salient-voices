@@ -1,13 +1,14 @@
 ### short
 
-- add back container test
 - add back sampler test
+
+- test polly slot, chromatic demos
 
 ### medium
 
-- investigate chromatic sample trig vs slot sample trig
 - rename nine09 as detroit
-- test polly slot, chromatic demos
+- investigate chromatic sample trig vs slot sample trig
+- add back 303 as an instrument
 
 ### euclid
 
@@ -44,6 +45,7 @@
 
 ### done
 
+- add back container test
 - blank querystring if empty
 - fix negative note handling
 - refactor sv sample so note is an argument and querystring is a property
