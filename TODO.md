@@ -8,12 +8,12 @@
 
 - rename note as relative_note
 
+- write up notes on SVSampleTrig and SVMultiSynthSampleTrig
+
 - check for %s
 - check/test rv instruments
 
 ### thoughts
-
-- should MultiSynthSampleTrig be merged into SampleTrig?
 
 ### gists 
 
