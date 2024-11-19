@@ -2,7 +2,6 @@
 
 - simplify project render chromatic check
 - add notes re IndirectSampleTrig structure
-- change is_sampler to see if class extends rv sampler
 
 - do you need trig cloning?
 
@@ -54,6 +53,7 @@
 
 ### done
 
+- change is_sampler to see if class extends rv sampler
 - add SVModule.is_sampler property
 - rename sample_mod as sampler_mod
 - rename SlotSampleTrig as simply SampleTrig

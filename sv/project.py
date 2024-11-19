@@ -18,7 +18,16 @@ def load_class(path):
         raise RuntimeError(str(error))
     except ModuleNotFoundError as error:
         raise RuntimeError(str(error))
-    
+
+def does_class_extend(class_name, base_class):
+    try:
+        module_name, class_short_name = class_name.rsplit('.', 1)
+        module = importlib.import_module(module_name)
+        cls = getattr(module, class_short_name)
+        return issubclass(cls, base_class)
+    except (ImportError, AttributeError, ValueError, TypeError):
+        return False
+
 class SVModule(dict):
 
     def __init__(self, item = {}):
@@ -26,7 +35,8 @@ class SVModule(dict):
 
     @property
     def is_sampler(self):
-        return self["class"].lower().endswith("sampler")
+        # return self["class"].lower().endswith("sampler")
+        return does_class_extend(self["class"], rv.modules.sampler.Sampler)
         
     @property
     def links(self):
