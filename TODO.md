@@ -1,6 +1,5 @@
 ### short
 
-- check 303 demo
 - replace local 303 sampler with slot sampler 
 
 ### medium
@@ -46,6 +45,7 @@
 
 ### done
 
+- check 303 demo
 - add note to cloned sample
 - clone base sample at 909 level
 - add sample ref clone 
