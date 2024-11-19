@@ -7,7 +7,7 @@ from sv.sampler import SVSampleRef as SVSample
 import random
 import unittest
 
-def bassline(self, n, rand,
+def BassLine(self, n, rand,
              block_sizes = [1, 2, 4],
              root_offset = -5,
              note_scale = [-2, 0, 0, 0, 5],
@@ -36,10 +36,10 @@ def bassline(self, n, rand,
         else:
             i += 1
             
-def ghost_echo(self, n, rand,
-               sample_hold_levels = ["0000", "0400", "0800"],
-               quantise = 8,
-               **kwargs):
+def GhostEcho(self, n, rand,
+              sample_hold_levels = ["0000", "0400", "0800"],
+              quantise = 8,
+              **kwargs):
     for i in range(n):
         if 0 == i % quantise:            
             wet_level = rand["fx"].choice(sample_hold_levels)
@@ -62,9 +62,9 @@ class BerlinTest(unittest.TestCase):
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx|vol".split("|")}
-        berlin.render(generator = bassline,
+        berlin.render(generator = BassLine,
                        seeds = seeds)
-        berlin.render(generator = ghost_echo,
+        berlin.render(generator = GhostEcho,
                        seeds = seeds)
         patches = container.patches
         self.assertTrue(patches != [])

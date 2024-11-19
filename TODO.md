@@ -1,6 +1,5 @@
 ### short
 
-- detroit test echo s&h
 - detroit test euclid
 - detroit test perkons
 
@@ -40,7 +39,7 @@
 
 ### done
 
-
+- detroit test echo s&h
 - why do instruments tests require this seed parameter?
 - should berlin instrument embed mikey303 samples? (probably)
 - add back 303 as berlin instrument 
