@@ -1,7 +1,5 @@
 ### short
 
-- add back sampler test
-
 - test polly slot, chromatic demos
 
 ### medium
@@ -45,6 +43,7 @@
 
 ### done
 
+- add back sampler test
 - add back container test
 - blank querystring if empty
 - fix negative note handling
