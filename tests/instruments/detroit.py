@@ -1,16 +1,16 @@
-from sv.instruments.detroit import Detroit
 from sv.banks import SVBank
 from sv.container import SVContainer
-from sv.sampler import SVSampleRef
+from sv.instruments.detroit import Detroit
+from sv.sampler import SVSampleRef as SVSample
 
 import unittest
 
 class DetroitTest(unittest.TestCase):
 
-    def test_detroit(self, seed = 12345):
+    def test_detroit(self):
         bank = SVBank.load_zip("tests/pico-default.zip")
         container = SVContainer(banks = [bank])
-        sample = SVSampleRef.parse("pico-default/00 BD.wav")
+        sample = SVSample.parse("pico-default/00 BD.wav")
         detroit = Detroit(container = container,
                           namespace = "909",
                           samples = [sample])

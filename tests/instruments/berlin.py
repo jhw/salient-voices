@@ -1,9 +1,8 @@
+import sv.algos.groove.perkons as perkons
 from sv.banks import SVBank
 from sv.container import SVContainer
 from sv.instruments.berlin import Berlin
 from sv.sampler import SVSampleRef as SVSample
-
-import sv.algos.groove.perkons as perkons
 
 import random
 import unittest
