@@ -1,15 +1,16 @@
 ### short
 
-- add sample ref clone 
-- 909 note function to lookup base sample 
-- clone base sample and add note 
+- add note to cloned sample
+
+- check 303 demo
+- replace local 303 sampler with slot sampler 
 
 ### medium
 
-- replace 303 chromatic sampler with slot sampler 
-
 - add back container test
 - add back sampler test
+
+- test polly slot, chromatic demos
 
 - rename nine09 as detroit
 
@@ -46,6 +47,8 @@
 
 ### done
 
+- clone base sample at 909 level
+- add sample ref clone 
 - sampler to adjust relative note based on sample note 
 - sample tests
 - add querystring and note support to sample ref

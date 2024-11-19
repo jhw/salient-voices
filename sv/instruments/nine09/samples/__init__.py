@@ -41,8 +41,9 @@ class Nine09(SVInstrumentBase):
     def note(self,
              volume = 1.0,
              level = 1.0):
+        cloned_sample = self.sample.clone()
         trigs = [SVSlotSampleTrig(target = f"{self.namespace}Beat",
-                                  sample = self.sample,
+                                  sample = cloned_sample,
                                   vel = volume * level)]
         return SVTrigBlock(trigs = trigs)
 

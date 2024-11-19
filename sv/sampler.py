@@ -54,6 +54,12 @@ class SVSampleRef(dict):
         self["querystring"] = querystring or {"note": 0}
         self["tags"] = tags or []
 
+    def clone(self):
+        return SVSampleRef(bank_name = self.bank_name,
+                           file_path = self.file_path,
+                           querystring = dict(self.querystring),
+                           tags = list(self.tags))
+
     @property
     def bank_name(self):
         return self["bank_name"]
