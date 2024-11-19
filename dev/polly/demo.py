@@ -3,6 +3,7 @@ from sv.container import SVContainer
 from sv.instruments.nine09.samples import Nine09
 
 import logging
+import random
 import sys
 
 logging.basicConfig(stream=sys.stdout,
@@ -12,7 +13,8 @@ logging.basicConfig(stream=sys.stdout,
 def Speak(self, n, **kwargs):
     for i in range(n):
         if 0 == i % 4:
-            trig_block = self.note()
+            note = random.choice([-3, 0, 3])
+            trig_block = self.note(note)
             yield i, trig_block
             self.increment_sample()
 
@@ -33,6 +35,6 @@ if __name__ == "__main__":
                         echo_wet = 0)
         container.add_instrument(nine09)
         nine09.render(generator = Speak)
-        container.write_project("tmp/polly-slot-sampler-demo.sunvox")
+        container.write_project("tmp/polly-demo.sunvox")
     except RuntimeError as error:
         print ("ERROR: %s" % str(error))

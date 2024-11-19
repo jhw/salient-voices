@@ -1,10 +1,8 @@
 ### short
 
-- test polly slot demo
-- test polly chromatic demo
-
 ### medium
 
+- rename note as relative_note
 - investigate chromatic sample trig vs slot sample trig
 - add back 303 as an instrument
 - rename instruments as cities
@@ -44,6 +42,8 @@
 
 ### done
 
+- test polly slot demo
+- test polly chromatic demo
 - add back sampler test
 - add back container test
 - blank querystring if empty
