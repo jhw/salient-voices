@@ -93,7 +93,6 @@ def init_modules(fn):
                 modules,
                 colours,
                 banks):
-        mod_names = [mod["name"] for mod in modules]
         for mod in modules:
             mod_class = load_class(mod["class"])
             mod_kwargs = {}
