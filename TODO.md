@@ -1,9 +1,12 @@
 ### short
 
-- rename SlotSampleTrig as simply SampleTrig
-- do you need trig cloning?
+- rename sample_mod as sampler_mod
+- add SVModule.is_sampler property
+- simplify project render chromatic check
 
 - add notes re IndirectSampleTrig structure
+
+- do you need trig cloning?
 
 - rename nine09 as Detroit
 - replace container test with Detroit instrument test
@@ -49,6 +52,7 @@
 
 ### done
 
+- rename SlotSampleTrig as simply SampleTrig
 - indirect sample trig to extend sample trig 
 - rename chromatic sample trig as indirect sample trig 
 - move chromatic sample trig into instrument

@@ -9,7 +9,7 @@ class SVIndirectSampleTrig(SVSampleTrig):
     def __init__(self, target,
                  i = 0,
                  sample = None,
-                 sample_mod = None,
+                 sampler_mod = None,
                  vel = None,
                  fx_value = None):
         super().__init__(target = target,
@@ -17,24 +17,24 @@ class SVIndirectSampleTrig(SVSampleTrig):
                          vel = vel,
                          fx_value = fx_value,
                          sample = sample)
-        self.sample_mod = sample_mod
+        self.sampler_mod = sampler_mod
 
     def clone(self):
         return SVIndirectSampleTrig(target = self.target,
                                      i = self.i,
                                      sample = self.sample,
-                                     sample_mod = self.sample_mod,
+                                     sampler_mod = self.sampler_mod,
                                      vel = self.vel,
                                      fx_value = self.fx_value)
         
     def render(self, modules, *args):
         if self.mod not in modules:
             raise RuntimeError("module %s not found" % self.mod)
-        if self.sample_mod and self.sample_mod not in modules:
-            raise RuntimeError("module %s not found" % self.sample_mod)
+        if self.sampler_mod and self.sampler_mod not in modules:
+            raise RuntimeError("module %s not found" % self.sampler_mod)
         mod = modules[self.mod]
-        sample_mod = modules[self.sample_mod] if self.sample_mod else mod
-        note = 1 + sample_mod.index_of(self.sample)
+        sampler_mod = modules[self.sampler_mod] if self.sampler_mod else mod
+        note = 1 + sampler_mod.index_of(self.sample)
         mod_id = 1 + mod.index
         note_kwargs = {
             "module": mod_id,
@@ -79,7 +79,7 @@ class Three03(SVInstrumentBase):
         cloned_sample = self.sample.clone()
         cloned_sample["note"] = note
         trigs = [SVIndirectSampleTrig(target = f"{self.namespace}MultiSynth",
-                                      sample_mod = f"{self.namespace}Sampler",
+                                      sampler_mod = f"{self.namespace}Sampler",
                                       sample = cloned_sample,
                                       vel = volume),
                  SVModTrig(target = f"{self.namespace}Sound2Ctl/out_max",

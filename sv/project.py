@@ -88,8 +88,8 @@ def init_modules(fn):
                 for patch in patches:
                     for trig in patch.trigs:
                         if (trig.mod == mod["name"] or
-                            (hasattr(trig, "sample_mod") and
-                             trig.sample_mod == mod["name"])):
+                            (hasattr(trig, "sampler_mod") and
+                             trig.sampler_mod == mod["name"])):
                             pool.add(trig.sample)
                 mod_kwargs = {"banks": banks,
                               "pool": pool,
