@@ -1,6 +1,6 @@
 ### short
 
-- refactor 303 note handling to clone sample and add note
+- refactor sv sample so note is an argument and querystring is a property
 
 ### medium
 
@@ -49,6 +49,7 @@
 
 ### done
 
+- refactor 303 note handling to clone sample and add note
 - check 303 demo
 - add note to cloned sample
 - clone base sample at 909 level

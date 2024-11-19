@@ -34,10 +34,11 @@ class Three03(SVInstrumentBase):
              sustain_term = None,
              release_ms = "0300",
              filter_freq = "4000"):
+        cloned_sample = self.sample.clone()
+        cloned_sample["note"] = note
         trigs = [SVChromaticSampleTrig(target = f"{self.namespace}MultiSynth",
                                        sample_mod = f"{self.namespace}Sampler",
-                                       sample = self.sample,
-                                       note = note,
+                                       sample = cloned_sample,
                                        vel = volume),
                  SVModTrig(target = f"{self.namespace}Sound2Ctl/out_max",
                           value = filter_freq)]
