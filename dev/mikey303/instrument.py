@@ -1,10 +1,10 @@
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
-from sv.model import SVNoteOffTrig, SVModTrig, SVSlotSampleTrig
+from sv.model import SVNoteOffTrig, SVModTrig, SVSampleTrig
 
 import rv
 import rv.api
 
-class SVIndirectSampleTrig(SVSlotSampleTrig):
+class SVIndirectSampleTrig(SVSampleTrig):
 
     def __init__(self, target,
                  i = 0,

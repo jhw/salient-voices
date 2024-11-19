@@ -1,5 +1,5 @@
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
-from sv.model import SVSlotSampleTrig, SVModTrig, ctrl_value
+from sv.model import SVSampleTrig, SVModTrig, ctrl_value
 
 import rv
 import rv.api
@@ -44,7 +44,7 @@ class Nine09(SVInstrumentBase):
              level = 1.0):
         cloned_sample = self.sample.clone()
         cloned_sample["note"] = note
-        trigs = [SVSlotSampleTrig(target = f"{self.namespace}Beat",
+        trigs = [SVSampleTrig(target = f"{self.namespace}Beat",
                                   sample = cloned_sample,
                                   vel = volume * level)]
         return SVTrigBlock(trigs = trigs)

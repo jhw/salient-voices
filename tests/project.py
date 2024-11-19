@@ -1,5 +1,5 @@
 from sv.banks import SVBank
-from sv.model import SVNoteTrig, SVSlotSampleTrig, SVTrigPatch
+from sv.model import SVNoteTrig, SVSampleTrig, SVTrigPatch
 from sv.project import SVProject
 from sv.sampler import SVSampleRef as SVSample
 
@@ -55,7 +55,7 @@ class ProjectTest(unittest.TestCase):
 
     def test_sampler(self, modules = SamplerModules):
         bank = SVBank.load_zip("tests/mikey303.zip")
-        trig = SVSlotSampleTrig(target = "Sampler",
+        trig = SVSampleTrig(target = "Sampler",
                                 sample = SVSample.parse("mikey303/303 VCO SQR.wav"),
                                 i = 0)
         patch = SVTrigPatch(trigs = [trig],

@@ -102,7 +102,7 @@ class SVNoteTrig(SVNoteTrigBase):
             note_kwargs["val"] = self.fx_value
         return rv.note.Note(**note_kwargs)
 
-class SVSlotSampleTrig(SVNoteTrigBase):
+class SVSampleTrig(SVNoteTrigBase):
 
     def __init__(self, target,
                  i = 0,
@@ -116,7 +116,7 @@ class SVSlotSampleTrig(SVNoteTrigBase):
         self.sample = sample
 
     def clone(self):
-        return SVSlotSampleTrig(target = self.target,
+        return SVSampleTrig(target = self.target,
                                 i = self.i,
                                 sample = self.sample,
                                 vel = self.vel,

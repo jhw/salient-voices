@@ -13,6 +13,9 @@
 - add back 303 as Berlin instrument 
 - Berlin instrument 
 
+- simplify demos in favour of tests
+  - tests should dump sunvox files
+
 - rename note as relative_note
 
 
