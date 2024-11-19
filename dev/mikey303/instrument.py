@@ -4,7 +4,7 @@ from sv.model import SVNoteOffTrig, SVModTrig, SVSampleTrig
 import rv
 import rv.api
 
-class SVIndirectSampleTrig(SVSampleTrig):
+class SVMultiSynthSampleTrig(SVSampleTrig):
 
     def __init__(self, target,
                  i = 0,
@@ -20,12 +20,12 @@ class SVIndirectSampleTrig(SVSampleTrig):
         self.sampler_mod = sampler_mod
 
     def clone(self):
-        return SVIndirectSampleTrig(target = self.target,
-                                     i = self.i,
-                                     sample = self.sample,
-                                     sampler_mod = self.sampler_mod,
-                                     vel = self.vel,
-                                     fx_value = self.fx_value)
+        return SVMultiSynthSampleTrig(target = self.target,
+                                      i = self.i,
+                                      sample = self.sample,
+                                      sampler_mod = self.sampler_mod,
+                                      vel = self.vel,
+                                      fx_value = self.fx_value)
         
     def render(self, modules, *args):
         if self.mod not in modules:
@@ -78,10 +78,10 @@ class Three03(SVInstrumentBase):
              filter_freq = "4000"):
         cloned_sample = self.sample.clone()
         cloned_sample["note"] = note
-        trigs = [SVIndirectSampleTrig(target = f"{self.namespace}MultiSynth",
-                                      sampler_mod = f"{self.namespace}Sampler",
-                                      sample = cloned_sample,
-                                      vel = volume),
+        trigs = [SVMultiSynthSampleTrig(target = f"{self.namespace}MultiSynth",
+                                        sampler_mod = f"{self.namespace}Sampler",
+                                        sample = cloned_sample,
+                                        vel = volume),
                  SVModTrig(target = f"{self.namespace}Sound2Ctl/out_max",
                           value = filter_freq)]
         trigs += [SVModTrig(target = f"{self.namespace}ADSR/attack_ms",
