@@ -1,7 +1,5 @@
 ### short
 
-- retire demos/euclid09
-
 ### medium
 
 - add back 303 as Berlin instrument 
@@ -9,7 +7,8 @@
 
 - extend detroit test
   - echo s&h
-  - euclid and perkons
+  - euclid
+  - perkons
 
 - check for %s
 - check/test rv instruments
@@ -45,6 +44,7 @@
 
 ### done
 
+- retire demos/euclid09
 - detroit test to dump output
 - replace container test with Detroit instrument test
 - rename nine09 as Detroit
