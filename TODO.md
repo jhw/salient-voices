@@ -18,6 +18,10 @@
 
 - rename nine09 as detroit
 
+### euclid
+
+- handle case where there are no tag values
+
 ### thoughts
 
 - model tests?

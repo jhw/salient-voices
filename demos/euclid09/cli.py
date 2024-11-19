@@ -120,6 +120,11 @@ class EuclidCLI(cmd.Cmd):
         self.tag_mapping[key] = value
         self.do_tags(None)
 
+    """
+    Disabled as some tags may have no matching values in pico-default test bank
+    """
+        
+    """
     def do_randomise_tags(self, _):
         tags = list(self.terms.keys())
         tag_mapping = {}
@@ -129,6 +134,7 @@ class EuclidCLI(cmd.Cmd):
             tags.remove(tag)
         self.tag_mapping = tag_mapping
         self.do_tags(None)
+    """
 
     def do_reset_tags(self, _, tag_mapping={track["name"]: track["name"] for track in Tracks}):
         self.tag_mapping = tag_mapping
