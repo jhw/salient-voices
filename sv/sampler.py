@@ -138,8 +138,7 @@ class SVSlotSampler(SVBaseSampler):
             src = banks.get_wav(sample)
             self.load_sample(src, i)
             # Remap pitch
-            sample = self.samples[i]
-            sample.relative_note += (root - i)
+            self.samples[i].relative_note += (root + sample.note - i)
 
     def index_of(self, sample):
         return self.sample_strings.index(str(sample))
