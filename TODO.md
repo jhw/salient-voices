@@ -1,14 +1,19 @@
 ### short
 
-- randomise_tags followed by randomise_patches fails
+- fix randomise tags problem
+- fix 303 sampler problem 
 
-- fix 303 demo
+
 
 ### medium
 
-- add sample ref qs functionality
-- sample trig to include note as part of sample reference
-- refactor sampler note arg as relative note
+- add querystring and note support to sample ref
+- sampler to adjust relative note based on sample note 
+- add sample ref clone 
+- 909 note function to lookup base sample 
+- clone base sample and add note 
+
+- replace 303 chromatic sampler with slot sampler 
 
 - add back container test
 - add sv sample tests
