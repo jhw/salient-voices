@@ -1,9 +1,6 @@
 ### short
 
 - fix randomise tags problem
-- fix 303 sampler problem 
-
-
 
 ### medium
 
@@ -49,6 +46,8 @@
   - belies the bare bones nature
 
 ### done
+
+- fix 303 sampler problem 
 
 - consider SVSample as dict to avoid euclid09 demo leading to 
 - try and remove cast_sample

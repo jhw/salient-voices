@@ -1,6 +1,7 @@
 from sv.banks import SVBank
 from sv.container import SVContainer
 # from sv.instruments.three03.mikey303 import Three03
+from sv.sampler import SVSampleRef as SVSample
 from dev.mikey303.instrument import Three03
 
 import sv.algos.groove.perkons as perkons
@@ -56,7 +57,7 @@ if __name__ == "__main__":
                                 n_ticks = 32)
         three03 = Three03(container = container,
                           namespace = "303",
-                          sample = "mikey303/303 VCO SQR.wav")
+                          sample = SVSample.parse("mikey303/303 VCO SQR.wav"))
         container.add_instrument(three03)
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)

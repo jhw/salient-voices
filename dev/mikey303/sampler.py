@@ -18,13 +18,21 @@ class SVSingleSlotDefaultSampler(SVBaseSampler):
         SVBaseSampler.__init__(self,
                                banks = banks,
                                pool = pool)
+        notes = list(rv.note.NOTE)
+        for i, sample in enumerate(self.pool):
+            self.note_samples[notes[i]] = i
+            src = banks.get_wav(sample)
+            self.load_sample(src, i)
 
     @property
     def root_notes(self, max_slots = MaxSlots):
         n = max_slots / len(self.pool)
-        return {sample: int(n * (i + 0.5))
+        return {str(sample): int(n * (i + 0.5))
                 for i, sample in enumerate(self.pool)}
-        
+
+    def index_of(self, sample):
+        return self.root_notes[str(sample)]
+    
 if __name__ == "__main__":
     pass
             
