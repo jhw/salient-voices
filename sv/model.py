@@ -105,6 +105,9 @@ class SVSampleTrig(SVNoteTrigBase):
                          fx_value = fx_value)
         self.sample = sample
 
+    def resolve_sampler(self):
+        return self.mod
+        
     def resolve_sampler_note(self, modules):
         sampler_mod = modules[self.mod]
         note = 1 + sampler_mod.index_of(self.sample)
@@ -142,6 +145,9 @@ class SVMultiSynthSampleTrig(SVSampleTrig):
                          sample = sample)
         self.sampler_mod = sampler_mod
 
+    def resolve_sampler(self):
+        return self.sampler_mod
+        
     def resolve_sampler_note(self, modules):
         sampler_mod = modules[self.sampler_mod]
         note = 1 + sampler_mod.index_of(self.sample)

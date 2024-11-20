@@ -1,7 +1,5 @@
 ### short
 
-- unify trig classes
-
 - detroit test euclid
 - detroit test perkons
 
@@ -43,6 +41,7 @@
 
 ### done
 
+- unify trig classes
 - detroit test echo s&h
 - why do instruments tests require this seed parameter?
 - should berlin instrument embed mikey303 samples? (probably)
