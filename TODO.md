@@ -1,7 +1,5 @@
 ### short
 
-- rename model as trigs
-
 ### medium
 
 - review exceptions
@@ -41,6 +39,7 @@
 
 ### done
 
+- rename model as trigs
 - try merging trig classes again
 - check for %s
 - unify trig classes

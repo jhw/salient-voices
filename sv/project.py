@@ -1,5 +1,5 @@
 from sv.banks import SVPool, SVBanks
-from sv.model import SVSampleTrig
+from sv.trigs import SVSampleTrig
 from sv.utils.colours import init_colours
 
 import importlib

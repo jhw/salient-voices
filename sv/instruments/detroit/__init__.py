@@ -1,5 +1,5 @@
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
-from sv.model import SVSampleTrig, SVModTrig, ctrl_value
+from sv.trigs import SVSampleTrig, SVModTrig, ctrl_value
 
 import rv
 import rv.api

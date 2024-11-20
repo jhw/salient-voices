@@ -1,6 +1,6 @@
 from sv.banks import SVBank
 from sv.container import SVTrigPatch
-from sv.model import SVNoteTrig, SVSampleTrig
+from sv.trigs import SVNoteTrig, SVSampleTrig
 from sv.project import SVProject
 from sv.sampler import SVSampleRef as SVSample
 
