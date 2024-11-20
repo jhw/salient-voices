@@ -1,4 +1,5 @@
 from sv.algos.euclid import bjorklund
+from sv.algos.groove import perkons
 from sv.banks import SVBank
 from sv.container import SVContainer
 from sv.instruments.detroit import Detroit
@@ -12,7 +13,8 @@ def Beat(self, n, **kwargs):
                            pulses = 5)    
     for i in range(n):
         if pattern_fn(i):
-            trig_block = self.note()
+            volume = perkons.shifted_swing(i)
+            trig_block = self.note(volume = volume)
             yield i, trig_block
 
 def GhostEcho(self, n, rand,

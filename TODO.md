@@ -2,9 +2,6 @@
 
 ### medium
 
-- detroit euclid
-- detroit perkons
-
 ### roadmap
 
 - euclid09 sv update
@@ -38,6 +35,8 @@
 
 ### done
 
+- detroit euclid
+- detroit perkons
 - bad controller values with 3 digits pass silently 
 - review exceptions
 - rename model as trigs
