@@ -1,12 +1,13 @@
 ### short
 
-- detroit test euclid
-- detroit test perkons
+- rename model as trigs
+- try merging trig classes again
 
 ### medium
 
-- check for %s
-- check/test rv instruments
+- bad controller values with 3 digits pass silently 
+- detroit test euclid, perkons
+- review exceptions
 
 ### roadmap
 
@@ -41,6 +42,7 @@
 
 ### done
 
+- check for %s
 - unify trig classes
 - detroit test echo s&h
 - why do instruments tests require this seed parameter?

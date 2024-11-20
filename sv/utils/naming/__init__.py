@@ -9,8 +9,9 @@ Adjectives = load_yaml("adjectives.yaml")
                           
 def random_name(nouns = Nouns,
                 adjectives = Adjectives):
-    return "%s-%s" % (random.choice(adjectives),
-                      random.choice(nouns))
+    noun = random.choice(nouns)
+    adjective = random.choice(adjectives)
+    return f"{adjective}-{noun}"
 
 if __name__ == "__main__":
     pass
