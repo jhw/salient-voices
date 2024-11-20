@@ -20,13 +20,10 @@ def load_class(path):
     except ModuleNotFoundError as error:
         raise RuntimeError(str(error))
 
-def does_class_extend(class_name, base_class):
+def does_class_extend(cls, base_class):
     try:
-        module_name, class_short_name = class_name.rsplit('.', 1)
-        module = importlib.import_module(module_name)
-        cls = getattr(module, class_short_name)
         return issubclass(cls, base_class)
-    except (ImportError, AttributeError, ValueError, TypeError):
+    except TypeError:
         return False
 
 class SVModule(dict):
@@ -36,14 +33,14 @@ class SVModule(dict):
 
     @property
     def is_sampler(self):
-        return does_class_extend(self["class"], rv.modules.sampler.Sampler)
+        return does_class_extend(load_class(self["class"]),
+                                 rv.modules.sampler.Sampler)
 
     def init_sample_pool(self, patches):
         pool = SVPool()
         for patch in patches:
             for trig in patch.trigs:
-                trig_class = str(trig.__class__).split("'")[1]
-                if (does_class_extend(trig_class, SVSampleTrig) and
+                if (does_class_extend(trig.__class__, SVSampleTrig) and
                     trig.resolve_sampler() == self["name"]):
                     pool.add(trig.sample)
         return pool
