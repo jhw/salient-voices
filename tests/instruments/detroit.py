@@ -1,3 +1,4 @@
+from sv.algos.euclid import bjorklund
 from sv.banks import SVBank
 from sv.container import SVContainer
 from sv.instruments.detroit import Detroit
@@ -7,8 +8,10 @@ import random
 import unittest
 
 def Beat(self, n, **kwargs):
+    pattern_fn = bjorklund(steps = 16,
+                           pulses = 5)    
     for i in range(n):
-        if 0 == i % 4:
+        if pattern_fn(i):
             trig_block = self.note()
             yield i, trig_block
 
