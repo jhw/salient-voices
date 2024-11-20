@@ -58,7 +58,7 @@ class SVSampleRefTest(unittest.TestCase):
         self.assertEqual(sample.note, 0)
 
     def test_empty_string(self):
-        with self.assertRaises(IndexError):
+        with self.assertRaises(RuntimeError):
             SVSample.parse("")
 
     def test_no_file_path(self):
@@ -70,7 +70,7 @@ class SVSampleRefTest(unittest.TestCase):
         self.assertEqual(sample.note, 0)
 
     def test_no_bank_name(self):
-        with self.assertRaises(IndexError):
+        with self.assertRaises(RuntimeError):
             SVSample.parse("/303 VCO SQR.wav")
 
     def test_round_trip_str(self):

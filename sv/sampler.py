@@ -14,7 +14,7 @@ class SVSampleRef(dict):
     @staticmethod
     def parse(sample_str):
         if not sample_str:
-            raise IndexError("Input string cannot be empty")
+            raise RuntimeError("Input string cannot be empty")
         
         # Split tags first
         tag_split = sample_str.split("#")
@@ -29,7 +29,7 @@ class SVSampleRef(dict):
         # Extract bank_name and file_path
         tokens = path.split("/", 1)
         if len(tokens) < 2 or not tokens[0]:
-            raise IndexError("Bank name cannot be empty")
+            raise RuntimeError("Bank name cannot be empty")
         bank_name = tokens[0]
         file_path = tokens[1] if len(tokens) > 1 else ""
 
