@@ -1,7 +1,7 @@
 ### short
 
-- rename model as trigs
 - try merging trig classes again
+- rename model as trigs
 
 ### medium
 
