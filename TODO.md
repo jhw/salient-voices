@@ -1,9 +1,9 @@
 ### short
 
+- bad controller values with 3 digits pass silently 
+
 ### medium
 
-- review exceptions
-- bad controller values with 3 digits pass silently 
 - add euclid, perkons to detroit test
 
 ### roadmap
@@ -39,6 +39,7 @@
 
 ### done
 
+- review exceptions
 - rename model as trigs
 - try merging trig classes again
 - check for %s
