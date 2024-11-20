@@ -2,7 +2,8 @@
 
 ### medium
 
-- add euclid, perkons to detroit test
+- detroit euclid
+- detroit perkons
 
 ### roadmap
 
