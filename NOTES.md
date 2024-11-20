@@ -1,9 +1,3 @@
-### SampleTrig and MultiSynthSampleTrig 19/11/24
-
-- feels like these should be merged as there is a lot of overall, but there are issues
-- MultiSynthSampleTrig required because the MultiSynth plays the notes but doesn't have any info about what sample is being played; this is at the sampler level
-- So trig needs to have reference to sampler, as well as sample, so it can do sampler.index(sample) to find the note for the multisynth to play
-
 ### decompiler notes 17/11/24
 
 - seem to be patterns with no notes in caravan, space trip

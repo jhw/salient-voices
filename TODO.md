@@ -1,16 +1,20 @@
 ### short
 
+- unify trig classes
+
 - detroit test euclid
 - detroit test perkons
 
 ### medium
 
-- rename note as relative_note
-
-- write up notes on SVSampleTrig and SVMultiSynthSampleTrig
-
 - check for %s
 - check/test rv instruments
+
+### roadmap
+
+- euclid09 sv update
+- polly gist sv update
+- euclid09 new features
 
 ### thoughts
 
@@ -34,8 +38,8 @@
 
 ### thoughts
 
-- layout management for decompiler?
-  - belies the bare bones nature
+- rename note as relative_note?
+  - is fine as is
 
 ### done
 
