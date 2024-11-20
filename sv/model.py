@@ -79,8 +79,6 @@ class SVNoteTrig(SVNoteTrigBase):
         self.note = note
 
     def render(self, modules, *args):
-        if self.mod not in modules:
-            raise RuntimeError("module %s not found" % self.mod)
         mod = modules[self.mod]
         note = self.note
         mod_id = 1 + mod.index
@@ -97,9 +95,8 @@ class SVNoteTrig(SVNoteTrigBase):
 
 class SVSampleTrig(SVNoteTrigBase):
 
-    def __init__(self, target,
+    def __init__(self, target, sample,
                  i = 0,
-                 sample = None,
                  vel = None,
                  fx_value = None):
         super().__init__(target = target,
@@ -108,12 +105,15 @@ class SVSampleTrig(SVNoteTrigBase):
                          fx_value = fx_value)
         self.sample = sample
 
+    def resolve_sampler_note(self, modules):
+        sampler_mod = modules[self.mod]
+        note = 1 + sampler_mod.index_of(self.sample)
+        return note
+        
     def render(self, modules, *args):
-        if self.mod not in modules:
-            raise RuntimeError("module %s not found" % self.mod)
-        mod = modules[self.mod]
-        note = 1 + mod.index_of(self.sample)
+        mod = modules[self.mod]        
         mod_id = 1 + mod.index
+        note = self.resolve_sampler_note(modules)
         note_kwargs = {
             "module": mod_id,
             "note": note
@@ -131,10 +131,8 @@ The core module is a MultiSynth, but needs a reference to sampler_mod so you can
     
 class SVMultiSynthSampleTrig(SVSampleTrig):
 
-    def __init__(self, target,
+    def __init__(self, target, sample, sampler_mod,
                  i = 0,
-                 sample = None,
-                 sampler_mod = None,
                  vel = None,
                  fx_value = None):
         super().__init__(target = target,
@@ -144,26 +142,11 @@ class SVMultiSynthSampleTrig(SVSampleTrig):
                          sample = sample)
         self.sampler_mod = sampler_mod
 
-    def render(self, modules, *args):
-        for mod in [self.mod,
-                    self.sampler_mod]:
-            if mod not in modules:
-                raise RuntimeError("module %s not found" % mod)
-        mod = modules[self.mod]
+    def resolve_sampler_note(self, modules):
         sampler_mod = modules[self.sampler_mod]
         note = 1 + sampler_mod.index_of(self.sample)
-        mod_id = 1 + mod.index
-        note_kwargs = {
-            "module": mod_id,
-            "note": note
-        }
-        if self.has_vel:
-            note_kwargs["vel"] = self.velocity
-        if self.has_fx and self.fx_value:
-            note_kwargs["pattern"] = self.fx
-            note_kwargs["val"] = self.fx_value
-        return rv.note.Note(**note_kwargs)
-    
+        return note
+        
 class SVNoteOffTrig(SVTrigBase):
 
     def __init__(self, target, i = 0):
@@ -201,8 +184,6 @@ class SVFXTrig(SVTrigBase):
         return self.target
     
     def render(self, modules, *args):
-        if self.mod not in modules:
-            raise RuntimeError("module %s not found" % self.mod)
         mod = modules[self.mod]
         mod_id = 1 + mod.index
         value = ctrl_value(self.value)
@@ -235,14 +216,8 @@ class SVModTrig(SVTrigBase):
                modules,
                controllers,
                *args):
-        if (self.mod not in modules or
-            self.mod not in controllers):
-            raise RuntimeError("module %s not found" % self.mod)
         mod, controller = modules[self.mod], controllers[self.mod]
         mod_id = 1 + mod.index
-        if self.ctrl not in controller:
-            raise RuntimeError("controller %s not found in module %s" % (self.ctrl,
-                                                                         self.mod))
         ctrl_id = self.CtrlMult * controller[self.ctrl]
         value = ctrl_value(self.value)
         return rv.note.Note(module = mod_id,
