@@ -1,13 +1,12 @@
 ### short
 
-- try merging trig classes again
 - rename model as trigs
 
 ### medium
 
-- bad controller values with 3 digits pass silently 
-- detroit test euclid, perkons
 - review exceptions
+- bad controller values with 3 digits pass silently 
+- add euclid, perkons to detroit test
 
 ### roadmap
 
@@ -42,6 +41,7 @@
 
 ### done
 
+- try merging trig classes again
 - check for %s
 - unify trig classes
 - detroit test echo s&h

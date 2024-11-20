@@ -1,5 +1,5 @@
 from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
-from sv.model import SVNoteOffTrig, SVModTrig, SVMultiSynthSampleTrig
+from sv.model import SVNoteOffTrig, SVModTrig, SVSampleTrig
 
 import rv
 import rv.api
@@ -34,10 +34,10 @@ class Berlin(SVInstrumentBase):
              filter_freq = "4000"):
         cloned_sample = self.sample.clone()
         cloned_sample["note"] = note
-        trigs = [SVMultiSynthSampleTrig(target = f"{self.namespace}MultiSynth",
-                                        sampler_mod = f"{self.namespace}Sampler",
-                                        sample = cloned_sample,
-                                        vel = volume),
+        trigs = [SVSampleTrig(target = f"{self.namespace}MultiSynth",
+                              sampler_mod = f"{self.namespace}Sampler",
+                              sample = cloned_sample,
+                              vel = volume),
                  SVModTrig(target = f"{self.namespace}Sound2Ctl/out_max",
                           value = filter_freq)]
         trigs += [SVModTrig(target = f"{self.namespace}ADSR/attack_ms",

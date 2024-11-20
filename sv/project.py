@@ -40,7 +40,7 @@ class SVModule(dict):
         pool = SVPool()
         for patch in patches:
             for trig in patch.trigs:
-                if (does_class_extend(trig.__class__, SVSampleTrig) and
+                if (isinstance(trig, SVSampleTrig) and 
                     trig.resolve_sampler() == self["name"]):
                     pool.add(trig.sample)
         return pool

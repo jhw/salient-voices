@@ -96,6 +96,7 @@ class SVNoteTrig(SVNoteTrigBase):
 class SVSampleTrig(SVNoteTrigBase):
 
     def __init__(self, target, sample,
+                 sampler_mod = None,
                  i = 0,
                  vel = None,
                  fx_value = None):
@@ -104,15 +105,16 @@ class SVSampleTrig(SVNoteTrigBase):
                          vel = vel,
                          fx_value = fx_value)
         self.sample = sample
+        self.sampler_mod = sampler_mod
 
     def resolve_sampler(self):
-        return self.mod
-        
+        return self.sampler_mod if self.sampler_mod else self.mod
+
     def resolve_sampler_note(self, modules):
-        sampler_mod = modules[self.mod]
+        sampler_mod = modules[self.sampler_mod if self.sampler_mod else self.mod]
         note = 1 + sampler_mod.index_of(self.sample)
         return note
-        
+    
     def render(self, modules, *args):
         mod = modules[self.mod]        
         mod_id = 1 + mod.index
@@ -127,31 +129,6 @@ class SVSampleTrig(SVNoteTrigBase):
             note_kwargs["pattern"] = self.fx
             note_kwargs["val"] = self.fx_value
         return rv.note.Note(**note_kwargs)
-
-"""
-The core module is a MultiSynth, but needs a reference to sampler_mod so you can lookup the note index for the sample to be played
-"""
-    
-class SVMultiSynthSampleTrig(SVSampleTrig):
-
-    def __init__(self, target, sample, sampler_mod,
-                 i = 0,
-                 vel = None,
-                 fx_value = None):
-        super().__init__(target = target,
-                         i = i,
-                         vel = vel,
-                         fx_value = fx_value,
-                         sample = sample)
-        self.sampler_mod = sampler_mod
-
-    def resolve_sampler(self):
-        return self.sampler_mod
-        
-    def resolve_sampler_note(self, modules):
-        sampler_mod = modules[self.sampler_mod]
-        note = 1 + sampler_mod.index_of(self.sample)
-        return note
         
 class SVNoteOffTrig(SVTrigBase):
 
