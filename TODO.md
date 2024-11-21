@@ -1,10 +1,11 @@
 ### short
 
+- instrument tests fail when run individually
+
 ### medium
 
 ### roadmap
 
-- euclid09 sv update
 - polly gist sv update
 - euclid09 new features
 
