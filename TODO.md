@@ -1,7 +1,5 @@
 ### short [01-detroit]
 
-- add sample toggling
-
 ### medium
 
 - instrument tests fail when run individually
@@ -43,6 +41,7 @@
 
 ### done
 
+- add sample toggling
 - replace berlin reference with machine
 - dynamic perkons lookup
 - add pattern densities

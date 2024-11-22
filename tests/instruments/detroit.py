@@ -16,11 +16,13 @@ clap: (clap)|(clp)|(cp)|(hc)
 hat: (oh)|(ch)|(open)|(closed)|(hh)|(hat)
 """)
 
-def Beat(self, n, rand, pattern, groove, **kwargs):   
+def Beat(self, n, rand, pattern, groove, temperature, **kwargs):   
     for i in range(n):
+        if rand["sample"].random() < temperature:
+            self.toggle_sample() 
+        volume = groove(i = i,
+                        rand = rand["vol"])
         if pattern(i):
-            volume = groove(i = i,
-                            rand = rand["vol"])
             trig_block = self.note(volume = volume)
             yield i, trig_block
 
@@ -48,6 +50,7 @@ def random_groove_fn(mod = perkons):
 def add_track(container, pool, tag,
               max_density = 0.9,
               min_density = 0.1,
+              temperature = 0.5,
               patterns = [pattern[:2] for pattern in TidalPatterns]):
     samples = pool.match(lambda sample: tag in sample.tags)
     random.shuffle(samples)        
@@ -64,7 +67,8 @@ def add_track(container, pool, tag,
     pattern_fn = random_pattern_fn(track_patterns)
     groove_fn = random_groove_fn()
     env = {"pattern": pattern_fn,
-           "groove": groove_fn}
+           "groove": groove_fn,
+           "temperature": temperature}
     machine.render(generator = Beat,
                    seeds = seeds,
                    env = env)
