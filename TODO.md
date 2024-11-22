@@ -1,8 +1,6 @@
 ### short [01-detroit]
 
-- abstract track code
 - dynamic perkons lookup
-- add pattern densities
 - add sample toggling
 - add clap and hat
 
@@ -45,6 +43,8 @@
 
 ### done
 
+- add pattern densities
+- abstract track code
 - add perkons.humanise
 - shuffle samples at main level
 - add multiple grooves
