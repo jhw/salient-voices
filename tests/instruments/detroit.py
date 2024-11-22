@@ -26,7 +26,7 @@ def Beat(self, n, rand, pattern, groove, **kwargs):
 
 def GhostEcho(self, n, rand,
               sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
-              quantise = 8,
+              quantise = 4,
               **kwargs):
     for i in range(n):
         if 0 == i % quantise:            

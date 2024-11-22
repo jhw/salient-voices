@@ -55,16 +55,16 @@ class BerlinTest(unittest.TestCase):
         container = SVContainer(banks = [bank],
                                 bpm = 240,
                                 n_ticks = 128)
-        berlin = Berlin(container = container,
-                        namespace = "303",
-                        sample = SVSample.parse("mikey303/303 VCO SQR.wav"))
-        container.add_instrument(berlin)
+        machine = Berlin(container = container,
+                         namespace = "303",
+                         sample = SVSample.parse("mikey303/303 VCO SQR.wav"))
+        container.add_instrument(machine)
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx|vol".split("|")}
-        berlin.render(generator = BassLine,
+        machine.render(generator = BassLine,
                        seeds = seeds)
-        berlin.render(generator = GhostEcho,
+        machine.render(generator = GhostEcho,
                        seeds = seeds)
         patches = container.patches
         self.assertTrue(patches != [])

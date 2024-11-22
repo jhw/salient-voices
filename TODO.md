@@ -1,14 +1,15 @@
 ### short [01-detroit]
 
 - add sample toggling
-- add clap and hat
 
 ### medium
 
 - instrument tests fail when run individually
+
 - rename instruments as patches
 - introduce patch sub directoriees for beats, bass
 
+- adding a second track to detroit demo results in it being appended!
 
 ### roadmap
 
@@ -42,6 +43,7 @@
 
 ### done
 
+- replace berlin reference with machine
 - dynamic perkons lookup
 - add pattern densities
 - abstract track code
