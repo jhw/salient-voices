@@ -48,6 +48,26 @@ def random_groove_fn(fns = [perkons.swing,
                             perkons.dynamic]):
     return random.choice(fns)
 
+def add_track(container, pool, tag):
+    samples = pool.match(lambda sample: tag in sample.tags)
+    random.shuffle(samples)        
+    machine = Machine(container = container,
+                      namespace = tag,
+                      samples = samples)
+    container.add_instrument(machine)
+    container.spawn_patch()
+    seeds = {key: int(random.random() * 1e8)
+             for key in "sample|vol|fx".split("|")}
+    pattern_fn = random_pattern_fn()
+    groove_fn = random_groove_fn()
+    env = {"pattern": pattern_fn,
+           "groove": groove_fn}
+    machine.render(generator = Beat,
+                   seeds = seeds,
+                   env = env)
+    machine.render(generator = GhostEcho,
+                   seeds = seeds)
+
 class DetroitTest(unittest.TestCase):
 
     def test_detroit(self):
@@ -58,24 +78,9 @@ class DetroitTest(unittest.TestCase):
                                 bpm = 120,
                                 n_ticks = 64)
         for tag in ["kick"]:
-            samples = pool.match(lambda sample: tag in sample.tags)
-            random.shuffle(samples)        
-            detroit = Detroit(container = container,
-                              namespace = tag,
-                              samples = samples)
-            container.add_instrument(detroit)
-            container.spawn_patch()
-            seeds = {key: int(random.random() * 1e8)
-                     for key in "sample|vol|fx".split("|")}
-            pattern_fn = random_pattern_fn()
-            groove_fn = random_groove_fn()
-            env = {"pattern": pattern_fn,
-                   "groove": groove_fn}
-            detroit.render(generator = Beat,
-                           seeds = seeds,
-                       env = env)
-            detroit.render(generator = GhostEcho,
-                           seeds = seeds)
+            add_track(container = container,
+                      pool = pool,
+                      tag = tag)            
         patches = container.patches
         self.assertTrue(patches != [])
         patch = patches[0]
