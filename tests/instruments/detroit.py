@@ -5,6 +5,7 @@ from sv.container import SVContainer
 from sv.instruments.detroit import Detroit
 from sv.sampler import SVSampleRef as SVSample
 
+import inspect
 import random
 import unittest
 import yaml
@@ -40,13 +41,9 @@ def random_pattern_fn(patterns):
                                            random.choice(patterns))}
     return bjorklund(**pattern_kwargs)
 
-def random_groove_fn(fns = [perkons.swing,
-                            perkons.shifted_swing,
-                            perkons.push,
-                            perkons.pull,
-                            perkons.humanise,
-                            perkons.dynamic]):
-    return random.choice(fns)
+def random_groove_fn(mod = perkons):
+    function_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]    
+    return getattr(mod, random.choice(function_names))
 
 def add_track(container, pool, tag,
               max_density = 0.9,

@@ -1,6 +1,5 @@
 ### short [01-detroit]
 
-- dynamic perkons lookup
 - add sample toggling
 - add clap and hat
 
@@ -43,6 +42,7 @@
 
 ### done
 
+- dynamic perkons lookup
 - add pattern densities
 - abstract track code
 - add perkons.humanise
