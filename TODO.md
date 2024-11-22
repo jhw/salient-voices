@@ -1,6 +1,7 @@
 ### short [01-detroit]
 
-- add perkons.humanise
+- abstract track code
+- dynamic perkons lookup
 - add pattern densities
 - add sample toggling
 - add clap and hat
@@ -44,6 +45,7 @@
 
 ### done
 
+- add perkons.humanise
 - shuffle samples at main level
 - add multiple grooves
 - add extra samples 

@@ -18,7 +18,8 @@ hat: (oh)|(ch)|(open)|(closed)|(hh)|(hat)
 def Beat(self, n, rand, pattern, groove, **kwargs):   
     for i in range(n):
         if pattern(i):
-            volume = groove(i)
+            volume = groove(i = i,
+                            rand = rand["vol"])
             trig_block = self.note(volume = volume)
             yield i, trig_block
 
@@ -43,7 +44,7 @@ def random_groove_fn(fns = [perkons.swing,
                             perkons.shifted_swing,
                             perkons.push,
                             perkons.pull,
-                            # perkons.humanise,
+                            perkons.humanise,
                             perkons.dynamic]):
     return random.choice(fns)
 
@@ -65,7 +66,7 @@ class DetroitTest(unittest.TestCase):
             container.add_instrument(detroit)
             container.spawn_patch()
             seeds = {key: int(random.random() * 1e8)
-                     for key in "sample|fx".split("|")}
+                     for key in "sample|vol|fx".split("|")}
             pattern_fn = random_pattern_fn()
             groove_fn = random_groove_fn()
             env = {"pattern": pattern_fn,

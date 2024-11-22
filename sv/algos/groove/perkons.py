@@ -12,7 +12,7 @@ def push(i, **kwargs):
 def pull(i, **kwargs):
     return 0.9 if i % 4 == 0 else 1.0
 
-def humanise(i, rand):
+def humanise(i, rand, **kwargs):
     return max(0.85, min(1.0, 0.9 + rand.uniform(-0.05, 0.05)))
 
 def dynamic(i, **kwargs):
