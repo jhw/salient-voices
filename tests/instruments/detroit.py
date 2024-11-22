@@ -39,8 +39,13 @@ def random_pattern_fn(patterns = TidalPatterns):
                                            random.choice(patterns))}
     return bjorklund(**pattern_kwargs)
 
-def random_groove_fn():
-    return perkons.shifted_swing
+def random_groove_fn(fns = [perkons.swing,
+                            perkons.shifted_swing,
+                            perkons.push,
+                            perkons.pull,
+                            # perkons.humanise,
+                            perkons.dynamic]):
+    return random.choice(fns)
 
 class DetroitTest(unittest.TestCase):
 
@@ -50,24 +55,26 @@ class DetroitTest(unittest.TestCase):
         pool, _ = banks.spawn_pool(tag_patterns = PoolTagPatterns)
         container = SVContainer(banks = banks,
                                 bpm = 120,
-                                n_ticks = 128)
-        samples = pool.match(lambda sample: "kick" in sample.tags)
-        detroit = Detroit(container = container,
-                          namespace = "kick",
-                          samples = samples)
-        container.add_instrument(detroit)
-        container.spawn_patch()
-        seeds = {key: int(random.random() * 1e8)
-                 for key in "sample|fx".split("|")}
-        pattern_fn = random_pattern_fn()
-        groove_fn = random_groove_fn()
-        env = {"pattern": pattern_fn,
-               "groove": groove_fn}
-        detroit.render(generator = Beat,
-                       seeds = seeds,
+                                n_ticks = 64)
+        for tag in ["kick"]:
+            samples = pool.match(lambda sample: tag in sample.tags)
+            random.shuffle(samples)        
+            detroit = Detroit(container = container,
+                              namespace = tag,
+                              samples = samples)
+            container.add_instrument(detroit)
+            container.spawn_patch()
+            seeds = {key: int(random.random() * 1e8)
+                     for key in "sample|fx".split("|")}
+            pattern_fn = random_pattern_fn()
+            groove_fn = random_groove_fn()
+            env = {"pattern": pattern_fn,
+                   "groove": groove_fn}
+            detroit.render(generator = Beat,
+                           seeds = seeds,
                        env = env)
-        detroit.render(generator = GhostEcho,
-                       seeds = seeds)
+            detroit.render(generator = GhostEcho,
+                           seeds = seeds)
         patches = container.patches
         self.assertTrue(patches != [])
         patch = patches[0]

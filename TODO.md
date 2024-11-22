@@ -1,9 +1,8 @@
 ### short [01-detroit]
 
-- add multiple grooves
-- shuffle samples at main level
+- add perkons.humanise
 - add pattern densities
-- add sample switching
+- add sample toggling
 - add clap and hat
 
 ### medium
@@ -45,6 +44,8 @@
 
 ### done
 
+- shuffle samples at main level
+- add multiple grooves
 - add extra samples 
 - add pool
 - add random pattern
