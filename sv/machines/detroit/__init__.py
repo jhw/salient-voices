@@ -1,10 +1,10 @@
-from sv.instruments import SVInstrumentBase, SVTrigBlock, load_yaml
+from sv.machines import SVMachineBase, SVTrigBlock, load_yaml
 from sv.trigs import SVSampleTrig, SVModTrig, ctrl_value
 
 import rv
 import rv.api
 
-class Detroit(SVInstrumentBase):
+class Detroit(SVMachineBase):
 
     Modules = load_yaml(__file__, "modules.yaml")
     

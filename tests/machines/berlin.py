@@ -1,7 +1,7 @@
 import sv.algos.groove.perkons as perkons
 from sv.banks import SVBank
 from sv.container import SVContainer
-from sv.instruments.berlin import Berlin
+from sv.machines.berlin import Berlin
 from sv.sampler import SVSampleRef as SVSample
 
 import random
@@ -51,14 +51,14 @@ def GhostEcho(self, n, rand,
 class BerlinTest(unittest.TestCase):
 
     def test_berlin(self):
-        bank = SVBank.load_zip("sv/instruments/berlin/mikey303.zip")
+        bank = SVBank.load_zip("sv/machines/berlin/mikey303.zip")
         container = SVContainer(banks = [bank],
                                 bpm = 240,
                                 n_ticks = 128)
         machine = Berlin(container = container,
                          namespace = "303",
                          sample = SVSample.parse("mikey303/303 VCO SQR.wav"))
-        container.add_instrument(machine)
+        container.add_machine(machine)
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx|vol".split("|")}

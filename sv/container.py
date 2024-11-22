@@ -28,21 +28,21 @@ class SVContainer:
         self.banks = banks
         self.bpm = bpm
         self.n_ticks = n_ticks
-        self.instruments = []
+        self.machines = []
         self.patches = []
 
     def spawn_patch(self):
         self.patches.append(SVTrigPatch(n_ticks = self.n_ticks,
                                         trigs = [])) # NB force reset
 
-    def add_instrument(self, instrument):
-        self.instruments.append(instrument)
+    def add_machine(self, machine):
+        self.machines.append(machine)
 
     @property
     def modules(self):
         modules = {}
-        for instrument in self.instruments:            
-            modules.update({mod["name"]:mod for mod in instrument.modules})
+        for machine in self.machines:            
+            modules.update({mod["name"]:mod for mod in machine.modules})
         return list(modules.values())
 
     def add_trigs(self, trigs):

@@ -2,7 +2,7 @@ from sv.algos.euclid import bjorklund, TidalPatterns
 from sv.algos.groove import perkons
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
-from sv.instruments.detroit import Detroit
+from sv.machines.detroit import Detroit
 from sv.sampler import SVSampleRef as SVSample
 
 import inspect
@@ -57,7 +57,7 @@ def add_track(container, pool, tag,
     machine = Detroit(container = container,
                       namespace = tag,
                       samples = samples)
-    container.add_instrument(machine)
+    container.add_machine(machine)
     seeds = {key: int(random.random() * 1e8)
              for key in "sample|vol|fx".split("|")}
     track_patterns = [[pulses, steps] for pulses, steps in patterns

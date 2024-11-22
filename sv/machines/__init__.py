@@ -18,7 +18,7 @@ class SVTrigBlock:
             trigs.append(trig)
         return trigs
         
-class SVInstrumentBase:
+class SVMachineBase:
 
     def __init__(self, container, namespace, root = None):
         self.container = container
