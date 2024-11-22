@@ -1,7 +1,7 @@
 import sv.algos.groove.perkons as perkons
 from sv.banks import SVBank
 from sv.container import SVContainer
-from sv.machines.berlin import Berlin
+from sv.machines.bass.berlin import Berlin
 from sv.sampler import SVSampleRef as SVSample
 
 import random
@@ -48,10 +48,10 @@ def GhostEcho(self, n, rand,
                                          echo_feedback = feedback_level)
             yield i, trig_block
 
-class BerlinTest(unittest.TestCase):
+class BerlinBassTest(unittest.TestCase):
 
     def test_berlin(self):
-        bank = SVBank.load_zip("sv/machines/berlin/mikey303.zip")
+        bank = SVBank.load_zip("sv/machines/bass/berlin/mikey303.zip")
         container = SVContainer(banks = [bank],
                                 bpm = 240,
                                 n_ticks = 128)

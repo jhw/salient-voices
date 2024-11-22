@@ -1,13 +1,10 @@
-### short [01-detroit]
+### short
 
-- rename instruments as patches
-- introduce patch sub directoriees for beats, bass
+- track mixing levels
 
 ### medium
 
-- track mixing level
-
-### sv
+### euclid09
 
 - track mixing levels
 
@@ -40,6 +37,8 @@
 
 ### done
 
+- rename instruments as patches
+- introduce patch sub directoriees for beats, bass
 - adding a second track to detroit demo results in it being appended!
 - instrument tests fail when run individually
 - add sample toggling
