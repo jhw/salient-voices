@@ -2,8 +2,6 @@
 
 ### medium
 
-- instrument tests fail when run individually
-
 - rename instruments as patches
 - introduce patch sub directoriees for beats, bass
 
@@ -15,6 +13,8 @@
 - euclid09 new features
 
 ### thoughts
+
+- why does running detroit test individually give wav file warnings?
 
 ### gists 
 
@@ -41,6 +41,7 @@
 
 ### done
 
+- instrument tests fail when run individually
 - add sample toggling
 - replace berlin reference with machine
 - dynamic perkons lookup
