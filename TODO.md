@@ -1,8 +1,17 @@
-### short
+### short [01-detroit]
 
-- instrument tests fail when run individually
+- add random pattern
+- add pool
+- add extra samples 
+- add sample switching
+- add clap and hat
 
 ### medium
+
+- instrument tests fail when run individually
+- rename instruments as patches
+- introduce patch sub directoriees for beats, bass
+
 
 ### roadmap
 
