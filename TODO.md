@@ -1,9 +1,8 @@
 ### short [01-detroit]
 
-- add random pattern
-- add pool
-- add extra samples 
+- shuffle samples at main level
 - add sample switching
+- add euclid densities
 - add clap and hat
 
 ### medium
@@ -45,6 +44,9 @@
 
 ### done
 
+- add extra samples 
+- add pool
+- add random pattern
 - detroit euclid
 - detroit perkons
 - bad controller values with 3 digits pass silently 

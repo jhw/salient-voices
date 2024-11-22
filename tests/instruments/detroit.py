@@ -1,16 +1,24 @@
-from sv.algos.euclid import bjorklund
+from sv.algos.euclid import bjorklund, TidalPatterns
 from sv.algos.groove import perkons
-from sv.banks import SVBank
+from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
 from sv.instruments.detroit import Detroit
 from sv.sampler import SVSampleRef as SVSample
 
 import random
 import unittest
+import yaml
 
-def Beat(self, n, **kwargs):
-    pattern_fn = bjorklund(steps = 16,
-                           pulses = 5)    
+PoolTagPatterns = yaml.safe_load("""
+kick: (kick)|(kik)|(kk)|(bd)
+clap: (clap)|(clp)|(cp)|(hc)
+hat: (oh)|(ch)|(open)|(closed)|(hh)|(hat)
+""")
+
+def Beat(self, n, rand, patterns = TidalPatterns, **kwargs):
+    pattern_kwargs = {k: v for k, v in zip(["pulses", "steps"],
+                                           random.choice(patterns))}
+    pattern_fn = bjorklund(**pattern_kwargs)
     for i in range(n):
         if pattern_fn(i):
             volume = perkons.shifted_swing(i)
@@ -33,17 +41,19 @@ class DetroitTest(unittest.TestCase):
 
     def test_detroit(self):
         bank = SVBank.load_zip("tests/pico-default.zip")
-        container = SVContainer(banks = [bank],
+        banks = SVBanks([bank])
+        pool, _ = banks.spawn_pool(tag_patterns = PoolTagPatterns)
+        container = SVContainer(banks = banks,
                                 bpm = 120,
                                 n_ticks = 128)
-        sample = SVSample.parse("pico-default/00 BD.wav")
+        samples = pool.match(lambda sample: "kick" in sample.tags)
         detroit = Detroit(container = container,
-                          namespace = "909",
-                          samples = [sample])
+                          namespace = "kick",
+                          samples = samples)
         container.add_instrument(detroit)
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
-                 for key in ["fx"]}
+                 for key in "sample|fx".split("|")}
         detroit.render(generator = Beat,
                        seeds = seeds)
         detroit.render(generator = GhostEcho,
