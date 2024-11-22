@@ -15,13 +15,10 @@ clap: (clap)|(clp)|(cp)|(hc)
 hat: (oh)|(ch)|(open)|(closed)|(hh)|(hat)
 """)
 
-def Beat(self, n, rand, patterns = TidalPatterns, **kwargs):
-    pattern_kwargs = {k: v for k, v in zip(["pulses", "steps"],
-                                           random.choice(patterns))}
-    pattern_fn = bjorklund(**pattern_kwargs)
+def Beat(self, n, rand, pattern, groove, **kwargs):   
     for i in range(n):
-        if pattern_fn(i):
-            volume = perkons.shifted_swing(i)
+        if pattern(i):
+            volume = groove(i)
             trig_block = self.note(volume = volume)
             yield i, trig_block
 
@@ -36,7 +33,15 @@ def GhostEcho(self, n, rand,
             trig_block = self.modulation(echo_wet = wet_level,
                                          echo_feedback = feedback_level)
             yield i, trig_block
-            
+
+def random_pattern_fn(patterns = TidalPatterns):
+    pattern_kwargs = {k: v for k, v in zip(["pulses", "steps"],
+                                           random.choice(patterns))}
+    return bjorklund(**pattern_kwargs)
+
+def random_groove_fn():
+    return perkons.shifted_swing
+
 class DetroitTest(unittest.TestCase):
 
     def test_detroit(self):
@@ -54,8 +59,13 @@ class DetroitTest(unittest.TestCase):
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
                  for key in "sample|fx".split("|")}
+        pattern_fn = random_pattern_fn()
+        groove_fn = random_groove_fn()
+        env = {"pattern": pattern_fn,
+               "groove": groove_fn}
         detroit.render(generator = Beat,
-                       seeds = seeds)
+                       seeds = seeds,
+                       env = env)
         detroit.render(generator = GhostEcho,
                        seeds = seeds)
         patches = container.patches

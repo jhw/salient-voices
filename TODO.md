@@ -1,8 +1,9 @@
 ### short [01-detroit]
 
+- add multiple grooves
 - shuffle samples at main level
+- add pattern densities
 - add sample switching
-- add euclid densities
 - add clap and hat
 
 ### medium
