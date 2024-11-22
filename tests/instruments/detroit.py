@@ -58,7 +58,6 @@ def add_track(container, pool, tag,
                       namespace = tag,
                       samples = samples)
     container.add_instrument(machine)
-    container.spawn_patch()
     seeds = {key: int(random.random() * 1e8)
              for key in "sample|vol|fx".split("|")}
     track_patterns = [[pulses, steps] for pulses, steps in patterns
@@ -79,13 +78,20 @@ class DetroitTest(unittest.TestCase):
 
     def test_detroit(self, tracks = [{"tag": "kick",
                                       "max_density": 0.6,
-                                      "min_density": 0.2}]):
+                                      "min_density": 0.2},
+                                     {"tag": "clap",
+                                      "max_density": 0.4,
+                                      "min_density": 0.1},
+                                     {"tag": "hat",
+                                      "max_density": 0.9,
+                                      "min_density": 0.5}]):
         bank = SVBank.load_zip("tests/pico-default.zip")
         banks = SVBanks([bank])
         pool, _ = banks.spawn_pool(tag_patterns = PoolTagPatterns)
         container = SVContainer(banks = banks,
                                 bpm = 120,
                                 n_ticks = 64)
+        container.spawn_patch()
         for track in tracks:
             add_track(container = container,
                       pool = pool,

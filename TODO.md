@@ -1,16 +1,15 @@
 ### short [01-detroit]
 
-### medium
-
 - rename instruments as patches
 - introduce patch sub directoriees for beats, bass
 
-- adding a second track to detroit demo results in it being appended!
+### medium
 
-### roadmap
+- track mixing level
 
-- polly gist sv update
-- euclid09 new features
+### sv
+
+- track mixing levels
 
 ### thoughts
 
@@ -41,6 +40,7 @@
 
 ### done
 
+- adding a second track to detroit demo results in it being appended!
 - instrument tests fail when run individually
 - add sample toggling
 - replace berlin reference with machine
