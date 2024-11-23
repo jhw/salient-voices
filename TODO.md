@@ -1,7 +1,5 @@
 ### short
 
-- allow generators to return trig
-
 ### medium
 
 - track mixing levels
@@ -11,6 +9,9 @@
 - track mixing levels
 
 ### thoughts
+
+- allow generators to return single trig?
+  - doesn't work like that; machine functions always return block
 
 - why does running detroit test individually give wav file warnings?
 
