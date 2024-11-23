@@ -1,7 +1,10 @@
 ### short [01-reverse-retrig]
 
+- get_wav needs to return io.BytesIO
+
 - add skeleton for performing pydub operations
 - implement rev, ret2, ret4
+
 - skeleton hats test
 - adjust hats test for rev/ret
 

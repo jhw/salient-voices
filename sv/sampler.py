@@ -22,24 +22,24 @@ class SVBaseSampler(rv.modules.sampler.Sampler):
 
     def init_rv_sample(self, src):
         rv_sample = self.Sample()
-        freq, snd = wavfile.read(src)
-        if snd.dtype.name == 'int16':
+        freq, buf = wavfile.read(src)
+        if buf.dtype.name == 'int16':
             rv_sample.format = self.Format.int16
-        elif snd.dtype.name == 'float32':
+        elif buf.dtype.name == 'float32':
             rv_sample.format = self.Format.float32
         else:
-            raise RuntimeError(f"dtype {snd.dtype.name} Not supported")
-        if len(snd.shape) == 1:
-            size, = snd.shape
+            raise RuntimeError(f"dtype {buf.dtype.name} Not supported")
+        if len(buf.shape) == 1:
+            size, = buf.shape
             channels = 1
         else:
-            size, channels = snd.shape
+            size, channels = buf.shape
         rv_sample.rate = freq
         rv_sample.channels = {
             1: rv.modules.sampler.Sampler.Channels.mono,
             2: rv.modules.sampler.Sampler.Channels.stereo,
         }[channels]
-        rv_sample.data = snd.data.tobytes()
+        rv_sample.data = buf.data.tobytes()
         return rv_sample
 
 class SVSlotSampler(SVBaseSampler):
