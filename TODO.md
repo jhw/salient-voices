@@ -1,6 +1,5 @@
 ### short [01-reverse-retrig]
 
-- pass bpm, tpb to sampler
 - add mod support to svsamplenote
 - add skeleton for performing pydub operations
 - implement rev, ret2, ret4
@@ -47,6 +46,7 @@
 
 ### done
 
+- pass bpm, tpb to sampler
 - install pydub
 - pass arg to test.py
 - rename instruments as patches

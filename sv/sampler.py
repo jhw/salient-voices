@@ -137,7 +137,7 @@ class SVSlotSampler(SVBaseSampler):
         self.relative_note = 16
     """
 
-    def __init__(self, banks, pool, root_note, max_slots=MaxSlots):
+    def __init__(self, banks, pool, root_note, bpm, max_slots=MaxSlots):
         SVBaseSampler.__init__(self, banks=banks, pool=pool)
         notes = list(rv.note.NOTE)
         root = notes.index(root_note)

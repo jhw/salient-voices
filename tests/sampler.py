@@ -103,7 +103,8 @@ class SamplerTest(unittest.TestCase):
         pool, _ = self.banks.spawn_pool(tag_mapping)
         sampler = SVSlotSampler(banks = self.banks,
                                 pool = pool,
-                                root_note = rv.note.NOTE.C5)
+                                root_note = rv.note.NOTE.C5,
+                                bpm = 120)
         samples = [sample for sample in sampler.samples
                    if sample]
         self.assertEqual(len(samples), 2)
