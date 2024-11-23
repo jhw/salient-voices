@@ -3,7 +3,7 @@ from sv.algos.groove import perkons
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
 from sv.machines.beats.detroit import Detroit
-from sv.sampler import SVSampleRef as SVSample
+from sv.sampler import SVSample
 
 import inspect
 import random

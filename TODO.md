@@ -1,6 +1,5 @@
 ### short [01-reverse-retrig]
 
-- separate sample and sampler
 - add skeleton for performing pydub operations
 - implement rev, ret2, ret4
 - skeleton hats test
@@ -46,6 +45,7 @@
 
 ### done
 
+- separate sample and sampler
 - add mod support to svsamplenote
 - pass bpm, tpb to sampler
 - install pydub

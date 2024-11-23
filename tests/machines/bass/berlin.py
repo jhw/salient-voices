@@ -2,7 +2,7 @@ import sv.algos.groove.perkons as perkons
 from sv.banks import SVBank
 from sv.container import SVContainer
 from sv.machines.bass.berlin import Berlin
-from sv.sampler import SVSampleRef as SVSample
+from sv.sampler import SVSample
 
 import random
 import unittest
