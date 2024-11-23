@@ -1,8 +1,10 @@
 ### short
 
-- track mixing levels
+- allow generators to return trig
 
 ### medium
+
+- track mixing levels
 
 ### euclid09
 
@@ -37,6 +39,7 @@
 
 ### done
 
+- pass arg to test.py
 - rename instruments as patches
 - introduce patch sub directoriees for beats, bass
 - adding a second track to detroit demo results in it being appended!
