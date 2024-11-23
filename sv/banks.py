@@ -87,7 +87,9 @@ class SVBanks(list):
         file_paths = banks[sample.bank_name].zip_file.namelist()
         if sample.file_path not in file_paths:
             raise RuntimeError(f"path {sample.file_path} not found in bank {sample.bank_name}")
-        return banks[sample.bank_name].zip_file.open(sample.file_path, 'r')
+        with banks[sample.bank_name].zip_file.open(sample.file_path, 'r') as file_entry:
+            file_content = file_entry.read()
+        return io.BytesIO(file_content)
     
 class SVPool(list):
 

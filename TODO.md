@@ -1,8 +1,6 @@
-### short [01-reverse-retrig]
+### short [01-sampler-fx]
 
-- get_wav needs to return io.BytesIO
-
-- add skeleton for performing pydub operations
+- with_audio_segment decorator
 - implement rev, ret2, ret4
 
 - skeleton hats test
@@ -46,6 +44,8 @@
 
 ### done
 
+- add skeleton for performing pydub operation
+- get_wav needs to return io.BytesIO
 - separate sample and sampler
 - add mod support to svsamplenote
 - pass bpm, tpb to sampler
