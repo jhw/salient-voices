@@ -1,7 +1,7 @@
 from scipy.io import wavfile
 
-# import rv
-import rv.modules  # why?
+import rv
+import rv.modules
 import warnings
 
 warnings.simplefilter("ignore", wavfile.WavFileWarning)

@@ -18,8 +18,6 @@
 - allow generators to return single trig?
   - doesn't work like that; machine functions always return block
 
-- why does running detroit test individually give wav file warnings?
-
 ### gists 
 
 - reverse/retrig

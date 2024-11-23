@@ -5,7 +5,6 @@ from sv.utils.colours import init_colours
 import importlib
 import math
 import rv
-import rv.api # why?
 
 Volume, PatternHeight = 256, 16
 
