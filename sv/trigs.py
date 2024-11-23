@@ -1,16 +1,19 @@
 import rv
 
-def ctrl_value(value):
+def hex_value(value):
+    try:
+        return int(value, 16)
+    except ValueError:
+        raise RuntimeError(f"couldn't parse {value} as hex")
+
+def controller_value(value):
     if isinstance(value, str):
-        try:
-            return int(value, 16)
-        except ValueError:
-            raise RuntimeError(f"couldn't parse FX value {value} as hex string")
+        return hex_value(value)
     elif isinstance(value, int):
         return value
     else:
-        raise RuntimeError(f"FX value of {value} found; must be int or hex string")
-
+        raise RuntimeError(f"controller_value supports int and hex string only [{value}]")
+    
 class SVTrigBase:
 
     def __init__(self, target, i):
@@ -169,7 +172,7 @@ class SVFXTrig(SVTrigBase):
     def render(self, modules, *args):
         mod = modules[self.mod]
         mod_id = 1 + mod.index
-        value = ctrl_value(self.value)
+        value = controller_value(self.value)
         return rv.note.Note(module = mod_id,
                             pattern = self.fx,
                             val = value)
@@ -202,7 +205,7 @@ class SVModTrig(SVTrigBase):
         mod, controller = modules[self.mod], controllers[self.mod]
         mod_id = 1 + mod.index
         ctrl_id = self.CtrlMult * controller[self.ctrl]
-        value = ctrl_value(self.value)
+        value = controller_value(self.value)
         return rv.note.Note(module = mod_id,
                             ctl = ctrl_id,
                             val = value)

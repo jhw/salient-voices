@@ -1,5 +1,5 @@
 from sv.machines import SVMachineBase, SVTrigBlock, load_yaml
-from sv.trigs import SVSampleTrig, SVModTrig, ctrl_value
+from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
 import rv
 import rv.api
@@ -55,7 +55,7 @@ class Detroit(SVMachineBase):
                    echo_feedback = None):
         trigs = []
         if echo_wet:
-            wet_level = int(level * ctrl_value(echo_wet))
+            wet_level = int(level * controller_value(echo_wet))
             trigs.append(SVModTrig(target = f"{self.namespace}Echo/wet",
                                    value = wet_level))
         if echo_feedback:

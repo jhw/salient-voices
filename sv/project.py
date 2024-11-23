@@ -1,5 +1,5 @@
 from sv.banks import SVPool, SVBanks
-from sv.trigs import SVSampleTrig
+from sv.trigs import SVSampleTrig, controller_value
 from sv.utils.colours import init_colours
 
 import importlib
@@ -95,11 +95,10 @@ def init_project(fn):
 
 def init_modules(fn):
     def wrapped(self,
-                project,
                 patches,
                 modules,
-                colours,
-                banks):
+                banks,
+                **kwargs):
         for mod in modules:
             mod_class = load_class(mod["class"])
             mod_kwargs = {}
@@ -110,11 +109,10 @@ def init_modules(fn):
                               "root_note": mod["root"]}
             mod["instance"] = mod_class(**mod_kwargs)
         return fn(self,
-                  project = project,
                   patches = patches,
                   modules = modules,
-                  colours = colours,
-                  banks = banks)
+                  banks = banks,
+                  **kwargs)
     return wrapped
 
 """
@@ -126,14 +124,13 @@ class SVProject:
     @init_modules
     def render_modules(self,                     
                        project,
-                       patches,                       
                        modules,
                        colours, 
-                       banks,
                        x_offset = 128,
                        y_offset = 128,
                        x0 = 128,
-                       y0 = 256):
+                       y0 = 256,
+                       **kwargs):
         output = project.modules[0]
         setattr(output, "x", x0)
         setattr(output, "y", y0)
@@ -149,15 +146,7 @@ class SVProject:
             setattr(mod, "y", y)
             if "defaults" in mod_item:
                 for key, raw_value in mod_item["defaults"].items():
-                    if isinstance(raw_value, str):
-                        try:
-                            value = int(raw_value, 16)
-                        except ValueError:
-                            raise RuntimeError(f"couldn't parse {value} as hex string")
-                    elif isinstance(raw_value, int):
-                        value = raw_value
-                    else:
-                        raise RuntimeError(f"fx value of {raw_value} found; must be int or hex string")
+                    value = controller_value(raw_value)
                     try:
                         mod.set_raw(key, value)
                     except rv.errors.ControllerValueError as error:
