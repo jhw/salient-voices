@@ -1,7 +1,8 @@
 ### short [01-sampler-fx]
 
-- look old detroit test
-- modify for fx
+- apply groove to fx demo
+- better parameterisation of apply_fx sz parameter
+- reverve + retrig
 
 ### medium
 
@@ -21,14 +22,11 @@
 
 ### gists 
 
-- reverse/retrig
-
 - freezing
 - polly vocals/ vocoder
 - 303 slide
 - pico play modes
 - resampling
-
 - granular
 - sv drum
 - kicker
@@ -44,6 +42,8 @@
 
 ### done
 
+- look old detroit test
+- modify for fx
 - nest detroit tests
 - implement rev, ret2, ret4
 - with_audio_segment decorator

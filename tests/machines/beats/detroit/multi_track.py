@@ -100,7 +100,7 @@ class DetroitMultiTrackBeatsTest(unittest.TestCase):
         self.assertTrue(patches != [])
         patch = patches[0]
         self.assertTrue(patch.trigs != [])
-        container.write_project("tmp/detroit-demo.sunvox")
+        container.write_project("tmp/detroit-multi-track-demo.sunvox")
         
 if __name__ == "__main__":
     unittest.main()

@@ -7,6 +7,8 @@ class SVSample(dict):
         REV = "rev"
         RET2 = "ret2"
         RET4 = "ret4"
+        RET8 = "ret8"
+        RET16 = "ret16"
 
     @staticmethod
     def parse(sample_str):

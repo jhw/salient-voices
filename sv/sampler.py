@@ -3,6 +3,7 @@ from scipy.io import wavfile
 
 from sv.sample import SVSample
 
+import io
 import rv
 import rv.modules
 import warnings
@@ -66,8 +67,8 @@ class SVSlotSampler(SVBaseSampler):
         for i, sample in enumerate(self.pool):
             # init rv sample and insert into self.samples
             raw_wav_io = banks.get_wav(sample)
-            if sample.fx :
-                wav_io = self.apply_fx(sample, wav_io, 60 / bpm)
+            if sample.fx:
+                wav_io = self.apply_fx(sample, raw_wav_io, bpm)
             else:
                 wav_io = raw_wav_io
             rv_sample = self.init_rv_sample(wav_io)
@@ -76,24 +77,29 @@ class SVSlotSampler(SVBaseSampler):
             # bind rv sample to keyboard/note
             self.note_samples[rv_notes[i]] = i
 
-    def apply_fx(self, sample, wav_io, t):
+    def apply_fx(self, sample, wav_io, bpm, sz = 0.5):
+        t = int(1000 * sz * 60 / bpm)
         if sample.fx == SVSample.FX.REV:
-            self.apply_reverse(wav_io, t)
+            return self.apply_reverse(wav_io, t)
         elif sample.fx == SVSample.FX.RET2:
-            self.apply_retrig(wav_io, t, n = 2)
+            return self.apply_retrig(wav_io, t, n = 2)
         elif sample.fx == SVSample.FX.RET4:
-            self.apply_retrig(wav_io, t, n = 4)
+            return self.apply_retrig(wav_io, t, n = 4)
+        elif sample.fx == SVSample.FX.RET8:
+            return self.apply_retrig(wav_io, t, n = 8)
+        elif sample.fx == SVSample.FX.RET16:
+            return self.apply_retrig(wav_io, t, n = 16)
         else:
             raise RuntimeError(f"fx {sample.fx} not supported")
 
     @with_audio_segment
-    def apply_reverse(audio, t):
+    def apply_reverse(self, audio, t, **kwargs):
         trimmed_audio = audio[:t]
         reversed_audio = trimmed_audio.reverse()
         return reversed_audio
 
     @with_audio_segment
-    def apply_retrig(audio, t, n):
+    def apply_retrig(self, audio, t, n, **kwargs):
         trimmed_audio = audio[:t]        
         slice_duration = t // n
         first_slice = trimmed_audio[:slice_duration]
