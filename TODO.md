@@ -1,13 +1,13 @@
 ### short [01-sampler-fx]
 
-- with_audio_segment decorator
-- implement rev, ret2, ret4
-
 - skeleton hats test
 - adjust hats test for rev/ret
 
 ### medium
 
+- decompiler to ask for directory
+- shred lagrange point
+- refactor project render_blank()
 - track mixing levels
 
 ### euclid09
@@ -44,6 +44,8 @@
 
 ### done
 
+- implement rev, ret2, ret4
+- with_audio_segment decorator
 - add skeleton for performing pydub operation
 - get_wav needs to return io.BytesIO
 - separate sample and sampler

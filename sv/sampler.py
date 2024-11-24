@@ -1,6 +1,8 @@
 from pydub import AudioSegment
 from scipy.io import wavfile
 
+from sv.sample import SVSample
+
 import rv
 import rv.modules
 import warnings
@@ -42,6 +44,17 @@ class SVBaseSampler(rv.modules.sampler.Sampler):
         }[channels]
         rv_sample.data = snd.data.tobytes()
         return rv_sample
+
+def with_audio_segment(fn):
+    def wrapped(self, wav_io, t, **kwargs):
+        wav_io.seek(0)
+        audio = AudioSegment.from_file(wav_io, format="wav")
+        audio_out = fn(self, audio, t, **kwargs)
+        wav_out = io.BytesIO()        
+        audio_out.export(wav_out, format="wav")
+        wav_out.seek(0)
+        return wav_out
+    return wrapped
     
 class SVSlotSampler(SVBaseSampler):
 
@@ -64,20 +77,28 @@ class SVSlotSampler(SVBaseSampler):
             self.note_samples[rv_notes[i]] = i
 
     def apply_fx(self, sample, wav_io, t):
-        if sample.fx == "rev":
-            self.apply_rev(wav_io, t)
-        elif sample.fx == "ret2":
-            self.apply_ret(wav_io, t, n = 2)
-        elif sample.fx == "ret4":
-            self.apply_ret(wav_io, bpm, n = 4)
+        if sample.fx == SVSample.FX.REV:
+            self.apply_reverse(wav_io, t)
+        elif sample.fx == SVSample.FX.RET2:
+            self.apply_retrig(wav_io, t, n = 2)
+        elif sample.fx == SVSample.FX.RET4:
+            self.apply_retrig(wav_io, t, n = 4)
         else:
             raise RuntimeError(f"fx {sample.fx} not supported")
 
-    def apply_rev(wav_io, t):
-        pass
+    @with_audio_segment
+    def apply_reverse(audio, t):
+        trimmed_audio = audio[:t]
+        reversed_audio = trimmed_audio.reverse()
+        return reversed_audio
 
-    def apply_ret(wav_io, bpm, t):
-        pass
+    @with_audio_segment
+    def apply_retrig(audio, t, n):
+        trimmed_audio = audio[:t]        
+        slice_duration = t // n
+        first_slice = trimmed_audio[:slice_duration]
+        retriggered_audio = first_slice * n
+        return retriggered_audio
 
     def index_of(self, sample):
         return self.sample_strings.index(str(sample))
