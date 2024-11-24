@@ -1,7 +1,7 @@
 ### short [01-sampler-fx]
 
-- skeleton hats test
-- adjust hats test for rev/ret
+- look old detroit test
+- modify for fx
 
 ### medium
 
@@ -44,6 +44,7 @@
 
 ### done
 
+- nest detroit tests
 - implement rev, ret2, ret4
 - with_audio_segment decorator
 - add skeleton for performing pydub operation

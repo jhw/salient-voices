@@ -74,7 +74,7 @@ def add_track(container, pool, tag,
     machine.render(generator = GhostEcho,
                    seeds = seeds)
 
-class DetroitBeatsTest(unittest.TestCase):
+class DetroitMultiTrackBeatsTest(unittest.TestCase):
     
     def test_detroit(self, tracks = [{"tag": "kick",
                                       "max_density": 0.6,
