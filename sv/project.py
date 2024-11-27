@@ -106,7 +106,8 @@ def init_modules(fn):
                 pool = mod.init_sample_pool(patches)
                 mod_kwargs = {"banks": banks,
                               "pool": pool,
-                              "root_note": mod["root"],
+                              "root": mod["root"],
+                              "cutoff": mod["cutoff"],
                               "bpm": bpm}
             mod["instance"] = mod_class(**mod_kwargs)
         return fn(self,

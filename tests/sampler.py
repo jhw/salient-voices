@@ -16,7 +16,8 @@ class SamplerTest(unittest.TestCase):
         pool, _ = self.banks.spawn_pool(tag_mapping)
         sampler = SVSlotSampler(banks = self.banks,
                                 pool = pool,
-                                root_note = rv.note.NOTE.C5,
+                                root = rv.note.NOTE.C5,
+                                cutoff = 0.5,
                                 bpm = 120)
         samples = [sample for sample in sampler.samples
                    if sample]

@@ -59,11 +59,12 @@ def with_audio_segment(fn):
     
 class SVSlotSampler(SVBaseSampler):
 
-    def __init__(self, banks, pool, root_note, bpm, max_slots=MaxSlots):
+    def __init__(self, banks, pool, root, cutoff, bpm, max_slots=MaxSlots):
         SVBaseSampler.__init__(self, banks=banks, pool=pool)
         self.sample_strings = [str(sample) for sample in self.pool]
+        self.cutoff = cutoff
         rv_notes = list(rv.note.NOTE)                
-        root = rv_notes.index(root_note)
+        root = rv_notes.index(root)
         for i, sample in enumerate(self.pool):
             # init rv sample and insert into self.samples
             raw_wav_io = banks.get_wav(sample)
