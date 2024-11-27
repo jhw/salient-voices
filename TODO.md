@@ -1,6 +1,6 @@
 ### short 
 
-- decompiler is reversing modules
+- test for sample error
 
 ### medium
 
@@ -40,6 +40,7 @@
 
 ### done
 
+- decompiler is reversing modules
 - decompiler to ask for directory
 - add beats interface with xxx_sound nomenclature (not xxx_sample)
 - look old detroit test

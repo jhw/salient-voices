@@ -277,7 +277,7 @@ def dump_modules(project_name, chain, patch, dest_dir):
     mod_struct = [{"name": mod.name,
                    "class": str(mod.__class__).split("'")[1],
                    "controller_values": mod.controller_values}
-                  for mod in patch.modules if mod.index != 0]
+                  for mod in reversed(patch.modules) if mod.index != 0] # NB reversed
     file_name = f"{dest_dir}/{project_name}/modules/{chain}.json"
     dir_name = "/".join(file_name.split("/")[:-1])
     if not os.path.exists(dir_name):        
