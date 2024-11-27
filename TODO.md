@@ -1,19 +1,19 @@
 ### short [01-sampler-fx]
 
-- apply groove to fx demo
-- better parameterisation of apply_fx sz parameter
-- reverve + retrig
+- add beats interface with xxx_sound nomenclature (not xxx_sample)
+
+- decompiler to ask for directory
 
 ### medium
 
-- decompiler to ask for directory
-- shred lagrange point
+- apply groove to fx demo
+- better parameterisation of apply_fx sz parameter
+- global sample cutoff
+
 - refactor project render_blank()
-- track mixing levels
+- shred lagrange point
 
 ### euclid09
-
-- track mixing levels
 
 ### thoughts
 
