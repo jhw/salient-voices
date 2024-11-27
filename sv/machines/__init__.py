@@ -1,4 +1,4 @@
-from sv.project import load_class, does_class_extend
+from sv.project import SVModule
 
 from random import Random
 
@@ -66,8 +66,7 @@ class SVSamplerMachine(SVMachine):
     def modules(self):
         modules = super().modules
         for mod in modules:
-            if does_class_extend(load_class(mod["class"]),
-                                 rv.modules.sampler.Sampler):
+            if SVModule(mod).is_sampler:
                 mod["root"] = self.root
         return modules
     

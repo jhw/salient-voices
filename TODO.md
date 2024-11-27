@@ -1,6 +1,5 @@
 ### short [01-sampler-cutoff]
 
-- machine to use SVModule
 - add cutoff partner to sv sampler machine base with default value 1
 - pass cutoff from machine base to sampler along with root
 - replace sampler sz variable with self cutoff 
@@ -46,6 +45,7 @@
 
 ### done
 
+- machine to use SVModule
 - subclass SV machine base for sampler 
 - remove machine group base classes
 - test for mechanical heart sampler error
