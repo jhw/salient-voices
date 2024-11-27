@@ -46,6 +46,7 @@
 
 ### done
 
+- remove machine group base classes
 - test for mechanical heart sampler error
 - decompiler is reversing modules
 - decompiler to ask for directory
