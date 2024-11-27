@@ -1,6 +1,12 @@
-### short 
+### short [01-sampler-cutoff]
 
-- test for sample error
+- subclass SV machine base for sampler 
+- add cutoff partner to sv sampler machine base with default value 1
+- pass cutoff from machine base to sampler along with root
+- replace sampler sz variable with self cutoff 
+- move cutoff default value from sv sampler machine base to Detroit class 
+- add skeleton code to sampler to trim all samples
+- implement sample trimming
 
 ### medium
 
@@ -40,6 +46,7 @@
 
 ### done
 
+- test for mechanical heart sampler error
 - decompiler is reversing modules
 - decompiler to ask for directory
 - add beats interface with xxx_sound nomenclature (not xxx_sample)
