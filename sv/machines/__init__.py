@@ -1,6 +1,9 @@
+from sv.project import load_class, does_class_extend
+
 from random import Random
 
 import copy
+import rv
 import yaml
 
 def load_yaml(base_path, file_name):
@@ -20,10 +23,9 @@ class SVTrigBlock:
         
 class SVMachine:
 
-    def __init__(self, container, namespace, root = None):
+    def __init__(self, container, namespace):
         self.container = container
         self.namespace = namespace.lower().capitalize()
-        self.root = root
         self.defaults = {}
 
     def render(self, generator,
@@ -52,9 +54,22 @@ class SVMachine:
                     if link_name != "Output":
                         mod["links"][i] = f"{self.namespace}{link_name}"
             mod["name"] = f"{self.namespace}{mod_name}"
-            if self.root:
+        return modules
+
+class SVSamplerMachine(SVMachine):
+
+    def __init__(self, container, namespace, root):
+        super().__init__(container, namespace)
+        self.root = root
+
+    @property
+    def modules(self):
+        modules = super().modules
+        for mod in modules:
+            if does_class_extend(load_class(mod["class"]),
+                                 rv.modules.sampler.Sampler):
                 mod["root"] = self.root
         return modules
-        
+    
 if __name__ == "__main__":
     pass
