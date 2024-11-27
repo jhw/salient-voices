@@ -1,6 +1,6 @@
-### short [01-sampler-fx]
+### short 
 
-- decompiler to ask for directory
+- decompiler is reversing modules
 
 ### medium
 
@@ -40,6 +40,7 @@
 
 ### done
 
+- decompiler to ask for directory
 - add beats interface with xxx_sound nomenclature (not xxx_sample)
 - look old detroit test
 - modify for fx
