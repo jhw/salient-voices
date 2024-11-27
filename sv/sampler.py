@@ -90,24 +90,23 @@ class SVSlotSampler(SVBaseSampler):
         else:
             return self.apply_trim(wav_io, t)
 
+    def trim_audio(self, audio, t, fade_out = 3):
+        return audio[:t].fade_out(fade_out)
+        
     @with_audio_segment
     def apply_trim(self, audio, t, **kwargs):
-        trimmed_audio = audio[:t]
-        return trimmed_audio
+        return self.trim_audio(audio, t)
         
     @with_audio_segment
     def apply_reverse(self, audio, t, **kwargs):
-        trimmed_audio = audio[:t]
-        reversed_audio = trimmed_audio.reverse()
-        return reversed_audio
+        return self.trim_audio(audio, t).reverse()
 
     @with_audio_segment
     def apply_retrig(self, audio, t, n, **kwargs):
-        trimmed_audio = audio[:t]        
+        trimmed_audio = self.trim_audio(audio, t)
         slice_duration = t // n
         first_slice = trimmed_audio[:slice_duration]
-        retriggered_audio = first_slice * n
-        return retriggered_audio
+        return first_slice * n
 
     def index_of(self, sample):
         return self.sample_strings.index(str(sample))

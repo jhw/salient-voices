@@ -1,7 +1,5 @@
 ### short
 
-- add fade out when trimming
-
 - apply groove to fx demo
 
 ### medium
@@ -35,6 +33,7 @@
 
 ### done
 
+- add fade out when trimming
 - shred lagrange point
 - global sample cutoff
 - replace sampler sz variable with self cutoff 

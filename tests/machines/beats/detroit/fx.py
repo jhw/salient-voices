@@ -8,10 +8,10 @@ import inspect
 import random
 import unittest
 
-def Beat(self, n, rand, quantise = 2, **kwargs):   
+def Beat(self, n, rand, threshold = 0.33333, **kwargs):   
     for i in range(n):
         self.randomise_sound(rand["sample"])
-        if 0 == i % quantise:
+        if rand["beat"].random() < threshold:
             trig_block = self.note(volume = 1)
             yield i, trig_block
 
@@ -54,7 +54,7 @@ class DetroitFXBeatsTest(unittest.TestCase):
                           samples = samples)
         container.add_machine(machine)
         seeds = {key: int(random.random() * 1e8)
-                 for key in "sample|fx".split("|")}
+                 for key in "beat|sample|fx".split("|")}
         machine.render(generator = Beat,
                        seeds = seeds)
         machine.render(generator = GhostEcho,
