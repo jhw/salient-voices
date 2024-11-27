@@ -1,10 +1,11 @@
-from sv.machines import SVMachineBase, SVTrigBlock, load_yaml
+from sv.machines import SVTrigBlock, load_yaml
+from sv.machines.bass import SVBassMachine
 from sv.trigs import SVNoteOffTrig, SVModTrig, SVSampleTrig
 
 import rv
 import rv.api
 
-class Berlin(SVMachineBase):
+class Berlin(SVBassMachine):
 
     Modules = load_yaml(__file__, "modules.yaml")
     

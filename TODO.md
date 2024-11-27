@@ -1,7 +1,5 @@
 ### short [01-sampler-fx]
 
-- add beats interface with xxx_sound nomenclature (not xxx_sample)
-
 - decompiler to ask for directory
 
 ### medium
@@ -42,6 +40,7 @@
 
 ### done
 
+- add beats interface with xxx_sound nomenclature (not xxx_sample)
 - look old detroit test
 - modify for fx
 - nest detroit tests

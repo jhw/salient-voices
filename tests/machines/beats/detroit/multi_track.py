@@ -19,7 +19,7 @@ hat: (oh)|(ch)|(open)|(closed)|(hh)|(hat)
 def Beat(self, n, rand, pattern, groove, temperature, **kwargs):   
     for i in range(n):
         if rand["sample"].random() < temperature:
-            self.toggle_sample() 
+            self.toggle_sound() 
         volume = groove(i = i,
                         rand = rand["vol"])
         if pattern(i):

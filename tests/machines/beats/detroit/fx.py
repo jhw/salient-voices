@@ -10,7 +10,7 @@ import unittest
 
 def Beat(self, n, rand, quantise = 2, **kwargs):   
     for i in range(n):
-        self.randomise_sample(rand["sample"])
+        self.randomise_sound(rand["sample"])
         if 0 == i % quantise:
             trig_block = self.note(volume = 1)
             yield i, trig_block

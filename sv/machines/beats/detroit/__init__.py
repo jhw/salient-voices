@@ -1,10 +1,11 @@
-from sv.machines import SVMachineBase, SVTrigBlock, load_yaml
+from sv.machines import SVTrigBlock, load_yaml
+from sv.machines.beats import SVBeatsMachine
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
 import rv
 import rv.api
 
-class Detroit(SVMachineBase):
+class Detroit(SVBeatsMachine):
 
     Modules = load_yaml(__file__, "modules.yaml")
     
@@ -22,16 +23,16 @@ class Detroit(SVMachineBase):
         self.samples = samples
         self.sample_index = sample_index
 
-    def toggle_sample(self):
+    def toggle_sound(self):
         self.sample_index = 1 - int(self.sample_index > 0)
 
-    def increment_sample(self):
+    def increment_sound(self):
         self.sample_index = (self.sample_index + 1) % len(self.samples)
 
-    def decrement_sample(self):
+    def decrement_sound(self):
         self.sample_index = (self.sample_index - 1) % len(self.samples)
         
-    def randomise_sample(self, rand):
+    def randomise_sound(self, rand):
         self.sample_index = rand.choice(list(range(len(self.samples))))
         
     @property
