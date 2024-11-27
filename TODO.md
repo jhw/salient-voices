@@ -1,25 +1,16 @@
-### short [01-sampler-cutoff]
+### short
 
-- move cutoff default value from sv sampler machine base to Detroit class 
-- replace sampler sz variable with self cutoff 
-- add skeleton code to sampler to trim all samples
-- implement sample trimming
+- add fade out when trimming
+
+- apply groove to fx demo
 
 ### medium
 
-- apply groove to fx demo
-- better parameterisation of apply_fx sz parameter
-- global sample cutoff
-
-- refactor project render_blank()
-- shred lagrange point
+- sv drum
 
 ### euclid09
 
 ### thoughts
-
-- allow generators to return single trig?
-  - doesn't work like that; machine functions always return block
 
 ### gists 
 
@@ -29,7 +20,6 @@
 - pico play modes
 - resampling
 - granular
-- sv drum
 - kicker
 
 ### long
@@ -38,11 +28,20 @@
 
 ### thoughts
 
+- refactor project render_blank()?
+  - not worth it
 - rename note as relative_note?
   - is fine as is
 
 ### done
 
+- shred lagrange point
+- global sample cutoff
+- replace sampler sz variable with self cutoff 
+- add skeleton code to sampler to trim all samples
+- implement sample trimming
+- move cutoff default value from sv sampler machine base to Detroit class 
+- increased default cutoff value and added detroit default cutoff of 0.5
 - pass cutoff from machine base to sampler along with root
 - add cutoff partner to sv sampler machine base with default value 1
 - machine to use SVModule

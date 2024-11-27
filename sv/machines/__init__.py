@@ -58,7 +58,7 @@ class SVMachine:
 
 class SVSamplerMachine(SVMachine):
 
-    def __init__(self, container, namespace, root, cutoff = 0.5):
+    def __init__(self, container, namespace, root, cutoff = 1e8):
         super().__init__(container, namespace)
         self.root = root
         self.cutoff = cutoff

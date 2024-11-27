@@ -9,13 +9,15 @@ class Detroit(SVSamplerMachine):
     Modules = load_yaml(__file__, "modules.yaml")
     
     def __init__(self, container, namespace, samples,
+                 sample_cutoff = 0.5,
                  sample_index = 0,
                  relative_note = 0,
                  echo_wet = 0,
                  echo_feedback = 0):
         super().__init__(container = container,
                          namespace = namespace,
-                         root = rv.note.NOTE.C5 + relative_note)
+                         root = rv.note.NOTE.C5 + relative_note,
+                         cutoff = sample_cutoff)
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback}}
 

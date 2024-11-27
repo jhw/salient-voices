@@ -68,18 +68,15 @@ class SVSlotSampler(SVBaseSampler):
         for i, sample in enumerate(self.pool):
             # init rv sample and insert into self.samples
             raw_wav_io = banks.get_wav(sample)
-            if sample.fx:
-                wav_io = self.apply_fx(sample, raw_wav_io, bpm)
-            else:
-                wav_io = raw_wav_io
+            wav_io = self.apply_fx(sample, raw_wav_io, bpm)
             rv_sample = self.init_rv_sample(wav_io)
             rv_sample.relative_note += (root + sample.note - i)
             self.samples[i] = rv_sample
             # bind rv sample to keyboard/note
             self.note_samples[rv_notes[i]] = i
 
-    def apply_fx(self, sample, wav_io, bpm, sz = 0.5):
-        t = int(1000 * sz * 60 / bpm)
+    def apply_fx(self, sample, wav_io, bpm):
+        t = int(1000 * self.cutoff * 60 / bpm)
         if sample.fx == SVSample.FX.REV:
             return self.apply_reverse(wav_io, t)
         elif sample.fx == SVSample.FX.RET2:
@@ -91,8 +88,13 @@ class SVSlotSampler(SVBaseSampler):
         elif sample.fx == SVSample.FX.RET16:
             return self.apply_retrig(wav_io, t, n = 16)
         else:
-            raise RuntimeError(f"fx {sample.fx} not supported")
+            return self.apply_trim(wav_io, t)
 
+    @with_audio_segment
+    def apply_trim(self, audio, t, **kwargs):
+        trimmed_audio = audio[:t]
+        return trimmed_audio
+        
     @with_audio_segment
     def apply_reverse(self, audio, t, **kwargs):
         trimmed_audio = audio[:t]
