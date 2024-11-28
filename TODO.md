@@ -1,10 +1,11 @@
 ### short
 
-- apply groove to fx demo
-
 ### medium
 
-- sv drum
+- stutter effect
+- simplify Berlin demo as single note with minimal sustain options
+- add groove to Detroit FX demo
+- SV drum / Dusseldorf 
 
 ### euclid09
 
