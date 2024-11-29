@@ -5,7 +5,8 @@
 - stutter effect
 - simplify Berlin demo as single note with minimal sustain options
 - add groove to Detroit FX demo
-- SV drum / Dusseldorf 
+- SV drum machine (dusseldorf)
+- detroit resampler demo
 
 ### euclid09
 
@@ -17,7 +18,6 @@
 - polly vocals/ vocoder
 - 303 slide
 - pico play modes
-- resampling
 - granular
 - kicker
 
