@@ -1,11 +1,12 @@
 ### short
 
+- test for name rendering
+
 ### medium
 
-- test for name rendering
-- stutter effect
-- detroit resampler demo
 - SV drum machine (dusseldorf)
+- detroit resampler demo
+- stutter effect
 
 ### thoughts
 
