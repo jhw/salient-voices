@@ -2,9 +2,7 @@
 
 ### medium
 
-- matthew reply
 - test for name rendering
-- add groove to Detroit FX demo
 - stutter effect
 - simplify Berlin demo as single note with minimal sustain options
 - detroit resampler demo
@@ -35,6 +33,8 @@
 
 ### done
 
+- add groove to Detroit FX demo
+- matthew reply
 - machine tests
 - add fade out when trimming
 - shred lagrange point
