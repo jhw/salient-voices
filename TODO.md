@@ -4,7 +4,6 @@
 
 - test for name rendering
 - stutter effect
-- simplify Berlin demo as single note with minimal sustain options
 - detroit resampler demo
 - SV drum machine (dusseldorf)
 
@@ -33,6 +32,7 @@
 
 ### done
 
+- simplify Berlin demo as single note with minimal sustain options
 - add groove to Detroit FX demo
 - matthew reply
 - machine tests

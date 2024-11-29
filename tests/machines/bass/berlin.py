@@ -8,18 +8,18 @@ import random
 import unittest
 
 def BassLine(self, n, rand,
-             block_sizes = [1, 2, 4],
-             root_offset = -5,
-             note_scale = [-2, 0, 0, 0, 5],
-             note_density = 0.66666,
+             block_sizes = [1, 1, 2, 4],
+             root_offset = -4,
+             note_scale = [-2, 0, 0],
+             note_density = 0.333333,
              quantise = 2,
-             filter_frequencies = ["1000", "1800", "2000"],
+             filter_frequencies = ["2000", "2000", "2000", "2800"],
              **kwargs):
     i = 0
     while True:
         volume = perkons.humanise(rand = rand["vol"],
                                   i = i)
-        if i >= (n - 2):
+        if i >= (n - max(block_sizes)):
             break
         elif (rand["seq"].random() < note_density and
               0 == i % quantise):
@@ -54,7 +54,7 @@ class BerlinBassTest(unittest.TestCase):
         bank = SVBank.load_zip("sv/machines/bass/berlin/mikey303.zip")
         container = SVContainer(banks = [bank],
                                 bpm = 240,
-                                n_ticks = 128)
+                                n_ticks = 64)
         machine = Berlin(container = container,
                          namespace = "303",
                          sample = SVSample.parse("mikey303/303 VCO SQR.wav"))
