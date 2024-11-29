@@ -1,21 +1,23 @@
 ### short
 
+- don't maintain test copy of pico-default
+
+- add groove to Detroit FX demo
+
 ### medium
 
 - stutter effect
 - simplify Berlin demo as single note with minimal sustain options
-- add groove to Detroit FX demo
-- SV drum machine (dusseldorf)
 - detroit resampler demo
-
-### euclid09
+- SV drum machine (dusseldorf)
 
 ### thoughts
 
 ### gists 
 
 - freezing
-- polly vocals/ vocoder
+- polly vocals/vocoder
+- autotune
 - 303 slide
 - pico play modes
 - granular
