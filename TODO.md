@@ -1,9 +1,11 @@
 ### short
 
-- test for name rendering
+- berlin test must scale echo delay according to bpm
+- berlin test (all tests?) should have a granularity parameter
 
 ### medium
 
+- test for name rendering
 - SV drum machine (dusseldorf)
 - detroit resampler demo
 - stutter effect
