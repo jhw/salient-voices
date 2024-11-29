@@ -1,11 +1,14 @@
 ### short
 
-- don't maintain test copy of pico-default
-
-- add groove to Detroit FX demo
+- machine tests
+- machine.is_sample_based
 
 ### medium
 
+- matthew reply
+- test for name rendering
+- don't maintain test copy of pico-default
+- add groove to Detroit FX demo
 - stutter effect
 - simplify Berlin demo as single note with minimal sustain options
 - detroit resampler demo
