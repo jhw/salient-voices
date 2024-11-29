@@ -1,6 +1,5 @@
 ### short
 
-- machine tests
 - machine.is_sample_based
 
 ### medium
@@ -39,6 +38,7 @@
 
 ### done
 
+- machine tests
 - add fade out when trimming
 - shred lagrange point
 - global sample cutoff
