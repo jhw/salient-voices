@@ -1,5 +1,7 @@
 ### short
 
+- wrap decompiler sampler error
+- report decompiler fmx error
 - simplify berlin variable names
 - berlin density 1.0 leaves gaps
 - update polly gist
