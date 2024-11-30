@@ -11,8 +11,10 @@ class Berlin(SVSamplerMachine):
     def __init__(self, container, namespace, sample,
                  relative_note = 0,
                  filter_resonance = "575", # no idea re format; doesn't seem to correspond to either of the values in the UI; max seems to be around "599"
-                 echo_wet = 64, # '2000'
-                 echo_feedback = 64, # '2000'
+                 echo_delay = 36,
+                 echo_delay_unit = 3, # tick
+                 echo_wet = 32, # '1000'
+                 echo_feedback = 32, # '1000'
                  reverb_wet = 2): # setting as integer as easier when wanting tiny amounts only
         super().__init__(container = container,
                          namespace = namespace,
@@ -20,7 +22,9 @@ class Berlin(SVSamplerMachine):
         self.sample = sample
         self.defaults = {"Filter": {"resonance": filter_resonance},
                          "Echo": {"wet": echo_wet,
-                                  "feedback": echo_feedback},
+                                  "feedback": echo_feedback,
+                                  "delay": echo_delay,
+                                  "delay_unit": echo_delay_unit},
                          "Reverb": {"wet": reverb_wet}}
 
     def note(self,

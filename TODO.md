@@ -1,8 +1,5 @@
 ### short
 
-- berlin demo to pass explicit delay parameter
-- berlin demo to accept scaling arg
-- make berlin demo sparser and add more echo
 - test project layout
 - test for name rendering
 
@@ -37,6 +34,9 @@
 
 ### done
 
+- berlin demo to pass explicit delay parameter
+- berlin demo to accept scaling arg
+- make berlin demo sparser and add more echo
 - simplify Berlin demo as single note with minimal sustain options
 - add groove to Detroit FX demo
 - matthew reply
