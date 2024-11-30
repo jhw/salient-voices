@@ -7,6 +7,7 @@ from rv.readers.reader import read_sunvox_file
 
 from collections import OrderedDict
 
+import argparse
 import json
 import logging
 import math
@@ -266,7 +267,7 @@ def create_patch(project, chain, groups,
     return patch
 
 def dump_sunvox(project_name, chain, patch, dest_dir):
-    file_name = f"{dest_dir}/{project_name}/sunvox/{chain}.sunvox"
+    file_name = f"{dest_dir}/{project_name}/{chain}.sunvox"
     dir_name = "/".join(file_name.split("/")[:-1])
     if not os.path.exists(dir_name):
         os.makedirs(dir_name)
@@ -278,7 +279,7 @@ def dump_modules(project_name, chain, patch, dest_dir):
                    "class": str(mod.__class__).split("'")[1],
                    "controller_values": mod.controller_values}
                   for mod in reversed(patch.modules) if mod.index != 0] # NB reversed
-    file_name = f"{dest_dir}/{project_name}/modules/{chain}.json"
+    file_name = f"{dest_dir}/{project_name}/{chain}.json"
     dir_name = "/".join(file_name.split("/")[:-1])
     if not os.path.exists(dir_name):        
         os.makedirs(dir_name)
@@ -297,44 +298,60 @@ def decompile_project(project_name, project, dest_dir, max_chains = 100):
     if len(chains) > max_chains:
         raise RuntimeError(f"skipping as {len(chains)} chains found")
     groups = PatternGroups.parse_timeline(project)
+    patch = None
     for chain in chains:
-        patch = create_patch(project = project,
-                             chain = chain,
-                             groups = groups)
-        if (patch.modules != [] and
+        try:
+            patch = create_patch(project = project,
+                                 chain = chain,
+                                 groups = groups)
+        except Exception:
+            logging.warning(f"{traceback.format_exc()}")
+        if (patch and
+            patch.modules != [] and
             patch.patterns != []):
             logging.info(chain)
-            dump_sunvox(project_name, chain, patch, dest_dir)
             dump_modules(project_name, chain, patch, dest_dir)
-
+            dump_sunvox(project_name, chain, patch, dest_dir)
+            
 def parse_project_name(filename):
     return "-".join([tok.lower() for tok in re.split("\\W", filename.split("/")[-1].split(".")[0]) if tok != ''])
-                
-if __name__ == "__main__":
-    try:
-        if len(sys.argv) < 3:
-            raise RuntimeError("please enter src, dest directories")        
-        src_dir, dest_dir = sys.argv[1:3]
-        if not os.path.exists(src_dir):
-            raise RuntimeError("src directory does not exist")
-        if not os.path.isdir(src_dir):
-            raise RuntimeError("src is not a directory")
-        if not os.path.exists(dest_dir):
-            os.makedirs(dest_dir)
-        for filename in sorted(os.listdir(src_dir)):
-            if not filename.endswith(".sunvox"):
-                continue
-            project_name = parse_project_name(filename)
-            logging.info(f"--- {project_name} ---")
-            abs_filename = f"{src_dir}/{filename}"
-            try:
-                project = read_sunvox_file(abs_filename)
-                decompile_project(project_name, project, dest_dir)
-            except RuntimeError as error:
-                logging.warning(str(error))
-            except Exception as e:
-                logging.warning(f"{traceback.format_exc()}")
-    except RuntimeError as error:
-        logging.error(str(error))
 
+def main():
+    parser = argparse.ArgumentParser(description="Decompile SunVox projects.")
+    parser.add_argument("src_dir", type=str, help="Source directory containing .sunvox files.")
+    parser.add_argument("dest_dir", type=str, help="Destination directory to store decompiled projects.")
+    
+    args = parser.parse_args()
+    src_dir = args.src_dir
+    dest_dir = args.dest_dir
+
+    # Check if source directory exists and is a directory
+    if not os.path.exists(src_dir):
+        logging.error("Source directory does not exist.")
+        sys.exit(1)
+    if not os.path.isdir(src_dir):
+        logging.error("Source is not a directory.")
+        sys.exit(1)
+
+    # Create destination directory if it doesn't exist
+    if not os.path.exists(dest_dir):
+        os.makedirs(dest_dir)
+
+    # Process .sunvox files in the source directory
+    for filename in sorted(os.listdir(src_dir)):
+        if not filename.endswith(".sunvox"):
+            continue
+        project_name = parse_project_name(filename)
+        logging.info(f"--- {project_name} ---")
+        abs_filename = f"{src_dir}/{filename}"
+        try:
+            project = read_sunvox_file(abs_filename)
+            decompile_project(project_name, project, dest_dir)
+        except RuntimeError as error:
+            logging.warning(str(error))
+        except Exception:
+            logging.warning(f"{traceback.format_exc()}")
+
+if __name__ == "__main__":
+    main()
                         

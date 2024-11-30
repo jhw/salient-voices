@@ -1,7 +1,5 @@
 ### short
 
-- wrap decompiler sampler error
-- report decompiler fmx error
 - simplify berlin variable names
 - berlin density 1.0 leaves gaps
 - update polly gist
@@ -55,6 +53,8 @@
 
 ### done
 
+- wrap decompiler sampler error
+- report decompiler fmx error
 - pass perkons as env variable
 - 303 basic note
 - reply to matthew
