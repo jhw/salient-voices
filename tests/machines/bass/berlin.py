@@ -7,32 +7,45 @@ from sv.sample import SVSample
 import random
 import unittest
 
+def simple_note(self, n, i, rand, tpb, root_offset,
+                note_offsets = [0, 0, 0, -2],
+                sustain_terms = [0.5, 0.5, 0.5, 2],
+                filter_frequencies = ["2000", "3000", "3000", "3000", "5000"]):
+    note = root_offset + rand["note"].choice(note_offsets)
+    volume = perkons.humanise(rand = rand["vol"], i = int(i / tpb))
+    terms = [term for term in sustain_terms
+             if (term * tpb) <= (n - i)]
+    if terms == []:
+        return None, None
+    term = int(rand["note"].choice(terms) * tpb)
+    freq = rand["fx"].choice(filter_frequencies)
+    block =  self.note(note = note,
+                       volume = volume,
+                       sustain_term = term, 
+                       filter_freq = freq)
+    return block, term
+
 def BassLine(self, n, rand, tpb,
-             block_sizes = [1, 1, 1, 4],
              root_offset = -4,
-             note_scale = [-0, 0, 0, -2],
-             note_density = 0.333333,
+             note_density = 0.5,
              quantise = 1,
-             filter_frequencies = ["3000", "3000", "3000", "4000"],
              **kwargs):
     i = 0
     while True:
-        volume = perkons.humanise(rand = rand["vol"], i = i)
-        block_size = rand["seq"].choice(block_sizes)
-        note_offset = root_offset + rand["note"].choice(note_scale)
-        sustain_term = min(n - (i + 1), rand["note"].choice(block_sizes))
-        filter_freq = rand["fx"].choice(filter_frequencies)
-        has_note = rand["seq"].random() < note_density
         if i >= n:
             break
-        elif (has_note and
+        elif (rand["seq"].random() < note_density and
               0 == i % (quantise * tpb)):
-            trig_block = self.note(note = note_offset,
-                                   volume = volume,
-                                   sustain_term = sustain_term, 
-                                   filter_freq = filter_freq)
-            yield i, trig_block
-            i += 1 + sustain_term
+            block, term = simple_note(self,
+                                      n = n,
+                                      i = i,
+                                      rand = rand,
+                                      tpb = tpb,
+                                      root_offset = root_offset)
+            if not block:
+                break
+            yield i, block
+            i += 1 + term
         else:
             i += 1
             
@@ -46,7 +59,9 @@ class BerlinBassTest(unittest.TestCase):
         machine = Berlin(container = container,
                          namespace = "303",
                          sample = SVSample.parse("mikey303/303 VCO SQR.wav"),
-                         echo_delay = 36 * tpb)
+                         echo_wet = 16,
+                         echo_feedback = 16,
+                         echo_delay = int(36 * tpb))
         container.add_machine(machine)
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)

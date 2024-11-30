@@ -1,8 +1,8 @@
 ### short
 
-- 303 basic note
-- synchronise mod and pattern colours
+- pass perkons as env variable
 - test for name rendering
+- synchronise mod and pattern colours
 - update polly gist
 
 ### medium
@@ -44,6 +44,7 @@
 
 ### done
 
+- 303 basic note
 - reply to matthew
 - fix polly demo
 - test project layout
