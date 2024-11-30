@@ -10,11 +10,7 @@ import unittest
 def simple_note(self, n, i, rand, tpb, root_offset, note_offsets, sustain_terms, filter_frequencies):
     note = root_offset + rand["note"].choice(note_offsets)
     volume = perkons.humanise(rand = rand["vol"], i = int(i / tpb))
-    terms = [term for term in sustain_terms
-             if (term * tpb) <= (n - i)]
-    if terms == []:
-        return None, None
-    term = int(rand["note"].choice(terms) * tpb)
+    term = int(rand["note"].choice(sustain_terms) * tpb)
     freq = rand["fx"].choice(filter_frequencies)
     block =  self.note(note = note,
                        volume = volume,
@@ -32,9 +28,7 @@ def BassLine(self, n, rand, tpb,
              **kwargs):
     i = 0
     while True:
-        if i >= n:
-            break
-        elif (rand["seq"].random() < note_density and
+        if (rand["seq"].random() < note_density and
               0 == i % (quantise * tpb)):
             block, term = simple_note(self,
                                       n = n,
@@ -45,12 +39,11 @@ def BassLine(self, n, rand, tpb,
                                       note_offsets = note_offsets,
                                       sustain_terms = sustain_terms,
                                       filter_frequencies = filter_frequencies)
-            if not block:
-                break
             yield i, block
-            i += 1 + term
-        else:
-            i += 1
+            i += term
+        i += 1
+        if i >= n:
+            break
             
 class BerlinBassTest(unittest.TestCase):
 

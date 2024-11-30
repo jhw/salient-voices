@@ -31,6 +31,8 @@
 
 ### thoughts
 
+- force final end note in berlin demo?
+  - not worth it; extra complexity for no change in sound
 - refactor main detroit test to use tpb?
   - it's really not worth it until you want to mix (eg) bass with beats, which is something for the downstream client level to handle
   - maybe euclid v1-1 which can handle bass 
