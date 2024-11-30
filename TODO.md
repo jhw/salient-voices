@@ -1,13 +1,12 @@
 ### short
 
-- refactor main detroit test to use bpm
 - 303 basic note
 - synchronise mod and pattern colours
 - test for name rendering
+- update polly gist
 
 ### medium
 
-- update polly gist
 - 303 slide_up/down, slide_to, trill notes
 - add start variable to sample
 - SV drum machine / tokyo
@@ -22,7 +21,6 @@
 - freezing
 - polly vocals/vocoder
 - autotune
-- 303 slide
 - pico play modes
 - granular
 - kicker
@@ -33,6 +31,12 @@
 
 ### thoughts
 
+- refactor main detroit test to use tpb?
+  - it's really not worth it until you want to mix (eg) bass with beats, which is something for the downstream client level to handle
+  - maybe euclid v1-1 which can handle bass 
+  - for now berlin acts as a good example
+- implement metamodules?
+  - simply not worth it as you need to encode note generating behaviour, when metamodules are just simple wrappers  
 - refactor project render_blank()?
   - not worth it
 - rename note as relative_note?
