@@ -1,16 +1,22 @@
 ### short
 
-- test for name rendering
 - synchronise mod and pattern colours
 - update polly gist
 
 ### medium
 
-- 303 slide_up/down, slide_to, trill notes
+- 303 slide up/down
+- 303 slide to
+- 303 trill
+
 - add start variable to sample
 - SV drum machine / tokyo
-- berlin test clustering and trilling
 - detroit resampler demo
+
+### issues
+
+- mechanical heart (and others) sample loading
+- names not rendering properly
 
 ### thoughts
 
