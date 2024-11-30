@@ -1,19 +1,21 @@
 ### short
 
-- berlin test must scale echo delay according to bpm
-- berlin test (all tests?) should have a granularity parameter
+- berlin demo to pass explicit delay parameter
+- berlin demo to accept scaling arg
+- make berlin demo sparser and add more echo
+- test project layout
+- test for name rendering
 
 ### medium
 
-- test for name rendering
-- SV drum machine (dusseldorf)
+- SV drum machine / tokyp
 - detroit resampler demo
-- stutter effect
 
 ### thoughts
 
 ### gists 
 
+- stutter effect
 - freezing
 - polly vocals/vocoder
 - autotune
