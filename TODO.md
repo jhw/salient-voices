@@ -1,5 +1,7 @@
 ### short
 
+- update polly gist
+
 - fix polly demo
 
 - module and pattern colours are no longer in sync
