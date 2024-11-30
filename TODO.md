@@ -1,6 +1,5 @@
 ### short
 
-- pass perkons as env variable
 - test for name rendering
 - synchronise mod and pattern colours
 - update polly gist
@@ -46,6 +45,7 @@
 
 ### done
 
+- pass perkons as env variable
 - 303 basic note
 - reply to matthew
 - fix polly demo

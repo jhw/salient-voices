@@ -4,12 +4,13 @@ from sv.container import SVContainer
 from sv.machines.bass.berlin import Berlin
 from sv.sample import SVSample
 
+import inspect
 import random
 import unittest
 
-def simple_note(self, n, i, rand, tpb, root_offset, note_offsets, sustain_terms, filter_frequencies):
+def simple_note(self, n, i, rand, groove, tpb, root_offset, note_offsets, sustain_terms, filter_frequencies):
     note = root_offset + rand["note"].choice(note_offsets)
-    volume = perkons.humanise(rand = rand["vol"], i = int(i / tpb))
+    volume = groove(rand = rand["vol"], i = int(i / tpb))
     term = int(rand["note"].choice(sustain_terms) * tpb)
     freq = rand["fx"].choice(filter_frequencies)
     block =  self.note(note = note,
@@ -18,7 +19,7 @@ def simple_note(self, n, i, rand, tpb, root_offset, note_offsets, sustain_terms,
                        filter_freq = freq)
     return block, term
 
-def BassLine(self, n, rand, tpb,
+def BassLine(self, n, rand, tpb, groove,
              root_offset = -4,
              note_offsets = [0, 0, 0, -2],
              sustain_terms = [0.5, 0.5, 0.5, 2],
@@ -34,6 +35,7 @@ def BassLine(self, n, rand, tpb,
                                       n = n,
                                       i = i,
                                       rand = rand,
+                                      groove = groove,
                                       tpb = tpb,
                                       root_offset = root_offset,
                                       note_offsets = note_offsets,
@@ -44,7 +46,11 @@ def BassLine(self, n, rand, tpb,
         i += 1
         if i >= n:
             break
-            
+
+def random_groove_fn(mod = perkons):
+    function_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]    
+    return getattr(mod, random.choice(function_names))
+        
 class BerlinBassTest(unittest.TestCase):
 
     def test_berlin(self, tpb = 2):
@@ -62,7 +68,9 @@ class BerlinBassTest(unittest.TestCase):
         container.spawn_patch()
         seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx|vol".split("|")}
-        env = {"tpb": tpb}
+        groove_fn = random_groove_fn()
+        env = {"groove": groove_fn,
+               "tpb": tpb}
         machine.render(generator = BassLine,
                        seeds = seeds,
                        env = env)
