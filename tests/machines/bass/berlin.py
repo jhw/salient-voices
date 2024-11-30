@@ -8,11 +8,11 @@ import inspect
 import random
 import unittest
 
-def simple_note(self, n, i, rand, groove, tpb, root_offset, note_offsets, sustain_terms, filter_frequencies):
-    note = root_offset + rand["note"].choice(note_offsets)
+def simple_note(self, n, i, rand, groove, tpb, root_offset, offsets, terms, frequencies):
+    note = root_offset + rand["note"].choice(offsets)
     volume = groove(rand = rand["vol"], i = int(i / tpb))
-    term = int(rand["note"].choice(sustain_terms) * tpb)
-    freq = rand["fx"].choice(filter_frequencies)
+    term = int(rand["note"].choice(terms) * tpb)
+    freq = rand["fx"].choice(frequencies)
     block =  self.note(note = note,
                        volume = volume,
                        sustain_term = term, 
@@ -21,9 +21,9 @@ def simple_note(self, n, i, rand, groove, tpb, root_offset, note_offsets, sustai
 
 def BassLine(self, n, rand, tpb, groove,
              root_offset = -4,
-             note_offsets = [0, 0, 0, -2],
-             sustain_terms = [0.5, 0.5, 0.5, 2],
-             filter_frequencies = ["2000", "3000", "3000", "3000", "5000"],
+             offsets = [0, 0, 0, -2],
+             terms = [0.5, 0.5, 0.5, 2],
+             frequencies = ["2000", "3000", "3000", "3000", "5000"],
              note_density = 0.5,
              quantise = 1,
              **kwargs):
@@ -38,9 +38,9 @@ def BassLine(self, n, rand, tpb, groove,
                                       groove = groove,
                                       tpb = tpb,
                                       root_offset = root_offset,
-                                      note_offsets = note_offsets,
-                                      sustain_terms = sustain_terms,
-                                      filter_frequencies = filter_frequencies)
+                                      offsets = offsets,
+                                      terms = terms,
+                                      frequencies = frequencies)
             yield i, block
             i += term
         i += 1

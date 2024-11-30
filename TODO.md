@@ -1,6 +1,5 @@
 ### short
 
-- simplify berlin variable names
 - berlin density 1.0 leaves gaps
 - update polly gist
 - synchronise mod and pattern colours
@@ -53,6 +52,7 @@
 
 ### done
 
+- simplify berlin variable names
 - wrap decompiler sampler error
 - report decompiler fmx error
 - pass perkons as env variable
