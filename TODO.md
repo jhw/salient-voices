@@ -1,7 +1,7 @@
 ### short
 
-- berlin density 1.0 leaves gaps
 - update polly gist
+
 - synchronise mod and pattern colours
 
 ### medium
@@ -37,6 +37,8 @@
 
 ### thoughts
 
+- why does berlin density 1.0 leaves gaps?
+  -  because of quantisation; terms don't always fill them
 - force final end note in berlin demo?
   - not worth it; extra complexity for no change in sound
 - refactor main detroit test to use tpb?
