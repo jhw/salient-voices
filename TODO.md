@@ -1,18 +1,22 @@
 ### short
 
-- test project layout
+- fix polly demo
+
+- module and pattern colours are no longer in sync
+
 - test for name rendering
 
 ### medium
 
-- SV drum machine / tokyp
+- SV drum machine / tokyo
+- berlin test clustering and trilling
 - detroit resampler demo
 
 ### thoughts
 
 ### gists 
 
-- stutter effect
+- stutter
 - freezing
 - polly vocals/vocoder
 - autotune
@@ -34,6 +38,7 @@
 
 ### done
 
+- test project layout
 - berlin demo to pass explicit delay parameter
 - berlin demo to accept scaling arg
 - make berlin demo sparser and add more echo
