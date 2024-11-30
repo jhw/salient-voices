@@ -1,15 +1,15 @@
 ### short
 
-- update polly gist
-
-- fix polly demo
-
-- module and pattern colours are no longer in sync
-
+- refactor main detroit test to use bpm
+- 303 basic note
+- synchronise mod and pattern colours
 - test for name rendering
 
 ### medium
 
+- update polly gist
+- 303 slide_up/down, slide_to, trill notes
+- add start variable to sample
 - SV drum machine / tokyo
 - berlin test clustering and trilling
 - detroit resampler demo
@@ -40,6 +40,8 @@
 
 ### done
 
+- reply to matthew
+- fix polly demo
 - test project layout
 - berlin demo to pass explicit delay parameter
 - berlin demo to accept scaling arg
