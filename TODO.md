@@ -1,7 +1,9 @@
 ### short
 
-- synchronise mod and pattern colours
+- simplify berlin variable names
+- berlin density 1.0 leaves gaps
 - update polly gist
+- synchronise mod and pattern colours
 
 ### medium
 
