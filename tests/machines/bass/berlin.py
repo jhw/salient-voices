@@ -7,10 +7,7 @@ from sv.sample import SVSample
 import random
 import unittest
 
-def simple_note(self, n, i, rand, tpb, root_offset,
-                note_offsets = [0, 0, 0, -2],
-                sustain_terms = [0.5, 0.5, 0.5, 2],
-                filter_frequencies = ["2000", "3000", "3000", "3000", "5000"]):
+def simple_note(self, n, i, rand, tpb, root_offset, note_offsets, sustain_terms, filter_frequencies):
     note = root_offset + rand["note"].choice(note_offsets)
     volume = perkons.humanise(rand = rand["vol"], i = int(i / tpb))
     terms = [term for term in sustain_terms
@@ -27,6 +24,9 @@ def simple_note(self, n, i, rand, tpb, root_offset,
 
 def BassLine(self, n, rand, tpb,
              root_offset = -4,
+             note_offsets = [0, 0, 0, -2],
+             sustain_terms = [0.5, 0.5, 0.5, 2],
+             filter_frequencies = ["2000", "3000", "3000", "3000", "5000"],
              note_density = 0.5,
              quantise = 1,
              **kwargs):
@@ -41,7 +41,10 @@ def BassLine(self, n, rand, tpb,
                                       i = i,
                                       rand = rand,
                                       tpb = tpb,
-                                      root_offset = root_offset)
+                                      root_offset = root_offset,
+                                      note_offsets = note_offsets,
+                                      sustain_terms = sustain_terms,
+                                      filter_frequencies = filter_frequencies)
             if not block:
                 break
             yield i, block
