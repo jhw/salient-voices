@@ -1,8 +1,5 @@
 ### short
 
-- define colours at machine level
-- pass colours down from demo level
-
 ### medium
 
 - berlin slide up/down
@@ -55,6 +52,8 @@
 
 ### done
 
+- define colours at machine level
+- pass colours down from demo level
 - remove project custom layout code
 - update polly gist
 - simplify berlin variable names

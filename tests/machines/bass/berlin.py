@@ -50,7 +50,17 @@ def BassLine(self, n, rand, tpb, groove,
 def random_groove_fn(mod = perkons):
     function_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]    
     return getattr(mod, random.choice(function_names))
-        
+
+def random_colour(offset = 64,
+                  contrast = 128,
+                  n = 256):
+    for i in range(n):
+        color = [int(offset + random.random() * (255 - offset))
+                 for i in range(3)]
+        if (max(color) - min(color)) > contrast:
+            return color
+    raise RuntimeError("couldn't find suitable random colour")
+
 class BerlinBassTest(unittest.TestCase):
 
     def test_berlin(self, tpb = 2):
@@ -65,7 +75,7 @@ class BerlinBassTest(unittest.TestCase):
                          echo_feedback = 16,
                          echo_delay = int(36 * tpb))
         container.add_machine(machine)
-        container.spawn_patch()
+        container.spawn_patch(colour = random_colour())
         seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx|vol".split("|")}
         groove_fn = random_groove_fn()

@@ -47,6 +47,16 @@ def random_groove_fn(mod = perkons):
     function_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]    
     return getattr(mod, random.choice(function_names))
 
+def random_colour(offset = 64,
+                  contrast = 128,
+                  n = 256):
+    for i in range(n):
+        color = [int(offset + random.random() * (255 - offset))
+                 for i in range(3)]
+        if (max(color) - min(color)) > contrast:
+            return color
+    raise RuntimeError("couldn't find suitable random colour")
+
 def add_track(container, pool, tag,
               max_density = 0.9,
               min_density = 0.1,
@@ -91,7 +101,7 @@ class DetroitMultiTrackBeatsTest(unittest.TestCase):
         container = SVContainer(banks = banks,
                                 bpm = 120,
                                 n_ticks = 64)
-        container.spawn_patch()
+        container.spawn_patch(colour = random_colour())
         for track in tracks:
             add_track(container = container,
                       pool = pool,
