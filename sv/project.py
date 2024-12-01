@@ -131,8 +131,9 @@ class SVProject:
         n = int(math.ceil(len(modules) ** 0.5))
         rendered_modules = {}
         for i, mod_item in enumerate(reversed(modules)):
-            mod, mod_name = mod_item["instance"], mod_item["name"]
+            mod, mod_name, mod_colour = mod_item["instance"], mod_item["name"], mod_item["colour"]
             setattr(mod, "name", mod_name)
+            setattr(mod, "color", mod_colour)
             if "defaults" in mod_item:
                 for key, raw_value in mod_item["defaults"].items():
                     value = controller_value(raw_value)

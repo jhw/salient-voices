@@ -1,7 +1,5 @@
 ### short [01-module-colours
 
-- render bg_color in project module rendering
-- pass colours down from machine subclass constructors
 - tests to initialise modules with random colours
 
 ### medium
@@ -56,6 +54,8 @@
 
 ### done
 
+- pass colours down from machine subclass constructors
+- render bg_color in project module rendering
 - pass colour to sv machine constructor
 - include colour in sv machine render
 - define colours at machine level

@@ -13,6 +13,7 @@ GeneratorModules = yaml.safe_load("""
   class: rv.modules.analoggenerator.AnalogGenerator
   links:
   - Echo
+  colour: [127, 127, 127]
 - name: Echo
   class: rv.modules.echo.Echo
   defaults:
@@ -22,6 +23,7 @@ GeneratorModules = yaml.safe_load("""
     delay_unit: 3 # tick
   links:
     - Output
+  colour: [127, 127, 127]
 """)
 
 SamplerModules = yaml.safe_load("""
@@ -31,6 +33,7 @@ SamplerModules = yaml.safe_load("""
   - Echo
   root: 62 # C5
   cutoff: 0.5
+  colour: [127, 127, 127]
 - name: Echo
   class: rv.modules.echo.Echo
   defaults:
@@ -40,6 +43,7 @@ SamplerModules = yaml.safe_load("""
     delay_unit: 3 # tick
   links:
     - Output
+  colour: [127, 127, 127]
 """)
 
 class ProjectTest(unittest.TestCase):

@@ -15,11 +15,13 @@ class Detroit(SVSamplerMachine):
                  echo_delay = 36,
                  echo_delay_unit = 3, # tick
                  echo_wet = 0,
-                 echo_feedback = 0):
+                 echo_feedback = 0,
+                 colour = [127, 127, 127]):
         super().__init__(container = container,
                          namespace = namespace,
                          root = rv.note.NOTE.C5 + relative_note,
-                         cutoff = sample_cutoff)
+                         cutoff = sample_cutoff,
+                         colour = colour)
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
                                   "delay": echo_delay,

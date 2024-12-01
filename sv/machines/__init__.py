@@ -23,7 +23,7 @@ class SVTrigBlock:
         
 class SVMachine:
 
-    def __init__(self, container, namespace, colour = [127, 127, 127]):
+    def __init__(self, container, namespace, colour):
         self.container = container
         self.namespace = namespace.lower().capitalize()
         self.colour = colour
@@ -60,8 +60,10 @@ class SVMachine:
 
 class SVSamplerMachine(SVMachine):
 
-    def __init__(self, container, namespace, root, cutoff = 1e8):
-        super().__init__(container, namespace)
+    def __init__(self, container, namespace, colour, root, cutoff = 1e8):
+        super().__init__(container = container,
+                         namespace = namespace,
+                         colour = colour)
         self.root = root
         self.cutoff = cutoff
 

@@ -10,7 +10,9 @@ class MachineTest(unittest.TestCase):
         self.mock_container = MagicMock()
         self.mock_container.n_ticks = 16
         self.namespace = "TestNamespace"
-        self.svmachine = SVMachine(container=self.mock_container, namespace=self.namespace)
+        self.svmachine = SVMachine(container = self.mock_container,
+                                   namespace = self.namespace,
+                                   colour = [127, 127, 127])
         def mock_generator(machine, rand, n, **env):
             for i in range(n):
                 yield i, SVTrigBlock(trigs=[MagicMock()])
@@ -42,7 +44,11 @@ class SamplerMachineTest(unittest.TestCase):
         self.root = "/sample/path"
         self.cutoff = 5000
         self.svsampler = SVSamplerMachine(
-            container=self.mock_container, namespace=self.namespace, root=self.root, cutoff=self.cutoff
+            container = self.mock_container,
+            namespace = self.namespace,
+            colour = [127, 127, 127],
+            root = self.root,
+            cutoff = self.cutoff
         )
         def mock_generator(machine, rand, n, **env):
             for i in range(n):
