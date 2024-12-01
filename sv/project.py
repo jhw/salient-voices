@@ -127,7 +127,6 @@ class SVProject:
     def render_modules(self,                     
                        project,
                        modules,
-                       colours, 
                        **kwargs):
         output = project.modules[0]
         n = int(math.ceil(len(modules) ** 0.5))
@@ -135,7 +134,6 @@ class SVProject:
         for i, mod_item in enumerate(reversed(modules)):
             mod, mod_name = mod_item["instance"], mod_item["name"]
             setattr(mod, "name", mod_name)
-            setattr(mod, "color", colours[mod_name])
             if "defaults" in mod_item:
                 for key, raw_value in mod_item["defaults"].items():
                     value = controller_value(raw_value)
@@ -264,17 +262,16 @@ class SVProject:
                        banks, 
                        bpm,
                        volume = Volume):
-        colours = init_colours([mod["name"] for mod in modules])
         project = rv.api.Project()
         project.initial_bpm = bpm
         project.global_volume = volume
         project_modules = self.render_modules(project = project,
                                               patches = patches,
                                               modules = modules,
-                                              colours = colours,
                                               banks = banks,
                                               bpm = bpm)
         project.layout() # NB
+        colours = init_colours([mod["name"] for mod in modules])
         project.patterns = self.render_patches(modules = project_modules,
                                                colours = colours,
                                                patches = patches)
