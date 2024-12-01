@@ -1,6 +1,5 @@
 from sv.banks import SVPool, SVBanks
 from sv.trigs import SVSampleTrig, controller_value
-from sv.utils.colours import init_colours
 
 import importlib
 import math
@@ -226,7 +225,6 @@ class SVProject:
 
     def render_patches(self,
                        modules,
-                       colours,
                        patches,
                        phrase_size = 4,
                        height = PatternHeight):
@@ -234,14 +232,10 @@ class SVProject:
         mod_names = list(modules.keys())
         controllers = self.render_controllers(modules)
         patterns, x, y = [], 0, 0
-        track_colours = dict(colours)
         for i, patch in enumerate(patches):
             n_ticks = patch.n_ticks
-            if 0 == i % phrase_size:
-                track_colours = init_colours(list(modules.keys()))
             for mod_name, group in patch.trig_groups(mod_names).items():
                 tracks = list(group.values())
-                colour = track_colours[mod_name]
                 self.render_patch(patterns = patterns,
                                   tracks = tracks,
                                   n_ticks = n_ticks,
@@ -249,7 +243,7 @@ class SVProject:
                                   controllers = controllers,
                                   x = x,
                                   y = y,
-                                  colour = colour)
+                                  colour = patch.colour)
                 y += height
             x += x_count * n_ticks
             y = 0
@@ -271,9 +265,7 @@ class SVProject:
                                               banks = banks,
                                               bpm = bpm)
         project.layout() # NB
-        colours = init_colours([mod["name"] for mod in modules])
         project.patterns = self.render_patches(modules = project_modules,
-                                               colours = colours,
                                                patches = patches)
         return project
 

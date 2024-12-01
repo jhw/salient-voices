@@ -4,9 +4,10 @@ import os
 
 class SVTrigPatch:
     
-    def __init__(self, n_ticks, trigs = []):
+    def __init__(self, n_ticks, trigs = [], colour = [128, 128, 128]):
         self.trigs = trigs
         self.n_ticks = n_ticks
+        self.colour = colour
 
     def add_trigs(self, trigs):
         self.trigs += trigs    

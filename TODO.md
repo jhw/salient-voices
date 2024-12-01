@@ -1,6 +1,7 @@
 ### short
 
-- pass colours from client
+- define colours at machine level
+- pass colours down from demo level
 
 ### medium
 
