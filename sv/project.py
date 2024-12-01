@@ -128,24 +128,14 @@ class SVProject:
                        project,
                        modules,
                        colours, 
-                       x_offset = 128,
-                       y_offset = 128,
-                       x0 = 128,
-                       y0 = 256,
                        **kwargs):
         output = project.modules[0]
-        setattr(output, "x", x0)
-        setattr(output, "y", y0)
         n = int(math.ceil(len(modules) ** 0.5))
         rendered_modules = {}
         for i, mod_item in enumerate(reversed(modules)):
             mod, mod_name = mod_item["instance"], mod_item["name"]
             setattr(mod, "name", mod_name)
             setattr(mod, "color", colours[mod_name])
-            x = x0 + int(x_offset * ((i + 1) % n))
-            y = y0 + int(y_offset * math.floor((i + 1) / n))
-            setattr(mod, "x",  x)
-            setattr(mod, "y", y)
             if "defaults" in mod_item:
                 for key, raw_value in mod_item["defaults"].items():
                     value = controller_value(raw_value)
@@ -284,6 +274,7 @@ class SVProject:
                                               colours = colours,
                                               banks = banks,
                                               bpm = bpm)
+        project.layout() # NB
         project.patterns = self.render_patches(modules = project_modules,
                                                colours = colours,
                                                patches = patches)

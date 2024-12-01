@@ -1,6 +1,5 @@
 ### short
 
-- remove project custom layout code
 - pass colours from client
 
 ### medium
@@ -55,6 +54,7 @@
 
 ### done
 
+- remove project custom layout code
 - update polly gist
 - simplify berlin variable names
 - wrap decompiler sampler error
