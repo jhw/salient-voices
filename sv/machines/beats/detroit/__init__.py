@@ -1,4 +1,4 @@
-from sv.machines import SVSamplerMachine, SVTrigBlock, load_yaml
+from sv.machines import SVSamplerMachine, SVMachineTrigs, load_yaml
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
 import rv
@@ -54,7 +54,7 @@ class Detroit(SVSamplerMachine):
         trigs = [SVSampleTrig(target = f"{self.namespace}Beat",
                                   sample = cloned_sample,
                                   vel = volume * level)]
-        return SVTrigBlock(trigs = trigs)
+        return SVMachineTrigs(trigs = trigs)
 
     def modulation(self,                   
                    level = 1.0,
@@ -68,7 +68,7 @@ class Detroit(SVSamplerMachine):
         if echo_feedback:
             trigs.append(SVModTrig(target = f"{self.namespace}Echo/feedback",
                                    value = echo_feedback))
-        return SVTrigBlock(trigs = trigs)
+        return SVMachineTrigs(trigs = trigs)
     
 if __name__ == "__main__":
     pass

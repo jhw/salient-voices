@@ -9,7 +9,7 @@ import yaml
 def load_yaml(base_path, file_name):
     return yaml.safe_load(open("/".join(base_path.split("/")[:-1] + [file_name])).read())
 
-class SVTrigBlock:
+class SVMachineTrigs:
 
     def __init__(self, trigs):
         self.trigs = trigs

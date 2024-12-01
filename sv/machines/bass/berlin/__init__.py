@@ -1,4 +1,4 @@
-from sv.machines import SVSamplerMachine, SVTrigBlock, load_yaml
+from sv.machines import SVSamplerMachine, SVMachineTrigs, load_yaml
 from sv.trigs import SVNoteOffTrig, SVModTrig, SVSampleTrig
 
 import rv
@@ -57,7 +57,7 @@ class Berlin(SVSamplerMachine):
         if sustain_term:
             trigs.append(SVNoteOffTrig(target = f"{self.namespace}MultiSynth",
                                        i = sustain_term))
-        return SVTrigBlock(trigs = trigs)
+        return SVMachineTrigs(trigs = trigs)
 
     def modulation(self,
                    echo_wet = None,
@@ -77,7 +77,7 @@ class Berlin(SVSamplerMachine):
         if filter_roll_off:
             trigs.append(SVModTrig(target = f"{self.namespace}Filter/roll_off",
                                    value = filter_roll_off))
-        return SVTrigBlock(trigs = trigs)
+        return SVMachineTrigs(trigs = trigs)
 
     
 if __name__ == "__main__":

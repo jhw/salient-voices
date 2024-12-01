@@ -1,4 +1,4 @@
-from sv.machines import SVMachine, SVSamplerMachine, SVTrigBlock
+from sv.machines import SVMachine, SVSamplerMachine, SVMachineTrigs
 
 from unittest.mock import MagicMock, patch
 
@@ -15,7 +15,7 @@ class MachineTest(unittest.TestCase):
                                    colour = [127, 127, 127])
         def mock_generator(machine, rand, n, **env):
             for i in range(n):
-                yield i, SVTrigBlock(trigs=[MagicMock()])
+                yield i, SVMachineTrigs(trigs=[MagicMock()])
         self.mock_generator = mock_generator
 
     def test_namespace_initialization(self):
@@ -52,7 +52,7 @@ class SamplerMachineTest(unittest.TestCase):
         )
         def mock_generator(machine, rand, n, **env):
             for i in range(n):
-                yield i, SVTrigBlock(trigs=[MagicMock()])
+                yield i, SVMachineTrigs(trigs=[MagicMock()])
         self.mock_generator = mock_generator
 
     def test_root_and_cutoff_initialization(self):

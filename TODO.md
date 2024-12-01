@@ -1,6 +1,4 @@
-### short [01-module-colours
-
-- rename SVTrigGroup as SVMachineTrigs
+### short
 
 ### medium
 
@@ -54,6 +52,7 @@
 
 ### done
 
+- rename SVTrigGroup as SVMachineTrigs
 - tests to initialise modules with random colours
 - pass colours down from machine subclass constructors
 - render bg_color in project module rendering
