@@ -23,9 +23,10 @@ class SVTrigBlock:
         
 class SVMachine:
 
-    def __init__(self, container, namespace):
+    def __init__(self, container, namespace, colour = [127, 127, 127]):
         self.container = container
         self.namespace = namespace.lower().capitalize()
+        self.colour = colour
         self.defaults = {}
 
     def render(self, generator,
@@ -54,6 +55,7 @@ class SVMachine:
                     if link_name != "Output":
                         mod["links"][i] = f"{self.namespace}{link_name}"
             mod["name"] = f"{self.namespace}{mod_name}"
+            mod["colour"] = self.colour
         return modules
 
 class SVSamplerMachine(SVMachine):
