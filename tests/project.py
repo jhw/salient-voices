@@ -49,6 +49,7 @@ class ProjectTest(unittest.TestCase):
                           note = 56,
                           i = 0)
         patch = SVTrigPatch(trigs = [trig],
+                            colour = [128, 128, 128],
                             n_ticks = 16)
         project = SVProject().render_project(patches = [patch],
                                              modules = modules,
@@ -61,6 +62,7 @@ class ProjectTest(unittest.TestCase):
                                 sample = SVSample.parse("mikey303/303 VCO SQR.wav"),
                                 i = 0)
         patch = SVTrigPatch(trigs = [trig],
+                            colour = [128, 128, 128],
                             n_ticks = 16)
         project = SVProject().render_project(patches = [patch],
                                              modules = modules,

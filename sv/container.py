@@ -4,7 +4,7 @@ import os
 
 class SVTrigPatch:
     
-    def __init__(self, n_ticks, trigs = [], colour = [128, 128, 128]):
+    def __init__(self, n_ticks, colour, trigs = []):
         self.trigs = trigs
         self.n_ticks = n_ticks
         self.colour = colour
@@ -32,9 +32,10 @@ class SVContainer:
         self.machines = []
         self.patches = []
 
-    def spawn_patch(self):
+    def spawn_patch(self, colour = [128, 128, 128]):
         self.patches.append(SVTrigPatch(n_ticks = self.n_ticks,
-                                        trigs = [])) # NB force reset
+                                        trigs = [],
+                                        colour = colour)) # NB force reset
 
     def add_machine(self, machine):
         self.machines.append(machine)
