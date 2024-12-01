@@ -68,6 +68,7 @@ class DetroitFXBeatsTest(unittest.TestCase):
             samples.append(sample)
         machine = Detroit(container = container,
                           namespace = "hat",
+                          colour = random_colour(),
                           samples = samples)
         container.add_machine(machine)
         seeds = {key: int(random.random() * 1e8)

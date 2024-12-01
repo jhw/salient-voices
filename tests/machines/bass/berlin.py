@@ -70,6 +70,7 @@ class BerlinBassTest(unittest.TestCase):
                                 n_ticks = 32 * tpb)
         machine = Berlin(container = container,
                          namespace = "303",
+                         colour = random_colour(),
                          sample = SVSample.parse("mikey303/303 VCO SQR.wav"),
                          echo_wet = 16,
                          echo_feedback = 16,

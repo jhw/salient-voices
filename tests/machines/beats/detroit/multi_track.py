@@ -66,6 +66,7 @@ def add_track(container, pool, tag,
     random.shuffle(samples)        
     machine = Detroit(container = container,
                       namespace = tag,
+                      colour = random_colour(),
                       samples = samples)
     container.add_machine(machine)
     seeds = {key: int(random.random() * 1e8)
