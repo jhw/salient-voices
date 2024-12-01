@@ -1,6 +1,10 @@
-### short
+### short [01-module-colours
 
-- module colours
+- pass colour to sv machine constructor
+- include colour in sv machine render
+- render bg_color in project module rendering
+- pass colours down from machine subclass constructors
+- tests to initialise modules with random colours
 
 ### medium
 
