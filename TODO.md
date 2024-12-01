@@ -1,6 +1,5 @@
 ### short
 
-- remove decompiler custom layout code
 - remove project custom layout code
 - pass colours from client
 
