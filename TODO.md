@@ -1,18 +1,21 @@
 ### short
 
-- update polly gist
-
-- synchronise mod and pattern colours
+- remove test options
+- remove decompiler custom layout code
+- remove project custom layout code
+- pass colours from client
 
 ### medium
 
-- 303 slide up/down
-- 303 slide to
-- 303 trill
+- berlin slide up/down
+- berlin slide to
+- berlin trill
 
 - add start variable to sample
-- SV drum machine / tokyo
-- detroit resampler demo
+
+### machines
+
+- tokyo -> sv drum
 
 ### issues
 
@@ -23,13 +26,13 @@
 
 ### gists 
 
+- resampling
 - stutter
 - freezing
-- polly vocals/vocoder
+- vocals + vocoder
 - autotune
 - pico play modes
 - granular
-- kicker
 
 ### long
 
@@ -54,6 +57,7 @@
 
 ### done
 
+- update polly gist
 - simplify berlin variable names
 - wrap decompiler sampler error
 - report decompiler fmx error
