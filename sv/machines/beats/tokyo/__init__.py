@@ -1,59 +1,56 @@
-from sv.machines import SVSamplerMachine, SVMachineTrigs, load_yaml
-from sv.trigs import SVSampleTrig, SVModTrig, controller_value
+from sv.machines import SVMachine, SVMachineTrigs, load_yaml
+from sv.trigs import SVNoteTrig, SVModTrig, controller_value
 
 import rv
 import rv.api
 
-class Tokyo(SVSamplerMachine):
+class TokyoMachineBase(SVMachine):
 
     Modules = load_yaml(__file__, "modules.yaml")
     
-    def __init__(self, container, namespace, samples,
-                 sample_cutoff = 0.5,
-                 sample_index = 0,
-                 relative_note = 0,
+    def __init__(self, container, namespace, base_notes, notes,
+                 note_index = 0,
                  echo_delay = 36,
                  echo_delay_unit = 3, # tick
                  echo_wet = 0,
                  echo_feedback = 0,
-                 colour = [127, 127, 127]):
+                 colour = [127, 127, 127],
+                 **kwargs):
         super().__init__(container = container,
                          namespace = namespace,
-                         root = rv.note.NOTE.C5 + relative_note,
-                         cutoff = sample_cutoff,
                          colour = colour)
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
                                   "delay": echo_delay,
                                   "delay_unit": echo_delay_unit}}
-        self.samples = samples
-        self.sample_index = sample_index
+        self.base_notes = base_notes
+        self.notes = notes
+        self.note_index = note_index
 
     def toggle_sound(self):
-        self.sample_index = 1 - int(self.sample_index > 0)
+        self.note_index = 1 - int(self.note_index > 0)
 
     def increment_sound(self):
-        self.sample_index = (self.sample_index + 1) % len(self.samples)
+        self.note_index = (self.note_index + 1) % len(self.notes)
 
     def decrement_sound(self):
-        self.sample_index = (self.sample_index - 1) % len(self.samples)
+        self.note_index = (self.note_index - 1) % len(self.notes)
         
     def randomise_sound(self, rand):
-        self.sample_index = rand.choice(list(range(len(self.samples))))
-        
+        self.note_index = rand.choice(list(range(len(self.notes))))
+
     @property
-    def sample(self):
-        return self.samples[self.sample_index]
-        
+    def base_note(self):
+        i = self.notes[self.note_index]
+        return self.base_notes[i % len(self.base_notes)]
+
     def note(self,
              note = 0,
              volume = 1.0,
              level = 1.0):
-        cloned_sample = self.sample.clone()
-        cloned_sample["note"] = note
-        trigs = [SVSampleTrig(target = f"{self.namespace}Beat",
-                                  sample = cloned_sample,
-                                  vel = volume * level)]
+        trigs = [SVNoteTrig(target = f"{self.namespace}Beat",
+                            note = self.base_note,                        
+                            vel = volume * level)]
         return SVMachineTrigs(trigs = trigs)
 
     def modulation(self,                   
@@ -69,6 +66,48 @@ class Tokyo(SVSamplerMachine):
             trigs.append(SVModTrig(target = f"{self.namespace}Echo/feedback",
                                    value = echo_feedback))
         return SVMachineTrigs(trigs = trigs)
+
+class TokyoBass(TokyoMachineBase):
+
+    def __init__(self, container, namespace, colour, notes,
+                 base_notes = [j + i * 12
+                          for i in range(10)
+                          for j in range(3)],
+                 **kwargs):
+        super().__init__(container = container,
+                         namespace = namespace,                         
+                         colour = colour,
+                         base_notes = base_notes,
+                         notes = notes,
+                         **kwargs)
+
+class TokyoSnare(TokyoMachineBase):
+
+    def __init__(self, container, namespace, colour, notes, 
+                 base_notes = [j + i * 12
+                          for i in range(10)
+                          for j in range(7, 12)],
+                 **kwargs):
+        super().__init__(container = container,
+                         namespace = namespace,                         
+                         colour = colour,
+                         base_notes = base_notes,
+                         notes = notes,
+                         **kwargs)
+
+class TokyoHat(TokyoMachineBase):
+
+    def __init__(self, container, namespace, colour, notes,
+                 base_notes = [j + i * 12
+                          for i in range(10)
+                          for j in range(3, 6)],
+                 **kwargs):
+        super().__init__(container = container,
+                         namespace = namespace,                         
+                         colour = colour,
+                         base_notes = base_notes,
+                         notes = notes,
+                         **kwargs)
     
 if __name__ == "__main__":
     pass

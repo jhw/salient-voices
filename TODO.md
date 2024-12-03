@@ -1,8 +1,6 @@
 ### short [01-tokyo-instrument]
 
-- remove sample stuff from module
-- remove bank stuff from test
-- add subclassing
+- remove sample/pool/bank stuff from test
 - test to initialise tokyo classes
 
 ### medium
@@ -53,6 +51,8 @@
 
 ### done
 
+- remove sample stuff from module
+- add subclassing
 - copy detroit including tests
 - undo **kwargs passed to instrument constructors
 - rename SVTrigGroup as SVMachineTrigs
