@@ -71,8 +71,9 @@ class TokyoKick(TokyoMachineBase):
 
     def __init__(self, container, namespace, colour, notes,
                  base_notes = [j + i * 12
-                          for i in range(10)
-                          for j in range(3)],
+                               for i in range(10)
+                               for j in range(3)
+                               if i not in []],
                  **kwargs):
         super().__init__(container = container,
                          namespace = namespace,                         
@@ -85,8 +86,9 @@ class TokyoSnare(TokyoMachineBase):
 
     def __init__(self, container, namespace, colour, notes, 
                  base_notes = [j + i * 12
-                          for i in range(10)
-                          for j in range(7, 12)],
+                               for i in range(10)
+                               for j in range(7, 12)
+                               if i not in []],
                  **kwargs):
         super().__init__(container = container,
                          namespace = namespace,                         
@@ -99,8 +101,9 @@ class TokyoHat(TokyoMachineBase):
 
     def __init__(self, container, namespace, colour, notes,
                  base_notes = [j + i * 12
-                          for i in range(10)
-                          for j in range(3, 6)],
+                               for i in range(10)
+                               for j in range(3, 6)
+                               if i not in [6]],
                  **kwargs):
         super().__init__(container = container,
                          namespace = namespace,                         

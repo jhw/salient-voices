@@ -1,6 +1,6 @@
 ### short [01-tokyo-instrument]
 
-- how to get notes the full range of base notes
+- rv generated DrumSynth mute not working
 
 ### medium
 
@@ -50,6 +50,7 @@
 
 ### done
 
+- how to get notes the full range of base notes
 - move detroit into tests/__init__.py
 - remove sample/pool/bank stuff from test
 - test to initialise tokyo classes

@@ -51,14 +51,13 @@ def random_colour(offset = 64,
     raise RuntimeError("couldn't find suitable random colour")
 
 def add_track(container, tag, klass,
-              notes = list(range(24)),
+              notes = list(range(120)),
               max_density = 0.9,
               min_density = 0.1,
               temperature = 0.5,
               patterns = [pattern[:2] for pattern in TidalPatterns]):
     notes = list(notes)
     random.shuffle(notes)
-    print(notes)
     machine = klass(container = container,
                     namespace = tag,
                     colour = random_colour(),
