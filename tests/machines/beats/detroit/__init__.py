@@ -85,7 +85,7 @@ def add_track(container, pool, tag,
     machine.render(generator = GhostEcho,
                    seeds = seeds)
 
-class DetroitMultiTrackBeatsTest(unittest.TestCase):
+class DetroitBeatsTest(unittest.TestCase):
     
     def test_detroit(self, tracks = [{"tag": "kick",
                                       "max_density": 0.6,
@@ -111,7 +111,7 @@ class DetroitMultiTrackBeatsTest(unittest.TestCase):
         self.assertTrue(patches != [])
         patch = patches[0]
         self.assertTrue(patch.trigs != [])
-        container.write_project("tmp/detroit-multi-track-demo.sunvox")
+        container.write_project("tmp/detroit-demo.sunvox")
         
 if __name__ == "__main__":
     unittest.main()
