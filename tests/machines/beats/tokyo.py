@@ -1,24 +1,16 @@
 from sv.algos.euclid import bjorklund, TidalPatterns
 from sv.algos.groove import perkons
-from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
-from sv.machines.beats.tokyo import Tokyo
-from sv.sample import SVSample
+from sv.machines.beats.tokyo import TokyoKick, TokyoHat
 
 import inspect
 import random
 import unittest
 import yaml
 
-PoolTagPatterns = yaml.safe_load("""
-kick: (kick)|(kik)|(kk)|(bd)
-clap: (clap)|(clp)|(cp)|(hc)
-hat: (oh)|(ch)|(open)|(closed)|(hh)|(hat)
-""")
-
 def Beat(self, n, rand, pattern, groove, temperature, **kwargs):   
     for i in range(n):
-        if rand["sample"].random() < temperature:
+        if rand["note"].random() < temperature:
             self.toggle_sound() 
         volume = groove(i = i,
                         rand = rand["vol"])
@@ -27,7 +19,8 @@ def Beat(self, n, rand, pattern, groove, temperature, **kwargs):
             yield i, trig_block
 
 def GhostEcho(self, n, rand,
-              sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
+              # sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
+              sample_hold_levels = ["0000", "1000", "2000", "3000", "4000"],
               quantise = 4,
               **kwargs):
     for i in range(n):
@@ -57,20 +50,22 @@ def random_colour(offset = 64,
             return color
     raise RuntimeError("couldn't find suitable random colour")
 
-def add_track(container, pool, tag,
+def add_track(container, tag, klass,
+              notes = list(range(24)),
               max_density = 0.9,
               min_density = 0.1,
               temperature = 0.5,
               patterns = [pattern[:2] for pattern in TidalPatterns]):
-    samples = pool.match(lambda sample: tag in sample.tags)
-    random.shuffle(samples)        
-    machine = Tokyo(container = container,
-                      namespace = tag,
-                      colour = random_colour(),
-                      samples = samples)
+    notes = list(notes)
+    random.shuffle(notes)
+    print(notes)
+    machine = klass(container = container,
+                    namespace = tag,
+                    colour = random_colour(),
+                    notes = notes)
     container.add_machine(machine)
     seeds = {key: int(random.random() * 1e8)
-             for key in "sample|vol|fx".split("|")}
+             for key in "note|vol|fx".split("|")}
     track_patterns = [[pulses, steps] for pulses, steps in patterns
                       if (pulses/steps < max_density and
                           pulses/steps > min_density)]
@@ -88,24 +83,19 @@ def add_track(container, pool, tag,
 class TokyoBeatsTest(unittest.TestCase):
     
     def test_tokyo(self, tracks = [{"tag": "kick",
+                                    "klass": TokyoKick,
                                     "max_density": 0.6,
                                     "min_density": 0.2},
-                                   {"tag": "clap",
-                                    "max_density": 0.4,
-                                    "min_density": 0.1},
                                    {"tag": "hat",
+                                    "klass": TokyoHat,
                                     "max_density": 0.9,
                                     "min_density": 0.5}]):
-        bank = SVBank.load_zip("tests/pico-default.zip")
-        banks = SVBanks([bank])
-        pool, _ = banks.spawn_pool(tag_patterns = PoolTagPatterns)
-        container = SVContainer(banks = banks,
+        container = SVContainer(banks = [],
                                 bpm = 120,
-                                n_ticks = 64)
+                                n_ticks = 32)
         container.spawn_patch(colour = random_colour())
         for track in tracks:
             add_track(container = container,
-                      pool = pool,
                       **track)
         patches = container.patches
         self.assertTrue(patches != [])

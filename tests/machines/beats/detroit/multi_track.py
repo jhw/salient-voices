@@ -101,7 +101,7 @@ class DetroitMultiTrackBeatsTest(unittest.TestCase):
         pool, _ = banks.spawn_pool(tag_patterns = PoolTagPatterns)
         container = SVContainer(banks = banks,
                                 bpm = 120,
-                                n_ticks = 64)
+                                n_ticks = 32)
         container.spawn_patch(colour = random_colour())
         for track in tracks:
             add_track(container = container,

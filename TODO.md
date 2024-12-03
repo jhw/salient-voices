@@ -1,7 +1,7 @@
 ### short [01-tokyo-instrument]
 
-- remove sample/pool/bank stuff from test
-- test to initialise tokyo classes
+- move detroit into tests/__init__.py
+- how to get notes the full range of base notes
 
 ### medium
 
@@ -51,6 +51,8 @@
 
 ### done
 
+- remove sample/pool/bank stuff from test
+- test to initialise tokyo classes
 - remove sample stuff from module
 - add subclassing
 - copy detroit including tests

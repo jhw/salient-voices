@@ -67,7 +67,7 @@ class TokyoMachineBase(SVMachine):
                                    value = echo_feedback))
         return SVMachineTrigs(trigs = trigs)
 
-class TokyoBass(TokyoMachineBase):
+class TokyoKick(TokyoMachineBase):
 
     def __init__(self, container, namespace, colour, notes,
                  base_notes = [j + i * 12
