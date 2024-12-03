@@ -16,8 +16,7 @@ class Detroit(SVSamplerMachine):
                  echo_delay_unit = 3, # tick
                  echo_wet = 0,
                  echo_feedback = 0,
-                 colour = [127, 127, 127],
-                 **kwargs):
+                 colour = [127, 127, 127]):
         super().__init__(container = container,
                          namespace = namespace,
                          root = rv.note.NOTE.C5 + relative_note,

@@ -1,5 +1,7 @@
 ### short
 
+- undo **kwargs passed to instrument constructors
+
 ### medium
 
 - berlin slide up/down

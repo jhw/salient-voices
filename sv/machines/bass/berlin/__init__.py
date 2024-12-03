@@ -16,8 +16,7 @@ class Berlin(SVSamplerMachine):
                  echo_wet = 32, # '1000'
                  echo_feedback = 32, # '1000'
                  reverb_wet = 2, # setting as integer as easier when wanting tiny amounts only
-                 colour = [127, 127, 127],
-                 **kwargs):
+                 colour = [127, 127, 127]):
         super().__init__(container = container,
                          namespace = namespace,
                          root = rv.note.NOTE.C5 + relative_note,
