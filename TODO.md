@@ -1,6 +1,9 @@
-### short
+### short [01-tokyo-instrument]
 
-- undo **kwargs passed to instrument constructors
+- remove sample stuff from module
+- remove bank stuff from test
+- add subclassing
+- test to initialise tokyo classes
 
 ### medium
 
@@ -9,10 +12,6 @@
 - berlin trill
 
 - add start variable to sample
-
-### machines
-
-- tokyo -> sv drum
 
 ### issues
 
@@ -54,6 +53,8 @@
 
 ### done
 
+- copy detroit including tests
+- undo **kwargs passed to instrument constructors
 - rename SVTrigGroup as SVMachineTrigs
 - tests to initialise modules with random colours
 - pass colours down from machine subclass constructors
