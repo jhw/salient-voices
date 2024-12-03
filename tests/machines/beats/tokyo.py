@@ -61,7 +61,7 @@ def add_track(container, tag, klass,
     machine = klass(container = container,
                     namespace = tag,
                     colour = random_colour(),
-                    notes = notes)
+                    sounds = notes)
     container.add_machine(machine)
     seeds = {key: int(random.random() * 1e8)
              for key in "note|vol|fx".split("|")}

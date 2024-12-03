@@ -1,10 +1,11 @@
 ### short [01-tokyo-instrument]
 
-- refactor samples, notes as sounds
-- refactor sample_cutoff as sound_cutoff
+- add back snare
 - add default 32 length
 
 ### medium
+
+- tokyo sound to include length, pitch changes
 
 - berlin slide up/down
 - berlin slide to
@@ -55,6 +56,8 @@
 
 ### done
 
+- refactor samples, notes as sounds
+- refactor sample_cutoff as sound_cutoff
 - how to get notes the full range of base notes
 - move detroit into tests/__init__.py
 - remove sample/pool/bank stuff from test

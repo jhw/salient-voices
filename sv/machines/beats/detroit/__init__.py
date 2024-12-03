@@ -8,9 +8,9 @@ class Detroit(SVSamplerMachine):
 
     Modules = load_yaml(__file__, "modules.yaml")
     
-    def __init__(self, container, namespace, samples,
-                 sample_cutoff = 0.5,
-                 sample_index = 0,
+    def __init__(self, container, namespace, sounds,
+                 sound_cutoff = 0.5,
+                 sound_index = 0,
                  relative_note = 0,
                  echo_delay = 36,
                  echo_delay_unit = 3, # tick
@@ -21,39 +21,39 @@ class Detroit(SVSamplerMachine):
         super().__init__(container = container,
                          namespace = namespace,
                          root = rv.note.NOTE.C5 + relative_note,
-                         cutoff = sample_cutoff,
+                         cutoff = sound_cutoff,
                          colour = colour)
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
                                   "delay": echo_delay,
                                   "delay_unit": echo_delay_unit}}
-        self.samples = samples
-        self.sample_index = sample_index
+        self.sounds = sounds
+        self.sound_index = sound_index
 
     def toggle_sound(self):
-        self.sample_index = 1 - int(self.sample_index > 0)
+        self.sound_index = 1 - int(self.sound_index > 0)
 
     def increment_sound(self):
-        self.sample_index = (self.sample_index + 1) % len(self.samples)
+        self.sound_index = (self.sound_index + 1) % len(self.sounds)
 
     def decrement_sound(self):
-        self.sample_index = (self.sample_index - 1) % len(self.samples)
+        self.sound_index = (self.sound_index - 1) % len(self.sounds)
         
     def randomise_sound(self, rand):
-        self.sample_index = rand.choice(list(range(len(self.samples))))
+        self.sound_index = rand.choice(list(range(len(self.sounds))))
         
     @property
-    def sample(self):
-        return self.samples[self.sample_index]
+    def sound(self):
+        return self.sounds[self.sound_index]
         
     def note(self,
              note = 0,
              volume = 1.0,
              level = 1.0):
-        cloned_sample = self.sample.clone()
-        cloned_sample["note"] = note
+        sample = self.sound.clone()
+        sample["note"] = note
         trigs = [SVSampleTrig(target = f"{self.namespace}Beat",
-                                  sample = cloned_sample,
+                                  sample = sample,
                                   vel = volume * level)]
         return SVMachineTrigs(trigs = trigs)
 

@@ -11,7 +11,7 @@ import unittest
 
 def Beat(self, n, rand, groove, threshold = 0.5, **kwargs):   
     for i in range(n):
-        self.randomise_sound(rand["sample"])
+        self.randomise_sound(rand["sound"])
         volume = groove(i = i,
                         rand = rand["vol"])
         if rand["beat"].random() < threshold:
@@ -69,10 +69,10 @@ class DetroitFXBeatsTest(unittest.TestCase):
         machine = Detroit(container = container,
                           namespace = "hat",
                           colour = random_colour(),
-                          samples = samples)
+                          sounds = samples)
         container.add_machine(machine)
         seeds = {key: int(random.random() * 1e8)
-                 for key in "beat|sample|fx|vol".split("|")}
+                 for key in "beat|sound|fx|vol".split("|")}
         groove_fn = random_groove_fn()
         env = {"groove": groove_fn}
         machine.render(generator = Beat,
