@@ -1,6 +1,8 @@
 ### short [01-tokyo-instrument]
 
-- rv generated DrumSynth mute not working
+- refactor samples, notes as sounds
+- refactor sample_cutoff as sound_cutoff
+- add default 32 length
 
 ### medium
 
@@ -11,6 +13,9 @@
 - add start variable to sample
 
 ### issues
+
+- rv generated DrumSynth mute not working
+
 
 - mechanical heart (and others) sample loading
 - names not rendering properly
