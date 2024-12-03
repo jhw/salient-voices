@@ -1,7 +1,7 @@
 from sv.algos.euclid import bjorklund, TidalPatterns
 from sv.algos.groove import perkons
 from sv.container import SVContainer
-from sv.machines.beats.tokyo import TokyoKick, TokyoHat
+from sv.machines.beats.tokyo import TokyoKick, TokyoSnare, TokyoHat
 
 import inspect
 import random
@@ -85,6 +85,10 @@ class TokyoBeatsTest(unittest.TestCase):
                                     "klass": TokyoKick,
                                     "max_density": 0.6,
                                     "min_density": 0.2},
+                                   {"tag": "snare",
+                                    "klass": TokyoSnare,
+                                    "max_density": 0.4,
+                                    "min_density": 0.1},
                                    {"tag": "hat",
                                     "klass": TokyoHat,
                                     "max_density": 0.9,

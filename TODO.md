@@ -1,6 +1,5 @@
 ### short [01-tokyo-instrument]
 
-- add back snare
 - add default 32 length
 
 ### medium
@@ -56,6 +55,7 @@
 
 ### done
 
+- add back snare
 - refactor samples, notes as sounds
 - refactor sample_cutoff as sound_cutoff
 - how to get notes the full range of base notes
