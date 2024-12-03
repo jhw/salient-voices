@@ -1,5 +1,9 @@
 - name: Beat
   class: rv.modules.drumsynth.DrumSynth
+  defaults:
+    bass_length: 32
+    snare_length: 32
+    hihat_length: 32
   links:
     - Echo
 - name: Echo

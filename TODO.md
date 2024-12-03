@@ -1,9 +1,8 @@
-### short [01-tokyo-instrument]
-
-- add default 32 length
+### short
 
 ### medium
 
+- tokyo sound_cutoff factor
 - tokyo sound to include length, pitch changes
 
 - berlin slide up/down
@@ -14,8 +13,7 @@
 
 ### issues
 
-- rv generated DrumSynth mute not working
-
+- rv generated DrumSynth mute not working?
 
 - mechanical heart (and others) sample loading
 - names not rendering properly
@@ -55,6 +53,7 @@
 
 ### done
 
+- add default 32 length
 - add back snare
 - refactor samples, notes as sounds
 - refactor sample_cutoff as sound_cutoff

@@ -19,8 +19,7 @@ def Beat(self, n, rand, pattern, groove, temperature, **kwargs):
             yield i, trig_block
 
 def GhostEcho(self, n, rand,
-              # sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
-              sample_hold_levels = ["0000", "1000", "2000", "3000", "4000"],
+              sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
               quantise = 4,
               **kwargs):
     for i in range(n):
