@@ -2,6 +2,7 @@
 
 ### medium
 
+- tokyo sound class
 - tokyo sound_cutoff factor
 - tokyo sound to include length, pitch changes
 

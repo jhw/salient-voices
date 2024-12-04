@@ -1,7 +1,7 @@
 from sv.algos.euclid import bjorklund, TidalPatterns
 from sv.algos.groove import perkons
 from sv.container import SVContainer
-from sv.machines.beats.tokyo import TokyoKick, TokyoSnare, TokyoHat
+from sv.machines.tokyo import TokyoKick, TokyoSnare, TokyoHat
 
 import inspect
 import random
@@ -78,7 +78,7 @@ def add_track(container, tag, klass,
     machine.render(generator = GhostEcho,
                    seeds = seeds)
 
-class TokyoBeatsTest(unittest.TestCase):
+class TokyoTest(unittest.TestCase):
     
     def test_tokyo(self, tracks = [{"tag": "kick",
                                     "klass": TokyoKick,

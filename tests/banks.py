@@ -1,5 +1,5 @@
 from sv.banks import SVBank, SVBanks, SVPool
-from sv.sample import SVSample
+from sv.sounds import SVSample
 
 from scipy.io import wavfile
 

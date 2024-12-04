@@ -1,8 +1,8 @@
 import sv.algos.groove.perkons as perkons
 from sv.banks import SVBank
 from sv.container import SVContainer
-from sv.machines.bass.berlin import Berlin
-from sv.sample import SVSample
+from sv.machines.berlin import Berlin
+from sv.sounds import SVSample
 
 import inspect
 import random
@@ -61,10 +61,10 @@ def random_colour(offset = 64,
             return color
     raise RuntimeError("couldn't find suitable random colour")
 
-class BerlinBassTest(unittest.TestCase):
+class BerlinTest(unittest.TestCase):
 
     def test_berlin(self, tpb = 2):
-        bank = SVBank.load_zip("sv/machines/bass/berlin/mikey303.zip")
+        bank = SVBank.load_zip("sv/machines/berlin/mikey303.zip")
         container = SVContainer(banks = [bank],
                                 bpm = 120 * tpb,
                                 n_ticks = 32 * tpb)

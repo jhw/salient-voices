@@ -1,7 +1,7 @@
 from pydub import AudioSegment
 from scipy.io import wavfile
 
-from sv.sample import SVSample
+from sv.sounds import SVSample
 
 import io
 import rv

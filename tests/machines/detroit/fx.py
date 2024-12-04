@@ -2,8 +2,8 @@ from sv.algos.euclid import bjorklund, TidalPatterns
 from sv.algos.groove import perkons
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
-from sv.machines.beats.detroit import Detroit
-from sv.sample import SVSample
+from sv.machines.detroit import Detroit
+from sv.sounds import SVSample
 
 import inspect
 import random
@@ -44,7 +44,7 @@ def random_colour(offset = 64,
             return color
     raise RuntimeError("couldn't find suitable random colour")
             
-class DetroitFXBeatsTest(unittest.TestCase):
+class DetroitFXTest(unittest.TestCase):
     
     def test_detroit(self, tracks = [{"tag": "hat"}]):
         bank = SVBank.load_zip("tests/pico-default.zip")

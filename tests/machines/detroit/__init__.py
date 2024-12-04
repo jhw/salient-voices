@@ -2,8 +2,8 @@ from sv.algos.euclid import bjorklund, TidalPatterns
 from sv.algos.groove import perkons
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
-from sv.machines.beats.detroit import Detroit
-from sv.sample import SVSample
+from sv.machines.detroit import Detroit
+from sv.sounds import SVSample
 
 import inspect
 import random
@@ -85,7 +85,7 @@ def add_track(container, pool, tag,
     machine.render(generator = GhostEcho,
                    seeds = seeds)
 
-class DetroitBeatsTest(unittest.TestCase):
+class DetroitTest(unittest.TestCase):
     
     def test_detroit(self, tracks = [{"tag": "kick",
                                       "max_density": 0.6,
