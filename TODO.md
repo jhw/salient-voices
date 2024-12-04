@@ -1,16 +1,16 @@
 ### short
 
-### medium
+- remove sampler cutoff variable 
+- and start and cutoff fields to sample 
+- implement sampler start and cutoff 
+- new sv drum sound class 
+- Tokyo to implement sv drum sound as sound 
 
-- tokyo sound class
-- tokyo sound_cutoff factor
-- tokyo sound to include length, pitch changes
+### medium
 
 - berlin slide up/down
 - berlin slide to
 - berlin trill
-
-- add start variable to sample
 
 ### issues
 
