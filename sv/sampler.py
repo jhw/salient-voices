@@ -59,7 +59,7 @@ def with_audio_segment(fn):
     
 class SVSlotSampler(SVBaseSampler):
 
-    def __init__(self, banks, pool, root, bpm, max_slots=MaxSlots):
+    def __init__(self, banks, pool, root, max_slots=MaxSlots):
         SVBaseSampler.__init__(self, banks=banks, pool=pool)
         self.sample_strings = [str(sample) for sample in self.pool]
         rv_notes = list(rv.note.NOTE)                
@@ -67,14 +67,14 @@ class SVSlotSampler(SVBaseSampler):
         for i, sample in enumerate(self.pool):
             # init rv sample and insert into self.samples
             raw_wav_io = banks.get_wav(sample)
-            wav_io = self.apply_fx(sample, raw_wav_io, bpm)
+            wav_io = self.apply_fx(sample, raw_wav_io)
             rv_sample = self.init_rv_sample(wav_io)
             rv_sample.relative_note += (root + sample.note - i)
             self.samples[i] = rv_sample
             # bind rv sample to keyboard/note
             self.note_samples[rv_notes[i]] = i
 
-    def apply_fx(self, sample, wav_io, bpm):
+    def apply_fx(self, sample, wav_io):
         if sample.fx == SVSample.FX.REV:
             return self.apply_reverse(wav_io, sample.cutoff)
         elif sample.fx == SVSample.FX.RET2:

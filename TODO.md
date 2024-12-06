@@ -1,6 +1,5 @@
 ### short
 
-- don't pass bpm to sampler
 - add default cutoff 16 seconds
 
 - implement sampler cutoff trimming
@@ -61,6 +60,7 @@
 
 ### done
 
+- don't pass bpm to sampler
 - remove sampler cutoff variable 
 - add value error during setters
 - tests for rendering and start/cutoff

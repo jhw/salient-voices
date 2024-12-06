@@ -96,7 +96,6 @@ def init_modules(fn):
                 patches,
                 modules,
                 banks,
-                bpm,
                 **kwargs):
         for mod in modules:
             mod_class = load_class(mod["class"])
@@ -105,8 +104,7 @@ def init_modules(fn):
                 pool = mod.init_sample_pool(patches)
                 mod_kwargs = {"banks": banks,
                               "pool": pool,
-                              "root": mod["root"],
-                              "bpm": bpm}
+                              "root": mod["root"]}
             mod["instance"] = mod_class(**mod_kwargs)
         return fn(self,
                   patches = patches,
@@ -262,8 +260,7 @@ class SVProject:
         project_modules = self.render_modules(project = project,
                                               patches = patches,
                                               modules = modules,
-                                              banks = banks,
-                                              bpm = bpm)
+                                              banks = banks)
         project.layout() # NB
         project.patterns = self.render_patches(modules = project_modules,
                                                patches = patches)
