@@ -1,8 +1,5 @@
 ### short
 
-- implement sampler cutoff trimming
-- implement sampler start trimming
-
 ### sv
 
 - capture ValueError raised by SVSample
@@ -58,6 +55,8 @@
 
 ### done
 
+- implement sampler cutoff trimming
+- implement sampler start trimming
 - add default cutoff 16 seconds
 - don't pass bpm to sampler
 - remove sampler cutoff variable 

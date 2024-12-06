@@ -47,10 +47,10 @@ class SVBaseSampler(rv.modules.sampler.Sampler):
         return rv_sample
 
 def with_audio_segment(fn):
-    def wrapped(self, wav_io, t, **kwargs):
+    def wrapped(self, wav_io, start, cutoff, **kwargs):
         wav_io.seek(0)
         audio = AudioSegment.from_file(wav_io, format="wav")
-        audio_out = fn(self, audio, t, **kwargs)
+        audio_out = fn(self, audio, start = start, cutoff = cutoff, **kwargs)
         wav_out = io.BytesIO()        
         audio_out.export(wav_out, format="wav")
         wav_out.seek(0)
@@ -76,35 +76,36 @@ class SVSlotSampler(SVBaseSampler):
 
     def apply_fx(self, sample, wav_io):
         if sample.fx == SVSample.FX.REV:
-            return self.apply_reverse(wav_io, sample.cutoff)
+            return self.apply_reverse(wav_io, **sample)
         elif sample.fx == SVSample.FX.RET2:
-            return self.apply_retrig(wav_io, sample.cutoff, n = 2)
+            return self.apply_retrig(wav_io, n_retrigs = 2, **sample)
         elif sample.fx == SVSample.FX.RET4:
-            return self.apply_retrig(wav_io, sample.cutoff, n = 4)
+            return self.apply_retrig(wav_io, n_retrigs = 4, **sample)
         elif sample.fx == SVSample.FX.RET8:
-            return self.apply_retrig(wav_io, sample.cutoff, n = 8)
+            return self.apply_retrig(wav_io, n_retrigs = 8, **sample)
         elif sample.fx == SVSample.FX.RET16:
-            return self.apply_retrig(wav_io, sample.cutoff, n = 16)
+            return self.apply_retrig(wav_io, n_retrigs = 16, **sample)
         else:
-            return self.apply_trim(wav_io, sample.cutoff)
+            return self.apply_trim(wav_io, **sample)
 
-    def trim_audio(self, audio, t, fade_out = 3):
-        return audio[:t].fade_out(fade_out)
+    def trim_audio(self, audio, start, cutoff, fade_out = 3):
+        return audio[start:cutoff].fade_out(fade_out)
         
     @with_audio_segment
-    def apply_trim(self, audio, t, **kwargs):
-        return self.trim_audio(audio, t)
+    def apply_trim(self, audio, start, cutoff, **kwargs):
+        return self.trim_audio(audio, start = start, cutoff = cutoff)
         
     @with_audio_segment
-    def apply_reverse(self, audio, t, **kwargs):
-        return self.trim_audio(audio, t).reverse()
+    def apply_reverse(self, audio, start, cutoff, **kwargs):
+        return self.trim_audio(audio, start = start, cutoff = cutoff).reverse()
 
     @with_audio_segment
-    def apply_retrig(self, audio, t, n, **kwargs):
-        trimmed_audio = self.trim_audio(audio, t)
-        slice_duration = t // n
+    def apply_retrig(self, audio, start, cutoff, n_retrigs, **kwargs):        
+        trimmed_audio = self.trim_audio(audio, start = start, cutoff = cutoff)
+        audio_duration = cutoff - start
+        slice_duration = audio_duration // n_retrigs
         first_slice = trimmed_audio[:slice_duration]
-        return first_slice * n
+        return first_slice * n_retrigs
 
     def index_of(self, sample):
         return self.sample_strings.index(str(sample))
