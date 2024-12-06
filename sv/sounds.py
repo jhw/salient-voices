@@ -1,6 +1,7 @@
 from enum import Enum
 from urllib.parse import parse_qs
 
+
 class SVSample(dict):
 
     class FX(Enum):
@@ -14,7 +15,7 @@ class SVSample(dict):
     def parse(sample_str):
         if not sample_str:
             raise RuntimeError("Input string cannot be empty")
-        
+
         # Split tags first
         tag_split = sample_str.split("#")
         sample_and_qs = tag_split[0]
@@ -54,7 +55,7 @@ class SVSample(dict):
             raise ValueError("start cannot be greater than cutoff")
         if fx is not None and cutoff is None:
             raise ValueError("cutoff must be set if fx is set")
-
+        
         return SVSample(
             bank_name=bank_name,
             file_path=file_path,
@@ -62,7 +63,7 @@ class SVSample(dict):
             fx=fx,
             start=start,
             cutoff=cutoff,
-            tags=tags
+            tags=tags,
         )
 
     def __init__(self, bank_name, file_path, note=0, fx=None, start=0, cutoff=None, tags=None):
@@ -83,7 +84,7 @@ class SVSample(dict):
             fx=self.fx,
             start=self.start,
             cutoff=self.cutoff,
-            tags=list(self.tags)
+            tags=list(self.tags),
         )
 
     @property
@@ -110,6 +111,8 @@ class SVSample(dict):
     def fx(self, value):
         if value is not None and not isinstance(value, SVSample.FX):
             raise ValueError(f"fx must be an instance of SVSample.FX or None, got {value}")
+        if value is not None and self.cutoff is None:
+            raise ValueError("cutoff must be set if fx is set")
         self["fx"] = value
 
     @property
@@ -118,6 +121,8 @@ class SVSample(dict):
 
     @start.setter
     def start(self, value):
+        if self.cutoff is not None and value > self.cutoff:
+            raise ValueError("start cannot be greater than cutoff")
         self["start"] = value
 
     @property
@@ -126,8 +131,8 @@ class SVSample(dict):
 
     @cutoff.setter
     def cutoff(self, value):
-        if value is not None and not isinstance(value, int):
-            raise ValueError("cutoff must be an integer or None")
+        if value is not None and self.start > value:
+            raise ValueError("cutoff cannot be less than start")
         self["cutoff"] = value
 
     @property
@@ -178,7 +183,7 @@ class SVSample(dict):
             fx=state.get("fx"),
             start=state.get("start", 0),
             cutoff=state.get("cutoff", None),
-            tags=state.get("tags", [])
+            tags=state.get("tags", []),
         )
 
 

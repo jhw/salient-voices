@@ -1,7 +1,5 @@
 ### short
 
-- add value error during setters
-
 - remove sampler cutoff variable 
 - implement sampler start and cutoff 
 
@@ -60,6 +58,7 @@
 
 ### done
 
+- add value error during setters
 - tests for rendering and start/cutoff
 - checks for start > cutoff and fx without cutoff
 - don't render sample note/fx to json if 0/null values

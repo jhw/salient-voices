@@ -54,7 +54,7 @@ class DetroitFXTest(unittest.TestCase):
                                 n_ticks = 32)
         container.spawn_patch(colour = random_colour())
         base_wav = random.choice(["40 CH", "41 CH", "45 OH", "46 OH"])
-        base_sample = SVSample.parse(f"pico-default/{base_wav}.wav")
+        base_sample = SVSample.parse(f"pico-default/{base_wav}.wav?cutoff=10000")
         samples = [base_sample,
                    base_sample]
         for fx in [SVSample.FX.REV,

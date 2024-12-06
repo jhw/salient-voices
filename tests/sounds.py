@@ -153,7 +153,7 @@ class SVSampleTest(unittest.TestCase):
 
     def test_start_cutoff_validation(self):
         with self.assertRaises(ValueError):
-            SVSample.parse("bank1/file.wav?start=100&cutoff=50")
+            SVSample.parse("bank1/file.wav?fx=rev")
 
     def test_valid_start_cutoff(self):
         sample = SVSample.parse("bank1/file.wav?start=50&cutoff=100")
