@@ -1,7 +1,6 @@
 ### short
 
-- tests for rendering and start/cutoff
-- checks for start > cutoff and fx without cutoff
+- add value error during setters
 
 - remove sampler cutoff variable 
 - implement sampler start and cutoff 
@@ -61,6 +60,8 @@
 
 ### done
 
+- tests for rendering and start/cutoff
+- checks for start > cutoff and fx without cutoff
 - don't render sample note/fx to json if 0/null values
 - and start and cutoff fields to sample 
 - add default 32 length

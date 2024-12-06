@@ -49,6 +49,12 @@ class SVSample(dict):
             else None
         )
 
+        # Validation at initialization
+        if cutoff is not None and start > cutoff:
+            raise ValueError("start cannot be greater than cutoff")
+        if fx is not None and cutoff is None:
+            raise ValueError("cutoff must be set if fx is set")
+
         return SVSample(
             bank_name=bank_name,
             file_path=file_path,
