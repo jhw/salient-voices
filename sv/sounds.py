@@ -1,6 +1,7 @@
 from enum import Enum
 from urllib.parse import parse_qs
 
+DefaultCutoff = 16000
 
 class SVSample(dict):
 
@@ -45,16 +46,14 @@ class SVSample(dict):
 
         start = int(query_dict.get("start", [0])[0]) if "start" in query_dict else 0
         cutoff = (
-            int(query_dict.get("cutoff", [None])[0])
+            int(query_dict.get("cutoff", [DefaultCutoff])[0])
             if "cutoff" in query_dict and query_dict["cutoff"][0].isdigit()
-            else None
+            else DefaultCutoff
         )
 
         # Validation at initialization
-        if cutoff is not None and start > cutoff:
+        if start > cutoff:
             raise ValueError("start cannot be greater than cutoff")
-        if fx is not None and cutoff is None:
-            raise ValueError("cutoff must be set if fx is set")
         
         return SVSample(
             bank_name=bank_name,
@@ -66,7 +65,7 @@ class SVSample(dict):
             tags=tags,
         )
 
-    def __init__(self, bank_name, file_path, note=0, fx=None, start=0, cutoff=None, tags=None):
+    def __init__(self, bank_name, file_path, note=0, fx=None, start=0, cutoff=DefaultCutoff, tags=None):
         dict.__init__(self)
         self["bank_name"] = bank_name
         self["file_path"] = file_path
@@ -111,8 +110,6 @@ class SVSample(dict):
     def fx(self, value):
         if value is not None and not isinstance(value, SVSample.FX):
             raise ValueError(f"fx must be an instance of SVSample.FX or None, got {value}")
-        if value is not None and self.cutoff is None:
-            raise ValueError("cutoff must be set if fx is set")
         self["fx"] = value
 
     @property
@@ -121,7 +118,7 @@ class SVSample(dict):
 
     @start.setter
     def start(self, value):
-        if self.cutoff is not None and value > self.cutoff:
+        if value > self.cutoff:
             raise ValueError("start cannot be greater than cutoff")
         self["start"] = value
 
@@ -144,7 +141,7 @@ class SVSample(dict):
             qs["fx"] = self["fx"].value
         if self["start"] != 0:
             qs["start"] = self["start"]
-        if self["cutoff"] is not None:
+        if self["cutoff"] != DefaultCutoff:
             qs["cutoff"] = self["cutoff"]
         return qs
 
@@ -169,7 +166,7 @@ class SVSample(dict):
                 (key == "note" and value == 0) or
                 (key == "fx" and value is None) or
                 (key == "start" and value == 0) or
-                (key == "cutoff" and value is None)
+                (key == "cutoff" and value == DefaultCutoff)
             )
         }
         return state
@@ -182,7 +179,7 @@ class SVSample(dict):
             note=state.get("note", 0),
             fx=state.get("fx"),
             start=state.get("start", 0),
-            cutoff=state.get("cutoff", None),
+            cutoff=state.get("cutoff", DefaultCutoff),
             tags=state.get("tags", []),
         )
 

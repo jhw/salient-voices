@@ -151,10 +151,6 @@ class SVSampleTest(unittest.TestCase):
         self.assertEqual(sample.querystring, {"note": 32, "cutoff": 50})
         self.assertEqual(str(sample), "mikey303/303 VCO SQR.wav?note=32&cutoff=50#bass")
 
-    def test_start_cutoff_validation(self):
-        with self.assertRaises(ValueError):
-            SVSample.parse("bank1/file.wav?fx=rev")
-
     def test_valid_start_cutoff(self):
         sample = SVSample.parse("bank1/file.wav?start=50&cutoff=100")
         self.assertEqual(sample.start, 50)
