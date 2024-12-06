@@ -42,22 +42,19 @@ class SamplerMachineTest(unittest.TestCase):
         self.mock_container.n_ticks = 16
         self.namespace = "SamplerNamespace"
         self.root = "/sample/path"
-        self.cutoff = 5000
         self.svsampler = SVSamplerMachine(
             container = self.mock_container,
             namespace = self.namespace,
             colour = [127, 127, 127],
-            root = self.root,
-            cutoff = self.cutoff
+            root = self.root
         )
         def mock_generator(machine, rand, n, **env):
             for i in range(n):
                 yield i, SVMachineTrigs(trigs=[MagicMock()])
         self.mock_generator = mock_generator
 
-    def test_root_and_cutoff_initialization(self):
+    def test_root_initialization(self):
         self.assertEqual(self.svsampler.root, self.root)
-        self.assertEqual(self.svsampler.cutoff, self.cutoff)
 
     @patch("copy.deepcopy")
     def test_modules_property(self, mock_deepcopy):
@@ -68,7 +65,6 @@ class SamplerMachineTest(unittest.TestCase):
             modules = self.svsampler.modules
 
         self.assertEqual(modules[0]["root"], self.root)
-        self.assertEqual(modules[0]["cutoff"], self.cutoff)
 
     def test_render(self):
         self.svsampler.render(generator=self.mock_generator, seeds={"test": 123})

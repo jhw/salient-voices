@@ -17,7 +17,6 @@ class SamplerTest(unittest.TestCase):
         sampler = SVSlotSampler(banks = self.banks,
                                 pool = pool,
                                 root = rv.note.NOTE.C5,
-                                cutoff = 0.5,
                                 bpm = 120)
         samples = [sample for sample in sampler.samples
                    if sample]

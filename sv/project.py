@@ -106,7 +106,6 @@ def init_modules(fn):
                 mod_kwargs = {"banks": banks,
                               "pool": pool,
                               "root": mod["root"],
-                              "cutoff": mod["cutoff"],
                               "bpm": bpm}
             mod["instance"] = mod_class(**mod_kwargs)
         return fn(self,

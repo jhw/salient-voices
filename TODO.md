@@ -1,7 +1,10 @@
 ### short
 
-- remove sampler cutoff variable 
-- implement sampler start and cutoff 
+- don't pass bpm to sampler
+- add default cutoff 16 seconds
+
+- implement sampler cutoff trimming
+- implement sampler start trimming
 
 ### sv
 
@@ -58,6 +61,7 @@
 
 ### done
 
+- remove sampler cutoff variable 
 - add value error during setters
 - tests for rendering and start/cutoff
 - checks for start > cutoff and fx without cutoff
