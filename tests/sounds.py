@@ -1,5 +1,4 @@
 from sv.sounds import SVSample
-
 import unittest
 
 class SVSampleTest(unittest.TestCase):
@@ -9,7 +8,7 @@ class SVSampleTest(unittest.TestCase):
         self.assertEqual(sample.bank_name, "mikey303")
         self.assertEqual(sample.file_path, "303 VCO SQR.wav")
         self.assertEqual(sample.tags, [])
-        self.assertEqual(sample.querystring, {"note": 0})
+        self.assertEqual(sample.querystring, {})  # Default note=0 not included
         self.assertEqual(sample.note, 0)
 
     def test_tagged_without_querystring(self):
@@ -17,7 +16,7 @@ class SVSampleTest(unittest.TestCase):
         self.assertEqual(sample.bank_name, "mikey303")
         self.assertEqual(sample.file_path, "303 VCO SQR.wav")
         self.assertEqual(set(sample.tags), {"303", "bass"})
-        self.assertEqual(sample.querystring, {"note": 0})
+        self.assertEqual(sample.querystring, {})  # Default note=0 not included
         self.assertEqual(sample.note, 0)
 
     def test_untagged_with_querystring(self):
@@ -41,18 +40,15 @@ class SVSampleTest(unittest.TestCase):
         self.assertEqual(sample.bank_name, "mikey303")
         self.assertEqual(sample.file_path, "303 VCO SQR.wav")
         self.assertEqual(sample.tags, [])
-        self.assertEqual(sample.querystring, {"note": 0})
+        self.assertEqual(sample.querystring, {})  # Default note=0 not included
         self.assertEqual(sample.note, 0)
 
-    # note
-        
     def test_invalid_note_querystring(self):
         sample = SVSample.parse("mikey303/303 VCO SQR.wav?note=invalid")
         self.assertEqual(sample.bank_name, "mikey303")
         self.assertEqual(sample.file_path, "303 VCO SQR.wav")
         self.assertEqual(sample.tags, [])
-        # Invalid note should fall back to default 0
-        self.assertEqual(sample.querystring, {"note": 0})
+        self.assertEqual(sample.querystring, {})  # Default note=0 not included
         self.assertEqual(sample.note, 0)
 
     def test_empty_string(self):
@@ -64,7 +60,7 @@ class SVSampleTest(unittest.TestCase):
         self.assertEqual(sample.bank_name, "mikey303")
         self.assertEqual(sample.file_path, "")
         self.assertEqual(sample.tags, [])
-        self.assertEqual(sample.querystring, {"note": 0})
+        self.assertEqual(sample.querystring, {})  # Default note=0 not included
         self.assertEqual(sample.note, 0)
 
     def test_no_bank_name(self):
@@ -90,15 +86,14 @@ class SVSampleTest(unittest.TestCase):
         self.assertEqual(sample.querystring, {"note": 64})
         self.assertEqual(str(sample), "mikey303/303 VCO SQR.wav?note=64#bass")
 
-    # FX
+    # FX Tests
 
     def test_untagged_with_querystring_fx(self):
         sample = SVSample.parse("mikey303/303 VCO SQR.wav?fx=rev")
         self.assertEqual(sample.bank_name, "mikey303")
         self.assertEqual(sample.file_path, "303 VCO SQR.wav")
         self.assertEqual(sample.tags, [])
-        self.assertEqual(sample.querystring, {"note": 0, "fx": "rev"})
-        self.assertEqual(sample.note, 0)
+        self.assertEqual(sample.querystring, {"fx": "rev"})  # Default note=0 not included
         self.assertEqual(sample.fx, SVSample.FX.REV)
 
     def test_tagged_with_querystring_fx(self):
@@ -115,7 +110,7 @@ class SVSampleTest(unittest.TestCase):
         self.assertEqual(sample.bank_name, "mikey303")
         self.assertEqual(sample.file_path, "303 VCO SQR.wav")
         self.assertEqual(sample.tags, [])
-        self.assertEqual(sample.querystring, {"note": 0})
+        self.assertEqual(sample.querystring, {})  # Default fx=None not included
         self.assertEqual(sample.note, 0)
         self.assertIsNone(sample.fx)
 
@@ -124,8 +119,7 @@ class SVSampleTest(unittest.TestCase):
         self.assertEqual(sample.bank_name, "mikey303")
         self.assertEqual(sample.file_path, "303 VCO SQR.wav")
         self.assertEqual(sample.tags, [])
-        # Invalid fx should fall back to None
-        self.assertEqual(sample.querystring, {"note": 0})
+        self.assertEqual(sample.querystring, {})  # Default fx=None not included
         self.assertEqual(sample.note, 0)
         self.assertIsNone(sample.fx)
 
@@ -150,6 +144,6 @@ class SVSampleTest(unittest.TestCase):
         self.assertIsNone(sample.fx)
         self.assertEqual(sample.querystring, {"note": 32})
         self.assertEqual(str(sample), "mikey303/303 VCO SQR.wav?note=32#bass")
-                 
+
 if __name__ == "__main__":
     unittest.main()

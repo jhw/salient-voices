@@ -1,15 +1,19 @@
 ### short
 
+- tests for rendering and start/cutoff
+- checks for start > cutoff and fx without cutoff
+
 - remove sampler cutoff variable 
-- and start and cutoff fields to sample 
 - implement sampler start and cutoff 
+
+### sv
+
+- capture ValueError raised by SVSample
 
 ### medium
 
 - new sv drum sound class 
 - tokyo to implement sv drum sound as sound 
-
-- don't render sample note/fx to json if 0/null values
 
 - berlin slide up/down
 - berlin slide to
@@ -57,6 +61,8 @@
 
 ### done
 
+- don't render sample note/fx to json if 0/null values
+- and start and cutoff fields to sample 
 - add default 32 length
 - add back snare
 - refactor samples, notes as sounds

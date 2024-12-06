@@ -42,20 +42,31 @@ class SVSample(dict):
         fx_value = query_dict.get("fx", [None])[0]
         fx = SVSample.FX(fx_value) if fx_value in SVSample.FX._value2member_map_ else None
 
+        start = int(query_dict.get("start", [0])[0]) if "start" in query_dict else 0
+        cutoff = (
+            int(query_dict.get("cutoff", [None])[0])
+            if "cutoff" in query_dict and query_dict["cutoff"][0].isdigit()
+            else None
+        )
+
         return SVSample(
             bank_name=bank_name,
             file_path=file_path,
             note=note,
             fx=fx,
+            start=start,
+            cutoff=cutoff,
             tags=tags
         )
 
-    def __init__(self, bank_name, file_path, note=0, fx=None, tags=None):
+    def __init__(self, bank_name, file_path, note=0, fx=None, start=0, cutoff=None, tags=None):
         dict.__init__(self)
         self["bank_name"] = bank_name
         self["file_path"] = file_path
         self["note"] = note
         self["fx"] = fx
+        self["start"] = start
+        self["cutoff"] = cutoff
         self["tags"] = tags or []
 
     def clone(self):
@@ -64,9 +75,11 @@ class SVSample(dict):
             file_path=self.file_path,
             note=self.note,
             fx=self.fx,
+            start=self.start,
+            cutoff=self.cutoff,
             tags=list(self.tags)
         )
-        
+
     @property
     def bank_name(self):
         return self["bank_name"]
@@ -94,10 +107,34 @@ class SVSample(dict):
         self["fx"] = value
 
     @property
+    def start(self):
+        return self["start"]
+
+    @start.setter
+    def start(self, value):
+        self["start"] = value
+
+    @property
+    def cutoff(self):
+        return self["cutoff"]
+
+    @cutoff.setter
+    def cutoff(self, value):
+        if value is not None and not isinstance(value, int):
+            raise ValueError("cutoff must be an integer or None")
+        self["cutoff"] = value
+
+    @property
     def querystring(self):
-        qs = {"note": self["note"]}
+        qs = {}
+        if self["note"] != 0:
+            qs["note"] = self["note"]
         if self["fx"] is not None:
             qs["fx"] = self["fx"].value
+        if self["start"] != 0:
+            qs["start"] = self["start"]
+        if self["cutoff"] is not None:
+            qs["cutoff"] = self["cutoff"]
         return qs
 
     @property
@@ -106,11 +143,38 @@ class SVSample(dict):
 
     def __str__(self):
         query_parts = [
-            f"{key}={value}" for key, value in self.querystring.items() if not (key == "note" and value == 0)
+            f"{key}={value}" for key, value in self.querystring.items()
         ]
         query_string = "?" + "&".join(query_parts) if query_parts else ""
         tag_string = "".join([f"#{tag}" for tag in sorted(self.tags)])
         return f"{self.bank_name}/{self.file_path}{query_string}{tag_string}"
-    
+
+    def __getstate__(self):
+        """Filter out default values when serializing."""
+        state = {
+            key: value
+            for key, value in self.items()
+            if not (
+                (key == "note" and value == 0) or
+                (key == "fx" and value is None) or
+                (key == "start" and value == 0) or
+                (key == "cutoff" and value is None)
+            )
+        }
+        return state
+
+    def __setstate__(self, state):
+        """Ensure defaults are set when deserializing."""
+        self.__init__(
+            bank_name=state.get("bank_name"),
+            file_path=state.get("file_path"),
+            note=state.get("note", 0),
+            fx=state.get("fx"),
+            start=state.get("start", 0),
+            cutoff=state.get("cutoff", None),
+            tags=state.get("tags", [])
+        )
+
+
 if __name__ == "__main__":
     pass
