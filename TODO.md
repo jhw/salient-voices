@@ -1,24 +1,20 @@
 ### short
 
-### sv
+- per- machine sound classes
+
+- extend tokyo sound to cover tone, length parameters
+
+### euclid
 
 - capture ValueError raised by SVSample
 
 ### medium
 
-- new sv drum sound class 
-- tokyo to implement sv drum sound as sound 
-
-- berlin slide up/down
-- berlin slide to
-- berlin trill
+- berlin slide up/down, slide to, trill
 
 ### issues
 
 - rv generated DrumSynth mute not working?
-
-- mechanical heart (and others) sample loading
-- names not rendering properly
 
 ### thoughts
 
