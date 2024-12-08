@@ -34,7 +34,7 @@ def GhostEcho(self, n, rand,
         if 0 == i % quantise:            
             wet_level = rand["fx"].choice(sample_hold_levels)
             feedback_level = rand["fx"].choice(sample_hold_levels)
-            trig_block = self.modulation(echo_delay = "3600",
+            trig_block = self.modulation(echo_delay = "1200",
                                          echo_wet = wet_level,
                                          echo_feedback = feedback_level)
             yield i, trig_block
