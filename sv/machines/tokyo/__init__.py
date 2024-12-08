@@ -55,9 +55,14 @@ class TokyoMachineBase(SVMachine):
 
     def modulation(self,                   
                    level = 1.0,
+                   echo_delay = None,
                    echo_wet = None,
                    echo_feedback = None):
         trigs = []
+        if echo_delay:
+            delay_level = int(level * controller_value(echo_delay))
+            trigs.append(SVModTrig(target = f"{self.namespace}Echo/delay",
+                                   value = delay_level))
         if echo_wet:
             wet_level = int(level * controller_value(echo_wet))
             trigs.append(SVModTrig(target = f"{self.namespace}Echo/wet",
