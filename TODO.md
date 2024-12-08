@@ -1,12 +1,10 @@
 ### short
 
-- per- machine sound classes
+- update rv to latest version
 
-- extend tokyo sound to cover tone, length parameters
+- machine quantisation [notes]
 
-### euclid
-
-- capture ValueError raised by SVSample
+- sound classes
 
 ### medium
 

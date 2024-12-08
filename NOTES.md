@@ -1,3 +1,21 @@
+### machine quantisation 08/12/24
+
+- you can probably move the "base" quantisation in here but not the "relative mod" quantisation
+- should be able to move base quantisation in there and pass 0, 2, 4 etc (in case of tbp = 2) and not 0, 1, 2, 3, 4 etc
+- but mod quantisation is relative to this; you want the 4 to become 8 when tbp = 2 for example
+- so the 4 needs to be hardcoded at the generator level, still
+
+---
+
+- what you probably don't want to do is be tempted to split out echo as a separate machine
+- it's not an machine in itself, it's an effect; part of something that makes the sound, but not sufficient on its own
+- if you split it out you are back in modular space which is what you want to avoid
+- in particular because you then have the problem of linking modules together, the link stuff currently being nicely embedded within the machine space
+
+---
+
+- get it to work with berlin and then you are probably done
+
 ### decompiler notes 17/11/24
 
 - seem to be patterns with no notes in caravan, space trip
