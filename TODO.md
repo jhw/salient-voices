@@ -1,10 +1,11 @@
 ### short
 
-- update rv to latest version
+- test for rv sunvox-2.0-file-format error
 
-- machine quantisation [notes]
+- test moving berlin tbp quantisation into container
 
-- sound classes
+- test berlin sound class
+- test tokyo sound class
 
 ### medium
 
