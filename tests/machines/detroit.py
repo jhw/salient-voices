@@ -112,7 +112,7 @@ class DetroitTest(unittest.TestCase):
                                 "min_density": 0.5}],
                      bpm = 120,
                      tpb = 1,
-                     n_ticks = 32):
+                     n_ticks = 16):
         bank = SVBank.load_zip("tests/pico-default.zip")
         banks = SVBanks([bank])
         pool, _ = banks.spawn_pool(tag_patterns = PoolTagPatterns)

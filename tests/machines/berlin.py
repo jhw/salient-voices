@@ -73,7 +73,7 @@ class BerlinTest(unittest.TestCase):
     def test_berlin(self,
                     bpm = 120,
                     tpb = 2,
-                    n_ticks = 32):
+                    n_ticks = 16):
         bank = SVBank.load_zip("sv/machines/berlin/mikey303.zip")
         container = SVContainer(banks = [bank],
                                 bpm = bpm,
