@@ -26,15 +26,16 @@ def Beat(self, n, rand, pattern, groove, temperature, **kwargs):
             trig_block = self.note(volume = volume)
             yield i, trig_block
 
-def GhostEcho(self, n, rand,
+def GhostEcho(self, n, rand, bpm, tpb,
               sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
               quantise = 4,
               **kwargs):
     for i in range(n):
-        if 0 == i % quantise:            
+        if 0 == i % int(quantise * tpb):
             wet_level = rand["fx"].choice(sample_hold_levels)
             feedback_level = rand["fx"].choice(sample_hold_levels)
-            trig_block = self.modulation(echo_delay = "1200",
+            delay_value = hex(int(128 * bpm * tpb * 3 / 10))
+            trig_block = self.modulation(echo_delay = delay_value,
                                          echo_wet = wet_level,
                                          echo_feedback = feedback_level)
             yield i, trig_block
@@ -65,7 +66,7 @@ def random_colour(offset = 64,
             return color
     raise RuntimeError("couldn't find suitable random colour")
 
-def add_track(container, pool, tag, tpb,
+def add_track(container, pool, tag, bpm,  tpb,
               max_density = 0.9,
               min_density = 0.1,
               temperature = 0.5,
@@ -87,12 +88,15 @@ def add_track(container, pool, tag, tpb,
     groove_fn = random_groove_fn(tpb)
     env = {"pattern": pattern_fn,
            "groove": groove_fn,
-           "temperature": temperature}
+           "temperature": temperature,
+           "bpm": bpm,
+           "tpb": tpb}
     machine.render(generator = Beat,
                    seeds = seeds,
                    env = env)
     machine.render(generator = GhostEcho,
-                   seeds = seeds)
+                   seeds = seeds,
+                   env = env)
 
 class DetroitTest(unittest.TestCase):
     
@@ -106,17 +110,20 @@ class DetroitTest(unittest.TestCase):
                                {"tag": "hat",
                                 "max_density": 0.9,
                                 "min_density": 0.5}],
-                     tpb = 1):
+                     bpm = 120,
+                     tpb = 1,
+                     n_ticks = 32):
         bank = SVBank.load_zip("tests/pico-default.zip")
         banks = SVBanks([bank])
         pool, _ = banks.spawn_pool(tag_patterns = PoolTagPatterns)
         container = SVContainer(banks = banks,
-                                bpm = 120,
-                                n_ticks = 32)
+                                bpm = bpm,
+                                n_ticks = n_ticks)
         container.spawn_patch(colour = random_colour())
         for track in tracks:
             add_track(container = container,
                       pool = pool,
+                      bpm = bpm,
                       tpb = tpb,
                       **track)
         patches = container.patches

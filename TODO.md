@@ -1,13 +1,10 @@
 ### short
 
-- adjust all ghost echos in machines tests to use tpb
-
+- consider if n_ticks arg in machine tests needs to be quantised for tbp
 - consider how to abstract berlin's use of tbp in note length
-
 - test moving berlin quantisation into container
-
+- check tests with tpb = 2
 - adapt berlin to use sounds api
-
 - tokyo sound class
 
 ### medium
@@ -57,6 +54,7 @@
 
 ### done
 
+- adjust all ghost echos in machines tests to use tpb
 - adjust all euclid refs in machines tests to use tpb
 - adjust all perkons refs in machines tests to use tpb
 - refactor berlin to adjust perkons `tpb` as part of wrapper

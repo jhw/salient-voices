@@ -18,15 +18,16 @@ def Beat(self, n, rand, groove, threshold = 0.5, **kwargs):
             trig_block = self.note(volume = volume)
             yield i, trig_block
 
-def GhostEcho(self, n, rand,
+def GhostEcho(self, n, rand, bpm, tpb,
               sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
               quantise = 4,
               **kwargs):
     for i in range(n):
-        if 0 == i % quantise:            
+        if 0 == i % int(quantise * tpb):
             wet_level = rand["fx"].choice(sample_hold_levels)
             feedback_level = rand["fx"].choice(sample_hold_levels)
-            trig_block = self.modulation(echo_delay = "1200",
+            delay_value = hex(int(128 * bpm * tpb * 3 / 10))
+            trig_block = self.modulation(echo_delay = delay_value,
                                          echo_wet = wet_level,
                                          echo_feedback = feedback_level)
             yield i, trig_block
@@ -56,12 +57,14 @@ class DetroitFXTest(unittest.TestCase):
     
     def test_detroit(self,
                      tracks = [{"tag": "hat"}],
-                     tpb = 1):
+                     bpm = 120,
+                     tpb = 1,
+                     n_ticks = 32):
         bank = SVBank.load_zip("tests/pico-default.zip")
         banks = SVBanks([bank])
         container = SVContainer(banks = banks,
-                                bpm = 120,
-                                n_ticks = 32)
+                                bpm = bpm,
+                                n_ticks = n_ticks)
         container.spawn_patch(colour = random_colour())
         base_wav = random.choice(["40 CH", "41 CH", "45 OH", "46 OH"])
         base_sample = SVSample.parse(f"pico-default/{base_wav}.wav?cutoff=10000")
@@ -84,12 +87,15 @@ class DetroitFXTest(unittest.TestCase):
         seeds = {key: int(random.random() * 1e8)
                  for key in "beat|sound|fx|vol".split("|")}
         groove_fn = random_groove_fn(tpb)
-        env = {"groove": groove_fn}
+        env = {"groove": groove_fn,
+               "bpm": bpm,
+               "tpb": tpb}
         machine.render(generator = Beat,
                        seeds = seeds,
                        env = env)
         machine.render(generator = GhostEcho,
-                       seeds = seeds)
+                       seeds = seeds,
+                       env = env)
         patches = container.patches
         self.assertTrue(patches != [])
         patch = patches[0]
