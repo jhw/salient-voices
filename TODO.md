@@ -1,7 +1,5 @@
 ### short
 
-- add tbp_adjusted_xxx values in container
-
 - review existing tpb refs in tests
 
 - tests for sampler fx
@@ -59,6 +57,7 @@
 
 ### done
 
+- add tbp_adjusted_xxx values in container
 - check detroit with tbp = 2
 - berlin is only producing notes in second half
 - reduce n_ticks to 16 in each case
