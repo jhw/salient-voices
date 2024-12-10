@@ -39,9 +39,9 @@ def GhostEcho(self, n, rand,
                                          echo_feedback = feedback_level)
             yield i, trig_block
 
-def random_pattern_fn(patterns):
-    pattern_kwargs = {k: v for k, v in zip(["pulses", "steps"],
-                                           random.choice(patterns))}
+def random_pattern_fn(patterns, tpb):
+    pattern_kwargs = {k: v * tpb for k, v in zip(["pulses", "steps"],
+                                                 random.choice(patterns))}
     return bjorklund(**pattern_kwargs)
 
 def random_groove_fn(tpb, mod = perkons):
@@ -82,7 +82,8 @@ def add_track(container, pool, tag, tpb,
     track_patterns = [[pulses, steps] for pulses, steps in patterns
                       if (pulses/steps < max_density and
                           pulses/steps > min_density)]
-    pattern_fn = random_pattern_fn(track_patterns)
+    pattern_fn = random_pattern_fn(patterns = track_patterns,
+                                   tpb = tpb)
     groove_fn = random_groove_fn(tpb)
     env = {"pattern": pattern_fn,
            "groove": groove_fn,

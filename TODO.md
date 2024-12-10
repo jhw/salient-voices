@@ -1,6 +1,5 @@
 ### short
 
-- adjust all euclid refs in machines tests to use tpb
 - adjust all ghost echos in machines tests to use tpb
 
 - consider how to abstract berlin's use of tbp in note length
@@ -58,6 +57,7 @@
 
 ### done
 
+- adjust all euclid refs in machines tests to use tpb
 - adjust all perkons refs in machines tests to use tpb
 - refactor berlin to adjust perkons `tpb` as part of wrapper
 - implement sampler cutoff trimming
