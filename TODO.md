@@ -1,9 +1,11 @@
 ### short
 
-- check detroit with tbp = 2
+- tests for sampler fx
+- adjust detroit sample cutoff for tbp?
+
 - refactor echo_delay value being passed to Berlin instance in tests
-- separate tests for sampler stuff
 - consider how to quantise index values passed to generator for tbp
+
 - test moving berlin quantisation into container
 - adapt berlin to use sounds api
 
@@ -58,6 +60,7 @@
 
 ### done
 
+- check detroit with tbp = 2
 - berlin is only producing notes in second half
 - reduce n_ticks to 16 in each case
 - remove fx demo
