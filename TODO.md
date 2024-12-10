@@ -1,12 +1,11 @@
 ### short
 
+- add tbp_adjusted_xxx values in container
+
+- review existing tpb refs in tests
+
 - tests for sampler fx
 - adjust detroit sample cutoff for tbp?
-
-- refactor echo_delay value being passed to Berlin instance in tests
-- consider how to quantise index values passed to generator for tbp
-
-- test moving berlin quantisation into container
 - adapt berlin to use sounds api
 
 ### euclid
