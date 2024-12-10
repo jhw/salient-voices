@@ -23,10 +23,10 @@ class SVTrigPatch:
 class SVContainer:
 
     def __init__(self,
+                 bpm,
+                 n_ticks,
                  banks = [],
-                 bpm = 120,
-                 tpb = 1,
-                 n_ticks = 16):
+                 tpb = 1):
         self.banks = banks
         self.bpm = bpm
         self.tpb = tpb

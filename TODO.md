@@ -2,8 +2,10 @@
 
 - check all tests bar berlin with tpb = 2
 
-- try removing default bpm and n_ticks args from Container constructor
 - refactor echo_delay value being passed to Berlin instance in tests
+
+- remove fx demo
+- separate tests for sampler stuff
 
 - berlin is only producing notes in second half
 
@@ -64,6 +66,7 @@
 
 ### done
 
+- try removing default bpm and n_ticks args from Container constructor
 - pass tpb as container arg
 - consider if n_ticks arg in machine tests needs to be quantised for tbp
 - adjust all ghost echos in machines tests to use tpb
