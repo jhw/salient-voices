@@ -25,15 +25,17 @@ class SVContainer:
     def __init__(self,
                  banks = [],
                  bpm = 120,
+                 tpb = 1,
                  n_ticks = 16):
         self.banks = banks
         self.bpm = bpm
+        self.tpb = tpb
         self.n_ticks = n_ticks
         self.machines = []
         self.patches = []
 
     def spawn_patch(self, colour = [128, 128, 128]):
-        self.patches.append(SVTrigPatch(n_ticks = self.n_ticks,
+        self.patches.append(SVTrigPatch(n_ticks = self.n_ticks * self.tpb,
                                         trigs = [],
                                         colour = colour)) # NB force reset
 
@@ -54,7 +56,7 @@ class SVContainer:
         return SVProject().render_project(patches = self.patches,
                                           modules = self.modules,
                                           banks = self.banks,
-                                          bpm = self.bpm)
+                                          bpm = self.bpm * self.tpb)
 
     def write_project(self, filename):
         path_to_filename = "/".join(filename.split("/")[:-1])

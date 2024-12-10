@@ -1,7 +1,11 @@
 ### short
 
-- pass tpb as container arg
 - check all tests bar berlin with tpb = 2
+
+- try removing default bpm and n_ticks args from Container constructor
+- refactor echo_delay value being passed to Berlin instance in tests
+
+- berlin is only producing notes in second half
 
 - consider how to quantise index values passed to generator for tbp
 - test moving berlin quantisation into container
@@ -60,6 +64,7 @@
 
 ### done
 
+- pass tpb as container arg
 - consider if n_ticks arg in machine tests needs to be quantised for tbp
 - adjust all ghost echos in machines tests to use tpb
 - adjust all euclid refs in machines tests to use tpb

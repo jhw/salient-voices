@@ -63,8 +63,9 @@ class DetroitFXTest(unittest.TestCase):
         bank = SVBank.load_zip("tests/pico-default.zip")
         banks = SVBanks([bank])
         container = SVContainer(banks = banks,
-                                bpm = bpm * tpb,
-                                n_ticks = n_ticks * tpb)
+                                bpm = bpm,
+                                tpb = tpb,
+                                n_ticks = n_ticks)
         container.spawn_patch(colour = random_colour())
         base_wav = random.choice(["40 CH", "41 CH", "45 OH", "46 OH"])
         base_sample = SVSample.parse(f"pico-default/{base_wav}.wav?cutoff=10000")

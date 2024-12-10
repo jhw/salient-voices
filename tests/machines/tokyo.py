@@ -110,8 +110,8 @@ class TokyoTest(unittest.TestCase):
                    tpb = 1,
                    n_ticks = 32):
         container = SVContainer(banks = [],
-                                bpm = bpm * tpb,
-                                n_ticks = n_ticks * tpb)
+                                bpm = bpm,
+                                n_ticks = n_ticks)
         container.spawn_patch(colour = random_colour())
         for track in tracks:
             add_track(container = container,

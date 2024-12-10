@@ -70,11 +70,15 @@ def random_colour(offset = 64,
 
 class BerlinTest(unittest.TestCase):
 
-    def test_berlin(self, tpb = 2):
+    def test_berlin(self,
+                    bpm = 120,
+                    tpb = 2,
+                    n_ticks = 32):
         bank = SVBank.load_zip("sv/machines/berlin/mikey303.zip")
         container = SVContainer(banks = [bank],
-                                bpm = 120 * tpb,
-                                n_ticks = 32 * tpb)
+                                bpm = bpm,
+                                tpb = tpb,
+                                n_ticks = n_ticks)
         machine = Berlin(container = container,
                          namespace = "303",
                          colour = random_colour(),
