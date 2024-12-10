@@ -1,6 +1,6 @@
 ### short
 
-- review existing tpb refs in tests
+- why can berlin echo_delay be set at int but detroit must be set as hex?
 
 - tests for sampler fx
 - adjust detroit sample cutoff for tbp?

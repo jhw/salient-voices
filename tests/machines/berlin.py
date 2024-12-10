@@ -85,7 +85,7 @@ class BerlinTest(unittest.TestCase):
                          sample = SVSample.parse("mikey303/303 VCO SQR.wav"),
                          echo_wet = 16,
                          echo_feedback = 16,
-                         echo_delay = int(36 * tpb))
+                         echo_delay = int(bpm * 3 * tpb / 10))
         container.add_machine(machine)
         container.spawn_patch(colour = random_colour())
         seeds = {key: int(random.random() * 1e8)

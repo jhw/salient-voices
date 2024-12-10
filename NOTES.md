@@ -1,3 +1,17 @@
+### tpb usage 10/12/24
+
+#### generator
+
+##### note quantisation [berlin, detroit]
+
+##### note length [berlin]
+
+##### echo delay [detroit]
+
+#### main
+
+##### echo delay [berlin]
+
 ### machine quantisation 08/12/24
 
 - you can probably move the "base" quantisation in here but not the "relative mod" quantisation
