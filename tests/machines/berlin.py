@@ -8,9 +8,9 @@ import inspect
 import random
 import unittest
 
-def simple_note(self, n, i, rand, groove, tpb, root_offset, offsets, terms, frequencies):
+def simple_note(self, n, i, tpb, rand, groove, root_offset, offsets, terms, frequencies):
     note = root_offset + rand["note"].choice(offsets)
-    volume = groove(rand = rand["vol"], i = int(i / tpb))
+    volume = groove(rand = rand["vol"], i = i)
     term = int(rand["note"].choice(terms) * tpb)
     freq = rand["fx"].choice(frequencies)
     block =  self.note(note = note,
@@ -34,9 +34,9 @@ def BassLine(self, n, rand, tpb, groove,
             block, term = simple_note(self,
                                       n = n,
                                       i = i,
+                                      tpb = tpb,
                                       rand = rand,
                                       groove = groove,
-                                      tpb = tpb,
                                       root_offset = root_offset,
                                       offsets = offsets,
                                       terms = terms,
@@ -47,10 +47,17 @@ def BassLine(self, n, rand, tpb, groove,
         if i >= n:
             break
 
-def random_groove_fn(mod = perkons):
-    function_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]    
-    return getattr(mod, random.choice(function_names))
-
+def random_groove_fn(tpb, mod = perkons):
+    fn_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]
+    fn = getattr(mod, random.choice(fn_names))
+    def wrapped(i, **kwargs):
+        if 0 == i % tpb:
+            j = int(i / tpb)
+            return fn(j, **kwargs)
+        else:
+            return 0
+    return wrapped
+    
 def random_colour(offset = 64,
                   contrast = 128,
                   n = 256):
@@ -79,7 +86,7 @@ class BerlinTest(unittest.TestCase):
         container.spawn_patch(colour = random_colour())
         seeds = {key: int(random.random() * 1e8)
                  for key in "seq|note|fx|vol".split("|")}
-        groove_fn = random_groove_fn()
+        groove_fn = random_groove_fn(tpb)
         env = {"groove": groove_fn,
                "tpb": tpb}
         machine.render(generator = BassLine,

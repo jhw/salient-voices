@@ -1,8 +1,8 @@
 ### short
 
-- test moving berlin `tpb` quantisation into container
-
+- adapt all tests to use tpb
 - test berlin sound class
+- test moving berlin `tpb` quantisation into container
 - test tokyo sound class
 
 ### medium
@@ -52,6 +52,7 @@
 
 ### done
 
+- refactor berlin to adjust perkons `tpb` as part of wrapper
 - implement sampler cutoff trimming
 - implement sampler start trimming
 - add default cutoff 16 seconds
