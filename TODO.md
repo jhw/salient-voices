@@ -9,6 +9,10 @@
 
 - tokyo sound class
 
+### euclid
+
+- container must be passed tpb arg / don't multiply bpm and n_ticks args by tpb
+
 ### medium
 
 - berlin slide up/down, slide to, trill
