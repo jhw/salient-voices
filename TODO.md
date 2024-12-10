@@ -1,8 +1,6 @@
 ### short
 
-- test for rv sunvox-2.0-file-format error
-
-- test moving berlin tbp quantisation into container
+- test moving berlin `tpb` quantisation into container
 
 - test berlin sound class
 - test tokyo sound class
@@ -10,6 +8,10 @@
 ### medium
 
 - berlin slide up/down, slide to, trill
+
+### pending
+
+- `sunvox-2.0-file-format` `attack_ms` vs `attack`
 
 ### issues
 
