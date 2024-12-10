@@ -1,10 +1,12 @@
 ### short
 
-- consider if n_ticks arg in machine tests needs to be quantised for tbp
-- consider how to abstract berlin's use of tbp in note length
+- pass tpb as container arg
+- check all tests bar berlin with tpb = 2
+
+- consider how to quantise index values passed to generator for tbp
 - test moving berlin quantisation into container
-- check tests with tpb = 2
 - adapt berlin to use sounds api
+
 - tokyo sound class
 
 ### medium
@@ -54,6 +56,7 @@
 
 ### done
 
+- consider if n_ticks arg in machine tests needs to be quantised for tbp
 - adjust all ghost echos in machines tests to use tpb
 - adjust all euclid refs in machines tests to use tpb
 - adjust all perkons refs in machines tests to use tpb

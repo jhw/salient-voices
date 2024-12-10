@@ -117,8 +117,8 @@ class DetroitTest(unittest.TestCase):
         banks = SVBanks([bank])
         pool, _ = banks.spawn_pool(tag_patterns = PoolTagPatterns)
         container = SVContainer(banks = banks,
-                                bpm = bpm,
-                                n_ticks = n_ticks)
+                                bpm = bpm * tpb,
+                                n_ticks = n_ticks * tpb)
         container.spawn_patch(colour = random_colour())
         for track in tracks:
             add_track(container = container,
