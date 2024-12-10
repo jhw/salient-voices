@@ -1,9 +1,15 @@
 ### short
 
-- adapt all tests to use tpb
-- test berlin sound class
-- test moving berlin `tpb` quantisation into container
-- test tokyo sound class
+- adjust all euclid refs in machines tests to use tpb
+- adjust all ghost echos in machines tests to use tpb
+
+- consider how to abstract berlin's use of tbp in note length
+
+- test moving berlin quantisation into container
+
+- adapt berlin to use sounds api
+
+- tokyo sound class
 
 ### medium
 
@@ -52,6 +58,7 @@
 
 ### done
 
+- adjust all perkons refs in machines tests to use tpb
 - refactor berlin to adjust perkons `tpb` as part of wrapper
 - implement sampler cutoff trimming
 - implement sampler start trimming

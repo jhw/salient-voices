@@ -31,9 +31,16 @@ def GhostEcho(self, n, rand,
                                          echo_feedback = feedback_level)
             yield i, trig_block
 
-def random_groove_fn(mod = perkons):
-    function_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]    
-    return getattr(mod, random.choice(function_names))
+def random_groove_fn(tpb, mod = perkons):
+    fn_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]
+    fn = getattr(mod, random.choice(fn_names))
+    def wrapped(i, **kwargs):
+        if 0 == i % tpb:
+            j = int(i / tpb)
+            return fn(j, **kwargs)
+        else:
+            return 0
+    return wrapped
 
 def random_colour(offset = 64,
                   contrast = 128,
@@ -47,7 +54,9 @@ def random_colour(offset = 64,
             
 class DetroitFXTest(unittest.TestCase):
     
-    def test_detroit(self, tracks = [{"tag": "hat"}]):
+    def test_detroit(self,
+                     tracks = [{"tag": "hat"}],
+                     tpb = 1):
         bank = SVBank.load_zip("tests/pico-default.zip")
         banks = SVBanks([bank])
         container = SVContainer(banks = banks,
@@ -74,7 +83,7 @@ class DetroitFXTest(unittest.TestCase):
         container.add_machine(machine)
         seeds = {key: int(random.random() * 1e8)
                  for key in "beat|sound|fx|vol".split("|")}
-        groove_fn = random_groove_fn()
+        groove_fn = random_groove_fn(tpb)
         env = {"groove": groove_fn}
         machine.render(generator = Beat,
                        seeds = seeds,

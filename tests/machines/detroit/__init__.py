@@ -44,9 +44,16 @@ def random_pattern_fn(patterns):
                                            random.choice(patterns))}
     return bjorklund(**pattern_kwargs)
 
-def random_groove_fn(mod = perkons):
-    function_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]    
-    return getattr(mod, random.choice(function_names))
+def random_groove_fn(tpb, mod = perkons):
+    fn_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]
+    fn = getattr(mod, random.choice(fn_names))
+    def wrapped(i, **kwargs):
+        if 0 == i % tpb:
+            j = int(i / tpb)
+            return fn(j, **kwargs)
+        else:
+            return 0
+    return wrapped
 
 def random_colour(offset = 64,
                   contrast = 128,
@@ -58,7 +65,7 @@ def random_colour(offset = 64,
             return color
     raise RuntimeError("couldn't find suitable random colour")
 
-def add_track(container, pool, tag,
+def add_track(container, pool, tag, tpb,
               max_density = 0.9,
               min_density = 0.1,
               temperature = 0.5,
@@ -76,7 +83,7 @@ def add_track(container, pool, tag,
                       if (pulses/steps < max_density and
                           pulses/steps > min_density)]
     pattern_fn = random_pattern_fn(track_patterns)
-    groove_fn = random_groove_fn()
+    groove_fn = random_groove_fn(tpb)
     env = {"pattern": pattern_fn,
            "groove": groove_fn,
            "temperature": temperature}
@@ -88,15 +95,17 @@ def add_track(container, pool, tag,
 
 class DetroitTest(unittest.TestCase):
     
-    def test_detroit(self, tracks = [{"tag": "kick",
-                                      "max_density": 0.6,
-                                      "min_density": 0.2},
-                                     {"tag": "clap",
-                                      "max_density": 0.4,
-                                      "min_density": 0.1},
-                                     {"tag": "hat",
-                                      "max_density": 0.9,
-                                      "min_density": 0.5}]):
+    def test_detroit(self,
+                     tracks = [{"tag": "kick",
+                                "max_density": 0.6,
+                                "min_density": 0.2},
+                               {"tag": "clap",
+                                "max_density": 0.4,
+                                "min_density": 0.1},
+                               {"tag": "hat",
+                                "max_density": 0.9,
+                                "min_density": 0.5}],
+                     tpb = 1):
         bank = SVBank.load_zip("tests/pico-default.zip")
         banks = SVBanks([bank])
         pool, _ = banks.spawn_pool(tag_patterns = PoolTagPatterns)
@@ -107,6 +116,7 @@ class DetroitTest(unittest.TestCase):
         for track in tracks:
             add_track(container = container,
                       pool = pool,
+                      tpb = tpb,
                       **track)
         patches = container.patches
         self.assertTrue(patches != [])
