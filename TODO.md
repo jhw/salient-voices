@@ -2,9 +2,14 @@
 
 - why can berlin echo_delay be set at int but detroit must be set as hex?
 
-- tests for sampler fx
+- abstract tpb usage in echo delay [detroit]
+- abstract tpb usage in note length [berlin]
+- abstract tpb usage in note quantisation [berlin, detroit]
+
 - adjust detroit sample cutoff for tbp?
+
 - adapt berlin to use sounds api
+- tests for sampler fx implementation
 
 ### euclid
 
