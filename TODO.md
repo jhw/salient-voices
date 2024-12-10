@@ -1,19 +1,13 @@
 ### short
 
-- check all tests bar berlin with tpb = 2
-
+- reduce n_ticks to 16 in each case
+- check detroit with tbp = 2
 - refactor echo_delay value being passed to Berlin instance in tests
-
-- remove fx demo
 - separate tests for sampler stuff
-
 - berlin is only producing notes in second half
-
 - consider how to quantise index values passed to generator for tbp
 - test moving berlin quantisation into container
 - adapt berlin to use sounds api
-
-- tokyo sound class
 
 ### euclid
 
@@ -66,6 +60,7 @@
 
 ### done
 
+- remove fx demo
 - try removing default bpm and n_ticks args from Container constructor
 - pass tpb as container arg
 - consider if n_ticks arg in machine tests needs to be quantised for tbp
