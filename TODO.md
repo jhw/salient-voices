@@ -8,7 +8,8 @@
 
 ### euclid
 
-- container must be passed tpb arg / don't multiply bpm and n_ticks args by tpb
+- container must be passed tpb arg
+  - don't multiply bpm and n_ticks args by tpb externally
 
 ### medium
 
