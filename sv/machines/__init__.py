@@ -75,6 +75,29 @@ class SVSamplerMachine(SVMachine):
                 for attr in attrs:
                     mod[attr] = getattr(self, attr)
         return modules
+
+class SVBeatsApi:
+    
+    def __init__(self, sounds, sound_index=0, **kwargs):
+        self.sounds = sounds
+        self.sound_index = sound_index
+
+    def toggle_sound(self):
+        self.sound_index = 1 - int(self.sound_index > 0)
+
+    def increment_sound(self):
+        self.sound_index = (self.sound_index + 1) % len(self.sounds)
+
+    def decrement_sound(self):
+        self.sound_index = (self.sound_index - 1) % len(self.sounds)
+
+    def randomise_sound(self, rand):
+        self.sound_index = rand.choice(list(range(len(self.sounds))))
+
+    @property
+    def sound(self):
+        return self.sounds[self.sound_index]
+
     
 if __name__ == "__main__":
     pass

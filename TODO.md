@@ -1,6 +1,5 @@
 ### short [01-berlin-sound]
 
-- base class implementing sound api for berlin, detroit
 - pass wave parameter to berlin
 - implement wave parameter as enum
 
@@ -17,6 +16,8 @@
 
 - more options for berlin test random_sound()
 - berlin slide up/down, slide to, trill
+
+- tokyo
 
 - tests for sampler fx implementation
 
@@ -69,6 +70,7 @@
 
 ### done
 
+- base class implementing sound api for berlin, detroit
 - berlin test generator to switch sounds like detroit
 - berlin test main script to initialise sounds and pass to machine
 - abstract generator sound randomisation into randomise_sounds function
