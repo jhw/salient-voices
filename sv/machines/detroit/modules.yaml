@@ -1,8 +1,0 @@
-- name: Beat
-  class: sv.sampler.SVSlotSampler
-  links:
-    - Echo
-- name: Echo
-  class: rv.modules.echo.Echo
-  links:
-    - Output

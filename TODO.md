@@ -1,7 +1,5 @@
 ### short [01-berlin-sound]
 
-- refactor machine/__init__.py as machine.py
-
 - pass wave parameter to berlin
 - implement wave parameter as enum
 
@@ -72,6 +70,7 @@
 
 ### done
 
+- refactor machine/__init__.py as machine.py
 - remove load_yaml
 - abstract echo modulation
 - base class implementing sound api for berlin, detroit
