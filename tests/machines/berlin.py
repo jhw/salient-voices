@@ -8,7 +8,7 @@ import inspect
 import random
 import unittest
 
-def BassLine(self, n, rand, tpb, groove,
+def BassLine(self, n, rand, tpb, groove, temperature,
              root_offset = -4,
              offsets = [0, 0, 0, -2],
              note_density = 0.5,
@@ -16,10 +16,12 @@ def BassLine(self, n, rand, tpb, groove,
              **kwargs):
     i = 0
     while True:
+        if rand["sound"].random() < temperature:
+            self.randomise_sound(rand["sound"])
+        note = root_offset + rand["note"].choice(offsets)
+        volume = groove(rand = rand["vol"], i = i)
         if (rand["seq"].random() < note_density and
               0 == i % (quantise * tpb)):
-            note = root_offset + rand["note"].choice(offsets)
-            volume = groove(rand = rand["vol"], i = i)
             block =  self.note(note = note,
                                volume = volume)
             yield i, block
@@ -58,6 +60,7 @@ def random_colour(offset = 64,
 class BerlinTest(unittest.TestCase):
 
     def test_berlin(self,
+                    temperature = 0.5,
                     bpm = 120,
                     tpb = 2,
                     n_ticks = 16,
@@ -79,9 +82,10 @@ class BerlinTest(unittest.TestCase):
         container.add_machine(machine)
         container.spawn_patch(colour = random_colour())
         seeds = {key: int(random.random() * 1e8)
-                 for key in "seq|note|fx|vol".split("|")}
+                 for key in "sound|seq|note|fx|vol".split("|")}
         groove_fn = random_groove_fn(tpb)
         env = {"groove": groove_fn,
+               "temperature": temperature,
                "tpb": tpb}
         machine.render(generator = BassLine,
                        seeds = seeds,

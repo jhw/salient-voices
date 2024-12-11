@@ -1,7 +1,5 @@
 ### short [01-berlin-sound]
 
-- berlin test generator to switch sounds like detroit
-
 ### euclid
 
 - container must be passed tpb arg
@@ -65,6 +63,7 @@
 
 ### done
 
+- berlin test generator to switch sounds like detroit
 - berlin test main script to initialise sounds and pass to machine
 - abstract generator sound randomisation into randomise_sounds function
 - check handling of sustain term parameter
