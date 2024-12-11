@@ -11,7 +11,7 @@
 
 ### medium
 
-- more options for berlin test random_sound()
+- more options for berlin random_sound
 - berlin slide up/down, slide to, trill
 
 - tokyo
