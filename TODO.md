@@ -1,20 +1,22 @@
 ### short
 
+- berlin random_sound resonance
+
+- berlin slide up/down
+
+### medium
+
+- berlin slide to
 - berlin sound serialisation
-- include resonance in berlin random_sound options
-- berlin slide up/down, slide to, trill
+- test DrumSynth mute
+- tokyo
+- tests for sampler fx implementation
+- adjust detroit sample cutoff for tbp?
 
 ### euclid
 
 - container must be passed tpb arg
   - don't multiply bpm and n_ticks args by tpb externally
-
-### medium
-
-- test DrumSynth mute
-- tokyo
-- tests for sampler fx implementation
-- adjust detroit sample cutoff for tbp?
 
 ### pending
 
