@@ -1,11 +1,9 @@
 ### short [01-berlin-sound]
 
-- add sound api to berlin class
-
-- refactor demo
-  - sound randomisation
-  - main script to generate sounds
-  - generators to shuffle sounds only
+- abstract generator sound randomisation into randomise_sounds function
+- pass sounds to machine
+- generator to play and shuffle sounds only
+- check handling of sustain term parameter
 
 ### euclid
 
@@ -14,6 +12,7 @@
 
 ### medium
 
+- base class implementing sound api for berlin, detroit
 - tests for sampler fx implementation
 - berlin slide up/down, slide to, trill
 
@@ -69,6 +68,7 @@
 
 ### done
 
+- add sound api to berlin class
 - new berlin sound class
   - attrs for whatever is currently being passed to note
 - add tbp_adjusted_xxx values in container

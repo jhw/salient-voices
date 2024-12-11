@@ -24,7 +24,8 @@ class Berlin(SVSamplerMachine):
 
     Modules = load_yaml(__file__, "modules.yaml")
     
-    def __init__(self, container, namespace, sample,
+    def __init__(self, container, namespace, sample, sounds,
+                 sound_index = 0,
                  relative_note = 0,
                  filter_resonance = "575", # no idea re format; doesn't seem to correspond to either of the values in the UI; max seems to be around "599"
                  echo_delay = 36,
@@ -43,7 +44,21 @@ class Berlin(SVSamplerMachine):
                                   "feedback": echo_feedback,
                                   "delay": echo_delay,
                                   "delay_unit": echo_delay_unit}}
+        self.sounds = sounds
+        self.sound_index = sound_index
+        
+    def toggle_sound(self):
+        self.sound_index = 1 - int(self.sound_index > 0)
 
+    def increment_sound(self):
+        self.sound_index = (self.sound_index + 1) % len(self.sounds)
+
+    def decrement_sound(self):
+        self.sound_index = (self.sound_index - 1) % len(self.sounds)
+        
+    def randomise_sound(self, rand):
+        self.sound_index = rand.choice(list(range(len(self.sounds))))
+        
     @property
     def sound(self):
         return self.sounds[self.sound_index]
