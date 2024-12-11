@@ -1,5 +1,8 @@
 ### short [01-berlin-sound]
 
+- abstract echo modulation
+- remove load_yaml
+
 - pass wave parameter to berlin
 - implement wave parameter as enum
 
