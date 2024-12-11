@@ -60,14 +60,17 @@ class BerlinTest(unittest.TestCase):
     def test_berlin(self,
                     bpm = 120,
                     tpb = 2,
-                    n_ticks = 16):
+                    n_ticks = 16,
+                    n_sounds = 16):
         bank = SVBank.load_zip("sv/machines/berlin/mikey303.zip")
         container = SVContainer(banks = [bank],
                                 bpm = bpm,
                                 tpb = tpb,
                                 n_ticks = n_ticks)
+        sounds = [random_sound(tpb) for i in range(n_sounds)]
         machine = Berlin(container = container,
                          namespace = "303",
+                         sounds = sounds,
                          colour = random_colour(),
                          sample = SVSample.parse("mikey303/303 VCO SQR.wav"),
                          echo_wet = 16,

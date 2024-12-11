@@ -1,7 +1,6 @@
 ### short [01-berlin-sound]
 
 - berlin test generator to switch sounds like detroit
-- berlin test main script to initialise sounds and pass to machine
 
 ### euclid
 
@@ -66,6 +65,7 @@
 
 ### done
 
+- berlin test main script to initialise sounds and pass to machine
 - abstract generator sound randomisation into randomise_sounds function
 - check handling of sustain term parameter
 - add sound api to berlin class
