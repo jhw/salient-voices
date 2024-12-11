@@ -1,7 +1,8 @@
 ### short
 
-- test controller parameterisation (initial vs trig)
-- test DrumSynth mute
+- berlin sound serialisation
+- include resonance in berlin random_sound options
+- berlin slide up/down, slide to, trill
 
 ### euclid
 
@@ -10,13 +11,9 @@
 
 ### medium
 
-- more options for berlin random_sound
-- berlin slide up/down, slide to, trill
-
+- test DrumSynth mute
 - tokyo
-
 - tests for sampler fx implementation
-
 - adjust detroit sample cutoff for tbp?
 
 ### pending
