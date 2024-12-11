@@ -1,5 +1,8 @@
 ### short [01-berlin-sound]
 
+- add more options to random_sound()
+- base class implementing sound api for berlin, detroit
+
 ### euclid
 
 - container must be passed tpb arg
@@ -7,7 +10,6 @@
 
 ### medium
 
-- base class implementing sound api for berlin, detroit
 - tests for sampler fx implementation
 - berlin slide up/down, slide to, trill
 
