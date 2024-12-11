@@ -1,14 +1,9 @@
 ### short [01-berlin-sound]
 
-- new berlin sound class
-  - attrs for whatever is currently being passed to note
-
-- sound randomise()
-  - include whatever is currently being set by generators
-
 - add sound api to berlin class
 
 - refactor demo
+  - sound randomisation
   - main script to generate sounds
   - generators to shuffle sounds only
 
@@ -19,7 +14,8 @@
 
 ### medium
 
-- why can berlin echo_delay be set at int but detroit must be set as hex?
+- tests for sampler fx implementation
+- berlin slide up/down, slide to, trill
 
 - abstract tbp
   - echo delay [detroit]
@@ -28,17 +24,15 @@
 
 - adjust detroit sample cutoff for tbp?
 
-- tests for sampler fx implementation
+### issues
 
-- berlin slide up/down, slide to, trill
+- rv generated DrumSynth mute not working?
+- initial controller vs controller trig parameterisation
+- filter resonance parameterisation
 
 ### pending
 
 - sunvox-2.0-file-format
-
-### issues
-
-- rv generated DrumSynth mute not working?
 
 ### thoughts
 
@@ -75,6 +69,8 @@
 
 ### done
 
+- new berlin sound class
+  - attrs for whatever is currently being passed to note
 - add tbp_adjusted_xxx values in container
 - check detroit with tbp = 2
 - berlin is only producing notes in second half

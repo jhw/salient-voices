@@ -4,6 +4,22 @@ from sv.trigs import SVNoteOffTrig, SVModTrig, SVSampleTrig
 import rv
 import rv.api
 
+class BerlinSound:
+
+    def __init__(self,
+                 attack_ms = "0008",
+                 decay_ms = "0018",
+                 sustain_level = "0800",
+                 sustain_term = None,
+                 release_ms = "0300",
+                 filter_freq = "4000"):
+        self.attack_ms = attack_ms
+        self.decay_ms = decay_ms
+        self.sustain_level = sustain_level
+        self.sustain_term = sustain_term
+        self.release_ms = release_ms
+        self.filter_freq = filter_freq
+
 class Berlin(SVSamplerMachine):
 
     Modules = load_yaml(__file__, "modules.yaml")
@@ -15,7 +31,6 @@ class Berlin(SVSamplerMachine):
                  echo_delay_unit = 3, # tick
                  echo_wet = 32, # '1000'
                  echo_feedback = 32, # '1000'
-                 reverb_wet = 2, # setting as integer as easier when wanting tiny amounts only
                  colour = [127, 127, 127],
                  **kwargs):
         super().__init__(container = container,
@@ -27,48 +42,53 @@ class Berlin(SVSamplerMachine):
                          "Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
                                   "delay": echo_delay,
-                                  "delay_unit": echo_delay_unit},
-                         "Reverb": {"wet": reverb_wet}}
+                                  "delay_unit": echo_delay_unit}}
 
+    @property
+    def sound(self):
+        return self.sounds[self.sound_index]
+        
     def note(self,
              note = 0,
              volume = 1.0,
-             attack_ms = "0008",
-             decay_ms = "0018",
-             sustain_level = "0800",
-             sustain_term = None,
-             release_ms = "0300",
-             filter_freq = "4000"):
-        cloned_sample = self.sample.clone()
-        cloned_sample["note"] = note
+             level = 1.0):
+        sample = self.sample.clone()
+        sample["note"] = note
         trigs = [SVSampleTrig(target = f"{self.namespace}MultiSynth",
                               sampler_mod = f"{self.namespace}Sampler",
-                              sample = cloned_sample,
-                              vel = volume),
+                              sample = sample,
+                              vel = volume * level),
                  SVModTrig(target = f"{self.namespace}Sound2Ctl/out_max",
-                          value = filter_freq)]
-        trigs += [SVModTrig(target = f"{self.namespace}ADSR/attack_ms",
-                            value = attack_ms),
-                  SVModTrig(target = f"{self.namespace}ADSR/decay_ms",
-                            value = decay_ms),
-                  SVModTrig(target = f"{self.namespace}ADSR/sustain_level",
-                            value = sustain_level),
-                  SVModTrig(target = f"{self.namespace}ADSR/release_ms",
-                            value = release_ms)]
-        if sustain_term:
+                           value = self.sound.filter_freq),
+                 SVModTrig(target = f"{self.namespace}ADSR/attack_ms",
+                           value = self.sound.attack_ms),
+                 SVModTrig(target = f"{self.namespace}ADSR/decay_ms",
+                           value = self.sound.decay_ms),
+                 SVModTrig(target = f"{self.namespace}ADSR/sustain_level",
+                           value = self.sound.sustain_level),
+                 SVModTrig(target = f"{self.namespace}ADSR/release_ms",
+                           value = self.sound.release_ms)]
+        if self.sound.sustain_term:
             trigs.append(SVNoteOffTrig(target = f"{self.namespace}MultiSynth",
-                                       i = sustain_term))
+                                       i = self.sound.sustain_term))
         return SVMachineTrigs(trigs = trigs)
 
     def modulation(self,
+                   level = 1.0,
+                   echo_delay = None,
                    echo_wet = None,
                    echo_feedback = None,
                    filter_resonance = None,
                    filter_roll_off = None):
         trigs = []
+        if echo_delay:
+            delay_level = int(level * controller_value(echo_delay))
+            trigs.append(SVModTrig(target = f"{self.namespace}Echo/delay",
+                                   value = delay_level))
         if echo_wet:
+            wet_level = int(level * controller_value(echo_wet))
             trigs.append(SVModTrig(target = f"{self.namespace}Echo/wet",
-                                   value = echo_wet))
+                                   value = wet_level))
         if echo_feedback:
             trigs.append(SVModTrig(target = f"{self.namespace}Echo/feedback",
                                    value = echo_feedback))
