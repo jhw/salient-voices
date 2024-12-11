@@ -34,11 +34,24 @@ Modules = yaml.safe_load("""
     freq: 0
     roll_off: 3 # no idea but seems to allow resonance to be higher without pinking distortion
   links:
+    - Distortion
+- name: Distortion
+  class: rv.modules.distortion.Distortion
+  defaults:
+    power: 0
+  links:
     - Echo
 - name: Echo
   class: rv.modules.echo.Echo
   links:
+    - Reverb
+- name: Reverb
+  class: rv.modules.reverb.Reverb
+  defaults:
+    wet: 0
+  links:
     - Output
+
 """)
 
 class BerlinSound:
@@ -69,7 +82,7 @@ class Berlin(SVSamplerMachine, SVBeatsApi):
     def __init__(self, container, namespace, wave, sounds,
                  sound_index=0,
                  relative_note=0,
-                 filter_resonance="575",
+                 filter_resonance=1300,
                  echo_delay=36,
                  echo_delay_unit=3,  # tick
                  echo_wet=32,  # '1000'

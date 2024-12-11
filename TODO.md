@@ -1,7 +1,6 @@
 ### short
 
 - test controller parameterisation (initial vs trig)
-- test initial filter resonance parameterisation
 - test DrumSynth mute
 
 ### euclid
@@ -19,9 +18,6 @@
 - tests for sampler fx implementation
 
 - adjust detroit sample cutoff for tbp?
-
-### issues
-
 
 ### pending
 
@@ -64,6 +60,7 @@
 
 ### done
 
+- test initial filter resonance parameterisation
 - implement wave parameter as enum
 - pass wave parameter to berlin
 - refactor machine/__init__.py as machine.py

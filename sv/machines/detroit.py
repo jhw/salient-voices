@@ -9,9 +9,21 @@ Modules = yaml.safe_load("""
 - name: Beat
   class: sv.sampler.SVSlotSampler
   links:
+    - Distortion
+- name: Distortion
+  class: rv.modules.distortion.Distortion
+  defaults:
+    power: 0
+  links:
     - Echo
 - name: Echo
   class: rv.modules.echo.Echo
+  links:
+    - Reverb
+- name: Reverb
+  class: rv.modules.reverb.Reverb
+  defaults:
+    wet: 0
   links:
     - Output
 """)
