@@ -1,6 +1,5 @@
 ### short [01-berlin-sound]
 
-- abstract echo modulation
 - remove load_yaml
 
 - pass wave parameter to berlin
@@ -73,6 +72,7 @@
 
 ### done
 
+- abstract echo modulation
 - base class implementing sound api for berlin, detroit
 - berlin test generator to switch sounds like detroit
 - berlin test main script to initialise sounds and pass to machine

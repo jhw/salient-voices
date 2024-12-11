@@ -77,18 +77,10 @@ class Berlin(SVSamplerMachine, SVBeatsApi):
                    echo_feedback=None,
                    filter_resonance=None,
                    filter_roll_off=None):
-        trigs = []
-        if echo_delay:
-            delay_level = int(level * controller_value(echo_delay))
-            trigs.append(SVModTrig(target=f"{self.namespace}Echo/delay",
-                                   value=delay_level))
-        if echo_wet:
-            wet_level = int(level * controller_value(echo_wet))
-            trigs.append(SVModTrig(target=f"{self.namespace}Echo/wet",
-                                   value=wet_level))
-        if echo_feedback:
-            trigs.append(SVModTrig(target=f"{self.namespace}Echo/feedback",
-                                   value=echo_feedback))
+        trigs = super().modulation(level=level,
+                                   echo_delay=echo_delay,
+                                   echo_wet=echo_wet,
+                                   echo_feedback=echo_feedback)
         if filter_resonance:
             trigs.append(SVModTrig(target=f"{self.namespace}Filter/resonance",
                                    value=filter_resonance))
@@ -96,6 +88,6 @@ class Berlin(SVSamplerMachine, SVBeatsApi):
             trigs.append(SVModTrig(target=f"{self.namespace}Filter/roll_off",
                                    value=filter_roll_off))
         return SVMachineTrigs(trigs=trigs)
-
+    
 if __name__ == "__main__":
     pass
