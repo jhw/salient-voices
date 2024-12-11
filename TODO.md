@@ -1,9 +1,7 @@
 ### short [01-berlin-sound]
 
-- abstract generator sound randomisation into randomise_sounds function
-- pass sounds to machine
-- generator to play and shuffle sounds only
-- check handling of sustain term parameter
+- berlin test generator to switch sounds like detroit
+- berlin test main script to initialise sounds and pass to machine
 
 ### euclid
 
@@ -68,6 +66,8 @@
 
 ### done
 
+- abstract generator sound randomisation into randomise_sounds function
+- check handling of sustain term parameter
 - add sound api to berlin class
 - new berlin sound class
   - attrs for whatever is currently being passed to note

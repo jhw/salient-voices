@@ -1,29 +1,16 @@
 import sv.algos.groove.perkons as perkons
 from sv.banks import SVBank
 from sv.container import SVContainer
-from sv.machines.berlin import Berlin
+from sv.machines.berlin import Berlin, BerlinSound
 from sv.sounds import SVSample
 
 import inspect
 import random
 import unittest
 
-def simple_note(self, n, i, tpb, rand, groove, root_offset, offsets, terms, frequencies):
-    note = root_offset + rand["note"].choice(offsets)
-    volume = groove(rand = rand["vol"], i = i)
-    term = int(rand["note"].choice(terms) * tpb)
-    freq = rand["fx"].choice(frequencies)
-    block =  self.note(note = note,
-                       volume = volume,
-                       sustain_term = term, 
-                       filter_freq = freq)
-    return block, term
-
 def BassLine(self, n, rand, tpb, groove,
              root_offset = -4,
              offsets = [0, 0, 0, -2],
-             terms = [0.5, 0.5, 0.5, 2],
-             frequencies = ["2000", "3000", "3000", "3000", "5000"],
              note_density = 0.5,
              quantise = 1,
              **kwargs):
@@ -31,22 +18,22 @@ def BassLine(self, n, rand, tpb, groove,
     while True:
         if (rand["seq"].random() < note_density and
               0 == i % (quantise * tpb)):
-            block, term = simple_note(self,
-                                      n = n,
-                                      i = i,
-                                      tpb = tpb,
-                                      rand = rand,
-                                      groove = groove,
-                                      root_offset = root_offset,
-                                      offsets = offsets,
-                                      terms = terms,
-                                      frequencies = frequencies)
+            note = root_offset + rand["note"].choice(offsets)
+            volume = groove(rand = rand["vol"], i = i)
+            block =  self.note(note = note,
+                               volume = volume)
             yield i, block
-            i += term
+            i += self.sound.sustain_term # NB
         i += 1
         if i >= n:
             break
 
+def random_sound(tpb,
+                 terms = [0.5, 0.5, 0.5, 1, 2]
+                 frequencies = ["2000", "3000", "3000", "3000", "5000"]):
+    return BerlinSound(sustain_term = int(random.choice(terms) * tbp),
+                       filter_freq = random.choice(frequencies))
+        
 def random_groove_fn(tpb, mod = perkons):
     fn_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]
     fn = getattr(mod, random.choice(fn_names))
