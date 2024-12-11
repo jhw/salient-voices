@@ -1,8 +1,10 @@
 ### short [01-berlin-sound]
 
 - base class implementing sound api for berlin, detroit
+- pass wave parameter to berlin
+- implement wave parameter as enum
 
-- rv generated DrumSynth mute not working?
+- rv generated DrumSynth mute not working
 - initial controller vs controller trig parameterisation
 - filter resonance parameterisation
 
