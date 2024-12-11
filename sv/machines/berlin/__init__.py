@@ -1,5 +1,8 @@
 from sv.machines import SVSamplerMachine, SVMachineTrigs, SVBeatsApi
+from sv.sounds import SVSample
 from sv.trigs import SVNoteOffTrig, SVModTrig, SVSampleTrig
+
+from enum import Enum
 
 import rv
 import rv.api
@@ -56,9 +59,14 @@ class BerlinSound:
 
 class Berlin(SVSamplerMachine, SVBeatsApi):
 
-    Modules = Modules
+    class Wave(Enum):
+        
+        SQR = "SQR"
+        SAW = "SAW"
     
-    def __init__(self, container, namespace, sample, sounds,
+    Modules = Modules
+
+    def __init__(self, container, namespace, wave, sounds,
                  sound_index=0,
                  relative_note=0,
                  filter_resonance="575",
@@ -73,7 +81,7 @@ class Berlin(SVSamplerMachine, SVBeatsApi):
                                    root=rv.note.NOTE.C5 + relative_note,
                                    colour=colour)
         SVBeatsApi.__init__(self, sounds=sounds, sound_index=sound_index)
-        self.sample = sample
+        self.sample = SVSample.parse(f"mikey303/303 VCO {wave.value}.wav")
         self.defaults = {"Filter": {"resonance": filter_resonance},
                          "Echo": {"wet": echo_wet,
                                    "feedback": echo_feedback,

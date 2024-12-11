@@ -2,7 +2,6 @@ import sv.algos.groove.perkons as perkons
 from sv.banks import SVBank
 from sv.container import SVContainer
 from sv.machines.berlin import Berlin, BerlinSound
-from sv.sounds import SVSample
 
 import inspect
 import random
@@ -75,9 +74,9 @@ class BerlinTest(unittest.TestCase):
                          namespace = "303",
                          sounds = sounds,
                          colour = random_colour(),
-                         sample = SVSample.parse("mikey303/303 VCO SQR.wav"),
-                         echo_wet = 16,
-                         echo_feedback = 16,
+                         wave = Berlin.Wave.SQR,
+                         echo_wet = 8,
+                         echo_feedback = 8,
                          echo_delay = int(bpm * 3 * tpb / 10))
         container.add_machine(machine)
         container.spawn_patch(colour = random_colour())

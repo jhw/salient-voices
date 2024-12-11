@@ -1,11 +1,8 @@
-### short [01-berlin-sound]
+### short
 
-- pass wave parameter to berlin
-- implement wave parameter as enum
-
-- rv generated DrumSynth mute not working
-- initial controller vs controller trig parameterisation
-- filter resonance parameterisation
+- test controller parameterisation (initial vs trig)
+- test initial filter resonance parameterisation
+- test DrumSynth mute
 
 ### euclid
 
@@ -21,11 +18,6 @@
 
 - tests for sampler fx implementation
 
-- abstract tbp
-  - echo delay [detroit]
-  - note length [berlin]
-  - note quantisation [berlin, detroit]
-
 - adjust detroit sample cutoff for tbp?
 
 ### issues
@@ -36,6 +28,8 @@
 - sunvox-2.0-file-format
 
 ### thoughts
+
+- can tbp be abstracted any further? quantising the counter passed to generator?
 
 ### gists 
 
@@ -70,6 +64,8 @@
 
 ### done
 
+- implement wave parameter as enum
+- pass wave parameter to berlin
 - refactor machine/__init__.py as machine.py
 - remove load_yaml
 - abstract echo modulation
