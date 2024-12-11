@@ -1,7 +1,10 @@
 ### short [01-berlin-sound]
 
-- add more options to random_sound()
 - base class implementing sound api for berlin, detroit
+
+- rv generated DrumSynth mute not working?
+- initial controller vs controller trig parameterisation
+- filter resonance parameterisation
 
 ### euclid
 
@@ -10,8 +13,10 @@
 
 ### medium
 
-- tests for sampler fx implementation
+- more options for berlin test random_sound()
 - berlin slide up/down, slide to, trill
+
+- tests for sampler fx implementation
 
 - abstract tbp
   - echo delay [detroit]
@@ -22,9 +27,6 @@
 
 ### issues
 
-- rv generated DrumSynth mute not working?
-- initial controller vs controller trig parameterisation
-- filter resonance parameterisation
 
 ### pending
 
