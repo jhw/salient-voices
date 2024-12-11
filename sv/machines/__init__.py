@@ -5,10 +5,6 @@ from random import Random
 
 import copy
 import rv
-import yaml
-
-def load_yaml(base_path, file_name):
-    return yaml.safe_load(open("/".join(base_path.split("/")[:-1] + [file_name])).read())
 
 class SVMachineTrigs:
 

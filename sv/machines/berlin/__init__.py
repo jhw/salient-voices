@@ -1,8 +1,42 @@
-from sv.machines import SVSamplerMachine, SVMachineTrigs, SVBeatsApi, load_yaml
+from sv.machines import SVSamplerMachine, SVMachineTrigs, SVBeatsApi
 from sv.trigs import SVNoteOffTrig, SVModTrig, SVSampleTrig
 
 import rv
 import rv.api
+import yaml
+
+Modules = yaml.safe_load("""
+- name: MultiSynth
+  class: rv.modules.multisynth.MultiSynth
+  links:
+    - ADSR
+    - Sampler
+- name: ADSR
+  class: rv.modules.adsr.Adsr
+  links:
+    - Sound2Ctl
+- name: Sound2Ctl
+  class: rv.modules.sound2ctl.Sound2Ctl
+  defaults:
+    out_controller: 2
+  links:
+    - Filter
+- name: Sampler
+  class: sv.sampler.SVSlotSampler
+  links:
+    - Filter
+- name: Filter
+  class: rv.modules.filter.Filter
+  defaults:
+    freq: 0
+    roll_off: 3 # no idea but seems to allow resonance to be higher without pinking distortion
+  links:
+    - Echo
+- name: Echo
+  class: rv.modules.echo.Echo
+  links:
+    - Output
+""")
 
 class BerlinSound:
 
@@ -21,9 +55,9 @@ class BerlinSound:
         self.filter_freq = filter_freq
 
 class Berlin(SVSamplerMachine, SVBeatsApi):
-    
-    Modules = load_yaml(__file__, "modules.yaml")
 
+    Modules = Modules
+    
     def __init__(self, container, namespace, sample, sounds,
                  sound_index=0,
                  relative_note=0,

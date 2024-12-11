@@ -1,12 +1,24 @@
-from sv.machines import SVSamplerMachine, SVMachineTrigs, SVBeatsApi, load_yaml
+from sv.machines import SVSamplerMachine, SVMachineTrigs, SVBeatsApi
 from sv.trigs import SVSampleTrig
 
 import rv
 import rv.api
+import yaml
+
+Modules = yaml.safe_load("""
+- name: Beat
+  class: sv.sampler.SVSlotSampler
+  links:
+    - Echo
+- name: Echo
+  class: rv.modules.echo.Echo
+  links:
+    - Output
+""")
 
 class Detroit(SVSamplerMachine, SVBeatsApi):
 
-    Modules = load_yaml(__file__, "modules.yaml")
+    Modules = Modules
 
     def __init__(self, container, namespace, sounds,
                  sound_index=0,
