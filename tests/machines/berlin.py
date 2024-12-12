@@ -29,13 +29,18 @@ def BassLine(self, n, rand, tpb, groove, temperature,
         if i >= n:
             break
 
-def random_sound(tpb,
-                 terms = [0.5, 0.5, 0.5, 1, 2],
-                 frequencies = ["2000", "3000", "3000", "3000", "5000"],
-                 resonances = ["6000", "6800", "7000", "7800"]):
-    return BerlinSound(sustain_term = int(random.choice(terms) * tpb),
-                       filter_freq = random.choice(frequencies),
-                       filter_resonance = random.choice(resonances))
+def random_sounds(tpb, n,
+                  terms = [0.5, 0.5, 0.5, 1, 2],
+                  frequencies = ["2000", "3000", "3000", "3000", "5000"],
+                  resonances = ["6000", "6800", "7000", "7800"]):
+    resonance = random.choice(resonances)
+    sounds = []
+    for i in range(n):
+        sound = BerlinSound(sustain_term = int(random.choice(terms) * tpb),
+                            filter_freq = random.choice(frequencies),
+                            filter_resonance = resonance)
+        sounds.append(sound)
+    return sounds
         
 def random_groove_fn(tpb, mod = perkons):
     fn_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]
@@ -71,7 +76,7 @@ class BerlinTest(unittest.TestCase):
                                 bpm = bpm,
                                 tpb = tpb,
                                 n_ticks = n_ticks)
-        sounds = [random_sound(tpb) for i in range(n_sounds)]
+        sounds = random_sounds(tpb = tpb, n = n_sounds)
         machine = Berlin(container = container,
                          namespace = "303",
                          sounds = sounds,

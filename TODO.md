@@ -1,15 +1,12 @@
 ### short
 
-- refactor berlin test so only a single resonance is selected each time
-
 - implement berlin slide up/down FX trigs
 
 ### medium
 
-- tests for sampler fx implementation
-- adjust detroit sample cutoff for tbp?
-- berlin slide to
+- tests for sampler fx 
 - berlin sound serialisation
+- berlin slide to
 - tokyo
 
 ### euclid
@@ -20,10 +17,17 @@
 ### pending
 
 - sunvox-2.0-file-format
+  - rename xxx_ms controllers
+  - multi synth issue
+    - `multisynth_module.out_port_mode = m.MultiSynth.OutPortMode.all_or_random1`
+  
+- controller values dual format
+- un- muteable modules
 
 ### thoughts
 
-- can tbp be abstracted any further? quantising the counter passed to generator?
+- adjust detroit sample cutoff for tbp?
+- can tbp be abstracted any further?
 
 ### gists 
 
@@ -58,6 +62,7 @@
 
 ### done
 
+- refactor berlin test so only a single resonance is selected each time
 - berlin slide up/down skeleton
 - refactor trig.increment as trig.set_position
 - test DrumSynth mute
