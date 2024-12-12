@@ -14,7 +14,7 @@ class SVMachineTrigs:
     def render(self, i):
         trigs = []
         for trig in self.trigs:
-            trig.increment(i)
+            trig.set_position(i)
             trigs.append(trig)
         return trigs
         

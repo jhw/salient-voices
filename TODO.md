@@ -1,5 +1,8 @@
 ### short
 
+- define i = 0 at trig base
+- pass kwargs down through trig constructors
+
 - berlin slide up/down
 
 ### medium
@@ -56,6 +59,7 @@
 
 ### done
 
+- refactor trig.increment as trig.set_position
 - test DrumSynth mute
 - add resonance options to berlin test random_sound
 - test initial filter resonance parameterisation

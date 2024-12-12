@@ -20,7 +20,7 @@ class SVTrigBase:
         self.target = target
         self.i = i
 
-    def increment(self, i):
+    def set_position(self, i):
         self.i += i
 
 class SVNoteTrigBase(SVTrigBase):
