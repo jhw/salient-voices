@@ -1,15 +1,14 @@
 ### short
 
 - berlin slide up/down
-- test DrumSynth mute
 
 ### medium
 
+- tests for sampler fx implementation
+- adjust detroit sample cutoff for tbp?
 - berlin slide to
 - berlin sound serialisation
 - tokyo
-- tests for sampler fx implementation
-- adjust detroit sample cutoff for tbp?
 
 ### euclid
 
@@ -57,6 +56,7 @@
 
 ### done
 
+- test DrumSynth mute
 - add resonance options to berlin test random_sound
 - test initial filter resonance parameterisation
 - implement wave parameter as enum
