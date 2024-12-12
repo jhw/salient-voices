@@ -1,9 +1,8 @@
 ### short
 
-- define i = 0 at trig base
-- pass kwargs down through trig constructors
+- refactor berlin test so only a single resonance is selected each time
 
-- berlin slide up/down
+- implement berlin slide up/down FX trigs
 
 ### medium
 
@@ -59,6 +58,7 @@
 
 ### done
 
+- berlin slide up/down skeleton
 - refactor trig.increment as trig.set_position
 - test DrumSynth mute
 - add resonance options to berlin test random_sound

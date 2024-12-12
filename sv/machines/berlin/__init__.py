@@ -1,6 +1,6 @@
 from sv.machines import SVSamplerMachine, SVMachineTrigs, SVBeatsApi
 from sv.sounds import SVSample
-from sv.trigs import SVNoteOffTrig, SVModTrig, SVSampleTrig
+from sv.trigs import SVNoteOffTrig, SVModTrig, SVSampleTrig, SVFXTrig
 
 from enum import Enum
 
@@ -63,7 +63,9 @@ class BerlinSound:
                  sustain_term = None,
                  release_ms = "0300",
                  filter_freq = "4000",
-                 filter_resonance = "7000"):
+                 filter_resonance = "7000",
+                 slide_up = None,
+                 slide_down = None):
         self.attack_ms = attack_ms
         self.decay_ms = decay_ms
         self.sustain_level = sustain_level
@@ -71,6 +73,8 @@ class BerlinSound:
         self.release_ms = release_ms
         self.filter_freq = filter_freq
         self.filter_resonance = filter_resonance
+        self.slide_up = slide_up
+        self.slide_down = slide_down
 
 class Berlin(SVSamplerMachine, SVBeatsApi):
 
@@ -123,6 +127,12 @@ class Berlin(SVSamplerMachine, SVBeatsApi):
                       value=self.sound.release_ms)
         ]
         if self.sound.sustain_term:
+            if self.sound.slide_up != None:
+                for i in range(self.sound.sustain_term):
+                    pass
+            elif self.sound.slide_down != None:
+                for i in range(self.sound.sustain_term):
+                    pass
             trigs.append(SVNoteOffTrig(target=f"{self.namespace}MultiSynth",
                                        i=self.sound.sustain_term))
         return SVMachineTrigs(trigs=trigs)
