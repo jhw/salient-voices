@@ -31,9 +31,11 @@ def BassLine(self, n, rand, tpb, groove, temperature,
 
 def random_sound(tpb,
                  terms = [0.5, 0.5, 0.5, 1, 2],
-                 frequencies = ["2000", "3000", "3000", "3000", "5000"]):
+                 frequencies = ["2000", "3000", "3000", "3000", "5000"],
+                 resonances = ["6000", "6800", "7000", "7800"]):
     return BerlinSound(sustain_term = int(random.choice(terms) * tpb),
-                       filter_freq = random.choice(frequencies))
+                       filter_freq = random.choice(frequencies),
+                       filter_resonance = random.choice(resonances))
         
 def random_groove_fn(tpb, mod = perkons):
     fn_names = [name for name, _ in inspect.getmembers(mod, inspect.isfunction)]

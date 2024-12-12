@@ -62,13 +62,15 @@ class BerlinSound:
                  sustain_level = "0800",
                  sustain_term = None,
                  release_ms = "0300",
-                 filter_freq = "4000"):
+                 filter_freq = "4000",
+                 filter_resonance = "7000"):
         self.attack_ms = attack_ms
         self.decay_ms = decay_ms
         self.sustain_level = sustain_level
         self.sustain_term = sustain_term
         self.release_ms = release_ms
         self.filter_freq = filter_freq
+        self.filter_resonance = filter_resonance
 
 class Berlin(SVSamplerMachine, SVBeatsApi):
 
@@ -82,7 +84,6 @@ class Berlin(SVSamplerMachine, SVBeatsApi):
     def __init__(self, container, namespace, wave, sounds,
                  sound_index=0,
                  relative_note=0,
-                 filter_resonance=1300,
                  echo_delay=36,
                  echo_delay_unit=3,  # tick
                  echo_wet=32,  # '1000'
@@ -95,8 +96,7 @@ class Berlin(SVSamplerMachine, SVBeatsApi):
                                    colour=colour)
         SVBeatsApi.__init__(self, sounds=sounds, sound_index=sound_index)
         self.sample = SVSample.parse(f"mikey303/303 VCO {wave.value}.wav")
-        self.defaults = {"Filter": {"resonance": filter_resonance},
-                         "Echo": {"wet": echo_wet,
+        self.defaults = {"Echo": {"wet": echo_wet,
                                    "feedback": echo_feedback,
                                    "delay": echo_delay,
                                    "delay_unit": echo_delay_unit}}
@@ -111,6 +111,8 @@ class Berlin(SVSamplerMachine, SVBeatsApi):
                          vel=volume * level),
             SVModTrig(target=f"{self.namespace}Sound2Ctl/out_max",
                       value=self.sound.filter_freq),
+            SVModTrig(target=f"{self.namespace}Filter/resonance",
+                      value=self.sound.filter_resonance),
             SVModTrig(target=f"{self.namespace}ADSR/attack_ms",
                       value=self.sound.attack_ms),
             SVModTrig(target=f"{self.namespace}ADSR/decay_ms",
@@ -123,25 +125,6 @@ class Berlin(SVSamplerMachine, SVBeatsApi):
         if self.sound.sustain_term:
             trigs.append(SVNoteOffTrig(target=f"{self.namespace}MultiSynth",
                                        i=self.sound.sustain_term))
-        return SVMachineTrigs(trigs=trigs)
-
-    def modulation(self,
-                   level=1.0,
-                   echo_delay=None,
-                   echo_wet=None,
-                   echo_feedback=None,
-                   filter_resonance=None,
-                   filter_roll_off=None):
-        trigs = super().modulation(level=level,
-                                   echo_delay=echo_delay,
-                                   echo_wet=echo_wet,
-                                   echo_feedback=echo_feedback)
-        if filter_resonance:
-            trigs.append(SVModTrig(target=f"{self.namespace}Filter/resonance",
-                                   value=filter_resonance))
-        if filter_roll_off:
-            trigs.append(SVModTrig(target=f"{self.namespace}Filter/roll_off",
-                                   value=filter_roll_off))
         return SVMachineTrigs(trigs=trigs)
     
 if __name__ == "__main__":
