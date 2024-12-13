@@ -1,10 +1,9 @@
 ### short
 
-- move berlin `while` loop into core
-
 ### medium
 
 - sunvox 2-0 file format [notes]
+- berlin to accept 1.5, 3 as quantisation options
 - replace set_via_fn
 - berlin slide up/down
 - test sampler fx 
@@ -19,6 +18,7 @@
 
 ### thoughts
 
+- move berlin `while` loop into core
 - adjust detroit sample cutoff for tbp?
 - can tbp be abstracted any further?
 
