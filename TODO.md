@@ -2,6 +2,7 @@
 
 ### medium
 
+- fix decompiled samplers
 - berlin to accept 1.5, 3 as quantisation options
 - replace set_via_fn
 - berlin slide up/down
