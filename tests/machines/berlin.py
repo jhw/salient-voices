@@ -69,7 +69,7 @@ class BerlinTest(unittest.TestCase):
                     temperature = 0.5,
                     bpm = 120,
                     tpb = 2,
-                    n_ticks = 16,
+                    n_ticks = 32,
                     n_sounds = 16):
         bank = SVBank.load_zip("sv/machines/berlin/mikey303.zip")
         container = SVContainer(banks = [bank],

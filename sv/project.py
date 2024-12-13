@@ -1,3 +1,5 @@
+from rv.modules.multisynth import MultiSynth
+
 from sv.banks import SVPool, SVBanks
 from sv.trigs import SVSampleTrig, controller_value
 
@@ -106,6 +108,10 @@ def init_modules(fn):
                               "pool": pool,
                               "root": mod["root"]}
             mod["instance"] = mod_class(**mod_kwargs)
+            # START sunvox-2.0-file-format TEMP CODE
+            if isinstance(mod["instance"], MultiSynth):
+                mod["instance"].out_port_mode = MultiSynth.OutPortMode.all_or_random1
+            # END sunvox-2.0-file-format TEMP CODE
         return fn(self,
                   patches = patches,
                   modules = modules,

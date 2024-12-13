@@ -4,6 +4,6 @@ botocore
 numpy
 pydub
 pyyaml
-radiant-voices @ git+ssh://git@github.com/metrasynth/radiant-voices.git@master
+radiant-voices @ git+ssh://git@github.com/metrasynth/radiant-voices.git@sunvox-2.0-file-format
 scipy
 sunvox-dll-python

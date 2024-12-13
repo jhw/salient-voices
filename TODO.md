@@ -2,7 +2,6 @@
 
 ### medium
 
-- sunvox 2-0 file format [notes]
 - berlin to accept 1.5, 3 as quantisation options
 - replace set_via_fn
 - berlin slide up/down
@@ -55,6 +54,7 @@
 
 ### done
 
+- sunvox 2-0 file format [notes]
 - reply to matthew
 - refactor berlin test so only a single resonance is selected each time
 - berlin slide up/down skeleton

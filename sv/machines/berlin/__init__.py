@@ -57,20 +57,20 @@ Modules = yaml.safe_load("""
 class BerlinSound:
 
     def __init__(self,
-                 attack_ms = "0008",
-                 decay_ms = "0018",
+                 attack = "0008",
+                 decay = "0018",
                  sustain_level = "0800",
                  sustain_term = None,
-                 release_ms = "0300",
+                 release = "0300",
                  filter_freq = "4000",
                  filter_resonance = "7000",
                  slide_up = None,
                  slide_down = None):
-        self.attack_ms = attack_ms
-        self.decay_ms = decay_ms
+        self.attack = attack
+        self.decay = decay
         self.sustain_level = sustain_level
         self.sustain_term = sustain_term
-        self.release_ms = release_ms
+        self.release = release
         self.filter_freq = filter_freq
         self.filter_resonance = filter_resonance
         self.slide_up = slide_up
@@ -117,14 +117,14 @@ class Berlin(SVSamplerMachine, SVBeatsApi):
                       value=self.sound.filter_freq),
             SVModTrig(target=f"{self.namespace}Filter/resonance",
                       value=self.sound.filter_resonance),
-            SVModTrig(target=f"{self.namespace}ADSR/attack_ms",
-                      value=self.sound.attack_ms),
-            SVModTrig(target=f"{self.namespace}ADSR/decay_ms",
-                      value=self.sound.decay_ms),
+            SVModTrig(target=f"{self.namespace}ADSR/attack",
+                      value=self.sound.attack),
+            SVModTrig(target=f"{self.namespace}ADSR/decay",
+                      value=self.sound.decay),
             SVModTrig(target=f"{self.namespace}ADSR/sustain_level",
                       value=self.sound.sustain_level),
-            SVModTrig(target=f"{self.namespace}ADSR/release_ms",
-                      value=self.sound.release_ms)
+            SVModTrig(target=f"{self.namespace}ADSR/release",
+                      value=self.sound.release)
         ]
         if self.sound.sustain_term:
             if self.sound.slide_up != None:
