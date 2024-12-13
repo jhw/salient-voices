@@ -1,16 +1,17 @@
-### tpb usage 10/12/24
+### sunvox-2.0.file-format
 
-#### generator
+- rename xxx_ms controller values as xxx
+- add multisynth hack
 
-##### note quantisation [berlin, detroit]
+```
+It’s a problem with the default options for MultiSynth. There is some new logic for this in RV that must have a bug in it.
 
-##### note length [berlin]
+Try doing this after you create any MultiSynth:
+multisynth_module.out_port_mode = m.MultiSynth.OutPortMode.all_or_random1
+```
 
-##### echo delay [detroit]
-
-#### main
-
-##### echo delay [berlin]
+- test decompiler
+- create issues for decompiler FMX problem if still exists
 
 ### machine quantisation 08/12/24
 

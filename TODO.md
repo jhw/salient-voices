@@ -1,28 +1,21 @@
 ### short
 
-- implement berlin slide up/down FX trigs
+- move berlin `while` loop into core
 
 ### medium
 
-- tests for sampler fx 
+- sunvox 2-0 file format [notes]
+- replace set_via_fn
+- berlin slide up/down
+- test sampler fx 
 - berlin sound serialisation
-- berlin slide to
+- berlin slide- to
 - tokyo
 
-### euclid
+### euclid09
 
-- container must be passed tpb arg
-  - don't multiply bpm and n_ticks args by tpb externally
-
-### pending
-
-- sunvox-2.0-file-format
-  - rename xxx_ms controllers
-  - multi synth issue
-    - `multisynth_module.out_port_mode = m.MultiSynth.OutPortMode.all_or_random1`
-  
-- controller values dual format
-- un- muteable modules
+- abstract banks/pool/tags into detroit plugin api exposing sounds
+- freeze experiments
 
 ### thoughts
 
@@ -62,6 +55,7 @@
 
 ### done
 
+- reply to matthew
 - refactor berlin test so only a single resonance is selected each time
 - berlin slide up/down skeleton
 - refactor trig.increment as trig.set_position
