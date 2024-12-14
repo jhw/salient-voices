@@ -77,6 +77,13 @@ class BerlinSound:
         self.slide_up = slide_up
         self.slide_down = slide_down
 
+    @staticmethod
+    def from_json(sound):
+        return BerlinSound(**sound)
+
+    def to_json(self):
+        return {k: v for k, v in self.__dict__.items() if v is not None}
+
 class BerlinWave(Enum):
             
     SQR = "SQR"

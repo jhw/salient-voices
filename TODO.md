@@ -1,7 +1,5 @@
 ### short
 
-- berlin sound serialisation
-
 ### medium
 
 - berlin slide up/down
@@ -62,6 +60,7 @@
 
 ### done
 
+- berlin sound serialisation
 - beats api
 - test sampler fx 
 - sunvox 2-0 file format [notes]
