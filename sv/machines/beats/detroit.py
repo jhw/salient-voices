@@ -1,4 +1,5 @@
-from sv.machines import SVSamplerMachine, SVMachineTrigs, SVBeatsApi
+from sv.machines import SVSamplerMachine, SVMachineTrigs
+from sv.machines.beats import SVBeatsApi
 from sv.trigs import SVSampleTrig
 
 import rv
@@ -28,7 +29,7 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class Detroit(SVSamplerMachine, SVBeatsApi):
+class DetroitMachine(SVSamplerMachine, SVBeatsApi):
 
     Modules = Modules
 

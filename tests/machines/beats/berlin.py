@@ -1,7 +1,7 @@
 import sv.algos.groove.perkons as perkons
 from sv.banks import SVBank
 from sv.container import SVContainer
-from sv.machines.berlin import Berlin, BerlinSound
+from sv.machines.beats.berlin import BerlinMachine, BerlinSound, BerlinWave
 
 import inspect
 import random
@@ -63,28 +63,28 @@ def random_colour(offset = 64,
             return color
     raise RuntimeError("couldn't find suitable random colour")
 
-class BerlinTest(unittest.TestCase):
+class BerlinMachineTest(unittest.TestCase):
 
-    def test_berlin(self,
-                    temperature = 0.5,
-                    bpm = 120,
-                    tpb = 2,
-                    n_ticks = 32,
-                    n_sounds = 16):
-        bank = SVBank.load_zip("sv/machines/berlin/mikey303.zip")
+    def test_berlin_machine(self,
+                            temperature = 0.5,
+                            bpm = 120,
+                            tpb = 2,
+                            n_ticks = 32,
+                            n_sounds = 16):
+        bank = SVBank.load_zip("sv/machines/beats/berlin/mikey303.zip")
         container = SVContainer(banks = [bank],
                                 bpm = bpm,
                                 tpb = tpb,
                                 n_ticks = n_ticks)
         sounds = random_sounds(tpb = tpb, n = n_sounds)
-        machine = Berlin(container = container,
-                         namespace = "303",
-                         sounds = sounds,
-                         colour = random_colour(),
-                         wave = Berlin.Wave.SQR,
-                         echo_wet = 8,
-                         echo_feedback = 8,
-                         echo_delay = int(bpm * 3 * tpb / 10))
+        machine = BerlinMachine(container = container,
+                                namespace = "303",
+                                sounds = sounds,
+                                colour = random_colour(),
+                                wave = BerlinWave.SQR,
+                                echo_wet = 8,
+                                echo_feedback = 8,
+                                echo_delay = int(bpm * 3 * tpb / 10))
         container.add_machine(machine)
         container.spawn_patch(colour = random_colour())
         seeds = {key: int(random.random() * 1e8)
@@ -100,7 +100,7 @@ class BerlinTest(unittest.TestCase):
         self.assertTrue(patches != [])
         patch = patches[0]
         self.assertTrue(patch.trigs != [])
-        container.write_project("tmp/berlin-demo.sunvox")
+        container.write_project("tmp/berlin-machine-demo.sunvox")
         
 if __name__ == "__main__":
     unittest.main()

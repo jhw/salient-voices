@@ -1,19 +1,19 @@
 ### short
 
-- beats api
+- berlin sound serialisation
 
 ### medium
 
-- berlin to accept 1.5, 3 as quantisation options
 - berlin slide up/down
-- berlin sound serialisation
+- berlin to accept 3 (and 1.5) as quantisation options
 - berlin slide- to
+
 - tokyo
 
 ### pending
 
 - sunvox 2.0 file format
-- decompiled samplers have no sound
+- decompiled samplers are missing sound
 
 ### euclid09
 
@@ -29,11 +29,11 @@
 - adjust detroit sample cutoff for tbp?
 - can tbp be abstracted any further?
 
-### gists 
+### roadmap
 
-- resampling
+- freeze
+- resample
 - stutter
-- freezing
 - vocals + vocoder
 - autotune
 - pico play modes
@@ -62,6 +62,7 @@
 
 ### done
 
+- beats api
 - test sampler fx 
 - sunvox 2-0 file format [notes]
 - reply to matthew

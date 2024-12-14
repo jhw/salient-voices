@@ -2,7 +2,7 @@ from sv.algos.euclid import bjorklund, TidalPatterns
 from sv.algos.groove import perkons
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
-from sv.machines.detroit import Detroit
+from sv.machines.beats.detroit import DetroitMachine
 from sv.sounds import SVSample
 
 import inspect
@@ -73,10 +73,10 @@ def add_track(container, pool, tag, bpm,  tpb,
               patterns = [pattern[:2] for pattern in TidalPatterns]):
     samples = pool.match(lambda sample: tag in sample.tags)
     random.shuffle(samples)        
-    machine = Detroit(container = container,
-                      namespace = tag,
-                      colour = random_colour(),
-                      sounds = samples)
+    machine = DetroitMachine(container = container,
+                             namespace = tag,
+                             colour = random_colour(),
+                             sounds = samples)
     container.add_machine(machine)
     seeds = {key: int(random.random() * 1e8)
              for key in "sound|vol|fx".split("|")}
@@ -98,21 +98,21 @@ def add_track(container, pool, tag, bpm,  tpb,
                    seeds = seeds,
                    env = env)
 
-class DetroitTest(unittest.TestCase):
+class DetroitMachineTest(unittest.TestCase):
     
-    def test_detroit(self,
-                     tracks = [{"tag": "kick",
-                                "max_density": 0.6,
-                                "min_density": 0.2},
-                               {"tag": "clap",
-                                "max_density": 0.4,
-                                "min_density": 0.1},
-                               {"tag": "hat",
-                                "max_density": 0.9,
-                                "min_density": 0.5}],
-                     bpm = 120,
-                     tpb = 1,
-                     n_ticks = 16):
+    def test_detroit_machine(self,
+                             tracks = [{"tag": "kick",
+                                        "max_density": 0.6,
+                                        "min_density": 0.2},
+                                       {"tag": "clap",
+                                        "max_density": 0.4,
+                                        "min_density": 0.1},
+                                       {"tag": "hat",
+                                        "max_density": 0.9,
+                                        "min_density": 0.5}],
+                             bpm = 120,
+                             tpb = 1,
+                             n_ticks = 32):
         bank = SVBank.load_zip("tests/pico-default.zip")
         banks = SVBanks([bank])
         pool, _ = banks.spawn_pool(tag_patterns = PoolTagPatterns)
@@ -131,7 +131,7 @@ class DetroitTest(unittest.TestCase):
         self.assertTrue(patches != [])
         patch = patches[0]
         self.assertTrue(patch.trigs != [])
-        container.write_project("tmp/detroit-demo.sunvox")
+        container.write_project("tmp/detroit-machine-demo.sunvox")
         
 if __name__ == "__main__":
     unittest.main()

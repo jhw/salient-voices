@@ -1,4 +1,5 @@
-from sv.machines import SVSamplerMachine, SVMachineTrigs, SVBeatsApi
+from sv.machines import SVSamplerMachine, SVMachineTrigs
+from sv.machines.beats import SVBeatsApi
 from sv.sounds import SVSample
 from sv.trigs import SVNoteOffTrig, SVModTrig, SVSampleTrig, SVFXTrig
 
@@ -76,12 +77,12 @@ class BerlinSound:
         self.slide_up = slide_up
         self.slide_down = slide_down
 
-class Berlin(SVSamplerMachine, SVBeatsApi):
-
-    class Wave(Enum):
+class BerlinWave(Enum):
+            
+    SQR = "SQR"
+    SAW = "SAW"
         
-        SQR = "SQR"
-        SAW = "SAW"
+class BerlinMachine(SVSamplerMachine, SVBeatsApi):
     
     Modules = Modules
 
