@@ -1,6 +1,7 @@
 ### short
 
 - replace set_via_fn
+- beats api
 - test sampler fx 
 
 ### medium
