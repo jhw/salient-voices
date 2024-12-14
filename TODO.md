@@ -1,8 +1,6 @@
 ### short
 
-- replace set_via_fn
 - beats api
-- test sampler fx 
 
 ### medium
 
@@ -24,7 +22,10 @@
 
 ### thoughts
 
-- move berlin `while` loop into core
+- replace set_via_fn?
+  - not worth it
+- move berlin `while` loop into core?
+  - don't see how it can be done
 - adjust detroit sample cutoff for tbp?
 - can tbp be abstracted any further?
 
@@ -61,6 +62,7 @@
 
 ### done
 
+- test sampler fx 
 - sunvox 2-0 file format [notes]
 - reply to matthew
 - refactor berlin test so only a single resonance is selected each time

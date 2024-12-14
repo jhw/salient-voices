@@ -26,7 +26,10 @@ class SVBaseSampler(rv.modules.sampler.Sampler):
 
     def init_rv_sample(self, wav_io):
         rv_sample = self.Sample()
-        freq, snd = wavfile.read(wav_io)
+        try:
+            freq, snd = wavfile.read(wav_io)
+        except ValueError as e:
+            raise RuntimeError(f"Unsupported WAV file format: {e}")
         if snd.dtype.name == 'int16':
             rv_sample.format = self.Format.int16
         elif snd.dtype.name == 'float32':
