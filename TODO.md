@@ -1,15 +1,20 @@
 ### short
 
+- replace set_via_fn
+- test sampler fx 
+
 ### medium
 
-- fix decompiled samplers
 - berlin to accept 1.5, 3 as quantisation options
-- replace set_via_fn
 - berlin slide up/down
-- test sampler fx 
 - berlin sound serialisation
 - berlin slide- to
 - tokyo
+
+### pending
+
+- sunvox 2.0 file format
+- decompiled samplers have no sound
 
 ### euclid09
 
