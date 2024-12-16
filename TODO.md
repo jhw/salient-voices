@@ -1,9 +1,10 @@
 ### short
 
-- berlin slide up/down
+- detroit sound
 
 ### medium
 
+- berlin slide up/down
 - berlin to accept 3 (and 1.5) as quantisation options
 - berlin slide- to
 
@@ -12,12 +13,6 @@
 ### pending
 
 - sunvox 2.0 file format
-- decompiled samplers are missing sound
-
-### euclid09
-
-- abstract banks/pool/tags into detroit plugin api exposing sounds
-- freeze experiments
 
 ### thoughts
 
@@ -32,6 +27,7 @@
 
 - freeze
 - resample
+- single wave samples
 - vocals + vocoder
 - pads and lfos
 - arps
