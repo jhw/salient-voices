@@ -1,5 +1,6 @@
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.machines.beats import SVBeatsApi
+from sv.sounds import SVSample
 from sv.trigs import SVSampleTrig
 
 import rv
@@ -28,6 +29,11 @@ Modules = yaml.safe_load("""
   links:
     - Output
 """)
+
+class DetroitSound(SVSample):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
 class DetroitMachine(SVSamplerMachine, SVBeatsApi):
 

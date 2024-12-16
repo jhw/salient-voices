@@ -4,6 +4,8 @@
 
 ### medium
 
+- SVSample shouldn't extend dict
+
 - berlin slide up/down
 - berlin to accept 3 (and 1.5) as quantisation options
 - berlin slide- to
