@@ -1,10 +1,10 @@
 ### short
 
-- detroit sound
+- SVSample shouldn't need to extend dict
 
 ### medium
 
-- SVSample shouldn't extend dict
+- sampler example for Matthew
 
 - berlin slide up/down
 - berlin to accept 3 (and 1.5) as quantisation options
@@ -61,6 +61,7 @@
 
 ### done
 
+- detroit sound
 - berlin sound serialisation
 - beats api
 - test sampler fx 
