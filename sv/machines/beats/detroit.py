@@ -66,7 +66,7 @@ class DetroitMachine(SVSamplerMachine, SVBeatsApi):
              volume=1.0,
              level=1.0):
         sample = self.sound.clone()
-        sample["note"] = note
+        sample.note = note
         trigs = [SVSampleTrig(target=f"{self.namespace}Beat",
                               sample=sample,
                               vel=volume * level)]

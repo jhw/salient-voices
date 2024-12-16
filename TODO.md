@@ -1,10 +1,8 @@
 ### short
 
-- SVSample shouldn't need to extend dict
+- sampler example for Matthew
 
 ### medium
-
-- sampler example for Matthew
 
 - berlin slide up/down
 - berlin to accept 3 (and 1.5) as quantisation options
@@ -61,6 +59,7 @@
 
 ### done
 
+- SVSample shouldn't need to extend dict
 - detroit sound
 - berlin sound serialisation
 - beats api

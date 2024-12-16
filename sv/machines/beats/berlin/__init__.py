@@ -115,7 +115,7 @@ class BerlinMachine(SVSamplerMachine, SVBeatsApi):
 
     def note(self, note=0, volume=1.0, level=1.0):
         sample = self.sample.clone()
-        sample["note"] = note
+        sample.note = note
         trigs = [
             SVSampleTrig(target=f"{self.namespace}MultiSynth",
                          sampler_mod=f"{self.namespace}Sampler",

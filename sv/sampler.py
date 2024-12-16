@@ -78,18 +78,19 @@ class SVSlotSampler(SVBaseSampler):
             self.note_samples[rv_notes[i]] = i
 
     def apply_fx(self, sample, wav_io):
+        sample_dict = sample.as_dict()
         if sample.fx == SVSample.FX.REV:
-            return self.apply_reverse(wav_io, **sample)
+            return self.apply_reverse(wav_io, **sample_dict)
         elif sample.fx == SVSample.FX.RET2:
-            return self.apply_retrig(wav_io, n_retrigs = 2, **sample)
+            return self.apply_retrig(wav_io, n_retrigs = 2, **sample_dict)
         elif sample.fx == SVSample.FX.RET4:
-            return self.apply_retrig(wav_io, n_retrigs = 4, **sample)
+            return self.apply_retrig(wav_io, n_retrigs = 4, **sample_dict)
         elif sample.fx == SVSample.FX.RET8:
-            return self.apply_retrig(wav_io, n_retrigs = 8, **sample)
+            return self.apply_retrig(wav_io, n_retrigs = 8, **sample_dict)
         elif sample.fx == SVSample.FX.RET16:
-            return self.apply_retrig(wav_io, n_retrigs = 16, **sample)
+            return self.apply_retrig(wav_io, n_retrigs = 16, **sample_dict)
         else:
-            return self.apply_trim(wav_io, **sample)
+            return self.apply_trim(wav_io, **sample_dict)
 
     def trim_audio(self, audio, start, cutoff, fade_out = 3):
         return audio[start:cutoff].fade_out(fade_out)

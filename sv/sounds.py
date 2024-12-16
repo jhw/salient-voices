@@ -3,7 +3,7 @@ from urllib.parse import parse_qs
 
 DefaultCutoff = 16000
 
-class SVSample(dict):
+class SVSample:
 
     class FX(Enum):
         REV = "rev"
@@ -54,7 +54,7 @@ class SVSample(dict):
         # Validation at initialization
         if start > cutoff:
             raise ValueError("start cannot be greater than cutoff")
-        
+
         return SVSample(
             bank_name=bank_name,
             file_path=file_path,
@@ -66,14 +66,13 @@ class SVSample(dict):
         )
 
     def __init__(self, bank_name, file_path, note=0, fx=None, start=0, cutoff=DefaultCutoff, tags=None):
-        dict.__init__(self)
-        self["bank_name"] = bank_name
-        self["file_path"] = file_path
-        self["note"] = note
-        self["fx"] = fx
-        self["start"] = start
-        self["cutoff"] = cutoff
-        self["tags"] = tags or []
+        self.bank_name = bank_name
+        self.file_path = file_path
+        self.note = note
+        self.fx = fx
+        self.start = start
+        self.cutoff = cutoff
+        self.tags = tags or []
 
     def clone(self):
         return SVSample(
@@ -87,67 +86,28 @@ class SVSample(dict):
         )
 
     @property
-    def bank_name(self):
-        return self["bank_name"]
-
-    @property
-    def file_path(self):
-        return self["file_path"]
-
-    @property
-    def note(self):
-        return self["note"]
-
-    @note.setter
-    def note(self, value):
-        self["note"] = value
-
-    @property
-    def fx(self):
-        return self["fx"]
-
-    @fx.setter
-    def fx(self, value):
-        if value is not None and not isinstance(value, SVSample.FX):
-            raise ValueError(f"fx must be an instance of SVSample.FX or None, got {value}")
-        self["fx"] = value
-
-    @property
-    def start(self):
-        return self["start"]
-
-    @start.setter
-    def start(self, value):
-        if value > self.cutoff:
-            raise ValueError("start cannot be greater than cutoff")
-        self["start"] = value
-
-    @property
-    def cutoff(self):
-        return self["cutoff"]
-
-    @cutoff.setter
-    def cutoff(self, value):
-        if value is not None and self.start > value:
-            raise ValueError("cutoff cannot be less than start")
-        self["cutoff"] = value
-
-    @property
     def querystring(self):
         qs = {}
-        if self["note"] != 0:
-            qs["note"] = self["note"]
-        if self["fx"] is not None:
-            qs["fx"] = self["fx"].value
-        if self["start"] != 0:
-            qs["start"] = self["start"]
-        if self["cutoff"] != DefaultCutoff:
-            qs["cutoff"] = self["cutoff"]
+        if self.note != 0:
+            qs["note"] = self.note
+        if self.fx is not None:
+            qs["fx"] = self.fx.value
+        if self.start != 0:
+            qs["start"] = self.start
+        if self.cutoff != DefaultCutoff:
+            qs["cutoff"] = self.cutoff
         return qs
 
-    @property
-    def tags(self):
-        return self["tags"]
+    def as_dict(self):
+        return {
+            "bank_name": self.bank_name,
+            "file_path": self.file_path,
+            "note": self.note,
+            "fx": self.fx,
+            "start": self.start,
+            "cutoff": self.cutoff,
+            "tags": self.tags,
+        }
 
     def __str__(self):
         query_parts = [
@@ -160,16 +120,15 @@ class SVSample(dict):
     def __getstate__(self):
         """Filter out default values when serializing."""
         state = {
-            key: value
-            for key, value in self.items()
-            if not (
-                (key == "note" and value == 0) or
-                (key == "fx" and value is None) or
-                (key == "start" and value == 0) or
-                (key == "cutoff" and value == DefaultCutoff)
-            )
+            "bank_name": self.bank_name,
+            "file_path": self.file_path,
+            "note": self.note if self.note != 0 else None,
+            "fx": self.fx,
+            "start": self.start if self.start != 0 else None,
+            "cutoff": self.cutoff if self.cutoff != DefaultCutoff else None,
+            "tags": self.tags,
         }
-        return state
+        return {k: v for k, v in state.items() if v is not None}
 
     def __setstate__(self, state):
         """Ensure defaults are set when deserializing."""
@@ -182,7 +141,6 @@ class SVSample(dict):
             cutoff=state.get("cutoff", DefaultCutoff),
             tags=state.get("tags", []),
         )
-
 
 if __name__ == "__main__":
     pass
