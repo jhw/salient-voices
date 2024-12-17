@@ -1,5 +1,7 @@
 ### short
 
+- refactor pool.add()
+
 - sampler example for Matthew
 
 ### medium
