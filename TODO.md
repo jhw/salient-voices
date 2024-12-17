@@ -1,12 +1,10 @@
 ### short
 
-- is null fx still being serialised?
-
-- harmonise berlin to/from dict/json methods with detroir
-- refactor pool.add()
 - sampler example for Matthew
 
 ### medium
+
+- refactor pool.add()
 
 - berlin slide up/down
 - berlin to accept 3 (and 1.5) as quantisation options
@@ -20,12 +18,11 @@
 
 ### thoughts
 
+- is null fx still being serialised?
 - replace set_via_fn?
   - not worth it
 - move berlin `while` loop into core?
   - don't see how it can be done
-- adjust detroit sample cutoff for tbp?
-- can tbp be abstracted any further?
 
 ### roadmap
 
@@ -63,6 +60,7 @@
 
 ### done
 
+- harmonise berlin to/from dict/json methods with detroit
 - remove detroit reverb and distortion
 - SVSample shouldn't need to extend dict
 - detroit sound
