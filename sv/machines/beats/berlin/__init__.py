@@ -35,24 +35,11 @@ Modules = yaml.safe_load("""
     freq: 0
     roll_off: 3 # no idea but seems to allow resonance to be higher without pinking distortion
   links:
-    - Distortion
-- name: Distortion
-  class: rv.modules.distortion.Distortion
-  defaults:
-    power: 0
-  links:
     - Echo
 - name: Echo
   class: rv.modules.echo.Echo
   links:
-    - Reverb
-- name: Reverb
-  class: rv.modules.reverb.Reverb
-  defaults:
-    wet: 0
-  links:
     - Output
-
 """)
 
 class BerlinSound:

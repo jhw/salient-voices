@@ -1,7 +1,9 @@
 ### short
 
-- refactor pool.add()
+- is null fx still being serialised?
 
+- harmonise berlin to/from dict/json methods with detroir
+- refactor pool.add()
 - sampler example for Matthew
 
 ### medium
@@ -61,6 +63,7 @@
 
 ### done
 
+- remove detroit reverb and distortion
 - SVSample shouldn't need to extend dict
 - detroit sound
 - berlin sound serialisation
