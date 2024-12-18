@@ -1,6 +1,6 @@
 ### short
 
-- sampler example for Matthew
+- why is sample.as_dict() required if you have __get|setstate__?
 
 ### medium
 
