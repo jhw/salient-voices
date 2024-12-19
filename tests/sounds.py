@@ -156,6 +156,5 @@ class SVSampleTest(unittest.TestCase):
         self.assertEqual(sample.start, 50)
         self.assertEqual(sample.cutoff, 100)
 
-
 if __name__ == "__main__":
     unittest.main()

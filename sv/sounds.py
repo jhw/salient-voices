@@ -99,26 +99,6 @@ class SVSample:
         return qs
 
     def as_dict(self):
-        return {
-            "bank_name": self.bank_name,
-            "file_path": self.file_path,
-            "note": self.note,
-            "fx": self.fx,
-            "start": self.start,
-            "cutoff": self.cutoff,
-            "tags": self.tags,
-        }
-
-    def __str__(self):
-        query_parts = [
-            f"{key}={value}" for key, value in self.querystring.items()
-        ]
-        query_string = "?" + "&".join(query_parts) if query_parts else ""
-        tag_string = "".join([f"#{tag}" for tag in sorted(self.tags)])
-        return f"{self.bank_name}/{self.file_path}{query_string}{tag_string}"
-
-    def __getstate__(self):
-        """Filter out default values when serializing."""
         state = {
             "bank_name": self.bank_name,
             "file_path": self.file_path,
@@ -130,17 +110,13 @@ class SVSample:
         }
         return {k: v for k, v in state.items() if v is not None}
 
-    def __setstate__(self, state):
-        """Ensure defaults are set when deserializing."""
-        self.__init__(
-            bank_name=state.get("bank_name"),
-            file_path=state.get("file_path"),
-            note=state.get("note", 0),
-            fx=state.get("fx"),
-            start=state.get("start", 0),
-            cutoff=state.get("cutoff", DefaultCutoff),
-            tags=state.get("tags", []),
-        )
+    def __str__(self):
+        query_parts = [
+            f"{key}={value}" for key, value in self.querystring.items()
+        ]
+        query_string = "?" + "&".join(query_parts) if query_parts else ""
+        tag_string = "".join([f"#{tag}" for tag in sorted(self.tags)])
+        return f"{self.bank_name}/{self.file_path}{query_string}{tag_string}"
 
 if __name__ == "__main__":
     pass

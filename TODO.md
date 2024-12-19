@@ -1,7 +1,5 @@
 ### short
 
-- why is sample.as_dict() required if you have __get|setstate__?
-
 ### medium
 
 - refactor pool.add()
@@ -60,6 +58,7 @@
 
 ### done
 
+- why is sample.as_dict() required if you have __get|setstate__?
 - harmonise berlin to/from dict/json methods with detroit
 - remove detroit reverb and distortion
 - SVSample shouldn't need to extend dict

@@ -50,7 +50,7 @@ class SVBaseSampler(rv.modules.sampler.Sampler):
         return rv_sample
 
 def with_audio_segment(fn):
-    def wrapped(self, wav_io, start, cutoff, **kwargs):
+    def wrapped(self, wav_io, start = None, cutoff = None, **kwargs):
         wav_io.seek(0)
         audio = AudioSegment.from_file(wav_io, format="wav")
         audio_out = fn(self, audio, start = start, cutoff = cutoff, **kwargs)
