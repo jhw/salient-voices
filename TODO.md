@@ -1,6 +1,6 @@
 ### short
 
-- regenerate tests
+- rebuild test suite
 
 ### medium
 
