@@ -41,24 +41,6 @@ class SamplerTest(unittest.TestCase):
         trimmed_audio = AudioSegment.from_file(trimmed_wav_io, format="wav")
         self.assertAlmostEqual(len(trimmed_audio), cutoff - start, delta=10)
 
-    def test_apply_reverse(self):
-        sampler = SVSlotSampler(bank=self.bank, pool=[], root=rv.note.NOTE.C5)
-        wav_io = self.generate_wav_io()
-        start, cutoff = 200, 900
-        reversed_wav_io = sampler.apply_reverse(wav_io, start=start, cutoff=cutoff)
-        reversed_audio = AudioSegment.from_file(reversed_wav_io, format="wav")
-        self.assertAlmostEqual(len(reversed_audio), cutoff - start, delta=10)
-
-    def test_apply_retrig(self):
-        sampler = SVSlotSampler(bank=self.bank, pool=[], root=rv.note.NOTE.C5)
-        wav_io = self.generate_wav_io()
-        start, cutoff = 0, 1000
-        n_retrigs = 4
-        retrigged_wav_io = sampler.apply_retrig(wav_io, start=start, cutoff=cutoff, n_retrigs=n_retrigs)
-        retrigged_audio = AudioSegment.from_file(retrigged_wav_io, format="wav")
-        expected_duration = (cutoff - start) // n_retrigs * n_retrigs
-        self.assertAlmostEqual(len(retrigged_audio), expected_duration, delta=10)
-
     def test_index_of(self):
         tag_mapping = {"bass": "303"}
         pool = [SVSample.parse(f"mikey303/{name}")

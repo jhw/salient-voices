@@ -1,16 +1,17 @@
 ### short
 
 - remove mod/fx stuff
-- remove pydub
 
 - add bank fn to spawn pool
 - add bank functions to join banks
 - don't like bank = None declaration
 - consider removing sample bank name
 - check TEMP, pool = samples
-
+- simplify trimming/cutoff?
 
 ### medium
+
+- remove cutoff?
 
 - berlin slide up/down
 - berlin to accept 3 (and 1.5) as quantisation options
@@ -24,6 +25,8 @@
 
 ### thoughts
 
+- remove pydub?
+  - no is required for trim, which you probabluy w
 - is null fx still being serialised?
 - replace set_via_fn?
   - not worth it

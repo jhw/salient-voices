@@ -70,27 +70,16 @@ class SVSlotSampler(SVBaseSampler):
         for i, sample in enumerate(self.pool):
             # init rv sample and insert into self.samples
             raw_wav_io = bank.get_wav(sample)
-            wav_io = self.apply_fx(sample, raw_wav_io)
+            wav_io = self.apply_cutoff(sample, raw_wav_io)
             rv_sample = self.init_rv_sample(wav_io)
             rv_sample.relative_note += (root + sample.note - i)
             self.samples[i] = rv_sample
             # bind rv sample to keyboard/note
             self.note_samples[rv_notes[i]] = i
 
-    def apply_fx(self, sample, wav_io):
+    def apply_cutoff(self, sample, wav_io):
         sample_dict = sample.as_dict()
-        if sample.fx == SVSample.FX.REV:
-            return self.apply_reverse(wav_io, **sample_dict)
-        elif sample.fx == SVSample.FX.RET2:
-            return self.apply_retrig(wav_io, n_retrigs = 2, **sample_dict)
-        elif sample.fx == SVSample.FX.RET4:
-            return self.apply_retrig(wav_io, n_retrigs = 4, **sample_dict)
-        elif sample.fx == SVSample.FX.RET8:
-            return self.apply_retrig(wav_io, n_retrigs = 8, **sample_dict)
-        elif sample.fx == SVSample.FX.RET16:
-            return self.apply_retrig(wav_io, n_retrigs = 16, **sample_dict)
-        else:
-            return self.apply_trim(wav_io, **sample_dict)
+        return self.apply_trim(wav_io, **sample_dict)
 
     def trim_audio(self, audio, start, cutoff, fade_out = 3):
         return audio[start:cutoff].fade_out(fade_out)
@@ -99,18 +88,6 @@ class SVSlotSampler(SVBaseSampler):
     def apply_trim(self, audio, start, cutoff, **kwargs):
         return self.trim_audio(audio, start = start, cutoff = cutoff)
         
-    @with_audio_segment
-    def apply_reverse(self, audio, start, cutoff, **kwargs):
-        return self.trim_audio(audio, start = start, cutoff = cutoff).reverse()
-
-    @with_audio_segment
-    def apply_retrig(self, audio, start, cutoff, n_retrigs, **kwargs):        
-        trimmed_audio = self.trim_audio(audio, start = start, cutoff = cutoff)
-        audio_duration = cutoff - start
-        slice_duration = audio_duration // n_retrigs
-        first_slice = trimmed_audio[:slice_duration]
-        return first_slice * n_retrigs
-
     def index_of(self, sample):
         return self.sample_strings.index(str(sample))
 
