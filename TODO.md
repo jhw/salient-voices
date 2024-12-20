@@ -1,15 +1,14 @@
 ### short
 
 - remove bank name
-
-- consider eliminating sample
+- remove sample
 
 ### medium
 
 - add bank initialiser from io.BytesIO
 - add bank join() function
 
-- revisit tests
+- regenerate tests
 
 ### pending
 
