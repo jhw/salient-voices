@@ -1,18 +1,17 @@
 ### short
 
-- remove bank name from bank
-- add bank functions to join banks
-- extend tests
+- remove start and cutoff
+- remove pydub
+- remove querystring
+- remove bank name
+- consider eliminating sample
 
 ### medium
 
-- remove cutoff?
+- add bank initialiser from io.BytesIO
+- add bank join() function
 
-- berlin slide up/down
-- berlin to accept 3 (and 1.5) as quantisation options
-- berlin slide- to
-
-- tokyo
+- revisit tests
 
 ### pending
 
