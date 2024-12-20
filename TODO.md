@@ -1,12 +1,9 @@
 ### short
 
-- pass matching function to spawn pool
-- detroit test to use matcher for different tracks
-
 - don't like bank = None declaration
+
 - simplify sampler cutoff/trimming
 - extend tests
-
 - add bank functions to join banks
 - remove bank name from bank
 
@@ -70,6 +67,8 @@
 
 ### done
 
+- pass matching function to spawn pool
+- detroit test to use matcher for different tracks
 - refactor TEMP
 - add bank fn to spawn pool
 - move pool back into bank

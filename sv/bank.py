@@ -16,6 +16,10 @@ class SVPool(list):
             self.append(sample)
             self.sample_strings.append(str(sample))
 
+    def filter(self, filter_fn):
+        return SVPool([sample for sample in self
+                       if filter_fn(sample)])
+            
 class SVBank:
     
     @staticmethod

@@ -8,14 +8,8 @@ from sv.sample import SVSample
 
 import inspect
 import random
+import re
 import unittest
-import yaml
-
-PoolTagPatterns = yaml.safe_load("""
-kick: (kick)|(kik)|(kk)|(bd)
-clap: (clap)|(clp)|(cp)|(hc)
-hat: (oh)|(ch)|(open)|(closed)|(hh)|(hat)
-""")
 
 def Beat(self, n, rand, pattern, groove, temperature, **kwargs):   
     for i in range(n):
@@ -67,16 +61,17 @@ def random_colour(offset = 64,
             return color
     raise RuntimeError("couldn't find suitable random colour")
 
-def add_track(container, pool, tag, bpm,  tpb,
+def add_track(container, pool, name, filter_fn, bpm,  tpb,
               max_density = 0.9,
               min_density = 0.1,
               temperature = 0.5,
               patterns = [pattern[:2] for pattern in TidalPatterns]):
+    samples = pool.filter(filter_fn)
     random.shuffle(samples)        
     machine = DetroitMachine(container = container,
-                             namespace = tag,
+                             namespace = name,
                              colour = random_colour(),
-                             sounds = pool)
+                             sounds = samples)
     container.add_machine(machine)
     seeds = {key: int(random.random() * 1e8)
              for key in "sound|vol|fx".split("|")}
@@ -101,13 +96,16 @@ def add_track(container, pool, tag, bpm,  tpb,
 class DetroitMachineTest(unittest.TestCase):
     
     def test_detroit_machine(self,
-                             tracks = [{"tag": "kick",
+                             tracks = [{"name": "kick",
+                                        "filter_fn": (lambda x: re.search("BD", str(x))),
                                         "max_density": 0.6,
                                         "min_density": 0.2},
-                                       {"tag": "clap",
+                                       {"name": "clap",
+                                        "filter_fn": (lambda x: re.search("(SD)|(HC)", str(x))),
                                         "max_density": 0.4,
                                         "min_density": 0.1},
-                                       {"tag": "hat",
+                                       {"name": "hat",
+                                        "filter_fn": (lambda x: re.search("(OH)|(CH)|(HH)", str(x))),
                                         "max_density": 0.9,
                                         "min_density": 0.5}],
                              bpm = 120,
