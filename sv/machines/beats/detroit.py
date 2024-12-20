@@ -18,11 +18,6 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class DetroitSound(SVSample):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
 class DetroitMachine(SVSamplerMachine, SVBeatsApi):
 
     Modules = Modules

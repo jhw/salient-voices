@@ -59,6 +59,7 @@
 
 ### done
 
+- remove detroit sound
 - remove bank name
 - remove querystring
 - remove note
