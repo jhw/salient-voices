@@ -1,7 +1,5 @@
 from scipy.io import wavfile
 
-from sv.sample import SVSample
-
 import io
 import rv
 import rv.modules

@@ -1,6 +1,5 @@
 from sv.bank import SVBank
 from sv.sampler import SVSlotSampler
-from sv.sample import SVSample
 
 from io import BytesIO
 from pydub.generators import Sine

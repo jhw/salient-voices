@@ -4,7 +4,6 @@ from sv.bank import SVBank
 from sv.container import SVContainer
 from sv.machines.beats.detroit import DetroitMachine
 from sv.project import SVPool
-from sv.sample import SVSample
 
 import inspect
 import random
@@ -112,8 +111,7 @@ class DetroitMachineTest(unittest.TestCase):
                              tpb = 1,
                              n_ticks = 32):
         bank = SVBank.load_zip("tests/pico-default.zip")
-        pool = SVPool([SVSample.parse(name)
-                       for name in bank.zip_file.namelist()])
+        pool = SVPool(bank.zip_file.namelist())
         container = SVContainer(bank = bank,
                                 bpm = bpm,
                                 tpb = tpb,

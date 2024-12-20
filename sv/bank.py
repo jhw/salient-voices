@@ -1,5 +1,3 @@
-from sv.sample import SVSample
-
 import io
 import os
 import re
@@ -38,14 +36,13 @@ class SVBank:
         return zipfile.ZipFile(self.zip_buffer, 'r')
 
     def spawn_pool(self):
-        return SVPool([SVSample.parse(wav_path)
-                       for wav_path in self.zip_file.namelist()])
+        return SVPool(self.zip_file.namelist())
 
     def get_wav(self, sample):
         file_paths = self.zip_file.namelist()
-        if sample.file_path not in file_paths:
-            raise RuntimeError(f"path {sample.file_path} not found in bank")
-        with self.zip_file.open(sample.file_path, 'r') as file_entry:
+        if sample not in file_paths:
+            raise RuntimeError(f"path {sample} not found in bank")
+        with self.zip_file.open(sample, 'r') as file_entry:
             file_content = file_entry.read()
         return io.BytesIO(file_content)
                 

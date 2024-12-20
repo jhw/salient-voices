@@ -1,6 +1,5 @@
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.machines.beats import SVBeatsApi
-from sv.sample import SVSample
 from sv.trigs import SVSampleTrig
 
 import rv
@@ -48,8 +47,7 @@ class DetroitMachine(SVSamplerMachine, SVBeatsApi):
              note=0,
              volume=1.0,
              level=1.0):
-        sample = self.sound.clone()
-        sample.note = note
+        sample = self.sound
         trigs = [SVSampleTrig(target=f"{self.namespace}Beat",
                               sample=sample,
                               vel=volume * level)]

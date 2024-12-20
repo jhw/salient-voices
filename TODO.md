@@ -1,10 +1,10 @@
 ### short
 
-- remove sample
 - convert pool to set
 
 ### medium
 
+- add back note adjustment facilities
 - add bank initialiser from io.BytesIO
 - add bank join() function
 
@@ -59,6 +59,7 @@
 
 ### done
 
+- remove sample
 - remove detroit sound
 - remove bank name
 - remove querystring
