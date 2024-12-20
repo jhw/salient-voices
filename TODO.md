@@ -1,9 +1,8 @@
 ### short
 
-- simplify sampler cutoff/trimming
-- extend tests
-- add bank functions to join banks
 - remove bank name from bank
+- add bank functions to join banks
+- extend tests
 
 ### medium
 
@@ -22,8 +21,7 @@
 ### thoughts
 
 - remove pydub?
-  - no is required for trim, which you probabluy w
-- is null fx still being serialised?
+  - no is required for cutoff application
 - replace set_via_fn?
   - not worth it
 - move berlin `while` loop into core?
@@ -65,6 +63,7 @@
 
 ### done
 
+- simplify sampler cutoff/trimming
 - don't like bank = None declaration
 - pass matching function to spawn pool
 - detroit test to use matcher for different tracks

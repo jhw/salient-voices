@@ -32,11 +32,11 @@ class SamplerTest(unittest.TestCase):
         self.assertEqual(len(samples), 2)
         self.assertIn(rv.note.NOTE.C5, sampler.note_samples)
 
-    def test_apply_trim(self):
+    def test_apply_cutoff(self):
         sampler = SVSlotSampler(bank=self.bank, pool=[], root=rv.note.NOTE.C5)
         wav_io = self.generate_wav_io()
         start, cutoff = 100, 800
-        trimmed_wav_io = sampler.apply_trim(wav_io, start=start, cutoff=cutoff)
+        trimmed_wav_io = sampler.apply_cutoff(wav_io, start=start, cutoff=cutoff)
         trimmed_audio = AudioSegment.from_file(trimmed_wav_io, format="wav")
         self.assertAlmostEqual(len(trimmed_audio), cutoff - start, delta=10)
 
