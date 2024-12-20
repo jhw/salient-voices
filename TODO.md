@@ -1,5 +1,6 @@
 ### short
 
+- rename tests
 - remove note
 - remove querystring
 - remove bank name

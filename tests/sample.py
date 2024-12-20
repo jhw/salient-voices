@@ -1,8 +1,7 @@
 from sv.sample import SVSample
 import unittest
 
-
-class SVSampleTest(unittest.TestCase):
+class SampleTest(unittest.TestCase):
 
     def test_without_querystring(self):
         sample = SVSample.parse("mikey303/303 VCO SQR.wav")
