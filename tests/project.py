@@ -1,8 +1,8 @@
-from sv.banks import SVBank
+from sv.bank import SVBank
 from sv.container import SVTrigPatch
 from sv.trigs import SVNoteTrig, SVSampleTrig
 from sv.project import SVProject
-from sv.sounds import SVSample
+from sv.sample import SVSample
 
 import rv
 import unittest

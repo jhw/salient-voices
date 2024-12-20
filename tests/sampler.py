@@ -1,6 +1,6 @@
-from sv.banks import SVBank
+from sv.bank import SVBank
 from sv.sampler import SVSlotSampler
-from sv.sounds import SVSample
+from sv.sample import SVSample
 
 from io import BytesIO
 from pydub import AudioSegment

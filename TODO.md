@@ -66,6 +66,7 @@
 
 ### done
 
+- rename banks as bank, sounds as sample
 - remove sample tag
 - replace banks with bank
 - test for get wav

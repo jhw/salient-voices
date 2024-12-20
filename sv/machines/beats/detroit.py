@@ -1,6 +1,6 @@
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.machines.beats import SVBeatsApi
-from sv.sounds import SVSample
+from sv.sample import SVSample
 from sv.trigs import SVSampleTrig
 
 import rv

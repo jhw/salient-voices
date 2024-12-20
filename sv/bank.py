@@ -1,4 +1,4 @@
-from sv.sounds import SVSample
+from sv.sample import SVSample
 
 import io
 import os

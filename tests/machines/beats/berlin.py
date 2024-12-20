@@ -1,5 +1,5 @@
 import sv.algos.groove.perkons as perkons
-from sv.banks import SVBank
+from sv.bank import SVBank
 from sv.container import SVContainer
 from sv.machines.beats.berlin import BerlinMachine, BerlinSound, BerlinWave
 
