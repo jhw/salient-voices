@@ -1,7 +1,5 @@
 ### short
 
-- don't like bank = None declaration
-
 - simplify sampler cutoff/trimming
 - extend tests
 - add bank functions to join banks
@@ -67,6 +65,7 @@
 
 ### done
 
+- don't like bank = None declaration
 - pass matching function to spawn pool
 - detroit test to use matcher for different tracks
 - refactor TEMP

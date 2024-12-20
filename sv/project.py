@@ -83,7 +83,7 @@ class SVModules(list):
         return links
 
 def init_project(fn):
-    def wrapped(self, modules, bank, *args, **kwargs):
+    def wrapped(self, modules, bank = None, *args, **kwargs):
         modules = SVModules(modules)
         modules.validate()
         return fn(self,
@@ -256,8 +256,8 @@ class SVProject:
     def render_project(self,
                        patches,
                        modules,
-                       bank, 
                        bpm,
+                       bank = None,
                        volume = Volume):
         project = rv.api.Project()
         project.initial_bpm = bpm

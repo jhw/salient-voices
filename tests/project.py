@@ -56,7 +56,6 @@ class ProjectTest(unittest.TestCase):
                             colour = [128, 128, 128],
                             n_ticks = 16)
         project = SVProject().render_project(patches = [patch],
-                                             bank = None,
                                              modules = modules,
                                              bpm = 120)
         self.assertTrue(isinstance(project, rv.project.Project))
