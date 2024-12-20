@@ -1,12 +1,16 @@
 ### short
 
-- add bank fn to spawn pool
-- add bank functions to join banks
+- refactor TEMP
+- refactor pool = samples
+- pass matching function to spawn pool
+- detroit test to use matcher for different tracks
+
 - don't like bank = None declaration
-- consider removing sample bank name
-- check TEMP, pool = samples
-- simplify trimming/cutoff?
+- simplify sampler cutoff/trimming
 - extend tests
+
+- add bank functions to join banks
+- remove bank name from bank
 
 ### medium
 
@@ -68,6 +72,7 @@
 
 ### done
 
+- add bank fn to spawn pool
 - move pool back into bank
 - remove mod/fx stuff
 - rename banks as bank, sounds as sample

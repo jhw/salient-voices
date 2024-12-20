@@ -7,9 +7,9 @@ import zipfile
 
 class SVPool(list):
 
-    def __init__(self, items=[]):
-        list.__init__(self, items)
-        self.sample_strings = []
+    def __init__(self, samples=[]):
+        list.__init__(self, samples)
+        self.sample_strings = [str(sample) for sample in samples]
 
     def add(self, sample):
         if str(sample) not in self.sample_strings:
@@ -35,6 +35,10 @@ class SVBank:
     def zip_file(self):
         return zipfile.ZipFile(self.zip_buffer, 'r')
 
+    def spawn_pool(self):
+        return SVPool([SVSample.parse(f"{self.name}/{wav_path}")
+                       for wav_path in self.zip_file.namelist()])
+    
     def dump_zip(self, dir_path):
         if not os.path.exists(dir_path):
             os.mkdir(dir_path)
