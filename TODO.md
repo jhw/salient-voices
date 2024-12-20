@@ -1,11 +1,8 @@
 ### short
 
-### medium
-
-- add bank initialiser from io.BytesIO
-- add bank join() function
-
 - regenerate tests
+
+### medium
 
 - add back note adjustment facilities?
 
@@ -58,6 +55,7 @@
 
 ### done
 
+- add bank join() function
 - pool definitions to use spawn_pool()
 - convert pool to set
 - remove sample

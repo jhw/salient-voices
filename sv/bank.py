@@ -43,6 +43,27 @@ class SVBank:
         with self.zip_file.open(sample, 'r') as file_entry:
             file_content = file_entry.read()
         return io.BytesIO(file_content)
+
+    def join(self, other_bank):
+        # Create a new zip buffer for the merged contents
+        new_zip_buffer = io.BytesIO()
+        
+        # Open a new zip file for writing
+        with zipfile.ZipFile(new_zip_buffer, 'w') as new_zip:
+            # Add all files from the current bank
+            for file_name in self.zip_file.namelist():
+                with self.zip_file.open(file_name) as file_entry:
+                    new_zip.writestr(file_name, file_entry.read())
+
+            # Add all files from the other bank, avoiding duplicates
+            for file_name in other_bank.zip_file.namelist():
+                if file_name not in self.zip_file.namelist():
+                    with other_bank.zip_file.open(file_name) as file_entry:
+                        new_zip.writestr(file_name, file_entry.read())
+
+        # Replace the current bank's zip buffer with the merged one
+        self.zip_buffer = new_zip_buffer
+        self.zip_buffer.seek(0)
                 
 if __name__ == "__main__":
     pass
