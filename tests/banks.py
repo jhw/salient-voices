@@ -28,6 +28,16 @@ class BankTest(unittest.TestCase):
         bank = SVBank.load_zip("tmp/mikey303.zip")
         self.assertTrue(isinstance(bank, SVBank))
         assert_wav_files(bank)
+
+    def test_get_wav(self):
+        bank = SVBank.load_zip("tests/mikey303.zip")
+        sample = SVSample(bank_name="mikey303", file_path="303 VCO SQR.wav", tags=["bass"])
+        wav_io = bank.get_wav(sample)
+        self.assertIsInstance(wav_io, io.BytesIO)
+        wav_io.seek(0)
+        rate, data = wavfile.read(wav_io)
+        self.assertTrue(rate > 0)
+        self.assertTrue(data.size > 0)
         
 class BanksTest(unittest.TestCase):
     
