@@ -4,10 +4,9 @@
 
 ### medium
 
-- add back note adjustment facilities
 - add bank initialiser from io.BytesIO
 - add bank join() function
-
+- add back note adjustment facilities
 - regenerate tests
 
 ### pending
