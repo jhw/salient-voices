@@ -1,6 +1,5 @@
 ### short
 
-- refactor pool = samples
 - pass matching function to spawn pool
 - detroit test to use matcher for different tracks
 
