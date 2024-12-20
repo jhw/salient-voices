@@ -1,5 +1,11 @@
 ### short
 
+- add local sample pool to project
+- add get_wav to bank
+- remove mod/fx stuff
+- remove banks, pool, sample tag
+- consider removing sample bank name
+
 ### medium
 
 - refactor pool.add()
@@ -58,6 +64,7 @@
 
 ### done
 
+- remove s3 stuff
 - why is sample.as_dict() required if you have __get|setstate__?
 - harmonise berlin to/from dict/json methods with detroit
 - remove detroit reverb and distortion
