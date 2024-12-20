@@ -35,9 +35,6 @@ class SVPool(list):
         if str(sample) not in self.sample_strings:
             self.append(sample)
             self.sample_strings.append(str(sample))
-
-    def match(self, matcher_fn):
-        return [sample for sample in self if matcher_fn(sample)]
     
 class SVModule(dict):
 

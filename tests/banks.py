@@ -31,7 +31,7 @@ class BankTest(unittest.TestCase):
 
     def test_get_wav(self):
         bank = SVBank.load_zip("tests/mikey303.zip")
-        sample = SVSample(bank_name="mikey303", file_path="303 VCO SQR.wav", tags=["bass"])
+        sample = SVSample(bank_name="mikey303", file_path="303 VCO SQR.wav")
         wav_io = bank.get_wav(sample)
         self.assertIsInstance(wav_io, io.BytesIO)
         wav_io.seek(0)

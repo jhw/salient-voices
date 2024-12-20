@@ -17,13 +17,8 @@ class SVSample:
         if not sample_str:
             raise RuntimeError("Input string cannot be empty")
 
-        # Split tags first
-        tag_split = sample_str.split("#")
-        sample_and_qs = tag_split[0]
-        tags = tag_split[1:] if len(tag_split) > 1 else []
-
         # Parse bank_name, file_path, and query string
-        path_and_query = sample_and_qs.split("?")
+        path_and_query = sample_str.split("?")
         path = path_and_query[0]
         query_string = path_and_query[1] if len(path_and_query) > 1 else ""
 
@@ -61,18 +56,16 @@ class SVSample:
             note=note,
             fx=fx,
             start=start,
-            cutoff=cutoff,
-            tags=tags,
+            cutoff=cutoff
         )
 
-    def __init__(self, bank_name, file_path, note=0, fx=None, start=0, cutoff=DefaultCutoff, tags=None):
+    def __init__(self, bank_name, file_path, note=0, fx=None, start=0, cutoff=DefaultCutoff):
         self.bank_name = bank_name
         self.file_path = file_path
         self.note = note
         self.fx = fx
         self.start = start
         self.cutoff = cutoff
-        self.tags = tags or []
 
     def clone(self):
         return SVSample(
@@ -81,8 +74,7 @@ class SVSample:
             note=self.note,
             fx=self.fx,
             start=self.start,
-            cutoff=self.cutoff,
-            tags=list(self.tags),
+            cutoff=self.cutoff
         )
 
     @property
@@ -105,8 +97,7 @@ class SVSample:
             "note": self.note if self.note != 0 else None,
             "fx": self.fx,
             "start": self.start if self.start != 0 else None,
-            "cutoff": self.cutoff if self.cutoff != DefaultCutoff else None,
-            "tags": self.tags,
+            "cutoff": self.cutoff if self.cutoff != DefaultCutoff else None
         }
         return {k: v for k, v in state.items() if v is not None}
 
@@ -115,8 +106,7 @@ class SVSample:
             f"{key}={value}" for key, value in self.querystring.items()
         ]
         query_string = "?" + "&".join(query_parts) if query_parts else ""
-        tag_string = "".join([f"#{tag}" for tag in sorted(self.tags)])
-        return f"{self.bank_name}/{self.file_path}{query_string}{tag_string}"
+        return f"{self.bank_name}/{self.file_path}{query_string}"
 
 if __name__ == "__main__":
     pass

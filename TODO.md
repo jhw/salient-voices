@@ -1,6 +1,5 @@
 ### short
 
-- remove sample tag
 - remove mod/fx stuff
 - remove pydub
 
@@ -8,6 +7,8 @@
 - add bank functions to join banks
 - don't like bank = None declaration
 - consider removing sample bank name
+- check TEMP, pool = samples
+
 
 ### medium
 
@@ -65,6 +66,7 @@
 
 ### done
 
+- remove sample tag
 - replace banks with bank
 - test for get wav
 - add get_wav to bank
