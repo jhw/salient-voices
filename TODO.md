@@ -1,7 +1,5 @@
 ### short
 
-- move pool back into bank
-
 - add bank fn to spawn pool
 - add bank functions to join banks
 - don't like bank = None declaration
@@ -70,6 +68,7 @@
 
 ### done
 
+- move pool back into bank
 - remove mod/fx stuff
 - rename banks as bank, sounds as sample
 - remove sample tag
