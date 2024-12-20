@@ -1,14 +1,14 @@
 ### short
 
-- add local sample pool to project
-- add get_wav to bank
+- test for get wav
+
+- replace banks with bank
+- remove sample tag
 - remove mod/fx stuff
-- remove banks, pool, sample tag
+
 - consider removing sample bank name
 
 ### medium
-
-- refactor pool.add()
 
 - berlin slide up/down
 - berlin to accept 3 (and 1.5) as quantisation options
@@ -63,6 +63,27 @@
   - is fine as is
 
 ### done
+
+- add get_wav to bank
+
+```
+ERROR: test_detroit_machine (tests.machines.beats.detroit.DetroitMachineTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/jhw/work/salient_voices/tests/machines/beats/detroit.py", line 127, in test_detroit_machine
+    add_track(container = container,
+  File "/Users/jhw/work/salient_voices/tests/machines/beats/detroit.py", line 95, in add_track
+    machine.render(generator = Beat,
+  File "/Users/jhw/work/salient_voices/sv/machines/__init__.py", line 33, in render
+    for i, trig_block in generator(self,
+  File "/Users/jhw/work/salient_voices/tests/machines/beats/detroit.py", line 27, in Beat
+    trig_block = self.note(volume = volume)
+  File "/Users/jhw/work/salient_voices/sv/machines/beats/detroit.py", line 56, in note
+    sample = self.sound.clone()
+  File "/Users/jhw/work/salient_voices/sv/machines/beats/__init__.py", line 24, in sound
+    return self.sounds[self.sound_index]
+IndexError: list index out of range
+```
 
 - remove s3 stuff
 - why is sample.as_dict() required if you have __get|setstate__?

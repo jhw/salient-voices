@@ -3,6 +3,8 @@ from sv.algos.groove import perkons
 from sv.banks import SVBank, SVBanks
 from sv.container import SVContainer
 from sv.machines.beats.detroit import DetroitMachine
+from sv.project import SVPool
+from sv.sounds import SVSample
 
 import inspect
 import random
@@ -70,7 +72,7 @@ def add_track(container, pool, tag, bpm,  tpb,
               min_density = 0.1,
               temperature = 0.5,
               patterns = [pattern[:2] for pattern in TidalPatterns]):
-    samples = pool.match(lambda sample: tag in sample.tags)
+    samples = pool # TEMP
     random.shuffle(samples)        
     machine = DetroitMachine(container = container,
                              namespace = tag,
@@ -114,7 +116,8 @@ class DetroitMachineTest(unittest.TestCase):
                              n_ticks = 32):
         bank = SVBank.load_zip("tests/pico-default.zip")
         banks = SVBanks([bank])
-        pool, _ = banks.spawn_pool(tag_patterns = PoolTagPatterns)
+        pool = SVPool([SVSample.parse(f"pico-default/{name}")
+                       for name in banks[0].zip_file.namelist()])
         container = SVContainer(banks = banks,
                                 bpm = bpm,
                                 tpb = tpb,

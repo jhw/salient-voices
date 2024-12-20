@@ -31,6 +31,14 @@ class SVBank:
         with open(zip_path, 'wb') as f:
             f.write(self.zip_buffer.getvalue())
 
+    def get_wav(self, sample):
+        file_paths = self.zip_file.namelist()
+        if sample.file_path not in file_paths:
+            raise RuntimeError(f"path {sample.file_path} not found in bank {sample.bank_name}")
+        with self.zip_file.open(sample.file_path, 'r') as file_entry:
+            file_content = file_entry.read()
+        return io.BytesIO(file_content)
+            
 class SVBanks(list):
 
     @staticmethod
@@ -46,40 +54,6 @@ class SVBanks(list):
     def __init__(self, items=[]):
         list.__init__(self, items)
 
-    def filter(self, name, pool):
-        subset_buffer = io.BytesIO()
-        with zipfile.ZipFile(subset_buffer, 'w') as subset_zip:
-            for sample in pool:
-                matching_bank = next((bank for bank in self if bank.name == sample.bank_name), None)
-                if matching_bank:
-                    if sample.file_path in matching_bank.zip_file.namelist():
-                        with matching_bank.zip_file.open(sample.file_path, 'r') as source_file:
-                            subset_zip.writestr(sample.file_path,
-                                                source_file.read())
-        subset_buffer.seek(0)
-        return SVBank(name=name, zip_buffer=subset_buffer)
-        
-    def match_tags(self, file_name, tag_patterns):
-        tags = []
-        for tag, term in tag_patterns.items():
-            if re.search(term, file_name, re.I):
-                tags.append(tag)
-        return tags        
-
-    def spawn_pool(self, tag_patterns):
-        pool, untagged = SVPool(), []
-        for bank in self:
-            for item in bank.zip_file.infolist():
-                tags = self.match_tags(item.filename, tag_patterns)
-                sample = SVSample(bank_name = bank.name,
-                                  file_path = item.filename,
-                                  tags = tags)
-                if tags:
-                    pool.append(sample)
-                else:
-                    untagged.append(sample)
-        return pool, untagged
-
     def get_wav(self, sample):
         banks = {bank.name: bank for bank in self}
         if sample.bank_name not in banks:
@@ -91,19 +65,5 @@ class SVBanks(list):
             file_content = file_entry.read()
         return io.BytesIO(file_content)
     
-class SVPool(list):
-
-    def __init__(self, items=[]):
-        list.__init__(self, items)
-        self.sample_strings = []
-
-    def add(self, sample):
-        if str(sample) not in self.sample_strings:
-            self.append(sample)
-            self.sample_strings.append(str(sample))
-
-    def match(self, matcher_fn):
-        return [sample for sample in self if matcher_fn(sample)]
-
 if __name__ == "__main__":
     pass

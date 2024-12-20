@@ -1,4 +1,4 @@
-from sv.banks import SVBank, SVBanks, SVPool
+from sv.banks import SVBank, SVBanks
 from sv.sounds import SVSample
 
 from scipy.io import wavfile
@@ -35,25 +35,6 @@ class BanksTest(unittest.TestCase):
         banks = SVBanks.load_zip("tests")        
         self.assertTrue(len(banks) == 2)
 
-    def test_filter(self):
-        bank = SVBank.load_zip("tests/mikey303.zip")
-        banks = SVBanks([bank])
-        pool = SVPool([SVSample.parse("mikey303/303 VCO SQR.wav")])
-        filtered = banks.filter(name = "filtered",
-                              pool = pool)
-        wav_files = filtered.zip_file.namelist()
-        self.assertEqual(len(wav_files), 1)
-        self.assertTrue("303 VCO SQR.wav" in wav_files)
-        
-    def test_spawn_pool(self):
-        bank = SVBank.load_zip("tests/mikey303.zip")
-        banks = SVBanks([bank])
-        tag_patterns = {"bass": "303"}
-        pool, unmapped = banks.spawn_pool(tag_patterns)
-        self.assertTrue(isinstance(pool, SVPool))
-        self.assertEqual(len(pool), 2)
-        self.assertEqual(unmapped, [])
-
     def test_get_wav(self):
         bank = SVBank.load_zip("tests/mikey303.zip")
         banks = SVBanks([bank])
@@ -64,16 +45,6 @@ class BanksTest(unittest.TestCase):
         rate, data = wavfile.read(wav_io)
         self.assertTrue(rate > 0)
         self.assertTrue(data.size > 0)
-        
-class PoolTest(unittest.TestCase):
-
-    def test_match(self):
-        pool = SVPool()
-        pool.add(SVSample.parse("mikey303/303 VCO SQR.wav#bass#303"))
-        samples = pool.match(lambda sample: "bass" in sample.tags)
-        self.assertTrue(len(samples), 1)
-        samples = pool.match(lambda sample: "kick" in sample.tags)
-        self.assertEqual(samples, [])
-        
+                
 if __name__ == "__main__":
     unittest.main()

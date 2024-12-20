@@ -27,7 +27,8 @@ class SamplerTest(unittest.TestCase):
 
     def test_slot_sampler_initialization(self):
         tag_mapping = {"bass": "303"}
-        pool, _ = self.banks.spawn_pool(tag_mapping)
+        pool = [SVSample.parse(f"mikey303/{name}")
+                for name in self.banks[0].zip_file.namelist()] # TEMP
         sampler = SVSlotSampler(banks=self.banks, pool=pool, root=rv.note.NOTE.C5)
         samples = [sample for sample in sampler.samples if sample]
         self.assertEqual(len(samples), 2)
@@ -61,7 +62,8 @@ class SamplerTest(unittest.TestCase):
 
     def test_index_of(self):
         tag_mapping = {"bass": "303"}
-        pool, _ = self.banks.spawn_pool(tag_mapping)
+        pool = [SVSample.parse(f"mikey303/{name}")
+                for name in self.banks[0].zip_file.namelist()] # TEMP
         sampler = SVSlotSampler(banks=self.banks, pool=pool, root=rv.note.NOTE.C5)
         sample_strings = [str(sample) for sample in pool]
         for i, sample in enumerate(pool):
@@ -69,7 +71,8 @@ class SamplerTest(unittest.TestCase):
 
     def test_max_slots_exceeded(self):
         tag_mapping = {"bass": "303"}
-        pool, _ = self.banks.spawn_pool(tag_mapping)
+        pool = [SVSample.parse(f"mikey303/{name}")
+                for name in self.banks[0].zip_file.namelist()] # TEMP
         with self.assertRaises(RuntimeError) as context:
             SVSlotSampler(banks=self.banks, pool=pool * 100, root=rv.note.NOTE.C5)
         self.assertIn("sampler max slots exceeded", str(context.exception))

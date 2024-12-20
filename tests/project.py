@@ -1,7 +1,7 @@
 from sv.banks import SVBank
 from sv.container import SVTrigPatch
 from sv.trigs import SVNoteTrig, SVSampleTrig
-from sv.project import SVProject
+from sv.project import SVProject, SVPool
 from sv.sounds import SVSample
 
 import rv
@@ -73,6 +73,15 @@ class ProjectTest(unittest.TestCase):
                                              banks = [bank],
                                              bpm = 120)
         self.assertTrue(isinstance(project, rv.project.Project))
+
+    def test_pool_match(self):
+        pool = SVPool()
+        pool.add(SVSample.parse("mikey303/303 VCO SQR.wav#bass#303"))
+        samples = pool.match(lambda sample: "bass" in sample.tags)
+        self.assertTrue(len(samples), 1)
+        samples = pool.match(lambda sample: "kick" in sample.tags)
+        self.assertEqual(samples, [])
+
             
 if __name__ == "__main__":
     unittest.main()
