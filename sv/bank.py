@@ -7,12 +7,10 @@ class SVPool(list):
 
     def __init__(self, samples=[]):
         list.__init__(self, samples)
-        self.sample_strings = [str(sample) for sample in samples]
 
     def add(self, sample):
-        if str(sample) not in self.sample_strings:
+        if sample not in self:
             self.append(sample)
-            self.sample_strings.append(str(sample))
 
     def filter(self, filter_fn):
         return SVPool([sample for sample in self

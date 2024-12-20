@@ -1,13 +1,15 @@
 ### short
 
-- convert pool to set
+- pool definitions to use spawn_pool()
 
 ### medium
 
 - add bank initialiser from io.BytesIO
 - add bank join() function
-- add back note adjustment facilities
+
 - regenerate tests
+
+- add back note adjustment facilities?
 
 ### pending
 
@@ -58,6 +60,7 @@
 
 ### done
 
+- convert pool to set
 - remove sample
 - remove detroit sound
 - remove bank name
