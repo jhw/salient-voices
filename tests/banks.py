@@ -1,4 +1,4 @@
-from sv.banks import SVBank, SVBanks
+from sv.banks import SVBank
 from sv.sounds import SVSample
 
 from scipy.io import wavfile
@@ -38,23 +38,6 @@ class BankTest(unittest.TestCase):
         rate, data = wavfile.read(wav_io)
         self.assertTrue(rate > 0)
         self.assertTrue(data.size > 0)
-        
-class BanksTest(unittest.TestCase):
-    
-    def test_load(self):        
-        banks = SVBanks.load_zip("tests")        
-        self.assertTrue(len(banks) == 2)
-
-    def test_get_wav(self):
-        bank = SVBank.load_zip("tests/mikey303.zip")
-        banks = SVBanks([bank])
-        sample = SVSample(bank_name="mikey303", file_path="303 VCO SQR.wav", tags=["bass"])
-        wav_io = banks.get_wav(sample)
-        self.assertIsInstance(wav_io, io.BytesIO)
-        wav_io.seek(0)
-        rate, data = wavfile.read(wav_io)
-        self.assertTrue(rate > 0)
-        self.assertTrue(data.size > 0)
-                
+                        
 if __name__ == "__main__":
     unittest.main()

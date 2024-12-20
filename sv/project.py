@@ -1,6 +1,5 @@
 from rv.modules.multisynth import MultiSynth
 
-from sv.banks import SVBanks
 from sv.trigs import SVSampleTrig, controller_value
 
 import importlib
@@ -97,13 +96,12 @@ class SVModules(list):
         return links
 
 def init_project(fn):
-    def wrapped(self, modules, banks = [], *args, **kwargs):
-        banks = SVBanks(banks)
+    def wrapped(self, modules, bank, *args, **kwargs):
         modules = SVModules(modules)
         modules.validate()
         return fn(self,
                   modules = modules,
-                  banks = banks,
+                  bank = bank,
                   *args, **kwargs)
     return wrapped
 
@@ -111,14 +109,14 @@ def init_modules(fn):
     def wrapped(self,
                 patches,
                 modules,
-                banks,
+                bank,
                 **kwargs):
         for mod in modules:
             mod_class = load_class(mod["class"])
             mod_kwargs = {}
             if mod.is_sampler:
                 pool = mod.init_sample_pool(patches)
-                mod_kwargs = {"banks": banks,
+                mod_kwargs = {"bank": bank,
                               "pool": pool,
                               "root": mod["root"]}
             mod["instance"] = mod_class(**mod_kwargs)
@@ -129,7 +127,7 @@ def init_modules(fn):
         return fn(self,
                   patches = patches,
                   modules = modules,
-                  banks = banks,
+                  bank = bank,
                   **kwargs)
     return wrapped
 
@@ -271,7 +269,7 @@ class SVProject:
     def render_project(self,
                        patches,
                        modules,
-                       banks, 
+                       bank, 
                        bpm,
                        volume = Volume):
         project = rv.api.Project()
@@ -280,7 +278,7 @@ class SVProject:
         project_modules = self.render_modules(project = project,
                                               patches = patches,
                                               modules = modules,
-                                              banks = banks)
+                                              bank = bank)
         project.layout() # NB
         project.patterns = self.render_patches(modules = project_modules,
                                                patches = patches)

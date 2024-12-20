@@ -1,11 +1,12 @@
 ### short
 
-- test for get wav
-
-- replace banks with bank
 - remove sample tag
 - remove mod/fx stuff
+- remove pydub
 
+- add bank fn to spawn pool
+- add bank functions to join banks
+- don't like bank = None declaration
 - consider removing sample bank name
 
 ### medium
@@ -26,7 +27,7 @@
 - replace set_via_fn?
   - not worth it
 - move berlin `while` loop into core?
-  - don't see how it can be done
+  - don't see how it can be achieved
 
 ### roadmap
 
@@ -64,6 +65,8 @@
 
 ### done
 
+- replace banks with bank
+- test for get wav
 - add get_wav to bank
 
 ```

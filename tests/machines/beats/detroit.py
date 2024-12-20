@@ -1,6 +1,6 @@
 from sv.algos.euclid import bjorklund, TidalPatterns
 from sv.algos.groove import perkons
-from sv.banks import SVBank, SVBanks
+from sv.banks import SVBank
 from sv.container import SVContainer
 from sv.machines.beats.detroit import DetroitMachine
 from sv.project import SVPool
@@ -115,10 +115,9 @@ class DetroitMachineTest(unittest.TestCase):
                              tpb = 1,
                              n_ticks = 32):
         bank = SVBank.load_zip("tests/pico-default.zip")
-        banks = SVBanks([bank])
         pool = SVPool([SVSample.parse(f"pico-default/{name}")
-                       for name in banks[0].zip_file.namelist()])
-        container = SVContainer(banks = banks,
+                       for name in bank.zip_file.namelist()])
+        container = SVContainer(bank = bank,
                                 bpm = bpm,
                                 tpb = tpb,
                                 n_ticks = n_ticks)

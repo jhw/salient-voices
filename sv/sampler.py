@@ -14,7 +14,7 @@ MaxSlots = 120
     
 class SVBaseSampler(rv.modules.sampler.Sampler):
 
-    def __init__(self, banks, pool, max_slots=MaxSlots):
+    def __init__(self, bank, pool, max_slots=MaxSlots):
         rv.modules.sampler.Sampler.__init__(self)
         if len(pool) > max_slots:
             raise RuntimeError("sampler max slots exceeded")
@@ -62,14 +62,14 @@ def with_audio_segment(fn):
     
 class SVSlotSampler(SVBaseSampler):
 
-    def __init__(self, banks, pool, root, max_slots=MaxSlots):
-        SVBaseSampler.__init__(self, banks=banks, pool=pool)
+    def __init__(self, bank, pool, root, max_slots=MaxSlots):
+        SVBaseSampler.__init__(self, bank=bank, pool=pool)
         self.sample_strings = [str(sample) for sample in self.pool]
         rv_notes = list(rv.note.NOTE)                
         root = rv_notes.index(root)
         for i, sample in enumerate(self.pool):
             # init rv sample and insert into self.samples
-            raw_wav_io = banks.get_wav(sample)
+            raw_wav_io = bank.get_wav(sample)
             wav_io = self.apply_fx(sample, raw_wav_io)
             rv_sample = self.init_rv_sample(wav_io)
             rv_sample.relative_note += (root + sample.note - i)

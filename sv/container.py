@@ -25,9 +25,9 @@ class SVContainer:
     def __init__(self,
                  bpm,
                  n_ticks,
-                 banks = [],
+                 bank,
                  tpb = 1):
-        self.banks = banks
+        self.bank = bank
         self.bpm = bpm
         self.tpb = tpb
         self.n_ticks = n_ticks
@@ -63,7 +63,7 @@ class SVContainer:
     def render_project(self):
         return SVProject().render_project(patches = self.patches,
                                           modules = self.modules,
-                                          banks = self.banks,
+                                          bank = self.bank,
                                           bpm = self.tpb_adjusted_bpm)
 
     def write_project(self, filename):

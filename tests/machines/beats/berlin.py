@@ -73,7 +73,7 @@ class BerlinMachineTest(unittest.TestCase):
                             n_ticks = 32,
                             n_sounds = 16):
         bank = SVBank.load_zip("sv/machines/beats/berlin/mikey303.zip")
-        container = SVContainer(banks = [bank],
+        container = SVContainer(bank = bank,
                                 bpm = bpm,
                                 tpb = tpb,
                                 n_ticks = n_ticks)

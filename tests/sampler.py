@@ -1,4 +1,4 @@
-from sv.banks import SVBank, SVBanks
+from sv.banks import SVBank
 from sv.sampler import SVSlotSampler
 from sv.sounds import SVSample
 
@@ -14,8 +14,7 @@ import unittest
 class SamplerTest(unittest.TestCase):
 
     def setUp(self):
-        bank = SVBank.load_zip("tests/mikey303.zip")
-        self.banks = SVBanks([bank])
+        self.bank = SVBank.load_zip("tests/mikey303.zip")
 
     def generate_wav_io(self, duration_ms=1000, freq=440):
         """Generates a valid WAV file-like object with a sine wave."""
@@ -28,14 +27,14 @@ class SamplerTest(unittest.TestCase):
     def test_slot_sampler_initialization(self):
         tag_mapping = {"bass": "303"}
         pool = [SVSample.parse(f"mikey303/{name}")
-                for name in self.banks[0].zip_file.namelist()] # TEMP
-        sampler = SVSlotSampler(banks=self.banks, pool=pool, root=rv.note.NOTE.C5)
+                for name in self.bank.zip_file.namelist()] # TEMP
+        sampler = SVSlotSampler(bank=self.bank, pool=pool, root=rv.note.NOTE.C5)
         samples = [sample for sample in sampler.samples if sample]
         self.assertEqual(len(samples), 2)
         self.assertIn(rv.note.NOTE.C5, sampler.note_samples)
 
     def test_apply_trim(self):
-        sampler = SVSlotSampler(banks=self.banks, pool=[], root=rv.note.NOTE.C5)
+        sampler = SVSlotSampler(bank=self.bank, pool=[], root=rv.note.NOTE.C5)
         wav_io = self.generate_wav_io()
         start, cutoff = 100, 800
         trimmed_wav_io = sampler.apply_trim(wav_io, start=start, cutoff=cutoff)
@@ -43,7 +42,7 @@ class SamplerTest(unittest.TestCase):
         self.assertAlmostEqual(len(trimmed_audio), cutoff - start, delta=10)
 
     def test_apply_reverse(self):
-        sampler = SVSlotSampler(banks=self.banks, pool=[], root=rv.note.NOTE.C5)
+        sampler = SVSlotSampler(bank=self.bank, pool=[], root=rv.note.NOTE.C5)
         wav_io = self.generate_wav_io()
         start, cutoff = 200, 900
         reversed_wav_io = sampler.apply_reverse(wav_io, start=start, cutoff=cutoff)
@@ -51,7 +50,7 @@ class SamplerTest(unittest.TestCase):
         self.assertAlmostEqual(len(reversed_audio), cutoff - start, delta=10)
 
     def test_apply_retrig(self):
-        sampler = SVSlotSampler(banks=self.banks, pool=[], root=rv.note.NOTE.C5)
+        sampler = SVSlotSampler(bank=self.bank, pool=[], root=rv.note.NOTE.C5)
         wav_io = self.generate_wav_io()
         start, cutoff = 0, 1000
         n_retrigs = 4
@@ -63,8 +62,8 @@ class SamplerTest(unittest.TestCase):
     def test_index_of(self):
         tag_mapping = {"bass": "303"}
         pool = [SVSample.parse(f"mikey303/{name}")
-                for name in self.banks[0].zip_file.namelist()] # TEMP
-        sampler = SVSlotSampler(banks=self.banks, pool=pool, root=rv.note.NOTE.C5)
+                for name in self.bank.zip_file.namelist()] # TEMP
+        sampler = SVSlotSampler(bank=self.bank, pool=pool, root=rv.note.NOTE.C5)
         sample_strings = [str(sample) for sample in pool]
         for i, sample in enumerate(pool):
             self.assertEqual(sampler.index_of(sample), sample_strings.index(str(sample)))
@@ -72,13 +71,13 @@ class SamplerTest(unittest.TestCase):
     def test_max_slots_exceeded(self):
         tag_mapping = {"bass": "303"}
         pool = [SVSample.parse(f"mikey303/{name}")
-                for name in self.banks[0].zip_file.namelist()] # TEMP
+                for name in self.bank.zip_file.namelist()] # TEMP
         with self.assertRaises(RuntimeError) as context:
-            SVSlotSampler(banks=self.banks, pool=pool * 100, root=rv.note.NOTE.C5)
+            SVSlotSampler(bank=self.bank, pool=pool * 100, root=rv.note.NOTE.C5)
         self.assertIn("sampler max slots exceeded", str(context.exception))
 
     def test_invalid_sample_format(self):
-        sampler = SVSlotSampler(banks=self.banks, pool=[], root=rv.note.NOTE.C5)
+        sampler = SVSlotSampler(bank=self.bank, pool=[], root=rv.note.NOTE.C5)
         with patch("scipy.io.wavfile.read", side_effect=ValueError("File format not understood")):
             wav_io = BytesIO(b"Not a valid WAV file")
             with self.assertRaises(RuntimeError) as context:
