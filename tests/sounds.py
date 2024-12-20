@@ -66,56 +66,6 @@ class SVSampleTest(unittest.TestCase):
         self.assertEqual(sample.querystring, {"note": 64})
         self.assertEqual(str(sample), "mikey303/303 VCO SQR.wav?note=64")
 
-    # FX Tests
-
-    def test_with_querystring_fx(self):
-        # Add a cutoff value to ensure the test passes
-        sample = SVSample.parse("mikey303/303 VCO SQR.wav?fx=rev&cutoff=50")
-        self.assertEqual(sample.bank_name, "mikey303")
-        self.assertEqual(sample.file_path, "303 VCO SQR.wav")
-        self.assertEqual(sample.querystring, {"fx": "rev", "cutoff": 50})
-        self.assertEqual(sample.fx, SVSample.FX.REV)
-        self.assertEqual(sample.cutoff, 50)
-
-    def test_querystring_with_default_fx(self):
-        sample = SVSample.parse("mikey303/303 VCO SQR.wav?")
-        self.assertEqual(sample.bank_name, "mikey303")
-        self.assertEqual(sample.file_path, "303 VCO SQR.wav")
-        self.assertEqual(sample.querystring, {})
-        self.assertEqual(sample.note, 0)
-        self.assertIsNone(sample.fx)
-
-    def test_invalid_fx_querystring(self):
-        sample = SVSample.parse("mikey303/303 VCO SQR.wav?fx=invalid")
-        self.assertEqual(sample.bank_name, "mikey303")
-        self.assertEqual(sample.file_path, "303 VCO SQR.wav")
-        self.assertEqual(sample.querystring, {})
-        self.assertEqual(sample.note, 0)
-        self.assertIsNone(sample.fx)
-
-    def test_round_trip_str_with_fx(self):
-        # Add a cutoff value to ensure the test passes
-        sample_str = "mikey303/303 VCO SQR.wav?note=64&fx=rev&cutoff=50"
-        sample = SVSample.parse(sample_str)
-        self.assertEqual(str(sample), sample_str)
-
-    def test_round_trip_default_fx(self):
-        sample_str = "mikey303/303 VCO SQR.wav?note=64"
-        sample = SVSample.parse(sample_str)
-        self.assertEqual(str(sample), sample_str)
-
-    def test_fx_property(self):
-        sample = SVSample("mikey303", "303 VCO SQR.wav", note=32, fx=SVSample.FX.RET4, cutoff=50)
-        self.assertEqual(sample.fx, SVSample.FX.RET4)
-        self.assertEqual(sample.querystring, {"note": 32, "fx": "ret4", "cutoff": 50})
-        sample.fx = SVSample.FX.RET2
-        self.assertEqual(sample.fx, SVSample.FX.RET2)
-        self.assertEqual(sample.querystring, {"note": 32, "fx": "ret2", "cutoff": 50})
-        sample.fx = None
-        self.assertIsNone(sample.fx)
-        self.assertEqual(sample.querystring, {"note": 32, "cutoff": 50})
-        self.assertEqual(str(sample), "mikey303/303 VCO SQR.wav?note=32&cutoff=50")
-
     def test_valid_start_cutoff(self):
         sample = SVSample.parse("bank1/file.wav?start=50&cutoff=100")
         self.assertEqual(sample.start, 50)

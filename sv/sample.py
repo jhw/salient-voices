@@ -5,13 +5,6 @@ DefaultCutoff = 16000
 
 class SVSample:
 
-    class FX(Enum):
-        REV = "rev"
-        RET2 = "ret2"
-        RET4 = "ret4"
-        RET8 = "ret8"
-        RET16 = "ret16"
-
     @staticmethod
     def parse(sample_str):
         if not sample_str:
@@ -36,9 +29,6 @@ class SVSample:
         except ValueError:
             note = 0
 
-        fx_value = query_dict.get("fx", [None])[0]
-        fx = SVSample.FX(fx_value) if fx_value in SVSample.FX._value2member_map_ else None
-
         start = int(query_dict.get("start", [0])[0]) if "start" in query_dict else 0
         cutoff = (
             int(query_dict.get("cutoff", [DefaultCutoff])[0])
@@ -54,16 +44,14 @@ class SVSample:
             bank_name=bank_name,
             file_path=file_path,
             note=note,
-            fx=fx,
             start=start,
             cutoff=cutoff
         )
 
-    def __init__(self, bank_name, file_path, note=0, fx=None, start=0, cutoff=DefaultCutoff):
+    def __init__(self, bank_name, file_path, note=0, start=0, cutoff=DefaultCutoff):
         self.bank_name = bank_name
         self.file_path = file_path
         self.note = note
-        self.fx = fx
         self.start = start
         self.cutoff = cutoff
 
@@ -72,7 +60,6 @@ class SVSample:
             bank_name=self.bank_name,
             file_path=self.file_path,
             note=self.note,
-            fx=self.fx,
             start=self.start,
             cutoff=self.cutoff
         )
@@ -82,8 +69,6 @@ class SVSample:
         qs = {}
         if self.note != 0:
             qs["note"] = self.note
-        if self.fx is not None:
-            qs["fx"] = self.fx.value
         if self.start != 0:
             qs["start"] = self.start
         if self.cutoff != DefaultCutoff:
@@ -95,7 +80,6 @@ class SVSample:
             "bank_name": self.bank_name,
             "file_path": self.file_path,
             "note": self.note if self.note != 0 else None,
-            "fx": self.fx,
             "start": self.start if self.start != 0 else None,
             "cutoff": self.cutoff if self.cutoff != DefaultCutoff else None
         }

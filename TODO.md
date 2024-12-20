@@ -1,13 +1,12 @@
 ### short
 
-- remove mod/fx stuff
-
 - add bank fn to spawn pool
 - add bank functions to join banks
 - don't like bank = None declaration
 - consider removing sample bank name
 - check TEMP, pool = samples
 - simplify trimming/cutoff?
+- extend tests
 
 ### medium
 
@@ -69,6 +68,7 @@
 
 ### done
 
+- remove mod/fx stuff
 - rename banks as bank, sounds as sample
 - remove sample tag
 - replace banks with bank
