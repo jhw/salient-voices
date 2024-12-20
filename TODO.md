@@ -1,6 +1,5 @@
 ### short
 
-- refactor TEMP
 - refactor pool = samples
 - pass matching function to spawn pool
 - detroit test to use matcher for different tracks
@@ -72,6 +71,7 @@
 
 ### done
 
+- refactor TEMP
 - add bank fn to spawn pool
 - move pool back into bank
 - remove mod/fx stuff

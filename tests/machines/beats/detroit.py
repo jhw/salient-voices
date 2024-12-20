@@ -72,12 +72,11 @@ def add_track(container, pool, tag, bpm,  tpb,
               min_density = 0.1,
               temperature = 0.5,
               patterns = [pattern[:2] for pattern in TidalPatterns]):
-    samples = pool # TEMP
     random.shuffle(samples)        
     machine = DetroitMachine(container = container,
                              namespace = tag,
                              colour = random_colour(),
-                             sounds = samples)
+                             sounds = pool)
     container.add_machine(machine)
     seeds = {key: int(random.random() * 1e8)
              for key in "sound|vol|fx".split("|")}
