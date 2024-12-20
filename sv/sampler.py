@@ -1,4 +1,3 @@
-from pydub import AudioSegment
 from scipy.io import wavfile
 
 from sv.sample import SVSample
@@ -49,17 +48,6 @@ class SVBaseSampler(rv.modules.sampler.Sampler):
         rv_sample.data = snd.data.tobytes()
         return rv_sample
 
-def with_audio_segment(fn):
-    def wrapped(self, wav_io, start = None, cutoff = None, **kwargs):
-        wav_io.seek(0)
-        audio = AudioSegment.from_file(wav_io, format="wav")
-        audio_out = fn(self, audio, start = start, cutoff = cutoff, **kwargs)
-        wav_out = io.BytesIO()        
-        audio_out.export(wav_out, format="wav")
-        wav_out.seek(0)
-        return wav_out
-    return wrapped
-    
 class SVSlotSampler(SVBaseSampler):
 
     def __init__(self, bank, pool, root, max_slots=MaxSlots):
@@ -69,18 +57,13 @@ class SVSlotSampler(SVBaseSampler):
         root = rv_notes.index(root)
         for i, sample in enumerate(self.pool):
             # init rv sample and insert into self.samples
-            raw_wav_io = bank.get_wav(sample)
-            wav_io = self.apply_cutoff(raw_wav_io, **sample.as_dict())
+            wav_io = bank.get_wav(sample)
             rv_sample = self.init_rv_sample(wav_io)
             rv_sample.relative_note += (root + sample.note - i)
             self.samples[i] = rv_sample
             # bind rv sample to keyboard/note
             self.note_samples[rv_notes[i]] = i
 
-    @with_audio_segment
-    def apply_cutoff(self, audio, start, cutoff, fade_out = 3, **kwargs):
-        return audio[start:cutoff].fade_out(fade_out)
-        
     def index_of(self, sample):
         return self.sample_strings.index(str(sample))
 

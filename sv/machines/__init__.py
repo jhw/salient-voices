@@ -56,15 +56,14 @@ class SVMachine:
 
 class SVSamplerMachine(SVMachine):
 
-    def __init__(self, container, namespace, colour, root, cutoff = 1e8):
+    def __init__(self, container, namespace, colour, root):
         super().__init__(container = container,
                          namespace = namespace,
                          colour = colour)
         self.root = root
-        self.cutoff = cutoff
 
     @property
-    def modules(self, attrs = ["root", "cutoff"]):
+    def modules(self, attrs = ["root"]):
         modules = super().modules
         for mod in modules:
             if SVModule(mod).is_sampler:

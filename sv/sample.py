@@ -1,8 +1,6 @@
 from enum import Enum
 from urllib.parse import parse_qs
 
-DefaultCutoff = 16000
-
 class SVSample:
 
     @staticmethod
@@ -29,39 +27,22 @@ class SVSample:
         except ValueError:
             note = 0
 
-        start = int(query_dict.get("start", [0])[0]) if "start" in query_dict else 0
-        cutoff = (
-            int(query_dict.get("cutoff", [DefaultCutoff])[0])
-            if "cutoff" in query_dict and query_dict["cutoff"][0].isdigit()
-            else DefaultCutoff
-        )
-
-        # Validation at initialization
-        if start > cutoff:
-            raise ValueError("start cannot be greater than cutoff")
-
         return SVSample(
             bank_name=bank_name,
             file_path=file_path,
-            note=note,
-            start=start,
-            cutoff=cutoff
+            note=note
         )
 
-    def __init__(self, bank_name, file_path, note=0, start=0, cutoff=DefaultCutoff):
+    def __init__(self, bank_name, file_path, note=0):
         self.bank_name = bank_name
         self.file_path = file_path
         self.note = note
-        self.start = start
-        self.cutoff = cutoff
 
     def clone(self):
         return SVSample(
             bank_name=self.bank_name,
             file_path=self.file_path,
-            note=self.note,
-            start=self.start,
-            cutoff=self.cutoff
+            note=self.note
         )
 
     @property
@@ -69,19 +50,13 @@ class SVSample:
         qs = {}
         if self.note != 0:
             qs["note"] = self.note
-        if self.start != 0:
-            qs["start"] = self.start
-        if self.cutoff != DefaultCutoff:
-            qs["cutoff"] = self.cutoff
         return qs
 
     def as_dict(self):
         state = {
             "bank_name": self.bank_name,
             "file_path": self.file_path,
-            "note": self.note if self.note != 0 else None,
-            "start": self.start if self.start != 0 else None,
-            "cutoff": self.cutoff if self.cutoff != DefaultCutoff else None
+            "note": self.note if self.note != 0 else None
         }
         return {k: v for k, v in state.items() if v is not None}
 

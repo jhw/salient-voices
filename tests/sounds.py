@@ -66,10 +66,5 @@ class SVSampleTest(unittest.TestCase):
         self.assertEqual(sample.querystring, {"note": 64})
         self.assertEqual(str(sample), "mikey303/303 VCO SQR.wav?note=64")
 
-    def test_valid_start_cutoff(self):
-        sample = SVSample.parse("bank1/file.wav?start=50&cutoff=100")
-        self.assertEqual(sample.start, 50)
-        self.assertEqual(sample.cutoff, 100)
-
 if __name__ == "__main__":
     unittest.main()

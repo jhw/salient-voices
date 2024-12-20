@@ -1,9 +1,10 @@
 ### short
 
-- remove start and cutoff
 - remove pydub
+- remove note
 - remove querystring
 - remove bank name
+
 - consider eliminating sample
 
 ### medium
@@ -62,6 +63,7 @@
 
 ### done
 
+- remove start and cutoff
 - simplify sampler cutoff/trimming
 - don't like bank = None declaration
 - pass matching function to spawn pool

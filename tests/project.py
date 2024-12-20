@@ -32,7 +32,6 @@ SamplerModules = yaml.safe_load("""
   links:
   - Echo
   root: 62 # C5
-  cutoff: 0.5
   colour: [127, 127, 127]
 - name: Echo
   class: rv.modules.echo.Echo
