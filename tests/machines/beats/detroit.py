@@ -111,7 +111,7 @@ class DetroitMachineTest(unittest.TestCase):
                              tpb = 1,
                              n_ticks = 32):
         bank = SVBank.load_zip("tests/pico-default.zip")
-        pool = SVPool(bank.zip_file.namelist())
+        pool = bank.spawn_pool()
         container = SVContainer(bank = bank,
                                 bpm = bpm,
                                 tpb = tpb,

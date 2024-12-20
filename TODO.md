@@ -1,7 +1,5 @@
 ### short
 
-- pool definitions to use spawn_pool()
-
 ### medium
 
 - add bank initialiser from io.BytesIO
@@ -60,6 +58,7 @@
 
 ### done
 
+- pool definitions to use spawn_pool()
 - convert pool to set
 - remove sample
 - remove detroit sound
