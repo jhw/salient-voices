@@ -1,6 +1,5 @@
 ### short
 
-- remove pydub
 - remove note
 - remove querystring
 - remove bank name
@@ -63,6 +62,8 @@
 
 ### done
 
+- remove berlin
+- remove pydub
 - remove start and cutoff
 - simplify sampler cutoff/trimming
 - don't like bank = None declaration

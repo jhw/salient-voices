@@ -3,7 +3,6 @@ from sv.sampler import SVSlotSampler
 from sv.sample import SVSample
 
 from io import BytesIO
-from pydub import AudioSegment
 from pydub.generators import Sine
 from unittest.mock import patch
 
