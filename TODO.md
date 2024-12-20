@@ -1,5 +1,7 @@
 ### short
 
+- move pool back into bank
+
 - add bank fn to spawn pool
 - add bank functions to join banks
 - don't like bank = None declaration

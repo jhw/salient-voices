@@ -5,6 +5,17 @@ import os
 import re
 import zipfile
 
+class SVPool(list):
+
+    def __init__(self, items=[]):
+        list.__init__(self, items)
+        self.sample_strings = []
+
+    def add(self, sample):
+        if str(sample) not in self.sample_strings:
+            self.append(sample)
+            self.sample_strings.append(str(sample))
+
 class SVBank:
     
     @staticmethod

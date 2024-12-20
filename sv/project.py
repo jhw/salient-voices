@@ -1,5 +1,6 @@
 from rv.modules.multisynth import MultiSynth
 
+from sv.bank import SVPool
 from sv.trigs import SVSampleTrig, controller_value
 
 import importlib
@@ -24,17 +25,6 @@ def does_class_extend(cls, base_class):
         return issubclass(cls, base_class)
     except TypeError:
         return False
-
-class SVPool(list):
-
-    def __init__(self, items=[]):
-        list.__init__(self, items)
-        self.sample_strings = []
-
-    def add(self, sample):
-        if str(sample) not in self.sample_strings:
-            self.append(sample)
-            self.sample_strings.append(str(sample))
     
 class SVModule(dict):
 
