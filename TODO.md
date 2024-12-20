@@ -1,7 +1,7 @@
 ### short
 
-- remove bank name
 - remove sample
+- convert pool to set
 
 ### medium
 
@@ -59,6 +59,7 @@
 
 ### done
 
+- remove bank name
 - remove querystring
 - remove note
 - rename tests

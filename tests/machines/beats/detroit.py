@@ -112,7 +112,7 @@ class DetroitMachineTest(unittest.TestCase):
                              tpb = 1,
                              n_ticks = 32):
         bank = SVBank.load_zip("tests/pico-default.zip")
-        pool = SVPool([SVSample.parse(f"pico-default/{name}")
+        pool = SVPool([SVSample.parse(name)
                        for name in bank.zip_file.namelist()])
         container = SVContainer(bank = bank,
                                 bpm = bpm,

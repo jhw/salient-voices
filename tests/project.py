@@ -62,7 +62,7 @@ class ProjectTest(unittest.TestCase):
     def test_sampler(self, modules = SamplerModules):
         bank = SVBank.load_zip("tests/mikey303.zip")
         trig = SVSampleTrig(target = "Sampler",
-                                sample = SVSample.parse("mikey303/303 VCO SQR.wav"),
+                                sample = SVSample.parse("303 VCO SQR.wav"),
                                 i = 0)
         patch = SVTrigPatch(trigs = [trig],
                             colour = [128, 128, 128],
