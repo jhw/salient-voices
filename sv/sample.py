@@ -22,41 +22,31 @@ class SVSample:
 
         # Parse query string into a dictionary
         query_dict = parse_qs(query_string)
-        try:
-            note = int(query_dict.get("note", [0])[0])  # Default note to 0 if not provided
-        except ValueError:
-            note = 0
 
         return SVSample(
             bank_name=bank_name,
-            file_path=file_path,
-            note=note
+            file_path=file_path
         )
 
-    def __init__(self, bank_name, file_path, note=0):
+    def __init__(self, bank_name, file_path):
         self.bank_name = bank_name
         self.file_path = file_path
-        self.note = note
 
     def clone(self):
         return SVSample(
             bank_name=self.bank_name,
-            file_path=self.file_path,
-            note=self.note
+            file_path=self.file_path
         )
 
     @property
     def querystring(self):
         qs = {}
-        if self.note != 0:
-            qs["note"] = self.note
         return qs
 
     def as_dict(self):
         state = {
             "bank_name": self.bank_name,
-            "file_path": self.file_path,
-            "note": self.note if self.note != 0 else None
+            "file_path": self.file_path
         }
         return {k: v for k, v in state.items() if v is not None}
 

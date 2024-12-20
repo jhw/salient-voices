@@ -59,7 +59,7 @@ class SVSlotSampler(SVBaseSampler):
             # init rv sample and insert into self.samples
             wav_io = bank.get_wav(sample)
             rv_sample = self.init_rv_sample(wav_io)
-            rv_sample.relative_note += (root + sample.note - i)
+            rv_sample.relative_note += (root - i)
             self.samples[i] = rv_sample
             # bind rv sample to keyboard/note
             self.note_samples[rv_notes[i]] = i

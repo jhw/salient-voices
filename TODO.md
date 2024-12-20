@@ -1,7 +1,5 @@
 ### short
 
-- rename tests
-- remove note
 - remove querystring
 - remove bank name
 
@@ -63,6 +61,8 @@
 
 ### done
 
+- remove note
+- rename tests
 - remove berlin
 - remove pydub
 - remove start and cutoff
