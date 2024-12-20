@@ -1,6 +1,5 @@
 ### short
 
-- remove querystring
 - remove bank name
 
 - consider eliminating sample
@@ -61,6 +60,7 @@
 
 ### done
 
+- remove querystring
 - remove note
 - rename tests
 - remove berlin
