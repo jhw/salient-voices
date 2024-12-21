@@ -29,12 +29,15 @@ class SVNoteTrigBase(SVTrigBase):
         
     def __init__(self, target,
                  i = 0,
+                 note = None,
                  vel = None,
                  fx_value = None):
         super().__init__(target = target,
                          i = i)
+        self.note = note
         self.vel = vel
         self.fx_value = fx_value
+
 
     @property
     def mod(self):
@@ -70,16 +73,15 @@ class SVNoteTrigBase(SVTrigBase):
         
 class SVNoteTrig(SVNoteTrigBase):
 
-    def __init__(self, target,
+    def __init__(self, target, note,
                  i = 0,
-                 note = None,
                  vel = None,
                  fx_value = None):
         super().__init__(target = target,
+                         note = note,
                          i = i,
                          vel = vel,
                          fx_value = fx_value)
-        self.note = note
 
     def render(self, modules, *args):
         mod = modules[self.mod]
@@ -99,7 +101,6 @@ class SVNoteTrig(SVNoteTrigBase):
 class SVSampleTrig(SVNoteTrigBase):
 
     def __init__(self, target, sample,
-                 note = None,
                  sampler_mod = None,
                  i = 0,
                  vel = None,
@@ -108,7 +109,6 @@ class SVSampleTrig(SVNoteTrigBase):
                          i = i,
                          vel = vel,
                          fx_value = fx_value)
-        self.note = note
         self.sample = sample
         self.sampler_mod = sampler_mod
 

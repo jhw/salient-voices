@@ -1,7 +1,4 @@
-### short [01-note-support]
-
-- merge samplers
-- move note into sv trig base
+### short
 
 ### medium
 
@@ -56,6 +53,8 @@
 
 ### done
 
+- move note into sv trig base
+- merge samplers
 - check index_of indexes into list
 - project pool creation to append note
 - sampler to split sample into sample and note
