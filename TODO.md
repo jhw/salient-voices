@@ -1,10 +1,14 @@
-### short
+### short [01-note-support]
 
-- rebuild test suite
+- check index_of indexes into list
+- project pool creation to append note
+- sampler to split sample into sample and note
+- sampler to adjust relative note
+- pass trig to index of 
 
 ### medium
 
-- add back note adjustment facilities?
+- rebuild test suite
 
 ### pending
 
