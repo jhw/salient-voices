@@ -1,10 +1,7 @@
 ### short [01-note-support]
 
-- check index_of indexes into list
-- project pool creation to append note
-- sampler to split sample into sample and note
-- sampler to adjust relative note
-- pass trig to index of 
+- merge samplers
+- move note into sv trig base
 
 ### medium
 
@@ -59,6 +56,11 @@
 
 ### done
 
+- check index_of indexes into list
+- project pool creation to append note
+- sampler to split sample into sample and note
+- sampler to adjust relative note
+- pass trig to index of 
 - add bank join() function
 - pool definitions to use spawn_pool()
 - convert pool to set
