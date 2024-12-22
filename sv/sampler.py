@@ -15,11 +15,11 @@ class SVSlotSampler(rv.modules.sampler.Sampler):
         rv.modules.sampler.Sampler.__init__(self)
         if len(pool) > max_slots:
             raise RuntimeError("sampler max slots exceeded")
-        self.pool = list(pool) # NB pool is set- based and needs converting to a list for indexation into by index_of()
+        self.sample_strings = list(pool) # NB pool is set- based and needs converting to a list for indexation into by index_of()
         rv_notes = list(rv.note.NOTE)                
         root = rv_notes.index(root)
-        for i, note_adjusted_sample in enumerate(self.pool):
-            sample, relative_note = self.parse_sample(note_adjusted_sample)
+        for i, sample_string in enumerate(self.sample_strings):
+            sample, relative_note = self.parse_sample_string(sample_string)
             relative_note = int(relative_note)
             # init rv sample and insert into self.samples
             wav_io = bank.get_wav(sample)
@@ -29,8 +29,8 @@ class SVSlotSampler(rv.modules.sampler.Sampler):
             # bind rv sample to keyboard/note
             self.note_samples[rv_notes[i]] = i
 
-    def parse_sample(self, note_adjusted_sample):
-        tokens = note_adjusted_sample.split("#")
+    def parse_sample_string(self, sample_string):
+        tokens = sample_string.split("#")
         return (tokens[0], int(tokens[1])) if len(tokens) > 1 else (tokens[0], 0)
 
     """
@@ -62,8 +62,8 @@ class SVSlotSampler(rv.modules.sampler.Sampler):
         rv_sample.data = snd.data.tobytes()
         return rv_sample
     
-    def index_of(self, note_adjusted_sample):
-        return self.pool.index(note_adjusted_sample)
+    def index_of(self, sample_string):
+        return self.sample_strings.index(sample_string)
 
 if __name__ == "__main__":
     pass

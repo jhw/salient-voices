@@ -1,7 +1,5 @@
 ### short
 
-- pass trigs direct to sampler
-
 ### medium
 
 - rebuild test suite

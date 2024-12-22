@@ -85,12 +85,12 @@ class SVSampleTrig(SVNoteTrigBase):
         self.sample = sample
 
     @property
-    def note_adjusted_sample(self):
+    def sample_string(self):
         return f"{self.sample}#{self.note}" if self.note else self.sample
         
     def sampler_note(self, modules):
         sampler_mod = modules[self.mod]
-        note = 1 + sampler_mod.index_of(self.note_adjusted_sample)
+        note = 1 + sampler_mod.index_of(self.sample_string)
         return note
     
     def render(self, modules, *args):

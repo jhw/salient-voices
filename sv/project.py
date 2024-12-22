@@ -42,7 +42,7 @@ class SVModule(dict):
             for trig in patch.trigs:
                 if (isinstance(trig, SVSampleTrig) and 
                     trig.mod == self["name"]):
-                    pool.add(trig.note_adjusted_sample)
+                    pool.add(trig.sample_string)
         return pool
     
     @property
