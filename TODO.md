@@ -1,7 +1,5 @@
 ### short
 
-- convert sample string to use querystring
-
 ### medium
 
 - refactor note as pitch
@@ -59,6 +57,7 @@
 
 ### done
 
+- convert sample string to use querystring
 - check mod_sampler removed
 - clean up trigs
 - move note into sv trig base

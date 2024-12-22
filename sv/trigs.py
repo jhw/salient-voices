@@ -70,7 +70,6 @@ class SVNoteTrigBase(SVTrigBase):
     @property
     def key(self):
         return self.mod
-
     
 class SVSampleTrig(SVNoteTrigBase):
 
@@ -86,7 +85,10 @@ class SVSampleTrig(SVNoteTrigBase):
 
     @property
     def sample_string(self):
-        return f"{self.sample}#{self.note}" if self.note else self.sample
+        params = {}
+        params["note"] = self.note if self.note else 0
+        qs = "&".join([f"{k}={params[k]}" for k in sorted(params.keys())])
+        return f"{self.sample}?{qs}"
         
     def sampler_note(self, modules):
         sampler_mod = modules[self.mod]
