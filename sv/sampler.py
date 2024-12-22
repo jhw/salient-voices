@@ -23,7 +23,7 @@ class SVSlotSampler(rv.modules.sampler.Sampler):
             # init rv sample and insert into self.samples
             wav_io = bank.get_wav(sample)
             rv_sample = self.init_rv_sample(wav_io)
-            rv_sample.relative_note += (root + params["note"] - i)
+            rv_sample.relative_note += (root + params["pitch"] - i)
             self.samples[i] = rv_sample
             # bind rv sample to keyboard/note
             self.note_samples[rv_notes[i]] = i
@@ -36,15 +36,16 @@ class SVSlotSampler(rv.modules.sampler.Sampler):
         return params
             
     def parse_sample_string(self, sample_string,
-                            default_note = 0):
+                            defaults = {"pitch": 0,
+                                        "cutoff": 500}): # 4 ticks @ 120 bpm
         tokens = sample_string.split("?")
         if len(tokens) == 2:
             sample, qs = tokens
             params = self.parse_querystring(qs)
         else:
             sample, params = tokens[0], {}
-        if "note" not in params:
-            params["note"] = default_note
+        for k, v in defaults.items():
+            params.setdefault(k, v)
         return (sample, params)
 
     """

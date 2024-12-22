@@ -75,6 +75,8 @@ class SVSampleTrig(SVNoteTrigBase):
 
     def __init__(self, target, sample,
                  i = 0,
+                 pitch = None,
+                 cutoff = None,
                  vel = None,
                  fx_value = None):
         super().__init__(target = target,
@@ -82,13 +84,21 @@ class SVSampleTrig(SVNoteTrigBase):
                          vel = vel,
                          fx_value = fx_value)
         self.sample = sample
+        self.pitch = pitch
+        self.cutoff = cutoff
 
     @property
     def sample_string(self):
         params = {}
-        params["note"] = self.note if self.note else 0
-        qs = "&".join([f"{k}={params[k]}" for k in sorted(params.keys())])
-        return f"{self.sample}?{qs}"
+        for attr in ["pitch", "cutoff"]:
+            value = getattr(self, attr)
+            if value != None:
+                params[attr] = value
+        if params != {}:
+            qs = "&".join([f"{k}={params[k]}" for k in sorted(params.keys())]) # sorted for lookup consistency
+            return f"{self.sample}?{qs}"
+        else:
+            return self.sample
         
     def sampler_note(self, modules):
         sampler_mod = modules[self.mod]

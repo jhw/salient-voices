@@ -1,10 +1,10 @@
 ### short
 
+- sampler to apply cutoff
+
 ### medium
 
-- refactor note as pitch
-- add cutoff to sample_string
-- refactor detroit api to use sound, pitch, cutoff
+- beats api to facilitate changing pitch, cutoff
 
 - rebuild test suite
 
@@ -57,6 +57,11 @@
 
 ### done
 
+- refactor detroit api to use sound, pitch, cutoff
+- add note self.cutoff
+- refactor defaults application
+- try removing self.note
+- add note self.pitch and refactor note as pitch
 - convert sample string to use querystring
 - check mod_sampler removed
 - clean up trigs
