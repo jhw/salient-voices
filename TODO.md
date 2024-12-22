@@ -1,5 +1,8 @@
 ### short
 
+- check mod_sampler removed
+- pass trigs direct to sampler
+
 ### medium
 
 - rebuild test suite
@@ -53,6 +56,7 @@
 
 ### done
 
+- clean up trigs
 - move note into sv trig base
 - merge samplers
 - check index_of indexes into list

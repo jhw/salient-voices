@@ -1,6 +1,6 @@
 from sv.bank import SVBank
 from sv.container import SVTrigPatch
-from sv.trigs import SVNoteTrig, SVSampleTrig
+from sv.trigs import SVSampleTrig
 from sv.project import SVProject
 
 import rv
@@ -45,18 +45,6 @@ SamplerModules = yaml.safe_load("""
 """)
 
 class ProjectTest(unittest.TestCase):
-
-    def test_generator(self, modules = GeneratorModules):
-        trig = SVNoteTrig(target = "Generator",
-                          note = 56,
-                          i = 0)
-        patch = SVTrigPatch(trigs = [trig],
-                            colour = [128, 128, 128],
-                            n_ticks = 16)
-        project = SVProject().render_project(patches = [patch],
-                                             modules = modules,
-                                             bpm = 120)
-        self.assertTrue(isinstance(project, rv.project.Project))
 
     def test_sampler(self, modules = SamplerModules):
         bank = SVBank.load_zip("tests/mikey303.zip")

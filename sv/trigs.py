@@ -70,34 +70,8 @@ class SVNoteTrigBase(SVTrigBase):
     @property
     def key(self):
         return self.mod
-        
-class SVNoteTrig(SVNoteTrigBase):
 
-    def __init__(self, target, note,
-                 i = 0,
-                 vel = None,
-                 fx_value = None):
-        super().__init__(target = target,
-                         note = note,
-                         i = i,
-                         vel = vel,
-                         fx_value = fx_value)
-
-    def render(self, modules, *args):
-        mod = modules[self.mod]
-        note = self.note
-        mod_id = 1 + mod.index
-        note_kwargs = {
-            "module": mod_id,
-            "note": note
-        }
-        if self.has_vel:
-            note_kwargs["vel"] = self.velocity
-        if self.has_fx and self.fx_value:
-            note_kwargs["pattern"] = self.fx
-            note_kwargs["val"] = self.fx_value
-        return rv.note.Note(**note_kwargs)
-
+    
 class SVSampleTrig(SVNoteTrigBase):
 
     def __init__(self, target, sample,
@@ -138,51 +112,7 @@ class SVSampleTrig(SVNoteTrigBase):
             note_kwargs["pattern"] = self.fx
             note_kwargs["val"] = self.fx_value
         return rv.note.Note(**note_kwargs)
-        
-class SVNoteOffTrig(SVTrigBase):
-
-    def __init__(self, target, i = 0):
-        super().__init__(target = target,
-                         i = i)
-    
-    @property
-    def mod(self):
-        return self.target.split("/")[0]
-
-    @property
-    def key(self):
-        return self.mod
-    
-    def render(self, *args):
-        return rv.note.Note(note = rv.note.NOTECMD.NOTE_OFF)
-
-class SVFXTrig(SVTrigBase):
-
-    def __init__(self, target, value, i = 0):
-        super().__init__(target = target,
-                         i = i)
-        self.value = value
-
-    @property
-    def mod(self):
-        return self.target.split("/")[0]
-
-    @property
-    def fx(self):
-        return int(self.target.split("/")[1])
-
-    @property
-    def key(self):
-        return self.target
-    
-    def render(self, modules, *args):
-        mod = modules[self.mod]
-        mod_id = 1 + mod.index
-        value = controller_value(self.value)
-        return rv.note.Note(module = mod_id,
-                            pattern = self.fx,
-                            val = value)
-    
+            
 class SVModTrig(SVTrigBase):
 
     CtrlMult = 256
