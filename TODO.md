@@ -1,6 +1,5 @@
 ### short
 
-- check mod_sampler removed
 - pass trigs direct to sampler
 
 ### medium
@@ -56,6 +55,7 @@
 
 ### done
 
+- check mod_sampler removed
 - clean up trigs
 - move note into sv trig base
 - merge samplers

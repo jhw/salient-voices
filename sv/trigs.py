@@ -75,7 +75,6 @@ class SVNoteTrigBase(SVTrigBase):
 class SVSampleTrig(SVNoteTrigBase):
 
     def __init__(self, target, sample,
-                 sampler_mod = None,
                  i = 0,
                  vel = None,
                  fx_value = None):
@@ -84,24 +83,20 @@ class SVSampleTrig(SVNoteTrigBase):
                          vel = vel,
                          fx_value = fx_value)
         self.sample = sample
-        self.sampler_mod = sampler_mod
 
     @property
     def note_adjusted_sample(self):
         return f"{self.sample}#{self.note}" if self.note else self.sample
         
-    def resolve_sampler(self):
-        return self.sampler_mod if self.sampler_mod else self.mod
-
-    def resolve_sampler_note(self, modules):
-        sampler_mod = modules[self.sampler_mod if self.sampler_mod else self.mod]
+    def sampler_note(self, modules):
+        sampler_mod = modules[self.mod]
         note = 1 + sampler_mod.index_of(self.note_adjusted_sample)
         return note
     
     def render(self, modules, *args):
         mod = modules[self.mod]        
         mod_id = 1 + mod.index
-        note = self.resolve_sampler_note(modules)
+        note = self.sampler_note(modules)
         note_kwargs = {
             "module": mod_id,
             "note": note
