@@ -1,6 +1,12 @@
 ### short
 
+- convert sample string to use querystring
+
 ### medium
+
+- refactor note as pitch
+- add cutoff to sample_string
+- refactor detroit api to use sound, pitch, cutoff
 
 - rebuild test suite
 
