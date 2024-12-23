@@ -1,7 +1,5 @@
 ### short
 
-- remove is_online
-- try SVSampleString class
 - sampler to apply cutoff
 
 ### medium
@@ -59,6 +57,7 @@
 
 ### done
 
+- remove is_online
 - add urlparse
 - refactor detroit api to use sound, pitch, cutoff
 - add note self.cutoff
