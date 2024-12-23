@@ -1,6 +1,6 @@
 ### short
 
-- sampler to apply cutoff
+- move SVPool into sampler
 
 ### medium
 
@@ -57,6 +57,7 @@
 
 ### done
 
+- sampler to apply cutoff
 - remove is_online
 - add urlparse
 - refactor detroit api to use sound, pitch, cutoff
