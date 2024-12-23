@@ -1,20 +1,9 @@
+from sv.sampler import SVSamplePool
+
 import io
 import os
 import re
 import zipfile
-
-class SVPool(list):
-
-    def __init__(self, samples=[]):
-        list.__init__(self, samples)
-
-    def add(self, sample):
-        if sample not in self:
-            self.append(sample)
-
-    def filter(self, filter_fn):
-        return SVPool([sample for sample in self
-                       if filter_fn(sample)])
             
 class SVBank:
     
@@ -34,7 +23,7 @@ class SVBank:
         return zipfile.ZipFile(self.zip_buffer, 'r')
 
     def spawn_pool(self):
-        return SVPool(self.zip_file.namelist())
+        return SVSamplePool(self.zip_file.namelist())
 
     def get_wav(self, sample):
         file_paths = self.zip_file.namelist()

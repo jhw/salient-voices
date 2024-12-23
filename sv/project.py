@@ -1,6 +1,6 @@
 from rv.modules.multisynth import MultiSynth
 
-from sv.bank import SVPool
+from sv.sampler import SVSamplePool
 from sv.trigs import SVSampleTrig, controller_value
 
 import importlib
@@ -37,7 +37,7 @@ class SVModule(dict):
                                  rv.modules.sampler.Sampler)
 
     def init_sample_pool(self, patches):
-        pool = SVPool()
+        pool = SVSamplePool()
         for patch in patches:
             for trig in patch.trigs:
                 if (isinstance(trig, SVSampleTrig) and 

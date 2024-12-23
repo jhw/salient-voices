@@ -1,7 +1,5 @@
 ### short
 
-- move SVPool into sampler
-
 ### medium
 
 - reconsider beats api (sample, pitch, cutoff)
@@ -57,6 +55,7 @@
 
 ### done
 
+- move SVPool into sampler
 - sampler to apply cutoff
 - remove is_online
 - add urlparse
