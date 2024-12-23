@@ -2,7 +2,6 @@
 
 - refactor sound as sample
 - try SVSampleString class
-- merge trig classes
 - sampler to apply cutoff
 
 ### medium

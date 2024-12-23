@@ -38,7 +38,6 @@ class SVNoteTrigBase(SVTrigBase):
         self.vel = vel
         self.fx_value = fx_value
 
-
     @property
     def mod(self):
         return self.target.split("/")[0]
@@ -46,7 +45,7 @@ class SVNoteTrigBase(SVTrigBase):
     """
     - NB explicit None check; a vel of 0 should still register as a vel
     """
-    
+
     @property
     def has_vel(self):
         return self.vel != None
@@ -70,15 +69,19 @@ class SVNoteTrigBase(SVTrigBase):
     @property
     def key(self):
         return self.mod
+
+"""
+Extend note for sampke, pitch, cutoff parameters; to be encoded in sample_string
+"""
     
 class SVSampleTrig(SVNoteTrigBase):
 
     def __init__(self, target, sample,
                  i = 0,
-                 pitch = None,
-                 cutoff = None,
                  vel = None,
-                 fx_value = None):
+                 fx_value = None,
+                 pitch = None,
+                 cutoff = None):
         super().__init__(target = target,
                          i = i,
                          vel = vel,
@@ -88,27 +91,32 @@ class SVSampleTrig(SVNoteTrigBase):
         self.cutoff = cutoff
 
     @property
-    def sample_string(self):
+    def sample_params(self, attrs = ["pitch", "cutoff"]):
         params = {}
-        for attr in ["pitch", "cutoff"]:
+        for attr in attrs:
             value = getattr(self, attr)
             if value != None:
                 params[attr] = value
-        if params != {}:
-            qs = "&".join([f"{k}={params[k]}" for k in sorted(params.keys())]) # sorted for lookup consistency
-            return f"{self.sample}?{qs}"
-        else:
-            return self.sample
-        
-    def sampler_note(self, modules):
-        sampler_mod = modules[self.mod]
-        note = 1 + sampler_mod.index_of(self.sample_string)
-        return note
+        return params
+
+    """
+    NB sorted for indexation consistency
+    """
     
+    @property
+    def sample_qs(self):
+        params = self.sample_params
+        return "&".join([f"{k}={params[k]}" for k in sorted(params.keys())]) if params != {} else None
+                    
+    @property
+    def sample_string(self):
+        qs = self.sample_qs
+        return f"{self.sample}?{qs}" if qs != None else self.sample
+
     def render(self, modules, *args):
         mod = modules[self.mod]        
         mod_id = 1 + mod.index
-        note = self.sampler_note(modules)
+        note = 1 + mod.index_of(self.sample_string)
         note_kwargs = {
             "module": mod_id,
             "note": note
