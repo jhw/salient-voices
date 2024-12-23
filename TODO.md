@@ -1,10 +1,13 @@
 ### short
 
+- refactor sound as sample
+- try SVSampleString class
+- merge trig classes
 - sampler to apply cutoff
 
 ### medium
 
-- beats api to facilitate changing pitch, cutoff
+- reconsider beats api (sample, pitch, cutoff)
 
 - rebuild test suite
 
