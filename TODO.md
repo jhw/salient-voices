@@ -1,5 +1,9 @@
 ### short
 
+- check bank load_zip
+- bank dump/save zip
+- bank filter
+
 ### medium
 
 - reconsider beats api (sample, pitch, cutoff)
