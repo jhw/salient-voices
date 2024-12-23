@@ -1,6 +1,6 @@
 ### short
 
-- refactor sound as sample
+- remove is_online
 - try SVSampleString class
 - sampler to apply cutoff
 
@@ -59,6 +59,7 @@
 
 ### done
 
+- add urlparse
 - refactor detroit api to use sound, pitch, cutoff
 - add note self.cutoff
 - refactor defaults application

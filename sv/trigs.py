@@ -1,3 +1,5 @@
+from sv.utils.urlparse import format_querystring
+
 import rv
 
 def hex_value(value):
@@ -98,15 +100,11 @@ class SVSampleTrig(SVNoteTrigBase):
             if value != None:
                 params[attr] = value
         return params
-
-    """
-    NB sorted for indexation consistency
-    """
     
     @property
     def sample_qs(self):
         params = self.sample_params
-        return "&".join([f"{k}={params[k]}" for k in sorted(params.keys())]) if params != {} else None
+        return format_querystring(params) if params != {} else None
                     
     @property
     def sample_string(self):

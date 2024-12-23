@@ -1,3 +1,5 @@
+from sv.utils.urlparse import parse_url
+
 from scipy.io import wavfile
 
 import io
@@ -8,7 +10,7 @@ import warnings
 warnings.simplefilter("ignore", wavfile.WavFileWarning)
 
 MaxSlots = 120
-    
+
 class SVSlotSampler(rv.modules.sampler.Sampler):
 
     def __init__(self, bank, pool, root, max_slots=MaxSlots):
@@ -27,23 +29,11 @@ class SVSlotSampler(rv.modules.sampler.Sampler):
             self.samples[i] = rv_sample
             # bind rv sample to keyboard/note
             self.note_samples[rv_notes[i]] = i
-
-    def parse_querystring(self, qs):
-        params = {}
-        for tok in qs.split("&"):
-            key, value = tok.split("=")
-            params[key] = int(value)
-        return params
             
     def parse_sample_string(self, sample_string,
                             defaults = {"pitch": 0,
                                         "cutoff": 500}): # 4 ticks @ 120 bpm
-        tokens = sample_string.split("?")
-        if len(tokens) == 2:
-            sample, qs = tokens
-            params = self.parse_querystring(qs)
-        else:
-            sample, params = tokens[0], {}
+        sample, params = parse_url(sample_string)
         for k, v in defaults.items():
             params.setdefault(k, v)
         return (sample, params)
