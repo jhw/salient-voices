@@ -1,8 +1,11 @@
-### short
+### short [01-bank-api]
 
-- check bank load_zip
-- bank dump/save zip
-- bank filter
+- check join doesn't duplicate keys
+- load from local zip
+- load from local files
+- save to local zip
+- save to local files
+- filter
 
 ### medium
 
