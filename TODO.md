@@ -1,7 +1,6 @@
 ### short [01-bank-api]
 
 - load from local files
-- save to local zip
 - save to local files
 - filter
 
@@ -60,6 +59,7 @@
 
 ### done
 
+- save to local zip
 - load from local zip
 - check join doesn't duplicate keys
 - move SVPool into sampler

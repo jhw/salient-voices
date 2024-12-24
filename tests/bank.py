@@ -4,9 +4,9 @@ from scipy.io import wavfile
 
 import io
 import os
+import shutil
 import unittest
 import zipfile
-
 
 class BankTest(unittest.TestCase):
 
@@ -113,6 +113,34 @@ class BankTest(unittest.TestCase):
         joined_files = bank1.zip_file.namelist()
         self.assertGreaterEqual(len(joined_files), 100)
 
+    def test_dump_zip(self):
+        # Load the test bank
+        bank = SVBank.load_zip(self.bank1_path)
+        bank.name = "test_bank"  # Assign a name to the bank for dump_zip
+
+        # Dump the ZIP to the output directory
+        output_dir = "tests/output"
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        bank.dump_zip(output_dir)
+
+        # Verify the ZIP file exists in the output directory
+        dumped_zip_path = os.path.join(output_dir, f"{bank.name}.zip")
+        self.assertTrue(os.path.exists(dumped_zip_path))
+
+        # Verify the contents of the dumped ZIP file
+        with zipfile.ZipFile(dumped_zip_path, 'r') as dumped_zip:
+            dumped_files = dumped_zip.namelist()
+            self.assertIn("sample1.wav", dumped_files)
+            self.assertIn("sample2.wav", dumped_files)
+
+            # Verify file content
+            with dumped_zip.open("sample1.wav") as f:
+                self.assertEqual(f.read(), b"Sample 1 Data")
+            with dumped_zip.open("sample2.wav") as f:
+                self.assertEqual(f.read(), b"Sample 2 Data")
+
     def tearDown(self):
         # Cleanup temporary files
         paths = [
@@ -121,10 +149,14 @@ class BankTest(unittest.TestCase):
             self.empty_bank_path,
             self.invalid_zip_path,
             "tests/large_bank.zip",
+            "tests/output",
         ]
         for path in paths:
             if os.path.exists(path):
-                os.remove(path)
+                if os.path.isdir(path):
+                    shutil.rmtree(path)
+                else:
+                    os.remove(path)
 
 
 if __name__ == "__main__":

@@ -56,5 +56,12 @@ class SVBank:
         self.zip_buffer = new_zip_buffer
         self.zip_buffer.seek(0)
 
+    def dump_zip(self, dir_path):
+        if not os.path.exists(dir_path):
+            os.mkdir(dir_path)
+        zip_path = f"{dir_path}/{self.name}.zip"
+        with open(zip_path, 'wb') as f:
+            f.write(self.zip_buffer.getvalue())
+        
 if __name__ == "__main__":
     pass
