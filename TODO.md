@@ -1,12 +1,8 @@
-### short [01-bank-api]
-
-- save to local files
+### short
 
 - filter
 
 ### medium
-
-- reconsider beats api (sample, pitch, cutoff)
 
 - rebuild test suite
 
@@ -59,6 +55,7 @@
 
 ### done
 
+- save to local files
 - load from local files
 - save to local zip
 - load from local zip

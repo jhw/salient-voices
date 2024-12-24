@@ -171,6 +171,32 @@ class BankTest(unittest.TestCase):
             with dumped_zip.open("sample2.wav") as f:
                 self.assertEqual(f.read(), b"Sample 2 Data")
 
+    def test_dump_wav(self):
+        # Load the test bank
+        bank = SVBank.load_zip(self.bank1_path)
+
+        # Create an output directory for WAV files
+        output_dir = "tests/output_wav"
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        # Dump the WAV files from the bank
+        bank.dump_wav(output_dir)
+
+        # Verify the files are dumped correctly
+        dumped_files = os.listdir(output_dir)
+        self.assertIn("sample1.wav", dumped_files)
+        self.assertIn("sample2.wav", dumped_files)
+
+        # Verify the content of the dumped files
+        with open(os.path.join(output_dir, "sample1.wav"), "rb") as f:
+            self.assertEqual(f.read(), b"Sample 1 Data")
+        with open(os.path.join(output_dir, "sample2.wav"), "rb") as f:
+            self.assertEqual(f.read(), b"Sample 2 Data")
+
+        # Clean up
+        shutil.rmtree(output_dir)
+                
     def tearDown(self):
         # Cleanup temporary files
         paths = [

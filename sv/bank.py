@@ -75,6 +75,16 @@ class SVBank:
         zip_path = f"{dir_path}/{self.name}.zip"
         with open(zip_path, 'wb') as f:
             f.write(self.zip_buffer.getvalue())
+
+    def dump_wav(self, dir_path):
+        if not os.path.exists(dir_path):
+            os.makedirs(dir_path)
+        for file_name in self.zip_file.namelist():
+            file_path = os.path.join(dir_path, file_name)
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
+            with self.zip_file.open(file_name, 'r') as file_entry:
+                with open(file_path, 'wb') as f:
+                    f.write(file_entry.read())
         
 if __name__ == "__main__":
     pass
