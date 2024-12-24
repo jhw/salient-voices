@@ -46,6 +46,36 @@ class BankTest(unittest.TestCase):
         self.assertIsInstance(bank, SVBank)
         self.assertEqual(len(bank.zip_file.namelist()), 0)
 
+    def test_load_wav(self):
+        # Create a test directory with WAV files
+        test_dir = "tests/wav_files"
+        os.makedirs(test_dir, exist_ok=True)
+        wav_files = {
+            "sample1.wav": b"Sample 1 Data",
+            "sample2.wav": b"Sample 2 Data",
+        }
+        for file_name, data in wav_files.items():
+            with open(os.path.join(test_dir, file_name), 'wb') as f:
+                f.write(data)
+
+        # Load WAV files into an SVBank instance
+        bank = SVBank.load_wav(test_dir)
+
+        # Verify the bank contains the expected files
+        self.assertIsInstance(bank, SVBank)
+        zip_file = bank.zip_file
+        self.assertIn("sample1.wav", zip_file.namelist())
+        self.assertIn("sample2.wav", zip_file.namelist())
+
+        # Verify the file content
+        with zip_file.open("sample1.wav") as f:
+            self.assertEqual(f.read(), b"Sample 1 Data")
+        with zip_file.open("sample2.wav") as f:
+            self.assertEqual(f.read(), b"Sample 2 Data")
+
+        # Clean up
+        shutil.rmtree(test_dir)
+
     def test_spawn_pool(self):
         bank = SVBank.load_zip(self.bank1_path)
         pool = bank.spawn_pool()

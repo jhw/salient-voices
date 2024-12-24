@@ -1,7 +1,7 @@
 ### short [01-bank-api]
 
-- load from local files
 - save to local files
+
 - filter
 
 ### medium
@@ -59,6 +59,7 @@
 
 ### done
 
+- load from local files
 - save to local zip
 - load from local zip
 - check join doesn't duplicate keys

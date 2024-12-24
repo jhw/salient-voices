@@ -14,7 +14,20 @@ class SVBank:
             zip_buffer.write(f.read())
         zip_buffer.seek(0)
         return SVBank(zip_buffer=zip_buffer)
-    
+
+    @staticmethod
+    def load_wav(root_dir):
+        zip_buffer = io.BytesIO()
+        with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
+            for root, _, files in os.walk(root_dir):
+                for file_name in files:
+                    if file_name.lower().endswith('.wav'):
+                        file_path = os.path.join(root, file_name)
+                        with open(file_path, 'rb') as f:
+                            zip_file.writestr(file_name, f.read())
+        zip_buffer.seek(0)
+        return SVBank(zip_buffer=zip_buffer)
+
     def __init__(self, zip_buffer):
         self.zip_buffer = zip_buffer
 
