@@ -1,7 +1,5 @@
 ### short [01-bank-api]
 
-- check join doesn't duplicate keys
-- load from local zip
 - load from local files
 - save to local zip
 - save to local files
@@ -62,6 +60,8 @@
 
 ### done
 
+- load from local zip
+- check join doesn't duplicate keys
 - move SVPool into sampler
 - sampler to apply cutoff
 - remove is_online
