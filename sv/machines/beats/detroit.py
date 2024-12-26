@@ -44,14 +44,12 @@ class DetroitMachine(SVSamplerMachine, SVBeatsApi):
                                    "delay_unit": echo_delay_unit}}
 
     def note(self,
-             pitch=0,
-             cutoff=500, # 4 ticks @ 120 bpm
              volume=1.0,
              level=1.0):
         trigs = [SVSampleTrig(target=f"{self.namespace}Beat",
                               sample=self.sound,
-                              cutoff=cutoff,
-                              pitch=pitch,
+                              cutoff=self.cutoff,
+                              pitch=self.pitch,
                               vel=volume * level)]
         return SVMachineTrigs(trigs=trigs)
 

@@ -1,7 +1,5 @@
 ### short
 
-- add beats API pitch and cutoff state fields and operators 
-
 ### medium
 
 ### pending
@@ -33,6 +31,8 @@
 
 ### done
 
+- add beats API pitch 
+- add cutoff state fields and operators 
 - add to dict / json / base64 serialisation 
 - save to local files
 - load from local files

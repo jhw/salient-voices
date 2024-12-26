@@ -3,10 +3,23 @@ from sv.trigs import SVModTrig, controller_value
 
 class SVBeatsApi:
     
-    def __init__(self, sounds, sound_index=0, **kwargs):
+    def __init__(self,
+                 sounds,
+                 sound_index = 0,
+                 pitches = [0],
+                 pitch_index = 0,
+                 cutoffs = [500],
+                 cutoff_index = 0,
+                 **kwargs):
         self.sounds = sounds
         self.sound_index = sound_index
+        self.pitches = pitches
+        self.pitch_index = pitch_index
+        self.cutoffs = cutoffs
+        self.cutoff_index = cutoff_index
 
+    # sound
+        
     def toggle_sound(self):
         self.sound_index = 1 - int(self.sound_index > 0)
 
@@ -22,6 +35,44 @@ class SVBeatsApi:
     @property
     def sound(self):
         return self.sounds[self.sound_index]
+
+    # pitch
+        
+    def toggle_pitch(self):
+        self.pitch_index = 1 - int(self.pitch_index > 0)
+
+    def increment_pitch(self):
+        self.pitch_index = (self.pitch_index + 1) % len(self.pitches)
+
+    def decrement_pitch(self):
+        self.pitch_index = (self.pitch_index - 1) % len(self.pitches)
+
+    def randomise_pitch(self, rand):
+        self.pitch_index = rand.choice(list(range(len(self.pitches))))
+
+    @property
+    def pitch(self):
+        return self.pitches[self.pitch_index]
+
+    # cutoff
+        
+    def toggle_cutoff(self):
+        self.cutoff_index = 1 - int(self.cutoff_index > 0)
+
+    def increment_cutoff(self):
+        self.cutoff_index = (self.cutoff_index + 1) % len(self.cutoffs)
+
+    def decrement_cutoff(self):
+        self.cutoff_index = (self.cutoff_index - 1) % len(self.cutoffs)
+
+    def randomise_cutoff(self, rand):
+        self.cutoff_index = rand.choice(list(range(len(self.cutoffs))))
+
+    @property
+    def cutoff(self):
+        return self.cutoffs[self.cutoff_index]
+
+    # methods
 
     def modulation(self,
                    level=1.0,
