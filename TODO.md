@@ -1,10 +1,9 @@
 ### short
 
-- filter
+- add to dict / json / base64 serialisation 
+- add beats API pitch and cutoff state fields and operators 
 
 ### medium
-
-- rebuild test suite
 
 ### pending
 
@@ -12,29 +11,9 @@
 
 ### thoughts
 
-- remove pydub?
-  - no is required for cutoff application
-- replace set_via_fn?
-  - not worth it
-- move berlin `while` loop into core?
-  - don't see how it can be achieved
-
 ### roadmap
 
-- freeze
-- resample
-- single wave samples
-- vocals + vocoder
-- pads and lfos
-- arps
-- stutter
-- autotune
-- granular
-- pico play modes
-
 ### long
-
-- moto upgrade
 
 ### thoughts
 
