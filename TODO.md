@@ -1,6 +1,5 @@
 ### short
 
-- add to dict / json / base64 serialisation 
 - add beats API pitch and cutoff state fields and operators 
 
 ### medium
@@ -34,6 +33,7 @@
 
 ### done
 
+- add to dict / json / base64 serialisation 
 - save to local files
 - load from local files
 - save to local zip

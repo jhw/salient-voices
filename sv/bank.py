@@ -1,8 +1,8 @@
 from sv.sampler import SVSamplePool
 
+import base64
 import io
 import os
-import re
 import zipfile
             
 class SVBank:
@@ -25,6 +25,16 @@ class SVBank:
                         file_path = os.path.join(root, file_name)
                         with open(file_path, 'rb') as f:
                             zip_file.writestr(file_name, f.read())
+        zip_buffer.seek(0)
+        return SVBank(zip_buffer=zip_buffer)
+
+    @staticmethod
+    def from_dict(data):
+        zip_buffer = io.BytesIO()
+        with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
+            for file_name, file_data in data.items():
+                decoded_data = base64.b64decode(file_data)
+                zip_file.writestr(file_name, decoded_data)
         zip_buffer.seek(0)
         return SVBank(zip_buffer=zip_buffer)
 
@@ -85,6 +95,12 @@ class SVBank:
             with self.zip_file.open(file_name, 'r') as file_entry:
                 with open(file_path, 'wb') as f:
                     f.write(file_entry.read())
+
+    def to_dict(self):
+        return {
+            file_name: base64.b64encode(self.zip_file.open(file_name).read()).decode('utf-8')
+            for file_name in self.zip_file.namelist()
+        }
         
 if __name__ == "__main__":
     pass

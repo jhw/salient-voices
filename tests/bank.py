@@ -2,6 +2,7 @@ from sv.bank import SVBank
 
 from scipy.io import wavfile
 
+import base64
 import io
 import os
 import shutil
@@ -196,6 +197,45 @@ class BankTest(unittest.TestCase):
 
         # Clean up
         shutil.rmtree(output_dir)
+
+    def test_to_dict(self):
+        # Load the test bank
+        bank = SVBank.load_zip(self.bank1_path)
+        
+        # Convert to dictionary
+        bank_dict = bank.to_dict()
+        
+        # Verify the dictionary keys and values
+        self.assertIn("sample1.wav", bank_dict)
+        self.assertIn("sample2.wav", bank_dict)
+        
+        # Verify the content of the base64-encoded data
+        with bank.zip_file.open("sample1.wav") as f:
+            self.assertEqual(
+                base64.b64encode(f.read()).decode('utf-8'),
+                bank_dict["sample1.wav"]
+            )
+
+    def test_from_dict(self):
+        # Create a test dictionary
+        test_dict = {
+            "sample1.wav": base64.b64encode(b"Sample 1 Data").decode('utf-8'),
+            "sample2.wav": base64.b64encode(b"Sample 2 Data").decode('utf-8'),
+        }
+
+        # Convert back to SVBank
+        bank = SVBank.from_dict(test_dict)
+
+        # Verify the bank contents
+        zip_file = bank.zip_file
+        self.assertIn("sample1.wav", zip_file.namelist())
+        self.assertIn("sample2.wav", zip_file.namelist())
+        
+        # Verify the file data
+        with zip_file.open("sample1.wav") as f:
+            self.assertEqual(f.read(), b"Sample 1 Data")
+        with zip_file.open("sample2.wav") as f:
+            self.assertEqual(f.read(), b"Sample 2 Data")
                 
     def tearDown(self):
         # Cleanup temporary files
