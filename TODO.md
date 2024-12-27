@@ -1,5 +1,7 @@
 ### short
 
+- adapt bank load_wav for multiple roots
+
 ### medium
 
 - check if bank.spawn_pool() is still required
