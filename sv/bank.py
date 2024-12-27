@@ -28,16 +28,6 @@ class SVBank:
         zip_buffer.seek(0)
         return SVBank(zip_buffer=zip_buffer)
 
-    @staticmethod
-    def from_dict(data):
-        zip_buffer = io.BytesIO()
-        with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
-            for file_name, file_data in data.items():
-                decoded_data = base64.b64decode(file_data)
-                zip_file.writestr(file_name, decoded_data)
-        zip_buffer.seek(0)
-        return SVBank(zip_buffer=zip_buffer)
-
     def __init__(self, zip_buffer):
         self.zip_buffer = zip_buffer
 
@@ -56,29 +46,6 @@ class SVBank:
             file_content = file_entry.read()
         return io.BytesIO(file_content)
 
-    def join(self, other_bank):
-        # Create a new zip buffer for the merged contents
-        new_zip_buffer = io.BytesIO()
-        existing_files = set(self.zip_file.namelist())
-        
-        # Open a new zip file for writing
-        with zipfile.ZipFile(new_zip_buffer, 'w') as new_zip:
-            # Add all files from the current bank
-            for file_name in self.zip_file.namelist():
-                with self.zip_file.open(file_name) as file_entry:
-                    new_zip.writestr(file_name, file_entry.read())
-
-            # Add all files from the other bank, avoiding duplicates
-            for file_name in other_bank.zip_file.namelist():
-                if file_name not in existing_files:
-                    with other_bank.zip_file.open(file_name) as file_entry:
-                        new_zip.writestr(file_name, file_entry.read())
-                    existing_files.add(file_name)
-
-        # Replace the current bank's zip buffer with the merged one
-        self.zip_buffer = new_zip_buffer
-        self.zip_buffer.seek(0)
-
     def dump_zip(self, dir_path):
         if not os.path.exists(dir_path):
             os.mkdir(dir_path)
@@ -96,11 +63,5 @@ class SVBank:
                 with open(file_path, 'wb') as f:
                     f.write(file_entry.read())
 
-    def to_dict(self):
-        return {
-            file_name: base64.b64encode(self.zip_file.open(file_name).read()).decode('utf-8')
-            for file_name in self.zip_file.namelist()
-        }
-        
 if __name__ == "__main__":
     pass

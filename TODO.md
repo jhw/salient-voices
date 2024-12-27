@@ -2,6 +2,8 @@
 
 ### medium
 
+- check if bank.spawn_pool() is still required
+
 ### pending
 
 - sunvox 2.0 file format

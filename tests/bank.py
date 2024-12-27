@@ -102,48 +102,6 @@ class BankTest(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             bank.get_wav("missing_sample.wav")
 
-    def test_join(self):
-        bank1 = SVBank.load_zip(self.bank1_path)
-        bank2 = SVBank.load_zip(self.bank2_path)
-
-        # Join bank2 into bank1
-        bank1.join(bank2)
-
-        # Check resulting files in bank1
-        joined_files = bank1.zip_file.namelist()
-        self.assertIn("sample1.wav", joined_files)
-        self.assertIn("sample2.wav", joined_files)  # Original from bank1
-        self.assertIn("sample3.wav", joined_files)
-
-        # Validate content of files
-        sample1_data = bank1.get_wav("sample1.wav").read()
-        sample2_data = bank1.get_wav("sample2.wav").read()
-        sample3_data = bank1.get_wav("sample3.wav").read()
-
-        self.assertEqual(sample1_data, b"Sample 1 Data")
-        self.assertEqual(sample2_data, b"Sample 2 Data")  # Original from bank1
-        self.assertEqual(sample3_data, b"Sample 3 Data")
-
-    def test_join_empty_banks(self):
-        empty_bank1 = SVBank.load_zip(self.empty_bank_path)
-        empty_bank2 = SVBank.load_zip(self.empty_bank_path)
-
-        empty_bank1.join(empty_bank2)
-
-        self.assertEqual(len(empty_bank1.zip_file.namelist()), 0)
-
-    def test_join_large_number_of_files(self):
-        large_bank_path = "tests/large_bank.zip"
-        files = {f"sample{i}.wav": f"Sample {i} Data".encode() for i in range(100)}
-        self.create_test_zip(large_bank_path, files)
-
-        large_bank = SVBank.load_zip(large_bank_path)
-        bank1 = SVBank.load_zip(self.bank1_path)
-        bank1.join(large_bank)
-
-        joined_files = bank1.zip_file.namelist()
-        self.assertGreaterEqual(len(joined_files), 100)
-
     def test_dump_zip(self):
         # Load the test bank
         bank = SVBank.load_zip(self.bank1_path)
@@ -198,45 +156,6 @@ class BankTest(unittest.TestCase):
         # Clean up
         shutil.rmtree(output_dir)
 
-    def test_to_dict(self):
-        # Load the test bank
-        bank = SVBank.load_zip(self.bank1_path)
-        
-        # Convert to dictionary
-        bank_dict = bank.to_dict()
-        
-        # Verify the dictionary keys and values
-        self.assertIn("sample1.wav", bank_dict)
-        self.assertIn("sample2.wav", bank_dict)
-        
-        # Verify the content of the base64-encoded data
-        with bank.zip_file.open("sample1.wav") as f:
-            self.assertEqual(
-                base64.b64encode(f.read()).decode('utf-8'),
-                bank_dict["sample1.wav"]
-            )
-
-    def test_from_dict(self):
-        # Create a test dictionary
-        test_dict = {
-            "sample1.wav": base64.b64encode(b"Sample 1 Data").decode('utf-8'),
-            "sample2.wav": base64.b64encode(b"Sample 2 Data").decode('utf-8'),
-        }
-
-        # Convert back to SVBank
-        bank = SVBank.from_dict(test_dict)
-
-        # Verify the bank contents
-        zip_file = bank.zip_file
-        self.assertIn("sample1.wav", zip_file.namelist())
-        self.assertIn("sample2.wav", zip_file.namelist())
-        
-        # Verify the file data
-        with zip_file.open("sample1.wav") as f:
-            self.assertEqual(f.read(), b"Sample 1 Data")
-        with zip_file.open("sample2.wav") as f:
-            self.assertEqual(f.read(), b"Sample 2 Data")
-                
     def tearDown(self):
         # Cleanup temporary files
         paths = [
