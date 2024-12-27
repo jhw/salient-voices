@@ -12,8 +12,8 @@ import unittest
 
 def Beat(self, n, rand, pattern, groove, temperature, **kwargs):   
     for i in range(n):
-        if rand["sound"].random() < temperature:
-            self.toggle_sound() 
+        if rand["sample"].random() < temperature:
+            self.toggle_sample() 
         volume = groove(i = i,
                         rand = rand["vol"])
         if pattern(i):
@@ -70,10 +70,10 @@ def add_track(container, pool, name, filter_fn, bpm,  tpb,
     machine = DetroitMachine(container = container,
                              namespace = name,
                              colour = random_colour(),
-                             sounds = samples)
+                             samples = samples)
     container.add_machine(machine)
     seeds = {key: int(random.random() * 1e8)
-             for key in "sound|vol|fx".split("|")}
+             for key in "sample|vol|fx".split("|")}
     track_patterns = [[pulses, steps] for pulses, steps in patterns
                       if (pulses/steps < max_density and
                           pulses/steps > min_density)]

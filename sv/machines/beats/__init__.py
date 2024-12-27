@@ -4,37 +4,37 @@ from sv.trigs import SVModTrig, controller_value
 class SVBeatsApi:
     
     def __init__(self,
-                 sounds,
-                 sound_index = 0,
+                 samples,
+                 sample_index = 0,
                  pitches = [0],
                  pitch_index = 0,
                  cutoffs = [500],
                  cutoff_index = 0,
                  **kwargs):
-        self.sounds = sounds
-        self.sound_index = sound_index
+        self.samples = samples
+        self.sample_index = sample_index
         self.pitches = pitches
         self.pitch_index = pitch_index
         self.cutoffs = cutoffs
         self.cutoff_index = cutoff_index
 
-    # sound
+    # sample
         
-    def toggle_sound(self):
-        self.sound_index = 1 - int(self.sound_index > 0)
+    def toggle_sample(self):
+        self.sample_index = 1 - int(self.sample_index > 0)
 
-    def increment_sound(self):
-        self.sound_index = (self.sound_index + 1) % len(self.sounds)
+    def increment_sample(self):
+        self.sample_index = (self.sample_index + 1) % len(self.samples)
 
-    def decrement_sound(self):
-        self.sound_index = (self.sound_index - 1) % len(self.sounds)
+    def decrement_sample(self):
+        self.sample_index = (self.sample_index - 1) % len(self.samples)
 
-    def randomise_sound(self, rand):
-        self.sound_index = rand.choice(list(range(len(self.sounds))))
+    def randomise_sample(self, rand):
+        self.sample_index = rand.choice(list(range(len(self.samples))))
 
     @property
-    def sound(self):
-        return self.sounds[self.sound_index]
+    def sample(self):
+        return self.samples[self.sample_index]
 
     # pitch
         
