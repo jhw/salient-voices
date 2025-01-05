@@ -1,8 +1,12 @@
-### short
+### short [01-0-5]
 
-- adapt bank load_wav for multiple roots
+- remove beats and machines
+- check if you still need pico-default.zip for tests
+- remove algos
 
 ### medium
+
+- adapt bank load_wav for multiple roots
 
 - check if bank.spawn_pool() is still required
 
