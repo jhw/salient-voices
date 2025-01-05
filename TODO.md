@@ -1,7 +1,4 @@
-### short [01-0-5]
-
-- remove machines directory
-- remove algos
+### short
 
 ### medium
 
@@ -38,6 +35,8 @@
 
 ### done
 
+- remove machines directory
+- remove algos
 - check if you still need pico-default.zip for tests
 - remove beats and machines
 - add beats API pitch 
