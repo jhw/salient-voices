@@ -1,7 +1,6 @@
 ### short [01-0-5]
 
-- remove beats and machines
-- check if you still need pico-default.zip for tests
+- remove machines directory
 - remove algos
 
 ### medium
@@ -39,6 +38,8 @@
 
 ### done
 
+- check if you still need pico-default.zip for tests
+- remove beats and machines
 - add beats API pitch 
 - add cutoff state fields and operators 
 - add to dict / json / base64 serialisation 

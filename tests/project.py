@@ -4,6 +4,7 @@ from sv.trigs import SVSampleTrig
 from sv.project import SVProject
 
 import rv
+import rv.api # no idea
 import unittest
 import yaml
 
