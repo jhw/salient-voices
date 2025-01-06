@@ -1,20 +1,25 @@
 ### short
 
+- simple slicing demo
+
 ### medium
 
-- adapt bank load_wav for multiple roots
+- refactor SVBank as simple dict rather than zipfile
+- remove load_wavs
+- add @fetch_wav decorator to lazily load wavs into memory
+- initialise SVBank with file root
+- dump_wavs to use state file root and have :force parameter
 
-- check if bank.spawn_pool() is still required
+### demos
+
+- sunvox slicing with delay
+- samplebrain slicing
 
 ### pending
 
 - sunvox 2.0 file format
 
 ### thoughts
-
-### roadmap
-
-### long
 
 ### thoughts
 
