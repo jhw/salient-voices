@@ -1,6 +1,9 @@
-### short
+### short [01-naive-slicing]
 
-- simple slicing demo
+- target wav file
+- script taking options for file, start, end, slices, variants
+- slice with AudioSegment
+- dump slices output
 
 ### medium
 
