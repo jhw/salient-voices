@@ -1,11 +1,4 @@
-### short [01-naive-slicing]
-
-- target wav file
-- script taking options for file, slices, samples
-- slice with AudioSegment
-- dump slices output
-
-### medium
+### short 
 
 - refactor SVBank as simple dict rather than zipfile
 - remove load_wavs
@@ -13,9 +6,12 @@
 - initialise SVBank with file root
 - dump_wavs to use state file root and have :force parameter
 
-### demos
+### medium
 
 - sunvox slicing with delay
+
+### demos
+
 - samplebrain slicing
 
 ### pending
@@ -43,6 +39,10 @@
 
 ### done
 
+- target wav file
+- script taking options for file, slices, samples
+- slice with AudioSegment
+- dump slices output
 - remove machines directory
 - remove algos
 - check if you still need pico-default.zip for tests
