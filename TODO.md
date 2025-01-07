@@ -1,18 +1,11 @@
-### short 
+### short [01-remove-bank]
 
-- refactor SVBank as simple dict rather than zipfile
-- remove load_wavs
-- add @fetch_wav decorator to lazily load wavs into memory
-- initialise SVBank with file root
-- dump_wavs to use state file root and have :force parameter
+- comment out local bank functionality
+- move sv bank into tests and rename
 
 ### medium
 
-- sunvox slicing with delay
-
 ### demos
-
-- samplebrain slicing
 
 ### pending
 
