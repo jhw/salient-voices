@@ -12,19 +12,6 @@ warnings.simplefilter("ignore", wavfile.WavFileWarning)
 
 MaxSlots = 120
 
-class SVSamplePool(list):
-
-    def __init__(self, samples=[]):
-        list.__init__(self, samples)
-
-    def add(self, sample):
-        if sample not in self:
-            self.append(sample)
-
-    def filter(self, filter_fn):
-        return SVSamplePool([sample for sample in self
-                             if filter_fn(sample)])
-
 def with_audio_segment(fn):
     def wrapped(self, wav_io, cutoff, **kwargs):
         wav_io.seek(0)

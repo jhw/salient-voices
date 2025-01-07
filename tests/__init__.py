@@ -1,5 +1,3 @@
-from sv.sampler import SVSamplePool
-
 import io
 import zipfile
             
@@ -19,9 +17,6 @@ class TestBank:
     @property
     def zip_file(self):
         return zipfile.ZipFile(self.zip_buffer, 'r')
-
-    def spawn_pool(self):
-        return SVSamplePool(self.zip_file.namelist())
 
     def get_wav(self, sample):
         file_paths = self.zip_file.namelist()
