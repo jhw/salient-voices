@@ -1,6 +1,6 @@
 from sv.sampler import SVSlotSampler
 
-from tests import SVBank
+from tests import TestBank
 
 from io import BytesIO
 from pydub.generators import Sine
@@ -13,7 +13,7 @@ import unittest
 class SamplerTest(unittest.TestCase):
 
     def setUp(self):
-        self.bank = SVBank.load_zip("tests/mikey303.zip")
+        self.bank = TestBank.load_zip("tests/mikey303.zip")
 
     def generate_wav_io(self, duration_ms=1000, freq=440):
         """Generates a valid WAV file-like object with a sine wave."""

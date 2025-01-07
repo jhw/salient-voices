@@ -3,7 +3,7 @@ from sv.sampler import SVSamplePool
 import io
 import zipfile
             
-class SVBank:
+class TestBank:
     
     @staticmethod
     def load_zip(zip_path):
@@ -11,7 +11,7 @@ class SVBank:
         with open(zip_path, 'rb') as f:
             zip_buffer.write(f.read())
         zip_buffer.seek(0)
-        return SVBank(zip_buffer=zip_buffer)
+        return TestBank(zip_buffer=zip_buffer)
     
     def __init__(self, zip_buffer):
         self.zip_buffer = zip_buffer

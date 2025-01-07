@@ -2,7 +2,7 @@ from sv.container import SVTrigPatch
 from sv.trigs import SVSampleTrig
 from sv.project import SVProject
 
-from tests import SVBank
+from tests import TestBank
 
 import rv
 import rv.api # no idea
@@ -49,7 +49,7 @@ SamplerModules = yaml.safe_load("""
 class ProjectTest(unittest.TestCase):
 
     def test_sampler(self, modules = SamplerModules):
-        bank = SVBank.load_zip("tests/mikey303.zip")
+        bank = TestBank.load_zip("tests/mikey303.zip")
         trig = SVSampleTrig(target = "Sampler",
                             sample = "303 VCO SQR.wav",
                             i = 0)

@@ -2,11 +2,6 @@
 
 ### medium
 
-### euclid
-
-- why doesn't bank need spawn_pool()?
-- how is sampler working if cli pool is a dict not a list?
-
 ### pending
 
 - sunvox 2.0 file format
