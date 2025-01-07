@@ -1,11 +1,11 @@
-### short [01-remove-bank]
-
-- comment out local bank functionality
-- move sv bank into tests and rename
+### short 
 
 ### medium
 
-### demos
+### euclid
+
+- why doesn't bank need spawn_pool()?
+- how is sampler working if cli pool is a dict not a list?
 
 ### pending
 
@@ -32,6 +32,8 @@
 
 ### done
 
+- comment out local bank functionality
+- move sv bank into tests and rename
 - target wav file
 - script taking options for file, slices, samples
 - slice with AudioSegment

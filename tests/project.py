@@ -1,7 +1,8 @@
-from sv.bank import SVBank
 from sv.container import SVTrigPatch
 from sv.trigs import SVSampleTrig
 from sv.project import SVProject
+
+from tests import SVBank
 
 import rv
 import rv.api # no idea
