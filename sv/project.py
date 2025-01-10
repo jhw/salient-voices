@@ -4,7 +4,9 @@ from sv.trigs import SVSampleTrig, controller_value
 
 import importlib
 import math
+
 import rv
+import rv.api # no idea
 
 Volume, PatternHeight = 256, 16
 

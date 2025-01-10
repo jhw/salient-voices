@@ -4,9 +4,10 @@ from pydub import AudioSegment
 from scipy.io import wavfile
 
 import io
+import warnings
+
 import rv
 import rv.modules
-import warnings
 
 warnings.simplefilter("ignore", wavfile.WavFileWarning)
 

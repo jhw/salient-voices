@@ -3,7 +3,6 @@ from sv.project import SVModule
 from random import Random
 
 import copy
-import rv
 
 class SVMachineTrigs:
 
