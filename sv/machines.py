@@ -31,7 +31,7 @@ class SVMachine:
                  for key, value in seeds.items()}
         for i, trig_block in generator(self,
                                        rand = rand,
-                                       n = self.container.tpb_adjusted_n_ticks,
+                                       n = self.container.n_ticks,
                                        **env):
             trigs = trig_block.render(i)
             self.container.add_trigs(trigs)
