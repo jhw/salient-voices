@@ -1,12 +1,18 @@
 ### short 
 
-- rationalise rv imports
+- exporting from resampler
 
-### medium
+### demos
+
+- berlin + slide
+- freeze
+- city dreams bass
 
 ### pending
 
 - sunvox 2.0 file format
+
+- rv circular imports
 
 ### thoughts
 
