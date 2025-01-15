@@ -32,6 +32,7 @@ class Sampler(SVSamplerMachine):
     Modules = Modules
 
     def __init__(self, container, namespace, samples,
+                 sample_group=[0, 1],
                  sample_index=0,
                  relative_note=0,
                  echo_delay=36,
@@ -46,18 +47,23 @@ class Sampler(SVSamplerMachine):
                                   root=rv.note.NOTE.C5 + relative_note,
                                   colour=colour)
         self.samples = samples
+        self.sample_group = sample_group
         self.sample_index = sample_index
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
                                   "delay": echo_delay,
                                   "delay_unit": echo_delay_unit}}
 
-    def toggle_sample(self):
+    def randomise_sample_group(self, rand):
+        I = [i for i in range(len(samples))]
+        self.sample_group = [rand.choice(I) for i in range(2)]
+        
+    def toggle_sample_index(self):
         self.sample_index = 1 - int(self.sample_index > 0)
 
     @property
     def sample(self):
-        return self.samples[self.sample_index]
+        return self.samples[self.sample_group[self.sample_index]]
         
     def note(self,
              volume=1.0):
@@ -85,12 +91,13 @@ class Sampler(SVSamplerMachine):
                                    value=feedback_level))
         return SVMachineTrigs(trigs=trigs)
 
-def Beat(self, n, rand, pattern, groove, temperature, density, **kwargs):
-    for i in range(n):
-        volume = groove(rand = rand["volume"], i = i)
+def Beat(self, n, rand, pattern_fn, groove_fn, temperature, density, **kwargs):
+    self.randomise_sample_group(rand["sample"])
+    for i in range(n):        
+        volume = groove_fn(rand = rand["vol"], i = i)
         if rand["sample"].random() < temperature:
-            self.toggle_sample()        
-        if (pattern(i) and 
+            self.toggle_sample_index()        
+        if (pattern_fn(i) and 
             rand["beat"].random() < density):
             trig_block = self.note(volume = volume)
             yield i, trig_block
@@ -163,14 +170,20 @@ def random_groove():
 def random_seed():
     return int(random.random() * 1e8)
 
-def add_patch(container, sampler, quantise, density, groove_fn, bpm):
+def spawn_function(mod, fn, **kwargs):
+    return getattr(eval(mod), fn)
+
+def add_patch(container, sampler, density, temperature, groove, pattern, bpm):
     container.spawn_patch(colour = random_colour())
-    seeds = {key: random_seed() for key in "sample|fx|trig|vol".split("|")}
+    seeds = {key: random_seed() for key in "sample|fx|beat|vol".split("|")}
+    pattern_fn = spawn_function(**pattern)(**pattern["args"])
+    groove_fn = spawn_function(**groove)
     sampler.render(generator = Beat,
                    seeds = seeds,
                    env = {"groove_fn": groove_fn,
-                          "quantise": quantise,
-                          "density": density})
+                          "pattern_fn": pattern_fn,
+                          "density": density,
+                          "temperature": temperature})
     sampler.render(generator = GhostEcho,
                    seeds = seeds,
                    env = {"bpm": bpm})
@@ -204,19 +217,22 @@ if __name__ == "__main__":
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)
-        samples = []
+        samples = bank.file_names
         sampler = Sampler(container = container,
                           namespace = "wol",
                           colour = random_colour(),
                           samples = samples)
         container.add_machine(sampler)
         for i in range(args.n_patches):
+            pattern = random_pattern()
+            groove = random_groove()
             add_patch(container = container,
                       sampler = sampler,
-                      groove_fn = perkons_humanise,
-                      quantise = args.quantise,
+                      groove = groove,
+                      pattern = pattern,
                       density = args.density,
-                      bpm = meta["bpm"])
-        container.write_project("tmp/resampler-demo.sunvox")
+                      temperature = args.temperature,
+                      bpm = args.bpm)
+        container.write_project("tmp/euclid09-demo.sunvox")
     except RuntimeError as error:
         print(f"ERROR: {error}")

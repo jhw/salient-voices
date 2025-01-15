@@ -1,14 +1,15 @@
-### short [01-euclid09-demo]
+### short 
 
-- per track sample selection
-- track addition
+- berlin03/mikey303 demo
 
 ### medium
 
-- berlin03 demo
 - berlin03 slide
+
 - freeze demo
 - city dreams bass demo
+- vocoder demo
+- polly demo
 
 ### pending
 
@@ -40,6 +41,8 @@
 
 ### done
 
+- per track sample selection
+- track addition
 - check archive is a zip file
 - default sampler pitch, cutoff variables
 - random_pattern, random_groove
