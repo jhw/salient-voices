@@ -1,10 +1,13 @@
-### short 
+### short [01-euclid09-demo]
 
-- euclid09 demo
-- berlin03 demo
+- check archive is a zip file
+- remove beats api
+- per track sample selection
+- track addition
 
 ### medium
 
+- berlin03 demo
 - berlin03 slide
 - freeze demo
 - city dreams bass demo
