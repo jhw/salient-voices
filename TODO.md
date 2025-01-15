@@ -1,17 +1,17 @@
 ### short 
 
-- exporting from resampler
-
 ### demos
 
-- berlin + slide
+- berlin / slide
 - freeze
 - city dreams bass
+
+- sustained bass
+- chords
 
 ### pending
 
 - sunvox 2.0 file format
-
 - rv circular imports
 
 ### thoughts
