@@ -1,5 +1,9 @@
 ### short 
 
+### medium
+
+- refactor resampler to do local slicing
+
 ### demos
 
 - berlin / slide
