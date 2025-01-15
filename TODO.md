@@ -1,7 +1,7 @@
 ### short [01-euclid09-demo]
 
+- default sampler pitch, cutoff variables
 - check archive is a zip file
-- remove beats api
 - per track sample selection
 - track addition
 
@@ -42,6 +42,8 @@
 
 ### done
 
+- random_pattern, random_groove
+- remove beats api
 - check pydub installed
 - comment out local bank functionality
 - move sv bank into tests and rename

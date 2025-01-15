@@ -2,22 +2,19 @@ from sv.container import SVContainer
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
+import demos.euclid09.euclid as euclid
+import demos.euclid09.perkons as perkons
+
 import argparse
+import inspect
 import io
-import json
 import os
 import random
 import yaml
 import zipfile
 
 import rv
-
-from sv.machines import SVSamplerMachine, SVMachineTrigs
-from sv.trigs import SVSampleTrig, SVModTrig, controller_value
-
-import rv
-import rv.api
-import yaml
+import rv.note
 
 Modules = yaml.safe_load("""
 - name: Beat
@@ -30,45 +27,7 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class BeatsApi:
-    
-    def __init__(self,
-                 samples,
-                 sample_index = 0,
-                 pitches = [0],
-                 pitch_index = 0,
-                 cutoffs = [500],
-                 cutoff_index = 0,
-                 **kwargs):
-        self.samples = samples
-        self.sample_index = sample_index
-        self.pitches = pitches
-        self.pitch_index = pitch_index
-        self.cutoffs = cutoffs
-        self.cutoff_index = cutoff_index
-
-    # sample
-        
-    def toggle_sample(self):
-        self.sample_index = 1 - int(self.sample_index > 0)
-
-    @property
-    def sample(self):
-        return self.samples[self.sample_index]
-
-    # pitch
-
-    @property
-    def pitch(self):
-        return self.pitches[self.pitch_index]
-
-    # cutoff
-
-    @property
-    def cutoff(self):
-        return self.cutoffs[self.cutoff_index]
-
-class Sampler(SVSamplerMachine, BeatsApi):
+class Sampler(SVSamplerMachine):
 
     Modules = Modules
 
@@ -86,14 +45,20 @@ class Sampler(SVSamplerMachine, BeatsApi):
                                   namespace=namespace,
                                   root=rv.note.NOTE.C5 + relative_note,
                                   colour=colour)
-        BeatsApi.__init__(self,
-                          samples=samples,
-                          sample_index=sample_index)
+        self.samples = samples
+        self.sample_index = sample_index
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
                                   "delay": echo_delay,
                                   "delay_unit": echo_delay_unit}}
 
+    def toggle_sample(self):
+        self.sample_index = 1 - int(self.sample_index > 0)
+
+    @property
+    def sample(self):
+        return self.samples[self.sample_index]
+        
     def note(self,
              volume=1.0):
         trigs = [SVSampleTrig(target=f"{self.namespace}Beat",
@@ -185,8 +150,21 @@ def random_colour(offset = 64,
             return color
     raise RuntimeError("couldn't find suitable random colour")
 
+def random_pattern():
+    pattern_kwargs = {k:v for k, v in zip(["pulses", "steps"],
+                                          random.choice(euclid.TidalPatterns)[:2])}
+    return {"mod": "euclid",
+            "fn": "bjorklund",
+            "args": pattern_kwargs}
+
+def random_groove():
+    groove_fns = [name for name, _ in inspect.getmembers(perkons, inspect.isfunction)]    
+    return {"mod": "perkons",
+            "fn": random.choice(groove_fns)}
+
 def random_seed():
     return int(random.random() * 1e8)
+
 
 def add_patch(container, sampler, quantise, density, groove_fn, bpm):
     container.spawn_patch(colour = random_colour())
