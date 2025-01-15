@@ -1,7 +1,5 @@
 ### short [01-euclid09-demo]
 
-- default sampler pitch, cutoff variables
-- check archive is a zip file
 - per track sample selection
 - track addition
 
@@ -42,6 +40,8 @@
 
 ### done
 
+- check archive is a zip file
+- default sampler pitch, cutoff variables
 - random_pattern, random_groove
 - remove beats api
 - check pydub installed

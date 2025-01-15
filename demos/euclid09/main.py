@@ -63,8 +63,6 @@ class Sampler(SVSamplerMachine):
              volume=1.0):
         trigs = [SVSampleTrig(target=f"{self.namespace}Beat",
                               sample=self.sample,
-                              cutoff=self.cutoff,
-                              pitch=self.pitch,
                               vel=volume)]
         return SVMachineTrigs(trigs=trigs)
 
@@ -165,7 +163,6 @@ def random_groove():
 def random_seed():
     return int(random.random() * 1e8)
 
-
 def add_patch(container, sampler, quantise, density, groove_fn, bpm):
     container.spawn_patch(colour = random_colour())
     seeds = {key: random_seed() for key in "sample|fx|trig|vol".split("|")}
@@ -178,7 +175,7 @@ def add_patch(container, sampler, quantise, density, groove_fn, bpm):
                    seeds = seeds,
                    env = {"bpm": bpm})
 
-def parse_args(config = [("archive_src", str, "demos/euclid09/pico-default.zip"),
+def parse_args(config = [("bank_src", str, "demos/euclid09/pico-default.zip"),
                          ("temperature", int, 0.5),
                          ("density", float, 0.5),
                          ("bpm", int, 120),
@@ -196,12 +193,14 @@ def parse_args(config = [("archive_src", str, "demos/euclid09/pico-default.zip")
             errors.append(attr)
     if errors != []:
         raise RuntimeError(f"please supply {', '.join(errors)}")
+    if not args.bank_src.endswith(".zip"):
+        raise RuntimeError("bank_src must be a zip file")
     return args
 
 if __name__ == "__main__":
     try:
         args = parse_args()
-        bank = Euclid09Archive(args.archive_src)
+        bank = Bank(args.bank_src)
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)
