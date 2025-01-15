@@ -1,7 +1,5 @@
 ### short 
 
-- resampler to do slicing on bank init
-
 - euclid09 demo
 - berlin03 demo
 
@@ -20,6 +18,10 @@
 
 ### thoughts
 
+- resampler to do slicing on bank init?
+  - can't be bothered
+  - if you include the raw file in the zip then the zip file will still be the same size
+  - it's not worth hacking this just so you can quantise; it's only intended as a demo
 - why does berlin density 1.0 leaves gaps?
   -  because of quantisation; terms don't always fill them
 - force final end note in berlin demo?
