@@ -1,8 +1,13 @@
 ### short 
 
-### medium
+- check pydub installed
+- extract wav file
+- get slicing code from old version of euclid
+- include slicing code as part of bank initialisation
+- point code at wav not zip
+- remove zip
 
-- refactor resampler to do local slicing
+### medium
 
 ### demos
 
