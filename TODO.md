@@ -1,22 +1,15 @@
 ### short 
 
-- check pydub installed
-- extract wav file
-- get slicing code from old version of euclid
-- include slicing code as part of bank initialisation
-- point code at wav not zip
-- remove zip
+- resampler to do slicing on bank init
+
+- euclid09 demo
+- berlin03 demo
 
 ### medium
 
-### demos
-
-- berlin / slide
-- freeze
-- city dreams bass
-
-- sustained bass
-- chords
+- berlin03 slide
+- freeze demo
+- city dreams bass demo
 
 ### pending
 
@@ -44,6 +37,7 @@
 
 ### done
 
+- check pydub installed
 - comment out local bank functionality
 - move sv bank into tests and rename
 - target wav file

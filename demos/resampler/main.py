@@ -205,7 +205,7 @@ def parse_args(config = [("archive_src", str, "demos/resampler/sample-archive.zi
                          ("n_groups", int, 64),
                          ("group_sz", int, 4),
                          ("density", float, 0.5),
-                         ("quantise", int, 2),
+                         ("quantise", int, 2), # <-- don't change this as sample-archive.zip currently only includes slices for quantise == 2
                          ("n_patches", int, 16)]):
     parser = argparse.ArgumentParser(description="whatevs")
     for attr, type, default in config:
