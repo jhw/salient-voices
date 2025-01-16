@@ -1,7 +1,5 @@
 ### short
 
-- move euclid, perkons spawning helpers into __init__
-
 - script to initialise resampler archive
 - resampler to do its own in- memory slicing
 
@@ -54,6 +52,7 @@
 
 ### done
 
+- move euclid, perkons spawning helpers into __init__
 - convert resampler to generate real random perkons function
 - check resampler nomenclature for groove vs groove_fn
 - abstract pico-default.zip

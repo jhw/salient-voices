@@ -4,9 +4,6 @@ from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
 from demos import random_seed, random_colour, random_euclid_pattern, random_perkons_groove
 
-import demos.algos.euclid as euclid
-import demos.algos.perkons as perkons
-
 import argparse
 import io
 import os
@@ -86,12 +83,12 @@ class Detroit09(SVSamplerMachine):
                                    value=feedback_level))
         return SVMachineTrigs(trigs=trigs)
 
-def Beat(self, n, rand, pattern_fn, groove_fn, temperature, density, **kwargs):
+def Beat(self, n, rand, pattern, groove, temperature, density, **kwargs):
     for i in range(n):        
-        volume = groove_fn(rand = rand["vol"], i = i)
+        volume = groove(rand = rand["vol"], i = i)
         if rand["sample"].random() < temperature:
             self.toggle_sample()        
-        if (pattern_fn(i) and 
+        if (pattern(i) and 
             rand["beat"].random() < density):
             trig_block = self.note(volume = volume)
             yield i, trig_block
@@ -139,18 +136,13 @@ class Bank(dict):
             file_content = file_entry.read()
         return io.BytesIO(file_content)
 
-def spawn_function(mod, fn, **kwargs):
-    return getattr(eval(mod), fn)
-
 def add_patch(container, machine, density, temperature, groove, pattern, bpm):
     container.spawn_patch(colour = random_colour())
     seeds = {key: random_seed() for key in "sample|fx|beat|vol".split("|")}
-    pattern_fn = spawn_function(**pattern)(**pattern["args"])
-    groove_fn = spawn_function(**groove)
     machine.render(generator = Beat,
                    seeds = seeds,
-                   env = {"groove_fn": groove_fn,
-                          "pattern_fn": pattern_fn,
+                   env = {"groove": groove,
+                          "pattern": pattern,
                           "density": density,
                           "temperature": temperature})
     machine.render(generator = GhostEcho,

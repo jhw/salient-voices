@@ -2,8 +2,6 @@ from sv.container import SVContainer
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
-import demos.algos.perkons as perkons
-
 from demos import random_seed, random_colour, random_perkons_groove
 
 import argparse
@@ -84,11 +82,11 @@ class Detroit09(SVSamplerMachine):
                                    value=echo_feedback))
         return SVMachineTrigs(trigs=trigs)
 
-def Beat(self, n, rand, groove_fn, quantise, density,
+def Beat(self, n, rand, groove, quantise, density,
          **kwargs):
     for i in range(n):
-        volume = groove_fn(i = i,
-                           rand = rand["vol"])
+        volume = groove(i = i,
+                        rand = rand["vol"])
         if (0 == i % quantise and
             rand["trig"].random() < density):
             self.randomise_sample(rand["sample"])
@@ -162,16 +160,12 @@ class Euclid09Archive(ZipBankBase):
             raise RuntimeError("no slice files found")
         return files
 
-def spawn_function(mod, fn, **kwargs):
-    return getattr(eval(mod), fn)
-    
 def add_patch(container, machine, quantise, density, groove, bpm):
     container.spawn_patch(colour = random_colour())
     seeds = {key: random_seed() for key in "sample|fx|trig|vol".split("|")}
-    groove_fn = spawn_function(**groove)
     machine.render(generator = Beat,
                    seeds = seeds,
-                   env = {"groove_fn": groove_fn,
+                   env = {"groove": groove,
                           "quantise": quantise,
                           "density": density})
     machine.render(generator = GhostEcho,
