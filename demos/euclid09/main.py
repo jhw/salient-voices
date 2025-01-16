@@ -2,14 +2,12 @@ from sv.container import SVContainer
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
-from demos import random_seed, random_colour, random_euclid_pattern, random_perkons_groove
+from demos import random_seed, random_colour, random_euclid_pattern, random_perkons_groove, SimpleBank
 
 import argparse
-import io
 import os
 import random
 import yaml
-import zipfile
 
 import rv
 import rv.note
@@ -108,34 +106,6 @@ def GhostEcho(self, n, rand, bpm,
                                          echo_feedback = feedback_level)
             yield i, trig_block
             
-class Bank(dict):
-
-    @staticmethod
-    def load_zip(zip_path):
-        zip_buffer = io.BytesIO()
-        with open(zip_path, 'rb') as f:
-            zip_buffer.write(f.read())
-        zip_buffer.seek(0)
-        return Bank(zip_buffer=zip_buffer)
-
-    def __init__(self, zip_buffer):
-        self.zip_buffer = zip_buffer
-
-    @property
-    def zip_file(self):
-        return zipfile.ZipFile(self.zip_buffer, 'r')
-
-    @property
-    def file_names(self):
-        return self.zip_file.namelist()
-
-    def get_wav(self, file_name):
-        if file_name not in self.file_names:
-            raise RuntimeError(f"path {file_name} not found in bank")
-        with self.zip_file.open(file_name, 'r') as file_entry:
-            file_content = file_entry.read()
-        return io.BytesIO(file_content)
-
 def parse_args(config = [("bank_src", str, "demos/pico-default.zip"),
                          ("bpm", int, 120),
                          ("n_ticks", int, 16),
@@ -194,7 +164,7 @@ def spawn_patch(bank_samples, container, bpm,
 if __name__ == "__main__":
     try:
         args = parse_args()
-        bank = Bank(args.bank_src)
+        bank = SimpleBank(args.bank_src)
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)

@@ -1,8 +1,12 @@
 import inspect
+import io
 import random
+import zipfile
 
 import demos.algos.euclid as euclid
 import demos.algos.perkons as perkons
+
+### general
 
 def random_colour(offset = 64,
                   contrast = 128,
@@ -16,6 +20,8 @@ def random_colour(offset = 64,
 
 def random_seed():
     return int(random.random() * 1e8)
+
+### patterns
 
 def spawn_function(mod, fn, **kwargs):
     return getattr(eval(mod), fn)
@@ -39,6 +45,37 @@ def _random_perkons_groove():
 def random_perkons_groove():
     groove = _random_perkons_groove()
     return spawn_function(**groove)
+
+### bank
+
+class SimpleBank(dict):
+
+    @staticmethod
+    def load_zip(zip_path):
+        zip_buffer = io.BytesIO()
+        with open(zip_path, 'rb') as f:
+            zip_buffer.write(f.read())
+        zip_buffer.seek(0)
+        return SimpleBank(zip_buffer=zip_buffer)
+
+    def __init__(self, zip_buffer):
+        self.zip_buffer = zip_buffer
+
+    @property
+    def zip_file(self):
+        return zipfile.ZipFile(self.zip_buffer, 'r')
+
+    @property
+    def file_names(self):
+        return self.zip_file.namelist()
+
+    def get_wav(self, file_name):
+        if file_name not in self.file_names:
+            raise RuntimeError(f"path {file_name} not found in bank")
+        with self.zip_file.open(file_name, 'r') as file_entry:
+            file_content = file_entry.read()
+        return io.BytesIO(file_content)
+
 
 if __name__ == "__main__":
     pass

@@ -2,15 +2,13 @@ from sv.container import SVContainer
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
-from demos import random_seed, random_colour, random_perkons_groove
+from demos import random_seed, random_colour, random_perkons_groove, SimpleBank
 
 import argparse
-import io
 import json
 import os
 import random
 import yaml
-import zipfile
 
 import rv
 
@@ -107,42 +105,15 @@ def GhostEcho(self, n, rand, bpm,
                                          echo_feedback = feedback_level)
             yield i, trig_block
 
-class ZipBankBase(dict):
-
-    @staticmethod
-    def load_zip(zip_path):
-        zip_buffer = io.BytesIO()
-        with open(zip_path, 'rb') as f:
-            zip_buffer.write(f.read())
-        zip_buffer.seek(0)
-        return Bank(zip_buffer=zip_buffer)
-
-    def __init__(self, zip_buffer):
-        self.zip_buffer = zip_buffer
-
-    @property
-    def zip_file(self):
-        return zipfile.ZipFile(self.zip_buffer, 'r')
-
-    @property
-    def file_names(self):
-        return self.zip_file.namelist()
-
-    def get_wav(self, file_name):
-        if file_name not in self.file_names:
-            raise RuntimeError(f"path {file_name} not found in bank")
-        with self.zip_file.open(file_name, 'r') as file_entry:
-            file_content = file_entry.read()
-        return io.BytesIO(file_content)
 
 """
 resampler assumes a particular output structure available from Euclid09, including metadata and slices of different duration
 """
     
-class Euclid09Archive(ZipBankBase):
+class Euclid09Archive(SimpleBank):
 
     def __init__(self, zip_buffer):
-        ZipBankBase.__init__(self, zip_buffer)
+        SimpleBank.__init__(self, zip_buffer)
 
     @property
     def project_metadata(self):
@@ -159,18 +130,6 @@ class Euclid09Archive(ZipBankBase):
         if files == []:
             raise RuntimeError("no slice files found")
         return files
-
-def add_patch(container, machine, quantise, density, groove, bpm):
-    container.spawn_patch(colour = random_colour())
-    seeds = {key: random_seed() for key in "sample|fx|trig|vol".split("|")}
-    machine.render(generator = Beat,
-                   seeds = seeds,
-                   env = {"groove": groove,
-                          "quantise": quantise,
-                          "density": density})
-    machine.render(generator = GhostEcho,
-                   seeds = seeds,
-                   env = {"bpm": bpm})
 
 def parse_args(config = [("archive_src", str, "demos/resampler/sample-archive.zip"),
                          ("group_sz", int, 4),
@@ -204,6 +163,7 @@ if __name__ == "__main__":
         all_samples = bank.slice_files(n_ticks = meta["n_ticks"],
                                        quantise = args.quantise)
         for i in range(args.n_patches):
+            container.spawn_patch(colour = random_colour())
             samples = [random.choice(all_samples) for i in range(args.group_sz)]
             machine = Detroit09(container = container,
                                 namespace = "wol",
@@ -211,12 +171,15 @@ if __name__ == "__main__":
                                 samples = samples)
             container.add_machine(machine)
             groove = random_perkons_groove()
-            add_patch(container = container,
-                      machine = machine,
-                      groove = groove,
-                      quantise = args.quantise,
-                      density = args.density,
-                      bpm = meta["bpm"])
+            seeds = {key: random_seed() for key in "sample|fx|trig|vol".split("|")}
+            machine.render(generator = Beat,
+                           seeds = seeds,
+                           env = {"groove": groove,
+                                  "quantise": args.quantise,
+                                  "density": args.density})
+            machine.render(generator = GhostEcho,
+                           seeds = seeds,
+                           env = {"bpm": meta["bpm"]})
         container.write_project("tmp/resampler-demo.sunvox")
     except RuntimeError as error:
         print(f"ERROR: {error}")

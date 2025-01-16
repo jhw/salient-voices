@@ -1,12 +1,13 @@
 ### short
 
-- berlin03
+- script to intialise resampler archive
+- refactor resampler bank so it can do its own slicing
 
 ### medium
 
 ### demos
 
-- berlin03 slide
+- berlin03 + slide
 - euclid09 cutoff 
 - reverse/retrig
 - city dreams bass
