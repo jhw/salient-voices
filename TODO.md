@@ -1,9 +1,14 @@
 ### short 
 
-- berlin03/mikey303 demo
+- refactor resamples to use multiple samplers
 
 ### medium
 
+- add checks to container to ensure stuff in the same namespace is always of the same type to ensure it has the same modules
+
+### demos
+
+- berlin03
 - berlin03 slide
 
 - freeze demo
@@ -41,6 +46,7 @@
 
 ### done
 
+- refactor euclid to use multiple samplers
 - per track sample selection
 - track addition
 - check archive is a zip file

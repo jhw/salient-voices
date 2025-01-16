@@ -32,7 +32,6 @@ class Detroit09(SVSamplerMachine):
     Modules = Modules
 
     def __init__(self, container, namespace, samples,
-                 selected_sample_index=[0, 1],
                  sample_index=0,
                  relative_note=0,
                  echo_delay=36,
@@ -47,23 +46,18 @@ class Detroit09(SVSamplerMachine):
                                   root=rv.note.NOTE.C5 + relative_note,
                                   colour=colour)
         self.samples = samples
-        self.selected_sample_index = selected_sample_index
         self.sample_index = sample_index
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
                                   "delay": echo_delay,
                                   "delay_unit": echo_delay_unit}}
 
-    def randomise_sample_pair(self, rand):
-        I = [i for i in range(len(samples))]
-        self.selected_sample_index = [rand.choice(I) for i in range(2)]
-        
-    def toggle_sample_index(self):
+    def toggle_sample(self):
         self.sample_index = 1 - int(self.sample_index > 0)
 
     @property
     def sample(self):
-        return self.samples[self.selected_sample_index[self.sample_index]]
+        return self.samples[self.sample_index]
         
     def note(self,
              volume=1.0):
@@ -92,11 +86,10 @@ class Detroit09(SVSamplerMachine):
         return SVMachineTrigs(trigs=trigs)
 
 def Beat(self, n, rand, pattern_fn, groove_fn, temperature, density, **kwargs):
-    self.randomise_sample_pair(rand["sample"])
     for i in range(n):        
         volume = groove_fn(rand = rand["vol"], i = i)
         if rand["sample"].random() < temperature:
-            self.toggle_sample_index()        
+            self.toggle_sample()        
         if (pattern_fn(i) and 
             rand["beat"].random() < density):
             trig_block = self.note(volume = volume)
@@ -217,13 +210,14 @@ if __name__ == "__main__":
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)
-        samples = bank.file_names
-        sampler = Detroit09(container = container,
-                            namespace = "wol",
-                            colour = random_colour(),
-                            samples = samples)
-        container.add_machine(sampler)
+        pool = bank.file_names
         for i in range(args.n_patches):
+            samples = [random.choice(pool) for i in range(2)]
+            sampler = Detroit09(container = container,
+                                namespace = "wol",
+                                colour = random_colour(),
+                                samples = samples)
+            container.add_machine(sampler)
             pattern = random_pattern()
             groove = random_groove()
             add_patch(container = container,
