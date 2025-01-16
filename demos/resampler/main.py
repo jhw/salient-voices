@@ -27,9 +27,8 @@ class Detroit09(SVSamplerMachine):
 
     Modules = Modules
 
-    def __init__(self, container, namespace, samples, sample_mapping,
-                 sample_i = 0,
-                 sample_j = 0,
+    def __init__(self, container, namespace, samples,
+                 sample_index=0,
                  relative_note=0,
                  echo_delay=36,
                  echo_delay_unit=3,  # tick
@@ -43,23 +42,14 @@ class Detroit09(SVSamplerMachine):
                                   root=rv.note.NOTE.C5 + relative_note,
                                   colour=colour)
         self.samples = samples
-        self.sample_mapping = sample_mapping
-        self.sample_i = sample_i
-        self.sample_j = sample_j
+        self.sample_index = sample_index
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
                                   "delay": echo_delay,
                                   "delay_unit": echo_delay_unit}}
 
-    def randomise_sample_group(self, rand):
-        self.sample_i = rand.choice(range(len(self.sample_mapping)))
-
-    def randomise_sample_index(self, rand):
-        self.sample_j = rand.choice(range(len(self.sample_mapping[self.sample_i])))
-        
-    @property
-    def sample_index(self):
-        return self.sample_mapping[self.sample_i][self.sample_j]
+    def randomise_sample(self, rand):
+        self.sample_index = rand.choice(range(len(self.samples)))
         
     @property
     def sample(self):
@@ -92,13 +82,12 @@ class Detroit09(SVSamplerMachine):
 
 def Beat(self, n, rand, groove_fn, quantise, density,
          **kwargs):
-    self.randomise_sample_group(rand["sample"])
     for i in range(n):
         volume = groove_fn(i = i,
                            rand = rand["vol"])
         if (0 == i % quantise and
             rand["trig"].random() < density):
-            self.randomise_sample_index(rand["sample"])
+            self.randomise_sample(rand["sample"])
             trig_block = self.note(volume = volume)
             yield i, trig_block
 
@@ -185,24 +174,19 @@ def random_colour(offset = 64,
 def random_seed():
     return int(random.random() * 1e8)
 
-def add_patch(container, sampler, quantise, density, groove_fn, bpm):
+def add_patch(container, machine, quantise, density, groove_fn, bpm):
     container.spawn_patch(colour = random_colour())
     seeds = {key: random_seed() for key in "sample|fx|trig|vol".split("|")}
-    sampler.render(generator = Beat,
+    machine.render(generator = Beat,
                    seeds = seeds,
                    env = {"groove_fn": groove_fn,
                           "quantise": quantise,
                           "density": density})
-    sampler.render(generator = GhostEcho,
+    machine.render(generator = GhostEcho,
                    seeds = seeds,
                    env = {"bpm": bpm})
 
-def init_sample_groups(n_samples, n_groups, group_sz):
-    index = list(range(n_samples))
-    return [[random.choice(index) for _ in range(group_sz)] for _ in range(n_groups)]
-
 def parse_args(config = [("archive_src", str, "demos/resampler/sample-archive.zip"),
-                         ("n_groups", int, 64),
                          ("group_sz", int, 4),
                          ("density", float, 0.5),
                          ("quantise", int, 2), # <-- don't change this as sample-archive.zip currently only includes slices for quantise == 2
@@ -231,20 +215,17 @@ if __name__ == "__main__":
         container = SVContainer(bank = bank,
                                 bpm = meta["bpm"],
                                 n_ticks = meta["n_ticks"])
-        samples = bank.slice_files(n_ticks = meta["n_ticks"],
-                                   quantise = args.quantise)
-        sample_mapping = init_sample_groups(n_samples = len(samples),
-                                            n_groups = args.n_groups,
-                                            group_sz = args.group_sz)
-        sampler = Detroit09(container = container,
-                            namespace = "wol",
-                            colour = random_colour(),
-                            samples = samples,
-                            sample_mapping = sample_mapping)
-        container.add_machine(sampler)
+        all_samples = bank.slice_files(n_ticks = meta["n_ticks"],
+                                       quantise = args.quantise)
         for i in range(args.n_patches):
+            samples = [random.choice(all_samples) for i in range(args.group_sz)]
+            machine = Detroit09(container = container,
+                                namespace = "wol",
+                                colour = random_colour(),
+                                samples = samples)
+            container.add_machine(machine)
             add_patch(container = container,
-                      sampler = sampler,
+                      machine = machine,
                       groove_fn = perkons_humanise,
                       quantise = args.quantise,
                       density = args.density,

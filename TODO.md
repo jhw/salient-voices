@@ -2,6 +2,8 @@
 
 - refactor resamples to use multiple samplers
 
+- abstract random_seed, random_colour again
+
 ### medium
 
 ### demos
