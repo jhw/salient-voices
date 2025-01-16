@@ -166,18 +166,18 @@ def random_groove():
     return {"mod": "perkons",
             "fn": random.choice(groove_fns)}
 
-def add_patch(container, sampler, density, temperature, groove, pattern, bpm):
+def add_patch(container, machine, density, temperature, groove, pattern, bpm):
     container.spawn_patch(colour = random_colour())
     seeds = {key: random_seed() for key in "sample|fx|beat|vol".split("|")}
     pattern_fn = spawn_function(**pattern)(**pattern["args"])
     groove_fn = spawn_function(**groove)
-    sampler.render(generator = Beat,
+    machine.render(generator = Beat,
                    seeds = seeds,
                    env = {"groove_fn": groove_fn,
                           "pattern_fn": pattern_fn,
                           "density": density,
                           "temperature": temperature})
-    sampler.render(generator = GhostEcho,
+    machine.render(generator = GhostEcho,
                    seeds = seeds,
                    env = {"bpm": bpm})
 
@@ -213,15 +213,15 @@ if __name__ == "__main__":
         pool = bank.file_names
         for i in range(args.n_patches):
             samples = [random.choice(pool) for i in range(2)]
-            sampler = Detroit09(container = container,
+            machine = Detroit09(container = container,
                                 namespace = "wol",
                                 colour = random_colour(),
                                 samples = samples)
-            container.add_machine(sampler)
+            container.add_machine(machine)
             pattern = random_pattern()
             groove = random_groove()
             add_patch(container = container,
-                      sampler = sampler,
+                      machine = machine,
                       groove = groove,
                       pattern = pattern,
                       density = args.density,
