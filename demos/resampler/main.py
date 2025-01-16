@@ -23,7 +23,7 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class Sampler(SVSamplerMachine):
+class Detroit09(SVSamplerMachine):
 
     Modules = Modules
 
@@ -236,11 +236,11 @@ if __name__ == "__main__":
         sample_mapping = init_sample_groups(n_samples = len(samples),
                                             n_groups = args.n_groups,
                                             group_sz = args.group_sz)
-        sampler = Sampler(container = container,
-                          namespace = "wol",
-                          colour = random_colour(),
-                          samples = samples,
-                          sample_mapping = sample_mapping)
+        sampler = Detroit09(container = container,
+                            namespace = "wol",
+                            colour = random_colour(),
+                            samples = samples,
+                            sample_mapping = sample_mapping)
         container.add_machine(sampler)
         for i in range(args.n_patches):
             add_patch(container = container,

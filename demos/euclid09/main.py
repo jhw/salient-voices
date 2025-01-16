@@ -27,12 +27,12 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class Sampler(SVSamplerMachine):
+class Detroit09(SVSamplerMachine):
 
     Modules = Modules
 
     def __init__(self, container, namespace, samples,
-                 sample_group=[0, 1],
+                 selected_sample_index=[0, 1],
                  sample_index=0,
                  relative_note=0,
                  echo_delay=36,
@@ -47,23 +47,23 @@ class Sampler(SVSamplerMachine):
                                   root=rv.note.NOTE.C5 + relative_note,
                                   colour=colour)
         self.samples = samples
-        self.sample_group = sample_group
+        self.selected_sample_index = selected_sample_index
         self.sample_index = sample_index
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
                                   "delay": echo_delay,
                                   "delay_unit": echo_delay_unit}}
 
-    def randomise_sample_group(self, rand):
+    def randomise_sample_pair(self, rand):
         I = [i for i in range(len(samples))]
-        self.sample_group = [rand.choice(I) for i in range(2)]
+        self.selected_sample_index = [rand.choice(I) for i in range(2)]
         
     def toggle_sample_index(self):
         self.sample_index = 1 - int(self.sample_index > 0)
 
     @property
     def sample(self):
-        return self.samples[self.sample_group[self.sample_index]]
+        return self.samples[self.selected_sample_index[self.sample_index]]
         
     def note(self,
              volume=1.0):
@@ -92,7 +92,7 @@ class Sampler(SVSamplerMachine):
         return SVMachineTrigs(trigs=trigs)
 
 def Beat(self, n, rand, pattern_fn, groove_fn, temperature, density, **kwargs):
-    self.randomise_sample_group(rand["sample"])
+    self.randomise_sample_pair(rand["sample"])
     for i in range(n):        
         volume = groove_fn(rand = rand["vol"], i = i)
         if rand["sample"].random() < temperature:
@@ -155,6 +155,12 @@ def random_colour(offset = 64,
             return color
     raise RuntimeError("couldn't find suitable random colour")
 
+def spawn_function(mod, fn, **kwargs):
+    return getattr(eval(mod), fn)
+
+def random_seed():
+    return int(random.random() * 1e8)
+
 def random_pattern():
     pattern_kwargs = {k:v for k, v in zip(["pulses", "steps"],
                                           random.choice(euclid.TidalPatterns)[:2])}
@@ -166,12 +172,6 @@ def random_groove():
     groove_fns = [name for name, _ in inspect.getmembers(perkons, inspect.isfunction)]    
     return {"mod": "perkons",
             "fn": random.choice(groove_fns)}
-
-def random_seed():
-    return int(random.random() * 1e8)
-
-def spawn_function(mod, fn, **kwargs):
-    return getattr(eval(mod), fn)
 
 def add_patch(container, sampler, density, temperature, groove, pattern, bpm):
     container.spawn_patch(colour = random_colour())
@@ -218,10 +218,10 @@ if __name__ == "__main__":
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)
         samples = bank.file_names
-        sampler = Sampler(container = container,
-                          namespace = "wol",
-                          colour = random_colour(),
-                          samples = samples)
+        sampler = Detroit09(container = container,
+                            namespace = "wol",
+                            colour = random_colour(),
+                            samples = samples)
         container.add_machine(sampler)
         for i in range(args.n_patches):
             pattern = random_pattern()
