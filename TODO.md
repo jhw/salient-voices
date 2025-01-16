@@ -1,16 +1,14 @@
 ### short
 
-- create a merge branch for main + 01-berlin03-demo
+- berlin03
 
 ### medium
 
 ### demos
 
-- berlin03
 - berlin03 slide
-
 - euclid09 cutoff 
-- retrig, reverse
+- reverse/retrig
 - city dreams bass
 - polly
 - vocoder
@@ -35,6 +33,7 @@
 
 ### done
 
+- create a merge branch for main + 01-berlin03-demo
 - spawn blank patches after each for wash
 - rename namespace as kick
 - add filter function looking for BD in sample name
