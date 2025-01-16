@@ -50,6 +50,19 @@ class SVContainer:
     def add_trigs(self, trigs):
         self.patches[-1].add_trigs(trigs)
 
+    def validate_namespaces(fn):
+        def wrapped(self):
+            classes = {}
+            for machine in self.machines:
+                classes.setdefault(machine.namespace, set())
+                classes[machine.namespace].add(str(machine.__class__))
+            for k, v in classes.items():
+                if len(v) != 1:
+                    raise RuntimeError(f"container namespace {k} contains multiple machine types")
+            return fn(self)
+        return wrapped
+        
+    @validate_namespaces
     def render_project(self):
         return SVProject().render_project(patches = self.patches,
                                           modules = self.modules,

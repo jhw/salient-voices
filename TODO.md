@@ -4,8 +4,6 @@
 
 ### medium
 
-- add checks to container to ensure stuff in the same namespace is always of the same type to ensure it has the same modules
-
 ### demos
 
 - berlin03
@@ -46,6 +44,7 @@
 
 ### done
 
+- add checks to container to ensure stuff in the same namespace is always of the same type to ensure it has the same modules
 - refactor euclid to use multiple samplers
 - per track sample selection
 - track addition
