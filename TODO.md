@@ -1,16 +1,8 @@
 ### short
 
-- rename namespace as kick
-- add filter function looking for BD in sample name
-- add iterator block -> namespace, sample filter, density, temperature
-- add new tracks for snare and hats 
-
-### medium
-
 - create a merge branch for main + 01-berlin03-demo
 
-- spawn blank patches after each for wash
-- beat generator to fix wet level, feedback at high level on patch exit
+### medium
 
 ### demos
 
@@ -42,4 +34,10 @@
   - but how? renaming?
 
 ### done
+
+- spawn blank patches after each for wash
+- rename namespace as kick
+- add filter function looking for BD in sample name
+- add iterator block -> namespace, sample filter, density, temperature
+- add new tracks for snare and hats 
 

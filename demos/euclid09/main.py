@@ -136,26 +136,11 @@ class Bank(dict):
             file_content = file_entry.read()
         return io.BytesIO(file_content)
 
-def add_patch(container, machine, density, temperature, groove, pattern, bpm):
-    container.spawn_patch(colour = random_colour())
-    seeds = {key: random_seed() for key in "sample|fx|beat|vol".split("|")}
-    machine.render(generator = Beat,
-                   seeds = seeds,
-                   env = {"groove": groove,
-                          "pattern": pattern,
-                          "density": density,
-                          "temperature": temperature})
-    machine.render(generator = GhostEcho,
-                   seeds = seeds,
-                   env = {"bpm": bpm})
-
 def parse_args(config = [("bank_src", str, "demos/pico-default.zip"),
-                         ("temperature", int, 0.5),
-                         ("density", float, 0.5),
                          ("bpm", int, 120),
                          ("n_ticks", int, 16),
                          ("n_patches", int, 16)]):
-    parser = argparse.ArgumentParser(description="whatevs")
+    parser = argparse.ArgumentParser(description="euclid09")
     for attr, type, default in config:
         kwargs = {"type": type}
         if default:
@@ -171,6 +156,41 @@ def parse_args(config = [("bank_src", str, "demos/pico-default.zip"),
         raise RuntimeError("bank_src must be a zip file")
     return args
 
+TrackConfig = [("kick", lambda x: "BD" in x, 0.5, 0.5),
+               ("snare", lambda x: ("SD" in x or
+                                    "TOM" in x or
+                                    "HC" in x), 0.5, 0.25),
+               ("hat", lambda x: ("RS" in x or
+                                  # "CH" in x or
+                                  "OH" in x or
+                                  "BLIP" in x or
+                                  "HH" in x), 0.5, 0.75)]
+
+def spawn_patch(bank_samples, container, bpm,
+                track_config = TrackConfig,
+                beat_generator = Beat,
+                echo_generator = GhostEcho):
+    for name, filter_fn, temperature, density in track_config:
+        track_samples = [sample for sample in bank_samples if filter_fn(sample)]
+        selected_samples = [random.choice(track_samples) for i in range(2)]
+        machine = Detroit09(container = container,
+                            namespace = name,
+                            colour = random_colour(),
+                            samples = selected_samples)
+        container.add_machine(machine)
+        pattern = random_euclid_pattern()
+        groove = random_perkons_groove()
+        seeds = {key: random_seed() for key in "sample|fx|beat|vol".split("|")}
+        machine.render(generator = beat_generator,
+                       seeds = seeds,
+                       env = {"groove": groove,
+                              "pattern": pattern,
+                              "density": density,
+                              "temperature": temperature})
+        machine.render(generator = echo_generator,
+                       seeds = seeds,
+                       env = {"bpm": args.bpm})
+    
 if __name__ == "__main__":
     try:
         args = parse_args()
@@ -178,23 +198,13 @@ if __name__ == "__main__":
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)
-        pool = bank.file_names
+        bank_samples = bank.file_names
         for i in range(args.n_patches):
-            samples = [random.choice(pool) for i in range(2)]
-            machine = Detroit09(container = container,
-                                namespace = "wol",
-                                colour = random_colour(),
-                                samples = samples)
-            container.add_machine(machine)
-            pattern = random_euclid_pattern()
-            groove = random_perkons_groove()
-            add_patch(container = container,
-                      machine = machine,
-                      groove = groove,
-                      pattern = pattern,
-                      density = args.density,
-                      temperature = args.temperature,
-                      bpm = args.bpm)
-        container.write_project("tmp/euclid09-demo.sunvox")
+            colour = random_colour()
+            container.spawn_patch(colour)
+            spawn_patch(bank_samples = bank_samples,
+                        container = container,
+                        bpm = args.bpm)
+            container.spawn_patch(colour)
     except RuntimeError as error:
         print(f"ERROR: {error}")
