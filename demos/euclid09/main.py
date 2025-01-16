@@ -2,13 +2,12 @@ from sv.container import SVContainer
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
-from demos import random_seed, random_colour
+from demos import random_seed, random_colour, random_euclid_pattern, random_perkons_groove
 
 import demos.algos.euclid as euclid
 import demos.algos.perkons as perkons
 
 import argparse
-import inspect
 import io
 import os
 import random
@@ -143,18 +142,6 @@ class Bank(dict):
 def spawn_function(mod, fn, **kwargs):
     return getattr(eval(mod), fn)
 
-def random_pattern():
-    pattern_kwargs = {k:v for k, v in zip(["pulses", "steps"],
-                                          random.choice(euclid.TidalPatterns)[:2])}
-    return {"mod": "euclid",
-            "fn": "bjorklund",
-            "args": pattern_kwargs}
-
-def random_groove():
-    groove_fns = [name for name, _ in inspect.getmembers(perkons, inspect.isfunction)]    
-    return {"mod": "perkons",
-            "fn": random.choice(groove_fns)}
-
 def add_patch(container, machine, density, temperature, groove, pattern, bpm):
     container.spawn_patch(colour = random_colour())
     seeds = {key: random_seed() for key in "sample|fx|beat|vol".split("|")}
@@ -207,8 +194,8 @@ if __name__ == "__main__":
                                 colour = random_colour(),
                                 samples = samples)
             container.add_machine(machine)
-            pattern = random_pattern()
-            groove = random_groove()
+            pattern = random_euclid_pattern()
+            groove = random_perkons_groove()
             add_patch(container = container,
                       machine = machine,
                       groove = groove,

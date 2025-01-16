@@ -2,7 +2,9 @@ from sv.container import SVContainer
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
-from demos import random_seed, random_colour
+import demos.algos.perkons as perkons
+
+from demos import random_seed, random_colour, random_perkons_groove
 
 import argparse
 import io
@@ -159,13 +161,14 @@ class Euclid09Archive(ZipBankBase):
         if files == []:
             raise RuntimeError("no slice files found")
         return files
+
+def spawn_function(mod, fn, **kwargs):
+    return getattr(eval(mod), fn)
     
-def perkons_humanise(i, rand, **kwargs):
-    return max(0.85, min(1.0, 0.9 + rand.uniform(-0.05, 0.05)))
-    
-def add_patch(container, machine, quantise, density, groove_fn, bpm):
+def add_patch(container, machine, quantise, density, groove, bpm):
     container.spawn_patch(colour = random_colour())
     seeds = {key: random_seed() for key in "sample|fx|trig|vol".split("|")}
+    groove_fn = spawn_function(**groove)
     machine.render(generator = Beat,
                    seeds = seeds,
                    env = {"groove_fn": groove_fn,
@@ -213,9 +216,10 @@ if __name__ == "__main__":
                                 colour = random_colour(),
                                 samples = samples)
             container.add_machine(machine)
+            groove = random_perkons_groove()
             add_patch(container = container,
                       machine = machine,
-                      groove_fn = perkons_humanise,
+                      groove = groove,
                       quantise = args.quantise,
                       density = args.density,
                       bpm = meta["bpm"])

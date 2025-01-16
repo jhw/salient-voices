@@ -1,4 +1,8 @@
+import inspect
 import random
+
+import demos.algos.euclid as euclid
+import demos.algos.perkons as perkons
 
 def random_colour(offset = 64,
                   contrast = 128,
@@ -12,6 +16,18 @@ def random_colour(offset = 64,
 
 def random_seed():
     return int(random.random() * 1e8)
+
+def random_euclid_pattern():
+    pattern_kwargs = {k:v for k, v in zip(["pulses", "steps"],
+                                          random.choice(euclid.TidalPatterns)[:2])}
+    return {"mod": "euclid",
+            "fn": "bjorklund",
+            "args": pattern_kwargs}
+
+def random_perkons_groove():
+    groove_fns = [name for name, _ in inspect.getmembers(perkons, inspect.isfunction)]    
+    return {"mod": "perkons",
+            "fn": random.choice(groove_fns)}
 
 if __name__ == "__main__":
     pass

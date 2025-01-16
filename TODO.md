@@ -1,10 +1,10 @@
-### short 
+### short
 
-- convert resampler to generate real random perkons function
-- check resampler nomenclature for groove vs groove_fn
-- abstract pico-default.zip
-- script to initialise resampler assets
-- resampler to do its own slicing
+- move euclid, perkons spawning helpers into __init__
+
+- script to initialise resampler archive
+- resampler to do its own in- memory slicing
+
 - add tags to euclid09 demo
 - add multiple tracks to euclid09 demo
 
@@ -18,10 +18,11 @@
 - berlin03
 - berlin03 slide
 
-- freeze demo
-- city dreams bass demo
-- vocoder demo
-- polly demo
+- euclid09 freeze
+- city dreams bass
+- polly
+- vocoder
+- vocal chords
 
 ### pending
 
@@ -53,6 +54,9 @@
 
 ### done
 
+- convert resampler to generate real random perkons function
+- check resampler nomenclature for groove vs groove_fn
+- abstract pico-default.zip
 - abstract perkons and euclid algos
 - abstract random_seed, random_colour again
 - refactor resamples to use multiple sampler
