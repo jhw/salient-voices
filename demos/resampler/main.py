@@ -2,6 +2,8 @@ from sv.container import SVContainer
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
+from demos import random_seed, random_colour
+
 import argparse
 import io
 import json
@@ -161,19 +163,6 @@ class Euclid09Archive(ZipBankBase):
 def perkons_humanise(i, rand, **kwargs):
     return max(0.85, min(1.0, 0.9 + rand.uniform(-0.05, 0.05)))
     
-def random_colour(offset = 64,
-                  contrast = 128,
-                  n = 256):
-    for i in range(n):
-        color = [int(offset + random.random() * (255 - offset))
-                 for i in range(3)]
-        if (max(color) - min(color)) > contrast:
-            return color
-    raise RuntimeError("couldn't find suitable random colour")
-
-def random_seed():
-    return int(random.random() * 1e8)
-
 def add_patch(container, machine, quantise, density, groove_fn, bpm):
     container.spawn_patch(colour = random_colour())
     seeds = {key: random_seed() for key in "sample|fx|trig|vol".split("|")}

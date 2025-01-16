@@ -2,6 +2,8 @@ from sv.container import SVContainer
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
+from demos import random_seed, random_colour
+
 import demos.euclid09.euclid as euclid
 import demos.euclid09.perkons as perkons
 
@@ -138,21 +140,8 @@ class Bank(dict):
             file_content = file_entry.read()
         return io.BytesIO(file_content)
 
-def random_colour(offset = 64,
-                  contrast = 128,
-                  n = 256):
-    for i in range(n):
-        color = [int(offset + random.random() * (255 - offset))
-                 for i in range(3)]
-        if (max(color) - min(color)) > contrast:
-            return color
-    raise RuntimeError("couldn't find suitable random colour")
-
 def spawn_function(mod, fn, **kwargs):
     return getattr(eval(mod), fn)
-
-def random_seed():
-    return int(random.random() * 1e8)
 
 def random_pattern():
     pattern_kwargs = {k:v for k, v in zip(["pulses", "steps"],

@@ -1,10 +1,18 @@
 ### short 
 
-- refactor resamples to use multiple samplers
-
-- abstract random_seed, random_colour again
+- abstract perkons and euclid algos
+- convert resampler to generate real random perkons function
+- check resampler nomenclature for groove vs groove_fn
+- abstract pico-default.zip
+- script to initialise resampler assets
+- resampler to do its own slicing
+- add tags to euclid09 demo
+- add multiple tracks to euclid09 demo
 
 ### medium
+
+- you shouldn't need to pass colour to machine as they are all going to get overridden 
+  - unless it's used for patch?
 
 ### demos
 
@@ -46,6 +54,8 @@
 
 ### done
 
+- abstract random_seed, random_colour again
+- refactor resamples to use multiple sampler
 - add checks to container to ensure stuff in the same namespace is always of the same type to ensure it has the same modules
 - refactor euclid to use multiple samplers
 - per track sample selection
