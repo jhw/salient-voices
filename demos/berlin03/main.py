@@ -148,11 +148,6 @@ def random_sounds(n,
         sounds.append(sound)
     return sounds
 
-def random_groove():
-    groove_fns = [name for name, _ in inspect.getmembers(perkons, inspect.isfunction)]    
-    return {"mod": "perkons",
-            "fn": random.choice(groove_fns)}
-
 def parse_args(config = [("bank_src", str, "demos/berlin03/mikey303.zip"),
                          ("bpm", int, 240),
                          ("n_ticks", int, 32),
