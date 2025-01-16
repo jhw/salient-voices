@@ -40,6 +40,11 @@ class SVContainer:
     def add_machine(self, machine):
         self.machines.append(machine)
 
+    """
+    - note that this will overwrite/flatten modules of the same name, hence the need for @validate_namespaces
+    - one consequence of this is that colours get flattened; assuming they are randomly chosen then the colour of the modules in the machine will be whatever the colour of the last specified one is
+    """
+        
     @property
     def modules(self):
         modules = {}

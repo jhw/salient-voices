@@ -1,21 +1,21 @@
 ### short
 
-- script to initialise resampler archive
-- resampler to do its own in- memory slicing
-
 - add tags to euclid09 demo
 - add multiple tracks to euclid09 demo
 
+- create a merge branch for main + 01-berlin03-demo
+
 ### medium
 
-- you shouldn't need to pass colour to machine as they are all going to get overridden 
-  - unless it's used for patch?
+- better handing of module colours -> avoid flattening
 
 ### demos
 
 - berlin03
 - berlin03 slide
 
+- euclid09 cutoff 
+- retrig, reverse
 - euclid09 freeze
 - city dreams bass
 - polly
