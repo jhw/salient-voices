@@ -4,8 +4,8 @@ from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
 from demos import random_seed, random_colour
 
-import demos.euclid09.euclid as euclid
-import demos.euclid09.perkons as perkons
+import demos.algos.euclid as euclid
+import demos.algos.perkons as perkons
 
 import argparse
 import inspect
@@ -170,7 +170,7 @@ def add_patch(container, machine, density, temperature, groove, pattern, bpm):
                    seeds = seeds,
                    env = {"bpm": bpm})
 
-def parse_args(config = [("bank_src", str, "demos/euclid09/pico-default.zip"),
+def parse_args(config = [("bank_src", str, "demos/pico-default.zip"),
                          ("temperature", int, 0.5),
                          ("density", float, 0.5),
                          ("bpm", int, 120),

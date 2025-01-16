@@ -1,6 +1,5 @@
 ### short 
 
-- abstract perkons and euclid algos
 - convert resampler to generate real random perkons function
 - check resampler nomenclature for groove vs groove_fn
 - abstract pico-default.zip
@@ -54,6 +53,7 @@
 
 ### done
 
+- abstract perkons and euclid algos
 - abstract random_seed, random_colour again
 - refactor resamples to use multiple sampler
 - add checks to container to ensure stuff in the same namespace is always of the same type to ensure it has the same modules
