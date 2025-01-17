@@ -1,14 +1,17 @@
 ### short 
 
-- closures to handle i variable
+- euclid, resampler closures to handle variable i
 
-- move note off trig to trigs
+- move SVNoteOff trig to trigs
+
 - include wave in berlin sound
+- randomise wave
+- randomise other sound parameters
+
 - perkons groove
 - slide to
 
 ### medium
-
 
 - slide up/down
 

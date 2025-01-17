@@ -164,23 +164,24 @@ class BerlinMachine(SVSamplerMachine):
 def BassLine(self, n, rand, groove, **kwargs):
     last = None
     for i in range(n):
+        pitch = rand["note"].choice([0, 12])
+        def note_on(self):
+            return self.note_on(pitch = pitch, i = i)
+        def note_off(self):
+            return self.note_off(i = i)
         if i == 0:
-            pitch = rand["note"].choice([0, 12])
-            yield self.note_on(pitch=pitch,
-                               i = i)
+            yield note_on(self)
             last = pitch
         elif (i == n-1 and last != None):
-            yield self.note_off(i = i)
+            yield note_off(self)
             last = None
         else:
             q = rand["note"].choice(range(3))
             if q == 0:
-                pitch = rand["note"].choice([0, 12])
-                yield self.note_on(pitch=pitch,
-                                   i = i)
+                yield note_on(self)
                 last = pitch
             elif (q == 1 and last != None):
-                yield self.note_off(i = i)
+                yield note_off(self)
                 last = None
             else:
                 pass
@@ -220,7 +221,7 @@ if __name__ == "__main__":
                                     namespace = "303",
                                     sound = sound,
                                     colour = random_colour(),
-                                    wave = BerlinWave.SQR)
+                                    wave = BerlinWave.SAW)
             container.add_machine(machine)
             seeds = {key: int(random.random() * 1e8)
                      for key in "note".split("|")}
