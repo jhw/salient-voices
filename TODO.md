@@ -1,12 +1,17 @@
 ### short 
 
-- purge SVMachineTrigs from berlin demo
+- :last trigger to avoid repeating sound
+- include wave in berlin sound
+- perkons groove
 
 ### medium
 
+- slide to
+- slide up/down
+
 - include namespace in trigs
 - SVModule to do namespace check rather than module check
-- include wave in berlin sound
+
 - pico waveforms
 
 ### demos
@@ -37,6 +42,7 @@
 
 ### done
 
+- purge SVMachineTrigs from berlin demo
 - purge SVMachineTrigs from resampler demo
 - purge SVMachineTrigs from euclid demo
 - sampler doesn't seem to have any sound

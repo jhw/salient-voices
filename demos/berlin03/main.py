@@ -1,5 +1,5 @@
 from sv.container import SVContainer
-from sv.machines import SVSamplerMachine, SVMachineTrigs
+from sv.machines import SVSamplerMachine
 from sv.trigs import SVSampleTrig, SVTrigBase, SVModTrig, controller_value
 
 from enum import Enum
@@ -96,14 +96,12 @@ class BerlinSound:
                  attack = "0008",
                  decay = "0018",
                  sustain_level = "0800",
-                 sustain_term = None,
                  release = "0300",
                  filter_freq = "4000",
                  filter_resonance = "7000"):
         self.attack = attack
         self.decay = decay
         self.sustain_level = sustain_level
-        self.sustain_term = sustain_term
         self.release = release
         self.filter_freq = filter_freq
         self.filter_resonance = filter_resonance
@@ -129,68 +127,63 @@ class BerlinMachine(SVSamplerMachine):
         self.sample = f"303 VCO {wave.value}.wav"
         self.defaults = {}
 
-    def note(self,
-             note=0,
-             volume=1.0):
-        trigs = [
-            BerlinSampleTrig(target=f"{self.namespace}MultiSynth",
+    def note_on(self, i,
+                note=0,
+                volume=1.0):
+        sample = f"{self.sample}?pitch={note}"
+        return [
+            BerlinSampleTrig(target=f"{self.namespace}MultiSynth",                             
+                             i=i,
                              sampler_mod=f"{self.namespace}Sampler",
-                             sample=self.sample,
+                             sample=sample,
                              vel=volume),
             SVModTrig(target=f"{self.namespace}Sound2Ctl/out_max",
+                      i=i,
                       value=self.sound.filter_freq),
             SVModTrig(target=f"{self.namespace}Filter/resonance",
+                      i=i,
                       value=self.sound.filter_resonance),
             SVModTrig(target=f"{self.namespace}ADSR/attack",
+                      i=i,
                       value=self.sound.attack),
             SVModTrig(target=f"{self.namespace}ADSR/decay",
+                      i=i,
                       value=self.sound.decay),
             SVModTrig(target=f"{self.namespace}ADSR/sustain_level",
+                      i=i,
                       value=self.sound.sustain_level),
             SVModTrig(target=f"{self.namespace}ADSR/release",
+                      i=i,
                       value=self.sound.release)
         ]
-        if self.sound.sustain_term:
-            trigs.append(SVNoteOffTrig(target=f"{self.namespace}MultiSynth",
-                                       i=self.sound.sustain_term))
-        return SVMachineTrigs(trigs=trigs)
     
-def BassLine(self, n, rand, groove,
-             root_offset = -4,
-             offsets = [0, 0, 0, -2],
-             note_density = 0.5,
-             quantise = 1):    
-    i = 0
-    while True:
-        note = root_offset + rand["note"].choice(offsets)
-        volume = groove(rand = rand["vol"], i = i)
-        if (rand["seq"].random() < note_density and
-              0 == i % quantise):
-            block = self.note(note = note,
-                              volume = volume)
-            yield i, block
-            i += self.sound.sustain_term # NB
-        i += 1
-        if i >= n:
-            break
-        
-def random_sounds(n,
-                  terms = [1, 2],
-                  frequencies = ["2000", "4000", "6000"],
-                  resonances = ["7000"]):
-    resonance = random.choice(resonances)
-    sounds = []
+    def note_off(self, i):
+        return [SVNoteOffTrig(target=f"{self.namespace}MultiSynth",
+                              i=i)]
+    
+def BassLine(self, n, rand, groove, **kwargs):
     for i in range(n):
-        sound = BerlinSound(sustain_term = int(random.choice(terms)),
-                            filter_freq = random.choice(frequencies),
-                            filter_resonance = resonance)
-        sounds.append(sound)
-    return sounds
-
+        if i == 0:
+            yield self.note_on(note=0,
+                               i = i)
+        elif i == n-1:
+            yield self.note_off(i = i)
+        else:
+            q = rand["note"].choice(range(4))
+            if q == 0:
+                yield self.note_on(note=0,
+                                   i = i)
+            elif q == 1:
+                yield self.note_on(note=12,
+                                   i = i)
+            elif q == 2:
+                yield self.note_off(i = i)
+            else:
+                pass
+        
 def parse_args(config = [("bank_src", str, "demos/berlin03/mikey303.zip"),
                          ("bpm", int, 120),
-                         ("n_ticks", int, 32),
-                         ("n_sounds", int, 16),                         
+                         ("n_ticks", int, 16),
                          ("n_patches", int, 16)]):
     parser = argparse.ArgumentParser(description="whatevs")
     for attr, type, default in config:
@@ -215,10 +208,10 @@ if __name__ == "__main__":
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)
-        sounds = random_sounds(n = args.n_sounds)
         for i in range(args.n_patches):
             container.spawn_patch(colour = random_colour())
-            sound = random.choice(sounds)
+            sound = BerlinSound(filter_freq = random.choice(["2000", "4000", "6000"]),
+                                filter_resonance = random.choice(["6000", "6800", "7000"]))
             machine = BerlinMachine(container = container,
                                     namespace = "303",
                                     sound = sound,
@@ -226,7 +219,7 @@ if __name__ == "__main__":
                                     wave = BerlinWave.SQR)
             container.add_machine(machine)
             seeds = {key: int(random.random() * 1e8)
-                     for key in "seq|note|fx|vol".split("|")}
+                     for key in "note".split("|")}
             groove = random_perkons_groove()
             env = {"groove": groove}
             machine.render(generator = BassLine,
