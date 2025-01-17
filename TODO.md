@@ -1,7 +1,9 @@
 ### short
 
-- script to intialise resampler archive
-- refactor resampler bank so it can do its own slicing
+- add back chatgpt script to initialise archive 
+- change bank so it doesnt extend simple bank but is its own version
+- initialise from zip but extend dict and keep stuff in memory.
+- new init slices method to initialise slices as in memory items 
 
 ### medium
 
