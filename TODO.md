@@ -1,8 +1,10 @@
-### short
+### short [01-berlin03-demo]
+
+- BerlinSampleTrig to extend SVSampleTrig
+- complete machine, track configuration
 
 ### medium
 
-- berlin03
 
 ### demos
 
@@ -33,6 +35,7 @@
 
 ### done
 
+- NOTE_OFF
 - rename SimpleBank as SimpleZipBank
 - check why euclid doesn't seem to be calling container.render
 - add back chatgpt script to initialise archive 
