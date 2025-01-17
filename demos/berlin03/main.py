@@ -57,7 +57,7 @@ class BerlinSampleTrig(SVNoteTrigBase):
         mod = modules[self.mod]        
         mod_id = 1 + mod.index
         # note = 1 + mod.index_of(self.sample_string)
-    note = self.resolve_sampler_note(modules)
+        note = self.resolve_sampler_note(modules)
         note_kwargs = {
             "module": mod_id,
             "note": note
