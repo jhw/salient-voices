@@ -1,5 +1,5 @@
 from sv.container import SVContainer
-from sv.machines import SVSamplerMachine, SVMachineTrigs
+from sv.machines import SVSamplerMachine
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
 from demos import *
@@ -54,14 +54,15 @@ class Detroit09(SVSamplerMachine):
     def sample(self):
         return self.samples[self.sample_index]
         
-    def note(self,
+    def note(self, i,
              volume=1.0):
-        trigs = [SVSampleTrig(target=f"{self.namespace}Beat",
-                              sample=self.sample,
-                              vel=volume)]
-        return SVMachineTrigs(trigs=trigs)
+        return [SVSampleTrig(target=f"{self.namespace}Beat",
+                             i=i,
+                             sample=self.sample,
+                             vel=volume)]
 
     def modulation(self,
+                   i, 
                    echo_delay=None,
                    echo_wet=None,
                    echo_feedback=None):
@@ -69,16 +70,19 @@ class Detroit09(SVSamplerMachine):
         if echo_delay:
             delay_level = int(controller_value(echo_delay))
             trigs.append(SVModTrig(target=f"{self.namespace}Echo/delay",
+                                   i=i,
                                    value=delay_level))
         if echo_wet:
             wet_level = int(controller_value(echo_wet))
             trigs.append(SVModTrig(target=f"{self.namespace}Echo/wet",
+                                   i=i,
                                    value=wet_level))
         if echo_feedback:
             feedback_level = int(controller_value(echo_feedback))
             trigs.append(SVModTrig(target=f"{self.namespace}Echo/feedback",
+                                   i=i,
                                    value=feedback_level))
-        return SVMachineTrigs(trigs=trigs)
+        return trigs
 
 def Beat(self, n, rand, pattern, groove, temperature, density, **kwargs):
     for i in range(n):        
@@ -87,8 +91,8 @@ def Beat(self, n, rand, pattern, groove, temperature, density, **kwargs):
             self.toggle_sample()        
         if (pattern(i) and 
             rand["beat"].random() < density):
-            trig_block = self.note(volume = volume)
-            yield i, trig_block
+            yield self.note(volume = volume,
+                            i = i)
 
 def GhostEcho(self, n, rand, bpm,
               wet_levels = ["0000", "2000", "4000", "6000"],
@@ -100,10 +104,10 @@ def GhostEcho(self, n, rand, bpm,
             wet_level = rand["fx"].choice(wet_levels)
             feedback_level = rand["fx"].choice(feedback_levels)
             delay_value = hex(int(128 * bpm  * 3 / 10))
-            trig_block = self.modulation(echo_delay = delay_value,
-                                         echo_wet = wet_level,
-                                         echo_feedback = feedback_level)
-            yield i, trig_block
+            yield self.modulation(i = i,
+                                  echo_delay = delay_value,
+                                  echo_wet = wet_level,
+                                  echo_feedback = feedback_level)
             
 def parse_args(config = [("bank_src", str, "demos/pico-default.zip"),
                          ("bpm", int, 120),

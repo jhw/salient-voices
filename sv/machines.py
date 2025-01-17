@@ -4,18 +4,6 @@ from random import Random
 
 import copy
 
-class SVMachineTrigs:
-
-    def __init__(self, trigs):
-        self.trigs = trigs
-                 
-    def render(self, i):
-        trigs = []
-        for trig in self.trigs:
-            trig.set_position(i)
-            trigs.append(trig)
-        return trigs
-        
 class SVMachine:
 
     def __init__(self, container, namespace, colour):
@@ -29,11 +17,10 @@ class SVMachine:
                env = {}):
         rand = {key: Random(value)
                  for key, value in seeds.items()}
-        for i, trig_block in generator(self,
-                                       rand = rand,
-                                       n = self.container.n_ticks,
-                                       **env):
-            trigs = trig_block.render(i)
+        for trigs in generator(self,
+                            rand = rand,
+                               n = self.container.n_ticks,
+                               **env):
             self.container.add_trigs(trigs)
 
     @property

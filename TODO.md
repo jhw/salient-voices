@@ -1,10 +1,11 @@
 ### short 
 
-- remove SVMachineTrigs via direct setting of i
+- purge SVMachineTrigs from euclid demo
+- purge SVMachineTrigs from resampler demo
+- purge SVMachineTrigs from berlin demo
 
 ### medium
 
-- new berlin03 beat generator
 - include wave in sound
 - pico waveforms
 
