@@ -1,8 +1,11 @@
 ### short [01-berlin03-demo]
 
-- complete machine, track configuration
+- include wave in sound
+- randomise sound as part of beat
 
 ### medium
+
+- pico waveforms
 
 ### demos
 
@@ -33,6 +36,8 @@
 
 ### done
 
+- multiple patches with different sounds
+- complete machine, track configuration
 - BerlinSampleTrig to extend SVSampleTrig
 - NOTE_OFF
 - rename SimpleBank as SimpleZipBank

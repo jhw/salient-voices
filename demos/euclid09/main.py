@@ -175,6 +175,6 @@ if __name__ == "__main__":
                         container = container,
                         bpm = args.bpm)
             container.spawn_patch(colour)
-        container.write_project("tmp/euclid-demo.sunvox")                    
+        container.write_project("tmp/euclid09-demo.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")

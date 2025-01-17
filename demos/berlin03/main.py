@@ -34,10 +34,6 @@ Modules = yaml.safe_load("""
     freq: 0
     roll_off: 3 # no idea but seems to allow resonance to be higher without pinking distortion
   links:
-    - Echo
-- name: Echo
-  class: rv.modules.echo.Echo
-  links:
     - Output
 """)
 
@@ -100,26 +96,17 @@ class BerlinMachine(SVSamplerMachine):
     
     Modules = Modules
     
-    def __init__(self, container, namespace, wave, sounds,
-                 sound_index=0,
+    def __init__(self, container, namespace, wave, sound,
                  relative_note=0,
-                 echo_delay=36,
-                 echo_delay_unit=3,  # tick
-                 echo_wet=32,  # '1000'
-                 echo_feedback=32,  # '1000'
                  colour=[127, 127, 127],
                  **kwargs):
         SVSamplerMachine.__init__(self, container=container,
                                   namespace=namespace,
                                   root=rv.note.NOTE.C5 + relative_note,
                                   colour=colour)
-        self.sounds = sounds
-        self.sound_index = sound_index
+        self.sound = sound
         self.sample = SVSample.parse(f"mikey303/303 VCO {wave.value}.wav")
-        self.defaults = {"Echo": {"wet": echo_wet,
-                                  "feedback": echo_feedback,
-                                "delay": echo_delay,
-                                  "delay_unit": echo_delay_unit}}
+        self.defaults = {}
 
     def note(self,
              note=0,
@@ -149,15 +136,13 @@ class BerlinMachine(SVSamplerMachine):
                                        i=self.sound.sustain_term))
         return SVMachineTrigs(trigs=trigs)
     
-def BassLine(self, n, rand, groove, temperature,
+def BassLine(self, n, rand, groove,
              root_offset = -4,
              offsets = [0, 0, 0, -2],
              note_density = 0.5,
              quantise = 1):    
     i = 0
     while True:
-        if rand["sound"].random() < temperature:
-            self.randomise_sound(rand["sound"])
         note = root_offset + rand["note"].choice(offsets)
         volume = groove(rand = rand["vol"], i = i)
         if (rand["seq"].random() < note_density and
@@ -186,6 +171,7 @@ def random_sounds(n,
 def parse_args(config = [("bank_src", str, "demos/berlin03/mikey303.zip"),
                          ("bpm", int, 240),
                          ("n_ticks", int, 32),
+                         ("n_sounds", int, 32),                         
                          ("n_patches", int, 16)]):
     parser = argparse.ArgumentParser(description="whatevs")
     for attr, type, default in config:
@@ -210,5 +196,23 @@ if __name__ == "__main__":
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)
+        sounds = random_sounds(n = args.n_sounds)
+        for i in range(args.n_patches):
+            container.spawn_patch(colour = random_colour())
+            sound = random.choice(sounds)
+            machine = BerlinMachine(container = container,
+                                    namespace = "303",
+                                    sound = sound,
+                                    colour = random_colour(),
+                                    wave = BerlinWave.SQR)
+            container.add_machine(machine)
+            seeds = {key: int(random.random() * 1e8)
+                     for key in "seq|note|fx|vol".split("|")}
+            groove = random_perkons_groove()
+            env = {"groove": groove}
+            machine.render(generator = BassLine,
+                           seeds = seeds,
+                           env = env)
+        container.write_project("tmp/berlin03-demo.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")
