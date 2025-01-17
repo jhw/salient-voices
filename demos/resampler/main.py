@@ -2,7 +2,7 @@ from sv.container import SVContainer
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
-from demos import random_seed, random_colour, random_perkons_groove, SimpleBank
+from demos import *
 
 from pydub import AudioSegment
 
@@ -109,7 +109,7 @@ def GhostEcho(self, n, rand, bpm,
                                          echo_feedback = feedback_level)
             yield i, trig_block
             
-class EuclidArchive(dict):
+class Euclid09Archive(dict):
 
     def __init__(self, bank):
         dict.__init__(self, {})
@@ -183,14 +183,13 @@ def parse_args(config = [("archive_src", str, "demos/resampler/sample-archive.zi
 if __name__ == "__main__":
     try:
         args = parse_args()
-        bank = SimpleBank(args.archive_src)
-        archive = EuclidArchive(bank)
-        meta = archive.project_metadata
-        container = SVContainer(bank = archive,
+        bank = Euclid09Archive(SimpleZipBank(args.archive_src))
+        meta = bank.project_metadata
+        container = SVContainer(bank = bank,
                                 bpm = meta["bpm"],
                                 n_ticks = meta["n_ticks"])
-        all_samples = archive.slice_files(n_ticks = meta["n_ticks"],
-                                          quantise = args.quantise)
+        all_samples = bank.slice_files(n_ticks = meta["n_ticks"],
+                                       quantise = args.quantise)
         for i in range(args.n_patches):
             container.spawn_patch(colour = random_colour())
             samples = [random.choice(all_samples) for i in range(args.group_sz)]

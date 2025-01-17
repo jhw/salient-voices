@@ -2,7 +2,7 @@ from sv.container import SVContainer
 from sv.machines import SVSamplerMachine, SVMachineTrigs
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
-from demos import random_seed, random_colour, random_euclid_pattern, random_perkons_groove, SimpleBank
+from demos import *
 
 import argparse
 import os
@@ -163,7 +163,7 @@ def spawn_patch(bank_samples, container, bpm,
 if __name__ == "__main__":
     try:
         args = parse_args()
-        bank = SimpleBank(args.bank_src)
+        bank = SimpleZipBank(args.bank_src)
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)

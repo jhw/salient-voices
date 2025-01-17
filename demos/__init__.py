@@ -8,6 +8,9 @@ import demos.algos.perkons as perkons
 
 ### general
 
+def random_seed():
+    return int(random.random() * 1e8)
+
 def random_colour(offset = 64,
                   contrast = 128,
                   n = 256):
@@ -18,10 +21,7 @@ def random_colour(offset = 64,
             return color
     raise RuntimeError("couldn't find suitable random colour")
 
-def random_seed():
-    return int(random.random() * 1e8)
-
-### patterns
+### algo generators
 
 def spawn_function(mod, fn, **kwargs):
     return getattr(eval(mod), fn)
@@ -48,7 +48,7 @@ def random_perkons_groove():
 
 ### bank
 
-class SimpleBank(dict):
+class SimpleZipBank(dict):
 
     @staticmethod
     def load_zip(zip_path):
@@ -56,7 +56,7 @@ class SimpleBank(dict):
         with open(zip_path, 'rb') as f:
             zip_buffer.write(f.read())
         zip_buffer.seek(0)
-        return SimpleBank(zip_buffer=zip_buffer)
+        return SimpleZipBank(zip_buffer=zip_buffer)
 
     def __init__(self, zip_buffer):
         self.zip_buffer = zip_buffer

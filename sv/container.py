@@ -72,7 +72,6 @@ class SVContainer:
         
     @validate_namespaces
     def render_project(self):
-        print("RENDER")
         return SVProject().render_project(patches = self.patches,
                                           modules = self.flattened_modules,
                                           bank = self.bank,
