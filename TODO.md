@@ -4,7 +4,6 @@
 
 ### medium
 
-
 ### demos
 
 - berlin03 slide

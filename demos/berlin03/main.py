@@ -48,10 +48,10 @@ class BerlinSampleTrig(SVNoteTrigBase):
                          sample = sample,
                          **kwargs)
         self.sampler_mod = sampler_mod
-
+        
     def resolve_sampler(self):
         return self.sampler_mod if self.sampler_mod else self.mod
-
+    
     def resolve_sampler_note(self, modules):
         sampler_mod = modules[self.sampler_mod if self.sampler_mod else self.mod]
         note = 1 + sampler_mod.index_of(self.sample)
@@ -61,7 +61,7 @@ class BerlinSampleTrig(SVNoteTrigBase):
         mod = modules[self.mod]        
         mod_id = 1 + mod.index
         # note = 1 + mod.index_of(self.sample_string)
-        note = self.resolve_sampler_note(modules)
+    note = self.resolve_sampler_note(modules)
         note_kwargs = {
             "module": mod_id,
             "note": note
@@ -90,10 +90,7 @@ class BerlinSound:
         self.release = release
         self.filter_freq = filter_freq
         self.filter_resonance = filter_resonance
-
-    def as_dict(self):
-        return {k: v for k, v in self.__dict__.items() if v is not None}
-    
+        
 class BerlinWave(Enum):
     
     SQR = "SQR"
@@ -102,7 +99,7 @@ class BerlinWave(Enum):
 class BerlinMachine(SVSamplerMachine):
     
     Modules = Modules
-                      
+    
     def __init__(self, container, namespace, wave, sounds,
                  sound_index=0,
                  relative_note=0,
@@ -113,16 +110,16 @@ class BerlinMachine(SVSamplerMachine):
                  colour=[127, 127, 127],
                  **kwargs):
         SVSamplerMachine.__init__(self, container=container,
-                                   namespace=namespace,
-                                   root=rv.note.NOTE.C5 + relative_note,
+                                  namespace=namespace,
+                                  root=rv.note.NOTE.C5 + relative_note,
                                   colour=colour)
         self.sounds = sounds
         self.sound_index = sound_index
         self.sample = SVSample.parse(f"mikey303/303 VCO {wave.value}.wav")
         self.defaults = {"Echo": {"wet": echo_wet,
-                                   "feedback": echo_feedback,
-                                   "delay": echo_delay,
-                                   "delay_unit": echo_delay_unit}}
+                                  "feedback": echo_feedback,
+                                "delay": echo_delay,
+                                  "delay_unit": echo_delay_unit}}
 
     def note(self,
              note=0,
@@ -151,13 +148,12 @@ class BerlinMachine(SVSamplerMachine):
             trigs.append(SVNoteOffTrig(target=f"{self.namespace}MultiSynth",
                                        i=self.sound.sustain_term))
         return SVMachineTrigs(trigs=trigs)
-
+    
 def BassLine(self, n, rand, groove, temperature,
              root_offset = -4,
              offsets = [0, 0, 0, -2],
              note_density = 0.5,
-             quantise = 1,
-             **kwargs):
+             quantise = 1):    
     i = 0
     while True:
         if rand["sound"].random() < temperature:
@@ -165,15 +161,15 @@ def BassLine(self, n, rand, groove, temperature,
         note = root_offset + rand["note"].choice(offsets)
         volume = groove(rand = rand["vol"], i = i)
         if (rand["seq"].random() < note_density and
-              0 == i % quantise:
-            block =  self.note(note = note,
-                               volume = volume)
+              0 == i % quantise):
+            block = self.note(note = note,
+                              volume = volume)
             yield i, block
             i += self.sound.sustain_term # NB
         i += 1
         if i >= n:
             break
-
+        
 def random_sounds(n,
                   terms = [0.5, 0.5, 0.5, 1, 2],
                   frequencies = ["2000", "3000", "3000", "3000", "5000"],
