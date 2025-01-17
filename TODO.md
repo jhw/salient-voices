@@ -1,6 +1,8 @@
 ### short 
 
-- :last trigger to avoid repeating sound
+- refactor note as pitch
+- move note off trig to trigs
+
 - include wave in berlin sound
 - perkons groove
 

@@ -128,9 +128,9 @@ class BerlinMachine(SVSamplerMachine):
         self.defaults = {}
 
     def note_on(self, i,
-                note=0,
+                pitch=0,
                 volume=1.0):
-        sample = f"{self.sample}?pitch={note}"
+        sample = f"{self.sample}?pitch={pitch}"
         return [
             BerlinSampleTrig(target=f"{self.namespace}MultiSynth",                             
                              i=i,
@@ -162,22 +162,26 @@ class BerlinMachine(SVSamplerMachine):
                               i=i)]
     
 def BassLine(self, n, rand, groove, **kwargs):
+    in_note = False
     for i in range(n):
         if i == 0:
-            yield self.note_on(note=0,
+            pitch = rand["note"].choice([0, 12])
+            yield self.note_on(pitch=pitch,
                                i = i)
-        elif i == n-1:
+            in_note = True
+        elif (i == n-1 and in_note):
             yield self.note_off(i = i)
+            note = False
         else:
-            q = rand["note"].choice(range(4))
+            q = rand["note"].choice(range(3))
             if q == 0:
-                yield self.note_on(note=0,
+                pitch = rand["note"].choice([0, 12])
+                yield self.note_on(pitch=pitch,
                                    i = i)
-            elif q == 1:
-                yield self.note_on(note=12,
-                                   i = i)
-            elif q == 2:
+                in_note = True
+            elif (q == 1 and in_note):
                 yield self.note_off(i = i)
+                in_note = False
             else:
                 pass
         
