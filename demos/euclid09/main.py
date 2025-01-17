@@ -10,7 +10,6 @@ import random
 import yaml
 
 import rv
-import rv.note
 
 Modules = yaml.safe_load("""
 - name: Beat

@@ -148,6 +148,14 @@ class EuclidArchive(dict):
                 file_name = f"audio/sliced/{(2**i):04}/{(i+j):04}.wav"
                 self[file_name] = slice_io
 
+    def slice_files(self, n_ticks, quantise):
+        n = int(n_ticks / quantise)
+        files = [file_name for file_name in self
+                 if file_name.startswith(f"audio/sliced/{n:04}")]
+        if files == []:
+            raise RuntimeError("no slice files found")
+        return files
+                
     def get_wav(self, file_name):
         return self[file_name]
     
@@ -181,8 +189,8 @@ if __name__ == "__main__":
         container = SVContainer(bank = archive,
                                 bpm = meta["bpm"],
                                 n_ticks = meta["n_ticks"])
-        all_samples = bank.slice_files(n_ticks = meta["n_ticks"],
-                                       quantise = args.quantise)
+        all_samples = archive.slice_files(n_ticks = meta["n_ticks"],
+                                          quantise = args.quantise)
         for i in range(args.n_patches):
             container.spawn_patch(colour = random_colour())
             samples = [random.choice(all_samples) for i in range(args.group_sz)]
