@@ -1,22 +1,14 @@
-### short [01-berlin03-demo]
+### short 
 
-- include wave in sound
-- cutoff note at end of ticks
-- dual notes
-- don't apply cutoff after every note -> to facilitate slides
-- slides
+- remove SVMachineTrigs via direct setting of i
 
 ### medium
 
+- new berlin03 beat generator
+- include wave in sound
 - pico waveforms
 
 ### extended utils
-
-- SVSimpleZipBank
-- git
-- cli colours
-- cli parse
-- base_cli
 
 ### demos
 
