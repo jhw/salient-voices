@@ -1,6 +1,5 @@
 ### short 
 
-- purge SVMachineTrigs from resampler demo
 - purge SVMachineTrigs from berlin demo
 
 ### medium
@@ -38,6 +37,7 @@
 
 ### done
 
+- purge SVMachineTrigs from resampler demo
 - purge SVMachineTrigs from euclid demo
 - sampler doesn't seem to have any sound
 - multiple patches with different sounds
