@@ -46,7 +46,7 @@ class Berlin03Sound:
                  sustain_term = None,
                  release = "0300",
                  filter_freq = "4000",
-                 filter_resonance = "7000",
+                 filter_resonance = "7000"):
         self.attack = attack
         self.decay = decay
         self.sustain_level = sustain_level
@@ -57,16 +57,16 @@ class Berlin03Sound:
 
     def as_dict(self):
         return {k: v for k, v in self.__dict__.items() if v is not None}
-
+    
 class Berlin03Wave(Enum):
-            
+    
     SQR = "SQR"
     SAW = "SAW"
         
-class Berlin03Machine(SVSamplerMachine, SVBeatsApi):
+class Berlin03Machine(SVSamplerMachine):
     
     Modules = Modules
-
+                      
     def __init__(self, container, namespace, wave, sounds,
                  sound_index=0,
                  relative_note=0,
@@ -79,22 +79,25 @@ class Berlin03Machine(SVSamplerMachine, SVBeatsApi):
         SVSamplerMachine.__init__(self, container=container,
                                    namespace=namespace,
                                    root=rv.note.NOTE.C5 + relative_note,
-                                   colour=colour)
-        SVBeatsApi.__init__(self, sounds=sounds, sound_index=sound_index)
+                                  colour=colour)
+        self.sounds = sounds
+        self.sound_index = sound_index
         self.sample = SVSample.parse(f"mikey303/303 VCO {wave.value}.wav")
         self.defaults = {"Echo": {"wet": echo_wet,
                                    "feedback": echo_feedback,
                                    "delay": echo_delay,
                                    "delay_unit": echo_delay_unit}}
 
-    def note(self, note=0, volume=1.0, level=1.0):
+    def note(self,
+             note=0,
+             volume=1.0):
         sample = self.sample.clone()
         sample.note = note
         trigs = [
             SVSampleTrig(target=f"{self.namespace}MultiSynth",
                          sampler_mod=f"{self.namespace}Sampler",
                          sample=sample,
-                         vel=volume * level),
+                         vel=volume),
             SVModTrig(target=f"{self.namespace}Sound2Ctl/out_max",
                       value=self.sound.filter_freq),
             SVModTrig(target=f"{self.namespace}Filter/resonance",
