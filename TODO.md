@@ -1,6 +1,5 @@
 ### short [01-berlin03-demo]
 
-- BerlinSampleTrig to extend SVSampleTrig
 - complete machine, track configuration
 
 ### medium
@@ -35,6 +34,7 @@
 
 ### done
 
+- BerlinSampleTrig to extend SVSampleTrig
 - NOTE_OFF
 - rename SimpleBank as SimpleZipBank
 - check why euclid doesn't seem to be calling container.render

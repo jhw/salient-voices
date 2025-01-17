@@ -7,94 +7,6 @@ from demos import random_colour, random_seed
 import argparse
 import random
 import yaml
-"""
-class SVSampleTrig(SVNoteTrigBase):
-
-    def __init__(self, target, sample,
-                 i = 0,
-                 vel = None,
-                 fx_value = None,
-                 pitch = None,
-                 cutoff = None):
-        super().__init__(target = target,
-                         i = i,
-                         vel = vel,
-                         fx_value = fx_value)
-        self.sample = sample
-        self.pitch = pitch
-        self.cutoff = cutoff
-
-    @property
-    def sample_params(self, attrs = ["pitch", "cutoff"]):
-        params = {}
-        for attr in attrs:
-            value = getattr(self, attr)
-            if value != None:
-                params[attr] = value
-        return params
-    
-    @property
-    def sample_qs(self):
-        params = self.sample_params
-        return format_querystring(params) if params != {} else None
-                    
-    @property
-    def sample_string(self):
-        qs = self.sample_qs
-        return f"{self.sample}?{qs}" if qs != None else self.sample
-
-    def render(self, modules, *args):
-        mod = modules[self.mod]        
-        mod_id = 1 + mod.index
-        note = 1 + mod.index_of(self.sample_string)
-        note_kwargs = {
-            "module": mod_id,
-            "note": note
-        }
-        if self.has_vel:
-            note_kwargs["vel"] = self.velocity
-        if self.has_fx and self.fx_value:
-            note_kwargs["pattern"] = self.fx
-            note_kwargs["val"] = self.fx_value
-        return rv.note.Note(**note_kwargs)
-"""
-
-class BerlinSampleTrig(SVNoteTrigBase):
-
-    def __init__(self, target, sample,
-                 sampler_mod = None,
-                 i = 0,
-                 vel = None,
-                 fx_value = None):
-        super().__init__(target = target,
-                         i = i,
-                         vel = vel,
-                         fx_value = fx_value)
-        self.sample = sample
-        self.sampler_mod = sampler_mod
-
-    def resolve_sampler(self):
-        return self.sampler_mod if self.sampler_mod else self.mod
-
-    def resolve_sampler_note(self, modules):
-        sampler_mod = modules[self.sampler_mod if self.sampler_mod else self.mod]
-        note = 1 + sampler_mod.index_of(self.sample)
-        return note
-    
-    def render(self, modules, *args):
-        mod = modules[self.mod]        
-        mod_id = 1 + mod.index
-        note = self.resolve_sampler_note(modules)
-        note_kwargs = {
-            "module": mod_id,
-            "note": note
-        }
-        if self.has_vel:
-            note_kwargs["vel"] = self.velocity
-        if self.has_fx and self.fx_value:
-            note_kwargs["pattern"] = self.fx
-            note_kwargs["val"] = self.fx_value
-        return rv.note.Note(**note_kwargs)
 
 Modules = yaml.safe_load("""
 - name: MultiSynth
@@ -129,7 +41,39 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class Berlin03Sound:
+class BerlinSampleTrig(SVNoteTrigBase):
+
+    def __init__(self, target, sample, sampler_mod, **kwargs):
+        super().__init__(target = target,
+                         sample = sample,
+                         **kwargs)
+        self.sampler_mod = sampler_mod
+
+    def resolve_sampler(self):
+        return self.sampler_mod if self.sampler_mod else self.mod
+
+    def resolve_sampler_note(self, modules):
+        sampler_mod = modules[self.sampler_mod if self.sampler_mod else self.mod]
+        note = 1 + sampler_mod.index_of(self.sample)
+        return note
+    
+    def render(self, modules, *args):
+        mod = modules[self.mod]        
+        mod_id = 1 + mod.index
+        # note = 1 + mod.index_of(self.sample_string)
+        note = self.resolve_sampler_note(modules)
+        note_kwargs = {
+            "module": mod_id,
+            "note": note
+        }
+        if self.has_vel:
+            note_kwargs["vel"] = self.velocity
+        if self.has_fx and self.fx_value:
+            note_kwargs["pattern"] = self.fx
+            note_kwargs["val"] = self.fx_value
+        return rv.note.Note(**note_kwargs)
+
+class BerlinSound:
 
     def __init__(self,
                  attack = "0008",
@@ -150,12 +94,12 @@ class Berlin03Sound:
     def as_dict(self):
         return {k: v for k, v in self.__dict__.items() if v is not None}
     
-class Berlin03Wave(Enum):
+class BerlinWave(Enum):
     
     SQR = "SQR"
     SAW = "SAW"
         
-class Berlin03Machine(SVSamplerMachine):
+class BerlinMachine(SVSamplerMachine):
     
     Modules = Modules
                       
@@ -237,9 +181,9 @@ def random_sounds(n,
     resonance = random.choice(resonances)
     sounds = []
     for i in range(n):
-        sound = Berlin03Sound(sustain_term = int(random.choice(terms)),
-                              filter_freq = random.choice(frequencies),
-                              filter_resonance = resonance)
+        sound = BerlinSound(sustain_term = int(random.choice(terms)),
+                            filter_freq = random.choice(frequencies),
+                            filter_resonance = resonance)
         sounds.append(sound)
     return sounds
 
