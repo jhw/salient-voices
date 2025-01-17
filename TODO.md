@@ -1,15 +1,14 @@
 ### short 
 
-- purge SVMachineTrigs from euclid demo
 - purge SVMachineTrigs from resampler demo
 - purge SVMachineTrigs from berlin demo
 
 ### medium
 
-- include wave in sound
+- include namespace in trigs
+- SVModule to do namespace check rather than module check
+- include wave in berlin sound
 - pico waveforms
-
-### extended utils
 
 ### demos
 
@@ -39,6 +38,7 @@
 
 ### done
 
+- purge SVMachineTrigs from euclid demo
 - sampler doesn't seem to have any sound
 - multiple patches with different sounds
 - complete machine, track configuration
