@@ -4,8 +4,12 @@ from sv.trigs import SVSampleTrig, SVModTrig, controller_value
 
 from demos import random_seed, random_colour, random_perkons_groove, SimpleBank
 
+from pydub import AudioSegment
+
 import argparse
+import io
 import json
+import math
 import os
 import random
 import yaml
@@ -104,33 +108,49 @@ def GhostEcho(self, n, rand, bpm,
                                          echo_wet = wet_level,
                                          echo_feedback = feedback_level)
             yield i, trig_block
+            
+class EuclidArchive(dict):
 
-
-"""
-resampler assumes a particular output structure available from Euclid09, including metadata and slices of different duration
-"""
-    
-class Euclid09Archive(SimpleBank):
-
-    def __init__(self, zip_buffer):
-        SimpleBank.__init__(self, zip_buffer)
+    def __init__(self, bank):
+        dict.__init__(self, {})
+        self.bank = bank
+        self.init_slices()
 
     @property
     def project_metadata(self):
-        if "meta.json" not in self.file_names:
+        if "meta.json" not in self.bank.file_names:
             raise RuntimeError("project metadata not found")
-        with self.zip_file.open("meta.json", 'r') as file_entry:
+        with self.bank.zip_file.open("meta.json", 'r') as file_entry:
             file_content = file_entry.read()
         return json.loads(file_content)["project"]
 
-    def slice_files(self, n_ticks, quantise):
-        n = int(n_ticks / quantise)
-        files = [file_name for file_name in self.file_names
-                 if file_name.startswith(f"audio/sliced/{n:04}")]
-        if files == []:
-            raise RuntimeError("no slice files found")
-        return files
+    @property
+    def raw_audio(self):
+        if "meta.json" not in self.bank.file_names:
+            raise RuntimeError("project metadata not found")
+        with self.bank.zip_file.open("audio/raw.wav", 'r') as file_entry:
+            file_content = file_entry.read()
+        return io.BytesIO(file_content)
 
+    def init_slices(self, fade = 3):
+        meta, wav_io = self.project_metadata, self.raw_audio
+        audio = AudioSegment.from_file(wav_io, format="wav")
+        n = int(math.log(meta["n_ticks"], 2))
+        for i in range(n+1):
+            n_slices = meta["n_patches"] * (2 ** n)
+            slice_sz = int(len(audio) / n_slices)
+            for j in range(n_slices):
+                start, end = j * slice_sz, (i + j) * slice_sz
+                slice_audio = audio[start:end].fade_in(fade).fade_out(fade)
+                slice_io = io.BytesIO()        
+                slice_audio.export(slice_io, format="wav")
+                slice_io.seek(0)
+                file_name = f"audio/sliced/{(2**i):04}/{(i+j):04}.wav"
+                self[file_name] = slice_io
+
+    def get_wav(self, file_name):
+        return self[file_name]
+    
 def parse_args(config = [("archive_src", str, "demos/resampler/sample-archive.zip"),
                          ("group_sz", int, 4),
                          ("density", float, 0.5),
@@ -155,9 +175,10 @@ def parse_args(config = [("archive_src", str, "demos/resampler/sample-archive.zi
 if __name__ == "__main__":
     try:
         args = parse_args()
-        bank = Euclid09Archive(args.archive_src)
-        meta = bank.project_metadata
-        container = SVContainer(bank = bank,
+        bank = SimpleBank(args.archive_src)
+        archive = EuclidArchive(bank)
+        meta = archive.project_metadata
+        container = SVContainer(bank = archive,
                                 bpm = meta["bpm"],
                                 n_ticks = meta["n_ticks"])
         all_samples = bank.slice_files(n_ticks = meta["n_ticks"],
