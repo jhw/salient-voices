@@ -54,8 +54,10 @@ class SVModule(dict):
         pool = SVSamplePool()
         for patch in patches:
             for trig in patch.trigs:
-                if (isinstance(trig, SVSampleTrig) and 
-                    trig.mod == self["name"]):
+                if (does_class_extend(trig.__class__, SVSampleTrig) and 
+                    (trig.mod == self["name"] or
+                     (hasattr(trig, "sampler_mod") and
+                      trig.sampler_mod == self["name"]))):
                     pool.add(trig.sample_string)
         return pool
     

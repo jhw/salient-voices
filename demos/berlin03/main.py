@@ -118,7 +118,7 @@ class BerlinMachine(SVSamplerMachine):
     Modules = Modules
     
     def __init__(self, container, namespace, wave, sound,
-                 relative_note=0,
+                 relative_note=-6,
                  colour=[127, 127, 127],
                  **kwargs):
         SVSamplerMachine.__init__(self, container=container,
@@ -175,9 +175,9 @@ def BassLine(self, n, rand, groove,
             break
         
 def random_sounds(n,
-                  terms = [0.5, 0.5, 0.5, 1, 2],
-                  frequencies = ["2000", "3000", "3000", "3000", "5000"],
-                  resonances = ["6000", "6800", "7000", "7800"]):
+                  terms = [1, 2],
+                  frequencies = ["2000", "4000", "6000"],
+                  resonances = ["7000"]):
     resonance = random.choice(resonances)
     sounds = []
     for i in range(n):
@@ -188,9 +188,9 @@ def random_sounds(n,
     return sounds
 
 def parse_args(config = [("bank_src", str, "demos/berlin03/mikey303.zip"),
-                         ("bpm", int, 240),
+                         ("bpm", int, 120),
                          ("n_ticks", int, 32),
-                         ("n_sounds", int, 32),                         
+                         ("n_sounds", int, 16),                         
                          ("n_patches", int, 16)]):
     parser = argparse.ArgumentParser(description="whatevs")
     for attr, type, default in config:

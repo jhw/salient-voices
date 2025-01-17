@@ -1,22 +1,25 @@
 ### short [01-berlin03-demo]
 
-- sampler doesn't seem to have any sound
+- include wave in sound
+- cutoff note at end of ticks
+- dual notes
+- don't apply cutoff after every note -> to facilitate slides
+- slides
 
 ### medium
 
-- include wave in sound
-- randomise sound as part of Beat generator
 - pico waveforms
 
 ### extended utils
 
 - SVSimpleZipBank
 - git
-- cli colours/parse/base_cli
+- cli colours
+- cli parse
+- base_cli
 
 ### demos
 
-- berlin03 slide
 - euclid09 cutoff 
 - reverse/retrig
 - city dreams bass
@@ -43,6 +46,7 @@
 
 ### done
 
+- sampler doesn't seem to have any sound
 - multiple patches with different sounds
 - complete machine, track configuration
 - BerlinSampleTrig to extend SVSampleTrig
