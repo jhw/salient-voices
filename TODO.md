@@ -1,11 +1,18 @@
 ### short [01-berlin03-demo]
 
-- include wave in sound
-- randomise sound as part of beat
+- sampler doesn't seem to have any sound
 
 ### medium
 
+- include wave in sound
+- randomise sound as part of Beat generator
 - pico waveforms
+
+### extended utils
+
+- SVSimpleZipBank
+- git
+- cli colours/parse/base_cli
 
 ### demos
 

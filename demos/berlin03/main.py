@@ -1,12 +1,16 @@
 from sv.container import SVContainer
 from sv.machines import SVSamplerMachine, SVMachineTrigs
-from sv.trigs import SVSampleTrig, SVNoteOffTrig, SVModTrig, controller_value
+from sv.trigs import SVSampleTrig, SVTrigBase, SVModTrig, controller_value
 
-from demos import random_colour, random_seed
+from enum import Enum
+
+from demos import *
 
 import argparse
 import random
 import yaml
+
+import rv
 
 Modules = yaml.safe_load("""
 - name: MultiSynth
@@ -37,7 +41,24 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class BerlinSampleTrig(SVNoteTrigBase):
+class SVNoteOffTrig(SVTrigBase):
+
+    def __init__(self, target, i = 0):
+        super().__init__(target = target,
+                         i = i)
+    
+    @property
+    def mod(self):
+        return self.target.split("/")[0]
+
+    @property
+    def key(self):
+        return self.mod
+    
+    def render(self, *args):
+        return rv.note.Note(note = rv.note.NOTECMD.NOTE_OFF)
+
+class BerlinSampleTrig(SVSampleTrig):
 
     def __init__(self, target, sample, sampler_mod, **kwargs):
         super().__init__(target = target,
@@ -105,18 +126,16 @@ class BerlinMachine(SVSamplerMachine):
                                   root=rv.note.NOTE.C5 + relative_note,
                                   colour=colour)
         self.sound = sound
-        self.sample = SVSample.parse(f"mikey303/303 VCO {wave.value}.wav")
+        self.sample = f"303 VCO {wave.value}.wav"
         self.defaults = {}
 
     def note(self,
              note=0,
              volume=1.0):
-        sample = self.sample.clone()
-        sample.note = note
         trigs = [
             BerlinSampleTrig(target=f"{self.namespace}MultiSynth",
                              sampler_mod=f"{self.namespace}Sampler",
-                             sample=sample,
+                             sample=self.sample,
                              vel=volume),
             SVModTrig(target=f"{self.namespace}Sound2Ctl/out_max",
                       value=self.sound.filter_freq),
@@ -192,7 +211,7 @@ def parse_args(config = [("bank_src", str, "demos/berlin03/mikey303.zip"),
 if __name__ == "__main__":
     try:
         args = parse_args()
-        bank = Bank(args.bank_src)
+        bank = SimpleZipBank(args.bank_src)
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)
