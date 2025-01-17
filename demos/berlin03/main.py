@@ -162,26 +162,26 @@ class BerlinMachine(SVSamplerMachine):
                               i=i)]
     
 def BassLine(self, n, rand, groove, **kwargs):
-    in_note = False
+    last = None
     for i in range(n):
         if i == 0:
             pitch = rand["note"].choice([0, 12])
             yield self.note_on(pitch=pitch,
                                i = i)
-            in_note = True
-        elif (i == n-1 and in_note):
+            last = pitch
+        elif (i == n-1 and last != None):
             yield self.note_off(i = i)
-            note = False
+            last = None
         else:
             q = rand["note"].choice(range(3))
             if q == 0:
                 pitch = rand["note"].choice([0, 12])
                 yield self.note_on(pitch=pitch,
                                    i = i)
-                in_note = True
-            elif (q == 1 and in_note):
+                last = pitch
+            elif (q == 1 and last != None):
                 yield self.note_off(i = i)
-                in_note = False
+                last = None
             else:
                 pass
         

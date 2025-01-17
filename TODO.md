@@ -1,14 +1,15 @@
 ### short 
 
-- refactor note as pitch
-- move note off trig to trigs
+- closures to handle i variable
 
+- move note off trig to trigs
 - include wave in berlin sound
 - perkons groove
+- slide to
 
 ### medium
 
-- slide to
+
 - slide up/down
 
 - include namespace in trigs
@@ -44,6 +45,7 @@
 
 ### done
 
+- refactor note as pitch
 - purge SVMachineTrigs from berlin demo
 - purge SVMachineTrigs from resampler demo
 - purge SVMachineTrigs from euclid demo
