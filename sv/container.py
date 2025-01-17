@@ -1,5 +1,6 @@
 from sv.project import SVProject
 
+import json
 import os
 
 class SVTrigPatch:
@@ -46,9 +47,9 @@ class SVContainer:
     """
         
     @property
-    def modules(self):
+    def flattened_modules(self):
         modules = {}
-        for machine in self.machines:            
+        for machine in self.machines:        
             modules.update({mod["name"]:mod for mod in machine.modules})
         return list(modules.values())
 
@@ -57,20 +58,23 @@ class SVContainer:
 
     def validate_namespaces(fn):
         def wrapped(self):
-            classes = {}
+            configs = {}
             for machine in self.machines:
-                classes.setdefault(machine.namespace, set())
-                classes[machine.namespace].add(str(machine.__class__))
-            for k, v in classes.items():
+                configs.setdefault(machine.namespace, set())
+                struct = {"modules": machine.Modules,
+                          "class": str(machine.__class__)}
+                configs[machine.namespace].add(json.dumps(struct))
+            for k, v in configs.items():
                 if len(v) != 1:
-                    raise RuntimeError(f"container namespace {k} contains multiple machine types")
+                    raise RuntimeError(f"container namespace {k} contains multiple machine confgurations")
             return fn(self)
         return wrapped
         
     @validate_namespaces
     def render_project(self):
+        print("RENDER")
         return SVProject().render_project(patches = self.patches,
-                                          modules = self.modules,
+                                          modules = self.flattened_modules,
                                           bank = self.bank,
                                           bpm = self.bpm)
 

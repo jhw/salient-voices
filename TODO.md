@@ -1,8 +1,10 @@
 ### short
 
-- berlin03
+- rename SimpleBank as SimpleZipBank
 
 ### medium
+
+- berlin03
 
 ### demos
 
@@ -33,6 +35,7 @@
 
 ### done
 
+- check why euclid doesn't seem to be calling container.render
 - add back chatgpt script to initialise archive 
 - change bank so it doesnt extend simple bank but is its own version
 - initialise from zip but extend dict and keep stuff in memory.
