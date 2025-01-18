@@ -1,10 +1,9 @@
 ### short 
 
-- include namespace in trigs
+- refactor BerlinSampleTrig as MultiSynthSampleTrig
 
 ### medium
 
-- SVModule to do namespace check rather than module check
 - slide to
 - randomise ADSR sound parameters
 - pico waveforms

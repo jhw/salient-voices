@@ -50,14 +50,24 @@ class SVModule(dict):
         return does_class_extend(load_class(self["class"]),
                                  rv.modules.sampler.Sampler)
 
+    """
+    - use of sampler_mod necessitated by MultiSynth pattern 
+    - note info is stored at one module level (MultiSynth) but sound info at another (Sampler)
+    """
+    
+    def is_parent_of(self, trig, attrs = ["mod", "sampler_mod"]):
+        for attr in attrs:
+            if (hasattr(trig, attr) and
+                getattr(trig, attr) == self["name"]):
+                return True
+        return False
+    
     def init_sample_pool(self, patches):
         pool = SVSamplePool()
         for patch in patches:
             for trig in patch.trigs:
-                if (does_class_extend(trig.__class__, SVSampleTrig) and 
-                    (trig.mod == self["name"] or
-                     (hasattr(trig, "sampler_mod") and
-                      trig.sampler_mod == self["name"]))):
+                if (does_class_extend(trig.__class__, SVSampleTrig) and
+                    self.is_parent_of(trig)):
                     pool.add(trig.sample_string)
         return pool
     
