@@ -1,8 +1,12 @@
-### short 
+### short [01-slide-to]
 
-- slide to
+- rehabilitate fx trig
+- slide_to to return fx trig
 
 ### medium
+
+- adjust slide scale for time since last slide 
+- add slide probability 
 
 - pico waveforms
 - slide up/down

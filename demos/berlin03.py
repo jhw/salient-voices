@@ -121,6 +121,9 @@ class BerlinMachine(SVSamplerMachine):
                       i=i,
                       value=self.sound.release)
         ]
+
+    def slide_to(self, i):
+        return []
     
     def note_off(self, i):
         return [SVNoteOffTrig(target=f"{self.namespace}MultiSynth",
@@ -138,8 +141,16 @@ def BassLine(self, n, rand, groove, scale, **kwargs):
                                 i = i)
         def note_off(self):
             return self.note_off(i = i)
+        def can_slide_to(self):
+            return (last != None and
+                    last[1] != pitch)
+        def slide_to(self, value = "0020"):
+            return self.slide_to(value = value,
+                                 i = i)
         if i == 0:
             yield note_on(self)
+            if can_slide_to(self):
+                yield slide_to(self)
             last = (i, pitch)
         elif (i == n-1 and last != None):
             yield note_off(self)
@@ -148,6 +159,8 @@ def BassLine(self, n, rand, groove, scale, **kwargs):
             q = rand["note"].choice(range(3))
             if q == 0:
                 yield note_on(self)
+                if can_slide_to(self):
+                    yield slide_to(self)
                 last = (i, pitch)
             elif (q == 1 and last != None):
                 yield note_off(self)
