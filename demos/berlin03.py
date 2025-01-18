@@ -89,19 +89,26 @@ class BerlinMachine(SVSamplerMachine):
                                   namespace=namespace,
                                   root=rv.note.NOTE.C5 + relative_note,
                                   colour=colour)
-        self.sound = sound
+        self.sound = sound        
         self.defaults = {}
 
     def note_on(self, i,
                 pitch=0,
-                volume=1.0):
+                volume=1.0,
+                slide_to=False):
+        trigs = []
+        # note
         sample = f"{self.sound.sample}?pitch={pitch}"
-        return [
-            SVMultiSynthSampleTrig(target=f"{self.namespace}MultiSynth",                             
-                                   i=i,
-                                   sampler_mod=f"{self.namespace}Sampler",
-                                   sample=sample,
-                                   vel=volume),
+        fx = "3/128" if slide_to else None
+        note = SVMultiSynthSampleTrig(target=f"{self.namespace}MultiSynth",
+                                      i=i,
+                                      sampler_mod=f"{self.namespace}Sampler",
+                                      sample=sample,
+                                      vel=volume,
+                                      fx=fx)
+        trigs.append(note)
+        # env
+        env = [
             SVModTrig(target=f"{self.namespace}Sound2Ctl/out_max",
                       i=i,
                       value=self.sound.filter_freq),
@@ -121,10 +128,9 @@ class BerlinMachine(SVSamplerMachine):
                       i=i,
                       value=self.sound.release)
         ]
+        trigs += env
+        return trigs
 
-    def slide_to(self, i):
-        return []
-    
     def note_off(self, i):
         return [SVNoteOffTrig(target=f"{self.namespace}MultiSynth",
                               i=i)]
@@ -136,35 +142,30 @@ def BassLine(self, n, rand, groove, scale, **kwargs):
         volume = groove(rand = rand["vol"],
                         i = i)
         def note_on(self):
+            slide_to = (last != None and
+                        last[1] != pitch)
             return self.note_on(pitch = pitch,
                                 volume = volume,
-                                i = i)
+                                i = i,
+                                slide_to = slide_to)
         def note_off(self):
             return self.note_off(i = i)
-        def can_slide_to(self):
-            return (last != None and
-                    last[1] != pitch)
-        def slide_to(self, value = "0020"):
-            return self.slide_to(value = value,
-                                 i = i)
         if i == 0:
             yield note_on(self)
-            if can_slide_to(self):
-                yield slide_to(self)
             last = (i, pitch)
-        elif (i == n-1 and last != None):
-            yield note_off(self)
-            last = None
+        elif i == n-1:
+            if last != None:
+                yield note_off(self)
+                last = None
         else:
             q = rand["note"].choice(range(3))
             if q == 0:
                 yield note_on(self)
-                if can_slide_to(self):
-                    yield slide_to(self)
                 last = (i, pitch)
-            elif (q == 1 and last != None):
-                yield note_off(self)
-                last = None
+            elif q == 1:
+                if last != None:
+                    yield note_off(self)
+                    last = None
             else:
                 pass
         
@@ -202,8 +203,8 @@ if __name__ == "__main__":
             decay = random.choice(["0018"])
             sustain = random.choice(["0800"])
             release = random.choice(["0300"])
-            filter_freq = random.choice(["2000", "4000", "6000"])
-            filter_resonance = random.choice(["6000", "6800", "7000"])
+            filter_freq = random.choice(["4000", "6000", "8000"])
+            filter_resonance = random.choice(["6800"])
             sound = BerlinSound(sample = sample,
                                 attack = attack,
                                 decay = decay,

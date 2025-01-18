@@ -32,11 +32,14 @@ class SVNoteTrigBase(SVTrigBase):
     def __init__(self, target,
                  i = 0,
                  note = None,
-                 vel = None):
+                 vel = None,
+                 fx = None,
+                 **kwargs):
         super().__init__(target = target,
                          i = i)
         self.note = note
         self.vel = vel
+        self.fx = fx
 
     @property
     def mod(self):
@@ -57,11 +60,19 @@ class SVNoteTrigBase(SVTrigBase):
     @property
     def velocity(self):        
         return max(1, int(self.vel * self.Volume))
-    
+
     @property
     def key(self):
         return self.mod
 
+    @property
+    def fx_pattern(self):
+        return int(self.fx.split("/")[0])
+
+    @property
+    def fx_value(self):
+        return int(self.fx.split("/")[1])
+    
 """
 Extend note for sampke, pitch, cutoff parameters; to be encoded in sample_string
 """
@@ -69,13 +80,11 @@ Extend note for sampke, pitch, cutoff parameters; to be encoded in sample_string
 class SVSampleTrig(SVNoteTrigBase):
 
     def __init__(self, target, sample,
-                 i = 0,
-                 vel = None,
                  pitch = None,
-                 cutoff = None):
+                 cutoff = None,
+                 **kwargs):
         super().__init__(target = target,
-                         i = i,
-                         vel = vel)
+                         **kwargs)
         self.sample = sample
         self.pitch = pitch
         self.cutoff = cutoff
@@ -109,6 +118,9 @@ class SVSampleTrig(SVNoteTrigBase):
         }
         if self.has_vel:
             note_kwargs["vel"] = self.velocity
+        if self.fx:
+            note_kwargs["ctl"] = self.fx_pattern
+            note_kwargs["val"] = self.fx_value
         return rv.note.Note(**note_kwargs)
 
 class SVMultiSynthSampleTrig(SVSampleTrig):
@@ -138,15 +150,17 @@ class SVMultiSynthSampleTrig(SVSampleTrig):
         }
         if self.has_vel:
             note_kwargs["vel"] = self.velocity
+        if self.fx:
+            note_kwargs["ctl"] = self.fx_pattern
+            note_kwargs["val"] = self.fx_value
         return rv.note.Note(**note_kwargs)
     
 class SVModTrig(SVTrigBase):
 
     CtrlMult = 256
 
-    def __init__(self, target, value, i = 0):
-        super().__init__(target = target,
-                         i = i)
+    def __init__(self, target, value, **kwargs):
+        super().__init__(target = target, **kwargs)            
         self.value = value
 
     @property
@@ -175,9 +189,8 @@ class SVModTrig(SVTrigBase):
 
 class SVNoteOffTrig(SVTrigBase):
 
-    def __init__(self, target, i = 0):
-        super().__init__(target = target,
-                         i = i)
+    def __init__(self, target, **kwargs):
+        super().__init__(target = target, **kwargs)
     
     @property
     def mod(self):

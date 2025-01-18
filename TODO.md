@@ -1,20 +1,16 @@
 ### short [01-slide-to]
 
-- check trig constructor passing
-
-- rehabilitate fx trig
-- slide_to to return fx trig
+- refactor slide-to handling
+- pico waveforms
+- extend sample length on initialisation
+- reduce blank probability between notes?
+- wol scales
 
 ### medium
 
-- adjust slide scale for time since last slide 
-- add slide probability 
-
-- pico waveforms
-- slide up/down
-
 ### demos
 
+- slide up/down
 - euclid09 cutoff 
 - reverse/retrig
 - city dreams bass
@@ -39,6 +35,9 @@
 
 ### done
 
+- still getting some notes rendered in last step
+- how to set fx pattern?
+- check trig constructor passing
 - purge fx support
 - berlin distortion
 - remove bpm component from euclid/resampler echo delay
