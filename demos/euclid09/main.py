@@ -63,15 +63,9 @@ class Detroit09(SVSamplerMachine):
 
     def modulation(self,
                    i, 
-                   echo_delay=None,
                    echo_wet=None,
                    echo_feedback=None):
         trigs = []
-        if echo_delay:
-            delay_level = int(controller_value(echo_delay))
-            trigs.append(SVModTrig(target=f"{self.namespace}Echo/delay",
-                                   i=i,
-                                   value=delay_level))
         if echo_wet:
             wet_level = int(controller_value(echo_wet))
             trigs.append(SVModTrig(target=f"{self.namespace}Echo/wet",
@@ -94,7 +88,7 @@ def Beat(self, n, rand, pattern, groove, temperature, density, **kwargs):
             yield self.note(volume = volume,
                             i = i)
 
-def GhostEcho(self, n, rand, bpm,
+def GhostEcho(self, n, rand,
               wet_levels = ["0000", "2000", "4000", "6000"],
               feedback_levels = ["0000", "2000", "4000", "6000"],
               quantise = 4,
@@ -103,9 +97,7 @@ def GhostEcho(self, n, rand, bpm,
         if 0 == i % quantise:
             wet_level = rand["fx"].choice(wet_levels)
             feedback_level = rand["fx"].choice(feedback_levels)
-            delay_value = hex(int(128 * bpm  * 3 / 10))
             yield self.modulation(i = i,
-                                  echo_delay = delay_value,
                                   echo_wet = wet_level,
                                   echo_feedback = feedback_level)
             
@@ -139,7 +131,7 @@ TrackConfig = [("kick", lambda x: "BD" in x, 0.5, 0.5),
                                   "BLIP" in x or
                                   "HH" in x), 0.5, 0.75)]
 
-def spawn_patch(bank_samples, container, bpm,
+def spawn_patch(bank_samples, container,
                 track_config = TrackConfig,
                 beat_generator = Beat,
                 echo_generator = GhostEcho):
@@ -161,8 +153,7 @@ def spawn_patch(bank_samples, container, bpm,
                               "density": density,
                               "temperature": temperature})
         machine.render(generator = echo_generator,
-                       seeds = seeds,
-                       env = {"bpm": args.bpm})
+                       seeds = seeds)
     
 if __name__ == "__main__":
     try:
@@ -176,8 +167,7 @@ if __name__ == "__main__":
             colour = random_colour()
             container.spawn_patch(colour)
             spawn_patch(bank_samples = bank_samples,
-                        container = container,
-                        bpm = args.bpm)
+                        container = container)
             container.spawn_patch(colour)
         container.write_project("tmp/euclid09-demo.sunvox")                    
     except RuntimeError as error:

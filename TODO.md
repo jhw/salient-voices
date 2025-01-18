@@ -2,8 +2,6 @@
 
 - berlin distortion
 
-- remove bpm component from euclid/resampler echo delay
-
 ### medium
 
 - slide to
@@ -36,6 +34,7 @@
 
 ### done
 
+- remove bpm component from euclid/resampler echo delay
 - recover slide demos into dev
 - randomise ADSR sound parameters
 - refactor BerlinSampleTrig as MultiSynthSampleTrig

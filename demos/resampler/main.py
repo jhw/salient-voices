@@ -67,15 +67,9 @@ class Detroit09(SVSamplerMachine):
                              vel=volume)]
 
     def modulation(self, i,
-                   echo_delay=None,
                    echo_wet=None,
                    echo_feedback=None):
         trigs = []
-        if echo_delay:
-            delay_level = int(controller_value(echo_delay))
-            trigs.append(SVModTrig(target=f"{self.namespace}Echo/delay",
-                                   i=i,
-                                   value=delay_level))
         if echo_wet:
             wet_level = int(controller_value(echo_wet))
             trigs.append(SVModTrig(target=f"{self.namespace}Echo/wet",
@@ -97,7 +91,7 @@ def Beat(self, n, rand, groove, quantise, density,
             self.randomise_sample(rand["sample"])
             yield self.note(volume = volume, i = i)
 
-def GhostEcho(self, n, rand, bpm,
+def GhostEcho(self, n, rand,
               quantise = 4,
               sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
               **kwargs):
@@ -105,9 +99,7 @@ def GhostEcho(self, n, rand, bpm,
         if 0 == i % quantise:
             wet_level = rand["fx"].choice(sample_hold_levels)
             feedback_level = rand["fx"].choice(sample_hold_levels)
-            delay_value = hex(int(128 * bpm * 3 / 10))
             yield self.modulation(i = i,
-                                  echo_delay = delay_value,
                                   echo_wet = wet_level,
                                   echo_feedback = feedback_level)
             
@@ -208,8 +200,7 @@ if __name__ == "__main__":
                                   "quantise": args.quantise,
                                   "density": args.density})
             machine.render(generator = GhostEcho,
-                           seeds = seeds,
-                           env = {"bpm": meta["bpm"]})
+                           seeds = seeds)
         container.write_project("tmp/resampler-demo.sunvox")
     except RuntimeError as error:
         print(f"ERROR: {error}")

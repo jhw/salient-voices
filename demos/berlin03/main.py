@@ -200,7 +200,7 @@ if __name__ == "__main__":
             seeds = {key: int(random.random() * 1e8)
                      for key in "note|vol".split("|")}
             groove = random_perkons_groove()
-            scale = random.choice(Vitling303Scales)
+            scale = [i for i in random.choice(Vitling303Scales) if i <= 12]
             env = {"groove": groove,
                    "scale": scale}
             machine.render(generator = BassLine,
