@@ -1,8 +1,9 @@
 ### short 
 
+- SVModule is_parent_of should use class to lookup the relevant attr (mod, sampler_mod) rather than iterating
+
 - recover slide demos into dev
 - randomise ADSR sound parameters
-
 
 ### medium
 
