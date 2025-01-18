@@ -6,7 +6,6 @@
 
 ### medium
 
-- recover slide demos into dev
 - slide to
 - pico waveforms
 - slide up/down
@@ -37,6 +36,7 @@
 
 ### done
 
+- recover slide demos into dev
 - randomise ADSR sound parameters
 - refactor BerlinSampleTrig as MultiSynthSampleTrig
 - vitling scales
