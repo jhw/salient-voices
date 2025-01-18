@@ -4,7 +4,6 @@
 
 ### medium
 
-- berlin distortion
 - pico waveforms
 - slide up/down
 
@@ -34,6 +33,7 @@
 
 ### done
 
+- berlin distortion
 - remove bpm component from euclid/resampler echo delay
 - recover slide demos into dev
 - randomise ADSR sound parameters

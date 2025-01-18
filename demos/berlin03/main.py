@@ -31,6 +31,12 @@ Modules = yaml.safe_load("""
 - name: Sampler
   class: sv.sampler.SVSlotSampler
   links:
+    - Distortion
+- name: Distortion
+  class: rv.modules.distortion.Distortion
+  defaults:
+    power: 128
+  links:
     - Filter
 - name: Filter
   class: rv.modules.filter.Filter
