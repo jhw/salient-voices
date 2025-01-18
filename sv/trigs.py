@@ -32,13 +32,11 @@ class SVNoteTrigBase(SVTrigBase):
     def __init__(self, target,
                  i = 0,
                  note = None,
-                 vel = None,
-                 fx_value = None):
+                 vel = None):
         super().__init__(target = target,
                          i = i)
         self.note = note
         self.vel = vel
-        self.fx_value = fx_value
 
     @property
     def mod(self):
@@ -61,14 +59,6 @@ class SVNoteTrigBase(SVTrigBase):
         return max(1, int(self.vel * self.Volume))
     
     @property
-    def has_fx(self):
-        return len(self.target.split("/")) > 1
-    
-    @property
-    def fx(self):
-        return int(self.target.split("/")[1])
-    
-    @property
     def key(self):
         return self.mod
 
@@ -81,13 +71,11 @@ class SVSampleTrig(SVNoteTrigBase):
     def __init__(self, target, sample,
                  i = 0,
                  vel = None,
-                 fx_value = None,
                  pitch = None,
                  cutoff = None):
         super().__init__(target = target,
                          i = i,
-                         vel = vel,
-                         fx_value = fx_value)
+                         vel = vel)
         self.sample = sample
         self.pitch = pitch
         self.cutoff = cutoff
@@ -121,9 +109,6 @@ class SVSampleTrig(SVNoteTrigBase):
         }
         if self.has_vel:
             note_kwargs["vel"] = self.velocity
-        if self.has_fx and self.fx_value:
-            note_kwargs["pattern"] = self.fx
-            note_kwargs["val"] = self.fx_value
         return rv.note.Note(**note_kwargs)
 
 class SVMultiSynthSampleTrig(SVSampleTrig):
@@ -153,9 +138,6 @@ class SVMultiSynthSampleTrig(SVSampleTrig):
         }
         if self.has_vel:
             note_kwargs["vel"] = self.velocity
-        if self.has_fx and self.fx_value:
-            note_kwargs["pattern"] = self.fx
-            note_kwargs["val"] = self.fx_value
         return rv.note.Note(**note_kwargs)
     
 class SVModTrig(SVTrigBase):

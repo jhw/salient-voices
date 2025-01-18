@@ -1,5 +1,7 @@
 ### short [01-slide-to]
 
+- check trig constructor passing
+
 - rehabilitate fx trig
 - slide_to to return fx trig
 
@@ -37,6 +39,7 @@
 
 ### done
 
+- purge fx support
 - berlin distortion
 - remove bpm component from euclid/resampler echo delay
 - recover slide demos into dev
