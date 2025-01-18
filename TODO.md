@@ -1,10 +1,10 @@
 ### short 
 
-- berlin distortion
+- slide to
 
 ### medium
 
-- slide to
+- berlin distortion
 - pico waveforms
 - slide up/down
 
