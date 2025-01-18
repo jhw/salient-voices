@@ -1,6 +1,6 @@
 ### short 
 
-- include index in last variable
+- pass scale as env variable
 - include namespace in trigs
 - perkons groove
 
@@ -40,6 +40,7 @@
 
 ### done
 
+- include index in last variable
 - move SVNoteOff trig to trigs
 - randomise wave
 - include wave in berlin sound

@@ -149,7 +149,7 @@ def BassLine(self, n, rand, groove, **kwargs):
             return self.note_off(i = i)
         if i == 0:
             yield note_on(self)
-            last = pitch
+            last = (i, pitch)
         elif (i == n-1 and last != None):
             yield note_off(self)
             last = None
@@ -157,7 +157,7 @@ def BassLine(self, n, rand, groove, **kwargs):
             q = rand["note"].choice(range(3))
             if q == 0:
                 yield note_on(self)
-                last = pitch
+                last = (i, pitch)
             elif (q == 1 and last != None):
                 yield note_off(self)
                 last = None
