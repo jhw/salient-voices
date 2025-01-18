@@ -125,7 +125,39 @@ class SVSampleTrig(SVNoteTrigBase):
             note_kwargs["pattern"] = self.fx
             note_kwargs["val"] = self.fx_value
         return rv.note.Note(**note_kwargs)
-            
+
+class SVMultiSynthSampleTrig(SVSampleTrig):
+
+    def __init__(self, target, sample, sampler_mod, **kwargs):
+        super().__init__(target = target,
+                         sample = sample,
+                         **kwargs)
+        self.sampler_mod = sampler_mod
+        
+    def resolve_sampler(self):
+        return self.sampler_mod if self.sampler_mod else self.mod
+    
+    def resolve_sampler_note(self, modules):
+        sampler_mod = modules[self.sampler_mod if self.sampler_mod else self.mod]
+        note = 1 + sampler_mod.index_of(self.sample)
+        return note
+    
+    def render(self, modules, *args):
+        mod = modules[self.mod]        
+        mod_id = 1 + mod.index
+        # note = 1 + mod.index_of(self.sample_string)
+        note = self.resolve_sampler_note(modules)
+        note_kwargs = {
+            "module": mod_id,
+            "note": note
+        }
+        if self.has_vel:
+            note_kwargs["vel"] = self.velocity
+        if self.has_fx and self.fx_value:
+            note_kwargs["pattern"] = self.fx
+            note_kwargs["val"] = self.fx_value
+        return rv.note.Note(**note_kwargs)
+    
 class SVModTrig(SVTrigBase):
 
     CtrlMult = 256

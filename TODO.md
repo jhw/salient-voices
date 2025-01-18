@@ -1,11 +1,12 @@
 ### short 
 
-- refactor BerlinSampleTrig as MultiSynthSampleTrig
+- recover slide demos into dev
+- randomise ADSR sound parameters
+
 
 ### medium
 
 - slide to
-- randomise ADSR sound parameters
 - pico waveforms
 - slide up/down
 
@@ -35,6 +36,7 @@
 
 ### done
 
+- refactor BerlinSampleTrig as MultiSynthSampleTrig
 - vitling scales
 - pass scale as env variable
 - perkons groove

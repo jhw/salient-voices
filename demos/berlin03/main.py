@@ -1,6 +1,6 @@
 from sv.container import SVContainer
 from sv.machines import SVSamplerMachine
-from sv.trigs import SVSampleTrig, SVModTrig, SVNoteOffTrig, controller_value
+from sv.trigs import SVMultiSynthSampleTrig, SVModTrig, SVNoteOffTrig, controller_value
 
 from enum import Enum
 
@@ -54,38 +54,6 @@ Vitling303Scales = [[0, 0, 12, 24, 27],
                     [0, 0, 0, 0, 12, 13, 16, 19, 22, 24, 25],
                     [0, 0, 0, 7, 12, 15, 17, 20, 24]]
 
-class BerlinSampleTrig(SVSampleTrig):
-
-    def __init__(self, target, sample, sampler_mod, **kwargs):
-        super().__init__(target = target,
-                         sample = sample,
-                         **kwargs)
-        self.sampler_mod = sampler_mod
-        
-    def resolve_sampler(self):
-        return self.sampler_mod if self.sampler_mod else self.mod
-    
-    def resolve_sampler_note(self, modules):
-        sampler_mod = modules[self.sampler_mod if self.sampler_mod else self.mod]
-        note = 1 + sampler_mod.index_of(self.sample)
-        return note
-    
-    def render(self, modules, *args):
-        mod = modules[self.mod]        
-        mod_id = 1 + mod.index
-        # note = 1 + mod.index_of(self.sample_string)
-        note = self.resolve_sampler_note(modules)
-        note_kwargs = {
-            "module": mod_id,
-            "note": note
-        }
-        if self.has_vel:
-            note_kwargs["vel"] = self.velocity
-        if self.has_fx and self.fx_value:
-            note_kwargs["pattern"] = self.fx
-            note_kwargs["val"] = self.fx_value
-        return rv.note.Note(**note_kwargs)
-
 class BerlinSound:
 
     def __init__(self, sample,
@@ -123,11 +91,11 @@ class BerlinMachine(SVSamplerMachine):
                 volume=1.0):
         sample = f"{self.sound.sample}?pitch={pitch}"
         return [
-            BerlinSampleTrig(target=f"{self.namespace}MultiSynth",                             
-                             i=i,
-                             sampler_mod=f"{self.namespace}Sampler",
-                             sample=sample,
-                             vel=volume),
+            SVMultiSynthSampleTrig(target=f"{self.namespace}MultiSynth",                             
+                                   i=i,
+                                   sampler_mod=f"{self.namespace}Sampler",
+                                   sample=sample,
+                                   vel=volume),
             SVModTrig(target=f"{self.namespace}Sound2Ctl/out_max",
                       i=i,
                       value=self.sound.filter_freq),
