@@ -101,7 +101,7 @@ def GhostEcho(self, n, rand,
                                   echo_wet = wet_level,
                                   echo_feedback = feedback_level)
             
-def parse_args(config = [("bank_src", str, "demos/pico-default.zip"),
+def parse_args(config = [("bank_src", str, "demos/packs/pico-default.zip"),
                          ("bpm", int, 120),
                          ("n_ticks", int, 16),
                          ("n_patches", int, 16)]):

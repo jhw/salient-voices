@@ -155,7 +155,7 @@ def BassLine(self, n, rand, groove, scale, **kwargs):
             else:
                 pass
         
-def parse_args(config = [("bank_src", str, "demos/berlin03/mikey303.zip"),
+def parse_args(config = [("bank_src", str, "demos/packs/mikey303.zip"),
                          ("bpm", int, 120),
                          ("n_ticks", int, 32),
                          ("n_patches", int, 16)]):
