@@ -41,6 +41,19 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
+"""
+https://github.com/vitling/acid-banger/blob/main/src/pattern.ts
+"""
+
+Vitling303Scales = [[0, 0, 12, 24, 27],
+                    [0, 0, 0, 12, 10, 19, 26, 27],
+                    [0, 1, 7, 10, 12, 13],
+                    [0], 
+                    [0, 0, 0, 12],
+                    [0, 0, 12, 14, 15, 19],
+                    [0, 0, 0, 0, 12, 13, 16, 19, 22, 24, 25],
+                    [0, 0, 0, 7, 12, 15, 17, 20, 24]]
+
 class BerlinSampleTrig(SVSampleTrig):
 
     def __init__(self, target, sample, sampler_mod, **kwargs):
@@ -139,10 +152,10 @@ class BerlinMachine(SVSamplerMachine):
         return [SVNoteOffTrig(target=f"{self.namespace}MultiSynth",
                               i=i)]
     
-def BassLine(self, n, rand, groove, **kwargs):
+def BassLine(self, n, rand, groove, scale, **kwargs):
     last = None
     for i in range(n):
-        pitch = rand["note"].choice([0, 12])
+        pitch = rand["note"].choice(scale)
         volume = groove(rand = rand["vol"],
                         i = i)
         def note_on(self):
@@ -170,7 +183,7 @@ def BassLine(self, n, rand, groove, **kwargs):
         
 def parse_args(config = [("bank_src", str, "demos/berlin03/mikey303.zip"),
                          ("bpm", int, 120),
-                         ("n_ticks", int, 16),
+                         ("n_ticks", int, 32),
                          ("n_patches", int, 16)]):
     parser = argparse.ArgumentParser(description="whatevs")
     for attr, type, default in config:
@@ -208,7 +221,9 @@ if __name__ == "__main__":
             seeds = {key: int(random.random() * 1e8)
                      for key in "note|vol".split("|")}
             groove = random_perkons_groove()
-            env = {"groove": groove}
+            scale = random.choice(Vitling303Scales)
+            env = {"groove": groove,
+                   "scale": scale}
             machine.render(generator = BassLine,
                            seeds = seeds,
                            env = env)

@@ -1,8 +1,6 @@
 ### short 
 
-- pass scale as env variable
 - include namespace in trigs
-- vitling scales
 
 ### medium
 
@@ -38,6 +36,8 @@
 
 ### done
 
+- vitling scales
+- pass scale as env variable
 - perkons groove
 - include index in last variable
 - move SVNoteOff trig to trigs
