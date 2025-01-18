@@ -67,11 +67,11 @@ class SVNoteTrigBase(SVTrigBase):
 
     @property
     def fx_pattern(self):
-        return int(self.fx.split("/")[0])
+        return controller_value(self.fx.split("/")[0])
 
     @property
     def fx_value(self):
-        return int(self.fx.split("/")[1])
+        return controller_value(self.fx.split("/")[1])
     
 """
 Extend note for sampke, pitch, cutoff parameters; to be encoded in sample_string

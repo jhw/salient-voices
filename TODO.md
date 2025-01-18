@@ -1,8 +1,7 @@
 ### short [01-slide-to]
 
-- refactor slide-to handling
-- pico waveforms
 - extend sample length on initialisation
+- pico waveforms
 - reduce blank probability between notes?
 - wol scales
 
@@ -35,6 +34,7 @@
 
 ### done
 
+- refactor slide-to handling
 - still getting some notes rendered in last step
 - how to set fx pattern?
 - check trig constructor passing

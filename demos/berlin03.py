@@ -76,6 +76,8 @@ class BerlinSound:
         self.release = release
         self.filter_freq = filter_freq
         self.filter_resonance = filter_resonance
+
+SlideToFX = "0003"
         
 class BerlinMachine(SVSamplerMachine):
     
@@ -95,11 +97,12 @@ class BerlinMachine(SVSamplerMachine):
     def note_on(self, i,
                 pitch=0,
                 volume=1.0,
-                slide_to=False):
+                slide_to=False,
+                slide_level="0080"):
         trigs = []
         # note
         sample = f"{self.sound.sample}?pitch={pitch}"
-        fx = "3/128" if slide_to else None
+        fx = f"{SlideToFX}/{slide_level}" if slide_to else None
         note = SVMultiSynthSampleTrig(target=f"{self.namespace}MultiSynth",
                                       i=i,
                                       sampler_mod=f"{self.namespace}Sampler",
@@ -107,8 +110,8 @@ class BerlinMachine(SVSamplerMachine):
                                       vel=volume,
                                       fx=fx)
         trigs.append(note)
-        # env
-        env = [
+        # envelope
+        envelope = [
             SVModTrig(target=f"{self.namespace}Sound2Ctl/out_max",
                       i=i,
                       value=self.sound.filter_freq),
@@ -128,7 +131,7 @@ class BerlinMachine(SVSamplerMachine):
                       i=i,
                       value=self.sound.release)
         ]
-        trigs += env
+        trigs += envelope
         return trigs
 
     def note_off(self, i):
@@ -204,7 +207,7 @@ if __name__ == "__main__":
             sustain = random.choice(["0800"])
             release = random.choice(["0300"])
             filter_freq = random.choice(["4000", "6000", "8000"])
-            filter_resonance = random.choice(["6800"])
+            filter_resonance = random.choice(["7000"])
             sound = BerlinSound(sample = sample,
                                 attack = attack,
                                 decay = decay,
