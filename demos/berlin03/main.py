@@ -92,13 +92,14 @@ class BerlinSampleTrig(SVSampleTrig):
 
 class BerlinSound:
 
-    def __init__(self,
+    def __init__(self, sample,
                  attack = "0008",
                  decay = "0018",
                  sustain_level = "0800",
                  release = "0300",
                  filter_freq = "4000",
                  filter_resonance = "7000"):
+        self.sample = sample
         self.attack = attack
         self.decay = decay
         self.sustain_level = sustain_level
@@ -106,16 +107,11 @@ class BerlinSound:
         self.filter_freq = filter_freq
         self.filter_resonance = filter_resonance
         
-class BerlinWave(Enum):
-    
-    SQR = "SQR"
-    SAW = "SAW"
-        
 class BerlinMachine(SVSamplerMachine):
     
     Modules = Modules
     
-    def __init__(self, container, namespace, wave, sound,
+    def __init__(self, container, namespace, sound,
                  relative_note=-6,
                  colour=[127, 127, 127],
                  **kwargs):
@@ -124,13 +120,12 @@ class BerlinMachine(SVSamplerMachine):
                                   root=rv.note.NOTE.C5 + relative_note,
                                   colour=colour)
         self.sound = sound
-        self.sample = f"303 VCO {wave.value}.wav"
         self.defaults = {}
 
     def note_on(self, i,
                 pitch=0,
                 volume=1.0):
-        sample = f"{self.sample}?pitch={pitch}"
+        sample = f"{self.sound.sample}?pitch={pitch}"
         return [
             BerlinSampleTrig(target=f"{self.namespace}MultiSynth",                             
                              i=i,
@@ -215,13 +210,13 @@ if __name__ == "__main__":
                                 n_ticks = args.n_ticks)
         for i in range(args.n_patches):
             container.spawn_patch(colour = random_colour())
-            sound = BerlinSound(filter_freq = random.choice(["2000", "4000", "6000"]),
+            sound = BerlinSound(sample =  random.choice(bank.file_names),
+                                filter_freq = random.choice(["2000", "4000", "6000"]),
                                 filter_resonance = random.choice(["6000", "6800", "7000"]))
             machine = BerlinMachine(container = container,
                                     namespace = "303",
                                     sound = sound,
-                                    colour = random_colour(),
-                                    wave = BerlinWave.SAW)
+                                    colour = random_colour())
             container.add_machine(machine)
             seeds = {key: int(random.random() * 1e8)
                      for key in "note".split("|")}

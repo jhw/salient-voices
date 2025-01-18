@@ -1,9 +1,7 @@
 ### short 
 
 - move SVNoteOff trig to trigs
-- include wave in berlin sound
 - include namespace in trigs
-- randomise wave
 - perkons groove
 - include index in last variable
 
@@ -44,6 +42,8 @@
 
 ### done
 
+- randomise wave
+- include wave in berlin sound
 - refactor note as pitch
 - purge SVMachineTrigs from berlin demo
 - purge SVMachineTrigs from resampler demo
