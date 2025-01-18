@@ -59,14 +59,14 @@ class BerlinSound:
     def __init__(self, sample,
                  attack = "0008",
                  decay = "0018",
-                 sustain_level = "0800",
+                 sustain = "0800",
                  release = "0300",
                  filter_freq = "4000",
                  filter_resonance = "7000"):
         self.sample = sample
         self.attack = attack
         self.decay = decay
-        self.sustain_level = sustain_level
+        self.sustain = sustain
         self.release = release
         self.filter_freq = filter_freq
         self.filter_resonance = filter_resonance
@@ -110,7 +110,7 @@ class BerlinMachine(SVSamplerMachine):
                       value=self.sound.decay),
             SVModTrig(target=f"{self.namespace}ADSR/sustain_level",
                       i=i,
-                      value=self.sound.sustain_level),
+                      value=self.sound.sustain),
             SVModTrig(target=f"{self.namespace}ADSR/release",
                       i=i,
                       value=self.sound.release)
@@ -178,9 +178,20 @@ if __name__ == "__main__":
                                 n_ticks = args.n_ticks)
         for i in range(args.n_patches):
             container.spawn_patch(colour = random_colour())
-            sound = BerlinSound(sample =  random.choice(bank.file_names),
-                                filter_freq = random.choice(["2000", "4000", "6000"]),
-                                filter_resonance = random.choice(["6000", "6800", "7000"]))
+            sample = random.choice(bank.file_names)
+            attack = random.choice(["0008"])
+            decay = random.choice(["0018"])
+            sustain = random.choice(["0800"])
+            release = random.choice(["0300"])
+            filter_freq = random.choice(["2000", "4000", "6000"])
+            filter_resonance = random.choice(["6000", "6800", "7000"])
+            sound = BerlinSound(sample = sample,
+                                attack = attack,
+                                decay = decay,
+                                sustain = sustain,
+                                release = release,                                
+                                filter_freq = filter_freq,
+                                filter_resonance = filter_resonance)
             machine = BerlinMachine(container = container,
                                     namespace = "303",
                                     sound = sound,

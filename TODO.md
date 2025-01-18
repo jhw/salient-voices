@@ -1,12 +1,12 @@
 ### short 
 
-- SVModule is_parent_of should use class to lookup the relevant attr (mod, sampler_mod) rather than iterating
+- berlin distortion
 
-- recover slide demos into dev
-- randomise ADSR sound parameters
+- remove bpm component from euclid/resampler echo delay
 
 ### medium
 
+- recover slide demos into dev
 - slide to
 - pico waveforms
 - slide up/down
@@ -37,6 +37,7 @@
 
 ### done
 
+- randomise ADSR sound parameters
 - refactor BerlinSampleTrig as MultiSynthSampleTrig
 - vitling scales
 - pass scale as env variable
