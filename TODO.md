@@ -1,24 +1,20 @@
 ### short 
 
-- euclid, resampler closures to handle variable i
-
 - move SVNoteOff trig to trigs
-
 - include wave in berlin sound
+- include namespace in trigs
 - randomise wave
-- randomise other sound parameters
-
 - perkons groove
-- slide to
+- include index in last variable
 
 ### medium
 
-- slide up/down
-
-- include namespace in trigs
 - SVModule to do namespace check rather than module check
-
+- randomise ADSR sound parameters
+- slide to
 - pico waveforms
+
+- slide up/down
 
 ### demos
 
