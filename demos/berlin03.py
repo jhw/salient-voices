@@ -44,6 +44,10 @@ Modules = yaml.safe_load("""
     freq: 0
     roll_off: 3 # no idea but seems to allow resonance to be higher without pinking distortion
   links:
+    - Echo
+- name: Echo
+  class: rv.modules.echo.Echo
+  links:
     - Output
 """)
 
@@ -59,6 +63,11 @@ Vitling303Scales = [[0, 0, 12, 24, 27],
                     [0, 0, 12, 14, 15, 19],
                     [0, 0, 0, 0, 12, 13, 16, 19, 22, 24, 25],
                     [0, 0, 0, 7, 12, 15, 17, 20, 24]]
+
+WolScales = [[0],
+             [0, 0, 0, 12],
+             [0, 0, 0, 3],
+             [0, 0, 0, -2]]
 
 class BerlinSound:
 
@@ -85,14 +94,21 @@ class BerlinMachine(SVSamplerMachine):
     
     def __init__(self, container, namespace, sound,
                  relative_note=-6,
+                 echo_delay=36,
+                 echo_delay_unit=3,  # tick
+                 echo_wet=64,
+                 echo_feedback=64,
                  colour=[127, 127, 127],
                  **kwargs):
         SVSamplerMachine.__init__(self, container=container,
                                   namespace=namespace,
                                   root=rv.note.NOTE.C5 + relative_note,
                                   colour=colour)
-        self.sound = sound        
-        self.defaults = {}
+        self.sound = sound
+        self.defaults = {"Echo": {"wet": echo_wet,
+                                  "feedback": echo_feedback,
+                                  "delay": echo_delay,
+                                  "delay_unit": echo_delay_unit}}
 
     def note_on(self, i,
                 pitch=0,
@@ -172,7 +188,7 @@ def BassLine(self, n, rand, groove, scale, **kwargs):
             else:
                 pass
         
-def parse_args(config = [("bank_src", str, "demos/packs/mikey303.zip"),
+def parse_args(config = [("bank_src", str, "demos/packs/erica-pico-vco-waveforms-32.zip"),
                          ("bpm", int, 120),
                          ("n_ticks", int, 32),
                          ("n_patches", int, 16)]):
@@ -206,7 +222,7 @@ if __name__ == "__main__":
             decay = random.choice(["0018"])
             sustain = random.choice(["0800"])
             release = random.choice(["0300"])
-            filter_freq = random.choice(["4000", "6000", "8000"])
+            filter_freq = random.choice(["6000", "8000", "a000"])
             filter_resonance = random.choice(["7000"])
             sound = BerlinSound(sample = sample,
                                 attack = attack,
@@ -223,7 +239,8 @@ if __name__ == "__main__":
             seeds = {key: int(random.random() * 1e8)
                      for key in "note|vol".split("|")}
             groove = random_perkons_groove()
-            scale = [i for i in random.choice(Vitling303Scales) if i <= 12]
+            # scale = [i for i in random.choice(Vitling303Scales) if i <= 12]
+            scale = random.choice(WolScales)
             env = {"groove": groove,
                    "scale": scale}
             machine.render(generator = BassLine,

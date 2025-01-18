@@ -1,9 +1,6 @@
 ### short [01-slide-to]
 
 - extend sample length on initialisation
-- pico waveforms
-- reduce blank probability between notes?
-- wol scales
 
 ### medium
 
@@ -34,6 +31,7 @@
 
 ### done
 
+- pico waveforms
 - refactor slide-to handling
 - still getting some notes rendered in last step
 - how to set fx pattern?
