@@ -143,8 +143,12 @@ def BassLine(self, n, rand, groove, **kwargs):
     last = None
     for i in range(n):
         pitch = rand["note"].choice([0, 12])
+        volume = groove(rand = rand["vol"],
+                        i = i)
         def note_on(self):
-            return self.note_on(pitch = pitch, i = i)
+            return self.note_on(pitch = pitch,
+                                volume = volume,
+                                i = i)
         def note_off(self):
             return self.note_off(i = i)
         if i == 0:
@@ -202,7 +206,7 @@ if __name__ == "__main__":
                                     colour = random_colour())
             container.add_machine(machine)
             seeds = {key: int(random.random() * 1e8)
-                     for key in "note".split("|")}
+                     for key in "note|vol".split("|")}
             groove = random_perkons_groove()
             env = {"groove": groove}
             machine.render(generator = BassLine,

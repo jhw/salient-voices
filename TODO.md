@@ -2,12 +2,12 @@
 
 - pass scale as env variable
 - include namespace in trigs
-- perkons groove
+- vitling scales
 
 ### medium
 
-- slide to
 - SVModule to do namespace check rather than module check
+- slide to
 - randomise ADSR sound parameters
 - pico waveforms
 - slide up/down
@@ -33,13 +33,12 @@
 
 ### thoughts
 
-### thoughts
-
 - avoid container.modules flattening modules?
   - but how? renaming?
 
 ### done
 
+- perkons groove
 - include index in last variable
 - move SVNoteOff trig to trigs
 - randomise wave
