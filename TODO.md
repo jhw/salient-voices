@@ -1,17 +1,15 @@
 ### short 
 
-- move SVNoteOff trig to trigs
+- include index in last variable
 - include namespace in trigs
 - perkons groove
-- include index in last variable
 
 ### medium
 
+- slide to
 - SVModule to do namespace check rather than module check
 - randomise ADSR sound parameters
-- slide to
 - pico waveforms
-
 - slide up/down
 
 ### demos
@@ -42,6 +40,7 @@
 
 ### done
 
+- move SVNoteOff trig to trigs
 - randomise wave
 - include wave in berlin sound
 - refactor note as pitch

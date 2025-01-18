@@ -1,6 +1,6 @@
 from sv.container import SVContainer
 from sv.machines import SVSamplerMachine
-from sv.trigs import SVSampleTrig, SVTrigBase, SVModTrig, controller_value
+from sv.trigs import SVSampleTrig, SVModTrig, SVNoteOffTrig, controller_value
 
 from enum import Enum
 
@@ -40,23 +40,6 @@ Modules = yaml.safe_load("""
   links:
     - Output
 """)
-
-class SVNoteOffTrig(SVTrigBase):
-
-    def __init__(self, target, i = 0):
-        super().__init__(target = target,
-                         i = i)
-    
-    @property
-    def mod(self):
-        return self.target.split("/")[0]
-
-    @property
-    def key(self):
-        return self.mod
-    
-    def render(self, *args):
-        return rv.note.Note(note = rv.note.NOTECMD.NOTE_OFF)
 
 class BerlinSampleTrig(SVSampleTrig):
 

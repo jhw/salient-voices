@@ -159,5 +159,22 @@ class SVModTrig(SVTrigBase):
                             ctl = ctrl_id,
                             val = value)
 
+class SVNoteOffTrig(SVTrigBase):
+
+    def __init__(self, target, i = 0):
+        super().__init__(target = target,
+                         i = i)
+    
+    @property
+    def mod(self):
+        return self.target.split("/")[0]
+
+    @property
+    def key(self):
+        return self.mod
+    
+    def render(self, *args):
+        return rv.note.Note(note = rv.note.NOTECMD.NOTE_OFF)
+    
 if __name__ == "__main__":
     pass
