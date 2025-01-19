@@ -69,7 +69,7 @@ WolScales = [[0],
              [0, 0, 0, 3],
              [0, 0, 0, -2]]
 
-class BerlinSound:
+class BassSound:
 
     def __init__(self, sample,
                  attack = "0008",
@@ -88,7 +88,7 @@ class BerlinSound:
 
 SlideToFX = "0003"
         
-class BerlinMachine(SVSamplerMachine):
+class BassMachine(SVSamplerMachine):
     
     Modules = Modules
     
@@ -154,7 +154,7 @@ class BerlinMachine(SVSamplerMachine):
         return [SVNoteOffTrig(target=f"{self.namespace}MultiSynth",
                               i=i)]
     
-def BassLine(self, n, rand, groove, scale, **kwargs):
+def Bassline(self, n, rand, groove, scale, **kwargs):
     last = None
     for i in range(n):
         pitch = rand["note"].choice(scale)
@@ -224,17 +224,17 @@ if __name__ == "__main__":
             release = random.choice(["0300"])
             filter_freq = random.choice(["6000", "8000", "a000"])
             filter_resonance = random.choice(["7000"])
-            sound = BerlinSound(sample = sample,
+            sound = BassSound(sample = sample,
                                 attack = attack,
                                 decay = decay,
                                 sustain = sustain,
                                 release = release,                                
                                 filter_freq = filter_freq,
                                 filter_resonance = filter_resonance)
-            machine = BerlinMachine(container = container,
-                                    namespace = "303",
-                                    sound = sound,
-                                    colour = random_colour())
+            machine = BassMachine(container = container,
+                                  namespace = "303",
+                                  sound = sound,
+                                  colour = random_colour())
             container.add_machine(machine)
             seeds = {key: int(random.random() * 1e8)
                      for key in "note|vol".split("|")}
@@ -243,7 +243,7 @@ if __name__ == "__main__":
             scale = random.choice(WolScales)
             env = {"groove": groove,
                    "scale": scale}
-            machine.render(generator = BassLine,
+            machine.render(generator = Bassline,
                            seeds = seeds,
                            env = env)
         container.write_project("tmp/berlin03-demo.sunvox")                    

@@ -22,7 +22,7 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class Detroit09(SVSamplerMachine):
+class BeatMachine(SVSamplerMachine):
 
     Modules = Modules
 
@@ -138,10 +138,10 @@ def spawn_patch(bank_samples, container,
     for name, filter_fn, temperature, density in track_config:
         track_samples = [sample for sample in bank_samples if filter_fn(sample)]
         selected_samples = [random.choice(track_samples) for i in range(2)]
-        machine = Detroit09(container = container,
-                            namespace = name,
-                            colour = random_colour(),
-                            samples = selected_samples)
+        machine = BeatMachine(container = container,
+                              namespace = name,
+                              colour = random_colour(),
+                              samples = selected_samples)
         container.add_machine(machine)
         pattern = random_euclid_pattern()
         groove = random_perkons_groove()
@@ -168,7 +168,7 @@ if __name__ == "__main__":
             container.spawn_patch(colour)
             spawn_patch(bank_samples = bank_samples,
                         container = container)
-            container.spawn_patch(colour)
+            # container.spawn_patch(colour)
         container.write_project("tmp/euclid09-demo.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")

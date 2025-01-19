@@ -27,7 +27,7 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class Detroit09(SVSamplerMachine):
+class SliceMachine(SVSamplerMachine):
 
     Modules = Modules
 
@@ -187,10 +187,10 @@ if __name__ == "__main__":
         for i in range(args.n_patches):
             container.spawn_patch(colour = random_colour())
             samples = [random.choice(all_samples) for i in range(args.group_sz)]
-            machine = Detroit09(container = container,
-                                namespace = "wol",
-                                colour = random_colour(),
-                                samples = samples)
+            machine = SliceMachine(container = container,
+                                   namespace = "wol",
+                                   colour = random_colour(),
+                                   samples = samples)
             container.add_machine(machine)
             groove = random_perkons_groove()
             seeds = {key: random_seed() for key in "sample|fx|trig|vol".split("|")}
