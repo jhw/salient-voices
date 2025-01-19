@@ -1,5 +1,7 @@
 ### short
 
+- add cli/git, cli/parse, cli/colours to utils 
+
 - bass demo playing long/short notes of single pitch but with randomised filter cutoff levels
 
 ### medium
