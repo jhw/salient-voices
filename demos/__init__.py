@@ -1,10 +1,10 @@
+import sv.utils.algos.euclid as euclid
+import sv.utils.algos.perkons as perkons
+
 import inspect
 import io
 import random
 import zipfile
-
-import demos.algos.euclid as euclid
-import demos.algos.perkons as perkons
 
 ### general
 
