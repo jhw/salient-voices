@@ -1,4 +1,6 @@
-### short [01-slide-to]
+### short
+
+- abstract trig sample rendering
 
 - extend sample length on initialisation
 
