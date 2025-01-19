@@ -1,7 +1,5 @@
 ### short
 
-- abstract trig sample rendering
-
 - extend sample length on initialisation
 
 ### medium
@@ -33,6 +31,7 @@
 
 ### done
 
+- abstract trig sample rendering
 - pico waveforms
 - refactor slide-to handling
 - still getting some notes rendered in last step

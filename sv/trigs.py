@@ -108,10 +108,18 @@ class SVSampleTrig(SVNoteTrigBase):
         qs = self.sample_qs
         return f"{self.sample}?{qs}" if qs != None else self.sample
 
+    def resolve_sampler_mod(self, modules):
+        return modules[self.mod]
+        
+    def resolve_note(self, modules):
+        mod = self.resolve_sampler_mod(modules)
+        note = 1 + mod.index_of(self.sample)
+        return note
+    
     def render(self, modules, *args):
         mod = modules[self.mod]        
         mod_id = 1 + mod.index
-        note = 1 + mod.index_of(self.sample_string)
+        note = self.resolve_note(modules)
         note_kwargs = {
             "module": mod_id,
             "note": note
@@ -130,31 +138,10 @@ class SVMultiSynthSampleTrig(SVSampleTrig):
                          sample = sample,
                          **kwargs)
         self.sampler_mod = sampler_mod
-        
-    def resolve_sampler(self):
-        return self.sampler_mod if self.sampler_mod else self.mod
-    
-    def resolve_sampler_note(self, modules):
-        sampler_mod = modules[self.sampler_mod if self.sampler_mod else self.mod]
-        note = 1 + sampler_mod.index_of(self.sample)
-        return note
-    
-    def render(self, modules, *args):
-        mod = modules[self.mod]        
-        mod_id = 1 + mod.index
-        # note = 1 + mod.index_of(self.sample_string)
-        note = self.resolve_sampler_note(modules)
-        note_kwargs = {
-            "module": mod_id,
-            "note": note
-        }
-        if self.has_vel:
-            note_kwargs["vel"] = self.velocity
-        if self.fx:
-            note_kwargs["ctl"] = self.fx_pattern
-            note_kwargs["val"] = self.fx_value
-        return rv.note.Note(**note_kwargs)
-    
+
+    def resolve_sampler_mod(self, modules):
+        return modules[self.sampler_mod]
+            
 class SVModTrig(SVTrigBase):
 
     CtrlMult = 256
