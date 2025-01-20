@@ -1,5 +1,7 @@
 ### short
 
+- add base cli with git
+
 ### medium
 
 - extend sample length on initialisation
