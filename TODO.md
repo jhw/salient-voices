@@ -1,7 +1,5 @@
 ### short
 
-- add base cli with git
-
 ### medium
 
 - extend sample length on initialisation
@@ -35,6 +33,7 @@
 
 ### done
 
+- add base cli with git
 - add cli/git, cli/parse, cli/colours to utils 
 - abstract trig sample rendering
 - pico waveforms
