@@ -51,24 +51,6 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-"""
-https://github.com/vitling/acid-banger/blob/main/src/pattern.ts
-"""
-
-Vitling303Scales = [[0, 0, 12, 24, 27],
-                    [0, 0, 0, 12, 10, 19, 26, 27],
-                    [0, 1, 7, 10, 12, 13],
-                    [0], 
-                    [0, 0, 0, 12],
-                    [0, 0, 12, 14, 15, 19],
-                    [0, 0, 0, 0, 12, 13, 16, 19, 22, 24, 25],
-                    [0, 0, 0, 7, 12, 15, 17, 20, 24]]
-
-WolScales = [[0],
-             [0, 0, 0, 12],
-             [0, 0, 0, 3],
-             [0, 0, 0, -2]]
-
 class BassSound:
 
     def __init__(self, sample,
@@ -96,8 +78,8 @@ class BassMachine(SVSamplerMachine):
                  relative_note=-6,
                  echo_delay=36,
                  echo_delay_unit=3,  # tick
-                 echo_wet=64,
-                 echo_feedback=64,
+                 echo_wet=32,
+                 echo_feedback=32,
                  colour=[127, 127, 127],
                  **kwargs):
         SVSamplerMachine.__init__(self, container=container,
@@ -207,6 +189,25 @@ def parse_args(config = [("bank_src", str, "demos/packs/erica-pico-vco-waveforms
     if not args.bank_src.endswith(".zip"):
         raise RuntimeError("bank_src must be a zip file")
     return args
+
+"""
+https://github.com/vitling/acid-banger/blob/main/src/pattern.ts
+"""
+
+Vitling303Scales = [[0, 0, 12, 24, 27],
+                    [0, 0, 0, 12, 10, 19, 26, 27],
+                    [0, 1, 7, 10, 12, 13],
+                    [0], 
+                    [0, 0, 0, 12],
+                    [0, 0, 12, 14, 15, 19],
+                    [0, 0, 0, 0, 12, 13, 16, 19, 22, 24, 25],
+                    [0, 0, 0, 7, 12, 15, 17, 20, 24]]
+
+
+WolScales = [[0],
+             [0, 0, 0, 12],
+             [0, 0, 10, 12],
+             [0, 0, 0, -2, 12]]
 
 if __name__ == "__main__":
     try:
