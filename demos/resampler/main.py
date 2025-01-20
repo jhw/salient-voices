@@ -12,6 +12,7 @@ import json
 import math
 import os
 import random
+import re
 import yaml
 
 import rv
@@ -110,6 +111,12 @@ class Euclid09Archive(dict):
         self.bank = bank
         self.init_slices()
 
+    """
+    archive expects format to be zip format currently exported by euclid09 demo, ie with
+    - meta.json 
+    - xxx-xxx-pat-{n}.wav 
+    """
+
     @property
     def project_metadata(self):
         if "meta.json" not in self.bank.file_names:
@@ -117,12 +124,15 @@ class Euclid09Archive(dict):
         with self.bank.zip_file.open("meta.json", 'r') as file_entry:
             file_content = file_entry.read()
         return json.loads(file_content)["project"]
-
+    
     @property
     def raw_audio(self):
-        if "meta.json" not in self.bank.file_names:
-            raise RuntimeError("project metadata not found")
-        with self.bank.zip_file.open("audio/raw.wav", 'r') as file_entry:
+        file_names = [file_name for file_name in self.bank.file_names
+                      if re.search("pat\\-\\d+\\.wav$", file_name) != None]
+        if file_names == []:
+            raise RuntimeError("project audio file not found")
+        file_name = file_names[0]
+        with self.bank.zip_file.open(file_name, 'r') as file_entry:
             file_content = file_entry.read()
         return io.BytesIO(file_content)
 

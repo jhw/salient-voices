@@ -1,14 +1,14 @@
 ### short
 
-- bass demo playing long/short notes of single pitch but with randomised filter cutoff levels
-
 ### medium
 
 - extend sample length on initialisation
 
 ### demos
 
+- single note bass with different lengths and cutoffs
 - bass slide up/down
+
 - euclid09 cutoff 
 - reverse/retrig
 - city dreams bass
