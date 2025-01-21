@@ -1,7 +1,6 @@
 ### short
 
 - abstract parse_args
-- increase berlin distortion power
 
 ### medium
 
@@ -36,6 +35,7 @@
 
 ### done
 
+- increase berlin distortion power
 - allow git to commit with custom names
 - add base cli with git
 - add cli/git, cli/parse, cli/colours to utils 
