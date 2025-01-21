@@ -1,5 +1,8 @@
 ### short
 
+- abstract parse_args
+- increase berlin distortion power
+
 ### medium
 
 - extend sample length on initialisation
@@ -33,6 +36,7 @@
 
 ### done
 
+- allow git to commit with custom names
 - add base cli with git
 - add cli/git, cli/parse, cli/colours to utils 
 - abstract trig sample rendering

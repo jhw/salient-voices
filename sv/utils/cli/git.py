@@ -8,8 +8,8 @@ import re
 class CommitId:
 
     @staticmethod
-    def randomise():
-        return CommitId(slug=random_name(),
+    def randomise(name_fn):
+        return CommitId(slug=name_fn(),
                         timestamp=datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S"))
 
     @staticmethod
@@ -52,8 +52,9 @@ class Git:
     def head(self):
         return self.commits[self.head_index] if not self.is_empty() else None
 
-    def commit(self, content):
-        new_commit = Commit(commit_id=CommitId.randomise(), content=content)
+    def commit(self, content, name_fn = random_name):
+        new_commit = Commit(commit_id=CommitId.randomise(name_fn),
+                            content=content)
         self.commits = self.commits[:self.head_index + 1]
         self.commits.append(new_commit)
         self.head_index += 1
@@ -61,10 +62,10 @@ class Git:
         logging.info(f"HEAD is {new_commit.commit_id}")
         return new_commit.commit_id
 
-    def checkout(self, commit_id_str):
+    def checkout(self, commit_id_str, name_fn = random_name):
         for commit in self.commits:
             if str(commit.commit_id) == commit_id_str:
-                new_commit = Commit(commit_id=CommitId.randomise(),
+                new_commit = Commit(commit_id=CommitId.randomise(name_fn),
                                     content=commit.content.clone())
                 self.commits = self.commits[:self.head_index + 1]
                 self.commits.append(new_commit)
