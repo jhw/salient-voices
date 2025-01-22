@@ -1,8 +1,6 @@
 ### short
 
-- replace StaticZipBank load_zip static method with constructor based variant
-- refactor demos to use new StaticZipBank constructor
-- include StaticFilesBank from gist/fxx
+- use a real world euclid archive for resampler demo
 
 ### medium
 
@@ -38,6 +36,8 @@
 
 ### done
 
+- include StaticFilesBank from gist/fxx
+- remove load_zip
 - abstract SlicerBank from Euclid09Archive
 - move simple bank to cli
 - add demos/sunvox/slide subdir

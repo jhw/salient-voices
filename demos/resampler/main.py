@@ -1,7 +1,7 @@
 from sv.container import SVContainer
 from sv.machines import SVSamplerMachine
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
-from sv.utils.cli.banks import StaticBank
+from sv.utils.cli.banks import StaticZipBank
 from sv.utils.cli.banks.slicer import SlicerBank
 from sv.utils.cli.parse import parse_args
 
@@ -159,7 +159,7 @@ ArgsConfig = yaml.safe_load("""
 if __name__ == "__main__":
     try:
         args = parse_args(ArgsConfig)
-        archive = Euclid09Archive(StaticBank(args.zip_src))
+        archive = Euclid09Archive(StaticZipBank(args.zip_src))
         meta, src_wav_io = archive.project_metadata, archive.patch_audio
         bank = SlicerBank(meta = meta,
                           wav_io = src_wav_io)

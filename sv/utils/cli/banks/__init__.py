@@ -1,15 +1,9 @@
 import io
+import os
+import re
 import zipfile
 
-class StaticBank(dict):
-
-    @staticmethod
-    def load_zip(zip_path):
-        zip_buffer = io.BytesIO()
-        with open(zip_path, 'rb') as f:
-            zip_buffer.write(f.read())
-        zip_buffer.seek(0)
-        return SimpleZipBank(zip_buffer=zip_buffer)
+class StaticZipBank(dict):
 
     def __init__(self, zip_buffer):
         self.zip_buffer = zip_buffer
@@ -29,5 +23,42 @@ class StaticBank(dict):
             file_content = file_entry.read()
         return io.BytesIO(file_content)
 
+class StaticFilesBank(dict):
+    
+    def __init__(self, pattern, root_dir = "samples"):
+        dict.__init__(self, {})
+        self.paths = self.init_paths(pattern = pattern,
+                                     root_dir = root_dir)
+        self.root_dir = root_dir
+
+    def init_paths(self, pattern, root_dir):
+        paths = []
+        for root, _, files in os.walk(root_dir):
+            for file_name in files:
+                if file_name.lower().endswith('.wav'):
+                    file_path = os.path.join(root, file_name)
+                    if re.search(pattern, file_path) != None:
+                        relative_path = os.path.relpath(file_path, root_dir)
+                        paths.append(relative_path)
+        return paths
+
+    def file_names(self):
+        return self.paths
+    
+    def load_wav_lazily(fn):
+        def wrapped(self, sample):
+            if sample not in self:
+                if sample not in self.paths:
+                    raise RuntimeError(f"{sample} not found")
+                file_name = f"{self.root_dir}/{sample}"
+                with open(file_name, 'rb') as f:
+                    self[sample] = io.BytesIO(f.read())
+            return fn(self, sample)
+        return wrapped
+
+    @load_wav_lazily
+    def get_wav(self, sample):
+        return self[sample]
+    
 if __name__ == "__main__":
     pass
