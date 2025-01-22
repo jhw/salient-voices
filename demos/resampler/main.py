@@ -1,6 +1,7 @@
 from sv.container import SVContainer
 from sv.machines import SVSamplerMachine
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
+from sv.utils.cli.parse import parse_args
 
 from demos import *
 
@@ -162,31 +163,34 @@ class Euclid09Archive(dict):
                 
     def get_wav(self, file_name):
         return self[file_name]
-    
-def parse_args(config = [("archive_src", str, "demos/resampler/sample-archive.zip"),
-                         ("group_sz", int, 4),
-                         ("density", float, 0.5),
-                         ("quantise", int, 2), # <-- don't change this as sample-archive.zip currently only includes slices for quantise == 2
-                         ("n_patches", int, 16)]):
-    parser = argparse.ArgumentParser(description="whatevs")
-    for attr, type, default in config:
-        kwargs = {"type": type}
-        if default:
-            kwargs["default"] = default
-        parser.add_argument(f"--{attr}", **kwargs)
-    args, errors = parser.parse_args(), []
-    for attr, _, _ in config:
-        if getattr(args, attr) == None:
-            errors.append(attr)
-    if errors != []:
-        raise RuntimeError(f"please supply {', '.join(errors)}")
-    if not args.archive_src.endswith(".zip"):
-        raise RuntimeError("archive_src must be a zip file")
-    return args
 
+ArgsConfig = yaml.safe_load("""
+- name: archive_src
+  type: str
+  file: true
+  default: demos/resampler/sample-archive.zip
+- name: group_sz
+  type: int
+  default: 4
+  min: 1
+- name: density
+  type: float
+  default: 0.5
+  min: 0
+  max: 1
+- name: quantise
+  type: int
+  default: 2
+  options: [1, 2, 4, 8, 16]
+- name: n_patches
+  type: int
+  default: 16
+  min: 1
+""")
+    
 if __name__ == "__main__":
     try:
-        args = parse_args()
+        args = parse_args(ArgsConfig)
         bank = Euclid09Archive(SimpleZipBank(args.archive_src))
         meta = bank.project_metadata
         container = SVContainer(bank = bank,

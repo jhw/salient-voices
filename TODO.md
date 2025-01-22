@@ -1,12 +1,13 @@
 ### short
 
-- demos to use cli parse_args
 - add demos/sunvox/slide subdir
+
+- abstract slice bank
+
+### medium
 
 - tokyo beats (kick, hat)
 - vordhosbahn noise hats (reverse, retrig)
-
-### medium
 
 ### demos
 
@@ -37,6 +38,7 @@
 
 ### done
 
+- demos to use cli parse_args
 - reduce berlin distortion power again
 - abstract parse_args
 - increase berlin distortion power

@@ -1,10 +1,10 @@
 from sv.container import SVContainer
 from sv.machines import SVSamplerMachine
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
+from sv.utils.cli.parse import parse_args
 
 from demos import *
 
-import argparse
 import os
 import random
 import yaml
@@ -100,26 +100,6 @@ def GhostEcho(self, n, rand,
             yield self.modulation(i = i,
                                   echo_wet = wet_level,
                                   echo_feedback = feedback_level)
-            
-def parse_args(config = [("bank_src", str, "demos/packs/pico-default.zip"),
-                         ("bpm", int, 120),
-                         ("n_ticks", int, 16),
-                         ("n_patches", int, 16)]):
-    parser = argparse.ArgumentParser(description="euclid09")
-    for attr, type, default in config:
-        kwargs = {"type": type}
-        if default:
-            kwargs["default"] = default
-        parser.add_argument(f"--{attr}", **kwargs)
-    args, errors = parser.parse_args(), []
-    for attr, _, _ in config:
-        if getattr(args, attr) == None:
-            errors.append(attr)
-    if errors != []:
-        raise RuntimeError(f"please supply {', '.join(errors)}")
-    if not args.bank_src.endswith(".zip"):
-        raise RuntimeError("bank_src must be a zip file")
-    return args
 
 TrackConfig = [("kick", lambda x: "BD" in x, 0.5, 0.5),
                ("snare", lambda x: ("SD" in x or
@@ -154,10 +134,29 @@ def spawn_patch(bank_samples, container,
                               "temperature": temperature})
         machine.render(generator = echo_generator,
                        seeds = seeds)
-    
+
+ArgsConfig = yaml.safe_load("""
+- name: bank_src
+  type: str
+  file: true
+  default: demos/packs/pico-default.zip
+- name: bpm
+  type: int
+  default: 120
+  min: 1
+- name: n_ticks
+  type: int
+  default: 16
+  min: 1
+- name: n_patches
+  type: int
+  default: 16
+  min: 1
+""")
+        
 if __name__ == "__main__":
     try:
-        args = parse_args()
+        args = parse_args(ArgsConfig)
         bank = SimpleZipBank(args.bank_src)
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,

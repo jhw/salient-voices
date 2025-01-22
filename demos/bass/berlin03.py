@@ -1,12 +1,12 @@
 from sv.container import SVContainer
 from sv.machines import SVSamplerMachine
 from sv.trigs import SVMultiSynthSampleTrig, SVModTrig, SVNoteOffTrig, controller_value
+from sv.utils.cli.parse import parse_args
 
 from enum import Enum
 
 from demos import *
 
-import argparse
 import random
 import yaml
 
@@ -169,27 +169,7 @@ def Bassline(self, n, rand, groove, scale, **kwargs):
                     last = None
             else:
                 pass
-        
-def parse_args(config = [("bank_src", str, "demos/packs/erica-pico-vco-waveforms-32.zip"),
-                         ("bpm", int, 120),
-                         ("n_ticks", int, 32),
-                         ("n_patches", int, 16)]):
-    parser = argparse.ArgumentParser(description="whatevs")
-    for attr, type, default in config:
-        kwargs = {"type": type}
-        if default:
-            kwargs["default"] = default
-        parser.add_argument(f"--{attr}", **kwargs)
-    args, errors = parser.parse_args(), []
-    for attr, _, _ in config:
-        if getattr(args, attr) == None:
-            errors.append(attr)
-    if errors != []:
-        raise RuntimeError(f"please supply {', '.join(errors)}")
-    if not args.bank_src.endswith(".zip"):
-        raise RuntimeError("bank_src must be a zip file")
-    return args
-
+            
 """
 https://github.com/vitling/acid-banger/blob/main/src/pattern.ts
 """
@@ -209,9 +189,28 @@ WolScales = [[0],
              [0, 0, 10, 12],
              [0, 0, 0, -2, 12]]
 
+ArgsConfig = yaml.safe_load("""
+- name: bank_src
+  type: str
+  file: true
+  default: demos/packs/pico-vco-waveforms.zip
+- name: bpm
+  type: int
+  default: 120
+  min: 1
+- name: n_ticks
+  type: int
+  default: 32
+  min: 1
+- name: n_patches
+  type: int
+  default: 16
+  min: 1
+""")
+
 if __name__ == "__main__":
     try:
-        args = parse_args()
+        args = parse_args(ArgsConfig)
         bank = SimpleZipBank(args.bank_src)
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
