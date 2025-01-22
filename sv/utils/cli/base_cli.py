@@ -1,6 +1,7 @@
 from sv.utils.cli.git import Git
 from sv.utils.cli.colours import Colours
 from sv.utils.cli.model import Project
+from sv.utils.cli.parse import parse_line
 
 import cmd
 import logging
