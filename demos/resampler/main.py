@@ -1,17 +1,14 @@
 from sv.container import SVContainer
 from sv.machines import SVSamplerMachine
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
+from sv.utils.cli.banks import StaticBank
+from sv.utils.cli.banks.slicer import SlicerBank
 from sv.utils.cli.parse import parse_args
 
 from demos import *
 
-from pydub import AudioSegment
-
-import argparse
 import io
 import json
-import math
-import os
 import random
 import re
 import yaml
@@ -104,13 +101,11 @@ def GhostEcho(self, n, rand,
             yield self.modulation(i = i,
                                   echo_wet = wet_level,
                                   echo_feedback = feedback_level)
-            
-class Euclid09Archive(dict):
+                    
+class Euclid09Archive:
 
     def __init__(self, bank):
-        dict.__init__(self, {})
         self.bank = bank
-        self.init_slices()
 
     """
     archive expects format to be zip format currently exported by euclid09 demo, ie with
@@ -127,45 +122,18 @@ class Euclid09Archive(dict):
         return json.loads(file_content)["project"]
     
     @property
-    def raw_audio(self):
+    def patch_audio(self):
         file_names = [file_name for file_name in self.bank.file_names
                       if re.search("pat\\-\\d+\\.wav$", file_name) != None]
         if file_names == []:
-            raise RuntimeError("project audio file not found")
+            raise RuntimeError("patch audio file not found")
         file_name = file_names[0]
         with self.bank.zip_file.open(file_name, 'r') as file_entry:
             file_content = file_entry.read()
         return io.BytesIO(file_content)
 
-    def init_slices(self, fade = 3):
-        meta, wav_io = self.project_metadata, self.raw_audio
-        audio = AudioSegment.from_file(wav_io, format="wav")
-        n = int(math.log(meta["n_ticks"], 2))
-        for i in range(n+1):
-            n_slices = meta["n_patches"] * (2 ** n)
-            slice_sz = int(len(audio) / n_slices)
-            for j in range(n_slices):
-                start, end = j * slice_sz, (i + j) * slice_sz
-                slice_audio = audio[start:end].fade_in(fade).fade_out(fade)
-                slice_io = io.BytesIO()        
-                slice_audio.export(slice_io, format="wav")
-                slice_io.seek(0)
-                file_name = f"audio/sliced/{(2**i):04}/{(i+j):04}.wav"
-                self[file_name] = slice_io
-
-    def slice_files(self, n_ticks, quantise):
-        n = int(n_ticks / quantise)
-        files = [file_name for file_name in self
-                 if file_name.startswith(f"audio/sliced/{n:04}")]
-        if files == []:
-            raise RuntimeError("no slice files found")
-        return files
-                
-    def get_wav(self, file_name):
-        return self[file_name]
-
 ArgsConfig = yaml.safe_load("""
-- name: archive_src
+- name: zip_src
   type: str
   file: true
   default: demos/resampler/sample-archive.zip
@@ -191,12 +159,14 @@ ArgsConfig = yaml.safe_load("""
 if __name__ == "__main__":
     try:
         args = parse_args(ArgsConfig)
-        bank = Euclid09Archive(SimpleZipBank(args.archive_src))
-        meta = bank.project_metadata
+        archive = Euclid09Archive(StaticBank(args.zip_src))
+        meta, src_wav_io = archive.project_metadata, archive.patch_audio
+        bank = SlicerBank(meta = meta,
+                          wav_io = src_wav_io)
         container = SVContainer(bank = bank,
                                 bpm = meta["bpm"],
                                 n_ticks = meta["n_ticks"])
-        all_samples = bank.slice_files(n_ticks = meta["n_ticks"],
+        all_samples = bank.list_slices(n_ticks = meta["n_ticks"],
                                        quantise = args.quantise)
         for i in range(args.n_patches):
             container.spawn_patch(colour = random_colour())

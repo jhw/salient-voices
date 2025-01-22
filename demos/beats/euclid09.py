@@ -1,11 +1,11 @@
 from sv.container import SVContainer
 from sv.machines import SVSamplerMachine
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
+from sv.utils.cli.banks import StaticBank
 from sv.utils.cli.parse import parse_args
 
 from demos import *
 
-import os
 import random
 import yaml
 
@@ -157,7 +157,7 @@ ArgsConfig = yaml.safe_load("""
 if __name__ == "__main__":
     try:
         args = parse_args(ArgsConfig)
-        bank = SimpleZipBank(args.bank_src)
+        bank = StaticBank(args.bank_src)
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)

@@ -1,8 +1,5 @@
 ### short
 
-- move simple bank to cli
-- add slice bank to cli
-
 ### medium
 
 - tokyo beats (kick, hat)
@@ -37,6 +34,8 @@
 
 ### done
 
+- abstract SlicerBank from Euclid09Archive
+- move simple bank to cli
 - add demos/sunvox/slide subdir
 - demos to use cli parse_args
 - reduce berlin distortion power again
