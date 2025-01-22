@@ -35,7 +35,7 @@ Modules = yaml.safe_load("""
 - name: Distortion
   class: rv.modules.distortion.Distortion
   defaults:
-    power: 192
+    power: 64
   links:
     - Filter
 - name: Filter

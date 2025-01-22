@@ -1,16 +1,17 @@
 ### short
 
-### medium
+- demos to use cli parse_args
+- add demos/sunvox/slide subdir
 
-- extend sample length on initialisation
+- tokyo beats (kick, hat)
+- vordhosbahn noise hats (reverse, retrig)
+
+### medium
 
 ### demos
 
-- tokyo beats
-- vordhosbn noise hats
 - euclid09 cutoff version
 - city dreams bass
-
 - bass slide up/down
 - polly
 - vocoder
@@ -28,11 +29,15 @@
 
 ### thoughts
 
+- berlin03 -> extend sample length on initialisation?
+  - can't be bothered, is just a demo
+  - also pico waveforms should be 2 seconds in length each
 - avoid container.modules flattening modules?
   - but how? renaming?
 
 ### done
 
+- reduce berlin distortion power again
 - abstract parse_args
 - increase berlin distortion power
 - allow git to commit with custom names
