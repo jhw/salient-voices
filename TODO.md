@@ -1,5 +1,9 @@
 ### short
 
+- replace StaticZipBank load_zip static method with constructor based variant
+- refactor demos to use new StaticZipBank constructor
+- include StaticFilesBank from gist/fxx
+
 ### medium
 
 - tokyo beats (kick, hat)
