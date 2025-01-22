@@ -1,5 +1,7 @@
 ### short
 
+- SlicerBank to take n (as in 2**n) or list of indices instead of meta
+
 - use a real world euclid archive for resampler demo
 
 ### medium
@@ -9,9 +11,11 @@
 
 ### demos
 
+- alt bass generators
 - euclid09 cutoff version
 - city dreams bass
 - bass slide up/down
+
 - polly
 - vocoder
 - vocal chords
