@@ -1,8 +1,7 @@
 ### short
 
-- add demos/sunvox/slide subdir
-
-- abstract slice bank
+- move simple bank to cli
+- add slice bank to cli
 
 ### medium
 
@@ -38,6 +37,7 @@
 
 ### done
 
+- add demos/sunvox/slide subdir
 - demos to use cli parse_args
 - reduce berlin distortion power again
 - abstract parse_args
