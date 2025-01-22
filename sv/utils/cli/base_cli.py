@@ -1,5 +1,6 @@
 from sv.utils.cli.git import Git
 from sv.utils.cli.colours import Colours
+from sv.utils.cli.model import Project
 
 import cmd
 import logging
@@ -44,6 +45,48 @@ class BaseCLI(cmd.Cmd):
         super().__init__()
         self.git = Git()
 
+    ### projects
+        
+    @assert_head
+    @commit_and_render
+    def do_render_project(self, _):
+        return Project(patches = self.git.head.content.patches)
+
+    def do_clean_projects(self, _,
+                          directories = ["tmp/sunvox",
+                                         "tmp/zip"]):
+        while True:
+            answer = input(f"Are you sure ?: ")
+            if answer == "y":
+                for dir_name in directories:
+                    if os.path.exists(dir_name):
+                        logging.info(f"cleaning {dir_name}")
+                        for filename in os.listdir(dir_name):
+                            file_path = os.path.join(dir_name, filename)
+                            if os.path.isfile(file_path):
+                                os.remove(file_path)
+                self.git = Git()
+                break
+            elif answer == "n":
+                break
+            elif answer == "q":
+                return 
+    
+    ### patches
+    
+    @assert_head
+    @parse_line([{"name": "I", "type": "hexstr"}])
+    @commit_and_render
+    def do_clone_patches(self, I):
+        roots = self.git.head.content.patches
+        project = Project()
+        for i in range(self.n_patches):
+            j = I[i % len(I)]
+            patch = roots[j].clone()
+            project.patches.append(patch)
+        project.freeze_patches(len(I))
+        return project    
+    
     ### git
         
     def do_git_head(self, _):
@@ -64,27 +107,6 @@ class BaseCLI(cmd.Cmd):
 
     def do_git_redo(self, _):
         self.git.redo()
-
-    ### project management
-
-    def do_clean_projects(self, _):
-        while True:
-            answer = input(f"Are you sure ?: ")
-            if answer == "y":
-                for dir_name in ["tmp/sunvox",
-                                 "tmp/zip"]:
-                    if os.path.exists(dir_name):
-                        logging.info(f"cleaning {dir_name}")
-                        for filename in os.listdir(dir_name):
-                            file_path = os.path.join(dir_name, filename)
-                            if os.path.isfile(file_path):
-                                os.remove(file_path)
-                self.git = Git()
-                break
-            elif answer == "n":
-                break
-            elif answer == "q":
-                return 
 
     ### exit
         

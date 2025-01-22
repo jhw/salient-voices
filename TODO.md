@@ -6,12 +6,12 @@
 
 ### demos
 
-- single note bass with different lengths and cutoffs
-- bass slide up/down
-
-- euclid09 cutoff 
-- reverse/retrig
+- tokyo beats
+- vordhosbn noise hats
+- euclid09 cutoff version
 - city dreams bass
+
+- bass slide up/down
 - polly
 - vocoder
 - vocal chords
