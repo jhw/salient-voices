@@ -1,4 +1,5 @@
 from sv.utils.cli.git import Git
+from sv.utils.cli.colours import Colours
 
 import cmd
 import logging
@@ -9,7 +10,32 @@ logging.basicConfig(stream = sys.stdout,
                     level = logging.INFO,
                     format = "%(levelname)s: %(message)s")
 
-    
+def assert_head(fn):
+    def wrapped(self, *args, **kwargs):
+        try:
+            if self.git.is_empty():
+                raise RuntimeError("Please create a commit first")
+            return fn(self, *args, **kwargs)
+        except RuntimeError as error:            
+            logging.warning(str(error))
+    return wrapped
+
+def commit_and_render(fn):
+    def wrapped(self, *args, **kwargs):
+        project = fn(self, *args, **kwargs)
+        colours = Colours.randomise(tracks = self.tracks,
+                                    patches = project.patches)
+        container = project.render(bank = self.bank,
+                                   generators = self.generators,
+                                   colours = colours,
+                                   bpm = self.bpm,
+                                   n_ticks = self.n_ticks)
+        commit_id = self.git.commit(project)
+        if not os.path.exists("tmp/sunvox"):
+            os.makedirs("tmp/sunvox")
+        container.write_project(f"tmp/sunvox/{commit_id}.sunvox")
+    return wrapped
+
 class BaseCLI(cmd.Cmd):
 
     prompt = ">>> "
