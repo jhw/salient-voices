@@ -5,15 +5,15 @@ import math
 
 class SlicerBank(dict):
 
-    def __init__(self, meta, wav_io):
+    def __init__(self, **kwargs):
         dict.__init__(self, {})
-        self.init_slices(meta, wav_io)
+        self.init_slices(**kwargs)
 
-    def init_slices(self, meta, wav_io, fade = 3):
+    def init_slices(self, wav_io, n_patches, n_ticks, fade = 3):
         audio = AudioSegment.from_file(wav_io, format="wav")
-        n = int(math.log(meta["n_ticks"], 2))
+        n = int(math.log(n_ticks, 2))
         for i in range(n+1):
-            n_slices = meta["n_patches"] * (2 ** n)
+            n_slices = n_patches * (2 ** n)
             slice_sz = int(len(audio) / n_slices)
             for j in range(n_slices):
                 start, end = j * slice_sz, (i + j) * slice_sz

@@ -1,9 +1,5 @@
 ### short
 
-- SlicerBank to take n (as in 2**n) or list of indices instead of meta
-
-- use a real world euclid archive for resampler demo
-
 ### medium
 
 - tokyo beats (kick, hat)
@@ -40,6 +36,7 @@
 
 ### done
 
+- SlicerBank to take n (as in 2**n) or list of indices instead of meta
 - include StaticFilesBank from gist/fxx
 - remove load_zip
 - abstract SlicerBank from Euclid09Archive
