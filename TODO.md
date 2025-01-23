@@ -7,10 +7,10 @@
 
 ### demos
 
-- alternative bassline generators
 - city dreams bass
 - bass slide up/down
 - euclid09 cutoff version
+- alternative bassline generators
 
 - polly
 - vocoder
