@@ -2,11 +2,17 @@ from sv.utils.cli.git import Git
 from sv.utils.cli.colours import Colours
 from sv.utils.cli.model import Project
 from sv.utils.cli.parse import parse_line
+from sv.utils.export import export_wav
+
+from pydub import AudioSegment
 
 import cmd
+import io
+import json
 import logging
 import os
 import sys
+import zipfile
 
 logging.basicConfig(stream = sys.stdout,
                     level = logging.INFO,
@@ -87,6 +93,53 @@ class BaseCLI(cmd.Cmd):
             project.patches.append(patch)
         project.freeze_patches(len(I))
         return project    
+
+    ### export
+
+    def _init_meta_export(self, project):
+        return {"project": {"bpm": self.bpm,
+                            "n_patches": self.n_patches,
+                            "n_ticks": self.n_ticks}}
+    
+    def _init_patches_export(self, project, fade = 3):
+        container = project.render(bank = self.bank,
+                                   generators = self.generators,
+                                   bpm = self.bpm,
+                                   n_ticks = self.n_ticks,
+                                   firewall = True) # NB
+        sv_project = container.render_project()
+        wav_io = export_wav(project = sv_project)
+        audio = AudioSegment.from_file(wav_io, format = "wav")
+        slice_size = len(audio) / (self.n_patches * 2)
+        patches_audio = AudioSegment.silent(duration = 0)
+        for i in range(self.n_patches):
+            j = 2 * i
+            start, end = j * slice_size, (j + 1) * slice_size
+            slice_audio = audio[start:end].fade_in(fade).fade_out(fade)
+            patches_audio += slice_audio
+        patches_io = io.BytesIO()
+        patches_audio.export(patches_io, format = "wav")
+        patches_io.seek(0)
+        return patches_io
+        
+    @assert_head
+    def do_export_zip(self, _):
+        def format_short_name(entry, n=3):
+            return "-".join([tok[:n] for tok in entry.split(".")[0].split("-")])        
+        if not os.path.exists("tmp/zip"):
+            os.makedirs("tmp/zip")
+        commit_id = self.git.head.commit_id
+        zip_name = f"tmp/zip/{commit_id.slug}{self.bpm}.zip"
+        short_name = format_short_name(commit_id.slug)
+        with zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED) as zf:
+            project = self.git.head.content
+            # metadata
+            meta = self._init_meta_export(project)
+            zf.writestr("meta.json", json.dumps(meta,
+                                                indent = 2))
+            # patches
+            patches_wav_io = self._init_patches_export(project)
+            zf.writestr(f"{short_name}.wav", patches_wav_io.getvalue())
     
     ### git
         
