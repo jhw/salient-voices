@@ -1,5 +1,10 @@
 ### short
 
+- sampler machine should accept relative note not root
+- sampler machine should have default colour
+- sampler machine should have default empty list for Modules
+- include cognito auth utils
+
 ### medium
 
 - tokyo beats (kick, hat)
