@@ -3,6 +3,11 @@
 - sampler machine should accept relative note not root
 - sampler machine should have default empty list for Modules
 
+### gists
+
+- remove colour [127, 127, 127] from machine initialisation
+- ensure machine constructor calls superclass constructor with **kwargs
+
 ### medium
 
 - tokyo beats (kick, hat)
