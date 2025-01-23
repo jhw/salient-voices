@@ -8,6 +8,8 @@ import rv
 
 class SVMachine:
 
+    Modules = []
+    
     def __init__(self, container, namespace, colour = [127, 127, 127]):
         self.container = container
         self.namespace = namespace.lower().capitalize()

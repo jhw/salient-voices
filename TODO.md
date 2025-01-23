@@ -1,12 +1,5 @@
 ### short
 
-- sampler machine should have default empty list for Modules
-
-### gists
-
-- remove colour [127, 127, 127] from machine initialisation
-- ensure machine constructor calls superclass constructor with **kwargs
-
 ### medium
 
 - tokyo beats (kick, hat)
@@ -14,10 +7,10 @@
 
 ### demos
 
-- alt bass generators
-- euclid09 cutoff version
+- alternative bassline generators
 - city dreams bass
 - bass slide up/down
+- euclid09 cutoff version
 
 - polly
 - vocoder
@@ -45,6 +38,7 @@
 
 ### done
 
+- sampler machine should have default empty list for Modules
 - sampler machine should accept relative note not root
 - sampler machine should have default colour
 - SlicerBank to take n (as in 2**n) or list of indices instead of meta
