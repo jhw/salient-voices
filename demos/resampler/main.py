@@ -13,8 +13,6 @@ import random
 import re
 import yaml
 
-import rv
-
 Modules = yaml.safe_load("""
 - name: Beat
   class: sv.sampler.SVSlotSampler
@@ -41,7 +39,7 @@ class SliceMachine(SVSamplerMachine):
         SVSamplerMachine.__init__(self,
                                   container=container,
                                   namespace=namespace,
-                                  root=rv.note.NOTE.C5 + relative_note,
+                                  relative_note=relative_note,
                                   **kwargs)
         self.samples = samples
         self.sample_index = sample_index

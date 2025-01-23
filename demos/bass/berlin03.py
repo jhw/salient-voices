@@ -9,8 +9,6 @@ from demos import *
 import random
 import yaml
 
-import rv
-
 Modules = yaml.safe_load("""
 - name: MultiSynth
   class: rv.modules.multisynth.MultiSynth
@@ -82,7 +80,7 @@ class BassMachine(SVSamplerMachine):
                  **kwargs):
         SVSamplerMachine.__init__(self, container=container,
                                   namespace=namespace,
-                                  root=rv.note.NOTE.C5 + relative_note,
+                                  relative_note=relative_note,
                                   **kwargs)
         self.sound = sound
         self.defaults = {"Echo": {"wet": echo_wet,

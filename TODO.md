@@ -1,6 +1,5 @@
 ### short
 
-- sampler machine should accept relative note not root
 - sampler machine should have default empty list for Modules
 
 ### gists
@@ -46,6 +45,7 @@
 
 ### done
 
+- sampler machine should accept relative note not root
 - sampler machine should have default colour
 - SlicerBank to take n (as in 2**n) or list of indices instead of meta
 - include StaticFilesBank from gist/fxx

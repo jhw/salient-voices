@@ -4,6 +4,8 @@ from random import Random
 
 import copy
 
+import rv
+
 class SVMachine:
 
     def __init__(self, container, namespace, colour = [127, 127, 127]):
@@ -42,11 +44,18 @@ class SVMachine:
 
 class SVSamplerMachine(SVMachine):
 
-    def __init__(self, container, namespace, colour, root):
+    def __init__(self, container, namespace, colour,
+                 root_note = rv.note.NOTE.C5,
+                 relative_note = 0):
         super().__init__(container = container,
                          namespace = namespace,
                          colour = colour)
-        self.root = root
+        self.root_note = root_note
+        self.relative_note = relative_note
+
+    @property
+    def root(self):
+        return self.root_note + self.relative_note
 
     @property
     def modules(self, attrs = ["root"]):
