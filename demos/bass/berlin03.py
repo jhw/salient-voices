@@ -79,12 +79,11 @@ class BassMachine(SVSamplerMachine):
                  echo_delay_unit=3,  # tick
                  echo_wet=32,
                  echo_feedback=32,
-                 colour=[127, 127, 127],
                  **kwargs):
         SVSamplerMachine.__init__(self, container=container,
                                   namespace=namespace,
                                   root=rv.note.NOTE.C5 + relative_note,
-                                  colour=colour)
+                                  **kwargs)
         self.sound = sound
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,

@@ -37,13 +37,12 @@ class SliceMachine(SVSamplerMachine):
                  echo_delay_unit=3,  # tick
                  echo_wet=0,
                  echo_feedback=0,
-                 colour=[127, 127, 127],
                  **kwargs):
         SVSamplerMachine.__init__(self,
                                   container=container,
                                   namespace=namespace,
                                   root=rv.note.NOTE.C5 + relative_note,
-                                  colour=colour)
+                                  **kwargs)
         self.samples = samples
         self.sample_index = sample_index
         self.defaults = {"Echo": {"wet": echo_wet,
@@ -161,7 +160,8 @@ if __name__ == "__main__":
         args = parse_args(ArgsConfig)
         archive = Euclid09Archive(StaticZipBank(args.zip_src))
         meta, src_wav_io = archive.project_metadata, archive.patch_audio
-        bank = SlicerBank(meta = meta,
+        bank = SlicerBank(n_patches = meta["n_patches"],
+                          n_ticks = meta["n_ticks"],
                           wav_io = src_wav_io)
         container = SVContainer(bank = bank,
                                 bpm = meta["bpm"],

@@ -1,9 +1,7 @@
 ### short
 
 - sampler machine should accept relative note not root
-- sampler machine should have default colour
 - sampler machine should have default empty list for Modules
-- include cognito auth utils
 
 ### medium
 
@@ -33,6 +31,8 @@
 
 ### thoughts
 
+- include cognito auth utils?
+  - no because all the aws stuff then needs to be part of requirements.txt
 - berlin03 -> extend sample length on initialisation?
   - can't be bothered, is just a demo
   - also pico waveforms should be 2 seconds in length each
@@ -41,6 +41,7 @@
 
 ### done
 
+- sampler machine should have default colour
 - SlicerBank to take n (as in 2**n) or list of indices instead of meta
 - include StaticFilesBank from gist/fxx
 - remove load_zip

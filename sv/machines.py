@@ -6,7 +6,7 @@ import copy
 
 class SVMachine:
 
-    def __init__(self, container, namespace, colour):
+    def __init__(self, container, namespace, colour = [127, 127, 127]):
         self.container = container
         self.namespace = namespace.lower().capitalize()
         self.colour = colour
