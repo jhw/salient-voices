@@ -8,10 +8,11 @@
 ### demos
 
 - city dreams bass
-- bass slide up/down
 - euclid09 cutoff version
-- alternative bassline generators
+- bass slide up/down
 
+- stutter
+- granular
 - polly
 - vocoder
 - vocal chords
@@ -38,6 +39,7 @@
 
 ### done
 
+- tools/copy_m8.py
 - sampler machine should have default empty list for Modules
 - sampler machine should accept relative note not root
 - sampler machine should have default colour

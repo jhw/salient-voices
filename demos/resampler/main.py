@@ -104,12 +104,6 @@ class Euclid09Archive:
     def __init__(self, bank):
         self.bank = bank
 
-    """
-    archive expects format to be zip format currently exported by euclid09 demo, ie with
-    - meta.json 
-    - xxx-xxx-pat-{n}.wav 
-    """
-
     @property
     def project_metadata(self):
         if "meta.json" not in self.bank.file_names:
@@ -121,7 +115,7 @@ class Euclid09Archive:
     @property
     def patch_audio(self):
         file_names = [file_name for file_name in self.bank.file_names
-                      if re.search("pat\\-\\d+\\.wav$", file_name) != None]
+                      if re.search("\.wav$", file_name) != None]
         if file_names == []:
             raise RuntimeError("patch audio file not found")
         file_name = file_names[0]
