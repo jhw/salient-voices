@@ -129,7 +129,7 @@ class BaseCLI(cmd.Cmd):
         if not os.path.exists("tmp/zip"):
             os.makedirs("tmp/zip")
         commit_id = self.git.head.commit_id
-        zip_name = f"tmp/zip/{commit_id.slug}{self.bpm}.zip"
+        zip_name = f"tmp/zip/{commit_id.slug}-{self.bpm}.zip"
         short_name = format_short_name(commit_id.slug)
         with zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED) as zf:
             project = self.git.head.content
