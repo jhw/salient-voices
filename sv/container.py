@@ -26,7 +26,7 @@ class SVContainer:
     def __init__(self,
                  bpm,
                  n_ticks,
-                 bank):
+                 bank = None):
         self.bank = bank
         self.bpm = bpm
         self.n_ticks = n_ticks

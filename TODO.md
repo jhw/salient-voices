@@ -1,4 +1,12 @@
-### short
+### short [01-tokyo09]
+
+- start with euclid09
+- replace SVSampler with DrumSynth
+- replace SVSamplerMachine with SVMachine
+- move machine.samples property inline with note definition
+- replace SVSampleTrig with SVNoteTrig
+- refactor sample/sample_index as note/note_index
+- refactor filter functions to use modulo 12
 
 ### medium
 

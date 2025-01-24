@@ -108,12 +108,12 @@ TrackConfig = [("kick", lambda x: "BD" in x, 0.5, 0.5),
                                   "BLIP" in x or
                                   "HH" in x), 0.5, 0.75)]
 
-def spawn_patch(bank_samples, container,
+def spawn_patch(samples, container,
                 track_config = TrackConfig,
                 beat_generator = Beat,
                 echo_generator = GhostEcho):
     for name, filter_fn, temperature, density in track_config:
-        track_samples = [sample for sample in bank_samples if filter_fn(sample)]
+        track_samples = [sample for sample in samples if filter_fn(sample)]
         selected_samples = [random.choice(track_samples) for i in range(2)]
         machine = BeatMachine(container = container,
                               namespace = name,
@@ -158,11 +158,11 @@ if __name__ == "__main__":
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)
-        bank_samples = bank.file_names
+        samples = bank.file_names
         for i in range(args.n_patches):
             colour = random_colour()
             container.spawn_patch(colour)
-            spawn_patch(bank_samples = bank_samples,
+            spawn_patch(samples = samples,
                         container = container)
             # container.spawn_patch(colour)
         container.write_project("tmp/euclid09-demo.sunvox")                    
