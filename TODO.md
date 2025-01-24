@@ -1,7 +1,5 @@
 ### short
 
-- cli rand_mutes()
-
 ### medium
 
 ### demos
