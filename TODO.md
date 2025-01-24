@@ -1,7 +1,5 @@
 ### short [01-tokyo09]
 
-- start with euclid09
-- replace SVSamplerMachine with SVMachine
 - replace SVSampleTrig with SVNoteTrig
 - refactor sample/sample_index as note/note_index
 - refactor filter functions to use modulo 12
@@ -45,8 +43,10 @@
 
 ### done
 
+- replace SVSamplerMachine with SVMachine
 - replace SVSampler with DrumSynth
 - move machine.samples property inline with note definition
+- start with euclid09
 - tools/copy_m8.py
 - sampler machine should have default empty list for Modules
 - sampler machine should accept relative note not root
