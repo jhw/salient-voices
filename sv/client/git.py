@@ -1,4 +1,4 @@
-from sv.utils.naming import random_name
+from sv.client.naming import random_name
 
 from datetime import datetime
 

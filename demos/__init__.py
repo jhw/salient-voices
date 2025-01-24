@@ -1,5 +1,5 @@
-import sv.utils.algos.euclid as euclid
-import sv.utils.algos.perkons as perkons
+import sv.client.algos.euclid as euclid
+import sv.client.algos.perkons as perkons
 
 import inspect
 import random

@@ -1,9 +1,8 @@
 ### short
 
-- cli/model TrackBase
-- cli/algos
-- demos to use cli/algos
+- move algos back to utils/algos
 - cli/base_cli rand_mutes()
+- client/algos
 
 ### medium
 
@@ -47,6 +46,9 @@
 
 ### done
 
+- cli/model TrackBase
+- cli/algos
+- demos to use cli/algos
 - cli requires random_seed()
 
 

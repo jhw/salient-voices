@@ -1,8 +1,8 @@
-from sv.utils.cli.git import Git
-from sv.utils.cli.colours import Colours
-from sv.utils.cli.model import Project
-from sv.utils.cli.parse import parse_line
-from sv.utils.export import export_wav
+from sv.client.colours import Colours
+from sv.client.export import export_wav
+from sv.client.git import Git
+from sv.client.model import Project
+from sv.client.parse import parse_line
 
 from pydub import AudioSegment
 

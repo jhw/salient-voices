@@ -1,9 +1,10 @@
+from sv.client.banks import StaticZipBank
+from sv.client.banks.slicer import SlicerBank
+from sv.client.parse import parse_args
+
 from sv.container import SVContainer
 from sv.machines import SVSamplerMachine
 from sv.trigs import SVSampleTrig, SVModTrig, controller_value
-from sv.utils.cli.banks import StaticZipBank
-from sv.utils.cli.banks.slicer import SlicerBank
-from sv.utils.cli.parse import parse_args
 
 from demos import *
 

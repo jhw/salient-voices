@@ -1,7 +1,8 @@
+from sv.client.parse import parse_args
+
 from sv.container import SVContainer
 from sv.machines import SVMachine
 from sv.trigs import SVNoteTrig, SVModTrig, controller_value
-from sv.utils.cli.parse import parse_args
 
 from demos import *
 
