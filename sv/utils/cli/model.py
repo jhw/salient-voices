@@ -1,7 +1,32 @@
 from sv.container import SVContainer
+from sv.project import load_class
 from sv.utils.cli.colours import Colour
 
+import sv # so machine classes can be dynamically accessed
+
 DefaultColour = Colour([127, 127, 127])
+
+class TrackBase:
+
+    def __init__(self, name, machine, seeds, muted = False):
+        self.name = name
+        self.machine = machine
+        self.seeds = seeds
+        self.muted = muted    
+    
+    def render(self, container, generators, colour):
+        machine_class = load_class(self.machine)
+        machine = machine_class(
+            container=container,
+            namespace=self.name.capitalize(),
+            colour=colour,
+            **self.machine_kwargs
+        )
+        container.add_machine(machine)
+        for generator in generators:
+            machine.render(generator=generator,
+                           seeds=self.seeds,
+                           env=self.env)
 
 class Tracks(list):
 
