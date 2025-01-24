@@ -11,6 +11,7 @@ import io
 import json
 import logging
 import os
+import random
 import sys
 import zipfile
 
@@ -94,6 +95,19 @@ class BaseCLI(cmd.Cmd):
         project.freeze_patches(len(I))
         return project    
 
+    @assert_head
+    @parse_line([{"name": "n", "type": "int"}])
+    @commit_and_render
+    def do_rand_seeds(self, n):
+        project = self.git.head.content.clone()
+        for patch in project.patches:
+            if not patch.frozen:
+                for _ in range(n):
+                    track = random.choice(patch.tracks)
+                    key = random.choice(list(track.seeds.keys()))
+                    track.seeds[key] = random_seed()
+        return project
+    
     ### export
 
     def _init_meta_export(self, project):
