@@ -44,13 +44,30 @@ class BeatMachine(SVMachine):
     def toggle_note(self):
         self.note_index = 1 - int(self.note_index > 0)
 
+    @property
+    def _note(self):
+        return self.notes[self.note_index]
+
+    """
+    because some bass notes are on the loud side
+    """
+    
+    def mix_level(self, i):
+        if i in [85, 86, 87, 88]:
+            return 0.7
+        elif i in [37, 38, 39, 40, 49, 50, 51, 52]:
+            return 0.85
+        else:
+            return 1.0
+        
     def note(self, i,
              volume=1.0):
-        note = self.notes[self.note_index]
-        return [SVNoteTrig(target=f"{self.namespace}Beat",
-                           i=i,
-                           note=self.note,
-                           vel=volume)]
+        note = self._note
+        level = self.mix_level(note)
+        return [SVNoteTrig(target = f"{self.namespace}Beat",
+                           i = i,
+                           note = note,
+                           vel = volume * level)]
 
     def modulation(self,
                    i, 
@@ -92,10 +109,18 @@ def GhostEcho(self, n, rand,
                                   echo_wet = wet_level,
                                   echo_feedback = feedback_level)
 
-TrackConfig = [("kick", lambda i: (i % 12) < 4, 0.5, 0.5),
-               ("hat", lambda i: (i % 12) > 7, 0.5, 0.75)]
+"""
+No snare as SVDrum snare sounds are lame
+"""
+            
+TrackConfig = [("kick", lambda i:((i % 12) < 4 and
+                                  int(i / 12) not in [1, 9]), 0.5, 0.5),
+               ("hat", lambda i: ((i % 12) > 4 and
+                                  (i % 12) < 7 and
+                                  int(i / 12) not in [6]), 0.5, 0.75)]
 
-def spawn_patch(notes, container,
+def spawn_patch(container,
+                notes = list(range(120)),
                 track_config = TrackConfig,
                 beat_generator = Beat,
                 echo_generator = GhostEcho):
@@ -139,12 +164,10 @@ if __name__ == "__main__":
         args = parse_args(ArgsConfig)
         container = SVContainer(bpm = args.bpm,
                                 n_ticks = args.n_ticks)
-        notes = list(range(120))
         for i in range(args.n_patches):
             colour = random_colour()
             container.spawn_patch(colour)
-            spawn_patch(notes = notes,
-                        container = container)
+            spawn_patch(container = container)
         container.write_project("tmp/tokyo09-demo.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")

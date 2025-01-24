@@ -72,9 +72,27 @@ class SVNoteTrig(SVTrigBase):
     @property
     def fx_value(self):
         return controller_value(self.fx.split("/")[1])
+
+    def resolve_note(self, _):
+        return self.note
+
+    def render(self, modules, *args):
+        mod = modules[self.mod]        
+        mod_id = 1 + mod.index
+        note = self.resolve_note(modules)
+        note_kwargs = {
+            "module": mod_id,
+            "note": note
+        }
+        if self.has_vel:
+            note_kwargs["vel"] = self.velocity
+        if self.fx:
+            note_kwargs["ctl"] = self.fx_pattern
+            note_kwargs["val"] = self.fx_value
+        return rv.note.Note(**note_kwargs)
     
 """
-Extend note for sampke, pitch, cutoff parameters; to be encoded in sample_string
+Extend note for sample, pitch, cutoff parameters; to be encoded in sample_string
 """
     
 class SVSampleTrig(SVNoteTrig):
@@ -116,21 +134,6 @@ class SVSampleTrig(SVNoteTrig):
         note = 1 + mod.index_of(self.sample)
         return note
     
-    def render(self, modules, *args):
-        mod = modules[self.mod]        
-        mod_id = 1 + mod.index
-        note = self.resolve_note(modules)
-        note_kwargs = {
-            "module": mod_id,
-            "note": note
-        }
-        if self.has_vel:
-            note_kwargs["vel"] = self.velocity
-        if self.fx:
-            note_kwargs["ctl"] = self.fx_pattern
-            note_kwargs["val"] = self.fx_value
-        return rv.note.Note(**note_kwargs)
-
 class SVMultiSynthSampleTrig(SVSampleTrig):
 
     def __init__(self, target, sample, sampler_mod, **kwargs):

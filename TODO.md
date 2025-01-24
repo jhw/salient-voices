@@ -1,17 +1,14 @@
-### short [01-tokyo09]
+### short
 
-```
-AttributeError: 'SVNoteTrig' object has no attribute 'render'
-```
+- vordhosbn synth [noise] hats (reverse, retrig)
 
 ### medium
 
 ### demos
 
-- vordhosbahn noise hats (reverse, retrig)
-
+- sample cutoff- based variation
+- sample hats
 - city dreams bass
-- euclid09 cutoff version
 - bass slide up/down
 
 - stutter
@@ -22,6 +19,7 @@ AttributeError: 'SVNoteTrig' object has no attribute 'render'
 
 ### gists
 
+- librosa sample analysis
 - samplebrain
 - vocoder
 
@@ -41,6 +39,10 @@ AttributeError: 'SVNoteTrig' object has no attribute 'render'
   - but how? renaming?
 
 ### done
+
+```
+AttributeError: 'SVNoteTrig' object has no attribute 'render'
+```
 
 - remove snare
 - refactor filter functions to use modulo 12
