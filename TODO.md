@@ -1,6 +1,6 @@
 ### short [01-tokyo09]
 
-- replace SVSampleTrig with SVNoteTrig
+- replace samples with list(range(120))
 - refactor sample/sample_index as note/note_index
 - refactor filter functions to use modulo 12
 
@@ -42,6 +42,7 @@
 
 ### done
 
+- replace SVSampleTrig with SVNoteTrig
 - refactored SVNoteTrigBase as simply SVNoteTrig
 - replace SVSamplerMachine with SVMachine
 - replace SVSampler with DrumSynth
