@@ -1,5 +1,7 @@
 ### short
 
+- cli requires random_seed()
+
 - vordhosbn synth [noise] hats (reverse, retrig)
 
 ### medium

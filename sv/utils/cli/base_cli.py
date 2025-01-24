@@ -105,7 +105,7 @@ class BaseCLI(cmd.Cmd):
                 for _ in range(n):
                     track = random.choice(patch.tracks)
                     key = random.choice(list(track.seeds.keys()))
-                    track.seeds[key] = random_seed()
+                    track.seeds[key] = int(random.random() * 1e8)
         return project
     
     ### export
