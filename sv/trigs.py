@@ -25,7 +25,7 @@ class SVTrigBase:
     def set_position(self, i):
         self.i += i
 
-class SVNoteTrigBase(SVTrigBase):
+class SVNoteTrig(SVTrigBase):
 
     Volume = 128
         
@@ -77,7 +77,7 @@ class SVNoteTrigBase(SVTrigBase):
 Extend note for sampke, pitch, cutoff parameters; to be encoded in sample_string
 """
     
-class SVSampleTrig(SVNoteTrigBase):
+class SVSampleTrig(SVNoteTrig):
 
     def __init__(self, target, sample,
                  pitch = None,

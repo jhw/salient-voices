@@ -6,10 +6,9 @@
 
 ### medium
 
-- tokyo beats (kick, hat)
-- vordhosbahn noise hats (reverse, retrig)
-
 ### demos
+
+- vordhosbahn noise hats (reverse, retrig)
 
 - city dreams bass
 - euclid09 cutoff version
@@ -43,6 +42,7 @@
 
 ### done
 
+- refactored SVNoteTrigBase as simply SVNoteTrig
 - replace SVSamplerMachine with SVMachine
 - replace SVSampler with DrumSynth
 - move machine.samples property inline with note definition
