@@ -1,3 +1,4 @@
+from sv.client.algos import random_perkons_groove
 from sv.client.banks import StaticZipBank
 from sv.client.banks.slicer import SlicerBank
 from sv.client.parse import parse_args

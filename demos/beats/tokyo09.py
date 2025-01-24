@@ -1,3 +1,4 @@
+from sv.client.algos import random_perkons_groove, random_euclid_pattern
 from sv.client.parse import parse_args
 
 from sv.container import SVContainer

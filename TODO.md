@@ -1,12 +1,8 @@
 ### short
 
-- client/algos to wrap utils/algos
-- replace algos stuff in demos
 - cli rand_mutes()
 
 ### medium
-
-- refactor utils, cli sub- directories
 
 ### demos
 
@@ -46,6 +42,9 @@
 
 ### done
 
+- refactor utils, cli sub- directories
+- client/algos to wrap utils/algos
+- replace algos stuff in demos
 - move algos back to utils/algos
 - cli/model TrackBase
 - cli/algos
