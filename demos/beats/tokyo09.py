@@ -1,7 +1,6 @@
 from sv.container import SVContainer
 from sv.machines import SVMachine
 from sv.trigs import SVNoteTrig, SVModTrig, controller_value
-from sv.utils.cli.banks import StaticZipBank
 from sv.utils.cli.parse import parse_args
 
 from demos import *
@@ -24,8 +23,8 @@ class BeatMachine(SVMachine):
 
     Modules = Modules
 
-    def __init__(self, container, namespace, samples,
-                 sample_index=0,
+    def __init__(self, container, namespace, notes,
+                 note_index=0,
                  echo_delay=36,
                  echo_delay_unit=3,  # tick
                  echo_wet=0,
@@ -35,22 +34,22 @@ class BeatMachine(SVMachine):
                            container=container,
                            namespace=namespace,
                            **kwargs)
-        self.samples = samples
-        self.sample_index = sample_index
+        self.notes = notes
+        self.note_index = note_index
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
                                   "delay": echo_delay,
                                   "delay_unit": echo_delay_unit}}
 
-    def toggle_sample(self):
-        self.sample_index = 1 - int(self.sample_index > 0)
+    def toggle_note(self):
+        self.note_index = 1 - int(self.note_index > 0)
 
     def note(self, i,
              volume=1.0):
-        sample = self.samples[self.sample_index]
+        note = self.notes[self.note_index]
         return [SVNoteTrig(target=f"{self.namespace}Beat",
                            i=i,
-                           sample=self.sample,
+                           note=self.note,
                            vel=volume)]
 
     def modulation(self,
@@ -73,8 +72,8 @@ class BeatMachine(SVMachine):
 def Beat(self, n, rand, pattern, groove, temperature, density, **kwargs):
     for i in range(n):        
         volume = groove(rand = rand["vol"], i = i)
-        if rand["sample"].random() < temperature:
-            self.toggle_sample()        
+        if rand["note"].random() < temperature:
+            self.toggle_note()        
         if (pattern(i) and 
             rand["beat"].random() < density):
             yield self.note(volume = volume,
@@ -103,21 +102,21 @@ TrackConfig = [("kick", lambda x: "BD" in x, 0.5, 0.5),
                                   "BLIP" in x or
                                   "HH" in x), 0.5, 0.75)]
 
-def spawn_patch(samples, container,
+def spawn_patch(notes, container,
                 track_config = TrackConfig,
                 beat_generator = Beat,
                 echo_generator = GhostEcho):
     for name, filter_fn, temperature, density in track_config:
-        track_samples = [sample for sample in samples if filter_fn(sample)]
-        selected_samples = [random.choice(track_samples) for i in range(2)]
+        track_notes = [note for note in notes if filter_fn(note)]
+        selected_notes = [random.choice(track_notes) for i in range(2)]
         machine = BeatMachine(container = container,
                               namespace = name,
                               colour = random_colour(),
-                              samples = selected_samples)
+                              notes = selected_notes)
         container.add_machine(machine)
         pattern = random_euclid_pattern()
         groove = random_perkons_groove()
-        seeds = {key: random_seed() for key in "sample|fx|beat|vol".split("|")}
+        seeds = {key: random_seed() for key in "note|fx|beat|vol".split("|")}
         machine.render(generator = beat_generator,
                        seeds = seeds,
                        env = {"groove": groove,
@@ -128,10 +127,6 @@ def spawn_patch(samples, container,
                        seeds = seeds)
 
 ArgsConfig = yaml.safe_load("""
-- name: bank_src
-  type: str
-  file: true
-  default: demos/packs/pico-default.zip
 - name: bpm
   type: int
   default: 120
@@ -149,15 +144,13 @@ ArgsConfig = yaml.safe_load("""
 if __name__ == "__main__":
     try:
         args = parse_args(ArgsConfig)
-        bank = StaticZipBank(args.bank_src)
-        container = SVContainer(bank = bank,
-                                bpm = args.bpm,
+        container = SVContainer(bpm = args.bpm,
                                 n_ticks = args.n_ticks)
-        samples = bank.file_names
+        notes = list(range(120))
         for i in range(args.n_patches):
             colour = random_colour()
             container.spawn_patch(colour)
-            spawn_patch(samples = samples,
+            spawn_patch(notes = notes,
                         container = container)
             # container.spawn_patch(colour)
         container.write_project("tmp/euclid09-demo.sunvox")                    
