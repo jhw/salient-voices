@@ -1,8 +1,8 @@
 ### short
 
-- move algos back to utils/algos
-- cli/base_cli rand_mutes()
-- client/algos
+- client/algos to wrap utils/algos
+- replace algos stuff in demos
+- cli rand_mutes()
 
 ### medium
 
@@ -46,6 +46,7 @@
 
 ### done
 
+- move algos back to utils/algos
 - cli/model TrackBase
 - cli/algos
 - demos to use cli/algos

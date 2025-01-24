@@ -45,7 +45,7 @@ def commit_and_render(fn):
         container.write_project(f"tmp/sunvox/{commit_id}.sunvox")
     return wrapped
 
-class BaseCLI(cmd.Cmd):
+class ClientCLI(cmd.Cmd):
 
     prompt = ">>> "
 
