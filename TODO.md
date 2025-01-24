@@ -7,6 +7,8 @@
 
 ### medium
 
+- refactor utils, cli sub- directories
+
 ### demos
 
 - vordhosbn synth [noise] hats (reverse, retrig)
