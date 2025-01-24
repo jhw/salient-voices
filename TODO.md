@@ -1,8 +1,8 @@
 ### short [01-tokyo09]
 
-- replace samples with list(range(120))
-- refactor sample/sample_index as note/note_index
-- refactor filter functions to use modulo 12
+```
+AttributeError: 'SVNoteTrig' object has no attribute 'render'
+```
 
 ### medium
 
@@ -42,6 +42,8 @@
 
 ### done
 
+- remove snare
+- refactor filter functions to use modulo 12
 - replace SVSampleTrig with SVNoteTrig
 - refactored SVNoteTrigBase as simply SVNoteTrig
 - replace SVSamplerMachine with SVMachine

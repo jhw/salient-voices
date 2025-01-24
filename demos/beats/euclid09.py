@@ -164,7 +164,6 @@ if __name__ == "__main__":
             container.spawn_patch(colour)
             spawn_patch(samples = samples,
                         container = container)
-            # container.spawn_patch(colour)
         container.write_project("tmp/euclid09-demo.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")

@@ -92,15 +92,8 @@ def GhostEcho(self, n, rand,
                                   echo_wet = wet_level,
                                   echo_feedback = feedback_level)
 
-TrackConfig = [("kick", lambda x: "BD" in x, 0.5, 0.5),
-               ("snare", lambda x: ("SD" in x or
-                                    "TOM" in x or
-                                    "HC" in x), 0.5, 0.25),
-               ("hat", lambda x: ("RS" in x or
-                                  # "CH" in x or
-                                  "OH" in x or
-                                  "BLIP" in x or
-                                  "HH" in x), 0.5, 0.75)]
+TrackConfig = [("kick", lambda i: (i % 12) < 4, 0.5, 0.5),
+               ("hat", lambda i: (i % 12) > 7, 0.5, 0.75)]
 
 def spawn_patch(notes, container,
                 track_config = TrackConfig,
@@ -152,7 +145,6 @@ if __name__ == "__main__":
             container.spawn_patch(colour)
             spawn_patch(notes = notes,
                         container = container)
-            # container.spawn_patch(colour)
-        container.write_project("tmp/euclid09-demo.sunvox")                    
+        container.write_project("tmp/tokyo09-demo.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")
