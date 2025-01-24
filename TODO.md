@@ -1,7 +1,6 @@
 ### short [01-tokyo09]
 
 - start with euclid09
-- replace SVSampler with DrumSynth
 - replace SVSamplerMachine with SVMachine
 - replace SVSampleTrig with SVNoteTrig
 - refactor sample/sample_index as note/note_index
@@ -46,6 +45,7 @@
 
 ### done
 
+- replace SVSampler with DrumSynth
 - move machine.samples property inline with note definition
 - tools/copy_m8.py
 - sampler machine should have default empty list for Modules
