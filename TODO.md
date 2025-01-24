@@ -1,12 +1,15 @@
 ### short
 
-- cli requires random_seed()
-
-- vordhosbn synth [noise] hats (reverse, retrig)
+- cli/model TrackBase
+- cli/algos
+- demos to use cli/algos
+- cli/base_cli rand_mutes()
 
 ### medium
 
 ### demos
+
+- vordhosbn synth [noise] hats (reverse, retrig)
 
 - sample cutoff- based variation
 - sample hats
@@ -41,6 +44,9 @@
   - but how? renaming?
 
 ### done
+
+- cli requires random_seed()
+
 
 ```
 AttributeError: 'SVNoteTrig' object has no attribute 'render'
