@@ -153,7 +153,7 @@ ArgsConfig = yaml.safe_load("""
   min: 1
 """)
         
-if __name__ == "__main__":
+def main():
     try:
         args = parse_args(ArgsConfig)
         bank = StaticZipBank(args.bank_src)
@@ -169,3 +169,6 @@ if __name__ == "__main__":
         container.write_project("tmp/euclid09-demo.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")
+
+if __name__ == "__main__":
+    main()

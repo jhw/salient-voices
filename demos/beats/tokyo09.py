@@ -161,7 +161,7 @@ ArgsConfig = yaml.safe_load("""
   min: 1
 """)
         
-if __name__ == "__main__":
+def main():
     try:
         args = parse_args(ArgsConfig)
         container = SVContainer(bpm = args.bpm,
@@ -173,3 +173,6 @@ if __name__ == "__main__":
         container.write_project("tmp/tokyo09-demo.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")
+
+if __name__ == "__main__":
+    main()

@@ -1,4 +1,4 @@
-### sunvox-2.0.file-format
+### sunvox-2.0.file-format 18/01/25
 
 - rename xxx_ms controller values as xxx
 - add multisynth hack
