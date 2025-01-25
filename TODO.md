@@ -1,10 +1,4 @@
-### short
-
-### medium
-
-- don't render tracks with no trigs unless forced
- 
-### tests
+### short [tests]
 
 - git
 - export
@@ -12,11 +6,7 @@
 
 - sampler, synth lifecycle
 
-### gists 
-
-- no longer any need for Project to initialise Patches, Patch to initialise Tracks
-- copy_m8 has been moved to scripts
-- parse_args is now in cli
+### medium
 
 ### demos
 
@@ -47,6 +37,8 @@
 
 ### thoughts
 
+- don't render tracks with no trigs unless forced?
+  - unclear has value
 - scaffolder script? 
   - not sure it makes sense
 - berlin03 -> extend sample length on initialisation?
