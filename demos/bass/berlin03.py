@@ -1,8 +1,9 @@
 from sv.client.algos import random_perkons_groove
 from sv.client.banks import StaticZipBank
 from sv.client.cli import parse_args
+from sv.client.colours import Colours
+from sv.client.model import Project, Patch, TrackBase
 
-from sv.core.container import SVContainer
 from sv.core.machines import SVSamplerMachine
 from sv.core.trigs import SVMultiSynthSampleTrig, SVModTrig, SVNoteOffTrig
 
@@ -133,6 +134,31 @@ class BassMachine(SVSamplerMachine):
     def note_off(self, i):
         return [SVNoteOffTrig(target=f"{self.namespace}MultiSynth",
                               i=i)]
+
+class Track(TrackBase):
+
+    def __init__(self, name, machine, groove, scale, seeds, sound, muted = False):
+        super().__init__(name = name,
+                         machine = machine,
+                         seeds = seeds,
+                         muted = muted)
+        self.groove = groove
+        self.scale = scale
+        self.sound = sound
+
+    @property
+    def env(self):
+        return {
+            "groove": self.groove,
+            "scale": self.scale
+        }
+
+    @property
+    def machine_kwargs(self):
+        return {
+            "sound": self.sound
+        }
+
     
 def Bassline(self, n, rand, groove, scale, **kwargs):
     last = None
@@ -181,12 +207,6 @@ Vitling303Scales = [[0, 0, 12, 24, 27],
                     [0, 0, 0, 0, 12, 13, 16, 19, 22, 24, 25],
                     [0, 0, 0, 7, 12, 15, 17, 20, 24]]
 
-
-WolScales = [[0],
-             [0, 0, 0, 12],
-             [0, 0, 10, 12],
-             [0, 0, 0, -2, 12]]
-
 ArgsConfig = yaml.safe_load("""
 - name: bank_src
   type: str
@@ -198,7 +218,7 @@ ArgsConfig = yaml.safe_load("""
   min: 1
 - name: n_ticks
   type: int
-  default: 32
+  default: 16
   min: 1
 - name: n_patches
   type: int
@@ -206,45 +226,49 @@ ArgsConfig = yaml.safe_load("""
   min: 1
 """)
 
-def main():
+def random_sound(bank):
+    sample = random.choice(bank.file_names)
+    attack = random.choice(["0008"])
+    decay = random.choice(["0018"])
+    sustain = random.choice(["0800"])
+    release = random.choice(["0300"])
+    filter_freq = random.choice(["6000", "8000", "a000"])
+    filter_resonance = random.choice(["7000"])
+    return BassSound(sample = sample,
+                     attack = attack,
+                     decay = decay,
+                     sustain = sustain,
+                     release = release,                                
+                     filter_freq = filter_freq,
+                     filter_resonance = filter_resonance)
+
+def main(args_config = ArgsConfig,
+         _track = {"name": "303",
+                   "machine": "demos.bass.berlin03.BassMachine"},
+         scales = Vitling303Scales, # WolScales,
+         generators = [Bassline]):
     try:
         args = parse_args(ArgsConfig)
         bank = StaticZipBank(args.bank_src)
-        container = SVContainer(bank = bank,
-                                bpm = args.bpm,
-                                n_ticks = args.n_ticks)
+        project = Project()
         for i in range(args.n_patches):
-            container.spawn_patch(colour = random_colour())
-            sample = random.choice(bank.file_names)
-            attack = random.choice(["0008"])
-            decay = random.choice(["0018"])
-            sustain = random.choice(["0800"])
-            release = random.choice(["0300"])
-            filter_freq = random.choice(["6000", "8000", "a000"])
-            filter_resonance = random.choice(["7000"])
-            sound = BassSound(sample = sample,
-                              attack = attack,
-                              decay = decay,
-                              sustain = sustain,
-                              release = release,                                
-                              filter_freq = filter_freq,
-                              filter_resonance = filter_resonance)
-            machine = BassMachine(container = container,
-                                  namespace = "303",
-                                  sound = sound,
-                                  colour = random_colour())
-            container.add_machine(machine)
-            seeds = {key: int(random.random() * 1e8)
-                     for key in "note|vol".split("|")}
-            groove = random_perkons_groove()
-            # scale = [i for i in random.choice(Vitling303Scales) if i <= 12]
-            scale = random.choice(WolScales)
-            env = {"groove": groove,
-                   "scale": scale}
-            machine.render(generator = Bassline,
-                           seeds = seeds,
-                           env = env)
-        container.write_project("tmp/demos/berlin03.sunvox")                    
+            patch = Patch()
+            track = Track(name = _track["name"],
+                          machine = _track["machine"],
+                          groove = random_perkons_groove(),
+                          scale = random.choice(scales),
+                          sound = random_sound(bank),
+                          seeds = random_seeds("note|vol"))
+            patch.tracks.append(track)
+            project.patches.append(patch)
+        colours = Colours.randomise(tracks = [_track],
+                                    patches = project.patches)
+        container = project.render(bank = bank,
+                                   generators = generators,
+                                   colours = colours,
+                                   bpm = args.bpm,
+                                   n_ticks = args.n_ticks)
+        container.write_project("tmp/demos/berlin03.sunvox")
     except RuntimeError as error:
         print(f"ERROR: {error}")
 
