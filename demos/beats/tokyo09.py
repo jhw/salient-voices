@@ -206,8 +206,7 @@ def main(notes = list(range(120)),
             project.patches.append(patch)
         colours = Colours.randomise(tracks = tracks,
                                     patches = project.patches)
-        container = project.render(bank = None, # AARGH
-                                   generators = generators,
+        container = project.render(generators = generators,
                                    colours = colours,
                                    bpm = args.bpm,
                                    n_ticks = args.n_ticks)

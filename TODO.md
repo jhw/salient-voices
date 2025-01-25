@@ -1,6 +1,5 @@
 ### short
 
-- allow bank to be None in project.render()
 - Project to auto- initialise Patches, Patch to auto- initialise Tracks
 - helper to initialise seeds with multiple keys
   - remove random_seed()
@@ -47,6 +46,7 @@
 
 ### done
 
+- allow bank to be None in project.render()
 - convert all demos to use single main() function
 - add main() function to each demo
 - add demos/run.py to run all demos

@@ -89,7 +89,8 @@ class Project:
     def __init__(self, patches = None):
         self.patches = patches if patches else Patches()
         
-    def render(self, bank, generators, bpm, n_ticks,
+    def render(self, generators, bpm, n_ticks,
+               bank = None,
                firewall = False,
                colours = {}):
         container = SVContainer(bank = bank,
