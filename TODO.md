@@ -1,6 +1,5 @@
 ### short
 
-- move copy M8 to scripts 
 - core package
 
 ### medium
@@ -61,6 +60,7 @@
 
 ### done
 
+- move copy M8 to scripts 
 - demos should export to demos/xxx.sunvox
 - rename ghost delay machine as ghost echo machine
 - centralise packs dir
