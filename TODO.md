@@ -1,8 +1,5 @@
 ### short
 
-- rename machines, sounds as 909/303
-- refactor single track namespaces as 909|303
-
 ### medium
 
 - don't render tracks with no trigs unless forced
@@ -60,6 +57,7 @@
 
 ### done
 
+- refactor single track namespaces as 909|303
 - all demos to catch AttributeError
 - refactor berlin03 to utilise TrackBase
 - refactor resampler to utilise TrackBase

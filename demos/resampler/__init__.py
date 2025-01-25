@@ -168,7 +168,7 @@ ArgsConfig = yaml.safe_load("""
 """)
     
 def main(args_config = ArgsConfig,
-         _track = {"name": "wol",
+         _track = {"name": "909",
                    "machine": "demos.resampler.SliceMachine"},
          generators = [Beat, GhostEcho]):
     try:
