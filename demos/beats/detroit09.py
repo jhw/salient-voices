@@ -116,14 +116,14 @@ def GhostEcho(self, n, rand,
 TrackConfig = [
     {
         "name": "kick",
-        "machine": "demos.beats.euclid09.BeatMachine",
+        "machine": "demos.beats.detroit09.BeatMachine",
         "temperature": 0.5,
         "density": 0.5,
         "filter_fn": lambda x: "BD" in x
     },
     {
         "name": "snare",
-        "machine": "demos.beats.euclid09.BeatMachine",
+        "machine": "demos.beats.detroit09.BeatMachine",
         "temperature": 0.5,
         "density": 0.25,
         "filter_fn": lambda x: ("SD" in x or
@@ -132,7 +132,7 @@ TrackConfig = [
     },
     {
         "name": "hat",
-        "machine": "demos.beats.euclid09.BeatMachine",
+        "machine": "demos.beats.detroit09.BeatMachine",
         "temperature": 0.5,
         "density": 0.75,
         "filter_fn": lambda x: ("RS" in x or
@@ -193,7 +193,7 @@ def main(args_config = ArgsConfig,
                                    colours = colours,
                                    bpm = args.bpm,
                                    n_ticks = args.n_ticks)
-        container.write_project("tmp/euclid09-demo.sunvox")                    
+        container.write_project("tmp/detroit09-demo.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")
 

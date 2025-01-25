@@ -1,6 +1,7 @@
 ### short
 
 - rename Euclid as Detroit 
+- centralise packs dir
 - rename ghost delay machine as ghost echo machine
 - demos should export to demos/xxx.sunvox
 - move copy M8 to scripts 
