@@ -1,5 +1,7 @@
 ### short
 
+- demo delay machine to implement S&H delay
+
 - refactor resampler to extend TrackBase
 - refactor berlin03 to extend TrackBase
 
