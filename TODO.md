@@ -1,9 +1,24 @@
 ### short
 
+- rename Euclid as Detroit 
+- rename ghost delay machine as ghost echo machine
+- demos should export to demos/xxx.sunvox
+- move copy M8 to scripts 
+- core package
+
+### medium
+
 - refactor resampler to utilise TrackBase, GhostDelayMachine 
 - refactor berlin03 to utilise TrackBase
 
-### medium
+- tests for synth and sampler project lifecycle 
+- git test
+- wav export test
+- test for wav export
+
+- remove iteration over tracks in Berlin and resampler cases 
+
+- scaffolder script? 
 
 ### gists 
 
@@ -11,14 +26,15 @@
 
 ### demos
 
+- ekaterinburg bass
 - vordhosbn synth [noise] hats (reverse, retrig)
 
 - sample cutoff- based variation
 - sample hats
-- city dreams bass
 - bass slide up/down
 
 - stutter
+- sidechain
 - granular
 - polly
 - vocoder
