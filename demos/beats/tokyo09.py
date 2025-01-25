@@ -1,6 +1,6 @@
 from sv.client.algos import random_perkons_groove, random_euclid_pattern
 from sv.client.colours import Colours
-from sv.client.model import Project, Patches, Patch, Tracks, TrackBase
+from sv.client.model import Project, Patch, TrackBase
 from sv.client.parse import parse_args
 
 from sv.container import SVContainer
@@ -186,9 +186,9 @@ def main(notes = list(range(120)),
          generators = [Beat, GhostEcho]):
     try:
         args = parse_args(args_config)
-        project = Project(patches = Patches())
+        project = Project()
         for i in range(args.n_patches):
-            patch = Patch(tracks = Tracks())
+            patch = Patch()
             for _track in tracks:
                 track_notes = [note for note in notes
                                if _track["filter_fn"](note)]

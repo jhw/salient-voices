@@ -1,7 +1,7 @@
 from sv.client.algos import random_perkons_groove, random_euclid_pattern
 from sv.client.banks import StaticZipBank
 from sv.client.colours import Colours
-from sv.client.model import Project, Patches, Patch, Tracks, TrackBase
+from sv.client.model import Project, Patch, TrackBase
 from sv.client.parse import parse_args
 
 from sv.machines import SVSamplerMachine
@@ -185,9 +185,9 @@ def main(args_config = ArgsConfig,
         args = parse_args(args_config)
         bank = StaticZipBank(args.bank_src)
         all_samples = bank.file_names
-        project = Project(patches = Patches())
+        project = Project()
         for i in range(args.n_patches):
-            patch = Patch(tracks = Tracks())
+            patch = Patch()
             for _track in tracks:
                 track_samples = [sample for sample in all_samples
                                  if _track["filter_fn"](sample)]

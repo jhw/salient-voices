@@ -47,8 +47,8 @@ class Tracks(list):
                 
 class Patch:
     
-    def __init__(self, tracks, frozen = False):
-        self.tracks = tracks
+    def __init__(self, tracks = None, frozen = False):
+        self.tracks = tracks if tracks else Tracks()
         self.frozen = frozen
 
     def clone(self):
