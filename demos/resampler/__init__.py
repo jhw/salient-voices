@@ -2,8 +2,9 @@ from sv.client.algos import random_perkons_groove
 from sv.client.banks import StaticZipBank
 from sv.client.banks.slicer import SlicerBank
 from sv.client.cli import parse_args
+from sv.client.colours import Colours
+from sv.client.model import Project, Patch, TrackBase
 
-from sv.core.container import SVContainer
 from sv.core.machines import SVSamplerMachine
 from sv.core.trigs import SVSampleTrig
 
@@ -65,22 +66,49 @@ class SliceMachine(SVSamplerMachine, GhostEchoMachine):
                              sample=self.sample,
                              vel=volume)]
 
-def Beat(self, n, rand, groove, quantise, density,
+class Track(TrackBase):
+
+    def __init__(self, name, machine, groove, seeds, beat_quantise, echo_quantise, density, samples, muted = False):
+        super().__init__(name = name,
+                         machine = machine,
+                         seeds = seeds,
+                         muted = muted)
+        self.groove = groove
+        self.density = density
+        self.beat_quantise = beat_quantise
+        self.echo_quantise = echo_quantise
+        self.samples = samples
+
+    @property
+    def env(self):
+        return {
+            "density": self.density,
+            "beat_quantise": self.beat_quantise,
+            "echo_quantise": self.echo_quantise,
+            "groove": self.groove
+        }
+
+    @property
+    def machine_kwargs(self):
+        return {
+            "samples": self.samples
+        }
+
+def Beat(self, n, rand, groove, beat_quantise, density,
          **kwargs):
     for i in range(n):
         volume = groove(i = i,
                         rand = rand["vol"])
-        if (0 == i % quantise and
+        if (0 == i % beat_quantise and
             rand["trig"].random() < density):
             self.randomise_sample(rand["sample"])
             yield self.note(volume = volume, i = i)
 
-def GhostEcho(self, n, rand,
-              quantise = 4,
+def GhostEcho(self, n, rand, echo_quantise,
               sample_hold_levels = ["0000", "2000", "4000", "6000", "8000"],
               **kwargs):
     for i in range(n):
-        if 0 == i % quantise:
+        if 0 == i % echo_quantise:
             wet_level = rand["fx"].choice(sample_hold_levels)
             feedback_level = rand["fx"].choice(sample_hold_levels)
             yield self.modulation(i = i,
@@ -125,9 +153,13 @@ ArgsConfig = yaml.safe_load("""
   default: 0.5
   min: 0
   max: 1
-- name: quantise
+- name: beat_quantise
   type: int
   default: 2
+  options: [1, 2, 4, 8, 16]
+- name: echo_quantise
+  type: int
+  default: 4
   options: [1, 2, 4, 8, 16]
 - name: n_patches
   type: int
@@ -135,37 +167,43 @@ ArgsConfig = yaml.safe_load("""
   min: 1
 """)
     
-def main():
+def main(args_config = ArgsConfig,
+         _track = {"name": "wol",
+                   "machine": "demos.resampler.SliceMachine"},
+         generators = [Beat, GhostEcho]):
     try:
-        args = parse_args(ArgsConfig)
+        args = parse_args(args_config)
         archive = Euclid09Archive(StaticZipBank(args.zip_src))
         meta, src_wav_io = archive.project_metadata, archive.patch_audio
         bank = SlicerBank(n_patches = meta["n_patches"],
                           n_ticks = meta["n_ticks"],
                           wav_io = src_wav_io)
-        container = SVContainer(bank = bank,
-                                bpm = meta["bpm"],
-                                n_ticks = meta["n_ticks"])
-        all_samples = bank.list_slices(n_ticks = meta["n_ticks"],
-                                       quantise = args.quantise)
+        all_slices = bank.list_slices(n_ticks = meta["n_ticks"],
+                                       quantise = args.beat_quantise)
+        project = Project()
         for i in range(args.n_patches):
-            container.spawn_patch(colour = random_colour())
-            samples = [random.choice(all_samples) for i in range(args.group_sz)]
-            machine = SliceMachine(container = container,
-                                   namespace = "wol",
-                                   colour = random_colour(),
-                                   samples = samples)
-            container.add_machine(machine)
-            groove = random_perkons_groove()
-            seeds = {key: random_seed() for key in "sample|fx|trig|vol".split("|")}
-            machine.render(generator = Beat,
-                           seeds = seeds,
-                           env = {"groove": groove,
-                                  "quantise": args.quantise,
-                                  "density": args.density})
-            machine.render(generator = GhostEcho,
-                           seeds = seeds)
+            patch = Patch()
+            slices = [random.choice(all_slices) for i in range(args.group_sz)]
+            track = Track(name = _track["name"],
+                          machine = _track["machine"],
+                          groove = random_perkons_groove(),
+                          seeds = random_seeds("sample|fx|trig|vol"),
+                          beat_quantise = args.beat_quantise,
+                          echo_quantise = args.echo_quantise,
+                          density = args.density,
+                          samples = slices)
+            patch.tracks.append(track)
+            project.patches.append(patch)
+        colours = Colours.randomise(tracks = [_track],
+                                    patches = project.patches)
+        container = project.render(bank = bank,
+                                   generators = generators,
+                                   colours = colours,
+                                   bpm = meta["bpm"],
+                                   n_ticks = meta["n_ticks"])
         container.write_project("tmp/demos/resampler.sunvox")
+    except AttributeError as error:
+        print(f"ERROR: {error}")
     except RuntimeError as error:
         print(f"ERROR: {error}")
 

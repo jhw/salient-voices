@@ -1,18 +1,18 @@
 ### short
 
-- refactor resampler to utilise TrackBase
 - refactor berlin03 to utilise TrackBase
+
+- all demos to catch AttributeError
 
 ### medium
 
-- clean up imports in berlin03, resampler tests
-
 ### tests
 
-- sampler, synth lifecycle
 - git
 - export
 - parse
+
+- sampler, synth lifecycle
 
 ### gists 
 
@@ -59,6 +59,7 @@
 
 ### done
 
+- refactor resampler to utilise TrackBase
 - move parse_args to cli
 - refactor resampler to use GhostEchoMachine 
 - core package
