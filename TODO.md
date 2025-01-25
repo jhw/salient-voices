@@ -1,6 +1,5 @@
 ### short
 
-- all demos to catch AttributeError
 - rename machines, sounds as 909/303
 - refactor single track namespaces as 909|303
 
@@ -61,6 +60,7 @@
 
 ### done
 
+- all demos to catch AttributeError
 - refactor berlin03 to utilise TrackBase
 - refactor resampler to utilise TrackBase
 - move parse_args to cli
