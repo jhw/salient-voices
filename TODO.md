@@ -1,22 +1,24 @@
 ### short
 
-- remove iteration over tracks in Berlin and resampler cases 
-
-### medium
-
 - refactor resampler to utilise TrackBase
 - refactor berlin03 to utilise TrackBase
 
-- git test
-- wav export test
-- tests for synth and sampler project lifecycle 
+### medium
 
-- scaffolder script? 
+- clean up imports in berlin03, resampler tests
+
+### tests
+
+- sampler, synth lifecycle
+- git
+- export
+- parse
 
 ### gists 
 
 - no longer any need for Project to initialise Patches, Patch to initialise Tracks
 - copy_m8 has been moved to scripts
+- parse_args is now in cli
 
 ### demos
 
@@ -47,8 +49,8 @@
 
 ### thoughts
 
-- include cognito auth utils?
-  - no because all the aws stuff then needs to be part of requirements.txt
+- scaffolder script? 
+  - not sure it makes sense
 - berlin03 -> extend sample length on initialisation?
   - can't be bothered, is just a demo
   - also pico waveforms should be 2 seconds in length each
@@ -57,6 +59,7 @@
 
 ### done
 
+- move parse_args to cli
 - refactor resampler to use GhostEchoMachine 
 - core package
 - move copy M8 to scripts 

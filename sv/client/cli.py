@@ -6,6 +6,7 @@ from sv.client.parse import parse_line
 
 from pydub import AudioSegment
 
+import argparse
 import cmd
 import io
 import json
@@ -44,6 +45,35 @@ def commit_and_render(fn):
             os.makedirs("tmp/sunvox")
         container.write_project(f"tmp/sunvox/{commit_id}.sunvox")
     return wrapped
+
+def parse_args(config):
+    parser = argparse.ArgumentParser(description="SV client")
+    for item in config:
+        kwargs = {"type": eval(item["type"])}
+        if "default" in item:
+            kwargs["default"] = item["default"]
+        parser.add_argument(f"--{item['name']}", **kwargs)
+    args, errors = parser.parse_args(), []
+    for item in config:
+        if getattr(args, item['name']) == None:
+            errors.append(f"please supply {item['name']}")
+        else:
+            value = getattr(args, item["name"])
+            if ("file" in item and item["file"] and
+                not os.path.exists(value)):
+                errors.append(f"{value} does not exist")
+            elif ("options" in item and
+                value not in item["options"]):
+                errors.append(f"{value} is not a valid options for {item['name']}")
+            elif ("min" in item and
+                  value < item["min"]):
+                errors.append(f"{item['name']} is below min value")
+            elif ("max" in item and
+                  value > item["max"]):
+                errors.append(f"{item['name']} exceeds max value")                
+    if errors != []:
+        raise RuntimeError(", ".join(errors))
+    return args
 
 class ClientCLI(cmd.Cmd):
 

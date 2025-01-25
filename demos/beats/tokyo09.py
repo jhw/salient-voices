@@ -1,9 +1,8 @@
 from sv.client.algos import random_perkons_groove, random_euclid_pattern
+from sv.client.cli import parse_args
 from sv.client.colours import Colours
 from sv.client.model import Project, Patch, TrackBase
-from sv.client.parse import parse_args
 
-from sv.core.container import SVContainer
 from sv.core.machines import SVMachine
 from sv.core.trigs import SVNoteTrig
 

@@ -1,6 +1,6 @@
 from sv.client.algos import random_perkons_groove
 from sv.client.banks import StaticZipBank
-from sv.client.parse import parse_args
+from sv.client.cli import parse_args
 
 from sv.core.container import SVContainer
 from sv.core.machines import SVSamplerMachine
