@@ -1,10 +1,11 @@
 ### short
 
-- convert all demos to use single main() function
+- refactor all demos as per euclid09 demo, to extend TrackBase
+- helper to initialise seeds with multiple keys
+  - remove random_seed()
+- Project to auto- initialise Patches, Patch to auto- initialise Tracks
 
 ### medium
-
-- refactor demos to extend TrackBase
 
 ### demos
 
@@ -44,6 +45,7 @@
 
 ### done
 
+- convert all demos to use single main() function
 - add main() function to each demo
 - add demos/run.py to run all demos
 - refactor resampler main as resampler/__init__.py
