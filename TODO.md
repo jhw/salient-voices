@@ -1,9 +1,11 @@
 ### short
 
-- refactor all demos as per euclid09 demo, to extend TrackBase
+- allow bank to be None in project.render()
+- Project to auto- initialise Patches, Patch to auto- initialise Tracks
 - helper to initialise seeds with multiple keys
   - remove random_seed()
-- Project to auto- initialise Patches, Patch to auto- initialise Tracks
+
+- refactor all demos as per euclid09 demo, to extend TrackBase
 
 ### medium
 

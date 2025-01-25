@@ -1,4 +1,6 @@
 from sv.client.algos import random_perkons_groove, random_euclid_pattern
+from sv.client.colours import Colours
+from sv.client.model import Project, Patches, Patch, Tracks, TrackBase
 from sv.client.parse import parse_args
 
 from sv.container import SVContainer
@@ -88,6 +90,34 @@ class BeatMachine(SVMachine):
                                    value=feedback_level))
         return trigs
 
+class Track(TrackBase):
+
+    def __init__(self, name, machine, pattern, groove, seeds, temperature, density, notes, muted = False):
+        super().__init__(name = name,
+                         machine = machine,
+                         seeds = seeds,
+                         muted = muted)
+        self.pattern = pattern
+        self.groove = groove
+        self.temperature = temperature
+        self.density = density
+        self.notes = notes
+
+    @property
+    def env(self):
+        return {
+            "temperature": self.temperature,
+            "density": self.density,
+            "pattern": self.pattern,
+            "groove": self.groove
+        }
+
+    @property
+    def machine_kwargs(self):
+        return {
+            "notes": self.notes
+        }    
+    
 def Beat(self, n, rand, pattern, groove, temperature, density, **kwargs):
     for i in range(n):        
         volume = groove(rand = rand["vol"], i = i)
@@ -118,6 +148,7 @@ No snare as SVDrum snare sounds are lame
 TrackConfig = [
     {
         "name": "kick",
+        "machine": "demos.beats.tokyo09.BeatMachine",
         "temperature": 0.5,
         "density": 0.5,
         "filter_fn": lambda i:((i % 12) < 4 and
@@ -125,6 +156,7 @@ TrackConfig = [
     },
     {
         "name": "hat",
+        "machine": "demos.beats.tokyo09.BeatMachine",
         "temperature": 0.5,
         "density": 0.75,
         "filter_fn": lambda i: ((i % 12) > 4 and
@@ -147,40 +179,38 @@ ArgsConfig = yaml.safe_load("""
   default: 16
   min: 1
 """)
-        
+
 def main(notes = list(range(120)),
          args_config = ArgsConfig,
          tracks = TrackConfig,
-         beat_generator = Beat,
-         echo_generator = GhostEcho):
-
+         generators = [Beat, GhostEcho]):
     try:
-        args = parse_args(ArgsConfig)
-        container = SVContainer(bpm = args.bpm,
-                                n_ticks = args.n_ticks)
+        args = parse_args(args_config)
+        project = Project(patches = Patches())
         for i in range(args.n_patches):
-            colour = random_colour()
-            container.spawn_patch(colour)
-            for track in tracks:
+            patch = Patch(tracks = Tracks())
+            for _track in tracks:
                 track_notes = [note for note in notes
-                               if track["filter_fn"](note)]
+                               if _track["filter_fn"](note)]
                 selected_notes = [random.choice(track_notes) for i in range(2)]
-                machine = BeatMachine(container = container,
-                                      namespace = track["name"],
-                                      colour = random_colour(),
-                                      notes = selected_notes)
-                container.add_machine(machine)
-                pattern = random_euclid_pattern()
-                groove = random_perkons_groove()
                 seeds = {key: random_seed() for key in "note|fx|beat|vol".split("|")}
-                machine.render(generator = beat_generator,
-                               seeds = seeds,
-                               env = {"groove": groove,
-                                      "pattern": pattern,
-                                      "density": track["density"],
-                                      "temperature": track["temperature"]})
-                machine.render(generator = echo_generator,
-                               seeds = seeds)
+                track = Track(name = _track["name"],
+                              machine = _track["machine"],
+                              groove = random_perkons_groove(),
+                              pattern = random_euclid_pattern(),
+                              seeds = seeds,
+                              notes = selected_notes,
+                              temperature = _track["temperature"],
+                              density = _track["density"])
+                patch.tracks.append(track)
+            project.patches.append(patch)
+        colours = Colours.randomise(tracks = tracks,
+                                    patches = project.patches)
+        container = project.render(bank = None, # AARGH
+                                   generators = generators,
+                                   colours = colours,
+                                   bpm = args.bpm,
+                                   n_ticks = args.n_ticks)
         container.write_project("tmp/tokyo09-demo.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")
