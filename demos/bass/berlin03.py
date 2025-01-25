@@ -223,12 +223,12 @@ def main():
             filter_freq = random.choice(["6000", "8000", "a000"])
             filter_resonance = random.choice(["7000"])
             sound = BassSound(sample = sample,
-                                attack = attack,
-                                decay = decay,
-                                sustain = sustain,
-                                release = release,                                
-                                filter_freq = filter_freq,
-                                filter_resonance = filter_resonance)
+                              attack = attack,
+                              decay = decay,
+                              sustain = sustain,
+                              release = release,                                
+                              filter_freq = filter_freq,
+                              filter_resonance = filter_resonance)
             machine = BassMachine(container = container,
                                   namespace = "303",
                                   sound = sound,
