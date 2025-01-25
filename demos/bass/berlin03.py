@@ -4,7 +4,7 @@ from sv.client.parse import parse_args
 
 from sv.core.container import SVContainer
 from sv.core.machines import SVSamplerMachine
-from sv.core.trigs import SVMultiSynthSampleTrig, SVModTrig, SVNoteOffTrig, controller_value
+from sv.core.trigs import SVMultiSynthSampleTrig, SVModTrig, SVNoteOffTrig
 
 from demos import *
 

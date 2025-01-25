@@ -1,10 +1,12 @@
 ### short
 
+- refactor resampler to use GhostEchoMachine 
+
 - remove iteration over tracks in Berlin and resampler cases 
 
 ### medium
 
-- refactor resampler to utilise TrackBase, GhostDelayMachine 
+- refactor resampler to utilise TrackBase
 - refactor berlin03 to utilise TrackBase
 
 - git test
