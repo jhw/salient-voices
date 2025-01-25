@@ -115,36 +115,23 @@ def GhostEcho(self, n, rand,
 No snare as SVDrum snare sounds are lame
 """
             
-TrackConfig = [("kick", lambda i:((i % 12) < 4 and
-                                  int(i / 12) not in [1, 9]), 0.5, 0.5),
-               ("hat", lambda i: ((i % 12) > 4 and
-                                  (i % 12) < 7 and
-                                  int(i / 12) not in [6]), 0.5, 0.75)]
-
-def spawn_patch(container,
-                notes = list(range(120)),
-                track_config = TrackConfig,
-                beat_generator = Beat,
-                echo_generator = GhostEcho):
-    for name, filter_fn, temperature, density in track_config:
-        track_notes = [note for note in notes if filter_fn(note)]
-        selected_notes = [random.choice(track_notes) for i in range(2)]
-        machine = BeatMachine(container = container,
-                              namespace = name,
-                              colour = random_colour(),
-                              notes = selected_notes)
-        container.add_machine(machine)
-        pattern = random_euclid_pattern()
-        groove = random_perkons_groove()
-        seeds = {key: random_seed() for key in "note|fx|beat|vol".split("|")}
-        machine.render(generator = beat_generator,
-                       seeds = seeds,
-                       env = {"groove": groove,
-                              "pattern": pattern,
-                              "density": density,
-                              "temperature": temperature})
-        machine.render(generator = echo_generator,
-                       seeds = seeds)
+TrackConfig = [
+    {
+        "name": "kick",
+        "temperature": 0.5,
+        "density": 0.5,
+        "filter_fn": lambda i:((i % 12) < 4 and
+                               int(i / 12) not in [1, 9])
+    },
+    {
+        "name": "hat",
+        "temperature": 0.5,
+        "density": 0.75,
+        "filter_fn": lambda i: ((i % 12) > 4 and
+                                (i % 12) < 7 and
+                                int(i / 12) not in [6])
+    }
+]
 
 ArgsConfig = yaml.safe_load("""
 - name: bpm
@@ -161,7 +148,12 @@ ArgsConfig = yaml.safe_load("""
   min: 1
 """)
         
-def main():
+def main(notes = list(range(120)),
+         args_config = ArgsConfig,
+         tracks = TrackConfig,
+         beat_generator = Beat,
+         echo_generator = GhostEcho):
+
     try:
         args = parse_args(ArgsConfig)
         container = SVContainer(bpm = args.bpm,
@@ -169,7 +161,26 @@ def main():
         for i in range(args.n_patches):
             colour = random_colour()
             container.spawn_patch(colour)
-            spawn_patch(container = container)
+            for track in tracks:
+                track_notes = [note for note in notes
+                               if track["filter_fn"](note)]
+                selected_notes = [random.choice(track_notes) for i in range(2)]
+                machine = BeatMachine(container = container,
+                                      namespace = track["name"],
+                                      colour = random_colour(),
+                                      notes = selected_notes)
+                container.add_machine(machine)
+                pattern = random_euclid_pattern()
+                groove = random_perkons_groove()
+                seeds = {key: random_seed() for key in "note|fx|beat|vol".split("|")}
+                machine.render(generator = beat_generator,
+                               seeds = seeds,
+                               env = {"groove": groove,
+                                      "pattern": pattern,
+                                      "density": track["density"],
+                                      "temperature": track["temperature"]})
+                machine.render(generator = echo_generator,
+                               seeds = seeds)
         container.write_project("tmp/tokyo09-demo.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")
