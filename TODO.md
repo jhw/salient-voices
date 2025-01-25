@@ -1,5 +1,9 @@
 ### short
 
+- refactor demos to extend TrackBase
+- add main() function to each demo
+- add demos/run.py to run all demos
+
 ### medium
 
 ### demos
@@ -40,6 +44,7 @@
 
 ### done
 
+- refactor resampler main as resampler/__init__.py
 - refactor utils, cli sub- directories
 - client/algos to wrap utils/algos
 - replace algos stuff in demos
