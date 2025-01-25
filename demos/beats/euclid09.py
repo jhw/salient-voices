@@ -1,5 +1,6 @@
 from sv.client.algos import random_perkons_groove, random_euclid_pattern
 from sv.client.banks import StaticZipBank
+from sv.client.model import TrackBase
 from sv.client.parse import parse_args
 
 from sv.container import SVContainer
@@ -77,6 +78,34 @@ class BeatMachine(SVSamplerMachine):
                                    value=feedback_level))
         return trigs
 
+class Track(TrackBase):
+
+    def __init__(self, name, machine, pattern, groove, seeds, temperature, density, samples, muted = False):
+        super().__init__(name = name,
+                         machine = machine,
+                         seeds = seeds,
+                         muted = muted)
+        self.pattern = pattern
+        self.groove = groove
+        self.temperature = temperature
+        self.density = density
+        self.samples = samples
+
+    @property
+    def env(self):
+        return {
+            "temperature": self.temperature,
+            "density": self.density,
+            "pattern": self.pattern,
+            "groove": self.groove
+        }
+
+    @property
+    def machine_kwargs(self):
+        return {
+            "samples": self.samples
+        }
+    
 def Beat(self, n, rand, pattern, groove, temperature, density, **kwargs):
     for i in range(n):        
         volume = groove(rand = rand["vol"], i = i)
@@ -103,12 +132,14 @@ def GhostEcho(self, n, rand,
 TrackConfig = [
     {
         "name": "kick",
+        "machine": "demos.beats.euclid09.BeatMachine",
         "temperature": 0.5,
         "density": 0.5,
         "filter_fn": lambda x: "BD" in x
     },
     {
         "name": "snare",
+        "machine": "demos.beats.euclid09.BeatMachine",
         "temperature": 0.5,
         "density": 0.25,
         "filter_fn": lambda x: ("SD" in x or
@@ -117,6 +148,7 @@ TrackConfig = [
     },
     {
         "name": "hat",
+        "machine": "demos.beats.euclid09.BeatMachine",
         "temperature": 0.5,
         "density": 0.75,
         "filter_fn": lambda x: ("RS" in x or
@@ -153,25 +185,32 @@ def main(args_config = ArgsConfig,
     try:
         args = parse_args(args_config)
         bank = StaticZipBank(args.bank_src)
+        """
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)
+        """
         all_samples = bank.file_names
         for i in range(args.n_patches):
+            """
             colour = random_colour()
             container.spawn_patch(colour)
-            for track in tracks:
+            """
+            for _track in tracks:
                 track_samples = [sample for sample in all_samples
-                                 if track["filter_fn"](sample)]
+                                 if _track["filter_fn"](sample)]
                 selected_samples = [random.choice(track_samples) for i in range(2)]
+                """
                 machine = BeatMachine(container = container,
                                       namespace = track["name"],
                                       colour = random_colour(),
                                       samples = selected_samples)
                 container.add_machine(machine)
+                """
                 pattern = random_euclid_pattern()
                 groove = random_perkons_groove()
                 seeds = {key: random_seed() for key in "sample|fx|beat|vol".split("|")}
+                """
                 machine.render(generator = beat_generator,
                                seeds = seeds,
                                env = {"groove": groove,
@@ -180,7 +219,19 @@ def main(args_config = ArgsConfig,
                                       "temperature": track["temperature"]})
                 machine.render(generator = echo_generator,
                                seeds = seeds)
+                """
+                track = Track(name = _track["name"],
+                              machine = _track["machine"],
+                              groove = groove,
+                              pattern = pattern,
+                              seeds = seeds,
+                              temperature = _track["temperature"],
+                              density = _track["density"],
+                              samples = selected_samples)
+                print(track)
+        """
         container.write_project("tmp/euclid09-demo.sunvox")                    
+        """
     except RuntimeError as error:
         print(f"ERROR: {error}")
 
