@@ -115,7 +115,7 @@ def GhostEcho(self, n, rand, echo_quantise,
                                   echo_wet = wet_level,
                                   echo_feedback = feedback_level)
                     
-class Euclid09Archive:
+class Detroit09Archive:
 
     def __init__(self, bank):
         self.bank = bank
@@ -168,12 +168,12 @@ ArgsConfig = yaml.safe_load("""
 """)
     
 def main(args_config = ArgsConfig,
-         _track = {"name": "909",
+         _track = {"name": "m8",
                    "machine": "demos.resampler.SliceMachine"},
          generators = [Beat, GhostEcho]):
     try:
         args = parse_args(args_config)
-        archive = Euclid09Archive(StaticZipBank(args.zip_src))
+        archive = Detroit09Archive(StaticZipBank(args.zip_src))
         meta, src_wav_io = archive.project_metadata, archive.patch_audio
         bank = SlicerBank(n_patches = meta["n_patches"],
                           n_ticks = meta["n_ticks"],
