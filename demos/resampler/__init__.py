@@ -5,7 +5,7 @@ from sv.client.parse import parse_args
 
 from sv.core.container import SVContainer
 from sv.core.machines import SVSamplerMachine
-from sv.core.trigs import SVSampleTrig, SVModTrig, controller_value
+from sv.core.trigs import SVSampleTrig
 
 from demos import *
 
@@ -26,7 +26,7 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class SliceMachine(SVSamplerMachine):
+class SliceMachine(SVSamplerMachine, GhostEchoMachine):
 
     Modules = Modules
 
@@ -43,6 +43,7 @@ class SliceMachine(SVSamplerMachine):
                                   namespace=namespace,
                                   relative_note=relative_note,
                                   **kwargs)
+        GhostEchoMachine.__init__(self)
         self.samples = samples
         self.sample_index = sample_index
         self.defaults = {"Echo": {"wet": echo_wet,
@@ -63,21 +64,6 @@ class SliceMachine(SVSamplerMachine):
                              i=i,
                              sample=self.sample,
                              vel=volume)]
-
-    def modulation(self, i,
-                   echo_wet=None,
-                   echo_feedback=None):
-        trigs = []
-        if echo_wet:
-            wet_level = int(controller_value(echo_wet))
-            trigs.append(SVModTrig(target=f"{self.namespace}Echo/wet",
-                                   i=i,
-                                   value=wet_level))
-        if echo_feedback:
-            trigs.append(SVModTrig(target=f"{self.namespace}Echo/feedback",
-                                   i=i,
-                                   value=echo_feedback))
-        return trigs
 
 def Beat(self, n, rand, groove, quantise, density,
          **kwargs):

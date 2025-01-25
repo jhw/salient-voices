@@ -1,7 +1,5 @@
 ### short
 
-- refactor resampler to use GhostEchoMachine 
-
 - remove iteration over tracks in Berlin and resampler cases 
 
 ### medium
@@ -59,6 +57,7 @@
 
 ### done
 
+- refactor resampler to use GhostEchoMachine 
 - core package
 - move copy M8 to scripts 
 - demos should export to demos/xxx.sunvox
