@@ -192,12 +192,11 @@ def main(args_config = ArgsConfig,
                 track_samples = [sample for sample in all_samples
                                  if _track["filter_fn"](sample)]
                 selected_samples = [random.choice(track_samples) for i in range(2)]
-                seeds = {key: random_seed() for key in "sample|fx|beat|vol".split("|")}
                 track = Track(name = _track["name"],
                               machine = _track["machine"],
                               groove = random_perkons_groove(),
                               pattern = random_euclid_pattern(),
-                              seeds = seeds,
+                              seeds = random_seeds("sample|fx|beat|vol"),
                               temperature = _track["temperature"],
                               density = _track["density"],
                               samples = selected_samples)

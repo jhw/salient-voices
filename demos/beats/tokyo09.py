@@ -193,12 +193,11 @@ def main(notes = list(range(120)),
                 track_notes = [note for note in notes
                                if _track["filter_fn"](note)]
                 selected_notes = [random.choice(track_notes) for i in range(2)]
-                seeds = {key: random_seed() for key in "note|fx|beat|vol".split("|")}
                 track = Track(name = _track["name"],
                               machine = _track["machine"],
                               groove = random_perkons_groove(),
                               pattern = random_euclid_pattern(),
-                              seeds = seeds,
+                              seeds = random_seeds("note|fx|beat|vol"),
                               notes = selected_notes,
                               temperature = _track["temperature"],
                               density = _track["density"])

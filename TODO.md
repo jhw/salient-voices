@@ -1,8 +1,5 @@
 ### short
 
-- helper to initialise seeds with multiple keys
-  - remove random_seed()
-
 - refactor resampler to extend TrackBase
 - refactor berlin03 to extend TrackBase
 
@@ -50,6 +47,8 @@
 
 ### done
 
+- helper to initialise seeds with multiple keys
+  - remove random_seed()
 - Project to auto- initialise Patches, Patch to auto- initialise Tracks
 - allow bank to be None in project.render()
 - convert all demos to use single main() function
