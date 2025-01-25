@@ -23,7 +23,7 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class BeatMachine(SVSamplerMachine, GhostDelayMachine):
+class BeatMachine(SVSamplerMachine, GhostEchoMachine):
 
     Modules = Modules
 
@@ -40,7 +40,7 @@ class BeatMachine(SVSamplerMachine, GhostDelayMachine):
                                   namespace=namespace,
                                   relative_note=relative_note,
                                   **kwargs)
-        GhostDelayMachine.__init__(self)
+        GhostEchoMachine.__init__(self)
         self.samples = samples
         self.sample_index = sample_index
         self.defaults = {"Echo": {"wet": echo_wet,

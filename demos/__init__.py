@@ -28,7 +28,7 @@ def random_colour(offset = 64,
 
 ### machines
 
-class GhostDelayMachine:
+class GhostEchoMachine:
 
     def modulation(self,
                    i, 
