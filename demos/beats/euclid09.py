@@ -5,7 +5,7 @@ from sv.client.model import Project, Patch, TrackBase
 from sv.client.parse import parse_args
 
 from sv.machines import SVSamplerMachine
-from sv.trigs import SVSampleTrig, SVModTrig, controller_value
+from sv.trigs import SVSampleTrig
 
 from demos import *
 
@@ -23,7 +23,7 @@ Modules = yaml.safe_load("""
     - Output
 """)
 
-class BeatMachine(SVSamplerMachine):
+class BeatMachine(SVSamplerMachine, GhostDelayMachine):
 
     Modules = Modules
 
@@ -40,6 +40,7 @@ class BeatMachine(SVSamplerMachine):
                                   namespace=namespace,
                                   relative_note=relative_note,
                                   **kwargs)
+        GhostDelayMachine.__init__(self)
         self.samples = samples
         self.sample_index = sample_index
         self.defaults = {"Echo": {"wet": echo_wet,
@@ -60,23 +61,6 @@ class BeatMachine(SVSamplerMachine):
                              i=i,
                              sample=self.sample,
                              vel=volume)]
-
-    def modulation(self,
-                   i, 
-                   echo_wet=None,
-                   echo_feedback=None):
-        trigs = []
-        if echo_wet:
-            wet_level = int(controller_value(echo_wet))
-            trigs.append(SVModTrig(target=f"{self.namespace}Echo/wet",
-                                   i=i,
-                                   value=wet_level))
-        if echo_feedback:
-            feedback_level = int(controller_value(echo_feedback))
-            trigs.append(SVModTrig(target=f"{self.namespace}Echo/feedback",
-                                   i=i,
-                                   value=feedback_level))
-        return trigs
 
 class Track(TrackBase):
 

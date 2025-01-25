@@ -1,9 +1,7 @@
 ### short
 
-- demo delay machine to implement S&H delay
-
-- refactor resampler to extend TrackBase
-- refactor berlin03 to extend TrackBase
+- refactor resampler to utilise TrackBase, GhostDelayMachine 
+- refactor berlin03 to utilise TrackBase
 
 ### medium
 
@@ -49,6 +47,7 @@
 
 ### done
 
+- demo delay machine to implement S&H delay
 - helper to initialise seeds with multiple keys
   - remove random_seed()
 - Project to auto- initialise Patches, Patch to auto- initialise Tracks

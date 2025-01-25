@@ -1,3 +1,5 @@
+from sv.trigs import SVModTrig, controller_value
+
 import random
 
 def random_seed():
@@ -21,6 +23,25 @@ def random_colour(offset = 64,
         if (max(color) - min(color)) > contrast:
             return color
     raise RuntimeError("couldn't find suitable random colour")
+
+class GhostDelayMachine:
+
+    def modulation(self,
+                   i, 
+                   echo_wet=None,
+                   echo_feedback=None):
+        trigs = []
+        if echo_wet:
+            wet_level = int(controller_value(echo_wet))
+            trigs.append(SVModTrig(target=f"{self.namespace}Echo/wet",
+                                   i=i,
+                                   value=wet_level))
+        if echo_feedback:
+            feedback_level = int(controller_value(echo_feedback))
+            trigs.append(SVModTrig(target=f"{self.namespace}Echo/feedback",
+                                   i=i,
+                                   value=feedback_level))
+        return trigs
 
 if __name__ == "__main__":
     pass
