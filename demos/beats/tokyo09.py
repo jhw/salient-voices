@@ -193,8 +193,6 @@ def main(notes = list(range(120)),
                                    bpm = args.bpm,
                                    n_ticks = args.n_ticks)
         container.write_project("tmp/demos/tokyo09.sunvox")
-    except AttributeError as error:
-        print(f"ERROR: {error}")
     except RuntimeError as error:
         print(f"ERROR: {error}")
 

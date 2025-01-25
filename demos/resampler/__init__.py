@@ -202,8 +202,6 @@ def main(args_config = ArgsConfig,
                                    bpm = meta["bpm"],
                                    n_ticks = meta["n_ticks"])
         container.write_project("tmp/demos/resampler.sunvox")
-    except AttributeError as error:
-        print(f"ERROR: {error}")
     except RuntimeError as error:
         print(f"ERROR: {error}")
 
