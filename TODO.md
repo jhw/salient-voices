@@ -1,6 +1,5 @@
 ### short
 
-- demos should export to demos/xxx.sunvox
 - move copy M8 to scripts 
 - core package
 
@@ -62,6 +61,7 @@
 
 ### done
 
+- demos should export to demos/xxx.sunvox
 - rename ghost delay machine as ghost echo machine
 - centralise packs dir
 - rename Euclid as Detroit 

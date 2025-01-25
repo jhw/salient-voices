@@ -193,7 +193,7 @@ def main(args_config = ArgsConfig,
                                    colours = colours,
                                    bpm = args.bpm,
                                    n_ticks = args.n_ticks)
-        container.write_project("tmp/detroit09-demo.sunvox")                    
+        container.write_project("tmp/demos/detroit09.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")
 

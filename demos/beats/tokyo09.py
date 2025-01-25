@@ -193,7 +193,7 @@ def main(notes = list(range(120)),
                                    colours = colours,
                                    bpm = args.bpm,
                                    n_ticks = args.n_ticks)
-        container.write_project("tmp/tokyo09-demo.sunvox")                    
+        container.write_project("tmp/demos/tokyo09.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")
 

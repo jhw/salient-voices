@@ -244,7 +244,7 @@ def main():
             machine.render(generator = Bassline,
                            seeds = seeds,
                            env = env)
-        container.write_project("tmp/berlin03-demo.sunvox")                    
+        container.write_project("tmp/demos/berlin03.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")
 

@@ -6,7 +6,7 @@ import demos.resampler
 import os
 
 if __name__ == "__main__":
-    os.system("rm tmp/*.sunvox")
+    os.system("rm -rf tmp/demos")
     demos.bass.berlin03.main()
     demos.beats.detroit09.main()
     demos.beats.tokyo09.main()

@@ -179,7 +179,7 @@ def main():
                                   "density": args.density})
             machine.render(generator = GhostEcho,
                            seeds = seeds)
-        container.write_project("tmp/resampler-demo.sunvox")
+        container.write_project("tmp/demos/resampler.sunvox")
     except RuntimeError as error:
         print(f"ERROR: {error}")
 
