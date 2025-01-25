@@ -1,6 +1,5 @@
 ### short
 
-- rename Euclid as Detroit 
 - centralise packs dir
 - rename ghost delay machine as ghost echo machine
 - demos should export to demos/xxx.sunvox
@@ -24,6 +23,7 @@
 ### gists 
 
 - no longer any need for Project to initialise Patches, Patch to initialise Tracks
+- copy_m8 has been moved to scripts
 
 ### demos
 
@@ -64,6 +64,7 @@
 
 ### done
 
+- rename Euclid as Detroit 
 - demo delay machine to implement S&H delay
 - helper to initialise seeds with multiple keys
   - remove random_seed()
