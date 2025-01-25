@@ -1,4 +1,4 @@
-from sv.project import SVProject
+from sv.core.project import SVProject
 
 import json
 import os

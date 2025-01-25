@@ -3,9 +3,9 @@ from sv.client.colours import Colours
 from sv.client.model import Project, Patch, TrackBase
 from sv.client.parse import parse_args
 
-from sv.container import SVContainer
-from sv.machines import SVMachine
-from sv.trigs import SVNoteTrig
+from sv.core.container import SVContainer
+from sv.core.machines import SVMachine
+from sv.core.trigs import SVNoteTrig
 
 from demos import *
 

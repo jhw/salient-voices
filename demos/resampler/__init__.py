@@ -3,9 +3,9 @@ from sv.client.banks import StaticZipBank
 from sv.client.banks.slicer import SlicerBank
 from sv.client.parse import parse_args
 
-from sv.container import SVContainer
-from sv.machines import SVSamplerMachine
-from sv.trigs import SVSampleTrig, SVModTrig, controller_value
+from sv.core.container import SVContainer
+from sv.core.machines import SVSamplerMachine
+from sv.core.trigs import SVSampleTrig, SVModTrig, controller_value
 
 from demos import *
 
@@ -17,7 +17,7 @@ import yaml
 
 Modules = yaml.safe_load("""
 - name: Beat
-  class: sv.sampler.SVSlotSampler
+  class: sv.core.sampler.SVSlotSampler
   links:
     - Echo
 - name: Echo

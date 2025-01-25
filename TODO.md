@@ -1,18 +1,15 @@
 ### short
 
-- core package
+- remove iteration over tracks in Berlin and resampler cases 
 
 ### medium
 
 - refactor resampler to utilise TrackBase, GhostDelayMachine 
 - refactor berlin03 to utilise TrackBase
 
-- tests for synth and sampler project lifecycle 
 - git test
 - wav export test
-- test for wav export
-
-- remove iteration over tracks in Berlin and resampler cases 
+- tests for synth and sampler project lifecycle 
 
 - scaffolder script? 
 
@@ -60,6 +57,7 @@
 
 ### done
 
+- core package
 - move copy M8 to scripts 
 - demos should export to demos/xxx.sunvox
 - rename ghost delay machine as ghost echo machine

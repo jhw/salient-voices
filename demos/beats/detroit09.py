@@ -4,8 +4,8 @@ from sv.client.colours import Colours
 from sv.client.model import Project, Patch, TrackBase
 from sv.client.parse import parse_args
 
-from sv.machines import SVSamplerMachine
-from sv.trigs import SVSampleTrig
+from sv.core.machines import SVSamplerMachine
+from sv.core.trigs import SVSampleTrig
 
 from demos import *
 
@@ -14,7 +14,7 @@ import yaml
 
 Modules = yaml.safe_load("""
 - name: Beat
-  class: sv.sampler.SVSlotSampler
+  class: sv.core.sampler.SVSlotSampler
   links:
     - Echo
 - name: Echo

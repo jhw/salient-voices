@@ -1,4 +1,4 @@
-from sv.project import SVModule
+from sv.core.project import SVModule
 
 from random import Random
 

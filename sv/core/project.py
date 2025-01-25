@@ -1,6 +1,6 @@
 from rv.modules.multisynth import MultiSynth
 
-from sv.trigs import SVSampleTrig, controller_value
+from sv.core.trigs import SVSampleTrig, controller_value
 
 import importlib
 import math

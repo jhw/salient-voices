@@ -1,6 +1,6 @@
-from sv.container import SVContainer
-from sv.project import load_class
 from sv.client.colours import Colour
+from sv.core.container import SVContainer
+from sv.core.project import load_class
 
 import sv # so machine classes can be dynamically accessed
 

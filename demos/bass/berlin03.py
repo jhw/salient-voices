@@ -2,9 +2,9 @@ from sv.client.algos import random_perkons_groove
 from sv.client.banks import StaticZipBank
 from sv.client.parse import parse_args
 
-from sv.container import SVContainer
-from sv.machines import SVSamplerMachine
-from sv.trigs import SVMultiSynthSampleTrig, SVModTrig, SVNoteOffTrig, controller_value
+from sv.core.container import SVContainer
+from sv.core.machines import SVSamplerMachine
+from sv.core.trigs import SVMultiSynthSampleTrig, SVModTrig, SVNoteOffTrig, controller_value
 
 from demos import *
 
@@ -28,7 +28,7 @@ Modules = yaml.safe_load("""
   links:
     - Filter
 - name: Sampler
-  class: sv.sampler.SVSlotSampler
+  class: sv.core.sampler.SVSlotSampler
   links:
     - Distortion
 - name: Distortion

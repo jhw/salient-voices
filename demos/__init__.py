@@ -1,4 +1,4 @@
-from sv.trigs import SVModTrig, controller_value
+from sv.core.trigs import SVModTrig, controller_value
 
 import random
 
