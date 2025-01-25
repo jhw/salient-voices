@@ -100,15 +100,32 @@ def GhostEcho(self, n, rand,
                                   echo_wet = wet_level,
                                   echo_feedback = feedback_level)
 
-TrackConfig = [("kick", lambda x: "BD" in x, 0.5, 0.5),
-               ("snare", lambda x: ("SD" in x or
-                                    "TOM" in x or
-                                    "HC" in x), 0.5, 0.25),
-               ("hat", lambda x: ("RS" in x or
-                                  # "CH" in x or
-                                  "OH" in x or
-                                  "BLIP" in x or
-                                  "HH" in x), 0.5, 0.75)]
+TrackConfig = [
+    {
+        "name": "kick",
+        "temperature": 0.5,
+        "density": 0.5,
+        "filter_fn": lambda x: "BD" in x
+    },
+    {
+        "name": "snare",
+        "temperature": 0.5,
+        "density": 0.25,
+        "filter_fn": lambda x: ("SD" in x or
+                                "TOM" in x or
+                                "HC" in x),
+    },
+    {
+        "name": "hat",
+        "temperature": 0.5,
+        "density": 0.75,
+        "filter_fn": lambda x: ("RS" in x or
+                                # "CH" in x or
+                                "OH" in x or
+                                "BLIP" in x or
+                                "HH" in x)
+    }
+]
 
 ArgsConfig = yaml.safe_load("""
 - name: bank_src
@@ -143,12 +160,12 @@ def main(args_config = ArgsConfig,
         for i in range(args.n_patches):
             colour = random_colour()
             container.spawn_patch(colour)
-            for name, filter_fn, temperature, density in tracks:
+            for track in tracks:
                 track_samples = [sample for sample in all_samples
-                                 if filter_fn(sample)]
+                                 if track["filter_fn"](sample)]
                 selected_samples = [random.choice(track_samples) for i in range(2)]
                 machine = BeatMachine(container = container,
-                                      namespace = name,
+                                      namespace = track["name"],
                                       colour = random_colour(),
                                       samples = selected_samples)
                 container.add_machine(machine)
@@ -159,8 +176,8 @@ def main(args_config = ArgsConfig,
                                seeds = seeds,
                                env = {"groove": groove,
                                       "pattern": pattern,
-                                      "density": density,
-                                      "temperature": temperature})
+                                      "density": track["density"],
+                                      "temperature": track["temperature"]})
                 machine.render(generator = echo_generator,
                                seeds = seeds)
         container.write_project("tmp/euclid09-demo.sunvox")                    
