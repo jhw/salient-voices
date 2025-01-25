@@ -1,8 +1,10 @@
 ### short
 
-- refactor demos to extend TrackBase
+- convert all demos to use single main() function
 
 ### medium
+
+- refactor demos to extend TrackBase
 
 ### demos
 

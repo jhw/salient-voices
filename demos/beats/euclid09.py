@@ -110,30 +110,6 @@ TrackConfig = [("kick", lambda x: "BD" in x, 0.5, 0.5),
                                   "BLIP" in x or
                                   "HH" in x), 0.5, 0.75)]
 
-def spawn_patch(samples, container,
-                track_config = TrackConfig,
-                beat_generator = Beat,
-                echo_generator = GhostEcho):
-    for name, filter_fn, temperature, density in track_config:
-        track_samples = [sample for sample in samples if filter_fn(sample)]
-        selected_samples = [random.choice(track_samples) for i in range(2)]
-        machine = BeatMachine(container = container,
-                              namespace = name,
-                              colour = random_colour(),
-                              samples = selected_samples)
-        container.add_machine(machine)
-        pattern = random_euclid_pattern()
-        groove = random_perkons_groove()
-        seeds = {key: random_seed() for key in "sample|fx|beat|vol".split("|")}
-        machine.render(generator = beat_generator,
-                       seeds = seeds,
-                       env = {"groove": groove,
-                              "pattern": pattern,
-                              "density": density,
-                              "temperature": temperature})
-        machine.render(generator = echo_generator,
-                       seeds = seeds)
-
 ArgsConfig = yaml.safe_load("""
 - name: bank_src
   type: str
@@ -153,19 +129,40 @@ ArgsConfig = yaml.safe_load("""
   min: 1
 """)
         
-def main():
+def main(args_config = ArgsConfig,
+         tracks = TrackConfig,
+         beat_generator = Beat,
+         echo_generator = GhostEcho):
     try:
-        args = parse_args(ArgsConfig)
+        args = parse_args(args_config)
         bank = StaticZipBank(args.bank_src)
         container = SVContainer(bank = bank,
                                 bpm = args.bpm,
                                 n_ticks = args.n_ticks)
-        samples = bank.file_names
+        all_samples = bank.file_names
         for i in range(args.n_patches):
             colour = random_colour()
             container.spawn_patch(colour)
-            spawn_patch(samples = samples,
-                        container = container)
+            for name, filter_fn, temperature, density in tracks:
+                track_samples = [sample for sample in all_samples
+                                 if filter_fn(sample)]
+                selected_samples = [random.choice(track_samples) for i in range(2)]
+                machine = BeatMachine(container = container,
+                                      namespace = name,
+                                      colour = random_colour(),
+                                      samples = selected_samples)
+                container.add_machine(machine)
+                pattern = random_euclid_pattern()
+                groove = random_perkons_groove()
+                seeds = {key: random_seed() for key in "sample|fx|beat|vol".split("|")}
+                machine.render(generator = beat_generator,
+                               seeds = seeds,
+                               env = {"groove": groove,
+                                      "pattern": pattern,
+                                      "density": density,
+                                      "temperature": temperature})
+                machine.render(generator = echo_generator,
+                               seeds = seeds)
         container.write_project("tmp/euclid09-demo.sunvox")                    
     except RuntimeError as error:
         print(f"ERROR: {error}")
