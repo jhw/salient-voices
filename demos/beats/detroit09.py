@@ -147,7 +147,7 @@ ArgsConfig = yaml.safe_load("""
 - name: bank_src
   type: str
   file: true
-  default: demos/packs/pico-default.zip
+  default: packs/pico-default.zip
 - name: bpm
   type: int
   default: 120

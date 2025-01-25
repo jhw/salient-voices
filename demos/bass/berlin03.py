@@ -191,7 +191,7 @@ ArgsConfig = yaml.safe_load("""
 - name: bank_src
   type: str
   file: true
-  default: demos/packs/pico-vco-waveforms.zip
+  default: packs/pico-vco-waveforms.zip
 - name: bpm
   type: int
   default: 120
