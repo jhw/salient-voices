@@ -2,6 +2,8 @@ from sv.trigs import SVModTrig, controller_value
 
 import random
 
+### random helpers
+
 def random_seed():
     return int(random.random() * 1e8)
 
@@ -23,6 +25,8 @@ def random_colour(offset = 64,
         if (max(color) - min(color)) > contrast:
             return color
     raise RuntimeError("couldn't find suitable random colour")
+
+### machines
 
 class GhostDelayMachine:
 
