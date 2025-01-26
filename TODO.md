@@ -1,11 +1,11 @@
 ### short
 
-- detroit09b
+- detroit09b demo
 
 ### medium
 
+- client bank tests
 - fix commented out line in git test
-
 - abstract rand iteration blocks from cli
 
 ### demos

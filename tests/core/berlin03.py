@@ -1,3 +1,7 @@
+"""
+This test tests the use of a complex project extending SVSamplerMachine, in particular using SVMultiSynthSampleTrig
+"""
+
 from sv.client.algos import random_perkons_groove
 from sv.client.banks import StaticZipBank
 from sv.client.cli import parse_args
