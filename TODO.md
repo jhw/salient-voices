@@ -1,7 +1,5 @@
 ### short
 
-- add rand mutes and reset mutes 
-
 - lifecycle tests (sampler, synth)
 
 ### medium
@@ -49,6 +47,7 @@
 
 ### done
 
+- add rand mutes and reset mutes 
 - git
 - export
 - parse
