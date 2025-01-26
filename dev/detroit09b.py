@@ -27,8 +27,8 @@ class BeatMachine(SVSamplerMachine, GhostEchoMachine):
 
     Modules = Modules
 
-    def __init__(self, container, namespace, samples,
-                 sample_index=0,
+    def __init__(self, container, namespace, sample, cutoffs,
+                 cutoff_index=0,
                  relative_note=0,
                  echo_delay=36,
                  echo_delay_unit=3,  # tick
@@ -41,30 +41,32 @@ class BeatMachine(SVSamplerMachine, GhostEchoMachine):
                                   relative_note=relative_note,
                                   **kwargs)
         GhostEchoMachine.__init__(self)
-        self.samples = samples
-        self.sample_index = sample_index
+        self.sample = sample
+        self.cutoffs = cutoffs
+        self.cutoff_index = cutoff_index
         self.defaults = {"Echo": {"wet": echo_wet,
                                   "feedback": echo_feedback,
                                   "delay": echo_delay,
                                   "delay_unit": echo_delay_unit}}
 
-    def toggle_sample(self):
-        self.sample_index = 1 - int(self.sample_index > 0)
+    def toggle_cutoff(self):
+        self.cutoff_index = 1 - int(self.cutoff_index > 0)
 
     @property
-    def sample(self):
-        return self.samples[self.sample_index]
+    def sample_url(self):
+        cutoff = self.cutoffs[self.cutoff_index]
+        return f"{self.sample}?cutoff={cutoff}"
         
     def note(self, i,
              volume=1.0):
         return [SVSampleTrig(target=f"{self.namespace}Beat",
                              i=i,
-                             sample=self.sample,
+                             sample=self.sample_url,
                              vel=volume)]
 
 class Track(TrackBase):
 
-    def __init__(self, name, machine, pattern, groove, seeds, temperature, density, samples, muted = False):
+    def __init__(self, name, machine, pattern, groove, seeds, temperature, density, sample, cutoffs, muted = False):
         super().__init__(name = name,
                          machine = machine,
                          seeds = seeds,
@@ -73,7 +75,8 @@ class Track(TrackBase):
         self.groove = groove
         self.temperature = temperature
         self.density = density
-        self.samples = samples
+        self.sample = sample
+        self.cutoffs = cutoffs
 
     @property
     def env(self):
@@ -87,19 +90,20 @@ class Track(TrackBase):
     @property
     def machine_kwargs(self):
         return {
-            "samples": self.samples
+            "sample": self.sample,
+            "cutoffs": self.cutoffs
         }
     
 def Beat(self, n, rand, pattern, groove, temperature, density, **kwargs):
     for i in range(n):        
         volume = groove(rand = rand["vol"], i = i)
         if rand["sample"].random() < temperature:
-            self.toggle_sample()        
+            self.toggle_cutoff()        
         if (pattern(i) and 
             rand["beat"].random() < density):
             yield self.note(volume = volume,
                             i = i)
-
+            
 def GhostEcho(self, n, rand,
               wet_levels = ["0000", "2000", "4000", "6000"],
               feedback_levels = ["0000", "2000", "4000", "6000"],
