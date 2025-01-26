@@ -1,13 +1,15 @@
 ### short
 
+- detroit09b
+
 ### medium
 
 - fix commented out line in git test
+
 - abstract rand iteration blocks from cli
 
 ### demos
 
-- detroit09b sample cutoff
 - ekaterinburg bass
 - vordhosbn synth [noise] hats (reverse, retrig)
 - bass slide up/down

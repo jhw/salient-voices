@@ -164,11 +164,11 @@ ArgsConfig = yaml.safe_load("""
 """)
 
 class Detroit09CoreTest(unittest.TestCase):
-    
-    def test_lifecycle(self,
-                       args_config = ArgsConfig,
-                       tracks = TrackConfig,
-                       generators = [Beat, GhostEcho]):
+
+    def test_project_lifecycle(self,
+                               args_config = ArgsConfig,
+                               tracks = TrackConfig,
+                               generators = [Beat, GhostEcho]):
         args = parse_args(args_config)
         bank = StaticZipBank(args.bank_src)
         all_samples = bank.file_names
@@ -196,6 +196,8 @@ class Detroit09CoreTest(unittest.TestCase):
                                    colours = colours,
                                    bpm = args.bpm,
                                    n_ticks = args.n_ticks)
+        trigs = flatten_trigs(container.patches)
+        self.assertTrue(trigs != [])
         container.write_project("tmp/tests/detroit09.sunvox")
 
 if __name__ == "__main__":

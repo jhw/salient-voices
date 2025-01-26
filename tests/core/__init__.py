@@ -47,5 +47,13 @@ class GhostEchoMachine:
                                    value=feedback_level))
         return trigs
 
+### test helpers
+    
+def flatten_trigs(patches):
+    trigs = []
+    for patch in patches:
+        trigs += patch.trigs
+    return trigs
+
 if __name__ == "__main__":
     pass

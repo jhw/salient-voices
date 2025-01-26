@@ -166,11 +166,11 @@ ArgsConfig = yaml.safe_load("""
 
 class Tokyo09CoreTest(unittest.TestCase):
 
-    def test_lifecycle(self,
-                       notes = list(range(120)),
-                       args_config = ArgsConfig,
-                       tracks = TrackConfig,
-                       generators = [Beat, GhostEcho]):
+    def test_project_lifecycle(self,
+                               notes = list(range(120)),
+                               args_config = ArgsConfig,
+                               tracks = TrackConfig,
+                               generators = [Beat, GhostEcho]):
         args = parse_args(args_config)
         project = Project()
         for i in range(args.n_patches):
@@ -195,6 +195,8 @@ class Tokyo09CoreTest(unittest.TestCase):
                                    colours = colours,
                                    bpm = args.bpm,
                                    n_ticks = args.n_ticks)
+        trigs = flatten_trigs(container.patches)
+        self.assertTrue(trigs != [])
         container.write_project("tmp/tests/tokyo09.sunvox")
 
 if __name__ == "__main__":

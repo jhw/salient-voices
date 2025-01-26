@@ -245,12 +245,12 @@ def random_sound(bank):
 
 class Berlin03CoreTest(unittest.TestCase):
 
-    def test_lifecycle(self,
-                       args_config = ArgsConfig,
-                       _track = {"name": "303",
-                                 "machine": "demos.bass.berlin03.BassMachine"},
-                       scales = Vitling303Scales, # WolScales,
-                       generators = [Bassline]):
+    def test_project_lifecycle(self,
+                               args_config = ArgsConfig,
+                               _track = {"name": "303",
+                                         "machine": "demos.bass.berlin03.BassMachine"},
+                               scales = Vitling303Scales, # WolScales,
+                               generators = [Bassline]):
         args = parse_args(ArgsConfig)
         bank = StaticZipBank(args.bank_src)
         project = Project()
@@ -271,6 +271,8 @@ class Berlin03CoreTest(unittest.TestCase):
                                    colours = colours,
                                    bpm = args.bpm,
                                    n_ticks = args.n_ticks)
+        trigs = flatten_trigs(container.patches)
+        self.assertTrue(trigs != [])
         container.write_project("tmp/tests/berlin03.sunvox")
 
 if __name__ == "__main__":
