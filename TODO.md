@@ -8,11 +8,9 @@
 
 ### demos
 
+- detroit09b sample cutoff
 - ekaterinburg bass
 - vordhosbn synth [noise] hats (reverse, retrig)
-
-- sample cutoff- based variation
-- sample hats
 - bass slide up/down
 
 - stutter
