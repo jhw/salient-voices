@@ -1,11 +1,9 @@
 ### short
 
-- lifecycle tests (sampler, synth)
-
 ### medium
 
+- lifecycle tests (sampler, synth)
 - abstract rand iteration blocks from cli
-
 - fix git test
 
 ### demos
