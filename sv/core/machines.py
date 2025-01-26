@@ -10,7 +10,7 @@ class SVMachine:
 
     Modules = []
     
-    def __init__(self, container, namespace, colour = [127, 127, 127]):
+    def __init__(self, container, namespace, colour = [127, 127, 127], **kwargs):
         self.container = container
         self.namespace = namespace.lower().capitalize()
         self.colour = colour
@@ -48,10 +48,12 @@ class SVSamplerMachine(SVMachine):
 
     def __init__(self, container, namespace, colour,
                  root_note = rv.note.NOTE.C5,
-                 relative_note = 0):
+                 relative_note = 0,
+                 **kwargs):
         super().__init__(container = container,
                          namespace = namespace,
-                         colour = colour)
+                         colour = colour,
+                         **kwargs)
         self.root_note = root_note
         self.relative_note = relative_note
 

@@ -97,7 +97,7 @@ class Track(TrackBase):
 def Beat(self, n, rand, pattern, groove, temperature, density, **kwargs):
     for i in range(n):        
         volume = groove(rand = rand["vol"], i = i)
-        if rand["sample"].random() < temperature:
+        if rand["cutoff"].random() < temperature:
             self.toggle_cutoff()        
         if (pattern(i) and 
             rand["beat"].random() < density):
@@ -120,14 +120,14 @@ def GhostEcho(self, n, rand,
 TrackConfig = [
     {
         "name": "kick",
-        "machine": "demos.beats.detroit09.BeatMachine",
+        "machine": "dev.detroit09b.BeatMachine",
         "temperature": 0.5,
         "density": 0.5,
         "filter_fn": lambda x: "BD" in x
     },
     {
         "name": "snare",
-        "machine": "demos.beats.detroit09.BeatMachine",
+        "machine": "dev.detroit09b.BeatMachine",
         "temperature": 0.5,
         "density": 0.25,
         "filter_fn": lambda x: ("SD" in x or
@@ -136,7 +136,7 @@ TrackConfig = [
     },
     {
         "name": "hat",
-        "machine": "demos.beats.detroit09.BeatMachine",
+        "machine": "dev.detroit09b.BeatMachine",
         "temperature": 0.5,
         "density": 0.75,
         "filter_fn": lambda x: ("RS" in x or
@@ -156,6 +156,13 @@ ArgsConfig = yaml.safe_load("""
   type: int
   default: 120
   min: 1
+- name: cutoff
+  type: int
+  default: 250 # 2 ticks @ 120
+  min: 1
+- name: cutoff_factor
+  type: float
+  default: 0.5
 - name: n_ticks
   type: int
   default: 16
@@ -177,17 +184,19 @@ def main(args_config = ArgsConfig,
         for i in range(args.n_patches):
             patch = Patch()
             for _track in tracks:
-                track_samples = [sample for sample in all_samples
-                                 if _track["filter_fn"](sample)]
-                selected_samples = [random.choice(track_samples) for i in range(2)]
+                samples = [sample for sample in all_samples
+                           if _track["filter_fn"](sample)]
+                cutoffs = [args.cutoff,
+                           int(args.cutoff * args.cutoff_factor)]
                 track = Track(name = _track["name"],
                               machine = _track["machine"],
                               groove = random_perkons_groove(),
                               pattern = random_euclid_pattern(),
-                              seeds = random_seeds("sample|fx|beat|vol"),
+                              seeds = random_seeds("cutoff|fx|beat|vol"),
                               temperature = _track["temperature"],
                               density = _track["density"],
-                              samples = selected_samples)
+                              sample = random.choice(samples),
+                              cutoffs = [args.cutoff, int(args.cutoff/2)])
                 patch.tracks.append(track)
             project.patches.append(patch)
         colours = Colours.randomise(tracks = tracks,

@@ -1,10 +1,5 @@
 ### short [01-detroit09b]
 
-- pass sample to machine not samples
-- add cutoff_nticks arg
-- calculate cutoff (ms)
-- pass cutoffs to machine
-
 ### medium
 
 - client bank tests
@@ -49,6 +44,10 @@
 
 ### done
 
+- add cutoff_nticks arg
+- calculate cutoff (ms)
+- pass cutoffs to machine
+- pass sample to machine not samples
 - refactor sample_index as cutoff_index
 - refactor toggle_sample as toggle_cutoff
 - construct url when defining trig
