@@ -1,7 +1,5 @@
 ### short
 
-- lifecycle tests
-
 ### medium
 
 - fix commented out line in git test
@@ -46,6 +44,7 @@
 
 ### done
 
+- lifecycle tests
 - add rand mutes and reset mutes 
 - git
 - export
