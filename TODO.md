@@ -1,6 +1,12 @@
-### short
+### short [01-detroit09b]
 
-- detroit09b demo
+- add cutoff_nticks arg
+- calculate cutoff (ms)
+- refactor sample_index as cutoff_index
+- refactor toggle_sample as toggle_cutoff
+- pass sample to machine not samples
+- pass [cutoff, cutoff/2] to machine
+- construct url when defining trig
 
 ### medium
 
