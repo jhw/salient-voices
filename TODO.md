@@ -2,7 +2,6 @@
 
 - git
 - export
-- parse
 
 - sampler, synth lifecycle
 
@@ -49,6 +48,7 @@
 
 ### done
 
+- parse
 - refactor single track namespaces as 909|303
 - all demos to catch AttributeError
 - refactor berlin03 to utilise TrackBase
