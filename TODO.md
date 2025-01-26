@@ -1,10 +1,14 @@
-### short [tests]
+### short
 
-- git
+- add rand mutes and reset mutes 
 
-- sampler, synth lifecycle
+- lifecycle tests (sampler, synth)
 
 ### medium
+
+- abstract rand iteration blocks from cli
+
+- fix git test
 
 ### demos
 
@@ -45,6 +49,7 @@
 
 ### done
 
+- git
 - export
 - parse
 - refactor single track namespaces as 909|303
