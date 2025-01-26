@@ -1,7 +1,6 @@
 ### short [tests]
 
 - git
-- export
 
 - sampler, synth lifecycle
 
@@ -48,6 +47,7 @@
 
 ### done
 
+- export
 - parse
 - refactor single track namespaces as 909|303
 - all demos to catch AttributeError
