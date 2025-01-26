@@ -1,4 +1,6 @@
-### short [01-detroit09b]
+### short
+
+- ekaterinburg bass
 
 ### medium
 
@@ -8,7 +10,6 @@
 
 ### demos
 
-- ekaterinburg bass
 - vordhosbn synth [noise] hats (reverse, retrig)
 - bass slide up/down
 

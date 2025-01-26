@@ -120,14 +120,14 @@ def GhostEcho(self, n, rand,
 TrackConfig = [
     {
         "name": "kick",
-        "machine": "dev.detroit09b.BeatMachine",
+        "machine": "demos.beats.detroit09b.BeatMachine",
         "temperature": 0.5,
         "density": 0.5,
         "filter_fn": lambda x: "BD" in x
     },
     {
         "name": "snare",
-        "machine": "dev.detroit09b.BeatMachine",
+        "machine": "demos.beats.detroit09b.BeatMachine",
         "temperature": 0.5,
         "density": 0.25,
         "filter_fn": lambda x: ("SD" in x or
@@ -136,7 +136,7 @@ TrackConfig = [
     },
     {
         "name": "hat",
-        "machine": "dev.detroit09b.BeatMachine",
+        "machine": "demos.beats.detroit09b.BeatMachine",
         "temperature": 0.5,
         "density": 0.75,
         "filter_fn": lambda x: ("RS" in x or
