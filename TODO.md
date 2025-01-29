@@ -1,6 +1,5 @@
 ### short
 
-- remove existing mute code from cli
 - added model code to mute/solo/reset/unmute
 - add model tests
 
@@ -49,6 +48,7 @@
 
 ### done
 
+- remove existing mute code from cli
 - add cutoff_nticks arg
 - calculate cutoff (ms)
 - pass cutoffs to machine

@@ -137,26 +137,6 @@ class ClientCLI(cmd.Cmd):
                     key = random.choice(list(track.seeds.keys()))
                     track.seeds[key] = int(random.random() * 1e8)
         return project
-
-    @assert_head
-    @parse_line([{"name": "threshold", "type": "float"}])
-    @commit_and_render
-    def do_rand_mutes(self, threshold):
-        project = self.git.head.content.clone()
-        for patch in project.patches:
-            if not patch.frozen:
-                for track in patch.tracks:
-                    track.muted = random.random() < threshold
-        return project
-
-    @assert_head
-    @commit_and_render
-    def do_reset_mutes(self, threshold):
-        project = self.git.head.content.clone()
-        for patch in project.patches:
-            for track in patch.tracks:
-                track.muted = False
-        return project
     
     ### export
 
