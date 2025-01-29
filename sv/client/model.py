@@ -44,6 +44,10 @@ class Tracks(list):
                 track.render(container = container,
                              generators = generators,
                              colour = colour)
+
+    def mute(self, mute_fn):        
+        for track in self.tracks:
+            track.muted = mute_fn(track)            
                 
 class Patch:
     
@@ -59,6 +63,9 @@ class Patch:
         self.tracks.render(container = container,
                            generators = generators,
                            colours = machine_colours)
+
+    def mute(self, mute_fn):
+        self.tracks.mute(mute_fn)
         
 class Patches(list):
     
@@ -80,6 +87,10 @@ class Patches(list):
             if firewall:
                 container.spawn_patch(patch_colour)
 
+    def mute(self, mute_fn):
+        for patch in self.patches:
+            patch.mute(mute_fn)
+                
     def freeze(self, n):
         for i, patch in enumerate(self):
             patch.frozen = i < n            
@@ -102,6 +113,21 @@ class Project:
                             firewall = firewall)
         return container
 
+    def mute_tracks(self, track_names):
+        def mute_fn(track):
+            return track.name in track_names
+        self.patches.mute(mute_fn)
+
+    def solo_tracks(self, track_names):
+        def mute_fn(track):
+            return track.name not in [track_names]
+        self.patches.mute(mute_fn)
+
+    def unmute_tracks(self, _):
+        def mute_fn(_):
+            return False
+        self.patches.mute(mute_fn)
+                
     def freeze_patches(self, n):
         self.patches.freeze(n)
         
