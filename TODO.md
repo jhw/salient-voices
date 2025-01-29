@@ -1,10 +1,8 @@
 ### short
 
-- add model tests
-
 ### medium
 
-- client bank tests
+- client model, bank tests
 - fix commented out line in git test
 
 ### demos
