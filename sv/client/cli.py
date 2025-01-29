@@ -122,7 +122,7 @@ class ClientCLI(cmd.Cmd):
             j = I[i % len(I)]
             patch = roots[j].clone()
             project.patches.append(patch)
-        project.freeze_patches(len(I))
+        project.freeze(len(I))
         return project    
 
     @assert_head

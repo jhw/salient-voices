@@ -1,9 +1,5 @@
 ### short
 
-### gists clients
-
-- project freeze_patches() is now freeze()
-
 ### medium
 
 - client model, bank tests
@@ -49,6 +45,7 @@
 
 ### done
 
+- project freeze_patches() is now freeze()
 - added model code to mute/solo/reset/unmute
 - remove existing mute code from cli
 - add cutoff_nticks arg
