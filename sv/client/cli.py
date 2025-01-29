@@ -9,6 +9,7 @@ from pydub import AudioSegment
 import argparse
 import cmd
 import io
+import itertools
 import json
 import logging
 import os
@@ -144,7 +145,7 @@ class ClientCLI(cmd.Cmd):
         return {"project": {"bpm": self.bpm,
                             "n_patches": self.n_patches,
                             "n_ticks": self.n_ticks}}
-    
+
     def _init_patches_export(self, project, fade = 3):
         container = project.render(bank = self.bank,
                                    generators = self.generators,
@@ -168,22 +169,31 @@ class ClientCLI(cmd.Cmd):
         
     @assert_head
     def do_export_zip(self, _):
-        def format_short_name(entry, n=3):
-            return "-".join([tok[:n] for tok in entry.split(".")[0].split("-")])        
+        def solo_combinations(tracks):
+            n = len(tracks)
+            result = []
+            for r in range(1, n + 1):
+                result.extend(itertools.combinations(range(n), r))
+            return [[tracks[p]["name"]for p in list(P)]
+                     for P in result]
         if not os.path.exists("tmp/zip"):
             os.makedirs("tmp/zip")
         commit_id = self.git.head.commit_id
         zip_name = f"tmp/zip/{commit_id.slug}-{self.bpm}.zip"
-        short_name = format_short_name(commit_id.slug)
         with zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED) as zf:
             project = self.git.head.content
             # metadata
             meta = self._init_meta_export(project)
             zf.writestr("meta.json", json.dumps(meta,
                                                 indent = 2))
-            # patches
-            patches_wav_io = self._init_patches_export(project)
-            zf.writestr(f"{short_name}.wav", patches_wav_io.getvalue())
+            # track combinations
+            for track_names in solo_combinations(self.tracks):
+                def mute_fn(track):
+                    return track.name not in track_names # solo
+                project.mute(mute_fn)
+                wav_io = self._init_patches_export(project)
+                wav_name = f"{'-'.join(sorted(track_names))}.wav"
+                zf.writestr(wav_name, wav_io.getvalue())
     
     ### git
         

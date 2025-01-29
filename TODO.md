@@ -1,5 +1,8 @@
 ### short
 
+- abstract export code to somewhere it can be tested
+  - but how then to extend/override it?
+
 ### medium
 
 - client model, bank tests
