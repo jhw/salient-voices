@@ -46,7 +46,7 @@ class Tracks(list):
                              colour = colour)
 
     def mute(self, mute_fn):        
-        for track in self.tracks:
+        for track in self:
             track.muted = mute_fn(track)            
                 
 class Patch:
@@ -88,7 +88,7 @@ class Patches(list):
                 container.spawn_patch(patch_colour)
 
     def mute(self, mute_fn):
-        for patch in self.patches:
+        for patch in self:
             patch.mute(mute_fn)
                 
     def freeze(self, n):
@@ -113,22 +113,10 @@ class Project:
                             firewall = firewall)
         return container
 
-    def mute_tracks(self, track_names):
-        def mute_fn(track):
-            return track.name in track_names
-        self.patches.mute(mute_fn)
-
-    def solo_tracks(self, track_names):
-        def mute_fn(track):
-            return track.name not in [track_names]
-        self.patches.mute(mute_fn)
-
-    def unmute_tracks(self, _):
-        def mute_fn(_):
-            return False
+    def mute(self, mute_fn):
         self.patches.mute(mute_fn)
                 
-    def freeze_patches(self, n):
+    def freeze(self, n):
         self.patches.freeze(n)
         
     def clone(self):

@@ -1,5 +1,9 @@
 ### short
 
+### gists clients
+
+- project freeze_patches() is now freeze()
+
 ### medium
 
 - client model, bank tests
