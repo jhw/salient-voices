@@ -1,15 +1,17 @@
 ### short
 
-- ekaterinburg bass
+- remove existing mute code from cli
+- added model code to mute/solo/reset/unmute
+- add model tests
 
 ### medium
 
 - client bank tests
 - fix commented out line in git test
-- abstract rand iteration blocks from cli
 
 ### demos
 
+- ekaterinburg bass
 - vordhosbn synth [noise] hats (reverse, retrig)
 - bass slide up/down
 
@@ -33,6 +35,8 @@
 
 ### thoughts
 
+- abstract rand iteration blocks from cli?
+  - too meta
 - don't render tracks with no trigs unless forced?
   - unclear has value
 - scaffolder script? 
