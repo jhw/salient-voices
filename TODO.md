@@ -1,9 +1,12 @@
 ### short
 
-- abstract export code to somewhere it can be tested
-  - but how then to extend/override it?
+- write zipped wavs to /audio
+- merge tools into scripts?
 
 ### medium
+
+- abstract export code to somewhere it can be tested
+  - but how then to extend/override it?
 
 - client model, bank tests
 - fix commented out line in git test
