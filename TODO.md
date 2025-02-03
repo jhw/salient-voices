@@ -1,7 +1,7 @@
 ### short
 
 - remove resampler, slicer bank
-- remove berlin, bass packs, MultiSynth, mod trig sample support
+- remove MultiSynth, mod trig sample support
 - remove sample qs support and cutoff/pitch support in sampler
 - remove refs to relative note
 
@@ -21,6 +21,7 @@
 
 ### done
 
+- remove berlin, bass packs
 - remove detroit09b
 
 
