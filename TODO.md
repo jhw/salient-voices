@@ -1,6 +1,5 @@
 ### short
 
-- check pitch, cutoff refs
 - remove refs to relative note
 - add getter/setter for rv_samples in sampler
 
@@ -20,6 +19,7 @@
 
 ### done
 
+- check pitch, cutoff refs
 - remove sample_string refs in trigs
 - remove sample_string refs in sampler
 - remove sample qs support and cutoff/pitch support in sampler
