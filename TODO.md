@@ -20,6 +20,7 @@
 
 ### done
 
+- SVSimpleBank doesn't need to extend dict
 - remove resampler, slicer bank
 - remove berlin, bass packs
 - remove detroit09b

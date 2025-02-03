@@ -3,7 +3,7 @@ import os
 import re
 import zipfile
 
-class StaticZipBank(dict):
+class StaticZipBank:
 
     def __init__(self, zip_buffer):
         self.zip_buffer = zip_buffer
