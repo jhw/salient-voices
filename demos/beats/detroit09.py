@@ -29,7 +29,6 @@ class BeatMachine(SVSamplerMachine, GhostEchoMachine):
 
     def __init__(self, container, namespace, samples,
                  sample_index=0,
-                 relative_note=0,
                  echo_delay=36,
                  echo_delay_unit=3,  # tick
                  echo_wet=0,
@@ -38,7 +37,6 @@ class BeatMachine(SVSamplerMachine, GhostEchoMachine):
         SVSamplerMachine.__init__(self,
                                   container=container,
                                   namespace=namespace,
-                                  relative_note=relative_note,
                                   **kwargs)
         GhostEchoMachine.__init__(self)
         self.samples = samples

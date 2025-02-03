@@ -1,6 +1,5 @@
 ### short
 
-- remove refs to relative note
 - add getter/setter for rv_samples in sampler
 
 ### medium
@@ -19,6 +18,7 @@
 
 ### done
 
+- remove refs to relative note
 - check pitch, cutoff refs
 - remove sample_string refs in trigs
 - remove sample_string refs in sampler
