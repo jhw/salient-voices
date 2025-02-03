@@ -16,12 +16,12 @@ class SVSlotSampler(rv.modules.sampler.Sampler):
         rv.modules.sampler.Sampler.__init__(self)
         if len(pool) > max_slots:
             raise RuntimeError("sampler max slots exceeded")
-        self.sample_strings = list(pool)
+        self.sv_samples = samples = list(pool)
         rv_notes = list(rv.note.NOTE)                
         root = rv_notes.index(root)
-        for i, sample_string in enumerate(self.sample_strings):
+        for i, sample in enumerate(samples):
             # init rv sample and insert into self.samples
-            wav_io = bank.get_wav(sample_string)
+            wav_io = bank.get_wav(sample)
             rv_sample = self.init_rv_sample(wav_io)
             rv_sample.relative_note += (root - i)
             self.samples[i] = rv_sample
@@ -57,8 +57,8 @@ class SVSlotSampler(rv.modules.sampler.Sampler):
         rv_sample.data = snd.data.tobytes()
         return rv_sample
     
-    def index_of(self, sample_string):
-        return self.sample_strings.index(sample_string)
+    def index_of(self, sample):
+        return self.sv_samples.index(sample)
 
 if __name__ == "__main__":
     pass

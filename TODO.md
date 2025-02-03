@@ -1,8 +1,8 @@
 ### short
 
-- remove sample qs support and cutoff/pitch support in sampler
-- remove sample_string refs
+- remove sample_string refs in trigs
 - remove refs to relative note
+- add getter/setter for rv_samples in sampler
 
 ### medium
 
@@ -20,6 +20,8 @@
 
 ### done
 
+- remove sample_string refs in sampler
+- remove sample qs support and cutoff/pitch support in sampler
 - SVSimpleBank doesn't need to extend dict
 - remove resampler, slicer bank
 - remove berlin, bass packs
