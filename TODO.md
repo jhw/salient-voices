@@ -1,15 +1,15 @@
 ### short
 
-- remove MultiSynth, mod trig sample support
 - remove sample qs support and cutoff/pitch support in sampler
+- remove sample_string refs
 - remove refs to relative note
 
 ### medium
 
-- use /fwd.wav as default sample
 - new bank to implement variety of simple fx
+- use fwd.wav as default sample
 - detroit demo to toggle fx
-- client/sampler models and tracks
+- client/sampler model, track
 
 ### pending
 

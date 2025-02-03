@@ -1,5 +1,3 @@
-from sv.utils.urlparse import format_querystring
-
 import rv
 
 def hex_value(value):
@@ -117,14 +115,8 @@ class SVSampleTrig(SVNoteTrig):
         return params
     
     @property
-    def sample_qs(self):
-        params = self.sample_params
-        return format_querystring(params) if params != {} else None
-                    
-    @property
     def sample_string(self):
-        qs = self.sample_qs
-        return f"{self.sample}?{qs}" if qs != None else self.sample
+        return self.sample
 
     def resolve_sampler_mod(self, modules):
         return modules[self.mod]
