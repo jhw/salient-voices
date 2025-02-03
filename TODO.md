@@ -1,34 +1,17 @@
 ### short
 
-- write zipped wavs to /audio
-- merge tools into scripts?
+- remove detroit09b
+- remove resampler, slicer bank
+- remove berlin, bass packs, MultiSynth, mod trig sample support
+- remove sample qs support and cutoff/pitch support in sampler
+- remove refs to relative note
 
 ### medium
 
-- abstract export code to somewhere it can be tested
-  - but how then to extend/override it?
-
-- client model, bank tests
-- fix commented out line in git test
-
-### demos
-
-- ekaterinburg bass
-- vordhosbn synth [noise] hats (reverse, retrig)
-- bass slide up/down
-
-- stutter
-- sidechain
-- granular
-- polly
-- vocoder
-- vocal chords
-
-### gists
-
-- librosa sample analysis
-- samplebrain
-- vocoder
+- use /fwd.wav as default sample
+- new bank to implement variety of simple fx
+- detroit demo to toggle fx
+- client/sampler models and tracks
 
 ### pending
 
@@ -37,133 +20,6 @@
 
 ### thoughts
 
-- abstract rand iteration blocks from cli?
-  - too meta
-- don't render tracks with no trigs unless forced?
-  - unclear has value
-- scaffolder script? 
-  - not sure it makes sense
-- berlin03 -> extend sample length on initialisation?
-  - can't be bothered, is just a demo
-  - also pico waveforms should be 2 seconds in length each
-- avoid container.modules flattening modules?
-  - but how? renaming?
-
 ### done
 
-- project freeze_patches() is now freeze()
-- added model code to mute/solo/reset/unmute
-- remove existing mute code from cli
-- add cutoff_nticks arg
-- calculate cutoff (ms)
-- pass cutoffs to machine
-- pass sample to machine not samples
-- refactor sample_index as cutoff_index
-- refactor toggle_sample as toggle_cutoff
-- construct url when defining trig
-- lifecycle tests
-- add rand mutes and reset mutes 
-- git
-- export
-- parse
-- refactor single track namespaces as 909|303
-- all demos to catch AttributeError
-- refactor berlin03 to utilise TrackBase
-- refactor resampler to utilise TrackBase
-- move parse_args to cli
-- refactor resampler to use GhostEchoMachine 
-- core package
-- move copy M8 to scripts 
-- demos should export to demos/xxx.sunvox
-- rename ghost delay machine as ghost echo machine
-- centralise packs dir
-- rename Euclid as Detroit 
-- demo delay machine to implement S&H delay
-- helper to initialise seeds with multiple keys
-  - remove random_seed()
-- Project to auto- initialise Patches, Patch to auto- initialise Tracks
-- allow bank to be None in project.render()
-- convert all demos to use single main() function
-- add main() function to each demo
-- add demos/run.py to run all demos
-- refactor resampler main as resampler/__init__.py
-- refactor utils, cli sub- directories
-- client/algos to wrap utils/algos
-- replace algos stuff in demos
-- move algos back to utils/algos
-- cli/model TrackBase
-- cli/algos
-- demos to use cli/algos
-- cli requires random_seed()
-
-
-```
-AttributeError: 'SVNoteTrig' object has no attribute 'render'
-```
-
-- remove snare
-- refactor filter functions to use modulo 12
-- replace SVSampleTrig with SVNoteTrig
-- refactored SVNoteTrigBase as simply SVNoteTrig
-- replace SVSamplerMachine with SVMachine
-- replace SVSampler with DrumSynth
-- move machine.samples property inline with note definition
-- start with euclid09
-- tools/copy_m8.py
-- sampler machine should have default empty list for Modules
-- sampler machine should accept relative note not root
-- sampler machine should have default colour
-- SlicerBank to take n (as in 2**n) or list of indices instead of meta
-- include StaticFilesBank from gist/fxx
-- remove load_zip
-- abstract SlicerBank from Euclid09Archive
-- move simple bank to cli
-- add demos/sunvox/slide subdir
-- demos to use cli parse_args
-- reduce berlin distortion power again
-- abstract parse_args
-- increase berlin distortion power
-- allow git to commit with custom names
-- add base cli with git
-- add cli/git, cli/parse, cli/colours to utils 
-- abstract trig sample rendering
-- pico waveforms
-- refactor slide-to handling
-- still getting some notes rendered in last step
-- how to set fx pattern?
-- check trig constructor passing
-- purge fx support
-- berlin distortion
-- remove bpm component from euclid/resampler echo delay
-- recover slide demos into dev
-- randomise ADSR sound parameters
-- refactor BerlinSampleTrig as MultiSynthSampleTrig
-- vitling scales
-- pass scale as env variable
-- perkons groove
-- include index in last variable
-- move SVNoteOff trig to trigs
-- randomise wave
-- include wave in berlin sound
-- refactor note as pitch
-- purge SVMachineTrigs from berlin demo
-- purge SVMachineTrigs from resampler demo
-- purge SVMachineTrigs from euclid demo
-- sampler doesn't seem to have any sound
-- multiple patches with different sounds
-- complete machine, track configuration
-- BerlinSampleTrig to extend SVSampleTrig
-- NOTE_OFF
-- rename SimpleBank as SimpleZipBank
-- check why euclid doesn't seem to be calling container.render
-- add back chatgpt script to initialise archive 
-- change bank so it doesnt extend simple bank but is its own version
-- initialise from zip but extend dict and keep stuff in memory.
-- new init slices method to initialise slices as in memory items 
-- create a merge branch for main + 01-berlin03-demo
-- spawn blank patches after each for wash
-- rename namespace as kick
-- add filter function looking for BD in sample name
-- add iterator block -> namespace, sample filter, density, temperature
-- add new tracks for snare and hats 
 
