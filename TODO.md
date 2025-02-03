@@ -1,6 +1,5 @@
 ### short
 
-- remove detroit09b
 - remove resampler, slicer bank
 - remove berlin, bass packs, MultiSynth, mod trig sample support
 - remove sample qs support and cutoff/pitch support in sampler
@@ -21,5 +20,7 @@
 ### thoughts
 
 ### done
+
+- remove detroit09b
 
 
