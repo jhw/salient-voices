@@ -1,13 +1,12 @@
 ### short
 
-- add getter/setter for rv_samples in sampler
-
 ### medium
 
 - new bank to implement variety of simple fx
 - use fwd.wav as default sample
-- detroit demo to toggle fx
+- detroit demo to toggle fx not sample
 - client/sampler model, track
+- improved tests
 
 ### pending
 
@@ -18,6 +17,7 @@
 
 ### done
 
+- add getter/setter for rv_samples in sampler
 - remove refs to relative note
 - check pitch, cutoff refs
 - remove sample_string refs in trigs
