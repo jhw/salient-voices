@@ -1,6 +1,6 @@
 ### short
 
-- remove sample_string refs in trigs
+- check pitch, cutoff refs
 - remove refs to relative note
 - add getter/setter for rv_samples in sampler
 
@@ -20,6 +20,7 @@
 
 ### done
 
+- remove sample_string refs in trigs
 - remove sample_string refs in sampler
 - remove sample qs support and cutoff/pitch support in sampler
 - SVSimpleBank doesn't need to extend dict

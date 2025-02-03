@@ -68,7 +68,7 @@ class SVModule(dict):
             for trig in patch.trigs:
                 if (does_class_extend(trig.__class__, SVSampleTrig) and
                     self.is_parent_of(trig)):
-                    pool.add(trig.sample_string)
+                    pool.add(trig.sample)
         return pool
     
     @property

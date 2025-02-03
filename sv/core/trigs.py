@@ -89,35 +89,14 @@ class SVNoteTrig(SVTrigBase):
             note_kwargs["val"] = self.fx_value
         return rv.note.Note(**note_kwargs)
     
-"""
-Extend note for sample, pitch, cutoff parameters; to be encoded in sample_string
-"""
-    
 class SVSampleTrig(SVNoteTrig):
 
     def __init__(self, target, sample,
-                 pitch = None,
-                 cutoff = None,
                  **kwargs):
         super().__init__(target = target,
                          **kwargs)
         self.sample = sample
-        self.pitch = pitch
-        self.cutoff = cutoff
-
-    @property
-    def sample_params(self, attrs = ["pitch", "cutoff"]):
-        params = {}
-        for attr in attrs:
-            value = getattr(self, attr)
-            if value != None:
-                params[attr] = value
-        return params
     
-    @property
-    def sample_string(self):
-        return self.sample
-
     def resolve_sampler_mod(self, modules):
         return modules[self.mod]
         
