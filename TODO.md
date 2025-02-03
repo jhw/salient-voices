@@ -1,5 +1,7 @@
 ### short
 
+- add back resampler
+
 ### medium
 
 - new bank to implement variety of simple fx
