@@ -1,6 +1,6 @@
 ### short
 
-- add back resampler
+- refactor track as sequence
 
 ### medium
 
@@ -16,6 +16,9 @@
 - rv circular imports
 
 ### thoughts
+
+- add back resampler?
+  - this may be better done at the m8 level
 
 ### done
 
