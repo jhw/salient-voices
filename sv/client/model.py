@@ -6,7 +6,7 @@ import sv # so machine classes can be dynamically accessed
 
 DefaultColour = Colour([127, 127, 127])
 
-class TrackBase:
+class SequenceBase:
 
     def __init__(self, name, machine, seeds, muted = False):
         self.name = name
@@ -28,44 +28,44 @@ class TrackBase:
                            seeds=self.seeds,
                            env=self.env)
 
-class Tracks(list):
+class Sequences(list):
 
-    def __init__(self, tracks = None):
-        list.__init__(self, tracks if tracks else [])
+    def __init__(self, sequences = None):
+        list.__init__(self, sequences if sequences else [])
 
     def clone(self):
-        return Tracks([track.clone() for track in self])
+        return Sequences([sequence.clone() for sequence in self])
 
     def render(self, container, generators, colours,
                default_colour = DefaultColour):
-        for track in self:
-            if not track.muted:
-                colour = colours[track.name] if track.name in colours else default_colour
-                track.render(container = container,
+        for sequence in self:
+            if not sequence.muted:
+                colour = colours[sequence.name] if sequence.name in colours else default_colour
+                sequence.render(container = container,
                              generators = generators,
                              colour = colour)
 
     def mute(self, mute_fn):        
-        for track in self:
-            track.muted = mute_fn(track)            
+        for sequence in self:
+            sequence.muted = mute_fn(sequence)            
                 
 class Patch:
     
-    def __init__(self, tracks = None, frozen = False):
-        self.tracks = tracks if tracks else Tracks()
+    def __init__(self, sequences = None, frozen = False):
+        self.sequences = sequences if sequences else Sequences()
         self.frozen = frozen
 
     def clone(self):
-        return Patch(tracks = self.tracks.clone(),
+        return Patch(sequences = self.sequences.clone(),
                      frozen = self.frozen)
 
     def render(self, container, generators, machine_colours):
-        self.tracks.render(container = container,
+        self.sequences.render(container = container,
                            generators = generators,
                            colours = machine_colours)
 
     def mute(self, mute_fn):
-        self.tracks.mute(mute_fn)
+        self.sequences.mute(mute_fn)
         
 class Patches(list):
     

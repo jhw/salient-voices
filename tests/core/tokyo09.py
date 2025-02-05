@@ -5,7 +5,7 @@ This test tests the use of a simple project extending SVMachine
 from sv.client.algos import random_perkons_groove, random_euclid_pattern
 from sv.client.cli import parse_args
 from sv.client.colours import Colours
-from sv.client.model import Project, Patch, TrackBase
+from sv.client.model import Project, Patch, SequenceBase
 
 from sv.core.machines import SVMachine
 from sv.core.trigs import SVNoteTrig
@@ -78,7 +78,7 @@ class BeatMachine(SVMachine, GhostEchoMachine):
                            note = note,
                            vel = volume * level)]
 
-class Track(TrackBase):
+class Sequence(SequenceBase):
 
     def __init__(self, name, machine, pattern, groove, seeds, temperature, density, notes, muted = False):
         super().__init__(name = name,
@@ -179,19 +179,19 @@ class Tokyo09CoreTest(unittest.TestCase):
         project = Project()
         for i in range(args.n_patches):
             patch = Patch()
-            for _track in tracks:
+            for track in tracks:
                 track_notes = [note for note in notes
-                               if _track["filter_fn"](note)]
+                               if track["filter_fn"](note)]
                 selected_notes = [random.choice(track_notes) for i in range(2)]
-                track = Track(name = _track["name"],
-                              machine = _track["machine"],
-                              groove = random_perkons_groove(),
-                              pattern = random_euclid_pattern(),
-                              seeds = random_seeds("note|fx|beat|vol"),
-                              notes = selected_notes,
-                              temperature = _track["temperature"],
-                              density = _track["density"])
-                patch.tracks.append(track)
+                sequence = Sequence(name = track["name"],
+                                    machine = track["machine"],
+                                    groove = random_perkons_groove(),
+                                    pattern = random_euclid_pattern(),
+                                    seeds = random_seeds("note|fx|beat|vol"),
+                                    notes = selected_notes,
+                                    temperature = track["temperature"],
+                                    density = track["density"])
+                patch.sequences.append(sequence)
             project.patches.append(patch)
         colours = Colours.randomise(tracks = tracks,
                                     patches = project.patches)

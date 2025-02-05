@@ -2,7 +2,7 @@ from sv.client.algos import random_perkons_groove, random_euclid_pattern
 from sv.client.banks import StaticZipBank
 from sv.client.cli import parse_args
 from sv.client.colours import Colours
-from sv.client.model import Project, Patch, TrackBase
+from sv.client.model import Project, Patch, SequenceBase
 
 from sv.core.machines import SVSamplerMachine
 from sv.core.trigs import SVSampleTrig
@@ -60,7 +60,7 @@ class BeatMachine(SVSamplerMachine, GhostEchoMachine):
                              sample=self.sample,
                              vel=volume)]
 
-class Track(TrackBase):
+class Sequence(SequenceBase):
 
     def __init__(self, name, machine, pattern, groove, seeds, temperature, density, samples, muted = False):
         super().__init__(name = name,
@@ -170,19 +170,19 @@ def main(args_config = ArgsConfig,
         project = Project()
         for i in range(args.n_patches):
             patch = Patch()
-            for _track in tracks:
+            for track in tracks:
                 track_samples = [sample for sample in all_samples
-                                 if _track["filter_fn"](sample)]
+                                 if track["filter_fn"](sample)]
                 selected_samples = [random.choice(track_samples) for i in range(2)]
-                track = Track(name = _track["name"],
-                              machine = _track["machine"],
-                              groove = random_perkons_groove(),
-                              pattern = random_euclid_pattern(),
-                              seeds = random_seeds("sample|fx|beat|vol"),
-                              temperature = _track["temperature"],
-                              density = _track["density"],
-                              samples = selected_samples)
-                patch.tracks.append(track)
+                sequence = Sequence(name = track["name"],
+                                    machine = track["machine"],
+                                    groove = random_perkons_groove(),
+                                    pattern = random_euclid_pattern(),
+                                    seeds = random_seeds("sample|fx|beat|vol"),
+                                    temperature = track["temperature"],
+                                    density = track["density"],
+                                    samples = selected_samples)
+                patch.sequences.append(sequence)
             project.patches.append(patch)
         colours = Colours.randomise(tracks = tracks,
                                     patches = project.patches)
